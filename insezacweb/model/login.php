@@ -12,4 +12,10 @@ class Login
 			die($e->getMessage());
 		}
 	}
+	public function signIn($usuario)
+  {
+    $usuario = $this->db->real_escape_string($usuario);
+    $sql = "SELECT usuario, password FROM usuarios WHERE usuario = '{$usuario}'";
+    return $this->db->query($sql);
+  }
 }
