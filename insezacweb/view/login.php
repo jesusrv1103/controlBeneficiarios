@@ -11,29 +11,28 @@
 </head>
 <body class="light_theme  fixed_header left_nav_fixed">
   <div class="wrapper">
-
     <div class="login_page">
       <div class="login_content">
         <div class="panel-heading border login_heading">INICIAR SESIÓN</div>	
-        <form role="form" class="form-horizontal" method="POST">
+        <form role="form" action="?c=Login&a=Acceder" class="form-horizontal" method="POST">
           <div class="form-group">
             <div class="col-sm-10">
-              <input type="email" placeholder="Email" id="inputEmail3" class="form-control">
+              <input type="text" placeholder="Usuario" name="usuario" id="inputEmail3" class="form-control">
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-10">
-              <input type="password" placeholder="Password" id="inputPassword3" class="form-control">
+              <input type="password" placeholder="Password" name="password" id="inputPassword3" class="form-control">
             </div>
           </div>
+           <?php !empty($error_message) ? print($error_message) : '' ?>
           <div class="form-group">
             <div class=" col-sm-10">
               <div class="checkbox checkbox_margin">
                 <label class="lable_margin">
                   <input type="checkbox"><p class="pull-left">Recordarme</p></label>
-                  <a href="?c=Login&a=Acceder" class="btn btn-default pull-right">
-                    ACCEDER
-                  </a></div>
+                      <button class="btn btn-success">Guardar</button>
+                  </div>
                 </div>
               </div>
             </form>

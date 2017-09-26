@@ -1,4 +1,5 @@
 <?php
+//error_reporting(ERROR_REPORTING_LEVEL);
 require_once 'model/database.php';
 
 $controller = 'login';
@@ -9,7 +10,7 @@ if(!isset($_REQUEST['c']))
     require_once "controller/$controller.controller.php";
     $controller = ucwords($controller) . 'Controller';
     $controller = new $controller;
-    $controller->Index();    
+    $controller->Index();   
 }
 else
 {
