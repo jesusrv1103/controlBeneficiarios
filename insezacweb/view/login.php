@@ -15,7 +15,7 @@
     <div class="login_page">
       <div class="login_content">
         <div class="panel-heading border login_heading">INICIAR SESIÓN</div>	
-        <form role="form" class="form-horizontal">
+        <form role="form" class="form-horizontal" method="POST">
           <div class="form-group">
             <div class="col-sm-10">
               <input type="email" placeholder="Email" id="inputEmail3" class="form-control">
