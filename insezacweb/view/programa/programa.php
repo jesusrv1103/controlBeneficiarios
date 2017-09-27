@@ -1,18 +1,18 @@
-<div class="col-md-10">
+<div class="col-md-10" id="view-programa">
   <div class="block-web">
     <div class="header">
-      <h3 class="content-header">Registrar proyecto</h3>
+      <h3 class="content-header">Registrar programa</h3>
     </div>
     <div class="porlets-content">
       <form action="" class="form-horizontal row-border">
         <div class="form-group">
           <div class="col-sm-12">
             <div class="input-group"> <span class="input-group-addon "><i class="fa fa-archive"></i></span>
-              <input type="text" class="form-control" placeholder="Nombre del proyecto" required>
+              <input type="text" class="form-control" placeholder="Nombre del programa" required>
             </div>
             <br>
             <div class="input-group"> <span class="input-group-addon "><i class="fa fa-align-left"></i></span>
-              <textarea type="textarea" class="form-control" placeholder="Descripción del proyecto" required></textarea>
+              <textarea type="textarea" class="form-control" placeholder="Descripción del programa" required></textarea>
             </div>
             <br>
             <div class="input-group"> <span class="input-group-addon "><i class="fa fa-calendar"></i></span>
@@ -31,8 +31,9 @@
               <button type="button" class="btn btn-danger" >Cancel</button>
             </div>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
+

@@ -8,6 +8,7 @@
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/admin.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="light_theme  fixed_header left_nav_fixed">
   <div class="wrapper">
@@ -65,7 +66,7 @@
             </li>
             <li> <a href="javascript:void(0);"> <i class="fa fa-edit"></i> Programa <span class="plus"><i class="fa fa-plus"></i></span></a>
               <ul>
-                <li> <a href="typography.html"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Registrar programa</b> </a> </li>
+                <li> <a href="?c=Programa&a=Alta"><span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Registrar programa</b></a> </li>
                 <li> <a href="buttons.html"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Consultar datos</b> </a> </li>
               </ul>
             </li>

@@ -33,6 +33,10 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 300;
 	color: #505458
 }
+#view-programa{
+	margin-left: 230px;
+	margin-top: 150px;
+}
 #logoSezac{
 	width: 50%;
 	height: 50%;

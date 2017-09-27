@@ -2,7 +2,6 @@
 class Programa
 {
 	private $pdo;
-	$
 	public function __CONSTRUCT()
 	{
 		try
