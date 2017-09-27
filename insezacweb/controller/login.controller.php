@@ -30,7 +30,7 @@ class LoginController{
    if($consulta!=null){
     if($consulta->password == $password){
       require_once 'view/header.php';
-      require_once 'view/blankpanel.php';
+      require_once 'view/inicio.php';
       require_once 'view/footer.php';
     }
     else
