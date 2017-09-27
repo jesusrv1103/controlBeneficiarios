@@ -1,6 +1,5 @@
 <?php
 class Login
-
 {
 	private $pdo;
 	public $usuario;

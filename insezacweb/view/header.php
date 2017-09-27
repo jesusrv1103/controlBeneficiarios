@@ -63,14 +63,14 @@
                     <span class="left_nav_pointer"></span>
                 </a>
             </li>
-            <li> <a href="javascript:void(0);"> <i class="fa fa-edit"></i> Proyectos <span class="plus"><i class="fa fa-plus"></i></span></a>
+            <li> <a href="javascript:void(0);"> <i class="fa fa-edit"></i> Programa <span class="plus"><i class="fa fa-plus"></i></span></a>
                 <ul>
-                  <li> <a href="typography.html"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Registrar proyecto</b> </a> </li>
+                  <li> <a href="typography.html"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Registrar programa</b> </a> </li>
                   <li> <a href="buttons.html"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Consultar datos</b> </a> </li>
               </ul>
           </li>
 
-          <li> <a href="javascript:void(0);"> <i class="fa fa-tasks"></i> Subproyectos <span class="plus"><i class="fa fa-plus"></i></span></a>
+          <li> <a href="javascript:void(0);"> <i class="fa fa-tasks"></i> Subprograma <span class="plus"><i class="fa fa-plus"></i></span></a>
             <ul>
                 <li> <a href="typography.html"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Registrar subproyecto</b> </a> </li>
                 <li> <a href="buttons.html"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Consultar</b> </a> </li>
