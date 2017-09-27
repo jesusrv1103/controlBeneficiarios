@@ -26,8 +26,7 @@ class Login
                     $data->usuario,
                 )
 			);
-			
-			return $sql->fetch(PDO::FETCH_OBJ);
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());

@@ -74,6 +74,7 @@ class USER
         session_destroy();
         unset($_SESSION['user_session']);
         return true;
+        require_once 'view/login.php';
    }
 }
 ?>
