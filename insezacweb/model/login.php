@@ -1,6 +1,10 @@
 <?php
 class Login
+
 {
+	private $pdo;
+	public $usuario;
+	public $password;
 	public function __CONSTRUCT()
 	{
 		try
@@ -12,10 +16,20 @@ class Login
 			die($e->getMessage());
 		}
 	}
-	public function signIn($usuario)
-  {
-    $usuario = $this->db->real_escape_string($usuario);
-    $sql = "SELECT usuario, password FROM usuarios WHERE usuario = '{$usuario}'";
-    return $this->db->query($sql);
-  }
+	public function verificar(Login $data)
+	{
+		try 
+		{
+			$sql= $this->pdo->prepare("SELECT * FROM usuarios WHERE usuario=?");
+			$resultado=$sql->execute(
+				array(
+                    $data->usuario,
+                )
+			);
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
 }

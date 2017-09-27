@@ -1,29 +1,74 @@
 <?php
-defined('BASEPATH') or exit('No se permite acceso directo');
+//defined('BASEPATH') or exit('No se permite acceso directo');
+//require_once ROOT . FOLDER_PATH .'/model/login.php';
 require_once 'model/login.php';
-require_once LIBS_ROUTE .'session.php';
+require_once 'system/libs/session.php';
 
 class LoginController{
 
-    private $model;
-    private $session;
-    
-    public function __CONSTRUCT(){
-        $this->model = new Login();
-        $this->session = new session();
+  private $model;
+  private $session;
+  public $error;
+  public function __CONSTRUCT(){
+    $this->model = new Login();
+
+       // if ($this->session->getStatus() === 1 || empty($this->session->get('usuario')))
+         //   exit('Acceso denegado');
+  }
+  public function exec()
+  {
+    $this->render(__CLASS__);
+  }
+  public function Index(){
+   require_once 'view/login.php';
+ }  
+ public function Acceder(){
+   $log = new Login();  
+   $log->usuario = $_REQUEST['usuario'];
+   $password = $_REQUEST['password'];
+   $consulta=$this->model->verificar($log);
+   if($consulta!=null){
+    if($consulta->password == $password){
+      require_once 'view/header.php';
+      require_once 'view/inicio.php';
+      require_once 'view/footer.php';
     }
-    public function exec()
+    else
     {
-        $this->render(__CLASS__);
+      $error="  La contraseña es incorrrecta";
+      require_once 'view/login.php';
     }
 
-    public function Index(){
-     require_once 'view/login.php';
+  }else{
+   $error="  El usuario es incorrecto";
+   require_once 'view/login.php';
  }
+}
 
- public function Acceder($request_params){
-        //Tu codigo...
-    if($this->verify($request_params))
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // if($resultado->fetchColumn() > 0)
+  /*  if($this->verify($request_params))
       return $this->renderErrorMessage('El Usuario y Contraseña son Obligatorios');
 
   $result = $this->model->signIn($request_params['usuario']);
@@ -35,11 +80,11 @@ class LoginController{
 
   if(!password_verify($request_params['password'], $result->password))
       return $this->renderErrorMessage('La contraseña es incorrecta');
-
+//Iniciar session 
   $this->session->init();
   $this->session->add('usuario', $result->usuario);
+ //var_dump($this->session->getAll());
   //header('location: /php-mvc/main');
-
   require_once 'view/header.php';
   require_once 'view/blankpanel.php';
   require_once 'view/footer.php';
@@ -55,4 +100,7 @@ private function renderErrorMessage($message)
     $params = array('error_message' => $message);
     $this->render(__CLASS__, $params);
 }
-}
+public function logout(){
+    $this->session->close();
+    require_once 'view/login.php';
+  }*/
