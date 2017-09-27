@@ -29,6 +29,8 @@ class LoginController{
    $consulta=$this->model->verificar($log);
    if($consulta!=null){
     if($consulta->password == $password){
+      $_SESSION['user_session'] = $consulta->idusuarios;
+      $controller=new LoginController;
       require_once 'view/header.php';
       require_once 'view/inicio.php';
       require_once 'view/footer.php';

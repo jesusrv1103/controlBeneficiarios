@@ -31,4 +31,23 @@ class Login
 			die($e->getMessage());
 		}
 	}
+	 public function logIn()
+   {
+      if(isset($_SESSION['user_session']))
+      {
+         return true;
+      }
+   }
+ 
+   public function redirect($url)
+   {
+       header("Location: $url");
+   }
+ 
+   public function logOut()
+   {
+        session_destroy();
+        unset($_SESSION['user_session']);
+        return true;
+   }
 }
