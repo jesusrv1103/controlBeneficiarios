@@ -1,6 +1,9 @@
 <?php
+session_start();
+
 class Database
 {
+	
 	public static function StartUp()
 	{
 		try
