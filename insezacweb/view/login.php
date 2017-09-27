@@ -14,7 +14,17 @@
     <div class="login_page">
       <div class="login_content">
         <div class="panel-heading border login_heading">INICIAR SESIÓN</div>	
-        <form role="form" action="?c=Login&a=Acceder" class="form-horizontal" method="POST">
+        <?php
+        if(isset($error))
+        {
+          ?>
+          <div class="alert alert-danger">
+            <i class="glyphicon glyphicon-warning-sign"></i><?php echo $error?>
+          </div>
+          <?php
+        }
+        ?>
+        <form role="form" action="?c=Login&a=Acceder" class="form-horizontal" method="post">
           <div class="form-group">
             <div class="col-sm-10">
               <input type="text" placeholder="Usuario" name="usuario" id="inputEmail3" class="form-control">
@@ -25,23 +35,18 @@
               <input type="password" placeholder="Password" name="password" id="inputPassword3" class="form-control">
             </div>
           </div>
-           <?php !empty($error_message) ? print($error_message) : '' ?>
           <div class="form-group">
             <div class=" col-sm-10">
-              <div class="checkbox checkbox_margin">
-                <label class="lable_margin">
-                  <input type="checkbox"><p class="pull-left">Recordarme</p></label>
-                      <button class="btn btn-success">Guardar</button>
-                  </div>
-                </div>
-              </div>
-            </form>
+              <button class="btn btn-success" style="width: 100%;">Acceder</button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
-      <script src="assets/js/jquery-2.1.0.js"></script>
-      <script src="assets/js/bootstrap.min.js"></script>
-      <script src="assets/js/common-script.js"></script>
-      <script src="assets/js/jquery.slimscroll.min.js"></script>
-    </body>
-    </html>
+    </div>
+  </div>
+  <script src="assets/js/jquery-2.1.0.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/common-script.js"></script>
+  <script src="assets/js/jquery.slimscroll.min.js"></script>
+</body>
+</html>

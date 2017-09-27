@@ -6,29 +6,68 @@ require_once 'system/libs/session.php';
 
 class LoginController{
 
-    private $model;
-    private $session;
-    public function __CONSTRUCT(){
-        $this->model = new Login();
+  private $model;
+  private $session;
+  public $error;
+  public function __CONSTRUCT(){
+    $this->model = new Login();
 
        // if ($this->session->getStatus() === 1 || empty($this->session->get('usuario')))
          //   exit('Acceso denegado');
+  }
+  public function exec()
+  {
+    $this->render(__CLASS__);
+  }
+  public function Index(){
+   require_once 'view/login.php';
+ }  
+ public function Acceder(){
+   $log = new Login();  
+   $log->usuario = $_REQUEST['usuario'];
+   $password = $_REQUEST['password'];
+   $consulta=$this->model->verificar($log);
+   if($consulta!=null){
+    if($consulta->password == $password){
+      require_once 'view/header.php';
+      require_once 'view/blankpanel.php';
+      require_once 'view/footer.php';
     }
-    public function exec()
+    else
     {
-        $this->render(__CLASS__);
+      $error="  La contraseña es incorrrecta";
+      require_once 'view/login.php';
     }
-    public function Index(){
-       require_once 'view/login.php';
-   }
-   public function Acceder(){
-       $log = new Login();  
-       $log->usuario = $_REQUEST['usuario'];
-       $log->password = $_REQUEST['password'];
-       $resultado=$this->model->verificar($log);
-      echo $resultado->usuario;
-      // if($resultado->fetchColumn() > 0)
-   }
+
+  }else{
+   $error="  El usuario es incorrecto";
+   require_once 'view/login.php';
+ }
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // if($resultado->fetchColumn() > 0)
   /*  if($this->verify($request_params))
       return $this->renderErrorMessage('El Usuario y Contraseña son Obligatorios');
 
@@ -64,5 +103,4 @@ private function renderErrorMessage($message)
 public function logout(){
     $this->session->close();
     require_once 'view/login.php';
-}*/
-}
+  }*/
