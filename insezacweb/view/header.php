@@ -1,10 +1,11 @@
 <?php
 include_once './model/database.php';
-if(!$controller->logIn())
+
+/*if(!$controller->is_loggedin())
 {
   $controller->redirect('./view/login.php');
 }
-
+*/
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -16,7 +17,10 @@ if(!$controller->logIn())
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/admin.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+
+  <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/select2.css" rel="stylesheet">
+  <link href="assets/plugins/bootstrap-editable/bootstrap-editable.css" rel="stylesheet">
 </head>
 <body class="light_theme  fixed_header left_nav_fixed">
   <div class="wrapper">
@@ -25,7 +29,7 @@ if(!$controller->logIn())
       <!--\\\\\\\ header Start \\\\\\-->
       <div class="brand">
         <!--\\\\\\\ brand Start \\\\\\-->
-        <div class="logo" style="display:block"><span class="theme_color">INSEZAC</span></div>
+        <div class="logo" style="display:block"><h2 style="margin-top: -5px;"><span class="theme_color">INSEZAC</span></h2></div>
         <div class="small_logo" style="display:none"><img src="images/s-logo.png" width="50" height="47" alt="s-logo" /> <img src="images/r-logo.png" width="122" height="20" alt="r-logo" /></div>
       </div>
       <!--\\\\\\\ brand end \\\\\\-->
@@ -38,11 +42,11 @@ if(!$controller->logIn())
 
             </div>
           </div>
-          <div class="user_admin dropdown"> <a href="javascript:void(0);" data-toggle="dropdown"><img src="assets/images/user.png" /><span class="user_adminname">John Doe</span> <b class="caret"></b> </a>
+          <div class="user_admin dropdown"> <a href="javascript:void(0);" data-toggle="dropdown"><img src="assets/images/user.png" /><span class="user_adminname"><a href="?c=Login&a=logout"><i class="fa fa-power-off"></i> Salir</a></span> <b class="caret"></b> </a>
             <ul class="dropdown-menu">
               <div class="top_pointer"></div>
               <li> <a href="help.html"><i class="fa fa-question-circle"></i> Ayuda</a> </li>
-              <li> <a href="login.html"><i class="fa fa-power-off"></i> Salir</a> </li>
+              <li> <a href="?c=Login&a=logout"><i class="fa fa-power-off"></i> Salir</a> </li>
               <li> <a href="settings.html"><i class="fa fa-cog"></i> Setting </a></li>
             </ul>
           </div>

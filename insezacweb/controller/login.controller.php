@@ -46,63 +46,25 @@ class LoginController{
    require_once 'view/login.php';
  }
 }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // if($resultado->fetchColumn() > 0)
-  /*  if($this->verify($request_params))
-      return $this->renderErrorMessage('El Usuario y Contraseña son Obligatorios');
-
-  $result = $this->model->signIn($request_params['usuario']);
-
-  if(!$result->num_rows)
-      return $this->renderErrorMessage("El usuario {$request_params['usuario']} no fue encontrado");
-
-  $result = $result->fetch_object();
-
-  if(!password_verify($request_params['password'], $result->password))
-      return $this->renderErrorMessage('La contraseña es incorrecta');
-//Iniciar session 
-  $this->session->init();
-  $this->session->add('usuario', $result->usuario);
- //var_dump($this->session->getAll());
-  //header('location: /php-mvc/main');
-  require_once 'view/header.php';
-  require_once 'view/blankpanel.php';
-  require_once 'view/footer.php';
-}
-
-private function verify($request_params)
+public function is_loggedin()
 {
-    return empty($request_params['usuario']) OR empty($request_params['password']);
+  if(isset($_SESSION['user_session']))
+  {
+   return true;
+ }
+ else
+ {
+  return false;
 }
-
-private function renderErrorMessage($message)
+}
+public function redirect($url)
 {
-    $params = array('error_message' => $message);
-    $this->render(__CLASS__, $params);
+ header("Location: $url");
 }
-public function logout(){
-    $this->session->close();
-    require_once 'view/login.php';
-  }*/
+  public function logout()
+   {
+        session_destroy();
+        unset($_SESSION['user_session']);
+        header("Location: index.php");
+   }
+}

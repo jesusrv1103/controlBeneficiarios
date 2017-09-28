@@ -4,7 +4,7 @@
 	<!--\\\\\\\ contentpanel start\\\\\\-->
 	<div class="pull-left breadcrumb_admin clear_both">
 		<div class="pull-left page_title theme_color">
-			<h1>INICIO</h1>
+			<h1><span class="theme_color">INICIO</span></h1>
 		</div>
 		<div class="pull-right">
 			<ol class="breadcrumb">
