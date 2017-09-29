@@ -1,14 +1,13 @@
 <?php
 require_once 'model/login.php';
 
+
 class LoginController{
   private $model;
   private $session;
   public $error;
   public function __CONSTRUCT(){
     $this->model = new Login();
-       // if ($this->session->getStatus() === 1 || empty($this->session->get('usuario')))
-     //   exit('Acceso denegado');
   }
   public function Index(){
     require_once 'view/login.php';
@@ -21,6 +20,8 @@ class LoginController{
    if($consulta!=null){
     if($consulta->password == $password){
       $_SESSION['user_session'] = $consulta->idusuarios;
+      $_SESSION['user_name'] = $consulta->usuario;
+
       $controller=new LoginController;
       $administracion=false;
       $inicio=true;
