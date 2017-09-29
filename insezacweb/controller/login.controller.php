@@ -1,23 +1,13 @@
 <?php
-//defined('BASEPATH') or exit('No se permite acceso directo');
-//require_once ROOT . FOLDER_PATH .'/model/login.php';
 require_once 'model/login.php';
-require_once 'system/libs/session.php';
 
 class LoginController{
 
-  private $model;
-  private $session;
-  public $error;
-  public function __CONSTRUCT(){
+ public function __CONSTRUCT(){
     $this->model = new Login();
 
        // if ($this->session->getStatus() === 1 || empty($this->session->get('usuario')))
          //   exit('Acceso denegado');
-  }
-  public function exec()
-  {
-    $this->render(__CLASS__);
   }
   public function Index(){
    require_once 'view/login.php';
@@ -31,9 +21,11 @@ class LoginController{
     if($consulta->password == $password){
       $_SESSION['user_session'] = $consulta->idusuarios;
       $controller=new LoginController;
-      require_once 'view/header.php';
-      require_once 'view/inicio.php';
-      require_once 'view/footer.php';
+      $administracion=false;
+      $inicio=true;
+      $beneficiarios=false;
+      $page="body.php";
+      require_once 'view/index.php';
     }
     else
     {

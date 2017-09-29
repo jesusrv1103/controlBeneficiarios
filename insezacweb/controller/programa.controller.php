@@ -6,16 +6,23 @@ class ProgramaController{
   private $model;
   private $session;
   public $error;
+
   public function __CONSTRUCT(){
     $this->model = new Programa();
   }
   public function Index(){
-   require_once 'view/programa/create.php';
+   $administracion = true;
+    $inicio = false;
+    $beneficiarios = false;
+   $page="view/programa/index.php";
+   require_once 'view/index.php';
  }  
    public function Alta(){
-   require_once 'view/header.php';
-   require_once 'view/programa/programa.php';
-   require_once 'view/footer.php';
+    $administracion = true;
+    $inicio = false;
+    $beneficiarios = false;
+   $page="view/programa/programa.php";
+   require_once 'view/index.php';
  } 
  public function Create(){
  }
