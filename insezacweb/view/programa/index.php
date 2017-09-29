@@ -49,8 +49,8 @@
             <table class="table table-striped table-hover table-bordered" id="editable-sample">
               <thead>
                 <tr>
-                  <th>Nombre del programa</th>
-                  <th>Cantidad de subprogramas</th>
+                  <th><h5>Nombre del programa</h5></th>
+                  <th><h5>Techo presupuestal</h5></th>
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
