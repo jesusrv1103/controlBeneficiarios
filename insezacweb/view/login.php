@@ -9,7 +9,20 @@
   <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/admin.css" rel="stylesheet" type="text/css" />
 </head>
-<body class="light_theme  fixed_header left_nav_fixed">
+<style>
+body{
+  background-color: white; 
+  background-image: url(assets/images/sezac.png); 
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-webkit-filter:blur(4px);
+   background-filter:blur(4px);
+  }
+  
+}
+
+</style>
+<body class="light_theme  fixed_header left_nav_fixed" style="">
   <div class="wrapper">
     <div class="login_page">
       <div class="login_content">
