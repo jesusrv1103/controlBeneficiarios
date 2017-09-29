@@ -1,6 +1,7 @@
 <?php
 class Login
 {
+
 	private $pdo;
 	public $usuario;
 	public $password;
@@ -31,7 +32,7 @@ class Login
 			die($e->getMessage());
 		}
 	}
-	 public function logIn()
+	public function logIn()
    {
       if(isset($_SESSION['user_session']))
       {

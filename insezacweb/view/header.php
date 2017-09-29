@@ -1,11 +1,9 @@
 <?php
 include_once './model/database.php';
-
-/*if(!$controller->is_loggedin())
+if(!$controller->is_loggedin())
 {
-  $controller->redirect('./view/login.php');
+  $controller->redirect('index.php');
 }
-*/
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -17,7 +15,6 @@ include_once './model/database.php';
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/admin.css" rel="stylesheet" type="text/css" />
-
   <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/select2.css" rel="stylesheet">
   <link href="assets/plugins/bootstrap-editable/bootstrap-editable.css" rel="stylesheet">
@@ -46,7 +43,7 @@ include_once './model/database.php';
             <ul class="dropdown-menu">
               <div class="top_pointer"></div>
               <li> <a href="help.html"><i class="fa fa-question-circle"></i> Ayuda</a> </li>
-              <li> <a href="?c=Login&a=logout"><i class="fa fa-power-off"></i> Salir</a> </li>
+              <li> <a href="?c=Login&a=logout?logout=true"><i class="fa fa-power-off"></i> Salir</a> </li>
               <li> <a href="settings.html"><i class="fa fa-cog"></i> Setting </a></li>
             </ul>
           </div>

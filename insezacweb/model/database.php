@@ -1,11 +1,12 @@
 <?php
+
 session_start();
 
 class Database
 {
-	
 	public static function StartUp()
-	{
+	{	
+		//session_start();
 		try
 		{
 			$pdo = new PDO('mysql:host=localhost;dbname=insezac;charset=utf8', 'root', '');

@@ -1,7 +1,6 @@
 <?php
 //error_reporting(ERROR_REPORTING_LEVEL);
 require_once 'model/database.php';
-
 $controller = 'login';
 
 // Todo esta lógica hara el papel de un FrontController
@@ -16,7 +15,7 @@ else
 {
     // Obtenemos el controlador que queremos cargar
     $controller = strtolower($_REQUEST['c']);
-    $accion = isset($_REQUEST['a']) ? $_REQUEST['a'] : 'Index';
+    $accion = isset($_REQUEST['a']) ? $_REQUEST['a'] : 'index';
 
     // Instanciamos el controlador
     require_once "controller/$controller.controller.php";
@@ -24,5 +23,5 @@ else
     $controller = new $controller;
 
     // Llama la accion
-    call_user_func( array( $controller, $accion ) );
+    call_user_func( array( $controller, $accion ));
 }
