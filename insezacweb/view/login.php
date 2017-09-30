@@ -15,12 +15,12 @@ body{
   }
 #logosezac{
   max-width: 25%; 
-  margin-top:5px;
-  margin-left: 30px; 
+  
+  margin-left: 20px; 
 }
 #titulo{
   margin-bottom: -120px;
-  margin-top: -70px;
+  margin-top: -50px;
 }
 </style>
 <body>
@@ -61,7 +61,7 @@ body{
         </form>
       </div>
   <br><hr style="color:black">
-  <center><h4>Vistar sitio oficial de <a href="http://sezac.org.mx/">SEZAC</a></h4></center>
+  <center><h4>Visitar sitio oficial de <a href="http://sezac.org.mx/">SEZAC</a></h4></center>
   <script src="assets/js/jquery-2.1.0.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/common-script.js"></script>
