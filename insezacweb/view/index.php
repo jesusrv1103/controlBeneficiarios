@@ -69,6 +69,7 @@ include_once './model/database.php';
                     <?php } ?>
                     <li> <a href="?c=Programa&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Programas</b> </a> </li>
                     <li> <a href="?c=Subprograma&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Subprogramas</b> </a> </li>
+                    <li> <a href="?c=Apoyos&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Apoyos</b> </a> </li>
                     <li> <a href="?c=Beneficiario&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Beneficiarios</b> </a> </li>
                     <li> <a href="?c=Usuario&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Usuarios</b> </a> </li>
                   </ul>
