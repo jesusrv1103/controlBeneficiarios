@@ -13,7 +13,7 @@ class BeneficiarioController{
   public function Index(){
    $administracion = true;
    $inicio = false;
-   $beneficiarios = false;
+   $beneficiarios = true;
    $page="view/beneficiario/index.php";
    require_once 'view/index.php';
  }  

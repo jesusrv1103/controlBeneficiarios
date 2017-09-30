@@ -17,9 +17,7 @@ class LoginController{
    $consulta=$this->model->verificar($log);
    if($consulta!=null){
     if($consulta->password == $password){
-      echo "<script type='text/javascript'> alert('Datos correctos'); </script>";
       $this->login($usuario);
-      echo "<script type='text/javascript'> alert('".$_SESSION['user_session']."'); </script>";
       header ('Location: index.php?c=Inicio');
       }else{
         $error="  La contraseña es incorrrecta";
