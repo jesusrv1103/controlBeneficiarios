@@ -1,5 +1,8 @@
 <?php
 include_once './model/database.php';
+//session_start();
+
+//$usuario = $_SESSION['login'];
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -38,7 +41,7 @@ include_once './model/database.php';
         </div>
         <div class="top_right_bar">
           <div style="margin-top: -33%;">
-            <span class="user_adminname">Hola <?php echo $_SESSION['user_name']; ?></span> 
+            <span class="user_adminname">Hola <?php echo $_SESSION['user_session']; ?></span> 
             <span class="user_adminname"><a href="?c=Login&a=logout"><i class="fa fa-power-off"></i> Salir</span></a>
           </div>
         </div>

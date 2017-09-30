@@ -1,10 +1,13 @@
 <?php
 //error_reporting(ERROR_REPORTING_LEVEL);
 require_once 'model/database.php';
-$controller = 'login';
+session_start();
+if (!isset($_SESSION['seguridad'])){
+    $controller = 'login';
+}
 
 // Todo esta lógica hara el papel de un FrontController
-if(!isset($_REQUEST['c']))
+if(!isset($_REQUEST['c']) )
 {
     require_once "controller/$controller.controller.php";
     $controller = ucwords($controller) . 'Controller';
