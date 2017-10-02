@@ -17,6 +17,8 @@ class Programa
 			die($e->getMessage());
 		}
 	}
+
+	//Metdodo para listar
 	public function Listar($nomPrograma)
 	{
 		try
@@ -67,6 +69,7 @@ class Programa
 		}
 	}
 
+	//Metodo para actualizar
 	public function Actualizar($data)
 	{
 		try 
@@ -87,7 +90,7 @@ class Programa
 			die($e->getMessage());
 		}
 	}
-
+	//Metdod para registrar
 	public function Registrar(Programa $data)
 	{
 		try 

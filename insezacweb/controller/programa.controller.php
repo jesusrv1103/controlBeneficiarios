@@ -32,6 +32,8 @@ class ProgramaController{
         $page= "view/programa/programa.php";
        require_once 'view/index.php';
   } 
+
+  //Metodo Guardar  si trae un id  actualiza si no registra
  	public function Guardar(){
         $programa= new Programa();
         //echo "entre";
@@ -44,7 +46,7 @@ class ProgramaController{
         $page="view/programa/index.php";
    			require_once 'view/index.php';
     }
-    
+    //Metodo  para eliminar
     public function Eliminar(){
         $this->model->Eliminar($_REQUEST['idPrograma']);
         echo $idPrograma;
