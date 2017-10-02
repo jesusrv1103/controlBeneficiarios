@@ -10,6 +10,26 @@
  		</ol>
  	</div>
  </div>
+ 
+ <?php
+ if(isset($mensaje))
+ {
+ 	?>
+ 	<div class="container clear_both padding_fix">
+ 		<div class="row">
+ 			<div class="col-md-12">
+ 				<div class="alert alert-success fade in">
+ 					<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+ 					<center><strong><i class="fa fa-check"></i>&nbsp;<?php echo $mensaje ?></strong> </center>
+ 				</div>
+ 				
+ 			</div>
+ 		</div>
+ 	</div>
+ 	<?php
+ }
+ ?>
+
  <div class="container clear_both padding_fix">
  	<div class="row">
  		<div class="col-md-12">
@@ -481,19 +501,22 @@
  						<div class="porlets-content" style="margin-bottom: -50px;">
  							<p>Importa tu archivo excel con los datos del beneficiario para agregarlo a la base de datos</p>
  							<br>
- 							<form class="dropzone dz-clickable" action="http://riaxe.com/file/post">
+ 							<form name="importar" action="?c=Beneficiario&a=Upload" method="post" enctype="multipart/form-data">
+ 								<!--div class="fallback"-->
+ 								<input name="file" type="file"/>
+ 								<!--/div-->
 
- 							</form>
- 						</div><!--/porlets-content--> 
- 					</div><!--/block-web--> 
+ 							</div><!--/porlets-content--> 
+ 						</div><!--/block-web--> 
+ 					</div>
  				</div>
- 			</div>
- 			<div class="modal-footer">
- 				<div class="row col-md-5 col-md-offset-7">
- 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
- 					<button type="button" class="btn btn-primary">Guardar</button>
+ 				<div class="modal-footer">
+ 					<div class="row col-md-5 col-md-offset-7">
+ 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+ 						<button type="submit" class="btn btn-primary">Guardar</button>
+ 					</div>
  				</div>
- 			</div>
+ 			</form>
  		</div>
  	</div>
  </div>

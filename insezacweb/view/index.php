@@ -148,13 +148,11 @@ if (!isset($_SESSION['seguridad'])){
     <script type="text/javascript"  src="assets/plugins/dropzone/dropzone.min.js"></script> 
     <script type="text/javascript" src="assets/plugins/ckeditor/ckeditor.js"></script>
     <script src="assets/plugins/validation/parsley.min.js"></script>
-    <script type="text/javascript"  src="assets/plugins/dropzone/dropzone.min.js"></script> 
     <script src="assets/plugins/data-tables/jquery.dataTables.js"></script>
     <script src="assets/plugins/data-tables/DT_bootstrap.js"></script>
     <script src="assets/plugins/data-tables/dynamic_table_init.js"></script>
     <script src="assets/plugins/edit-table/edit-table.js"></script>
     <script>
-
 
       /*==Porlets Actions==*/
       $('.minimize').click(function(e){
