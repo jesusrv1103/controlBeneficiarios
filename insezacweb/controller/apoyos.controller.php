@@ -13,7 +13,7 @@ class ApoyosController{
   public function Index(){
    $administracion = true;
    $inicio = false;
-   $beneficiarios = true;
+   $apoyos = true;
    $page="view/apoyos/index.php";
    require_once 'view/index.php';
  }

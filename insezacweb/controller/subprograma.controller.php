@@ -12,5 +12,12 @@ class SubprogramaController{
    $subprogramas=true;
    $page="view/subprograma/index.php";
    require_once 'view/index.php';
- }  
+ }
+  public function Alta(){
+  $administracion = true;
+  $inicio = false;
+  $subprogramas = true;
+  $page="view/subprograma/subprograma.php";
+  require_once 'view/index.php';
+}   
 }

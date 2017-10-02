@@ -1,13 +1,12 @@
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
     <h1>Inicio</h1>
-    <h2 class="">Programas</h2>
+    <h2 class="">Apoyos</h2>
   </div>
   <div class="pull-right">
     <ol class="breadcrumb">
       <li><a href="?c=Inicio">Inicio</a></li>
-      <li><a href="?c=Programa">Programas</a></li>
-      <li class="active">Registrar programa</li>
+      <li>Apoyos</a></li>
     </ol>
   </div>
 </div>
@@ -17,7 +16,7 @@
       <div class="block-web">
         <div class="header">
           <div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-          <h3 class="content-header">Registrar programa</h3>
+          <h3 class="content-header">Registrar apoyo</h3>
         </div>
         <div class="porlets-content">
           <form action="" class="form-horizontal row-border">
