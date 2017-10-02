@@ -15,6 +15,7 @@ class ProgramaController{
 
   //Index 
   public function Index(){
+<<<<<<< HEAD
 
    $page="view/programa/index.php";
    require_once 'view/index.php';
@@ -53,4 +54,27 @@ class ProgramaController{
    			$page="view/programa/index.php";
    			require_once 'view/index.php';
     }
+=======
+   $administracion = true;
+   $inicio = false;
+   $programas=true;
+   $page="view/programa/index.php";
+   require_once 'view/index.php';
+ }  
+ public function Alta(){
+  $administracion = true;
+  $inicio = false;
+  $beneficiarios = false;
+  $page="view/subprograma/subprograma.php";
+  require_once 'view/index.php';
+} 
+public function Create(){
+}
+public function Update(){
+  
+}
+public function Delete(){
+  
+}
+>>>>>>> c43d4553c5e729aa4c8c5efd67c514c7c9bd0670
 }

@@ -2,12 +2,13 @@
 //error_reporting(ERROR_REPORTING_LEVEL);
 require_once 'model/database.php';
 session_start();
-if (!isset($_SESSION['seguridad'])){
-    $controller = 'login';
+if (!isset($_REQUEST['c']) && isset($_SESSION['seguridad'])){
+    //echo "<script type='text/javascript'> alert('No hay sesion'); </script>";
+    header("Location: index.php?c=Inicio"); 
 }
-
+$controller = 'login';
 // Todo esta lógica hara el papel de un FrontController
-if(!isset($_REQUEST['c']) )
+if(!isset($_REQUEST['c']))
 {
     require_once "controller/$controller.controller.php";
     $controller = ucwords($controller) . 'Controller';
@@ -28,3 +29,4 @@ else
     // Llama la accion
     call_user_func( array( $controller, $accion ));
 }
+?>

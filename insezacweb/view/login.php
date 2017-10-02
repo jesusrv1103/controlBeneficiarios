@@ -11,20 +11,25 @@
 </head>
 <style>
 body{
-  background-color: white; 
-  background-image: url(assets/images/sezac.png); 
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-webkit-filter:blur(4px);
-   background-filter:blur(4px);
+  background-color: #FAFAFA;  
   }
+#logosezac{
+  max-width: 25%; 
   
+  margin-left: 20px; 
 }
-
+#titulo{
+  margin-bottom: -120px;
+  margin-top: -50px;
+}
 </style>
-<body class="light_theme  fixed_header left_nav_fixed" style="">
-  <div class="wrapper">
-    <div class="login_page">
+<body>
+  <img src="assets/images/sezac.png" style="" id="logosezac">
+  <div id="titulo">
+    <center><h1> Bienvenido a <b>INSEZAC</b></h1></center>
+  <h4 id="intro" align="center">Sistema para el control del padrón de beneficiarios</h4>
+</div>
+  
       <div class="login_content">
         <div class="panel-heading border login_heading">INICIAR SESIÓN</div>	
         <?php
@@ -55,8 +60,8 @@ body{
           </div>
         </form>
       </div>
-    </div>
-  </div>
+  <br><hr style="color:black">
+  <center><h4>Visitar sitio oficial de <a href="http://sezac.org.mx/">SEZAC</a></h4></center>
   <script src="assets/js/jquery-2.1.0.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/common-script.js"></script>
