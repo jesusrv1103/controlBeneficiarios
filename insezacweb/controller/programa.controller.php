@@ -21,7 +21,7 @@ class ProgramaController{
   $administracion = true;
   $inicio = false;
   $beneficiarios = false;
-  $page="view/programa/programa.php";
+  $page="view/subprograma/subprograma.php";
   require_once 'view/index.php';
 } 
 public function Create(){
