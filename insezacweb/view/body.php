@@ -1,15 +1,16 @@
 
-  <!--\\\\\\\ contentpanel start\\\\\\-->
-  <div class="pull-left breadcrumb_admin clear_both" style="background-color=black">
-  	<div class="pull-left page_title theme_color">
-  		<h1><span class="theme_color">Inicio
-  		</span></h1>
-  	</div>
-  </div>
-  <div class="container clear_both padding_fix">
-  	<!--\\\\\\\ container  start \\\\\\-->
+<!--\\\\\\\ contentpanel start\\\\\\-->
+<div class="pull-left breadcrumb_admin clear_both" style="background-color=black">
+ <div class="pull-left page_title theme_color">
+  <h1><span class="theme_color">Inicio
+  </span></h1>
+</div>
+</div>
+<div class="container clear_both padding_fix">
+ <!--\\\\\\\ container  start \\\\\\-->
 
-  	<img width="100%" src="assets/images/sezac.png">
-  </div>
-  <!--\\\\\\\ container  end \\\\\\-->
+   <img align="center" style="align-content: center ; max-width:43% ; " src="assets/images/logo_white.png">
+ 
+</div>
+<!--\\\\\\\ container  end \\\\\\-->
 
