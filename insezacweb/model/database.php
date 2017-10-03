@@ -8,6 +8,7 @@ class Database
 		//session_start();
 		try
 		{
+
 			if (isset($_SESSION['seguridad'])) {
 				$usuario=$_SESSION['user_session'];
 				$password=$_SESSION['user_password'];
@@ -19,6 +20,11 @@ class Database
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);	
 				return $pdo;
 			}
+
+			$pdo = new PDO('mysql:host=localhost;dbname=INSEZAC;charset=utf8', 'root', '123-horses');
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);	
+			return $pdo;
+
 		}
 		catch(PDOException $e)
 		{

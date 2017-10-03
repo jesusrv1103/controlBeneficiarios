@@ -23,7 +23,7 @@ class Alumno
 			die($e->getMessage());
 		}
 	}
-
+	//Metodo para listar
 	public function Listar()
 	{
 		try
@@ -40,7 +40,7 @@ class Alumno
 			die($e->getMessage());
 		}
 	}
-
+	//Metodo para obtenet
 	public function Obtener($id)
 	{
 		try 
@@ -56,7 +56,7 @@ class Alumno
 			die($e->getMessage());
 		}
 	}
-
+	//Metdo para eliminar
 	public function Eliminar($id)
 	{
 		try 
@@ -71,6 +71,7 @@ class Alumno
 		}
 	}
 
+	//Metodo para actualizar
 	public function Actualizar($data)
 	{
 		try 
@@ -99,7 +100,7 @@ class Alumno
 			die($e->getMessage());
 		}
 	}
-
+	//Metdo para registrar
 	public function Registrar(Alumno $data)
 	{
 		try 
