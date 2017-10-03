@@ -1,10 +1,5 @@
 
-                            <h1 class="page-header">
-
-                                <?php echo $programa->idPrograma != null ? $programa->programa : 'Nuevo Registro'; ?>
-                                <?php echo $programa->idPrograma; ?>
-                            </h1>
-
+                          
                             <ol class="breadcrumb">
                               <li><a href="?c=Programa">Programas</a></li>
                               <li class="active"><?php echo $programa->idPrograma != null ? $programa->programa : 'Nuevo Registro'; ?></li>
@@ -26,7 +21,7 @@
                                                       <label class="col-sm-2 control-label"><h4>Nombre</h4></label>
                                                       <div class="col-sm-8">
                                                         <input name="programa" type="text" class="form-control" required placeholder="Ingrese el nombre del programa" value="<?php echo $programa->programa; ?>" />
-                                                        <?php echo $programa->idPrograma; ?>
+                                                       
                                                       </div>
                                                     </div><!--/form-group-->
 
