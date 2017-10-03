@@ -1,6 +1,6 @@
 
   <!--\\\\\\\ contentpanel start\\\\\\-->
-  <div class="pull-left breadcrumb_admin clear_both">
+  <div class="pull-left breadcrumb_admin clear_both" style="background-color=black">
   	<div class="pull-left page_title theme_color">
   		<h1><span class="theme_color">Inicio
   		</span></h1>
