@@ -26,7 +26,7 @@
                                                     </div><!--/form-group-->
 
                                            
-                                                      <a href="?c=Programa" class="btn btn-info" role="button">Editar </a>
+                                                      <a href="?c=Programa" class="btn btn-warning" role="button">Cancelar</a>
                                                       <button type="submit" class="btn btn-success">Guardar</button>
                                                     
                                                   </div>

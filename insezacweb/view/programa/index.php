@@ -23,7 +23,7 @@
                     <div class="row">
                       <div class="col-sm-4">
                         <div class="input-group">
-                          <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." >
+                          <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="NOmbre de Programa .." >
                           <span class="input-group-btn">
                             <button type="button" class="btn btn-default"><i class="fa fa-search"></i> Buscar </button>
                           </span>
@@ -52,7 +52,7 @@
                         <div class="clearfix">
                         </div>
                         <div class="margin-top-10"></div>
-                        <table class="table table-striped table-hover table-bordered" id="myTable"">
+                        <table class="table table-striped table-hover table-bordered" id="myTable">
                           <thead>
                             <tr>
                               <th><h5>Nombre del programa</h5></th>
@@ -68,7 +68,7 @@
                               </td>
                               <td class="center">
                                 
-                                 <a href="?c=Programa&a=Crud&idPrograma=<?php echo $r->idPrograma; ?>">Editar</a>
+                                 <a class="btn btn-primary"  role="button" href="?c=Programa&a=Crud&idPrograma=<?php echo $r->idPrograma; ?>">Editar</a>
                               </td>
                               <td class="center"><a onclick="javascript:return confirm('¿Seguro de eliminar este programa?');" href="?c=Programa&a=Eliminar&idPrograma=<?php echo $r->idPrograma; ?>" class="btn btn-danger" >Borrar<i class="fa fa-eraser"></i></a></td>
                             </tr>
