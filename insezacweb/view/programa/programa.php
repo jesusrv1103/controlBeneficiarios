@@ -1,6 +1,6 @@
 
-                          
-                            
+
+
 
                             <!--form id="frm-programa" action="?c=Programa&a=Guardar" method="post" enctype="multipart/form-data">
                                       <div class="row">
@@ -18,14 +18,14 @@
                                                       <label class="col-sm-2 control-label"><h4>Nombre</h4></label>
                                                       <div class="col-sm-8">
                                                         <input name="programa" type="text" class="form-control" required placeholder="Ingrese el nombre del programa" value="<?php echo $programa->programa; ?>" />
-                                                       
+
                                                       </div>
                                                     </div><!-/form-group-->
 
-                                           
+
                                                       <!--a href="?c=Programa" class="btn btn-warning" role="button">Cancelar</a>
                                                       <button type="submit" class="btn btn-success">Guardar</button>
-                                                    
+
                                                   </div>
                                                 </div>
                                               </div>
@@ -62,35 +62,22 @@
           </div>
           <div class="porlets-content">
             <form action="?c=Programa&a=Guardar" method="post" class="form-horizontal row-border">
-              <input name="idPrograma"  value="<?php echo $programa->idPrograma != null ? $programa->idPrograma : 0;  ?>"/>
+              <input DISABLED name="idPrograma"  value="<?php echo $programa->idPrograma != null ? $programa->idPrograma : 0;  ?>"  style="visibility:hidden"/>
               <div class="form-group">
                 <label class="col-sm-3 control-label">Nombre</label>
                 <div class="col-sm-6">
                   <input name="programa" type="text" class="form-control" required value="<?php echo $programa->idPrograma != null ? $programa->programa :"";  ?>"  />
                 </div>
-              </div><!--/form-group--> 
+              </div><!--/form-group-->
             <div class="form-group">
               <div class="col-sm-offset-7 col-sm-5">
-                <button type="submit" class="btn btn-primarys">Guardar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
                 <a href="?c=Programa" class="btn btn-default"> Cancelar</a>
               </div>
-            </div><!--/form-group--> 
+            </div><!--/form-group-->
           </form>
         </div><!--/porlets-content-->
       </div><!--/block-web-->
     </div><!--/col-md-12-->
   </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
-
-
-
-
-
-
-
-
-
-
-
-
-
