@@ -43,8 +43,8 @@ class Programa
 		try 
 		{
 			$stm = $this->pdo
-			          ->prepare("SELECT * FROM programa WHERE idPrograma = ?");
-			          
+			->prepare("SELECT * FROM programa WHERE idPrograma = ?");
+
 
 			$stm->execute(array($id));
 			return $stm->fetch(PDO::FETCH_OBJ);
@@ -60,7 +60,7 @@ class Programa
 		try 
 		{
 			$stm = $this->pdo
-			            ->prepare("DELETE FROM programa WHERE idPrograma = ?");			          
+			->prepare("DELETE FROM programa WHERE idPrograma = ?");			          
 
 			$stm->execute(array($id));
 		} catch (Exception $e) 
@@ -75,16 +75,16 @@ class Programa
 		try 
 		{
 			$sql = "UPDATE programa SET 
-						programa = ?
-				    WHERE idPrograma = ?";
+			programa = ?
+			WHERE idPrograma = ?";
 
 			$this->pdo->prepare($sql)
-			     ->execute(
-				    array(
-				    	$data->programa, 
-                        $data->idPrograma
-					)
-				);
+			->execute(
+				array(
+					$data->programa, 
+					$data->idPrograma
+				)
+			);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -95,14 +95,14 @@ class Programa
 	{
 		try 
 		{
-		$sql = "INSERT INTO programa (programa) 
-		        VALUES (?)";
+			$sql = "INSERT INTO programa (programa) 
+			VALUES (?)";
 
-		$this->pdo->prepare($sql)
-		     ->execute(
+			$this->pdo->prepare($sql)
+			->execute(
 				array(
-                    $data->programa
-                )
+					$data->programa
+				)
 			);
 		} catch (Exception $e) 
 		{
