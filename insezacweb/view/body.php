@@ -6,11 +6,10 @@
   </span></h1>
 </div>
 </div>
-<div class="container clear_both padding_fix">
+<div class="container">
  <!--\\\\\\\ container  start \\\\\\-->
-
-   <img align="center" style="align-content: center ; max-width:43% ; " src="assets/images/logo_white.png">
- 
+ <div class="row col-md-6 col-md-offset-3">
+     <img align="center" style="max-width: 100%;" src="assets/images/logozacatecas.png">   
 </div>
 <!--\\\\\\\ container  end \\\\\\-->
 
