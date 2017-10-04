@@ -23,10 +23,7 @@ class Programa
 	{
 		try
 		{
-			//$result = array();
-		    // SELECT p.idPrograma, p.programa, sum(techoPresupuestal) as suma   FROM programa p , subprograma s where p.idPrograma =  s.idPrograma group by p.idPrograma
-
-			$stm = $this->pdo->prepare("SELECT * from programa");
+			
 			
 			$stm->execute();
 
