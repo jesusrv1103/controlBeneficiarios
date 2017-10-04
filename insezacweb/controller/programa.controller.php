@@ -36,17 +36,16 @@ public function Guardar(){
   $programa->idPrograma > 0 
   ? $this->model->Actualizar($programa)
   : $this->model->Registrar($programa);
-  $administracion=true;
-  $programas=true;
-  $page="view/programa/index.php";
-  require_once 'view/index.php';
-}
+    $administracion=true; //variable cargada para activar la opcion administracion en el menu
+    $programas=true; //variable cargada para activar la opcion programas en el menu
+    $page="view/programa/index.php";
+    require_once 'view/index.php';
+  }
     //Metodo  para eliminar
-public function Eliminar(){
-  $this->model->Eliminar($_REQUEST['idPrograma']);
-  echo $idPrograma;
-  $page="view/programa/index.php";
-  require_once 'view/index.php';
-}
-
+  public function Eliminar(){
+    $administracion=true; //variable cargada para activar la opcion administracion en el menu
+    $programas=true; //variable cargada para activar la opcion programas en el menu
+    $this->model->Eliminar($_REQUEST['idPrograma']);
+    header ('Location: index.php?c=Programa&a=Index');
+  }
 }

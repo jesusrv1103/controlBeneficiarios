@@ -23,7 +23,7 @@
                     <div class="row">
                       <div class="col-sm-4">
                         <div class="input-group">
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." >
                           <span class="input-group-btn">
                             <button type="button" class="btn btn-default"><i class="fa fa-search"></i> Buscar </button>
                           </span>
@@ -52,7 +52,7 @@
                         <div class="clearfix">
                         </div>
                         <div class="margin-top-10"></div>
-                        <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                        <table class="table table-striped table-hover table-bordered" id="myTable"">
                           <thead>
                             <tr>
                               <th><h5>Nombre del programa</h5></th>
@@ -81,4 +81,27 @@
                 </div><!--/col-md-12-->
               </div><!--/row-->
             </div>
+
+<script>
+function myFunction() {
+  // Declare variables 
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+</script>
         

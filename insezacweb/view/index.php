@@ -62,13 +62,14 @@ if (!isset($_SESSION['seguridad'])){
 
         <div class="left_nav_slidebar">
           <ul>
-            <?php if($inicio==true){ ?>
-            <li class="left_nav_active theme_border"><a href="?c=Inicio"> <i class="fa fa-home"></i> Inicio </a></li>
-            <?php  }else{ ?>
-            <li class="theme_border"><a href="?c=Inicio"> <i class="fa fa-home"></i> Inicio </a></li>
-            <?php } ?>
-
-            <?php if($administracion==true){ ?>
+           <?php if (isset($inicio)){  ?>
+            <li class="left_nav_active theme_border"> 
+            <?php } else { ?>
+            <li class="theme_border">
+              <?php } ?>
+              <a href="?c=Inicio"> <i class="fa fa-home"></i> Inicio </a>
+            </li>
+            <?php if(isset($administracion)){ ?>
             <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
               <ul class="opened" style="display:block">
                 <?php  }else{ ?>
