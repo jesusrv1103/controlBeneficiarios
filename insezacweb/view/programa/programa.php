@@ -48,7 +48,7 @@
       <ol class="breadcrumb">
         <li><a href="?c=Inicio">Inicio</a></li>
         <li><a href="?c=Programa">Programas</a></li>
-        <li class="active">Registrar programa</li>
+        <li class="active"><?php echo $programa->idPrograma != null ? 'Actualizar programa' : 'Registrar programa'; ?></li>
       </ol>
     </div>
   </div>
