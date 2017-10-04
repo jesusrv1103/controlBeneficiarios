@@ -19,7 +19,7 @@ class Programa
 	}
 
 	//Metdodo para listar
-	public function Listar($nomPrograma)
+	public function Listar()
 	{
 		try
 		{
@@ -28,7 +28,7 @@ class Programa
 
 			$stm = $this->pdo->prepare("SELECT * from programa");
 			
-			$stm->execute($nomPrograma);
+			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		}
