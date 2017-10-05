@@ -63,7 +63,7 @@ if (!isset($_SESSION['seguridad'])){
         <div class="left_nav_slidebar">
           <ul>
            <?php if (isset($inicio)){  ?>
-            <li class="left_nav_active theme_border"> 
+           <li class="left_nav_active theme_border"> 
             <?php } else { ?>
             <li class="theme_border">
               <?php } ?>
@@ -71,11 +71,13 @@ if (!isset($_SESSION['seguridad'])){
             </li>
             <?php if(isset($administracion)){ ?>
             <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
+
               <ul class="opened" style="display:block">
                 <?php  }else{ ?>
                 <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
+                  <?php }  ?>
+
                   <ul>
-                    <?php }  ?>
                     <li> 
                       <a href="?c=Programa&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                         <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b> 
@@ -103,97 +105,173 @@ if (!isset($_SESSION['seguridad'])){
              </li>
            </ul>
          </li>
-         <?php //if($beneficiarios==true){ ?>
-              <!--li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-users icon"></i> Beneficiarios <span class="plus"><i class="fa fa-plus"></i></span></a>
-                <ul class="opened" style="display:block"-->
-                 <?php//  }else{ ?>
-                 <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-users icon"></i> Beneficiarios <span class="plus"><i class="fa fa-plus"></i></span></a>
-                  <ul>
-                   <?php// } ?>
-
-                   <li> <a href="#"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Consultar datos</b> </a> </li>
-                   <li> <a href="#"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Registrar beneficiario</b> </a> </li>
-                 </ul>
+         <?php if(isset($catalogos)){ ?>
+         <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catalogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+          <ul class="opened" style="display:block">
+            <?php  }else{ ?>
+            <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catalogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+              <ul>
+                <?php }  ?>
+                <li> 
+                  <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                   <?php if (isset($beneficiarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>
+                 </a> 
                </li>
-             </ul>
-           </div>
-         </div>
-         <!--\\\\\\\left_nav end \\\\\\-->
-         <div class="contentpanel">
-          <!--\\\\\\\ contentpanel start\\\\\\-->
+               <li> 
+                <a href="?c=Catalogos&a=Vialidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                 <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+               </a> 
+             </li>
+           </ul>
+         </li>
+         <?php if(isset($catalogos2)){ ?>
+         <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catalogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+          <ul class="opened" style="display:block">
+            <?php  }else{ ?>
+            <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catalogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+              <ul>
+                <?php }  ?>
+                <li> 
+                  <a href="?c=Catalogos&a=IdOficial"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                   <?php if (isset($idOficial)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Identificación Oficial</b>
+                 </a> 
+               </li>
+               <li> 
+                <a href="?c=Catalogos&a=Vialidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                 <?php if (isset($vialidad)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Vialidad</b>
+               </a> 
+             </li>
+             <li> 
+              <a href="?c=Catalogos&a=EstadoCivil"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+               <?php if (isset($estadoCivil)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Estado civil</b>
+             </a> 
+           </li>
+           <li> 
+            <a href="?c=Catalogos&a=Ocupacion"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+             <?php if (isset($ocupacion)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Ocupación</b>
+           </a> 
+         </li>
+         <li> 
+          <a href="?c=Catalogos&a=IngresoMensual"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+           <?php if (isset($ingresoMensual)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Ingreso mensual</b>
+         </a> 
+       </li>
+       <li> 
+        <a href="?c=Catalogos&a=Vivienda"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+         <?php if (isset($vivienda)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Vivienda</b>
+       </a> 
+     </li>
+     <li> 
+      <a href="?c=Catalogos&a=NivelEstudios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+       <?php if (isset($nivelEstudios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Nivel de estudios</b>
+     </a> 
+   </li>
+   <li> 
+    <a href="?c=Catalogos&a=SeguridadSocial"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+     <?php if (isset($seguridadSocial)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Seguridad social</b>
+   </a> 
+ </li>
+ <li> 
+  <a href="?c=Catalogos&a=Discapacidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+   <?php if (isset($discapacidad)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Discapacidad</b>
+ </a> 
+</li>
+<li> 
+  <a href="?c=Catalogos&a=GrupoVulnerable"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+   <?php if (isset($grupoVulnerable)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Grupo vulnerable</b>
+ </a> 
+</li>
+<li> 
+  <a href="?c=Catalogos&a=Asentamientos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+   <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Asentamientos</b>
+ </a> 
+</li>
+<li> 
+  <a href="?c=Catalogos&a=Localidades"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+   <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
+ </a> 
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!--\\\\\\\left_nav end \\\\\\-->
+<div class="contentpanel">
+  <!--\\\\\\\ contentpanel start\\\\\\-->
 
-          <?php include($page); ?>      
+  <?php include($page); ?>      
 
-        </div>
-        <!--\\\\\\\ content panel end \\\\\\-->
-      </div>
-      <!--\\\\\\\ inner end\\\\\\-->
-    </div>
-    <!--\\\\\\\ wrapper end\\\\\\-->
-    <script src="assets/js/jquery-2.1.0.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/common-script.js"></script>
-    <script src="assets/js/jquery.slimscroll.min.js"></script>
-    <script type="text/javascript"  src="assets/plugins/toggle-switch/toggles.min.js"></script> 
-    <script src="assets/plugins/checkbox/zepto.js"></script>
-    <script src="assets/plugins/checkbox/icheck.js"></script>
-    <script src="assets/js/icheck-init.js"></script>
-    <script type="text/javascript" src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> 
-    <script type="text/javascript" src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script> 
-    <script type="text/javascript" src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script> 
-    <script type="text/javascript" src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script> 
-    <script type="text/javascript" src="assets/js/form-components.js"></script> 
-    <script type="text/javascript"  src="assets/plugins/input-mask/jquery.inputmask.min.js"></script> 
-    <script type="text/javascript"  src="assets/plugins/input-mask/demo-mask.js"></script> 
-    <script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script> 
-    <script type="text/javascript"  src="assets/plugins/dropzone/dropzone.min.js"></script> 
-    <script type="text/javascript" src="assets/plugins/ckeditor/ckeditor.js"></script>
-    <script src="assets/plugins/validation/parsley.min.js"></script>
-    <script src="assets/plugins/data-tables/jquery.dataTables.js"></script>
-    <script src="assets/plugins/data-tables/DT_bootstrap.js"></script>
-    <script src="assets/plugins/data-tables/dynamic_table_init.js"></script>
-    <script src="assets/plugins/edit-table/edit-table.js"></script>
-    <script>
+</div>
+<!--\\\\\\\ content panel end \\\\\\-->
+</div>
+<!--\\\\\\\ inner end\\\\\\-->
+</div>
+<!--\\\\\\\ wrapper end\\\\\\-->
+<script src="assets/js/jquery-2.1.0.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/common-script.js"></script>
+<script src="assets/js/jquery.slimscroll.min.js"></script>
+<script type="text/javascript"  src="assets/plugins/toggle-switch/toggles.min.js"></script> 
+<script src="assets/plugins/checkbox/zepto.js"></script>
+<script src="assets/plugins/checkbox/icheck.js"></script>
+<script src="assets/js/icheck-init.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> 
+<script type="text/javascript" src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script> 
+<script type="text/javascript" src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script> 
+<script type="text/javascript" src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script> 
+<script type="text/javascript" src="assets/js/form-components.js"></script> 
+<script type="text/javascript"  src="assets/plugins/input-mask/jquery.inputmask.min.js"></script> 
+<script type="text/javascript"  src="assets/plugins/input-mask/demo-mask.js"></script> 
+<script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script> 
+<script type="text/javascript"  src="assets/plugins/dropzone/dropzone.min.js"></script> 
+<script type="text/javascript" src="assets/plugins/ckeditor/ckeditor.js"></script>
+<script src="assets/plugins/validation/parsley.min.js"></script>
+<script src="assets/plugins/data-tables/jquery.dataTables.js"></script>
+<script src="assets/plugins/data-tables/DT_bootstrap.js"></script>
+<script src="assets/plugins/data-tables/dynamic_table_init.js"></script>
+<script src="assets/plugins/edit-table/edit-table.js"></script>
+<script>
 
-      /*==Porlets Actions==*/
-      $('.minimize').click(function(e){
-        var h = $(this).parents(".header");
-        var c = h.next('.porlets-content');
-        var p = h.parent();
+  /*==Porlets Actions==*/
+  $('.minimize').click(function(e){
+    var h = $(this).parents(".header");
+    var c = h.next('.porlets-content');
+    var p = h.parent();
 
-        c.slideToggle();
+    c.slideToggle();
 
-        p.toggleClass('closed');
+    p.toggleClass('closed');
 
-        e.preventDefault();
-      });
+    e.preventDefault();
+  });
 
-      $('.refresh').click(function(e){
-        var h = $(this).parents(".header");
-        var p = h.parent();
-        var loading = $('&lt;div class="loading"&gt;&lt;i class="fa fa-refresh fa-spin"&gt;&lt;/i&gt;&lt;/div&gt;');
+  $('.refresh').click(function(e){
+    var h = $(this).parents(".header");
+    var p = h.parent();
+    var loading = $('&lt;div class="loading"&gt;&lt;i class="fa fa-refresh fa-spin"&gt;&lt;/i&gt;&lt;/div&gt;');
 
-        loading.appendTo(p);
-        loading.fadeIn();
-        setTimeout(function() {
-          loading.fadeOut();
-        }, 1000);
+    loading.appendTo(p);
+    loading.fadeIn();
+    setTimeout(function() {
+      loading.fadeOut();
+    }, 1000);
 
-        e.preventDefault();
-      });
+    e.preventDefault();
+  });
 
-      $('.close-down').click(function(e){
-        var h = $(this).parents(".header");
-        var p = h.parent();
+  $('.close-down').click(function(e){
+    var h = $(this).parents(".header");
+    var p = h.parent();
 
-        p.fadeOut(function(){
-          $(this).remove();
-        });
-        e.preventDefault();
-      });
+    p.fadeOut(function(){
+      $(this).remove();
+    });
+    e.preventDefault();
+  });
 
-    </script>
+</script>
 
-    <script src="assets/js/jPushMenu.js"></script> 
-  </body>
-  </html>
+<script src="assets/js/jPushMenu.js"></script> 
+</body>
+</html>

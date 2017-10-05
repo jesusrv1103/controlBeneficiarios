@@ -30,6 +30,7 @@
          <div class="col-sm-8">
            <div class="btn-group pull-right">
              <b>
+              <div class="btn-group">
                <div class="btn-group"> <a class="btn btn-sm btn-success" href="?c=Subprograma&a=Alta"> <i class="fa fa-plus"></i> Registrar subprograma </a> </div>
              </b>
            </div>
