@@ -62,7 +62,7 @@
           </div>
           <div class="porlets-content">
             <form action="?c=Programa&a=Guardar" method="post" class="form-horizontal row-border">
-              <input name="idPrograma"  value="<?php echo $programa->idPrograma != null ? $programa->idPrograma : 0;  ?>"/>
+              <input hidden name="idPrograma"  value="<?php echo $programa->idPrograma != null ? $programa->idPrograma : 0;  ?>"/>
               <div class="form-group">
                 <label class="col-sm-3 control-label">Nombre</label>
                 <div class="col-sm-6">
@@ -71,7 +71,7 @@
               </div><!--/form-group--> 
             <div class="form-group">
               <div class="col-sm-offset-7 col-sm-5">
-                <button type="submit" class="btn btn-primarys">Guardar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
                 <a href="?c=Programa" class="btn btn-default"> Cancelar</a>
               </div>
             </div><!--/form-group--> 
