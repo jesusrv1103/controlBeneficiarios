@@ -70,32 +70,20 @@ if(isset($mensaje))
              </thead>
              <tbody>
                <tr class="gradeA">
-                 <th>CURP</th>
-                 <th>Primer apellido</th>
-                 <th>Segunda apellido</th>
-                 <th>Nombre</th>
-                 <th>Id idnetificacion</th>
-                 <td class="center">
-                  <a class="btn btn-primary"  role="button" href="?c=Programa&a=Crud&idPrograma=<?php echo $r->idPrograma; ?>"><i class="fa fa-edit"></i>Editar</a>
-                </td>
-                <td class="center">
-                 <a class="btn btn-danger"  role="button" href="?c=Programa&a=Crud&idPrograma=<?php echo $r->idPrograma; ?>"><i class="fa fa-eraser"></i>Borrar</a>
-               </td>
-               <td class="center">
-                <a class="btn btn-info"  role="button" href="?c=Programa&a=Crud&idPrograma=<?php echo $r->idPrograma; ?>"><i class="fa fa-eye"></i>Ver</a>
-              </td>
+                 <td>GOTA042494HZRSS</td>
+                 <td>Gozalez</td>
+                 <td>Torres</td>
+                 <td>Alejadnro</td>
+                 <td>Credencial</td>
                </tr>
              </tbody>
              <tfoot>
                <tr>
-                 <th>CURP</th>
-                 <th>Primer apellido</th>
-                 <th>Segunda apellido</th>
-                 <th>Nombre</th>
-                 <th>Id idnetificacion</th>
-                 <th>Edit</th>
-                 <th>Borrar</th>
-                 <th>Ver</th>
+                 <th>Rendering engine</th>
+                 <th>Browser</th>
+                 <th>Platform(s)</th>
+                 <th class="hidden-phone">Engine version</th>
+                 <th class="hidden-phone">CSS grade</th>
                </tr>
              </tfoot>
            </table>
