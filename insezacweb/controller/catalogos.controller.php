@@ -4,8 +4,6 @@ class CatalogosController{
   public function __CONSTRUCT()
   {
    $this->model = new Catalogos();
-
-<<<<<<< HEAD
  }
 
  public function Beneficiarios(){
@@ -20,20 +18,6 @@ public function Upload(){
   $tipo = $_FILES['file']['type'];
   $destino = "./assets/importaciones/bak_" . $archivo;
   if (copy($_FILES['file']['tmp_name'], $destino)){
-=======
-  public function Beneficiarios(){
-    $catalogos=true;
-    $beneficiarios2=true;
-    $page="view/catalogos/beneficiarios.php";
-    require_once 'view/index.php';
-  }
-  
-  public function Upload(){
-    $archivo = $_FILES['file']['name'];
-    $tipo = $_FILES['file']['type'];
-    $destino = "./assets/importaciones/bak_" . $archivo;
-    if (copy($_FILES['file']['tmp_name'], $destino)){
->>>>>>> d9df02012a97c7ac60fd292a67477fd8d7dc3bd3
     //echo "Archivo Cargado Con Éxito" . "<br><br>";
     $this->Importar($archivo);
     //mandar llamar todas las funciones a importar
