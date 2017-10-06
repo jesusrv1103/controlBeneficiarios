@@ -1,28 +1,35 @@
 <?php
+require_once 'model/catalogos.php';
 class CatalogosController{
+  public function __CONSTRUCT()
+  {
+   $this->model = new Catalogos();
+ }
 
-  public function Beneficiarios(){
-    $catalogos=true;
-    $beneficiarios2=true;
-    $page="view/catalogos/beneficiarios.php";
-    require_once 'view/index.php';
-  }
-  
-  public function Upload(){
-    $archivo = $_FILES['file']['name'];
-    $tipo = $_FILES['file']['type'];
-    $destino = "./assets/importaciones/bak_" . $archivo;
-    if (copy($_FILES['file']['tmp_name'], $destino)){
+ public function Beneficiarios(){
+  $catalogos=true;
+  $beneficiarios=true;
+  $page="view/catalogos/beneficiarios.php";
+  require_once 'view/index.php';
+}
+
+public function Upload(){
+  $archivo = $_FILES['file']['name'];
+  $tipo = $_FILES['file']['type'];
+  $destino = "./assets/importaciones/bak_" . $archivo;
+  if (copy($_FILES['file']['tmp_name'], $destino)){
     //echo "Archivo Cargado Con Éxito" . "<br><br>";
-    //$this->Importar($archivo);
-    }
-    else{
-    //echo "Error Al Cargar el Archivo". "<br><br>";
-    }
+    $this->Importar($archivo);
+    //mandar llamar todas las funciones a importar
   }
-  public function Importar($archivo){
-    if (file_exists("./assets/importaciones/bak_" . $archivo)) {
-  //Agregamos la librería 
+  else{
+    echo "Error Al Cargar el Archivo". "<br><br>";
+  }
+}
+public function Importar($archivo){
+  if (file_exists("./assets/importaciones/bak_" . $archivo)) {
+
+        //Agregamos la librería 
       require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
   //Variable con el nombre del archivo
       $nombreArchivo = './assets/importaciones/bak_' . $archivo;
@@ -32,38 +39,43 @@ class CatalogosController{
       $objPHPExcel->setActiveSheetIndex(0);
   //Obtengo el numero de filas del archivo
       $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-
-    //echo '<table border=1><tr><td>Producto</td><td>Precio</td><td>Existencia</td></tr>';
-
-      for ($i = 2; $i <= $numRows; $i++) {
-
-        $ben = new Beneficiario();
-        $ben->nombre = $objPHPExcel->getActiveSheet()->getCell('A'.$i)->getCalculatedValue();
-        $ben->precio = $objPHPExcel->getActiveSheet()->getCell('B'.$i)->getCalculatedValue();
-        $ben->existencia = $objPHPExcel->getActiveSheet()->getCell('C'.$i)->getCalculatedValue();
-        $this->model->Importar($ben);
-
-     /* echo '<tr>';
-      echo '<td>'. $ben->nombre.'</td>';
-      echo '<td>'. $ben->precio.'</td>';
-      echo '<td>'. $ben->existencia.'</td>';
-      echo '</tr>';
-      */
-    }
-
-   /* echo '<table>';
-   echo '<br> Importación con éxito'; */
-   $mensaje="El archivo se ha importado correctamente";
-   $page="view/beneficiario/index.php";
-   $administracion = true;
-   $inicio = false;
-   $beneficiarios = true;
-   require_once 'view/index.php';
-
- }
+      $this->IdentificacionOficial($objPHPExcel,$numRows);
+      //incluir las demas funciones
+  }
         //si por algo no cargo el archivo bak_ 
- else {
-  echo "Necesitas primero importar el archivo";
+  else {
+    echo "Necesitas primero importar el archivo";
+  }
+}
+public function IdentificacionOficial($objPHPExcel,$numRows){
+ try{
+  $this->model->Limpiar("identificacionOficial");
+  $numRow=2;
+
+  do {
+       //echo "Entra";
+    $cat = new Catalogos();
+    $cat->idIdentificacion = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
+    $cat->identificacion = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
+    if (!$cat->idIdentificacion == null) {
+
+      $this->model->ImportarIdentificacionOficial($cat);
+
+    }
+    $numRow+=1;
+  } while ( !$cat->idIdentificacion == null);
+
+  $mensaje="success";
+  $page="view/catalogos/beneficiarios.php";
+  $beneficiarios2 = true;
+  $catalogos=true;
+  require_once 'view/index.php';
+} catch (Exception $e) {
+ $mensaje="error";
+ $page="view/catalogos/beneficiarios.php";
+ $beneficiarios2 = true;
+ $catalogos=true;
+ require_once 'view/index.php';
 }
 }
 }
