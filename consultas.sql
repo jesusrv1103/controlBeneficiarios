@@ -1,21 +1,23 @@
 
-  select b.idBeneficiario, 
+    <?php foreach($this->model->ListarDatosPersonales() as $r): ?>
+               <tr>
+                 <th><?php echo $r->curp; ?></th>
+                 <th><?php echo $r->primerApellido; ?></th>
+                 <th><?php echo $r->segundoApellido; ?></th>
+                 <th><?php echo $r->nombres; ?></th>
+                 <th><?php echo $r->curp; ?></th>
+                 <th>Edit</th>
+                 <th>Borrar</th>
+                 <th>Ver</th>
+                <?php endforeach; ?>
+
+
+select b.idBeneficiario, 
   b.curp, 
   b.primerApellido, 
   b.segundoApellido,
   b.nombres, 
-  idOf.identificacion, 
-  tV.tipoVialidad, 
-  eC.estadoCivil, 
-  o.ocupacion, 
-  iM.ingresoMensual,
-  v.vivienda, 
-  nE.nivelEstudios, 
-  sS.seguridadSocial,
-  d.discapacidad, 
-  gV.grupoVunerable,
-  a.nombreAsentamiento, 
-  l.localidad 
+  idOf.identificacion AS nombreId
   from identificacionOficial idOf, 
   tipoVialidad tV, estadoCivil eC, 
   ocupacion o, vivienda v, 

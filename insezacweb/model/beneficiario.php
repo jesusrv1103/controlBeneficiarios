@@ -78,7 +78,7 @@ class Beneficiario
 			  b.primerApellido, 
 			  b.segundoApellido,
 			  b.nombres, 
-			  idOf.identificacion, 
+			  idOf.identificacion as nomTipoI, 
 			  tV.tipoVialidad, 
 			  eC.estadoCivil, 
 			  o.ocupacion, 
@@ -110,8 +110,7 @@ class Beneficiario
 			    b.discapacidad = d.idDiscapacidad AND  
 			   	b.grupoVulnerable =gV.idGrupoVulnerable AND 
 			    b.claveAsentamiento = a.idAsentamientos AND 
-			    b.claveLocalidad = l.idLocalidad;
-			");
+			    b.claveLocalidad = l.idLocalidad");
 			
 			$stm->execute();
 
@@ -134,7 +133,7 @@ class Beneficiario
 			  b.primerApellido, 
 			  b.segundoApellido,
 			  b.nombres, 
-			  idOf.identificacion
+			  idOf.identificacion AS nombreId
 			  from identificacionOficial idOf, 
 			  tipoVialidad tV, estadoCivil eC, 
 			  ocupacion o, vivienda v, 
@@ -155,8 +154,7 @@ class Beneficiario
 			    b.discapacidad = d.idDiscapacidad AND  
 			   	b.grupoVulnerable =gV.idGrupoVulnerable AND 
 			    b.claveAsentamiento = a.idAsentamientos AND 
-			    b.claveLocalidad = l.idLocalidad;
-			");
+			    b.claveLocalidad = l.idLocalidad");
 			
 			$stm->execute();
 
