@@ -3,7 +3,7 @@ class CatalogosController{
 
   public function Beneficiarios(){
     $catalogos=true;
-    $beneficiarios=true;
+    $beneficiarios2=true;
     $page="view/catalogos/beneficiarios.php";
     require_once 'view/index.php';
   }
