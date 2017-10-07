@@ -62,19 +62,20 @@ if(isset($mensaje))
                  <th>Primer apellido</th>
                  <th>Segunda apellido</th>
                  <th>Nombre</th>
-                 <th>Id idnetificacion</th>
+                 <th>Tipo Identifcacion</th>
                  <th>Edit</th>
                  <th>Borrar</th>
                  <th>Ver</th>
                </tr>
              </thead>
              <tbody>
+              <?php foreach($this->model->ListarDatosPersonales() as $r): ?>
                <tr class="gradeA">
-                 <th>CURP</th>
-                 <th>Primer apellido</th>
-                 <th>Segunda apellido</th>
-                 <th>Nombre</th>
-                 <th>Id idnetificacion</th>
+                  <th><?php echo $r->curp; ?></th>
+                 <th><?php echo $r->primerApellido; ?></th>
+                 <th><?php echo $r->segundoApellido; ?></th>
+                 <th><?php echo $r->nombres; ?></th>
+                 <th><?php echo $r->nombreId; ?></th>
                  <td class="center">
                   <a class="btn btn-primary"  role="button" href="?c=Programa&a=Crud&idPrograma=<?php echo $r->idPrograma; ?>"><i class="fa fa-edit"></i>Editar</a>
                 </td>
@@ -85,6 +86,7 @@ if(isset($mensaje))
                 <a class="btn btn-info"  role="button" href="?c=Programa&a=Crud&idPrograma=<?php echo $r->idPrograma; ?>"><i class="fa fa-eye"></i>Ver</a>
               </td>
                </tr>
+              <?php endforeach; ?>
              </tbody>
              <tfoot>
                <tr>
