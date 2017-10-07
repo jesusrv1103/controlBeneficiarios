@@ -18,14 +18,36 @@
 				<div class="header">
 					<div class="row">					
 						<div class="block-web">
-							
-							<div class="btn-group pull-right">
-								<b>
-									<div class="btn-group"> 
-										<a class="btn btn-sm btn-success" href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal">  <i class="fa  fa-cloud-upload"></i> Importar catálogos </a>
-										<a class="btn btn-sm btn-primary" href="?c=Subprograma&a=Alta"> <i class="fa  fa-cloud-download"></i> Exportar catálogos </a> 
-									</div>
-								</b>
+							<?php if(isset($success)){ ?>
+							<div class="col-md-8">
+								<div class="alert alert-success fade in">
+									<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+									<i class="fa fa-check"></i>&nbsp;Se han importado los catálogos correctamente
+								</div>
+							</div> 
+							<?php 	} 
+							if(isset($error)){ ?>
+							<div class="col-md-8">
+								<div class="alert alert-danger">
+									<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+									<i class="fa fa-check"></i>&nbsp;Ha ocurrido un error al importar los catálogos
+								</div>
+							</div>
+							<?php }
+							if(!isset($error) && !isset($success)){ ?>
+							<div class="col-md-8">
+								<h2 class="content-header theme_color" style="margin-top: -10px;">Identificadores para el registro de beneficiarios</b></h2>
+							</div>
+							<?php } ?>
+							<div class="col-md-4">
+								<div class="btn-group pull-right">
+									<b>
+										<div class="btn-group"> 
+											<a class="btn btn-sm btn-success" href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal">  <i class="fa  fa-cloud-upload"></i> Importar catálogos </a>
+											<a class="btn btn-sm btn-primary" href="?c=Subprograma&a=Alta"> <i class="fa  fa-cloud-download"></i> Exportar catálogos </a> 
+										</div>
+									</b>
+								</div>
 							</div>
 						</div>
 					</div>
