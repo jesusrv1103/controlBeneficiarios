@@ -1,13 +1,16 @@
 <?php
 require_once 'model/beneficiario.php';
+require_once 'model/catalogos.php';
 class BeneficiarioController{
   private $pdo;
   private $model;
+  private $model2; 
   private $session;
   public $error;
 
   public function __CONSTRUCT(){
     $this->model = new Beneficiario();
+    $this->model2 = new Catalogos();
     /*try
     {
       $this->pdo = Database::StartUp();     

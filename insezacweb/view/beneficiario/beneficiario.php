@@ -88,7 +88,7 @@
                           <label class="col-sm-3 control-label">Tipo de seguridad social</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
-                              <?php foreach($this->model->ListarTipoSeguridadSocial() as $r): ?>
+                              <?php foreach($this->model2->Listar('seguridadSocial') as $r): ?>
                               <option value="r"> 
                               <?php echo $r->seguridadSocial; ?>
                               </option>
