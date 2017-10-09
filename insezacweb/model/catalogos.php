@@ -43,8 +43,8 @@ class Catalogos
 				array(
 					$data->idIdentificacion,
 					$data->identificacion
-				)
-			);
+					)
+				);
 
 		} catch (Exception $e) 
 		{
@@ -52,18 +52,16 @@ class Catalogos
 		}
 	}
 
-public function ImportarTipoVialidad(Catalogos $data){
+	public function ImportarTipoVialidad(Catalogos $data){
 		try 
 		{
-			$this->Limpiar('tipoVialidad');
 			$sql= $this->pdo->prepare("INSERT INTO tipoVialidad VALUES(?,?)");
 			$resultado=$sql->execute(
 				array(
-					null,
 					$data->idTipoVialidad,
 					$data->tipoVialidad
-				)
-			);
+					)
+				);
 
 		} catch (Exception $e) 
 		{
@@ -73,16 +71,13 @@ public function ImportarTipoVialidad(Catalogos $data){
 	public function ImportarEstadoCivil(Catalogos $data){
 		try 
 		{
-			$this->Limpiar('estadoCivil');
 			$sql= $this->pdo->prepare("INSERT INTO estadoCivil VALUES(?,?)");
 			$resultado=$sql->execute(
 				array(
-					null,
 					$data->idEstadoCivil,
 					$data->estadoCivil
-				)
-			);
-
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -91,15 +86,13 @@ public function ImportarTipoVialidad(Catalogos $data){
 	public function ImportarOcupacion(Catalogos $data){
 		try 
 		{
-			$this->Limpiar('ocupacion');
 			$sql= $this->pdo->prepare("INSERT INTO ocupacion VALUES(?,?)");
 			$resultado=$sql->execute(
 				array(
-					null,
 					$data->idOcupacion,
 					$data->ocupacion
-				)
-			);
+					)
+				);
 
 		} catch (Exception $e) 
 		{
@@ -109,15 +102,13 @@ public function ImportarTipoVialidad(Catalogos $data){
 	public function ImportarIngresoMensual(Catalogos $data){
 		try 
 		{
-			$this->Limpiar('ingresoMensual');
 			$sql= $this->pdo->prepare("INSERT INTO ingresoMensual VALUES(?,?)");
 			$resultado=$sql->execute(
 				array(
-					null,
 					$data->idIngresoMensual,
 					$data->ingresoMensual
-				)
-			);
+					)
+				);
 
 		} catch (Exception $e) 
 		{
@@ -127,15 +118,13 @@ public function ImportarTipoVialidad(Catalogos $data){
 	public function ImportarVivienda(Catalogos $data){
 		try 
 		{
-			$this->Limpiar('vivienda');
 			$sql= $this->pdo->prepare("INSERT INTO vivienda VALUES(?,?)");
 			$resultado=$sql->execute(
 				array(
-					null,
 					$data->idVivienda,
 					$data->vivienda
-				)
-			);
+					)
+				);
 
 		} catch (Exception $e) 
 		{
@@ -145,16 +134,61 @@ public function ImportarTipoVialidad(Catalogos $data){
 	public function ImportarNivelEstudios(Catalogos $data){
 		try 
 		{
-			$this->Limpiar('nivelEstudio');
 			$sql= $this->pdo->prepare("INSERT INTO nivelEstudio VALUES(?,?)");
 			$resultado=$sql->execute(
 				array(
-					null,
 					$data->idNivelEstudios,
 					$data->nivelEstudios
-				)
-			);
+					)
+				);
 
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ImportarSeguridadSocial(Catalogos $data){
+		try 
+		{
+			$sql= $this->pdo->prepare("INSERT INTO seguridadSocial VALUES(?,?)");
+			$resultado=$sql->execute(
+				array(
+					$data->idSeguridadSocial,
+					$data->seguridadSocial
+					)
+				);
+
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ImportarDiscapacidad(Catalogos $data){
+		try 
+		{
+			$sql= $this->pdo->prepare("INSERT INTO discapacidad VALUES(?,?)");
+			$resultado=$sql->execute(
+				array(
+					$data->idDiscapacidad,
+					$data->discapacidad
+					)
+				);
+
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ImportarGrupoVulnerable(Catalogos $data){
+		try 
+		{
+			$sql= $this->pdo->prepare("INSERT INTO grupoVulnerable VALUES(?,?)");
+			$resultado=$sql->execute(
+				array(
+					$data->idGrupoVulnerable,
+					$data->grupoVulnerable
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -165,7 +199,7 @@ public function ImportarTipoVialidad(Catalogos $data){
 		try 
 		{
 			$stm = $this->pdo
-			            ->prepare("DELETE FROM $nomTabla");			          
+			->prepare("DELETE FROM $nomTabla");			          
 
 			$stm->execute();
 		} catch (Exception $e) 
