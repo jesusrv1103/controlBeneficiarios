@@ -118,7 +118,7 @@
 														<?php foreach($this->model->Listar('seguridadSocial') as $r): ?>
 															<tr>
 																<td><?php echo $r->idSeguridadSocial; ?></td>
-																<td><?php echo $r->seguridadsocial; ?></td>
+																<td><?php echo $r->seguridadSocial; ?></td>
 															</tr>
 														<?php endforeach; ?>
 													</tbody>
@@ -142,7 +142,7 @@
 														<?php foreach($this->model->Listar('grupoVulnerable') as $r): ?>
 															<tr>
 																<td><?php echo $r->idGrupoVulnerable; ?></td>
-																<td><?php echo $r->GrupoVulnerable; ?></td>
+																<td><?php echo $r->grupoVulnerable; ?></td>
 															</tr>
 														<?php endforeach; ?>
 													</tbody>													
@@ -264,8 +264,8 @@
 													<tbody>
 														<?php foreach($this->model->Listar('tipoVialidad') as $r): ?>
 															<tr>
-																<td><?php echo $r->idVialidad; ?></td>
-																<td><?php echo $r->vialidad; ?></td>
+																<td><?php echo $r->idTipoVialidad; ?></td>
+																<td><?php echo $r->tipoVialidad; ?></td>
 															</tr>
 														<?php endforeach; ?>
 													</tbody>
@@ -314,37 +314,10 @@
 												<p>Importa tu archivo excel con los datos de los catalogos en caso de que hubiese alguna actualización en los mismos, si no tienes el archivo puedes exportarlo y darle la actualización necesaria, una vez actualizado puedes volver a importarlo para actualizar los datos.</p>
 												<br>
 												<form id="fileupload" action="?c=Catalogos&a=Upload" method="POST" enctype="multipart/form-data">
-													<!-- Redirect browsers with JavaScript disabled to the origin page -->
-													<noscript>
-														<input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/">
-													</noscript>
-													<!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-													<div class="row fileupload-buttonbar">
-														<div class="col-lg-12"> 
-															<!-- The fileinput-button span is used to style the file input field as button --> 
-															<span class="btn btn-success fileinput-button"> <i class="glyphicon glyphicon-plus"></i> <span>Elegir archivo</span>
-															<input type="file" name="file">
-														</span>
-														<button type="submit" class="btn btn-primary"> <i class="glyphicon glyphicon-upload"></i> <span>Start upload</span> </button>
+										
+													<input type="file" name="file">
+												
 
-														<!-- The global file processing state --> 
-														<span class="fileupload-process"></span> </div>
-														<!-- The global progress state -->
-														<div class="col-lg-5 fileupload-progress fade"> 
-															<!-- The global progress bar -->
-															<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-																<div class="progress-bar progress-bar-success" style="width:0%;"> </div>
-															</div>
-															<!-- The extended global progress state -->
-															<div class="progress-extended"> &nbsp; </div>
-														</div>
-													</div>
-													<!-- The table listing the files available for upload/download -->
-													<table role="presentation" class="table table-striped">
-														<tbody class="files">
-														</tbody>
-													</table>
-												</form>
 											</div><!--/porlets-content--> 
 										</div><!--/block-web--> 
 									</div>
@@ -355,11 +328,25 @@
 										<button type="submit" class="btn btn-primary">Guardar</button>
 									</div>
 								</div>
-
-							</div>
+							</form>
 						</div>
 					</div>
-					<script id="template-upload" type="text/x-tmpl">
+				</div>
+				<script type="text/javascript">
+					$(document).on('change', ':file', function() {
+						var input = $(this),
+						numFiles = input.get(0).files ? input.get(0).files.length : 1,
+						label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+						input.trigger('fileselect', [numFiles, label]);
+					});
+					$(document).ready( function() {
+						$(':file').on('fileselect', function(event, numFiles, label) {
+							console.log(numFiles);
+							console.log(label);
+						});
+					});
+				</script>
+					<!--script id="template-upload" type="text/x-tmpl">
 						{% for (var i=0, file; file=o.files[i]; i++) { %}
 						<tr class="template-upload fade">
 							<td width="">
@@ -393,8 +380,8 @@
 						</tr>
 						{% } %}
 					</script> 
-					<!-- The template to display files available for download --> 
-					<script id="template-download" type="text/x-tmpl">
+					< The template to display files available for download --> 
+					<!--script id="template-download" type="text/x-tmpl">
 						{% for (var i=0, file; file=o.files[i]; i++) { %}
 						<tr class="template-download fade">
 							<td>

@@ -38,23 +38,18 @@ public function Importar(){
   //Asigno la hoja de calculo activa
     $objPHPExcel->setActiveSheetIndex(0);
   //Obtengo el numero de filas del archivo
-<<<<<<< HEAD
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
     $this->IdentificacionOficial($objPHPExcel,$numRows);
-      //incluir las demas funciones
-=======
-      $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-      $this->IdentificacionOficial($objPHPExcel,$numRows);
-       $this->TipoVialidad($objPHPExcel,$numRows);
-       $this->EstadoCivil($objPHPExcel,$numRows);
-       $this->Ocupacion($objPHPExcel,$numRows);
-       $this->IngresoMensual($objPHPExcel,$numRows);
-       $this->Vivienda($objPHPExcel,$numRows);
-       $this->NivelEstudio($objPHPExcel,$numRows);
-       $this->SeguridadSocial($objPHPExcel,$numRows);
-       $this->Discapacidad($objPHPExcel,$numRows);
-       $this->GrupoVulnerable($objPHPExcel,$numRows);
->>>>>>> 36a9af6ab1106bf3261cdf77327089cc2d4a120c
+    $this->IdentificacionOficial($objPHPExcel,$numRows);
+    $this->TipoVialidad($objPHPExcel,$numRows);
+    $this->EstadoCivil($objPHPExcel,$numRows);
+    $this->Ocupacion($objPHPExcel,$numRows);
+    $this->IngresoMensual($objPHPExcel,$numRows);
+    $this->Vivienda($objPHPExcel,$numRows);
+    $this->NivelEstudio($objPHPExcel,$numRows);
+    $this->SeguridadSocial($objPHPExcel,$numRows);
+    $this->Discapacidad($objPHPExcel,$numRows);
+    $this->GrupoVulnerable($objPHPExcel,$numRows);
   }
         //si por algo no cargo el archivo bak_ 
   else {
@@ -92,48 +87,34 @@ public function IdentificacionOficial($objPHPExcel,$numRows){
  require_once 'view/index.php';
 }
 }
-<<<<<<< HEAD
-public function Descargar(){
-// grab the requested file's name
-  $file_name = 'catalogo_beneficiarios.xlsx';
-// make sure it's a file before doing anything!
-  if(is_file($file_name))
-  {
-    header("Content-type: text/html; charset=utf8");
-    header ("Content-Disposition: attachment; filename=catalogo_beneficiarios.xlsx"); 
-    header ("Content-Type: application/octet-stream");
-    header ("Content-Length: ".filesize($enlace));
-    readfile($enlace);
-  }
-=======
-public function TipoVialidad($objPHPExcel,$numRows){
- try{
-  $this->model->Limpiar("tipoVialidad");
-  $numRow=2;
+  public function TipoVialidad($objPHPExcel,$numRows){
+   try{
+    $this->model->Limpiar("tipoVialidad");
+    $numRow=2;
 
-  do {
+    do {
        //echo "Entra";
-    $cat = new Catalogos();
-    $cat->idTipoVialidad = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
-    $cat->tipoVialidad = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
-    if (!$cat->idTipoVialidad == null) {
+      $cat = new Catalogos();
+      $cat->idTipoVialidad = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
+      $cat->tipoVialidad = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
+      if (!$cat->idTipoVialidad == null) {
 
-      $this->model->ImportarTipoVialidad($cat);
-    }
-    $numRow+=1;
-  } while ( !$cat->idTipoVialidad == null);
-  $mensaje="success";
-  $page="view/catalogos/beneficiarios.php";
-  $beneficiarios2 = true;
-  $catalogos=true;
-  require_once 'view/index.php';
-} catch (Exception $e) {
- $mensaje="error";
- $page="view/catalogos/beneficiarios.php";
- $beneficiarios2 = true;
- $catalogos=true;
- require_once 'view/index.php';
-}
+        $this->model->ImportarTipoVialidad($cat);
+      }
+      $numRow+=1;
+    } while ( !$cat->idTipoVialidad == null);
+    $mensaje="success";
+    $page="view/catalogos/beneficiarios.php";
+    $beneficiarios2 = true;
+    $catalogos=true;
+    require_once 'view/index.php';
+  } catch (Exception $e) {
+   $mensaje="error";
+   $page="view/catalogos/beneficiarios.php";
+   $beneficiarios2 = true;
+   $catalogos=true;
+   require_once 'view/index.php';
+ }
 }
 public function EstadoCivil($objPHPExcel,$numRows){
  try{
@@ -380,7 +361,19 @@ public function GrupoVulnerable($objPHPExcel,$numRows){
  $catalogos=true;
  require_once 'view/index.php';
 }
->>>>>>> 36a9af6ab1106bf3261cdf77327089cc2d4a120c
+}
+public function Descargar(){
+// grab the requested file's name
+  $file_name = 'catalogo_beneficiarios.xlsx';
+// make sure it's a file before doing anything!
+  if(is_file($file_name))
+  {
+    header("Content-type: text/html; charset=utf8");
+    header ("Content-Disposition: attachment; filename=catalogo_beneficiarios.xlsx"); 
+    header ("Content-Type: application/octet-stream");
+    header ("Content-Length: ".filesize($enlace));
+    readfile($enlace);
+  }
 }
 }
 ?>
