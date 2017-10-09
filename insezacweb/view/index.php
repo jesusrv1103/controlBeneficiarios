@@ -24,7 +24,35 @@ if (!isset($_SESSION['seguridad'])){
   <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
   <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
   <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
+  <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/plugins/file-uploader/css/blueimp-gallery.min.css">
+  <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload.css">
+  <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload-ui.css">
+  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datepicker/css/datepicker.css" />
+  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-timepicker/compiled/timepicker.css" />
+  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css" />
 </head>
+<style type="text/css">
+  .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+</style>
 <body class="light_theme  fixed_header left_nav_fixed">
   <div class="wrapper">
     <!--\\\\\\\ wrapper Start \\\\\\-->
@@ -75,77 +103,75 @@ if (!isset($_SESSION['seguridad'])){
                 <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
                   <ul>
                     <?php }  ?>
-                      <li> 
-                        <a href="?c=Programa&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                          <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b> 
-                        </a> 
-                      </li>
-                      <li> 
-                        <a href="?c=Subprograma&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                         <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
-                       </a> 
-                     </li>
-                     <li> 
-                      <a href="?c=Apoyos&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                       <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+                    <li> 
+                      <a href="?c=Programa&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                        <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b> 
+                      </a> 
+                    </li>
+                    <li> 
+                      <a href="?c=Subprograma&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                       <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
                      </a> 
                    </li>
                    <li> 
-                    <a href="?c=Beneficiario&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                     <?php if (isset($beneficiarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>
+                    <a href="?c=Apoyos&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                     <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
                    </a> 
                  </li>
                  <li> 
-                  <a href="?c=Usuario&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                   <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
+                  <a href="?c=Beneficiario&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                   <?php if (isset($beneficiarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>
                  </a> 
                </li>
-             </ul>
-           </li>
-           <?php if(isset($catalogos)){ ?>
-           <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catalogos <span class="plus"><i class="fa fa-plus"></i></span></a>
-            <ul class="opened" style="display:block">
-              <?php  }else{ ?>
-              <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catalogos <span class="plus"><i class="fa fa-plus"></i></span></a>
-                <ul>
-                  <?php }  ?>
-                  <li> 
-                    <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                     <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>
-                   </a> 
-                 </li>
-                 <li> 
-                    <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                     <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
-                   </a> 
-                 </li>
-                 <li> 
-                    <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                     <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Acentamientos</b>
-                   </a> 
-                 </li>
-                 <li> 
-                  <a href="?c=Catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                   <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+               <li> 
+                <a href="?c=Usuario&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                 <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
+               </a> 
+             </li>
+           </ul>
+         </li>
+         <?php if(isset($catalogos)){ ?>
+         <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catalogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+          <ul class="opened" style="display:block">
+            <?php  }else{ ?>
+            <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catalogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+              <ul>
+                <?php }  ?>
+                <li> 
+                  <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                   <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>
                  </a> 
                </li>
-             </ul>
+               <li> 
+                <a href="?c=Localidad&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                 <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
+               </a> 
+             </li>
+             <li> 
+              <a href="?c=Asentamiento&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+               <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Acentamientos</b>
+             </a> 
            </li>
-         </ul>
+           <li> 
+            <a href="?c=Apoyos&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+             <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+           </a> 
+         </li>
+       </ul>
+     </li>
+   </ul>
+ </div>
+</div>
+<!--\\\\\\\left_nav end \\\\\\-->
+<div class="contentpanel">
+  <!--\\\\\\\ contentpanel start\\\\\\-->
 
+  <?php include($page); ?>      
 
-       </div>
-     </div>
-     <!--\\\\\\\left_nav end \\\\\\-->
-     <div class="contentpanel">
-      <!--\\\\\\\ contentpanel start\\\\\\-->
-
-      <?php include($page); ?>      
-
-    </div>
-    <!--\\\\\\\ content panel end \\\\\\-->
-  </div>
-  <!--\\\\\\\ inner end\\\\\\-->
+</div>
+<!--\\\\\\\ content panel end \\\\\\-->
+</div>
+<!--\\\\\\\ inner end\\\\\\-->
 </div>
 <!--\\\\\\\ wrapper end\\\\\\-->
 <script src="assets/js/jquery-2.1.0.js"></script>
@@ -171,6 +197,21 @@ if (!isset($_SESSION['seguridad'])){
 <script src="assets/plugins/data-tables/DT_bootstrap.js"></script>
 <script src="assets/plugins/data-tables/dynamic_table_init.js"></script>
 <script src="assets/plugins/edit-table/edit-table.js"></script>
+<script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script> 
+<script src="assets/plugins/file-uploader/js/vendor/jquery.ui.widget.js"></script> 
+<script src="assets/plugins/file-uploader/js/tmpl.min.js"></script> 
+<script src="assets/plugins/file-uploader/js/load-image.min.js"></script> 
+<script src="assets/plugins/file-uploader/js/canvas-to-blob.min.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.blueimp-gallery.min.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.iframe-transport.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.fileupload.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.fileupload-process.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.fileupload-image.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.fileupload-audio.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.fileupload-video.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.fileupload-validate.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.fileupload-ui.js"></script> 
+<script src="assets/plugins/file-uploader/js/main.js"></script>
 <script>
 
   /*==Porlets Actions==*/
@@ -209,9 +250,8 @@ if (!isset($_SESSION['seguridad'])){
     });
     e.preventDefault();
   });
-
 </script>
-
+<!-- The template to display files available for upload -->
 <script src="assets/js/jPushMenu.js"></script> 
 </body>
 </html>

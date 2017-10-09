@@ -64,7 +64,15 @@
                           <label class="col-sm-3 control-label">Indentificacion</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
+<<<<<<< HEAD
                               <option value="ididentificacion"> Caracteristicas </option>
+=======
+                              <?php foreach($this->model->ListarIdentificaciones() as $r): ?>
+                              <option value="r"> 
+                              <?php echo $r->identificacion; ?>
+                              </option>
+                            <?php endforeach; ?>
+>>>>>>> 1fe877d0de819573b5482732abb2023914d82fd3
                             </select>
                           </div>
                         </div><!--/form-group-->
@@ -72,7 +80,15 @@
                           <label class="col-sm-3 control-label">Nivel de estudio</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
+<<<<<<< HEAD
                               <option value="idNivelEstudio"> Caracteristicas </option>
+=======
+                              <?php foreach($this->model->ListarNivelEstudio() as $r): ?>
+                              <option value="r"> 
+                              <?php echo $r->nivelEstudios; ?>
+                              </option>
+                            <?php endforeach; ?>
+>>>>>>> 1fe877d0de819573b5482732abb2023914d82fd3
                             </select>
                           </div>
                         </div><!--/form-group-->
@@ -80,7 +96,15 @@
                           <label class="col-sm-3 control-label">Tipo de seguridad social</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
+<<<<<<< HEAD
                               <option value="idSeguridadSocial>"> Caracteristicas </option>
+=======
+                              <?php foreach($this->model2->Listar('seguridadSocial') as $r): ?>
+                              <option value="r"> 
+                              <?php echo $r->seguridadSocial; ?>
+                              </option>
+                            <?php endforeach; ?>
+>>>>>>> 1fe877d0de819573b5482732abb2023914d82fd3
                             </select>
                           </div>
                         </div><!--/form-group-->
@@ -88,7 +112,16 @@
                           <label class="col-sm-3 control-label">Discapasidad</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
+<<<<<<< HEAD
                               <option value="idDiscapacidad"> Caracteristicas </option>
+=======
+                            <?php foreach($this->model->ListarDiscapacidad() as $r): ?>
+
+                              <option value="r"> 
+                              <?php echo $r->discapacidad; ?>
+                              </option>
+                            <?php endforeach; ?>
+>>>>>>> 1fe877d0de819573b5482732abb2023914d82fd3
                             </select>
                           </div>
                         </div><!--/form-group-->
