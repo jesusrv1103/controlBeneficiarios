@@ -171,7 +171,7 @@
                       </form>
                     </div>
                   </div>
-                  <div class="tab-pane" id="user-activities">
+                  <div class="tab-pane" id="estado-social">
                     <ul class="media-list">
                       <li class="media"> <a href="#">
                         <p><strong>John Doe</strong> Uploaded a photo <strong>"DSC000254.jpg"</strong> <br>
