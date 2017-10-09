@@ -50,6 +50,11 @@ public function Importar(){
     $this->SeguridadSocial($objPHPExcel,$numRows);
     $this->Discapacidad($objPHPExcel,$numRows);
     $this->GrupoVulnerable($objPHPExcel,$numRows);
+    $mensaje="success";
+    $page="view/catalogos/beneficiarios.php";
+    $beneficiarios2 = true;
+    $catalogos=true;
+    require_once 'view/index.php';
   }
         //si por algo no cargo el archivo bak_ 
   else {
@@ -74,11 +79,6 @@ public function IdentificacionOficial($objPHPExcel,$numRows){
     $numRow+=1;
   } while ( !$cat->idIdentificacion == null);
 
-  $mensaje="success";
-  $page="view/catalogos/beneficiarios.php";
-  $beneficiarios2 = true;
-  $catalogos=true;
-  require_once 'view/index.php';
 } catch (Exception $e) {
  $mensaje="error";
  $page="view/catalogos/beneficiarios.php";
@@ -87,34 +87,29 @@ public function IdentificacionOficial($objPHPExcel,$numRows){
  require_once 'view/index.php';
 }
 }
-  public function TipoVialidad($objPHPExcel,$numRows){
-   try{
-    $this->model->Limpiar("tipoVialidad");
-    $numRow=2;
+public function TipoVialidad($objPHPExcel,$numRows){
+ try{
+  $this->model->Limpiar("tipoVialidad");
+  $numRow=2;
 
-    do {
+  do {
        //echo "Entra";
-      $cat = new Catalogos();
-      $cat->idTipoVialidad = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
-      $cat->tipoVialidad = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
-      if (!$cat->idTipoVialidad == null) {
+    $cat = new Catalogos();
+    $cat->idTipoVialidad = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
+    $cat->tipoVialidad = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
+    if (!$cat->idTipoVialidad == null) {
 
-        $this->model->ImportarTipoVialidad($cat);
-      }
-      $numRow+=1;
-    } while ( !$cat->idTipoVialidad == null);
-    $mensaje="success";
-    $page="view/catalogos/beneficiarios.php";
-    $beneficiarios2 = true;
-    $catalogos=true;
-    require_once 'view/index.php';
-  } catch (Exception $e) {
-   $mensaje="error";
-   $page="view/catalogos/beneficiarios.php";
-   $beneficiarios2 = true;
-   $catalogos=true;
-   require_once 'view/index.php';
- }
+      $this->model->ImportarTipoVialidad($cat);
+    }
+    $numRow+=1;
+  } while ( !$cat->idTipoVialidad == null);
+} catch (Exception $e) {
+ $mensaje="error";
+ $page="view/catalogos/beneficiarios.php";
+ $beneficiarios2 = true;
+ $catalogos=true;
+ require_once 'view/index.php';
+}
 }
 public function EstadoCivil($objPHPExcel,$numRows){
  try{
@@ -133,12 +128,6 @@ public function EstadoCivil($objPHPExcel,$numRows){
     }
     $numRow+=1;
   } while ( !$cat->idEstadoCivil == null);
-
-  $mensaje="success";
-  $page="view/catalogos/beneficiarios.php";
-  $beneficiarios2 = true;
-  $catalogos=true;
-  require_once 'view/index.php';
 } catch (Exception $e) {
  $mensaje="error";
  $page="view/catalogos/beneficiarios.php";
@@ -164,11 +153,6 @@ public function Ocupacion($objPHPExcel,$numRows){
     }
     $numRow+=1;
   } while ( !$cat->idOcupacion == null);
-  $mensaje="success";
-  $page="view/catalogos/beneficiarios.php";
-  $beneficiarios2 = true;
-  $catalogos=true;
-  require_once 'view/index.php';
 } catch (Exception $e) {
  $mensaje="error";
  $page="view/catalogos/beneficiarios.php";
@@ -194,12 +178,6 @@ public function IngresoMensual($objPHPExcel,$numRows){
     }
     $numRow+=1;
   } while ( !$cat->idIngresoMensual == null);
-
-  $mensaje="success";
-  $page="view/catalogos/beneficiarios.php";
-  $beneficiarios2 = true;
-  $catalogos=true;
-  require_once 'view/index.php';
 } catch (Exception $e) {
  $mensaje="error";
  $page="view/catalogos/beneficiarios.php";
@@ -225,12 +203,6 @@ public function Vivienda($objPHPExcel,$numRows){
     }
     $numRow+=1;
   } while ( !$cat->idVivienda == null);
-
-  $mensaje="success";
-  $page="view/catalogos/beneficiarios.php";
-  $beneficiarios2 = true;
-  $catalogos=true;
-  require_once 'view/index.php';
 } catch (Exception $e) {
  $mensaje="error";
  $page="view/catalogos/beneficiarios.php";
@@ -255,12 +227,6 @@ public function NivelEstudio($objPHPExcel,$numRows){
     }
     $numRow+=1;
   } while ( !$cat->idNivelEstudios == null);
-
-  $mensaje="success";
-  $page="view/catalogos/beneficiarios.php";
-  $beneficiarios2 = true;
-  $catalogos=true;
-  require_once 'view/index.php';
 } catch (Exception $e) {
  $mensaje="error";
  $page="view/catalogos/beneficiarios.php";
@@ -286,12 +252,6 @@ public function SeguridadSocial($objPHPExcel,$numRows){
     }
     $numRow+=1;
   } while ( !$cat->idSeguridadSocial == null);
-
-  $mensaje="success";
-  $page="view/catalogos/beneficiarios.php";
-  $beneficiarios2 = true;
-  $catalogos=true;
-  require_once 'view/index.php';
 } catch (Exception $e) {
  $mensaje="error";
  $page="view/catalogos/beneficiarios.php";
@@ -317,12 +277,6 @@ public function Discapacidad($objPHPExcel,$numRows){
     }
     $numRow+=1;
   } while ( !$cat->idDiscapacidad == null);
-
-  $mensaje="success";
-  $page="view/catalogos/beneficiarios.php";
-  $beneficiarios2 = true;
-  $catalogos=true;
-  require_once 'view/index.php';
 } catch (Exception $e) {
  $mensaje="error";
  $page="view/catalogos/beneficiarios.php";
@@ -348,12 +302,6 @@ public function GrupoVulnerable($objPHPExcel,$numRows){
     }
     $numRow+=1;
   } while ( !$cat->idGrupoVulnerable == null);
-
-  $mensaje="success";
-  $page="view/catalogos/beneficiarios.php";
-  $beneficiarios2 = true;
-  $catalogos=true;
-  require_once 'view/index.php';
 } catch (Exception $e) {
  $mensaje="error";
  $page="view/catalogos/beneficiarios.php";
