@@ -28,14 +28,30 @@ class BeneficiarioController{
    require_once 'view/index.php';
  }  
 
- public function Alta(){
+//Metodo Guardar  si trae un id actualiza, no registra
+public function Guardar(){
+  $beneficiario= new Beneficiario();
+
+        //echo "entre";
+        //echo  $programa->idPrograma
+  $beneficiario->idBeneficiario = $_REQUEST['idBeneficiario'];
+  $beneficiario->curp = $_REQUEST['curp'];
+  $beneficiario->curp = $_REQUEST['primerApellido'];
+  $beneficiario->curp = $_REQUEST['segundoApellido'];
+  $beneficiario->curp = $_REQUEST['nombres'];
+  $beneficiario->curp = $_REQUEST['idIdentificacion'];
+  $beneficiario->curp = $_REQUEST['tiposeguridadSocial'];
+  $beneficiario->curp = $_REQUEST['discapacidad'];
+  $beneficiario->idBeneficiario > 0 
+  ? $this->model->Actualizar($beneficiario)
+  : $this->model->Registrar($beneficiario);
   $administracion = true;
   $inicio = false;
   $beneficiarios = false;
   $page="view/beneficiario/beneficiario.php";
   require_once 'view/index.php';
-} 
-
+  }
+ 
 public function Upload(){
   $archivo = $_FILES['file']['name'];
   $tipo = $_FILES['file']['type'];
@@ -47,6 +63,16 @@ public function Upload(){
   else{
     //echo "Error Al Cargar el Archivo". "<br><br>";
   }
+}
+
+
+ public function Crud(){
+   $beneficiario = new Beneficiario();
+   if(isset($_REQUEST['idBeneficiario'])){
+    $beneficiario = $this->model->Obtener($_REQUEST['idBeneficiario']);
+  }
+  $page="view/beneficiario/beneficiario.php";
+  require_once 'view/index.php';
 }
 
 public function Importar($archivo){
