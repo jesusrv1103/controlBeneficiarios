@@ -64,7 +64,7 @@
                           <label class="col-sm-3 control-label">Indentificacion</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
-                              <option value="CA"> Caracteristicas </option>
+                              <option value="ididentificacion"> Caracteristicas </option>
                             </select>
                           </div>
                         </div><!--/form-group-->
@@ -72,7 +72,7 @@
                           <label class="col-sm-3 control-label">Nivel de estudio</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
-                              <option value="CA"> Caracteristicas </option>
+                              <option value="idNivelEstudio"> Caracteristicas </option>
                             </select>
                           </div>
                         </div><!--/form-group-->
@@ -80,7 +80,7 @@
                           <label class="col-sm-3 control-label">Tipo de seguridad social</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
-                              <option value="CA"> Caracteristicas </option>
+                              <option value="idSeguridadSocial>"> Caracteristicas </option>
                             </select>
                           </div>
                         </div><!--/form-group-->
@@ -88,7 +88,7 @@
                           <label class="col-sm-3 control-label">Discapasidad</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
-                              <option value="CA"> Caracteristicas </option>
+                              <option value="idDiscapacidad"> Caracteristicas </option>
                             </select>
                           </div>
                         </div><!--/form-group-->
