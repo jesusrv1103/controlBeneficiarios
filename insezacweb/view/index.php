@@ -143,17 +143,17 @@ if (!isset($_SESSION['seguridad'])){
                  </a> 
                </li>
                <li> 
-                <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                <a href="?c=Localidad&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                  <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
                </a> 
              </li>
              <li> 
-              <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+              <a href="?c=Asentamiento&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Acentamientos</b>
              </a> 
            </li>
            <li> 
-            <a href="?c=Catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+            <a href="?c=Apoyos&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
              <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
            </a> 
          </li>
