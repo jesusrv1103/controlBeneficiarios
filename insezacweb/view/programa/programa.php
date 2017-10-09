@@ -62,11 +62,11 @@
           </div>
           <div class="porlets-content">
             <form action="?c=Programa&a=Guardar" method="post" class="form-horizontal row-border">
-<<<<<<< HEAD
+
               <input hidden name="idPrograma"  value="<?php echo $programa->idPrograma != null ? $programa->idPrograma : 0;  ?>"/>
-=======
+
               <input DISABLED name="idPrograma"  value="<?php echo $programa->idPrograma != null ? $programa->idPrograma : 0;  ?>"  style="visibility:hidden"/>
->>>>>>> 8f1022a2add5cacf73552fe8cb3c882a8cd8f9d7
+
               <div class="form-group">
                 <label class="col-sm-3 control-label">Nombre</label>
                 <div class="col-sm-6">

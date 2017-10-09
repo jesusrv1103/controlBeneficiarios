@@ -64,7 +64,11 @@
                           <label class="col-sm-3 control-label">Indentificacion</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
-                              <option value="CA"> Caracteristicas </option>
+                              <?php foreach($this->model->ListarIdentificaciones() as $r): ?>
+                              <option value="r"> 
+                              <?php echo $r->identificacion; ?>
+                              </option>
+                            <?php endforeach; ?>
                             </select>
                           </div>
                         </div><!--/form-group-->
@@ -88,7 +92,12 @@
                           <label class="col-sm-3 control-label">Discapasidad</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
-                              <option value="CA"> Caracteristicas </option>
+                            <?php foreach($this->model->ListarDiscapacidad() as $r): ?>
+
+                              <option value="r"> 
+                              <?php echo $r->discapacidad; ?>
+                              </option>
+                            <?php endforeach; ?>
                             </select>
                           </div>
                         </div><!--/form-group-->

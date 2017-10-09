@@ -167,6 +167,41 @@ class Beneficiario
 	}
 
 
+
+	public function ListarIdentificaciones()
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("select * from identificacionOficial");
+			
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function ListaDiscapacidad()
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("select * from discapacidad");
+			
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+
+
 	public function Obtener($id)
 	{
 		try 
@@ -221,6 +256,25 @@ class Beneficiario
 		}
 	}
 
+
+	public function Registrar(Beneficiario $data)
+	{
+		try 
+		{
+			$sql = "INSERT INTO beneficiarios (curp,primerApellido,segundoApellido,nombres,idIdentificacion) 
+			VALUES (?)";
+
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					$data->programa
+				)
+			);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
 
 	
 
