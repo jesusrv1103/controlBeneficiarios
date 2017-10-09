@@ -184,11 +184,44 @@ class Beneficiario
 		}
 	}
 
-	public function ListaDiscapacidad()
+	public function ListarDiscapacidad()
 	{
 		try
 		{
 			$stm = $this->pdo->prepare("select * from discapacidad");
+			
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+
+	public function ListarTipoSeguridadSocial()
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("select * from seguridadSocial");
+			
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function ListarNivelEstudio()
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("select * from nivelEstudio");
 			
 			$stm->execute();
 

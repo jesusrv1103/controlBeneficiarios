@@ -76,7 +76,11 @@
                           <label class="col-sm-3 control-label">Nivel de estudio</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
-                              <option value="CA"> Caracteristicas </option>
+                              <?php foreach($this->model->ListarNivelEstudio() as $r): ?>
+                              <option value="r"> 
+                              <?php echo $r->nivelEstudios; ?>
+                              </option>
+                            <?php endforeach; ?>
                             </select>
                           </div>
                         </div><!--/form-group-->
@@ -84,7 +88,11 @@
                           <label class="col-sm-3 control-label">Tipo de seguridad social</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
-                              <option value="CA"> Caracteristicas </option>
+                              <?php foreach($this->model->ListarTipoSeguridadSocial() as $r): ?>
+                              <option value="r"> 
+                              <?php echo $r->seguridadSocial; ?>
+                              </option>
+                            <?php endforeach; ?>
                             </select>
                           </div>
                         </div><!--/form-group-->
