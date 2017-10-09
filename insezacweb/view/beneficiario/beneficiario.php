@@ -1,12 +1,12 @@
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
     <h1>Inicio</h1>
-    <h2 class="">Apoyos</h2>
+    <h2 class="">Beneficiarios</h2>
   </div>
   <div class="pull-right">
     <ol class="breadcrumb">
       <li><a href="?c=Inicio">Inicio</a></li>
-      <li><a href="?c=Programa">Apoyos</a></li>
+      <li><a href="?c=Beneficiario">Beneficiarios</a></li>
       <li>Nota: Usa la etique de abajo</li>
       <!--li class="active"><?php echo $apoyo->idApoyo != null ? 'Actualizar apoyo' : 'Registrar apoyo'; ?></li-->
     </ol>
@@ -23,7 +23,7 @@
           <!--h3 class=""><?php echo $apoyo->idApoyo != null ? 'Actualizar apoyo' : 'Registrar apoyo'; ?></h3-->
         </div>
         <div class="porlets-content">
-          <form action="" class="form-horizontal row-border">
+          <form  class="form-horizontal row-border" >
               <div class="block-web full">
                 <ul class="nav nav-tabs nav-justified nav_bg">
                   <li class="active"><a href="#generales" data-toggle="tab"><i class="fa fa-user"></i> Datos Generales</a></li>
@@ -35,7 +35,8 @@
                   <div class="tab-pane animated fadeInRight active" id="generales">
                     <div class="user-profile-content">
                       <h5><strong>Datos Generales</strong></h5>
-                      <form role="form">
+                      <form action="?c=Beneficiario&a=Guardar" method="post" role="form">
+                         <input type="hidden" name="idBneficiario" value="<?php echo $beneficario->idBneficiario; ?>" />
                         <div class="form-group">
                           <label class="col-sm-3 control-label">CURP</label>
                           <div class="col-sm-6">
@@ -63,9 +64,10 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Indentificacion</label>
                           <div class="col-sm-6">
-                            <select class="form-control" >
-                              <?php foreach($this->model->ListarIdentificaciones() as $r): ?>
-                              <option value="r"> 
+                             <select class="form-control" >
+                              <?php foreach($this->model2->Listar('identificacionOficial') as $r): ?>
+                              <option value="1"> 
+
                               <?php echo $r->identificacion; ?>
                               </option>
                             <?php endforeach; ?>
@@ -76,8 +78,8 @@
                           <label class="col-sm-3 control-label">Nivel de estudio</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
-                              <?php foreach($this->model->ListarNivelEstudio() as $r): ?>
-                              <option value="r"> 
+                              <?php foreach($this->model2->Listar('nivelEstudio') as $r): ?>
+                              <option value="1"> 
                               <?php echo $r->nivelEstudios; ?>
                               </option>
                             <?php endforeach; ?>
@@ -89,7 +91,7 @@
                           <div class="col-sm-6">
                             <select class="form-control" >
                               <?php foreach($this->model2->Listar('seguridadSocial') as $r): ?>
-                              <option value="r"> 
+                              <option value="1"> 
                               <?php echo $r->seguridadSocial; ?>
                               </option>
                             <?php endforeach; ?>
@@ -100,9 +102,9 @@
                           <label class="col-sm-3 control-label">Discapasidad</label>
                           <div class="col-sm-6">
                             <select class="form-control" >
-                            <?php foreach($this->model->ListarDiscapacidad() as $r): ?>
+                            <?php foreach($this->model2->Listar('discapacidad') as $r): ?>
 
-                              <option value="r"> 
+                              <option value="1"> 
                               <?php echo $r->discapacidad; ?>
                               </option>
                             <?php endforeach; ?>

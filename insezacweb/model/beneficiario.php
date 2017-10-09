@@ -168,71 +168,7 @@ class Beneficiario
 
 
 
-	public function ListarIdentificaciones()
-	{
-		try
-		{
-			$stm = $this->pdo->prepare("select * from identificacionOficial");
-			
-			$stm->execute();
-
-			return $stm->fetchAll(PDO::FETCH_OBJ);
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
-	}
-
-	public function ListarDiscapacidad()
-	{
-		try
-		{
-			$stm = $this->pdo->prepare("select * from discapacidad");
-			
-			$stm->execute();
-
-			return $stm->fetchAll(PDO::FETCH_OBJ);
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
-	}
-
-
-	public function ListarTipoSeguridadSocial()
-	{
-		try
-		{
-			$stm = $this->pdo->prepare("select * from seguridadSocial");
-			
-			$stm->execute();
-
-			return $stm->fetchAll(PDO::FETCH_OBJ);
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
-	}
-
-	public function ListarNivelEstudio()
-	{
-		try
-		{
-			$stm = $this->pdo->prepare("select * from nivelEstudio");
-			
-			$stm->execute();
-
-			return $stm->fetchAll(PDO::FETCH_OBJ);
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
-	}
-
+	
 
 
 	public function Obtener($id)
@@ -294,8 +230,8 @@ class Beneficiario
 	{
 		try 
 		{
-			$sql = "INSERT INTO beneficiarios (curp,primerApellido,segundoApellido,nombres,idIdentificacion) 
-			VALUES (?)";
+			$sql = "INSERT INTO beneficiarios(curp,primerApellido,segundoApellido,nombres,idIdentificacion,nivelEstudios,tipoSeguridadSocial,discapacidad) 
+			VALUES (?,?,?,?,?,?,?,?)";
 
 			$this->pdo->prepare($sql)
 			->execute(
