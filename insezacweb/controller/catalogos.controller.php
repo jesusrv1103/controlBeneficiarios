@@ -8,7 +8,7 @@ class CatalogosController{
 
  public function Beneficiarios(){
   $catalogos=true;
-  $beneficiarios=true;
+  $beneficiarios2=true;
   $page="view/catalogos/beneficiarios.php";
   require_once 'view/index.php';
 }
@@ -16,30 +16,30 @@ class CatalogosController{
 public function Upload(){
   $archivo = $_FILES['file']['name'];
   $tipo = $_FILES['file']['type'];
-  $destino = "./assets/importaciones/bak_" . $archivo;
+  $destino = "./assets/importaciones/catalogo_beneficiarios.xlsx";
   if (copy($_FILES['file']['tmp_name'], $destino)){
     //echo "Archivo Cargado Con Éxito" . "<br><br>";
-    $this->Importar($archivo);
+    $this->Importar();
     //mandar llamar todas las funciones a importar
   }
   else{
     echo "Error Al Cargar el Archivo". "<br><br>";
   }
 }
-public function Importar($archivo){
-  if (file_exists("./assets/importaciones/bak_" . $archivo)) {
+public function Importar(){
+  if (file_exists("./assets/importaciones/catalogo_beneficiarios.xlsx")) {
 
         //Agregamos la librería 
-      require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
+    require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
   //Variable con el nombre del archivo
-      $nombreArchivo = './assets/importaciones/bak_' . $archivo;
+    $nombreArchivo = './assets/importaciones/catalogo_beneficiarios.xlsx';
   // Cargo la hoja de cálculo
-      $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
+    $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
   //Asigno la hoja de calculo activa
-      $objPHPExcel->setActiveSheetIndex(0);
+    $objPHPExcel->setActiveSheetIndex(0);
   //Obtengo el numero de filas del archivo
-      $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-      $this->IdentificacionOficial($objPHPExcel,$numRows);
+    $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
+    $this->IdentificacionOficial($objPHPExcel,$numRows);
       //incluir las demas funciones
   }
         //si por algo no cargo el archivo bak_ 
@@ -77,6 +77,19 @@ public function IdentificacionOficial($objPHPExcel,$numRows){
  $catalogos=true;
  require_once 'view/index.php';
 }
+}
+public function Descargar(){
+// grab the requested file's name
+  $file_name = 'catalogo_beneficiarios.xlsx';
+// make sure it's a file before doing anything!
+  if(is_file($file_name))
+  {
+    header("Content-type: text/html; charset=utf8");
+    header ("Content-Disposition: attachment; filename=catalogo_beneficiarios.xlsx"); 
+    header ("Content-Type: application/octet-stream");
+    header ("Content-Length: ".filesize($enlace));
+    readfile($enlace);
+  }
 }
 }
 ?>

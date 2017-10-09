@@ -24,6 +24,13 @@ if (!isset($_SESSION['seguridad'])){
   <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
   <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
   <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
+  <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/plugins/file-uploader/css/blueimp-gallery.min.css">
+  <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload.css">
+  <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload-ui.css">
+  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datepicker/css/datepicker.css" />
+  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-timepicker/compiled/timepicker.css" />
+  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css" />
 </head>
 <body class="light_theme  fixed_header left_nav_fixed">
   <div class="wrapper">
@@ -132,8 +139,6 @@ if (!isset($_SESSION['seguridad'])){
        </ul>
      </li>
    </ul>
-
-
  </div>
 </div>
 <!--\\\\\\\left_nav end \\\\\\-->
@@ -171,6 +176,21 @@ if (!isset($_SESSION['seguridad'])){
 <script src="assets/plugins/data-tables/DT_bootstrap.js"></script>
 <script src="assets/plugins/data-tables/dynamic_table_init.js"></script>
 <script src="assets/plugins/edit-table/edit-table.js"></script>
+<script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script> 
+<script src="assets/plugins/file-uploader/js/vendor/jquery.ui.widget.js"></script> 
+<script src="assets/plugins/file-uploader/js/tmpl.min.js"></script> 
+<script src="assets/plugins/file-uploader/js/load-image.min.js"></script> 
+<script src="assets/plugins/file-uploader/js/canvas-to-blob.min.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.blueimp-gallery.min.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.iframe-transport.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.fileupload.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.fileupload-process.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.fileupload-image.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.fileupload-audio.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.fileupload-video.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.fileupload-validate.js"></script> 
+<script src="assets/plugins/file-uploader/js/jquery.fileupload-ui.js"></script> 
+<script src="assets/plugins/file-uploader/js/main.js"></script>
 <script>
 
   /*==Porlets Actions==*/
@@ -209,9 +229,8 @@ if (!isset($_SESSION['seguridad'])){
     });
     e.preventDefault();
   });
-
 </script>
-
+<!-- The template to display files available for upload -->
 <script src="assets/js/jPushMenu.js"></script> 
 </body>
 </html>

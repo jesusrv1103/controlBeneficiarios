@@ -1,16 +1,15 @@
 <div class="pull-left breadcrumb_admin clear_both">
 	<div class="pull-left page_title theme_color">
-		<h1>Catálogos</h1>
+		<h1>Catálogo</h1>
 		<h2 class="">Beneficiarios</h2>
 	</div>
 	<div class="pull-right">
 		<ol class="breadcrumb">
 			<li><a href="?c=Inicio">Inicio</a></li>
-			<li class="active">Catálogos de beneficiarios</a></li>
+			<li class="active">Catálogo de beneficiarios</a></li>
 		</ol>
 	</div>
 </div>
-
 <div class="container clear_both padding_fix">
 	<div class="row">
 		<div class="col-md-12">
@@ -18,715 +17,422 @@
 				<div class="header">
 					<div class="row">					
 						<div class="block-web">
-							<?php if(isset($success)){ ?>
 							<div class="col-md-8">
+								<h2 class="content-header theme_color" style="margin-top: -10px;">Identificadores para el registro de beneficiarios</b></h2>
+							</div>							
+							<div class="col-md-4">
+								<div class="btn-group pull-right">
+									<b>
+										<div class="btn-group"> 
+											<a class="btn btn-sm btn-success tooltips" href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal" data-original-title="Importar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="left" title="">  <i class="fa  fa-upload"></i></a>
+											<a class="btn btn-sm btn-primary tooltips" href="?c=Catalogos&a=Descargar" data-original-title="Descargar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i></a> 
+										</div>
+									</b>
+								</div>
+							</div>							
+						</div>
+					</div>
+				</div><br>
+				<div class="row">
+					<?php if(isset($mensaje)){ 
+						if($mensaje=="success"){
+							?>
+							<div class="col-md-12">
 								<div class="alert alert-success fade in">
 									<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
 									<i class="fa fa-check"></i>&nbsp;Se han importado los catálogos correctamente
 								</div>
 							</div> 
-							<?php 	} 
-							if(isset($error)){ ?>
-							<div class="col-md-8">
+							<?php }else{ ?>
+							<div class="col-md-12">
 								<div class="alert alert-danger">
 									<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
 									<i class="fa fa-check"></i>&nbsp;Ha ocurrido un error al importar los catálogos
 								</div>
 							</div>
-							<?php }
-							if(!isset($error) && !isset($success)){ ?>
-							<div class="col-md-8">
-								<h2 class="content-header theme_color" style="margin-top: -10px;">Identificadores para el registro de beneficiarios</b></h2>
-							</div>
-							<?php } ?>
-							<div class="col-md-4">
-								<div class="btn-group pull-right">
-									<b>
-										<div class="btn-group"> 
-											<a class="btn btn-sm btn-success" href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal">  <i class="fa  fa-cloud-upload"></i> Importar catálogos </a>
-											<a class="btn btn-sm btn-primary" href="?c=Subprograma&a=Alta"> <i class="fa  fa-cloud-download"></i> Exportar catálogos </a> 
+							<?php } } ?>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="block-web">
+									<div class="header">
+										<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+										<h3 class="content-header">Identificación oficial</h3>
+									</div>
+									<div class="porlets-content">
+										<div class="panel-body">
+											<div class="col-md-10 col-md-offset-1">
+												<table class="table table-striped">
+													<tbody>
+														<?php foreach($this->model->Listar('identificacionOficial') as $r): ?>
+															<tr>
+																<td><?php echo $r->idIdentificacion; ?></td>
+																<td><?php echo $r->identificacion; ?></td>
+															</tr>
+														<?php endforeach; ?>
+													</tbody>
+												</table>
+											</div>
 										</div>
-									</b>
+									</div><!--/porlets-content-->
+								</div><!--/block-web-->
+							</div><!--/col-md-6-->
+							<div class="col-md-6">
+								<div class="block-web">
+									<div class="header">
+										<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+										<h3 class="content-header">Ingreso mensual</h3>
+									</div>
+									<div class="porlets-content">
+										<div class="panel-body">
+											<div class="col-md-12">
+												<table class="table table-striped">
+
+
+													<tbody>
+														<?php foreach($this->model->Listar('ingresoMensual') as $r): ?>
+															<tr>
+																<td><?php echo $r->idIngresoMensual; ?></td>
+																<td><?php echo $r->ingresoMensual; ?></td>
+															</tr>
+														<?php endforeach; ?>
+													</tbody>
+													
+												</table>
+											</div>
+										</div>
+									</div><!--/porlets-content-->
+								</div><!--/block-web-->
+							</div><!--/col-md-6-->
+							<div class="col-md-6">
+								<div class="block-web">
+									<div class="header">
+										<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+										<h3 class="content-header">Tipo de seguridad social</h3>
+									</div>
+									<div class="porlets-content">
+										<div class="panel-body">
+											<div class="col-md-12">
+												<table class="table table-striped">
+													<tbody>
+														<?php foreach($this->model->Listar('seguridadSocial') as $r): ?>
+															<tr>
+																<td><?php echo $r->idSeguridadSocial; ?></td>
+																<td><?php echo $r->seguridadsocial; ?></td>
+															</tr>
+														<?php endforeach; ?>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div><!--/porlets-content-->
+								</div><!--/block-web-->
+							</div><!--/col-md-6-->
+							<div class="col-md-6">
+								<div class="block-web">
+									<div class="header">
+										<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+										<h3 class="content-header">Grupo vulnerable</h3>
+									</div>
+									<div class="porlets-content">
+										<div class="panel-body">
+											<div class="col-md-12">
+												<table class="table table-striped">									
+													<tbody>
+														<?php foreach($this->model->Listar('grupoVulnerable') as $r): ?>
+															<tr>
+																<td><?php echo $r->idGrupoVulnerable; ?></td>
+																<td><?php echo $r->GrupoVulnerable; ?></td>
+															</tr>
+														<?php endforeach; ?>
+													</tbody>													
+												</table>
+											</div>
+										</div>
+									</div><!--/porlets-content-->
+								</div><!--/block-web-->
+							</div><!--/col-md-6-->
+							<div class="col-md-6">
+								<div class="block-web">
+									<div class="header">
+										<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+										<h3 class="content-header">Nivel de estudios</h3>
+									</div>
+									<div class="porlets-content">
+										<div class="panel-body">
+											<div class="col-md-12">
+												<table class="table table-striped">									
+													<tbody>
+														<?php foreach($this->model->Listar('nivelEstudio') as $r): ?>
+															<tr>
+																<td><?php echo $r->idNivelEstudios; ?></td>
+																<td><?php echo $r->nivelEstudios; ?></td>
+															</tr>
+														<?php endforeach; ?>
+													</tbody>													
+												</table>
+											</div>
+										</div>
+									</div><!--/porlets-content-->
+								</div><!--/block-web-->
+							</div><!--/col-md-6-->
+							<div class="col-md-6">
+								<div class="block-web">
+									<div class="header">
+										<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+										<h3 class="content-header">Discapacidad</h3>
+									</div>
+									<div class="porlets-content">
+										<div class="panel-body">
+											<div class="col-md-12">
+												<table class="table table-striped">
+													<tbody>
+														<?php foreach($this->model->Listar('discapacidad') as $r): ?>
+															<tr>
+																<td><?php echo $r->idDiscapacidad; ?></td>
+																<td><?php echo $r->discapacidad; ?></td>
+															</tr>
+														<?php endforeach; ?>
+													</tbody>
+													
+												</table>
+											</div>
+										</div>
+									</div><!--/porlets-content-->
+								</div><!--/block-web-->
+							</div><!--/col-md-6-->
+							<div class="col-md-6">
+								<div class="block-web">
+									<div class="header">
+										<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+										<h3 class="content-header">Vivienda</h3>
+									</div>
+									<div class="porlets-content">
+										<div class="panel-body">
+											<div class="col-md-12">
+												<table class="table table-striped">
+													<tbody>
+														<tbody>
+															<?php foreach($this->model->Listar('vivienda') as $r): ?>
+																<tr>
+																	<td><?php echo $r->idVivienda; ?></td>
+																	<td><?php echo $r->vivienda; ?></td>
+																</tr>
+															<?php endforeach; ?>
+														</tbody>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div><!--/porlets-content-->
+								</div><!--/block-web-->
+							</div><!--/col-md-6-->
+							<div class="col-md-6">
+								<div class="block-web">
+									<div class="header">
+										<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+										<h3 class="content-header">Estado civil</h3>
+									</div>
+									<div class="porlets-content">
+										<div class="panel-body">
+											<div class="col-md-12">
+												<table class="table table-striped">
+													<tbody>
+														<?php foreach($this->model->Listar('estadoCivil') as $r): ?>
+															<tr>
+																<td><?php echo $r->idEstadoCivil; ?></td>
+																<td><?php echo $r->estadoCivil; ?></td>
+															</tr>
+														<?php endforeach; ?>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div><!--/porlets-content-->
+								</div><!--/block-web-->
+							</div><!--/col-md-6-->
+							<div class="col-md-6">
+								<div class="block-web">
+									<div class="header">
+										<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+										<h3 class="content-header">Tipo Vialidad</h3>
+									</div>
+									<div class="porlets-content">
+										<div class="panel-body">
+											<div class="col-md-10 col-md-offset-1">
+												<table class="table table-striped">
+													<tbody>
+														<?php foreach($this->model->Listar('tipoVialidad') as $r): ?>
+															<tr>
+																<td><?php echo $r->idVialidad; ?></td>
+																<td><?php echo $r->vialidad; ?></td>
+															</tr>
+														<?php endforeach; ?>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div><!--/porlets-content-->
+								</div><!--/block-web-->
+							</div><!--/col-md-6-->
+							<div class="col-md-6">
+								<div class="block-web">
+									<div class="header">
+										<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+										<h3 class="content-header">Ocupación</h3>
+									</div>
+									<div class="porlets-content">
+										<div class="panel-body">
+											<div class="col-md-12">
+												<table class="table table-striped">
+													<tbody>
+														<?php foreach($this->model->Listar('ocupacion') as $r): ?>
+															<tr>
+																<td><?php echo $r->idOcupacion; ?></td>
+																<td><?php echo $r->ocupacion; ?></td>
+															</tr>
+														<?php endforeach; ?>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div><!--/porlets-content-->
+								</div><!--/block-web-->
+							</div><!--/col-md-6-->
+						</div><!--/row-->
+					</div><!--/container clear_both padding_fix-->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-body"> 
+									<div class="row">
+										<div class="block-web">
+											<div class="header">
+												<h3 class="content-header">Importar catálogo</h3>
+											</div>
+											<div class="porlets-content" style="margin-bottom: -50px;">
+												<p>Importa tu archivo excel con los datos de los catalogos en caso de que hubiese alguna actualización en los mismos, si no tienes el archivo puedes exportarlo y darle la actualización necesaria, una vez actualizado puedes volver a importarlo para actualizar los datos.</p>
+												<br>
+												<form id="fileupload" action="?c=Catalogos&a=Upload" method="POST" enctype="multipart/form-data">
+													<!-- Redirect browsers with JavaScript disabled to the origin page -->
+													<noscript>
+														<input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/">
+													</noscript>
+													<!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+													<div class="row fileupload-buttonbar">
+														<div class="col-lg-12"> 
+															<!-- The fileinput-button span is used to style the file input field as button --> 
+															<span class="btn btn-success fileinput-button"> <i class="glyphicon glyphicon-plus"></i> <span>Elegir archivo</span>
+															<input type="file" name="file">
+														</span>
+														<button type="submit" class="btn btn-primary"> <i class="glyphicon glyphicon-upload"></i> <span>Start upload</span> </button>
+
+														<!-- The global file processing state --> 
+														<span class="fileupload-process"></span> </div>
+														<!-- The global progress state -->
+														<div class="col-lg-5 fileupload-progress fade"> 
+															<!-- The global progress bar -->
+															<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+																<div class="progress-bar progress-bar-success" style="width:0%;"> </div>
+															</div>
+															<!-- The extended global progress state -->
+															<div class="progress-extended"> &nbsp; </div>
+														</div>
+													</div>
+													<!-- The table listing the files available for upload/download -->
+													<table role="presentation" class="table table-striped">
+														<tbody class="files">
+														</tbody>
+													</table>
+												</form>
+											</div><!--/porlets-content--> 
+										</div><!--/block-web--> 
+									</div>
 								</div>
+								<div class="modal-footer">
+									<div class="row col-md-5 col-md-offset-7">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+										<button type="submit" class="btn btn-primary">Guardar</button>
+									</div>
+								</div>
+
 							</div>
 						</div>
 					</div>
-				</div><br>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="block-web">
-							<div class="header">
-								<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-								<h3 class="content-header">Identificación oficial</h3>
-							</div>
-							<div class="porlets-content">
-								<div class="panel-body">
-									<div class="col-md-10 col-md-offset-1">
-										<table class="table table-striped">
-
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Mark</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Jacob</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>4</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>5</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>6</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>7</td>
-													<td>Larry</td>									
-												</tr>
-
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div><!--/porlets-content-->
-						</div><!--/block-web-->
-					</div><!--/col-md-6-->
-					<div class="col-md-6">
-						<div class="block-web">
-							<div class="header">
-								<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-								<h3 class="content-header">Ingreso mensual</h3>
-							</div>
-							<div class="porlets-content">
-								<div class="panel-body">
-									<div class="col-md-12">
-										<table class="table table-striped">
-
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Mark</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Jacob</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>4</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>5</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>6</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>7</td>
-													<td>Larry</td>									
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div><!--/porlets-content-->
-						</div><!--/block-web-->
-					</div><!--/col-md-6-->
-					<div class="col-md-6">
-						<div class="block-web">
-							<div class="header">
-								<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-								<h3 class="content-header">Tipo de seguridad social</h3>
-							</div>
-							<div class="porlets-content">
-								<div class="panel-body">
-									<div class="col-md-12">
-										<table class="table table-striped">
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Mark</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Jacob</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>4</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>5</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>6</td>
-													<td>Larry</td>									
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div><!--/porlets-content-->
-						</div><!--/block-web-->
-					</div><!--/col-md-6-->
-					<div class="col-md-6">
-						<div class="block-web">
-							<div class="header">
-								<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-								<h3 class="content-header">Grupo vulnerable</h3>
-							</div>
-							<div class="porlets-content">
-								<div class="panel-body">
-									<div class="col-md-12">
-										<table class="table table-striped">
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Mark</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Jacob</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>4</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>5</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>6</td>
-													<td>Larry</td>									
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div><!--/porlets-content-->
-						</div><!--/block-web-->
-					</div><!--/col-md-6-->
-
-					<div class="col-md-6">
-						<div class="block-web">
-							<div class="header">
-								<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-								<h3 class="content-header">Nivel de estudios</h3>
-							</div>
-							<div class="porlets-content">
-								<div class="panel-body">
-									<div class="col-md-12">
-										<table class="table table-striped">
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Mark</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Jacob</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>4</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>5</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>6</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>7</td>
-													<td>Larry</td>									
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div><!--/porlets-content-->
-						</div><!--/block-web-->
-					</div><!--/col-md-6-->
-					<div class="col-md-6">
-						<div class="block-web">
-							<div class="header">
-								<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-								<h3 class="content-header">Discapacidad</h3>
-							</div>
-							<div class="porlets-content">
-								<div class="panel-body">
-									<div class="col-md-12">
-										<table class="table table-striped">
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Mark</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Jacob</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>4</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>5</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>6</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>7</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>8</td>
-													<td>Larry</td>									
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div><!--/porlets-content-->
-						</div><!--/block-web-->
-					</div><!--/col-md-6-->
-					<div class="col-md-6">
-						<div class="block-web">
-							<div class="header">
-								<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-								<h3 class="content-header">Vivienda</h3>
-							</div>
-							<div class="porlets-content">
-								<div class="panel-body">
-									<div class="col-md-12">
-										<table class="table table-striped">
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Mark</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Jacob</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div><!--/porlets-content-->
-						</div><!--/block-web-->
-					</div><!--/col-md-6-->
-					<div class="col-md-6">
-						<div class="block-web">
-							<div class="header">
-								<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-								<h3 class="content-header">Estado civil</h3>
-							</div>
-							<div class="porlets-content">
-								<div class="panel-body">
-									<div class="col-md-12">
-										<table class="table table-striped">
-
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Mark</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Jacob</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>4</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>5</td>
-													<td>Larry</td>									
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div><!--/porlets-content-->
-						</div><!--/block-web-->
-					</div><!--/col-md-6-->
-
-					<div class="col-md-6">
-						<div class="block-web">
-							<div class="header">
-								<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-								<h3 class="content-header">Tipo Vialidad</h3>
-							</div>
-							<div class="porlets-content">
-								<div class="panel-body">
-									<div class="col-md-10 col-md-offset-1">
-										<table class="table table-striped">
-
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Mark</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Jacob</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div><!--/porlets-content-->
-						</div><!--/block-web-->
-					</div><!--/col-md-6-->
-					<div class="col-md-6">
-						<div class="block-web">
-							<div class="header">
-								<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-								<h3 class="content-header">Ocupación</h3>
-							</div>
-							<div class="porlets-content">
-								<div class="panel-body">
-									<div class="col-md-12">
-										<table class="table table-striped">
-
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Mark</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Jacob</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>4</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>5</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>6</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>7</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>8</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>9</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>10</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>11</td>
-													<td>Larry</td>									
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div><!--/porlets-content-->
-						</div><!--/block-web-->
-					</div><!--/col-md-6-->
-
-					<div class="col-md-12">
-						<div class="block-web">
-							<div class="header">
-								<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-								<h3 class="content-header">Asentamientos</h3>
-							</div>
-							<div class="porlets-content">
-								<div class="panel-body">
-									<div class="col-md-12">
-										<table class="table table-striped">
-
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Mark</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Jacob</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>4</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>5</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>6</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>7</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>8</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>9</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>10</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>11</td>
-													<td>Larry</td>									
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div><!--/porlets-content-->
-						</div><!--/block-web-->
-					</div><!--/col-md-12-->
-
-					<div class="col-md-12">
-						<div class="block-web">
-							<div class="header">
-								<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-								<h3 class="content-header">Localidades</h3>
-							</div>
-							<div class="porlets-content">
-								<div class="panel-body">
-									<div class="col-md-12">
-										<table class="table table-striped">
-
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Mark</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Jacob</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>4</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>5</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>6</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>7</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>8</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>9</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>10</td>
-													<td>Larry</td>									
-												</tr>
-												<tr>
-													<td>11</td>
-													<td>Larry</td>									
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div><!--/porlets-content-->
-						</div><!--/block-web-->
-					</div><!--/col-md-12-->
-				</div><!--/row-->
-			</div><!--/container clear_both padding_fix-->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-body"> 
-							<div class="row">
-								<div class="block-web">
-									<div class="header">
-										<h3 class="content-header">Importar catálogo</h3>
-									</div>
-									<div class="porlets-content" style="margin-bottom: -50px;">
-										<p>Importa tu archivo excel con los datos de los catalogos en caso de que hubiese alguna actualización en los mismos, si no tienes el archivo puedes exportarlo y darle la actualización necesaria, una vez actualizado puedes volver a importarlo para actualizar los datos.</p>
-										<br>
-										<form name="importar" action="?c=Catalogos&a=Upload" method="post" enctype="multipart/form-data">
-											<!--div class="fallback"-->
-											<input name="file" type="file"/>
-											<!--/div-->
-
-										</div><!--/porlets-content--> 
-									</div><!--/block-web--> 
-								</div>
-							</div>
-							<div class="modal-footer">
-								<div class="row col-md-5 col-md-offset-7">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-									<button type="submit" class="btn btn-primary">Guardar</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
+					<script id="template-upload" type="text/x-tmpl">
+						{% for (var i=0, file; file=o.files[i]; i++) { %}
+						<tr class="template-upload fade">
+							<td width="">
+								<span class="preview"></span>
+							</td>
+							<td width="40%">
+								<p class="name">{%=file.name%}</p>
+								<strong class="error text-danger"></strong>
+							</td>
+							<td width="25%">
+								<p class="size">Processing...</p>
+								<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+							</td>
+							<td width="10%">
+								
+							</td>
+							<td>
+								{% if (!i && !o.options.autoUpload) { %}
+								<button class="btn btn-primary start" disabled>
+									<i class="glyphicon glyphicon-upload"></i>
+									<span></span>
+								</button>
+								{% } %}
+								{% if (!i) { %}
+								<button type="button" class="btn btn-danger cancel"> 
+									<i class="glyphicon glyphicon-trash"></i> 
+									<span></span> 
+								</button>
+								{% } %}
+							</td>
+						</tr>
+						{% } %}
+					</script> 
+					<!-- The template to display files available for download --> 
+					<script id="template-download" type="text/x-tmpl">
+						{% for (var i=0, file; file=o.files[i]; i++) { %}
+						<tr class="template-download fade">
+							<td>
+								<span class="preview">
+									{% if (file.thumbnailUrl) { %}
+									<a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+									{% } %}
+								</span>
+							</td>
+							<td>
+								<p class="name">
+									{% if (file.url) { %}
+									<a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+									{% } else { %}
+									<span>{%=file.name%}</span>
+									{% } %}
+								</p>
+								{% if (file.error) { %}
+								<div><span class="label label-danger">Error</span> {%=file.error%}</div>
+								{% } %}
+							</td>
+							<td>
+								<span class="size">{%=o.formatFileSize(file.size)%}</span>
+							</td>
+							<td>
+								{% if (file.deleteUrl) { %}
+								<button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+									<i class="glyphicon glyphicon-trash"></i>
+									<span>Delete</span>
+								</button>
+								<input type="checkbox" name="delete" value="1" class="toggle">
+								{% } else { %}
+								<button class="btn btn-warning cancel">
+									<i class="glyphicon glyphicon-ban-circle"></i>
+									<span>Cancel</span>
+								</button>
+								{% } %}
+							</td>
+						</tr>
+						{% } %}
+					</script>

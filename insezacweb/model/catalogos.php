@@ -52,7 +52,7 @@ class Catalogos
 		}
 	}
 
-public function ImportarTipoVialidad(Catalogos $data){
+	public function ImportarTipoVialidad(Catalogos $data){
 		try 
 		{
 			$this->Limpiar('tipoVialidad');
@@ -165,7 +165,7 @@ public function ImportarTipoVialidad(Catalogos $data){
 		try 
 		{
 			$stm = $this->pdo
-			            ->prepare("DELETE FROM $nomTabla");			          
+			->prepare("DELETE FROM $nomTabla");			          
 
 			$stm->execute();
 		} catch (Exception $e) 
@@ -173,4 +173,21 @@ public function ImportarTipoVialidad(Catalogos $data){
 			die($e->getMessage());
 		}
 	}
+	public function Listar($nomTabla)
+	{
+		try
+		{
+			//$result = array();
+
+			$stm = $this->pdo->prepare("SELECT * FROM $nomTabla");
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+	
 }
