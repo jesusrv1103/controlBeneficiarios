@@ -24,8 +24,8 @@
 								<div class="btn-group pull-right">
 									<b>
 										<div class="btn-group"> 
-											<a class="btn btn-sm btn-success tooltips" href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal" data-original-title="Importar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="left" title="">  <i class="fa  fa-upload"></i></a>
-											<a class="btn btn-sm btn-primary tooltips" href="?c=Catalogos&a=Descargar" data-original-title="Descargar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i></a> 
+											<a class="btn btn-sm btn-success tooltips" href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal" data-original-title="Importar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="left" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
+											<a class="btn btn-sm btn-primary tooltips" href="?c=Catalogos&a=Descargar" data-original-title="Descargar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
 										</div>
 									</b>
 								</div>
@@ -58,23 +58,49 @@
 								<h3 class="content-header">Asentamientos</h3>
 							</div>
 							<div class="porlets-content">
-								<div class="panel-body">
-									<div class="col-md-12">
-										<table class="table table-striped">
-											<tbody>
-												<?php foreach($this->model->Listar() as $r): ?>
-													<tr>
-														<td><?php echo $r->idAsentamientos; ?></td>
-														<td><?php echo $r->municipio; ?></td>
-														<td><?php echo $r->localidad; ?></td>
-														<td><?php echo $r->nombreAsentamiento; ?></td>
-														<td><?php echo $r->tipoAsentamiento; ?></td>
-													</tr>
-												<?php endforeach; ?>
-											</tbody>
-										</table>
-									</div>
-								</div>
+								<div class="table-responsive">
+									<table  class="display table table-bordered table-striped" id="dynamic-table">
+										<thead>
+											<tr>
+												<th>Clave asentamiento</th>
+												<th>Municipio</th>
+												<th>Localidad</th>
+												<th>Nombre de asentamiento</th>
+												<th>Tipo de asentamiento</th>
+												<th>Editar</th>
+												<th>Borrar</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php foreach($this->model->Listar() as $r): ?>
+												<tr class="gradeA">
+													<td><?php echo $r->idAsentamientos; ?></td>
+													<td><?php echo $r->municipio; ?></td>
+													<td><?php echo $r->localidad; ?></td>
+													<td><?php echo $r->nombreAsentamiento; ?></td>
+													<td><?php echo $r->tipoAsentamiento; ?></td>
+													<td class="center">
+														<a href="index.php?c=Usuario&a=Crud&idUsuario=<?php echo $r->idUsuario ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>
+													</td>
+													<td class="center">
+														<a class="btn btn-danger" role="button" href="?c=Usuario&a=Borrar&idUsuario=<?php echo $r->idUsuario; ?>"><i class="fa fa-eraser"></i></a>
+													</td>
+												</tr>
+											<?php endforeach; ?>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>Clave asentamiento</th>
+												<th>Municipio</th>
+												<th>Localidad</th>
+												<th>Nombre de asentamiento</th>
+												<th>Tipo de asentamiento</th>
+												<th>Editar</th>
+												<th>Borrar</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div><!--/table-responsive-->
 							</div><!--/porlets-content-->
 						</div><!--/block-web-->
 					</div><!--/col-md-12-->
