@@ -42,7 +42,7 @@ if(isset($mensaje))
            </div>
            <div class="col-sm-8">
              <div class="btn-group pull-right">
-               <div class="btn-group"> <a class="btn btn-sm btn-success" href="?c=Beneficiario&a=Alta"> <i class="fa fa-plus"></i> Registrar beneficiario </a> </div>&nbsp;
+               <div class="btn-group"> <a class="btn btn-sm btn-success" href="?c=Beneficiario&a=Crud"> <i class="fa fa-plus"></i> Registrar beneficiario </a> </div>&nbsp;
                <b>
                  <button type="button" class="btn btn-secundary" data-toggle="modal" data-target="#myModal"><i class="fa fa-cloud-upload"></i></button>
                </b>
