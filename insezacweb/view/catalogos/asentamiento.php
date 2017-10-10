@@ -64,10 +64,9 @@
 											<tbody>
 												<?php foreach($this->model->Listar() as $r): ?>
 													<tr>
-														<td><?php echo $r->idAsentamiento; ?></td>
+														<td><?php echo $r->idAsentamientos; ?></td>
 														<td><?php echo $r->municipio; ?></td>
 														<td><?php echo $r->localidad; ?></td>
-														<td><?php echo $r->ambito; ?></td>
 														<td><?php echo $r->nombreAsentamiento; ?></td>
 														<td><?php echo $r->tipoAsentamiento; ?></td>
 													</tr>
