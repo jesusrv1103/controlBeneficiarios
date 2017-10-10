@@ -1,10 +1,11 @@
 <?php
 class Login
 {
-
 	private $pdo;
 	public $usuario;
 	public $password;
+	public $tipousuario;
+
 	public function __CONSTRUCT()
 	{
 		try

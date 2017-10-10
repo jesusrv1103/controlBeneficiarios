@@ -9287,7 +9287,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Mostrando _START_ a _END_ de _TOTAL_ beneficiarios",
+			"sInfo": "Mostrando _START_ a _END_ de _TOTAL_ registros",
 		
 		
 			/**
@@ -9306,7 +9306,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Mostrando 0 a 0 de 0 beneficiarios",
+			"sInfoEmpty": "Mostrando 0 a 0 de 0 registros",
 		
 		
 			/**
@@ -9326,7 +9326,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(Filtrado de _MAX_ beneficiarios)",
+			"sInfoFiltered": "(Filtrado de _MAX_ registros)",
 		
 		
 			/**
