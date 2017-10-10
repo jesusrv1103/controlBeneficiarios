@@ -56,7 +56,7 @@
                       Secretario
                     </option>
                     <option value="3"> 
-                      Estandar
+                      Regular
                     </option>
                 </select>
               </div>

@@ -133,7 +133,7 @@ if (!isset($_SESSION['seguridad'])){
            </li>
            <li> 
             <a href="?c=Apoyos&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-             <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+             <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
            </a> 
          </li>
        </ul>
