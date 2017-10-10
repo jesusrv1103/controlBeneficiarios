@@ -58,22 +58,48 @@
 								<h3 class="content-header">Localidades</h3>
 							</div>
 							<div class="porlets-content">
-								<div class="panel-body">
-									<div class="col-md-12">
-										<table class="table table-striped">
-											<tbody>
-												<?php foreach($this->model->Listar() as $r): ?>
-													<tr>
-														<td><?php echo $r->idLocalidad; ?></td>
-														<td><?php echo $r->municipio; ?></td>
-														<td><?php echo $r->localidad; ?></td>
-														<td><?php echo $r->ambito; ?></td>
-													</tr>
-												<?php endforeach; ?>
-											</tbody>
-										</table>
-									</div>
-								</div>
+								<div class="table-responsive">
+									<table  class="display table table-bordered table-striped" id="dynamic-table">
+										<thead>
+											<tr>
+												<th>Clave asentamiento</th>
+												<th>Municipio</th>
+												<th>Localidad</th>
+												<th>Nombre de asentamiento</th>
+												<th>Tipo de asentamiento</th>
+												<th>Editar</th>
+												<th>Borrar</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php foreach($this->model->Listar() as $r): ?>
+												<tr class="gradeA">
+													<td><?php echo $r->idLocalidad; ?></td>
+													<td><?php echo $r->municipio; ?></td>
+													<td><?php echo $r->localidad; ?></td>
+													<td><?php echo $r->ambito; ?></td>
+													<td class="center">
+														<a href="index.php?c=Usuario&a=Crud&idUsuario=<?php echo $r->idUsuario ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>
+													</td>
+													<td class="center">
+														<a class="btn btn-danger" role="button" href="?c=Usuario&a=Borrar&idUsuario=<?php echo $r->idUsuario; ?>"><i class="fa fa-eraser"></i></a>
+													</td>
+												</tr>
+											<?php endforeach; ?>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>Clave localidad</th>
+												<th>Municipio</th>
+												<th>Localidad</th>
+												<th>Ámbito</th>
+												<th>Tipo de asentamiento</th>
+												<th>Editar</th>
+												<th>Borrar</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div><!--/table-responsive-->
 							</div><!--/porlets-content-->
 						</div><!--/block-web-->
 					</div><!--/col-md-12-->
