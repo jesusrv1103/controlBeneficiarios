@@ -1,7 +1,8 @@
 <?php
+require_once 'model/database.php';
 class Localidad
 {
-
+	private $pdo;
 	public $idLocalidad;
 	public $municipio;
 	public $localidad;
@@ -18,6 +19,27 @@ class Localidad
 			die($e->getMessage());
 		}
 	}
+	public function ImportarLocalidad(Localidad $data){
+		try 
+		{
+			//$this->Limpiar('identificacionOficial');
+			$sql= $this->pdo->prepare("INSERT INTO localidades VALUES(?,?,?,?)");
+			$resultado=$sql->execute(
+				array(
+					$data->idLocalidad,
+					$data->municipio,
+					$data->localidad,
+					$data->ambito
+
+					)
+				);
+
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
 	public function Listar()
 	{
 		try
@@ -30,6 +52,19 @@ class Localidad
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		}
 		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+	public function Limpiar($nomTabla)
+	{
+		try 
+		{
+			$stm = $this->pdo
+			->prepare("DELETE FROM $nomTabla");			          
+
+			$stm->execute();
+		} catch (Exception $e) 
 		{
 			die($e->getMessage());
 		}
