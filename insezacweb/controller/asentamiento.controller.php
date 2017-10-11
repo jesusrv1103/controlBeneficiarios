@@ -13,7 +13,7 @@ class AsentamientoController{
 	public function Index(){
 		$catalogos=true;
 		$asentamientos=true;
-		$page="view/catalogos/asentamiento.php";
+		$page="view/asentamiento/index.php";
 		require_once 'view/index.php';
 	}
 
@@ -28,7 +28,7 @@ class AsentamientoController{
 		}
 		else{
 			$mensaje="Error al cargar el archivo";
-			$page="view/catalogos/asentamiento.php";
+			$page="view/asentamiento/index.php";
 			$asentamientos = true;
 			$catalogos=true;
 			require_once 'view/index.php';
@@ -49,7 +49,7 @@ class AsentamientoController{
 			$numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
 			$this->Asentamientos($objPHPExcel,$numRows);
 			$mensaje="success";
-			$page="view/catalogos/asentamiento.php";
+			$page="view/asentamiento/index.php";
 			$asentamientos = true;
 			$catalogos=true;
 			require_once 'view/index.php';
@@ -80,7 +80,7 @@ class AsentamientoController{
 
 		}catch (Exception $e) {
 			$mensaje="error";
-			$page="view/catalogos/asentamiento.php";
+			$page="view/asentamiento/index.php";
 			$asentamientos = true;
 			$catalogos=true;
 			require_once 'view/index.php';
