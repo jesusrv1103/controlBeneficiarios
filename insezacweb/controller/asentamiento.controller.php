@@ -73,7 +73,6 @@ class AsentamientoController{
 				$cat->nombreAsentamiento = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
 				$cat->tipoAsentamiento = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
 				if (!$cat->idAsentamientos == null) {
-					echo $cat->idAsentamientos;
 					$this->model->ImportarAsentamientos($cat);
 				}
 				$numRow+=1;

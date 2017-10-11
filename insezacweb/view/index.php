@@ -128,7 +128,7 @@ if (!isset($_SESSION['seguridad'])){
              </li>
              <li> 
               <a href="?c=Asentamiento&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-               <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Acentamientos</b>
+               <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Asentamientos</b>
              </a> 
            </li>
            <li> 
@@ -176,24 +176,72 @@ if (!isset($_SESSION['seguridad'])){
 <script src="assets/plugins/data-tables/DT_bootstrap.js"></script>
 <script src="assets/plugins/data-tables/dynamic_table_init.js"></script>
 <script src="assets/plugins/edit-table/edit-table.js"></script>
-<script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script> 
-<script src="assets/plugins/file-uploader/js/vendor/jquery.ui.widget.js"></script> 
-<script src="assets/plugins/file-uploader/js/tmpl.min.js"></script> 
-<script src="assets/plugins/file-uploader/js/load-image.min.js"></script> 
-<script src="assets/plugins/file-uploader/js/canvas-to-blob.min.js"></script> 
-<script src="assets/plugins/file-uploader/js/jquery.blueimp-gallery.min.js"></script> 
-<script src="assets/plugins/file-uploader/js/jquery.iframe-transport.js"></script> 
-<script src="assets/plugins/file-uploader/js/jquery.fileupload.js"></script> 
-<script src="assets/plugins/file-uploader/js/jquery.fileupload-process.js"></script> 
-<script src="assets/plugins/file-uploader/js/jquery.fileupload-image.js"></script> 
-<script src="assets/plugins/file-uploader/js/jquery.fileupload-audio.js"></script> 
-<script src="assets/plugins/file-uploader/js/jquery.fileupload-video.js"></script> 
-<script src="assets/plugins/file-uploader/js/jquery.fileupload-validate.js"></script> 
-<script src="assets/plugins/file-uploader/js/jquery.fileupload-ui.js"></script> 
-<script src="assets/plugins/file-uploader/js/main.js"></script>
-<script>
+<script src="assets/plugins/file-uploader/js/vendor/jquery.ui.widget.js"></script>
+<script src="assets/plugins/file-uploader/js/jquery.iframe-transport.js"></script>
+<script src="assets/plugins/file-uploader/js/jquery.fileupload.js"></script>
 
+<script>
   /*==Porlets Actions==*/
+  $(document).on('ready', function() {
+    'use strict';
+    // Change this to the location of your server-side upload handler:
+    var url = 'assets/';
+    $('#fileupload').fileupload({
+      url: url,
+      dataType: 'json',
+      done: function (e, data) {
+        $.each(data.result.files, function (index, file) {
+          $('<p/>').text(file.name).appendTo('#files');
+        }); 
+       },
+      progressall: function (e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $('#progress .progress-bar').css(
+          'width',
+          progress + '%'
+          );
+      }
+    }).prop('disabled', !$.support.fileInput)
+    .parent().addClass($.support.fileInput ? undefined : 'disabled');
+  });
+
+  $('.catalogos').change(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: 'assets/process.php?file=catalogo_beneficiarios.xlsx',
+      type: 'post',
+      dataType: 'json'
+    })
+
+  });
+
+  $('.asentamientos').change(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: 'assets/process.php?file=asentamientos.xlsx',
+      type: 'post',
+      dataType: 'json'
+    })
+  });
+
+  $('.localidades').change(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: 'assets/process.php?file=localidades.xlsx',
+      type: 'post',
+      dataType: 'json'
+    })
+  });
+
+  $('.beneficiarios').change(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: 'assets/process.php?file=beneficiarios.xlsx',
+      type: 'post',
+      dataType: 'json'
+    })
+  });
+
   $('.minimize').click(function(e){
     var h = $(this).parents(".header");
     var c = h.next('.porlets-content');
