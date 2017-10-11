@@ -31,24 +31,22 @@ class BeneficiarioController{
 //Metodo Guardar  si trae un id actualiza, no registra
 public function Guardar(){
   $beneficiario= new Beneficiario();
-
-        //echo "entre";
-        //echo  $programa->idPrograma
   $beneficiario->idBeneficiario = $_REQUEST['idBeneficiario'];
   $beneficiario->curp = $_REQUEST['curp'];
-  $beneficiario->curp = $_REQUEST['primerApellido'];
-  $beneficiario->curp = $_REQUEST['segundoApellido'];
-  $beneficiario->curp = $_REQUEST['nombres'];
-  $beneficiario->curp = $_REQUEST['idIdentificacion'];
-  $beneficiario->curp = $_REQUEST['tiposeguridadSocial'];
-  $beneficiario->curp = $_REQUEST['discapacidad'];
+  $beneficiario->primerApellido= $_REQUEST['primerApellido'];
+  $beneficiario->segundoApellido = $_REQUEST['segundoApellido'];
+  $beneficiario->nombres = $_REQUEST['nombres'];
+  $beneficiario->idIdentificacion = $_REQUEST['idIdentificacion'];
+   $beneficiario->idNivelEstudios = $_REQUEST['idNivelEstudios'];
+  $beneficiario->idSeguridadSocial = $_REQUEST['idSeguridadSocial'];
+  $beneficiario->idDiscapacidad = $_REQUEST['idDiscapacidad'];
   $beneficiario->idBeneficiario > 0 
-  ? $this->model->Actualizar($beneficiario)
-  : $this->model->Registrar($beneficiario);
+    ? $this->model->Actualizar($beneficiario)
+    : $this->model->Registrar($beneficiario);
   $administracion = true;
   $inicio = false;
   $beneficiarios = false;
-  $page="view/beneficiario/beneficiario.php";
+  $page="view/beneficiario/index.php";
   require_once 'view/index.php';
   }
  
@@ -121,10 +119,5 @@ public function Importar($archivo){
     echo "Necesitas primero importar el archivo";
   }
 }
-public function Update(){
 
-}
-public function Delete(){
-
-}
 }

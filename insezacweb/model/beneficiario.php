@@ -1,43 +1,41 @@
 <?php
 class Beneficiario
 {
-	private $pdo;
-	private $idBeneficiario;
-	private $curp;
-	private $primerApellido;
-	private $segundoApellido;
-	private $nombres;
-	private $idIdentificacion;
-	private $idTipoVialidad;
-	private $nombreVialidad;
-	private $noExterior;
-	private $claveAsentamiento;
-	private $claveLocalidad;
-	private $entreVialidades;
-	private $descripcionUbicacion;
-	private $estudioSocioeconomico;
-	private $estadoCivil;
-	private $jefeFamilia;
-	private $ocupacion;
-	private $ingresoMensual;
-	private $integrantesFamilia;
-	private $dependientesEconomicos;
-	private $vivienda;
-	private $noHabitantes;
-	private $viviendaElectricidad;
-	private $viviendaAgua;
-	private $viviendaDrenaje;
-	private $viviendaGas;
-	private $viviendaTelefono;
-	private $viviendaInternet;
-	private $nivelEstudios;
-	private $tipoSeguridadSocial;
-	private $discapacidad;
-	private $grupoVulnerable;
-	private $beneficiarioColectivo;
-
-
-
+	public $pdo;
+	public $idBeneficiario;
+	public $curp;
+	public $primerApellido;
+	public $segundoApellido;
+	public $nombres;
+	public $idIdentificacion;
+	public $idTipoVialidad;
+	public $nombreVialidad;
+	public $noExterior;
+	public $noInterior;
+	public $idAsentamientos;
+	public $idLocalidad;
+	public $entreVialidades;
+	public $descripcionUbicacion;
+	public $estudioSocioeconomico;
+	public $idEstadoCivil;
+	public $jefeFamilia;
+	public $idOcupacion;
+	public $idIngresoMensual;
+	public $integrantesFamilia;
+	public $dependientesEconomicos;
+	public $idVivienda;
+	public $noHabitantes;
+	public $viviendaElectricidad;
+	public $viviendaAgua;
+	public $viviendaDrenaje;
+	public $viviendaGas;
+	public $viviendaTelefono;
+	public $viviendaInternet;
+	public $idNivelEstudios;
+	public $idSeguridadSocial;
+	public $idDiscapacidad;
+	public $idGrupoVulnerable;
+	public $beneficiarioColectivo;
 	
 	public function __CONSTRUCT()
 	{
@@ -50,46 +48,47 @@ class Beneficiario
 			die($e->getMessage());
 		}
 	}
-	public function Importar(Beneficiario $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO beneficiarios  VALUES(?,?,?,?)");
-			$resultado=$sql->execute(
-				array(
-					null,
-					$data->nombre,
-					$data->precio,
-					$data->existencia
-				)
-			);
 
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
-	}
 
 	public function Listar()
 	{
 		try
 		{
-			$stm = $this->pdo->prepare("select b.idBeneficiario, 
+			$stm = $this->pdo->prepare(" select
+			  b.idBeneficiario, 
 			  b.curp, 
 			  b.primerApellido, 
 			  b.segundoApellido,
 			  b.nombres, 
 			  idOf.identificacion as nomTipoI, 
-			  tV.tipoVialidad, 
+			  tV.tipoVialidad,
+			  b.nombreVialidad,
+			  b.noExterior,
+			  b.noInterior,
+			  a.nombreAsentamiento,
+			  l.localidad,
+ 			  b.entreVialidades,
+  			  b.descripcionUbicacion,
+              b.estudioSocioeconomico,
 			  eC.estadoCivil, 
+			  b.jefeFamilia
 			  o.ocupacion, 
 			  iM.ingresoMensual,
+			  b.integrantesFamilia,
+			  b.dependientesEconomicos,
 			  v.vivienda, 
+  			  b.noHabitantes,
+			  b.viviendaElectricidad,
+			  b.viviendaAgua,
+			  b.viviendaDrenaje,
+			  b.viviendaGas,
+			  b.viviendaTelefono,
+  			  b.viviendaInternet
 			  nE.nivelEstudios, 
 			  sS.seguridadSocial,
 			  d.discapacidad, 
-			  gV.grupoVunerable,
-			  a.nombreAsentamiento, 
-			  l.localidad 
+			  gV.grupoVulnerable,
+			  b.beneficiarioColectivo
 			  from identificacionOficial idOf, 
 			  tipoVialidad tV, estadoCivil eC, 
 			  ocupacion o, vivienda v, 
@@ -128,12 +127,14 @@ class Beneficiario
 	{
 		try
 		{
-			$stm = $this->pdo->prepare("select b.idBeneficiario, 
+			$stm = $this->pdo->prepare("
+			  select
+			  b.idBeneficiario, 
 			  b.curp, 
 			  b.primerApellido, 
 			  b.segundoApellido,
 			  b.nombres, 
-			  idOf.identificacion AS nombreId
+			  idOf.identificacion as nomTipoI
 			  from identificacionOficial idOf, 
 			  tipoVialidad tV, estadoCivil eC, 
 			  ocupacion o, vivienda v, 
@@ -141,20 +142,22 @@ class Beneficiario
 			  seguridadSocial sS, 
 			  discapacidad d, 
 			  grupoVulnerable gV, 
-			  asentamientos a, localidades l, 
-			  ingresoMensual iM, beneficiarios  b
-			    where  b.idIdentificacion = idOf.idIdentificacion AND   
-			   	b.idTipoVialidad = tV.idTipoVialidad AND 	
-				b.estadoCivil = eC.idEstadoCivil AND 
-			    b.ocupacion = o.idOcupacion AND 
-			    b.ingresoMensual = iM.idIngresoMensual AND 
-			    b.vivienda =  v.idVivienda AND   
-			    b.nivelEstudios = nE.idNivelEstudios AND  
-			    b.tipoSeguridadSocial = sS.idSeguridadSocial AND  
-			    b.discapacidad = d.idDiscapacidad AND  
-			   	b.grupoVulnerable =gV.idGrupoVulnerable AND 
-			    b.claveAsentamiento = a.idAsentamientos AND 
-			    b.claveLocalidad = l.idLocalidad");
+			  asentamientos a, 
+			  localidades l, 
+			  ingresoMensual iM, 
+			  beneficiarios  b
+			  where  b.idIdentificacion = idOf.idIdentificacion AND
+				b.idTipoVialidad = tV.idTipoVialidad AND 
+				b.idEstadoCivil = eC.idEstadoCivil AND  
+				b.idOcupacion = o.idOcupacion AND  
+				b.idIngresoMensual = iM.idIngresoMensual AND 
+				b.idVivienda =  v.idVivienda AND  
+				b.idNivelEstudios = nE.idNivelEstudios AND  
+				 b.idSeguridadSocial = sS.idSeguridadSocial AND   
+				b.idDiscapacidad = d.idDiscapacidad AND
+				 b.idGrupoVulnerable =gV.idGrupoVulnerable AND 
+				 b.idAsentamientos = a.idAsentamientos AND  
+				b.idLocalidad = l.idLocalidad");
 			
 			$stm->execute();
 
@@ -208,15 +211,15 @@ class Beneficiario
 	{
 		try 
 		{
-			$sql = "UPDATE programa SET 
-					programa = ?
-					WHERE idPrograma = ?";
+			$sql = "UPDATE beneficiarios SET 
+					nombres = ?
+					WHERE idBeneficiario = ?";
 	
 			$this->pdo->prepare($sql)
 					->execute(
 					array(
-						$data->programa, 
-						$data->idPrograma
+						$data->nombres, 
+						$data->idBeneficiario
 						)
 					);
 		} catch (Exception $e) 
@@ -230,13 +233,22 @@ class Beneficiario
 	{
 		try 
 		{
-			$sql = "INSERT INTO beneficiarios(curp,primerApellido,segundoApellido,nombres,idIdentificacion,nivelEstudios,tipoSeguridadSocial,discapacidad) 
-			VALUES (?,?,?,?,?,?,?,?)";
+			
+			$sql = "INSERT INTO beneficiarios (curp,primerApellido,segundoApellido,nombres,idIdentificacion,
+					idNivelEstudios,idSeguridadSocial,
+					idDiscapacidad) values (?,?,?,?,?,?,?,?)";
 
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
-					$data->programa
+					$data->curp,
+					$data->primerApellido,
+					$data->segundoApellido,
+					$data->nombres,
+					$data->idIdentificacion,
+					$data->idNivelEstudios,
+					$data->idSeguridadSocial,
+					$data->idDiscapacidad
 				)
 			);
 		} catch (Exception $e) 
