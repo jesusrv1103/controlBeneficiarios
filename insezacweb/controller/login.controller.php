@@ -1,15 +1,16 @@
 <?php
 require_once 'model/login.php';
 class LoginController{
+
   private $model;
-  private $session;
-  public $error;
+  
   public function __CONSTRUCT(){
     $this->model = new Login();
   }
   public function Index(){
     require_once 'view/login.php';
   }
+
   public function Acceder(){
    $log = new Login();
    $usuario=$log->usuario = $_REQUEST['usuario'];
@@ -33,16 +34,19 @@ class LoginController{
    require_once 'view/login.php';
  }
 }
+
 public function login($usuario,$password)
 {
  $_SESSION['user_session'] = $usuario;
  $_SESSION['user_password'] = $password;
  $_SESSION['seguridad'] = "ok";
 }
+
 public function redirect($url)
 {
  header("Location: $url");
 }
+
 public function logout()
 {
   session_destroy();

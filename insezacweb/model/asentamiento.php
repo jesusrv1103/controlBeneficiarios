@@ -1,14 +1,13 @@
 <?php
+require_once 'model/database.php';
 class Asentamiento
 {
-
-	public $idAsentamiento;
+	private $pdo;
+	public $idAsentamientos;
 	public $municipio;
 	public $localidad;
-	public $ambito;
 	public $nombreAsentamiento;
 	public $tipoAsentamiento;
-
 
 	public function __CONSTRUCT()
 	{
@@ -33,6 +32,39 @@ class Asentamiento
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		}
 		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ImportarAsentamientos(Asentamiento $data){
+		try 
+		{
+
+		//$this->Limpiar("asentamientos");
+			$sql= $this->pdo->prepare("INSERT INTO asentamientos VALUES (?,?,?,?,?)");
+			$resultado=$sql->execute(
+				array(
+					$data->idAsentamientos,
+					$data->municipio,
+					$data->localidad,
+					$data->nombreAsentamiento,
+					$data->tipoAsentamiento
+					)
+				);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+		public function Limpiar($nomTabla)
+	{
+		try 
+		{
+			$stm = $this->pdo
+			->prepare("DELETE FROM $nomTabla");			          
+
+			$stm->execute();
+		} catch (Exception $e) 
 		{
 			die($e->getMessage());
 		}

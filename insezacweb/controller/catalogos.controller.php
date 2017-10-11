@@ -14,29 +14,29 @@ class CatalogosController{
 }
 
 public function Upload(){
-    $archivo = $_FILES['file']['name'];
-    $tipo = $_FILES['file']['type'];
-    $destino = "./assets/importaciones/catalogo_beneficiarios.xlsx";
-    if(copy($_FILES['file']['tmp_name'], $destino)){
+  $archivo = $_FILES['file']['name'];
+  $tipo = $_FILES['file']['type'];
+  $destino = "./assets/files/catalogo_beneficiarios.xlsx";
+  if(copy($_FILES['file']['tmp_name'], $destino)){
     //echo "Archivo Cargado Con Éxito" . "<br><br>";
-      $this->Importar();
+    $this->Importar();
     //mandar llamar todas las funciones a importar
-    }
-    else{
-     $mensaje="Error al cargar el archivo";
-     $page="view/catalogos/beneficiarios.php";
-     $beneficiarios2 = true;
-     $catalogos=true;
-     require_once 'view/index.php';
-   }
+  }
+  else{
+   $mensaje="Error al cargar el archivo";
+   $page="view/catalogos/beneficiarios.php";
+   $beneficiarios2 = true;
+   $catalogos=true;
+   require_once 'view/index.php';
  }
- public function Importar(){
-  if (file_exists("./assets/importaciones/catalogo_beneficiarios.xlsx")) {
+}
+public function Importar(){
+  if (file_exists("./assets/files/catalogo_beneficiarios.xlsx")) {
 
         //Agregamos la librería 
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
   //Variable con el nombre del archivo
-    $nombreArchivo = './assets/importaciones/catalogo_beneficiarios.xlsx';
+    $nombreArchivo = './assets/files/catalogo_beneficiarios.xlsx';
   // Cargo la hoja de cálculo
     $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
   //Asigno la hoja de calculo activa
