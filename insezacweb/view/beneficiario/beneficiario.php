@@ -23,7 +23,7 @@
           <!--h3 class=""><?php echo $apoyo->idApoyo != null ? 'Actualizar apoyo' : 'Registrar apoyo'; ?></h3-->
         </div>
         <div class="porlets-content">
-          <form  class="form-horizontal row-border" >
+          <div  class="form-horizontal row-border" >
               <div class="block-web full">
                 <ul class="nav nav-tabs nav-justified nav_bg">
                   <li class="active"><a href="#generales" data-toggle="tab"><i class="fa fa-user"></i> Datos Generales</a></li>
@@ -35,8 +35,8 @@
                   <div class="tab-pane animated fadeInRight active" id="generales">
                     <div class="user-profile-content">
                       <h5><strong>Datos Generales</strong></h5>
-                      <form action="?c=Beneficiario&a=Guardar" method="post" role="form">
-                         <input type="hidden" name="idBneficiario" value="<?php echo $beneficario->idBneficiario; ?>" />
+                      <form id="frm-beneficiario" action="?c=Beneficiario&a=Guardar" method="post" role="form" enctype="multipart/form-data">
+                         <input type="hidden" name="idBeneficiario" value="<?php echo $beneficario->idBeneficiario; ?>" />
                         <div class="form-group">
                           <label class="col-sm-3 control-label">CURP</label>
                           <div class="col-sm-6">
@@ -44,7 +44,7 @@
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
-                          <label class="col-sm-3 control-label">Primer Apillido</label>
+                          <label class="col-sm-3 control-label">Primer Apellido</label>
                           <div class="col-sm-6">
                             <input name="primerApellido" type="text" class="form-control" required placeholder="Ingrese su Primer Apellido" />
                           </div>
@@ -61,94 +61,68 @@
                             <input name="nombres" type="text" class="form-control" required placeholder="Ingrese sus Nombres" />
                           </div>
                         </div><!--/form-group-->
+                        
                         <div class="form-group">
-                          <label class="col-sm-3 control-label">Indentificacion</label>
+                          <label class="col-sm-3 control-label">Identificacion</label>
                           <div class="col-sm-6">
-<<<<<<< HEAD
-                            <select class="form-control" >
-<<<<<<< HEAD
-                              <option value="ididentificacion"> Caracteristicas </option>
-=======
-                              <?php foreach($this->model->ListarIdentificaciones() as $r): ?>
-                              <option value="r"> 
-=======
-                             <select class="form-control" >
+                            <select name="idIdentificacion" class="form-control" >
                               <?php foreach($this->model2->Listar('identificacionOficial') as $r): ?>
-                              <option value="1"> 
-
->>>>>>> da2680a920e43130e9f75666b54c7ea6207ff0d8
+                              <option value="<?php echo $r->idIdentificacion; ?>"> 
                               <?php echo $r->identificacion; ?>
                               </option>
                             <?php endforeach; ?>
->>>>>>> 1fe877d0de819573b5482732abb2023914d82fd3
+
                             </select>
                           </div>
                         </div><!--/form-group-->
+                        
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Nivel de estudio</label>
                           <div class="col-sm-6">
-                            <select class="form-control" >
-<<<<<<< HEAD
-<<<<<<< HEAD
-                              <option value="idNivelEstudio"> Caracteristicas </option>
-=======
-                              <?php foreach($this->model->ListarNivelEstudio() as $r): ?>
-                              <option value="r"> 
-=======
+                            <select name="idNivelEstudios" class="form-control" >
                               <?php foreach($this->model2->Listar('nivelEstudio') as $r): ?>
-                              <option value="1"> 
->>>>>>> da2680a920e43130e9f75666b54c7ea6207ff0d8
-                              <?php echo $r->nivelEstudios; ?>
+                                <option value="<?php echo $r->idNivelEstudios; ?>"> 
+                                <?php echo $r->nivelEstudios; ?>
                               </option>
                             <?php endforeach; ?>
->>>>>>> 1fe877d0de819573b5482732abb2023914d82fd3
                             </select>
                           </div>
                         </div><!--/form-group-->
+                        
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Tipo de seguridad social</label>
                           <div class="col-sm-6">
-                            <select class="form-control" >
-<<<<<<< HEAD
-                              <option value="idSeguridadSocial>"> Caracteristicas </option>
-=======
+                            <select name="idSeguridadSocial" class="form-control" >
                               <?php foreach($this->model2->Listar('seguridadSocial') as $r): ?>
-                              <option value="1"> 
+                              <option value="<?php echo $r->idSeguridadSocial; ?>"> 
                               <?php echo $r->seguridadSocial; ?>
                               </option>
                             <?php endforeach; ?>
->>>>>>> 1fe877d0de819573b5482732abb2023914d82fd3
                             </select>
                           </div>
                         </div><!--/form-group-->
+                        
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Discapasidad</label>
                           <div class="col-sm-6">
-                            <select class="form-control" >
-<<<<<<< HEAD
-<<<<<<< HEAD
-                              <option value="idDiscapacidad"> Caracteristicas </option>
-=======
-                            <?php foreach($this->model->ListarDiscapacidad() as $r): ?>
-=======
+                            <select name="idDiscapacidad" class="form-control" >
                             <?php foreach($this->model2->Listar('discapacidad') as $r): ?>
->>>>>>> da2680a920e43130e9f75666b54c7ea6207ff0d8
-
-                              <option value="1"> 
+                              <option value=" <?php echo $r->idDiscapacidad; ?>"> 
                               <?php echo $r->discapacidad; ?>
                               </option>
                             <?php endforeach; ?>
->>>>>>> 1fe877d0de819573b5482732abb2023914d82fd3
                             </select>
                           </div>
                         </div><!--/form-group-->
+                       
+
                         <div class="form-group">
                           <div class="col-sm-offset-7 col-sm-5">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                            <a href="?c=Programa" class="btn btn-default"> Cancelar</a>
-                          </div>
-                        </div><!--/form-group-->
 
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href="?c=Beneficiario" class="btn btn-default"> Cancelar</a>
+                          </div>
+                        </div><!--/form-group-->-->
                       </form>
                     </div>
                   </div>
@@ -221,6 +195,7 @@
                       </form>
                     </div>
                   </div>
+                  <!--
                   <div class="tab-pane" id="estado-social">
                     <ul class="media-list">
                       <li class="media"> <a href="#">
@@ -248,7 +223,8 @@
                           <i>Yesterday</i></p>
                         </a> </li>
                     </ul>
-                  </div>
+                  </div>-->
+                  <!--
                   <div class="tab-pane" id="mymessage">
                     <ul class="media-list">
                       <li class="media"> <a class="pull-left" href="#"><img src="images/gg.png" /></a>
@@ -288,14 +264,14 @@
                         </div>
                       </li>
                     </ul>
-                  </div>
+                  </div>-->
                 </div>
                 <!--/tab-content-->
               </div>
               <!--/block-web-->
 
 
-          </form>
+          </div>
         </div><!--/porlets-content-->
       </div><!--/block-web-->
     </div><!--/col-md-12-->
