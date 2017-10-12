@@ -17,11 +17,11 @@
 				
 				<div class="header">
 					<div class="row" style="margin-top: 15px; margin-bottom: 12px;">
-						<div class="col-sm-8">
+						<div class="col-sm-7">
 							<div class="actions"> </div>
 							<h2 class="content-header theme_color" style="margin-top: -5px;">Localidades</b></h2>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-5">
 							<div class="btn-group pull-right">
 								<b>
 									<div class="btn-group" style="margin-right: 10px;"> 
@@ -33,7 +33,23 @@
 							</div>
 						</div>		
 					</div>
-					
+				</div>
+				<div class="row">
+					<?php if(isset($mensaje)){ if($mensaje=="success"){ ?>
+					<div class="col-md-12">
+						<div class="alert alert-success fade in">
+							<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+							<i class="fa fa-check"></i>&nbsp;Se han importado las localidades correctamente
+						</div>
+					</div> 
+					<?php }else{ ?>
+					<div class="col-md-12">
+						<div class="alert alert-danger">
+							<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+							<i class="fa fa-times"></i>&nbsp;<?php echo $mensaje; ?>
+						</div>
+					</div>
+					<?php } } ?>
 				</div>
 				<div class="porlets-content">
 					<div class="table-responsive">
@@ -56,14 +72,13 @@
 										<td><?php echo $r->localidad; ?></td>
 										<td><?php echo $r->ambito; ?></td>
 										<td class="center">
-											<a href="index.php?c=Usuario&a=Crud&idUsuario=<?php echo $r->idUsuario ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>
+											<a href="index.php?c=Localidad&a=Crud&idLocalidad=<?php echo $r->idUsuario ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>
 										</td>
 										<td class="center">
-											<a class="btn btn-danger" role="button" href="?c=Usuario&a=Borrar&idUsuario=<?php echo $r->idUsuario; ?>"><i class="fa fa-eraser"></i></a>
+											<a class="btn btn-danger" role="button" href="?c=Localidad&a=Borrar&idLocalidad=<?php echo $r->idLocalidad; ?>"><i class="fa fa-eraser"></i></a>
 										</td>
 									</tr>
 								<?php endforeach; ?>
-
 							</tbody>
 							<tfoot>
 								<tr>
@@ -115,9 +130,12 @@
 					</div>
 				</div>
 				<div class="modal-footer">
+					<!--div class="progress">
+						<div class="progress-bar" style="width: 0%; margin-left: -5px;"></div>
+					</div-->
 					<div class="row col-md-5 col-md-offset-7">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-						<a href="?c=Localidad&a=Importar" class="btn btn-primary" data-dismiss="modal">Guardar</a>
+						<a href="?c=Localidad&a=Importar" class="btn btn-primary">Guardar</a>
 					</div>
 				</div>
 			</div><!--/modal-content--> 

@@ -35,6 +35,17 @@ class AsentamientoController{
 		}
 	}
 
+	public function Crud(){
+      $asentamiento = new Asentamiento();
+      if(isset($_REQUEST['idAsentamientos'])){
+        $asentamiento = $this->model->Obtener($_REQUEST['idAsentamientos']);
+      }
+      $catalogos=true;
+      $asentamientos=true;
+      $page="view/asentamiento/asentamiento.php";
+      require_once 'view/index.php';
+    }
+
 	public function Importar(){
 		if (file_exists("./assets/files/asentamientos.xlsx")) {
         	//Agregamos la librería 

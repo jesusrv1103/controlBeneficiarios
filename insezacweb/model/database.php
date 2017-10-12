@@ -13,8 +13,8 @@ class Database
 				$usuario=$_SESSION['user_session'];
 				$password=$_SESSION['user_password'];
 				$pdo = new PDO('mysql:host=localhost;dbname=insezac;charset=utf8',$usuario,$password);
-				$pdo = new PDO('mysql:host=localhost;dbname=INSEZAC;charset=utf8',$usuario,$password);//USO JRV
-				//$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);	
+				//$pdo = new PDO('mysql:host=localhost;dbname=INSEZAC;charset=utf8',$usuario,$password);//USO JRV
+				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);	
 				return $pdo;
 			}else{
 				//$pdo = new PDO('mysql:host=localhost;dbname=INSEZAC;charset=utf8', 'root', '123-horses');//USO JRV
