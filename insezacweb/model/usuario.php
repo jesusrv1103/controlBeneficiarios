@@ -64,7 +64,7 @@ class Usuario
 			die($e->getMessage());
 		}
 	}
-	public function Actualizar($data)
+	public function Actualizar(Usuario $data)
 	{
 		try 
 		{
@@ -74,11 +74,11 @@ class Usuario
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
-					null,
 					$data->usuario, 
 					$data->password,
 					$data->direccion,
-					$data->tipoUsuario
+					$data->tipoUsuario,
+					$data->idUsuario
 				)
 			);
 		} catch (Exception $e) 
@@ -90,7 +90,7 @@ class Usuario
 	{
 		try 
 		{
-			$sql = "INSERT INTO usuario
+			$sql = "INSERT INTO usuarioS
 			VALUES (?,?,?,?,?)";
 
 			$this->pdo->prepare($sql)

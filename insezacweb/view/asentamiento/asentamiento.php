@@ -60,7 +60,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Tipo asentamiento</label>
               <div class="col-sm-6">
-                <input name="asentamiento" type="text" class="form-control" required value="<?php echo $asentamiento->idAsentamientos != null ? $asentamiento->tipoAsentamiento : "";  ?>" placeholder="Indique el tipo de asentamiento"/>
+                <input name="asentamiento" type="number" class="form-control" required value="<?php echo $asentamiento->idAsentamientos != null ? $asentamiento->tipoAsentamiento : "";  ?>" placeholder="Indique el tipo de asentamiento"/>
               </div>
             </div><!--/form-group-->
             <div class="form-group">
