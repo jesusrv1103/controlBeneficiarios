@@ -67,7 +67,7 @@ if(isset($mensaje))
                 <th><?php echo $r->direccion; ?></th>
                 <th><?php echo $r->tipoUsuario; ?></th>
                 <td class="center">
-                  <a href="index.php?c=Usuario&a=Crud&idUsuario=<?php echo $r->idUsuario ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i>Editar</a>
+                  <a href="index.php?c=Usuario&a=Crud&idUsuario=<?php echo $r->idUsuario; ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i>Editar</a>
                 </td>
                 <td class="center">
                  <a class="btn btn-danger" role="button" href="?c=Usuario&a=Borrar&idUsuario=<?php echo $r->idUsuario; ?>"><i class="fa fa-eraser"></i>Borrar</a>

@@ -33,22 +33,28 @@
               </div>
             </div><!--/form-group-->
             <div class="form-group">
+              <label class="col-sm-3 control-label">Direccion</label>
+              <div class="col-sm-6">
+                <input name="direccion" type="text" class="form-control" required value="<?php echo $usuario->idUsuario != null ? $usuario->direccion : "";  ?>" placeholder="Ingrese la direccion que pertenece el usuario"/>
+              </div>
+            </div><!--/form-group-->
+            <div class="form-group">
               <label class="col-sm-3 control-label">Contraseña</label>
               <div class="col-sm-6">
-                <input name="usuario" type="password" class="form-control" required placeholder="Ingrese la contraseña del usuario"/>
+                <input name="password" type="password" class="form-control" value="<?php echo $usuario->idUsuario != null ? $usuario->password : "";  ?>" required placeholder="Ingrese la contraseña del usuario"/>
                 <!--value="<?php //echo $usuario->idUsuario != null ? $usuario->password : "";  ?>"-->
               </div>
             </div><!--/form-group-->
              <div class="form-group">
               <label class="col-sm-3 control-label">Confirmar Contraseña</label>
               <div class="col-sm-6">
-                <input name="usuario" type="password" class="form-control" required placeholder="Confirme la contraseña del usuario"/>
+                <input name="password2" type="password" class="form-control" value="<?php echo $usuario->idUsuario != null ? $usuario->password : "";  ?>" required placeholder="Confirme la contraseña del usuario"/>
               </div>
             </div><!--/form-group-->
             <div class="form-group">
               <label class="col-sm-3 control-label">Tipo usuario</label>
               <div class="col-sm-6">
-                <select class="form-control" >
+                <select class="form-control" name="tipoUsuario" id="tipoUsuario">
                     <option value="1"> 
                       Administrador
                     </option>
