@@ -28,8 +28,8 @@
                 <ul class="nav nav-tabs nav-justified nav_bg">
                   <li class="active"><a href="#generales" data-toggle="tab"><i class="fa fa-user"></i> Datos Generales</a></li>
                   <li class=""><a href="#vialidad" data-toggle="tab"><i class="fa fa-road"></i> Vialidad</a></li>
-                  <li class=""><a href="#user-activities" data-toggle="tab"><i class="fa fa-money"></i> Estado Social</a></li>
-                  <li class=""><a href="#mymessage" data-toggle="tab"><i class="fa fa-home"></i> Vivienda</a></li>
+                  <li class=""><a href="#estadoSocial" data-toggle="tab"><i class="fa fa-money"></i> Estado Social</a></li>
+                  <li class=""><a href="#vivienda" data-toggle="tab"><i class="fa fa-home"></i> Vivienda</a></li>
                 </ul>
                 <div class="tab-content">
                   <div class="tab-pane animated fadeInRight active" id="generales">
@@ -114,6 +114,23 @@
                             </select>
                           </div>
                         </div><!--/form-group-->
+                        <div class="form-group">
+                         <label class="col-sm-3 control-label">Beneficiario Colectivo</label>
+                          <div class="col-sm-9">
+                            <div class="radio">
+                             <label>
+                              <input type="radio" name="beneficiarioColectivo"  value="si" checked="">
+                               Si
+                             </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                  <input type="radio" name="beneficiarioColectivo"  value="no">
+                                   No 
+                                </label>
+                            </div>
+                          </div>
+                        </div><!--/form-group--> 
                        
 
                         <div class="form-group">
@@ -124,18 +141,26 @@
                           </div>
                         </div><!--/form-group-->-->
                       </form>
+
+
+                      <!--+++++++++++++++++++++++++++++++++++++++++Vialid***************************-->
                     </div>
                   </div>
                   <div class="tab-pane animated fadeInRight" id="vialidad">
                     <div class="user-profile-content">
                         <h5><strong>Vialidad</strong></h5>
-                      <form role="form">
+                      <form id="frm-beneficiario" action="?c=Beneficiario&a=Guardar" method="post" role="form" enctype="multipart/form-data">
+                         <input type="hidden" name="idBeneficiario" value="10" />
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Vialidad</label>
                           <div class="col-sm-6">
-                            <select class="form-control" >
-                              <option value="idTipoVialidad"> Caracteristicas </option>
+                          <?php foreach($this->model2->Listar('tipoVialidad') as $r): ?>
+                            <select name="idTipoVialidad" class="form-control" >
+                              <option value="<?php echo $r->idTipoVialidad; ?>"> 
+                                <?php echo $r->tipoVialidad; ?>
+                              </option>
                             </select>
+                          <?php endforeach; ?>
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
@@ -147,29 +172,37 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Numero Exterior</label>
                           <div class="col-sm-6">
-                            <input name="noEterior" type="text" class="form-control" required placeholder="Ingrese el numero exterior de su vivienda" />
+                            <input name="noExterior"  class="form-control" required placeholder="Ingrese el numero exterior de su vivienda" type="text" />
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
                           <label class="col-sm-3 control-label">*Numero Interior</label>
                           <div class="col-sm-6">
-                            <input name="noInterior" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" />
+                            <input name="noInterior"  class="form-control" required placeholder="Ingrese el nombre de su vialidad" type="text" />
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Asentamineto</label>
                           <div class="col-sm-6">
-                            <select class="form-control" >
-                              <option value="claveAsentamiento"> Caracteristicas </option>
+                           <?php foreach($this->model2->Listar('asentamientos') as $r): ?>
+                            <select name="idAsentamientos" class="form-control" >
+                              <option value="<?php echo $r->idAsentamientos; ?>"> 
+                                <?php echo $r->nombreAsentamiento; ?>
+                              </option>
                             </select>
+                          <?php endforeach; ?>
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Localidad</label>
                           <div class="col-sm-6">
-                            <select class="form-control" >
-                              <option value="claveLocalidad"> Caracteristicas </option>
+                           <?php foreach($this->model2->Listar('localidades') as $r): ?>
+                            <select name="idLocalidad" class="form-control" >
+                              <option value="<?php echo $r->idLocalidad; ?>"> 
+                                <?php echo $r->localidad; ?>
+                              </option>
                             </select>
+                          <?php endforeach; ?>
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
@@ -181,90 +214,154 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Descripcion de la ubicacion</label>
                           <div class="col-sm-6">
-                            <textarea name="descripcionUbicación" rows="8" cols="68"></textarea>
+                            <textarea name="descripcionUbicacion" rows="8" cols="68"></textarea>
                           </div>
                         </div><!--/form-group-->
 
                         <div class="form-group">
                           <div class="col-sm-offset-7 col-sm-5">
                             <button type="submit" class="btn btn-primary">Guardar</button>
-                            <a href="?c=Programa" class="btn btn-default"> Cancelar</a>
+                            <a href="?c=Beneficiario" class="btn btn-default"> Cancelar</a>
                           </div>
                         </div><!--/form-group-->
 
                       </form>
                     </div>
                   </div>
-                  <!--
-                  <div class="tab-pane" id="estado-social">
-                    <ul class="media-list">
-                      <li class="media"> <a href="#">
-                        <p><strong>John Doe</strong> Uploaded a photo <strong>"DSC000254.jpg"</strong> <br>
-                          <i>2 minutes ago</i></p>
-                        </a> </li>
-                      <li class="media"> <a href="#">
-                        <p><strong>Imran Tahir</strong> Created an photo album <strong>"Indonesia Tourism"</strong> <br>
-                          <i>8 minutes ago</i></p>
-                        </a> </li>
-                      <li class="media"> <a href="#">
-                        <p><strong>Colin Munro</strong> Posted an article <strong>"London never ending Asia"</strong> <br>
-                          <i>an hour ago</i></p>
-                        </a> </li>
-                      <li class="media"> <a href="#">
-                        <p><strong>Corey Anderson</strong> Added 3 products <br>
-                          <i>3 hours ago</i></p>
-                        </a> </li>
-                      <li class="media"> <a href="#">
-                        <p><strong>Morne Morkel</strong> Send you a message <strong>"Lorem ipsum dolor..."</strong> <br>
-                          <i>12 hours ago</i></p>
-                        </a> </li>
-                      <li class="media"> <a href="#">
-                        <p><strong>Imran Tahir</strong> Updated his avatar <br>
-                          <i>Yesterday</i></p>
-                        </a> </li>
-                    </ul>
-                  </div>-->
-                  <!--
-                  <div class="tab-pane" id="mymessage">
-                    <ul class="media-list">
-                      <li class="media"> <a class="pull-left" href="#"><img src="images/gg.png" /></a>
-                        <div class="media-body">
-                          <h4 class="media-heading"><a href="#fakelink">John Doe</a> <small>Just now</small></h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                        </div>
-                      </li>
-                      <li class="media"> <a class="pull-left" href="#"><img src="images/gg.png" /></a>
-                        <div class="media-body">
-                          <h4 class="media-heading"><a href="#fakelink">Tim Southee</a> <small>Yesterday at 04:00 AM</small></h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus</p>
-                        </div>
-                      </li>
-                      <li class="media"> <a class="pull-left" href="#"><img src="images/gg.png" /></a>
-                        <div class="media-body">
-                          <h4 class="media-heading"><a href="#fakelink">Kane Williamson</a> <small>January 17, 2014 05:35 PM</small></h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                        </div>
-                      </li>
-                      <li class="media"> <a class="pull-left" href="#"><img src="images/gg.png" /></a>
-                        <div class="media-body">
-                          <h4 class="media-heading"><a href="#fakelink">Lonwabo Tsotsobe</a> <small>January 17, 2014 05:35 PM</small></h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                        </div>
-                      </li>
-                      <li class="media"> <a class="pull-left" href="#"><img src="images/gg.png" /></a>
-                        <div class="media-body">
-                          <h4 class="media-heading"><a href="#fakelink">Dale Steyn</a> <small>January 17, 2014 05:35 PM</small></h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                        </div>
-                      </li>
-                      <li class="media"> <a class="pull-left" href="#"><img src="images/gg.png" /></a>
-                        <div class="media-body">
-                          <h4 class="media-heading"><a href="#fakelink">John Doe</a> <small>Just now</small></h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>-->
+
+
+                    <div class="tab-pane animated fadeInRight" id="estadoSocial">
+                    <div class="user-profile-content">
+                        <h5><strong>Estado Social</strong></h5>
+                      <form id="frm-beneficiario" action="?c=Beneficiario&a=Guardar" method="post" role="form" enctype="multipart/form-data">
+                        <input type="hidden" name="idBeneficiario" value="10" />
+                         <div class="form-group">
+                         <label class="col-sm-3 control-label">Estudio Socioeconomico</label>
+                          <div class="col-sm-9">
+                            <div class="radio">
+                             <label>
+                              <input type="radio" name="beneficiarioColectivo"  value="si" checked="">
+                               Si
+                             </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                  <input type="radio" name="beneficiarioColectivo"  value="no">
+                                   No 
+                                </label>
+                            </div>
+                          </div>
+                        </div><!--/form-group--> 
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Estado Civil</label>
+                          <div class="col-sm-6">
+                           <?php foreach($this->model2->Listar('estadoCivil') as $r): ?>
+                            <select name="idEstadoCivil" class="form-control" >
+                              <option value="<?php echo $r->idEstadoCivil; ?>"> 
+                                <?php echo $r->estadoCivil; ?>
+                              </option>
+                            </select>
+                          <?php endforeach; ?>
+                          </div>
+                        </div><!--/form-group-->
+                         <div class="form-group">
+                          <label class="col-sm-3 control-label">Ocupacion</label>
+                          <div class="col-sm-6">
+                           <?php foreach($this->model2->Listar('ocupacion') as $r): ?>
+                            <select name="idOcupacion" class="form-control" >
+                              <option value="<?php echo $r->idOcupacion; ?>"> 
+                                <?php echo $r->ocupacion; ?>
+                              </option>
+                            </select>
+                          <?php endforeach; ?>
+                          </div>
+                        </div><!--/form-group-->
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Ingreso Mensual</label>
+                          <div class="col-sm-6">
+                           <?php foreach($this->model2->Listar('ingresoMensual') as $r): ?>
+                            <select name="idIngresoMensual" class="form-control" >
+                              <option value="<?php echo $r->idIngresoMensual; ?>"> 
+                                <?php echo $r->ingresoMensual; ?>
+                              </option>
+                            </select>
+                          <?php endforeach; ?>
+                          </div>
+                        </div><!--/form-group-->
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Integrantes Familia</label>
+                          <div class="col-sm-6">
+                            <input name="integrantesFamilia" type="text" class="form-control" required placeholder="Ingrese el numero de integrantes de su familia" />
+                          </div>
+                        </div><!--/form-group-->
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Dependientes Economicos</label>
+                          <div class="col-sm-6">
+                            <input name="dependientesEconomicos" type="text" class="form-control" required placeholder="Ingrese el numero de personas que dependen  de usted" />
+                          </div>
+                        </div><!--/form-group-->
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Grupo Vulnerable</label>
+                          <div class="col-sm-6">
+                          
+                            <select name="idGrupoVulnerable" class="form-control" >
+                              <?php foreach($this->model2->Listar('grupoVulnerable') as $r): ?>
+                              <option value="<?php echo $r->idGrupoVulnerable; ?>"> 
+                                <?php echo $r->grupoVulnerable; ?>
+                              </option>
+                             <?php endforeach; ?>
+                            </select>
+                         
+                          </div>
+                        </div><!--/form-group-->
+                
+                        
+                        <div class="form-group">
+                          <div class="col-sm-offset-7 col-sm-5">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href="?c=Beneficiario" class="btn btn-default"> Cancelar</a>
+                          </div>
+                        </div><!--/form-group-->
+
+                      </form>
+                    </div>
+                  </div>
+                   <div class="tab-pane animated fadeInRight" id="vivienda">
+                    <div class="user-profile-content">
+                        <h5><strong>Vivienda</strong></h5>
+                      <form id="frm-beneficiario" action="?c=Beneficiario&a=Guardar" method="post" role="form" enctype="multipart/form-data">
+                        <input type="hidden" name="idBeneficiario" value="10" />
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Tipo Vivienda</label>
+                          <div class="col-sm-6">
+                           <?php foreach($this->model2->Listar('vivienda') as $r): ?>
+                            <select name="idVivienda" class="form-control" >
+                              <option value="<?php echo $r->idVivienda; ?>"> 
+                                <?php echo $r->vivienda; ?>
+                              </option>
+                            </select>
+                          <?php endforeach; ?>
+                          </div>
+                        </div><!--/form-group-->
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">No Habintantes </label>
+                          <div class="col-sm-6">
+                            <input name="entreVialidades" type="text" class="form-control" required placeholder="Ingrese el N° de Habitantes que residen en la vivienda" />
+                          </div>
+                        </div><!--/form-group-->
+
+                
+                        
+                        <div class="form-group">
+                          <div class="col-sm-offset-7 col-sm-5">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href="?c=Beneficiario" class="btn btn-default"> Cancelar</a>
+                          </div>
+                        </div><!--/form-group-->
+
+                      </form>
+                    </div>
+                  </div>
                 </div>
                 <!--/tab-content-->
               </div>
