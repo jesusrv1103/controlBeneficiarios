@@ -69,4 +69,19 @@ class Localidad
 			die($e->getMessage());
 		}
 	}
+	public function Obtener($id)
+	{
+		try 
+		{
+			$stm = $this->pdo
+			->prepare("SELECT * FROM localidad WHERE idLocalidad = ?");
+
+
+			$stm->execute(array($id));
+			return $stm->fetch(PDO::FETCH_OBJ);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
 }

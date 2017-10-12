@@ -10,7 +10,6 @@
 		</ol>
 	</div>
 </div>
-
 <div class="container clear_both padding_fix">
 	<div class="row">
 		<div class="col-md-12">
@@ -25,7 +24,8 @@
 							<div class="btn-group pull-right">
 								<b>
 									<div class="btn-group" style="margin-right: 10px;"> 
-										<a class="btn btn-sm btn-success tooltips" href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal" data-original-title="Importar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="left" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
+										<a class="btn btn-sm btn-success" href="?c=Asentamiento&a=Crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title=""> <i class="fa fa-plus"></i> Registrar asentamiento </a>
+										<a class="btn btn-sm  tooltips btn-warning"  href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal" data-original-title="Importar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="left" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
 										<a class="btn btn-sm btn-primary tooltips" href="?c=Catalogos&a=Descargar" data-original-title="Descargar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
 									</div>
 								</b>
