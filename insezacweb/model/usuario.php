@@ -108,4 +108,23 @@ class Usuario
 			die($e->getMessage());
 		}
 	}
+	public function RegistrarInDB(Usuario $data)
+	{
+		try 
+		{
+			$sql = "grant all privileges on *.* to ?@'localhost' identified by ? with grant option";
+
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					
+					$data->usuario, 
+					$data->password,	
+				)
+			);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
 }
