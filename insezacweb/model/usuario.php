@@ -90,13 +90,17 @@ class Usuario
 	{
 		try 
 		{
-			$sql = "INSERT INTO usuario (null,usuario,password,direccion,tipoUsuario) 
-			VALUES (?)";
+			$sql = "INSERT INTO usuario
+			VALUES (?,?,?,?,?)";
 
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
-					$data->programa
+					null,
+					$data->usuario, 
+					$data->password,
+					$data->direccion,
+					$data->tipoUsuario
 				)
 			);
 		} catch (Exception $e) 
