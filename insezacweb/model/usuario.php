@@ -4,6 +4,8 @@ class Usuario
 
 	public $idUsuario;
 	public $usuario;
+	public $password;
+	public $direccion;
 	public $tipoUsuario;
 	private $pdo;
 
@@ -44,6 +46,63 @@ class Usuario
 
 			$stm->execute(array($id));
 			return $stm->fetch(PDO::FETCH_OBJ);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function Eliminar($id)
+	{
+		try 
+		{
+			$stm = $this->pdo
+			->prepare("DELETE FROM usuarios WHERE idUsuario = ?");			          
+
+			$stm->execute(array($id));
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function Actualizar(Usuario $data)
+	{
+		try 
+		{
+			$sql = "UPDATE usuarios SET
+			usuario = ?, password = ?, direccion =?, tipoUsuario = ? 
+			WHERE idUsuario = ?";
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					$data->usuario, 
+					$data->password,
+					$data->direccion,
+					$data->tipoUsuario,
+					$data->idUsuario
+				)
+			);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function Registrar(Usuario $data)
+	{
+		try 
+		{
+			$sql = "INSERT INTO usuarioS
+			VALUES (?,?,?,?,?)";
+
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					null,
+					$data->usuario, 
+					$data->password,
+					$data->direccion,
+					$data->tipoUsuario
+				)
+			);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());

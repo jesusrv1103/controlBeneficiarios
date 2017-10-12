@@ -24,8 +24,6 @@
 
             <input hidden name="idUsuario"  value="<?php echo $usuario->idUsuario != null ? $usuario->idUsuario : 0;  ?>"/>
 
-            <input DISABLED name="idUsuario"  value="<?php echo $usuario->idUsuario != null ? $usuario->idUsuario : 0;  ?>"  style="visibility:hidden"/>
-
             <div class="form-group">
               <label class="col-sm-3 control-label">Nombre</label>
               <div class="col-sm-6">
@@ -33,43 +31,70 @@
               </div>
             </div><!--/form-group-->
             <div class="form-group">
+              <label class="col-sm-3 control-label">Direccion</label>
+              <div class="col-sm-6">
+                <input name="direccion" type="text" class="form-control" required value="<?php echo $usuario->idUsuario != null ? $usuario->direccion : "";  ?>" placeholder="Ingrese la direccion que pertenece el usuario"/>
+              </div>
+            </div><!--/form-group-->
+            <div class="form-group">
               <label class="col-sm-3 control-label">Contraseña</label>
               <div class="col-sm-6">
-                <input name="usuario" type="password" class="form-control" required placeholder="Ingrese la contraseña del usuario"/>
+                <input name="password" type="password" class="form-control" required placeholder="Ingrese la contraseña del usuario"/>
                 <!--value="<?php //echo $usuario->idUsuario != null ? $usuario->password : "";  ?>"-->
               </div>
             </div><!--/form-group-->
-             <div class="form-group">
+            <div class="form-group">
               <label class="col-sm-3 control-label">Confirmar Contraseña</label>
               <div class="col-sm-6">
-                <input name="usuario" type="password" class="form-control" required placeholder="Confirme la contraseña del usuario"/>
+                <input name="password2" type="password" class="form-control" required placeholder="Confirme la contraseña del usuario"/>
               </div>
             </div><!--/form-group-->
             <div class="form-group">
               <label class="col-sm-3 control-label">Tipo usuario</label>
               <div class="col-sm-6">
-                <select class="form-control" >
-                    <option value="1"> 
-                      Administrador
-                    </option>
-                    <option value="2"> 
-                      Secretario
-                    </option>
-                    <option value="3"> 
-                      Regular
-                    </option>
-                </select>
-              </div>
-            </div><!--/form-group-->
-            <div class="form-group">
-              <div class="col-sm-offset-7 col-sm-5">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="?c=Usuario" class="btn btn-default"> Cancelar</a>
-              </div>
-            </div><!--/form-group-->
-          </form>
-        </div><!--/porlets-content-->
-      </div><!--/block-web-->
-    </div><!--/col-md-12-->
-  </div><!--/row-->
+                <select class="form-control" name="tipoUsuario" id="tipoUsuario">
+                  <?php if($usuario->idUsuario != null){ ?>
+                  <option value="<?php echo $usuario->tipoUsuario; ?>"> 
+                    <?php 
+                    switch ($usuario->tipoUsuario) {
+                      case 1:
+                      echo "Administrador";
+                      break;
+                      case 2:
+                      echo "Secretario";
+                      break;
+                      case 3:
+                      echo "Regular";
+                      break;
+                    }
+                    ?>
+                  </option>
+                  <?php } if($usuario->tipoUsuario!=1){?>
+                  <option value="1"> 
+                    Administrador
+                  </option>
+                  <?php } if($usuario->tipoUsuario!=2){?>
+                  <option value="2"> 
+                    Secretario
+                  </option>
+                  <?php } if($usuario->tipoUsuario!=3){?>
+                  <option value="3"> 
+                    Regular
+                  </option>
+                  <?php } ?>
+                }
+              </select>
+            </div>
+          </div><!--/form-group-->
+          <div class="form-group">
+            <div class="col-sm-offset-7 col-sm-5">
+              <button type="submit" class="btn btn-primary">Guardar</button>
+              <a href="?c=Usuario" class="btn btn-default"> Cancelar</a>
+            </div>
+          </div><!--/form-group-->
+        </form>
+      </div><!--/porlets-content-->
+    </div><!--/block-web-->
+  </div><!--/col-md-12-->
+</div><!--/row-->
 </div><!--/container clear_both padding_fix-->

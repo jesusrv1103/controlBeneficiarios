@@ -24,7 +24,7 @@
 								<b>
 									<div class="btn-group"> 
 										<a class="btn btn-sm btn-warning tooltips" href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal" data-original-title="Importar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="left" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
-										<a class="btn btn-sm btn-primary tooltips" href="?c=Catalogos&a=Descargar" data-original-title="Descargar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
+										<a class="btn btn-sm btn-primary tooltips" download="assets/files/catalogo_beneficiarios.xlsx" data-original-title="Descargar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
 									</div>
 								</b>
 							</div>
@@ -58,7 +58,7 @@
 						</div>
 						<div class="porlets-content">
 							<div class="panel-body">
-								<div class="col-md-10 col-md-offset-1">
+								<div class="col-md-12">
 									<table class="table table-striped">
 										<tbody>
 											<?php foreach($this->model->Listar('identificacionOficial') as $r): ?>
@@ -256,7 +256,7 @@
 						</div>
 						<div class="porlets-content">
 							<div class="panel-body">
-								<div class="col-md-10 col-md-offset-1">
+								<div class="col-md-12">
 									<table class="table table-striped">
 										<tbody>
 											<?php foreach($this->model->Listar('tipoVialidad') as $r): ?>

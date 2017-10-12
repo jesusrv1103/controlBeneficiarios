@@ -32,7 +32,7 @@ if (!isset($_SESSION['seguridad'])){
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-timepicker/compiled/timepicker.css" />
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css" />
 </head>
-<body class="light_theme  fixed_header left_nav_fixed">
+<body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE">
   <div class="wrapper">
     <!--\\\\\\\ wrapper Start \\\\\\-->
     <div class="header_bar">
@@ -122,17 +122,17 @@ if (!isset($_SESSION['seguridad'])){
                  </a> 
                </li>
                <li> 
-                <a href="?c=Localidad&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                <a href="?c=Localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                  <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
                </a> 
              </li>
              <li> 
-              <a href="?c=Asentamiento&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+              <a href="?c=Asentamiento"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Asentamientos</b>
              </a> 
            </li>
            <li> 
-            <a href="?c=Apoyos&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+            <a href="?c=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
              <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
            </a> 
          </li>
