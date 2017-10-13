@@ -36,15 +36,15 @@ class AsentamientoController{
 	}
 
 	public function Crud(){
-      $asentamiento = new Asentamiento();
-      if(isset($_REQUEST['idAsentamientos'])){
-        $asentamiento = $this->model->Obtener($_REQUEST['idAsentamientos']);
-      }
-      $catalogos=true;
-      $asentamientos=true;
-      $page="view/asentamiento/asentamiento.php";
-      require_once 'view/index.php';
-    }
+		$asentamiento = new Asentamiento();
+		if(isset($_REQUEST['idAsentamientos'])){
+			$asentamiento = $this->model->Obtener($_REQUEST['idAsentamientos']);
+		}
+		$catalogos=true;
+		$asentamientos=true;
+		$page="view/asentamiento/asentamiento.php";
+		require_once 'view/index.php';
+	}
 
 	public function Importar(){
 		if (file_exists("./assets/files/asentamientos.xlsx")) {
@@ -97,4 +97,15 @@ class AsentamientoController{
 			require_once 'view/index.php';
 		}
 	}
+	public function Eliminar(){
+		if (isset($_POST['idAsentamientos'])){
+			echo $_POST['idAsentamientos'];
+			$catalogos=true;
+			$asentamientos=true;
+			$mensaje="success";
+			$page="view/asentamiento/index.php";
+			require_once 'view/index.php';
+		}
+	}
+
 }

@@ -91,4 +91,14 @@ class LocalidadController{
      require_once 'view/index.php';
     }
   }
+    public function Eliminar(){
+    if (isset($_POST['idLocalidad'])){
+      echo $_POST['idLocalidad'];
+      /*$catalogos=true;
+      $asentamientos=true;
+      $mensaje="success";
+      $page="view/asentamiento/index.php";
+      require_once 'view/index.php';*/
+    }
+  }
 }

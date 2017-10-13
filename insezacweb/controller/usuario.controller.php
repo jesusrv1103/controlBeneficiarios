@@ -32,7 +32,7 @@ class UsuarioController{
 		$usuario= new Usuario();
 		$usuario->password = $_REQUEST['password'];
 		$password2 = $_REQUEST['password2'];
-		if (!$usuario->password==$password2) {
+		if ($usuario->password!=$password2) {
 			$error="Verifique que las contraseñas coincidan";
 			$page="view/usuario/usuario.php";
 		}else{
