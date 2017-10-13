@@ -212,13 +212,27 @@ class Beneficiario
 		try 
 		{
 			$sql = "UPDATE beneficiarios SET 
-					nombres = ?
+					idTipoVialidad = ?,
+					nombreVialidad = ?,
+					noExterior = ?,
+					noInterior = ?,
+					idAsentamientos = ?,
+					idLocalidad = ?,
+					entreVialidades = ?,
+					descripcionUbicacion = ?
 					WHERE idBeneficiario = ?";
 	
 			$this->pdo->prepare($sql)
 					->execute(
 					array(
-						$data->nombres, 
+						$data->idTipoVialidad, 
+						$data->nombreVialidad,
+						$data->noExterior,
+						$data->noInterior,
+						$data->idAsentamientos,
+						$data->idLocalidad,
+						$data->entreVialidades,
+						$data->descripcionUbicacion,
 						$data->idBeneficiario
 						)
 					);
@@ -236,7 +250,7 @@ class Beneficiario
 			
 			$sql = "INSERT INTO beneficiarios (curp,primerApellido,segundoApellido,nombres,idIdentificacion,
 					idNivelEstudios,idSeguridadSocial,
-					idDiscapacidad) values (?,?,?,?,?,?,?,?)";
+					idDiscapacidad,beneficiarioColectivo) values (?,?,?,?,?,?,?,?,?)";
 
 			$this->pdo->prepare($sql)
 			->execute(
@@ -248,7 +262,8 @@ class Beneficiario
 					$data->idIdentificacion,
 					$data->idNivelEstudios,
 					$data->idSeguridadSocial,
-					$data->idDiscapacidad
+					$data->idDiscapacidad,
+					$data->beneficiarioColectivo
 				)
 			);
 		} catch (Exception $e) 

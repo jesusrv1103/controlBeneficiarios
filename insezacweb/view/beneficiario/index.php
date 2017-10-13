@@ -77,13 +77,13 @@ if(isset($mensaje))
                  <th><?php echo $r->nombres; ?></th>
                  <th><?php echo $r->nomTipoI;?></th>
                  <td class="center">
-                  <a class="btn btn-primary"  role="button" href="?c=Programa&a=Crud&idPrograma=<?php echo $r->idPrograma; ?>"><i class="fa fa-edit"></i>Editar</a>
+                  <a class="btn btn-primary"  role="button" href="?c=Beneficiario&a=Crud&idBenenficiario=<?php echo $r->idBenenficiario; ?>"><i class="fa fa-edit"></i>Editar</a>
                 </td>
                 <td class="center">
                  <a onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="?c=Beneficiario&a=Eliminar&id=<?php echo $r->idBenenficiario; ?>"><i class="fa fa-eraser"></i>Eliminar</a>
                </td>
                <td class="center">
-                <a class="btn btn-info"  role="button" href="?c=Programa&a=Crud&idPrograma=<?php echo $r->idPrograma; ?>"><i class="fa fa-eye"></i>Ver</a>
+                <a class="btn btn-info"  role="button" href="?c=Beneficiario&a=Crud&idBenenficiario=<?php echo $r->idBenenficiario; ?>"><i class="fa fa-eye"></i>Ver</a>
               </td>
                </tr>
               <?php endforeach; ?>
@@ -135,7 +135,7 @@ if(isset($mensaje))
          <div class="row col-md-5 col-md-offset-7">
            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
            <button type="submit" class="btn btn-primary">Guardar</button>
-        
+
          </div>
        </div>
      </form>
