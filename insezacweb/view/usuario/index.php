@@ -81,7 +81,7 @@ if(isset($mensaje))
                   <a href="index.php?c=Usuario&a=Crud&idUsuario=<?php echo $r->idUsuario; ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>
                 </td>
                 <td class="center">
-                 <a class="btn btn-danger" role="button" href="?c=Usuario&a=Borrar&idUsuario=<?php echo $r->idUsuario; ?>"><i class="fa fa-eraser"></i></a>
+                 <a class="btn btn-danger" role="button" href="?c=Usuario&a=Eliminar&idUsuario=<?php echo $r->idUsuario; ?>"><i class="fa fa-eraser"></i></a>
                </td>
              </tr>
            <?php endforeach; ?>
