@@ -40,6 +40,17 @@ public function Guardar(){
    $beneficiario->idNivelEstudios = $_REQUEST['idNivelEstudios'];
   $beneficiario->idSeguridadSocial = $_REQUEST['idSeguridadSocial'];
   $beneficiario->idDiscapacidad = $_REQUEST['idDiscapacidad'];
+  $beneficiario->beneficiarioColectivo=$_REQUEST['beneficiarioColectivo'];
+  //vialidad
+  $beneficiario->idTipoVialidad = $_REQUEST['idTipoVialidad'];
+  $beneficiario->nombreVialidad = $_REQUEST['nombreVialidad'];
+ $beneficiario->noExterior = $_REQUEST['noExterior'];
+ $beneficiario->noInterior = $_REQUEST['noInterior'];
+ $beneficiario->idAsentamientos = $_REQUEST['idAsentamientos'];
+ $beneficiario->idLocalidad = $_REQUEST['idLocalidad'];
+ $beneficiario->entreVialidades = $_REQUEST['entreVialidades'];
+ $beneficiario->descripcionUbicacion = $_REQUEST['descripcionUbicacion'];
+
   $beneficiario->idBeneficiario > 0 
     ? $this->model->Actualizar($beneficiario)
     : $this->model->Registrar($beneficiario);
@@ -121,3 +132,39 @@ public function Importar($archivo){
 }
 
 }
+/*
+public $pdo;
+  public $idBeneficiario;
+  public $curp;
+  public $primerApellido;
+  public $segundoApellido;
+  public $nombres;
+  public $idIdentificacion;
+  public $idTipoVialidad;
+  public $nombreVialidad;
+  public $noExterior;
+  public $noInterior;
+  public $idAsentamientos;
+  public $idLocalidad;
+  public $entreVialidades;
+  public $descripcionUbicacion;
+  public $estudioSocioeconomico;
+  public $idEstadoCivil;
+  public $jefeFamilia;
+  public $idOcupacion;
+  public $idIngresoMensual;
+  public $integrantesFamilia;
+  public $dependientesEconomicos;
+  public $idVivienda;
+  public $noHabitantes;
+  public $viviendaElectricidad;
+  public $viviendaAgua;
+  public $viviendaDrenaje;
+  public $viviendaGas;
+  public $viviendaTelefono;
+  public $viviendaInternet;
+  public $idNivelEstudios;
+  public $idSeguridadSocial;
+  public $idDiscapacidad;
+  public $idGrupoVulnerable;
+  public $beneficiarioColectivo;*/

@@ -136,6 +136,8 @@
 
 
 
+ select b.idBeneficiario, b.curp, b.primerApellido,  b.segundoApellido, b.nombres,  idIdentificacion , idTipoVialidad, b.nombreVialidad, b.noExterior, b.noInterior, idAsentamiento, idLocalidad,b.entreVialidades, b.descripcionUbicacion, nE.nivelEstudios,  idSeguridadSocial, idDiscapacidad  from  beneficiarios  b;
+
 
 
 
