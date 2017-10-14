@@ -32,16 +32,11 @@ body{
   
       <div class="login_content">
         <div class="panel-heading border login_heading">INICIAR SESIÓN</div>	
-        <?php
-        if(isset($error))
-        {
-          ?>
+        <?php if(isset($error)){ ?>
           <div class="alert alert-danger">
-            <i class="glyphicon glyphicon-warning-sign"></i><?php echo $error?>
+            <i class="fa fa-warning"></i><?php echo $error?>
           </div>
-          <?php
-        }
-        ?>
+          <?php } ?>
         <form role="form" action="?c=Login&a=Acceder" class="form-horizontal" method="post">
           <div class="form-group">
             <div class="col-sm-10">

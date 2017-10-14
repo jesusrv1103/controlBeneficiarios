@@ -33,23 +33,25 @@
 						</div>		
 					</div>
 				</div>
-				<div class="row">
-					<?php if(isset($mensaje)){ if($mensaje=="success"){ ?>
+				<?php if(isset($mensaje)){ if(!isset($error)){?>
+				<div class="row" style="margin-bottom: -20px; margin-top: 20px">
 					<div class="col-md-12">
 						<div class="alert alert-success fade in">
 							<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-							<i class="fa fa-check"></i>&nbsp;Se han importado los asentamientos correctamente
+							<i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
 						</div>
-					</div> 
-					<?php }else{ ?>
+					</div>
+				</div> 
+				<?php } if(isset($error)){ ?>
+				<div class="row" style="margin-bottom: -20px; margin-top: 20px">
 					<div class="col-md-12">
 						<div class="alert alert-danger">
 							<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-							<i class="fa fa-times"></i>&nbsp;<?php echo $mensaje; ?>
+							<i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
 						</div>
 					</div>
-					<?php } } ?>
 				</div>
+				<?php } }?>
 				<div class="porlets-content">
 					<div class="table-responsive">
 						<table  class="display table table-bordered table-striped" id="dynamic-table">
@@ -61,7 +63,7 @@
 									<th>Nombre de asentamiento</th>
 									<th>Tipo de asentamiento</th>
 									<th>Editar</th>
-									<th>Borrar</th>
+									<th>Eliminar</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -89,7 +91,7 @@
 									<th>Nombre de asentamiento</th>
 									<th>Tipo de asentamiento</th>
 									<th>Editar</th>
-									<th>Borrar</th>
+									<th>Eliminar</th>
 								</tr>
 							</tfoot>
 						</table>
@@ -134,7 +136,7 @@
 			<div class="modal-footer">
 				<div class="row col-md-5 col-md-offset-7">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-					<a href="?c=Asentamiento&a=Importar" class="btn btn-primary">Guardar</a>
+					<a href="?c=Asentamiento&a=Importar" class="btn btn-primary">Importar datos</a>
 				</div>
 			</div>
 		</div><!--/modal-content--> 

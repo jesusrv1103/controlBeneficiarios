@@ -32,24 +32,26 @@
 						</div><!--/col-md-4--> 						
 					</div><!--/block-web--> 
 				</div><!--/row--> 
-			</div><!--/header--> <br>
-			<div class="row">
-				<?php if(isset($mensaje)){ if($mensaje=="success"){ ?>
+			</div><!--/header-->
+			<?php if(isset($mensaje)){ if(!isset($error)){?>
+			<br> <div class="row">
 				<div class="col-md-12">
 					<div class="alert alert-success fade in">
 						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-						<i class="fa fa-check"></i>&nbsp;Se han importado los catálogos correctamente
+						<i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
 					</div>
-				</div> 
-				<?php }else{ ?>
+				</div>
+			</div> 
+			<?php } if(isset($error)){ ?>
+			<br> <div class="row">
 				<div class="col-md-12">
 					<div class="alert alert-danger">
 						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-						<i class="fa fa-times"></i>&nbsp;<?php echo $mensaje; ?>
+						<i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
 					</div>
 				</div>
-				<?php } } ?>
 			</div>
+			<?php } }?>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="block-web">
@@ -319,7 +321,7 @@
 								<i class="glyphicon glyphicon-plus"></i>
 								<span>Seleccionar archivo</span>
 								<!-- The file input field used as target for the file upload widget -->
-								<input id="fileupload1" class="catalogos" type="file" name="files" multiple>
+								<input id="fileupload" class="catalogos" type="file" name="files[]" multiple>
 							</span>
 							<br>
 							<br>
@@ -336,7 +338,7 @@
 			<div class="modal-footer">
 				<div class="row col-md-5 col-md-offset-7">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-					<a href="?c=Catalogos&a=Importar" class="btn btn-primary">Guardar</a>
+					<a href="?c=Catalogos&a=Importar" class="btn btn-primary">Importar datos</a>
 				</div>
 			</div>
 		</div><!--/modal-content--> 

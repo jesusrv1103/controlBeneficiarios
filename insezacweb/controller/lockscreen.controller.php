@@ -9,7 +9,7 @@ class LockscreenController{
 
 	public function Index(){
 		if(isset($_REQUEST['idUsuario'])){
-		$idUsuario=$_REQUEST['idUsuario'];
+			$idUsuario=$_REQUEST['idUsuario'];
 		}	
 		$c=$_REQUEST['c'];
 		$a=$_REQUEST['a'];
@@ -20,7 +20,7 @@ class LockscreenController{
 		$log = new Login();
 		$c=$_REQUEST['ct'];
 		$a=$_REQUEST['at'];
-		$usuario=$log->usuario = $_REQUEST['usuario'];
+		$usuario=$log->usuario = $_SESSION['user_session'];
 		$password = $_REQUEST['password'];
 		$password=md5($password);
 		$password=crc32($password);
@@ -30,16 +30,16 @@ class LockscreenController{
 		if($consulta!=null){
 			if($consulta->password == $password && $consulta->tipoUsuario==1){
 				if(isset($_REQUEST['idUsuario'])){
-				$idUsuario=$_REQUEST['idUsuario'];
-				echo 	
-				"<script type='text/javascript'>
-				window.location='index.php?acceso=true&c=$c&a=$a&idUsuario=$idUsuario';
-				</script>";
+					$idUsuario=$_REQUEST['idUsuario'];
+					echo 	
+					"<script type='text/javascript'>
+					window.location='index.php?acceso=true&c=$c&a=$a&idUsuario=$idUsuario';
+					</script>";
 				}else{
 					echo 	
-				"<script type='text/javascript'>
-				window.location='index.php?acceso=true&c=$c&a=$a';
-				</script>";
+					"<script type='text/javascript'>
+					window.location='index.php?acceso=true&c=$c&a=$a';
+					</script>";
 				}
 			}else{
 				$error="  Acceso incorrecto";

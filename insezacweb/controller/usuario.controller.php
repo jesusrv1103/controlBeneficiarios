@@ -31,41 +31,44 @@ class UsuarioController{
 
 	public function Guardar(){
 		$usuario= new Usuario();
-		$usuario->password = $_REQUEST['password'];
-		$password2 = $_REQUEST['password2'];
-		if ($usuario->password!=$password2) {
-			$error=true;
-			$mensaje="Las contraseñas no coinciden";
-			$page="view/usuario/usuario.php";
-		}else{
-			$usuario->idUsuario = $_REQUEST['idUsuario'];
-			$usuario->usuario = $_REQUEST['usuario'];
-			$usuario->direccion = $_REQUEST['direccion'];
-			$usuario->tipoUsuario = $_REQUEST['tipoUsuario'];
-			if($usuario->idUsuario > 0)
+		$usuario->idUsuario = $_REQUEST['idUsuario'];
+		$usuario->usuario = $_REQUEST['usuario'];
+		$usuario->direccion = $_REQUEST['direccion'];
+		$usuario->tipoUsuario = $_REQUEST['tipoUsuario'];
+		$password =$_REQUEST['password']; 
+		$password=md5($password);
+   		$password=crc32($password);
+   		$password=crypt($password,"xtem");
+   		$password=sha1($password);
+		$usuario->password=$password;   		
+		if($usuario->idUsuario > 0){
 			$this->model->Actualizar($usuario);
-			else{
+			$mensaje="Se han actualizado correctamente los datos del usuario";
+		}else{
 			$this->model->Registrar($usuario);
 			$this->model->RegistrarInDB($usuario);
-		}
-		 $mensaje="Se han actualizado correctamente del usuario "
-		 $administracion=true; //variable cargada para activar la opcion administracion en el menu
-		 $usuarios=true; //variable cargada para activar la opcion usuarios en el menu
-		 $page="view/usuario/index.php";
-		 require_once 'view/index.php';
+			$mensaje="Se ha registrado correctamente el usuario";
+		}		 
+		$administracion=true; //variable cargada para activar la opcion administracion en el menu
+		$usuarios=true; //variable cargada para activar la opcion usuarios en el menu
+		$page="view/usuario/index.php";
+		require_once 'view/index.php';
+		
 	}
-}
-//Metodo  para eliminar
+	//Metodo  para eliminar
 	public function Eliminar(){
 		if(isset($_REQUEST['acceso'])){
-	    $administracion=true; //variable cargada para activar la opcion administracion en el menu
-	    $usuarios=true; //variable cargada para activar la opcion usuarios en el menu
-	    $this->model->Eliminar($_REQUEST['idUsuario']);
-	    header ('Location: index.php?c=Usuario&a=Index');
-	}else{
-		$this->Lockscreen();
+		    $this->model->Eliminar($_REQUEST['idUsuario']);
+		    $administracion=true; //variable cargada para activar la opcion administracion en el menu
+			$usuarios=true; //variable cargada para activar la opcion usuarios en el menu
+		 	$page="view/usuario/index.php";
+		 	$mensaje="Se ha eliminado correctamente el usuario";
+		 	require_once 'view/index.php';
+		}else{
+			$this->Lockscreen();
+		}
 	}
-}
+	//Metodo para acceso de administrador
 	public function Lockscreen(){
 		$c=$_REQUEST['c'];
 		$a=$_REQUEST['a'];
