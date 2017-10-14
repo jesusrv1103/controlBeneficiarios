@@ -99,6 +99,8 @@ class LocalidadController{
       $mensaje="success";
       $page="view/asentamiento/index.php";
       require_once 'view/index.php';*/
+    }else{
+      echo "No se selecciono localidad";
     }
   }
 }
