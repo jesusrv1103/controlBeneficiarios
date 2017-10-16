@@ -37,7 +37,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">Usuario<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
-              <input name="usuario" type="text" class="form-control" required value="<?php echo $usuario->idUsuario != null ? $usuario->usuario : "";  ?>" placeholder="Ingrese el nombre de usuario" <?php if($usuario->idUsuario != null){ ?> disabled<?php } ?> autofocus/>
+              <input name="usuario" type="text" class="form-control" required value="<?php echo $usuario->idUsuario != null ? $usuario->usuario : "";  ?>" placeholder="Ingrese el nombre de usuario" <?php if($usuario->idUsuario != null){ ?>  <?php } ?> autofocus/>
             </div>
           </div><!--/form-group-->
           <div class="form-group">

@@ -83,7 +83,10 @@ class Usuario
 			);
 		} catch (Exception $e) 
 		{
-			die($e->getMessage());
+			$error=true;
+			$mensaje="Error al actualizar el usuario";
+			$page="view/usuario/index.php";
+			require_once "view/index.php";
 		}
 	}
 	public function Registrar(Usuario $data)
