@@ -18,16 +18,18 @@
 					<div class="row" style="margin-top: 15px; margin-bottom: 12px;">
 						<div class="col-sm-7">
 							<div class="actions"> </div>
-							<h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Localidades</b></h2>
+							<h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Localidades</h2>
 						</div>
 						<div class="col-md-5">
 							<div class="btn-group pull-right">
-								<b>
+								<b> 
+									<?php if($_SESSION['user_type']==1){?>
 									<div class="btn-group" style="margin-right: 10px;"> 
 										<a class="btn btn-sm btn-success" href="?c=Localidad&a=Crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title=""> <i class="fa fa-plus"></i> Registrar localidad </a>
 										<a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="left" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
 										<a href="assets/files/localidades.xlsx" download="localidades.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
 									</div>
+									<?php } ?>
 								</b>
 							</div>
 						</div>		
@@ -61,8 +63,10 @@
 									<th>Municipio</th>
 									<th>Localidad</th>
 									<th>Ámbito</th>
+									<?php if($_SESSION['user_type']==1){?>
 									<th>Editar</th>
-									<th>Borrar</th>
+									<th>Borrar</th> 
+									<?php } ?>
 								</tr>
 							</thead>
 							<tbody>
@@ -72,13 +76,14 @@
 										<td><?php echo $r->municipio; ?></td>
 										<td><?php echo $r->localidad; ?></td>
 										<td><?php echo $r->ambito; ?></td>
+										<?php if($_SESSION['user_type']==1){?>
 										<td class="center">
 											<a href="index.php?c=Localidad&a=Crud&idLocalidad=<?php echo $r->idLocalidad ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>
 										</td>
 										<td class="center">
-											<!--a class="btn btn-danger" role="button" href="?c=Localidad&a=Borrar&idLocalidad=<?php// echo $r->idLocalidad; ?>"><i class="fa fa-eraser"></i></a-->
 											<a onclick="eliminarLocalidad(<?php echo $r->idLocalidad;?>);" class="btn btn-danger" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
 										</td>
+										<?php } ?>
 									</tr>
 								<?php endforeach; ?>
 							</tbody>
@@ -88,8 +93,10 @@
 									<th>Municipio</th>
 									<th>Localidad</th>
 									<th>Ámbito</th>
+									<?php if($_SESSION['user_type']==1){?>
 									<th>Editar</th>
-									<th>Borrar</th>
+									<th>Borrar</th> 
+									<?php } ?>
 								</tr>
 							</tfoot>
 						</table>

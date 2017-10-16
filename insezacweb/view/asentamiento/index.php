@@ -18,16 +18,18 @@
 					<div class="row" style="margin-top: 15px; margin-bottom: 12px;">
 						<div class="col-sm-7">
 							<div class="actions"> </div>
-							<h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Asentamientos</b></h2>
+							<h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Asentamientos</h2>
 						</div>
 						<div class="col-md-5">
 							<div class="btn-group pull-right">
 								<b>
+									<?php if($_SESSION['user_type']==1){?>
 									<div class="btn-group" style="margin-right: 10px;"> 
 										<a class="btn btn-sm btn-success" href="?c=Asentamiento&a=Crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title=""> <i class="fa fa-plus"></i> Registrar asentamiento </a>
 										<a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="left" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
 										<a href="assets/files/asentamientos.xlsx" download="asentamientos.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
 									</div>
+									<?php } ?>
 								</b>
 							</div>
 						</div>		
@@ -62,8 +64,10 @@
 									<th>Localidad</th>
 									<th>Nombre de asentamiento</th>
 									<th>Tipo de asentamiento</th>
+									<?php if($_SESSION['user_type']==1){?>
 									<th>Editar</th>
-									<th>Eliminar</th>
+									<th>Eliminar</th> 
+									<?php } ?>
 								</tr>
 							</thead>
 							<tbody>
@@ -74,12 +78,14 @@
 										<td><?php echo $r->localidad; ?></td>
 										<td><?php echo $r->nombreAsentamiento; ?></td>
 										<td><?php echo $r->tipoAsentamiento; ?></td>
+										<?php if($_SESSION['user_type']==1){?>
 										<td class="center">
 											<a href="index.php?c=Asentamiento&a=Crud&idAsentamientos=<?php echo $r->idAsentamientos ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>
 										</td>
 										<td class="center">
 											<a onclick="eliminarAsentamiento(<?php echo $r->idAsentamientos;?>);" class="btn btn-danger" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
 										</td>
+										<?php } ?>
 									</tr>
 								<?php endforeach; ?>
 							</tbody>
@@ -90,8 +96,10 @@
 									<th>Localidad</th>
 									<th>Nombre de asentamiento</th>
 									<th>Tipo de asentamiento</th>
+									<?php if($_SESSION['user_type']==1){?>
 									<th>Editar</th>
-									<th>Eliminar</th>
+									<th>Eliminar</th> 
+									<?php } ?>
 								</tr>
 							</tfoot>
 						</table>

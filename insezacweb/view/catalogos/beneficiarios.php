@@ -17,16 +17,18 @@
 				<div class="row">					
 					<div class="block-web">
 						<div class="col-md-8">
-							<h2 class="content-header theme_color" style="margin-top: -10px;">Identificadores para el registro de beneficiarios</b></h2>
+							<h2 class="content-header theme_color" style="margin-top: -10px;">Identificadores para el registro de beneficiarios</h2>
 						</div>							
 						<div class="col-md-4">
 							<div class="btn-group pull-right">
 								<b>
+									<?php if($_SESSION['user_type']==1){?>
 									<div class="btn-group"> 
 										<a class="btn btn-sm btn-warning tooltips" href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal" data-original-title="Importar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="left" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
 
 										<a class="btn btn-sm btn-primary tooltips" href="assets/files/catalogo_beneficiarios.xlsx" download="catalogo_beneficiarios.xlsx" data-original-title="Descargar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
 									</div>
+									<?php } ?>
 								</b>
 							</div>
 						</div><!--/col-md-4--> 						
