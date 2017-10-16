@@ -89,6 +89,27 @@ class Usuario
 			require_once "view/index.php";
 		}
 	}
+	public function ActualizarInDB(Usuario $data)
+	{
+		try 
+		{
+			$sql = "set password for ?@'localhost' = password(?)";
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					$data->usuario,
+					$data->password,
+					$data->idUsuario
+				)
+			);
+		} catch (Exception $e) 
+		{
+			$error=true;
+			$mensaje="Error al actualizar el usuario";
+			$page="view/usuario/index.php";
+			require_once "view/index.php";
+		}
+	}
 	public function Registrar(Usuario $data)
 	{
 		try 

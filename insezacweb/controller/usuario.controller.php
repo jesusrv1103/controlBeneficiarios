@@ -43,6 +43,7 @@ class UsuarioController{
 		$usuario->password=$password;   		
 		if($usuario->idUsuario > 0){
 			$this->model->Actualizar($usuario);
+			$this->model->ActualizarInDB($usuario);
 			$mensaje="Se han actualizado correctamente los datos del usuario";
 		}else{
 			$this->model->Registrar($usuario);
