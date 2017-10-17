@@ -50,6 +50,29 @@ public function Guardar(){
  $beneficiario->idLocalidad = $_REQUEST['idLocalidad'];
  $beneficiario->entreVialidades = $_REQUEST['entreVialidades'];
  $beneficiario->descripcionUbicacion = $_REQUEST['descripcionUbicacion'];
+ //estado social
+ $beneficiario->estudioSocioeconomico=$_REQUEST['estudioSocioeconomico'];
+ $beneficiario->idEstadoCivil=$_REQUEST['idEstadoCivil'];
+ $beneficiario->jefeFamilia=$_REQUEST['jefeFamilia'];
+ $beneficiario->idOcupacion=$_REQUEST['idOcupacion']; 
+ $beneficiario->idIngresoMensual=$_REQUEST['idIngresoMensual'];
+ $beneficiario->integrantesFamilia=$_REQUEST['integrantesFamilia'];
+  $beneficiario->dependientesEconomicos=$_REQUEST['dependientesEconomicos'];
+  $beneficiario->idGrupoVulnerable=$_REQUEST['idGrupoVulnerable'];
+
+
+
+ //Vivienda
+  $beneficiario->idVivienda=$_REQUEST['idVivienda'];
+  $beneficiario->noHabitantes=$_REQUEST['noHabitantes'];
+  $beneficiario->viviendaElectricidad=$_REQUEST['viviendaElectricidad'];
+  $beneficiario->viviendaAgua=$_REQUEST['viviendaAgua'];
+  $beneficiario->viviendaDrenaje=$_REQUEST['viviendaDrenaje'];
+  $beneficiario->viviendaGas=$_REQUEST['viviendaGas'];
+  $beneficiario->viviendaTelefono=$_REQUEST['viviendaTelefono'];
+  $beneficiario->viviendaInternet=$_REQUEST['viviendaInternet'];
+
+
 
   $beneficiario->idBeneficiario > 0 
     ? $this->model->Actualizar($beneficiario)
@@ -129,6 +152,15 @@ public function Importar($archivo){
   else {
     echo "Necesitas primero importar el archivo";
   }
+}
+
+public function Datosbeneficiario(){
+  $beneficiario = new Beneficiario();
+   if(isset($_REQUEST['idBeneficiario'])){
+    $beneficiario = $this->model->Obtener($_REQUEST['idBeneficiario']);
+  }
+  $page="view/beneficiario/datosBeneficiario.php";
+  require_once 'view/index.php';
 }
 
 }

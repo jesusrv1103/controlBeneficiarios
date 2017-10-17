@@ -27,7 +27,7 @@
 									<div class="btn-group" style="margin-right: 10px;"> 
 										<a class="btn btn-sm btn-success" href="?c=Asentamiento&a=Crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title=""> <i class="fa fa-plus"></i> Registrar asentamiento </a>
 										<a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="left" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
-										<a href="assets/files/asentamientos.xlsx" download="asentamientos.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
+										<a href="assets/files/asentamientos.xlsx" download="asentamientos.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar ejemplo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
 									</div>
 									<?php } ?>
 								</b>
@@ -65,8 +65,8 @@
 									<th>Nombre de asentamiento</th>
 									<th>Tipo de asentamiento</th>
 									<?php if($_SESSION['user_type']==1){?>
-									<th>Editar</th>
-									<th>Eliminar</th> 
+									<td><center><b>Editar</b></center></td>
+									<td><center><b>Eliminar</b></center></td>	
 									<?php } ?>
 								</tr>
 							</thead>
@@ -97,8 +97,8 @@
 									<th>Nombre de asentamiento</th>
 									<th>Tipo de asentamiento</th>
 									<?php if($_SESSION['user_type']==1){?>
-									<th>Editar</th>
-									<th>Eliminar</th> 
+									<td><center><b>Editar</b></center></td>
+									<td><center><b>Eliminar</b></center></td>	
 									<?php } ?>
 								</tr>
 							</tfoot>
@@ -109,7 +109,6 @@
 		</div><!--/col-md-12-->
 	</div><!--/row-->
 </div>
-
 <div class="modal fade" id="modalImportar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -121,7 +120,7 @@
 						</div>
 						<div class="porlets-content" style="margin-bottom: -65px;">
 							<p>Importa tu archivo excel con los datos de los asentamientos en caso de que haya algun cambio, si no tienes el archivo puedes descargarlo y agregar o eliminar los datos necesarios.</p>
-							<p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">asentamientos.xmls</strong> para poder ser leído correctamente</p>	
+							<p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">asentamientos.xmls</strong> para poder ser leído correctamente.</p>	
 							<br>
 							<span class="btn btn-success fileinput-button">
 								<i class="glyphicon glyphicon-plus"></i>

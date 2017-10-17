@@ -150,17 +150,18 @@
                     <div class="user-profile-content">
                         <h5><strong>Vialidad</strong></h5>
                       <form id="frm-beneficiario" action="?c=Beneficiario&a=Guardar" method="post" role="form" enctype="multipart/form-data">
-                         <input type="hidden" name="idBeneficiario" value="10" />
+                         <input type="hidden" name="idBeneficiario" value="14" />
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Vialidad</label>
                           <div class="col-sm-6">
-                          <?php foreach($this->model2->Listar('tipoVialidad') as $r): ?>
                             <select name="idTipoVialidad" class="form-control" >
+                              <?php foreach($this->model2->Listar('tipoVialidad') as $r): ?>
                               <option value="<?php echo $r->idTipoVialidad; ?>"> 
                                 <?php echo $r->tipoVialidad; ?>
                               </option>
+                              <?php endforeach; ?>
                             </select>
-                          <?php endforeach; ?>
+                          
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
@@ -184,25 +185,26 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Asentamineto</label>
                           <div class="col-sm-6">
-                           <?php foreach($this->model2->Listar('asentamientos') as $r): ?>
                             <select name="idAsentamientos" class="form-control" >
+                              <?php foreach($this->model2->Listar('asentamientos') as $r): ?>
                               <option value="<?php echo $r->idAsentamientos; ?>"> 
                                 <?php echo $r->nombreAsentamiento; ?>
                               </option>
+                              <?php endforeach; ?>
                             </select>
-                          <?php endforeach; ?>
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Localidad</label>
                           <div class="col-sm-6">
-                           <?php foreach($this->model2->Listar('localidades') as $r): ?>
                             <select name="idLocalidad" class="form-control" >
+                            <?php foreach($this->model2->Listar('localidades') as $r): ?>
                               <option value="<?php echo $r->idLocalidad; ?>"> 
-                                <?php echo $r->localidad; ?>
+                                 <?php echo $r->localidad; ?>
                               </option>
+                            <?php endforeach; ?>
                             </select>
-                          <?php endforeach; ?>
+                         
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
@@ -234,13 +236,30 @@
                     <div class="user-profile-content">
                         <h5><strong>Estado Social</strong></h5>
                       <form id="frm-beneficiario" action="?c=Beneficiario&a=Guardar" method="post" role="form" enctype="multipart/form-data">
-                        <input type="hidden" name="idBeneficiario" value="10" />
+                        <input type="hidden" name="idBeneficiario" value="14" />
                          <div class="form-group">
                          <label class="col-sm-3 control-label">Estudio Socioeconomico</label>
                           <div class="col-sm-9">
                             <div class="radio">
                              <label>
-                              <input type="radio" name="beneficiarioColectivo"  value="si" checked="">
+                              <input type="radio" name="jefeFamilia"  value="si" checked="">
+                               Si
+                             </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                  <input type="radio" name="jefeFamilia"  value="no">
+                                   No 
+                                </label>
+                            </div>
+                          </div>
+                        </div><!--/form-group--> 
+                        <div class="form-group">
+                         <label class="col-sm-3 control-label">Jefe de Familia</label>
+                          <div class="col-sm-9">
+                            <div class="radio">
+                             <label>
+                              <input type="radio" name="beneficiarioColec"  value="si" checked="">
                                Si
                              </label>
                             </div>
@@ -255,37 +274,37 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Estado Civil</label>
                           <div class="col-sm-6">
-                           <?php foreach($this->model2->Listar('estadoCivil') as $r): ?>
                             <select name="idEstadoCivil" class="form-control" >
+                             <?php foreach($this->model2->Listar('estadoCivil') as $r): ?>
                               <option value="<?php echo $r->idEstadoCivil; ?>"> 
                                 <?php echo $r->estadoCivil; ?>
                               </option>
-                            </select>
-                          <?php endforeach; ?>
+                            <?php endforeach; ?>
+                            </select>  
                           </div>
                         </div><!--/form-group-->
                          <div class="form-group">
                           <label class="col-sm-3 control-label">Ocupacion</label>
                           <div class="col-sm-6">
-                           <?php foreach($this->model2->Listar('ocupacion') as $r): ?>
                             <select name="idOcupacion" class="form-control" >
+                              <?php foreach($this->model2->Listar('ocupacion') as $r): ?>
                               <option value="<?php echo $r->idOcupacion; ?>"> 
                                 <?php echo $r->ocupacion; ?>
                               </option>
+                             <?php endforeach; ?>
                             </select>
-                          <?php endforeach; ?>
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Ingreso Mensual</label>
                           <div class="col-sm-6">
-                           <?php foreach($this->model2->Listar('ingresoMensual') as $r): ?>
                             <select name="idIngresoMensual" class="form-control" >
+                             <?php foreach($this->model2->Listar('ingresoMensual') as $r): ?>
                               <option value="<?php echo $r->idIngresoMensual; ?>"> 
                                 <?php echo $r->ingresoMensual; ?>
                               </option>
+                            <?php endforeach; ?>
                             </select>
-                          <?php endforeach; ?>
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
@@ -334,23 +353,58 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Tipo Vivienda</label>
                           <div class="col-sm-6">
-                           <?php foreach($this->model2->Listar('vivienda') as $r): ?>
                             <select name="idVivienda" class="form-control" >
+                              <?php foreach($this->model2->Listar('vivienda') as $r): ?>
                               <option value="<?php echo $r->idVivienda; ?>"> 
                                 <?php echo $r->vivienda; ?>
                               </option>
+                              <?php endforeach; ?>
                             </select>
-                          <?php endforeach; ?>
+                    
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
-                          <label class="col-sm-3 control-label">No Habintantes </label>
+                          <label class="col-sm-3 control-label">No Habitantes </label>
                           <div class="col-sm-6">
                             <input name="entreVialidades" type="text" class="form-control" required placeholder="Ingrese el N° de Habitantes que residen en la vivienda" />
                           </div>
                         </div><!--/form-group-->
 
-                
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Servicios vivienda</label>
+                          <div class="col-sm-9">
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" value="viviendaElectricidad">
+                                <span class="custom-checkbox"></span> Vivienda Electricidad</label>
+                            </div>
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" value="viviendaAgua">
+                                <span class="custom-checkbox"></span> Vivienda Agua </label>
+                            </div>
+                             <div class="checkbox">
+                              <label>
+                                <input type="checkbox" value="viviendaDrenaje">
+                                <span class="custom-checkbox"></span> Vivienda Drenaje</label>
+                            </div>
+                             <div class="checkbox">
+                              <label>
+                                <input type="checkbox" value="viviendaGas">
+                                <span class="custom-checkbox"></span> Vivienda Gas</label>
+                            </div>
+                             <div class="checkbox">
+                              <label>
+                                <input type="checkbox" value="viviendaTelefonos">
+                                <span class="custom-checkbox"></span> Vivienda Telefono</label>
+                            </div>
+                             <div class="checkbox">
+                              <label>
+                                <input type="checkbox" value="viviendaInternet">
+                                <span class="custom-checkbox"></span> Vivienda Internet</label>
+                            </div>
+                          </div>
+                        </div><!--/form-group-->
                         
                         <div class="form-group">
                           <div class="col-sm-offset-7 col-sm-5">
@@ -375,3 +429,42 @@
 
   </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
+
+<!--
+public $pdo;
+  public $idBeneficiario;
+  public $curp;
+  public $primerApellido;
+  public $segundoApellido;
+  public $nombres;
+  public $idIdentificacion;
+  public $idTipoVialidad;
+  public $nombreVialidad;
+  public $noExterior;
+  public $noInterior;
+  public $idAsentamientos;
+  public $idLocalidad;
+  public $entreVialidades;
+  public $descripcionUbicacion;
+  public $estudioSocioeconomico;
+  public $idEstadoCivil;
+  public $jefeFamilia;
+  public $idOcupacion;
+  public $idIngresoMensual;
+  public $integrantesFamilia;
+  public $dependientesEconomicos;
+  public $idVivienda;
+  public $noHabitantes;
+  public $viviendaElectricidad;
+  public $viviendaAgua;
+  public $viviendaDrenaje;
+  public $viviendaGas;
+  public $viviendaTelefono;
+  public $viviendaInternet;
+  public $idNivelEstudios;
+  public $idSeguridadSocial;
+  public $idDiscapacidad;
+  public $idGrupoVulnerable;
+  public $beneficiarioColectivo;
+
+-->
