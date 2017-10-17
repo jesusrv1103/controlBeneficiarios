@@ -242,6 +242,78 @@ class Beneficiario
 		}
 	}
 
+		//Metodo para actualizar
+	public function Actualizar1($data)
+	{
+		try 
+		{
+			$sql = "UPDATE beneficiarios SET 
+					estudioSocioeconomico = ?,
+					jefeFamilia = ?,
+					idEstadoCivil = ?,
+					idOcupacion = ?,
+					idIngresoMensual = ?,
+					integrantesFamilia = ?,
+					dependientesEconomicos = ?,
+					idGrupoVulnerable =?
+					WHERE idBeneficiario = ?";
+	
+			$this->pdo->prepare($sql)
+					->execute(
+					array(
+						$data->estudioSocioeconomico,
+						$data->jefeFamilia,
+						$data->idEstadoCivil,
+						$data->idOcupacion,
+						$data->idIngresoMensual,
+						$data->integrantesFamilia,
+						$data->dependientesEconomicos,
+						$data->idGrupoVulnerable,
+						$data->idBeneficiario
+						)
+					);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
+
+	public function Actualizar2($data)
+	{
+		try 
+		{
+			$sql = "UPDATE beneficiarios SET 
+					idVivienda = ?,
+					noHabitantes = ?,
+					viviendaElectricidad = ?,
+					viviendaAgua = ?,
+					viviendaDrenaje = ?,
+					viviendaGas = ?,
+					viviendaTelefono = ?,
+					viviendaInternet = ?
+					WHERE idBeneficiario = ?";
+	
+			$this->pdo->prepare($sql)
+					->execute(
+					array(
+						$data->idTipoVialidad, 
+						$data->nombreVialidad,
+						$data->noExterior,
+						$data->noInterior,
+						$data->idAsentamientos,
+						$data->idLocalidad,
+						$data->entreVialidades,
+						$data->descripcionUbicacion,
+						$data->idBeneficiario
+						)
+					);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
 
 	public function Registrar(Beneficiario $data)
 	{
