@@ -28,43 +28,51 @@ class UsuarioController{
 			$this->Lockscreen();
 		}
 	}
-
 	public function Guardar(){
 		$usuario= new Usuario();
-		$usuario->idUsuario = $_REQUEST['idUsuario'];
-		$usuario->usuario = $_REQUEST['usuario'];
-		$usuario->direccion = $_REQUEST['direccion'];
-		$usuario->tipoUsuario = $_REQUEST['tipoUsuario'];
-		$password =$_REQUEST['password']; 
-		$password=md5($password);
-   		$password=crc32($password);
-   		$password=crypt($password,"xtem");
-   		$password=sha1($password);
-		$usuario->password=$password;   		
-		if($usuario->idUsuario > 0){
-			$this->model->Actualizar($usuario);
-			$this->model->ActualizarInDB($usuario);
-			$mensaje="Se han actualizado correctamente los datos del usuario";
-		}else{
-			$this->model->Registrar($usuario);
-			$this->model->RegistrarInDB($usuario);
-			$mensaje="Se ha registrado correctamente el usuario";
-		}		 
+		$consulta=$this->model->Obtener2($usuario);
+		if($consulta==null){
+			$usuario->idUsuario = $_REQUEST['idUsuario'];
+			$usuario->usuario = $_REQUEST['usuario'];
+			$usuario->direccion = $_REQUEST['direccion'];
+			$usuario->tipoUsuario = $_REQUEST['tipoUsuario'];
+			$password =$_REQUEST['password']; 
+			$password=md5($password);
+			$password=crc32($password);
+			$password=crypt($password,"xtem");
+			$password=sha1($password);
+			$usuario->password=$password;   		
+			if($usuario->idUsuario > 0){
+				$this->model->Actualizar($usuario);
+				$this->model->ActualizarInDB($usuario,$password);
+				$mensaje="Se han actualizado correctamente los datos del usuario";
+			}else{
+				$this->model->Registrar($usuario);
+				$this->model->RegistrarInDB($usuario);
+				$mensaje="Se ha registrado correctamente el usuario";
+			}		 
 		$administracion=true; //variable cargada para activar la opcion administracion en el menu
 		$usuarios=true; //variable cargada para activar la opcion usuarios en el menu
 		$page="view/usuario/index.php";
 		require_once 'view/index.php';
-		
+	}else{
+		$error=true;
+		$mensaje="Usuario Existente";
+		$page="view/usuario/usuario.php";
+		require_once "view/index.php";
 	}
+}
+
 	//Metodo  para eliminar
-	public function Eliminar(){
-		if(isset($_REQUEST['acceso'])){
-		    $this->model->Eliminar($_REQUEST['idUsuario']);
+public function Eliminar(){
+	if(isset($_REQUEST['acceso'])){
+		$this->model->Eliminar($_REQUEST['idUsuario']);
+		$this->model->EliminarInDB($_REQUEST['idUsuario']);
 		    $administracion=true; //variable cargada para activar la opcion administracion en el menu
 			$usuarios=true; //variable cargada para activar la opcion usuarios en el menu
-		 	$page="view/usuario/index.php";
-		 	$mensaje="Se ha eliminado correctamente el usuario";
-		 	require_once 'view/index.php';
+			$page="view/usuario/index.php";
+			$mensaje="Se ha eliminado correctamente el usuario";
+			require_once 'view/index.php';
 		}else{
 			$this->Lockscreen();
 		}
