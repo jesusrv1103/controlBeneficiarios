@@ -74,7 +74,7 @@ class Localidad
 		try 
 		{
 			$stm = $this->pdo
-			->prepare("SELECT * FROM localidad WHERE idLocalidad = ?");
+			->prepare("SELECT * FROM localidades WHERE idLocalidad = ?");
 
 
 			$stm->execute(array($id));

@@ -7,7 +7,7 @@ class SubprogramaController{
     $this->model = new Subprograma();
   }
   public function Index(){
-   $administracion = true;
+   $catalogos = true;
    $inicio = false;
    $subprogramas=true;
    $page="view/subprograma/index.php";

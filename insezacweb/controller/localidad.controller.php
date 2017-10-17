@@ -56,7 +56,7 @@ class LocalidadController{
           //Obtengo el numero de filas del archivo
         $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
         $this->Localidades($objPHPExcel,$numRows);
-        $mensaje="success";
+        $mensaje="Se han importado correctamente las localidades";
         $page="view/localidad/index.php";
         $localidades=true;
         $catalogos=true;
@@ -64,7 +64,12 @@ class LocalidadController{
       }
         //si por algo no cargo el archivo bak_ 
       else {
-        echo "Necesitas primero importar el archivo";
+          $error=true;
+          $mensaje="El archivo <strong>localidades.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+          $page="view/localidad/index.php";
+          $localidades = true;
+          $catalogos=true;
+          require_once 'view/index.php';
       }
     }
 
@@ -89,6 +94,18 @@ class LocalidadController{
      $localidades=true;
      $catalogos=true;
      require_once 'view/index.php';
+    }
+  }
+    public function Eliminar(){
+    if (isset($_POST['idLocalidad'])){
+      echo $_POST['idLocalidad'];
+      /*$catalogos=true;
+      $asentamientos=true;
+      $mensaje="success";
+      $page="view/asentamiento/index.php";
+      require_once 'view/index.php';*/
+    }else{
+      echo "No se selecciono localidad";
     }
   }
 }

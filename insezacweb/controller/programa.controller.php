@@ -12,7 +12,7 @@ class ProgramaController{
   }
   //Index 
   public function Index(){
-    $administracion=true; //variable cargada para activar la opcion administracion en el menu
+    $catalogos=true; //variable cargada para activar la opcion administracion en el menu
     $programas=true; //variable cargada para activar la opcion programas en el menu
    $page="view/programa/index.php"; //Vista principal donde se enlistan los programas
    require_once 'view/index.php';

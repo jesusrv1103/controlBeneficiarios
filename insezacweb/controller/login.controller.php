@@ -19,11 +19,11 @@ class LoginController{
    $password=crc32($password);
    $password=crypt($password,"xtem");
    $password=sha1($password);
-   echo $password;
+   //echo $password;
    $consulta=$this->model->verificar($log);
    if($consulta!=null){
     if($consulta->password == $password){
-      $this->login($usuario,$password);
+      $this->login($usuario,$password,$consulta->tipoUsuario);
       header ('Location: index.php?c=Inicio');
     }else{
       $error="  La contraseña es incorrrecta";
@@ -35,10 +35,11 @@ class LoginController{
  }
 }
 
-public function login($usuario,$password)
+public function login($usuario,$password,$type)
 {
  $_SESSION['user_session'] = $usuario;
  $_SESSION['user_password'] = $password;
+ $_SESSION['user_type'] = $type;
  $_SESSION['seguridad'] = "ok";
 }
 

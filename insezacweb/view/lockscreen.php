@@ -15,8 +15,8 @@
   margin-left: 20px; 
 }
 #titulo{
-  margin-bottom: -150px;
-  margin-top: -60px;
+  margin-bottom: -180px;
+  margin-top: -70px;
 }
 </style>
 <body class="light_theme  fixed_header left_nav_fixed">
@@ -25,57 +25,38 @@
   <center><h1 style="color:white"><b>INSEZAC</b></h1></center>
 </div>
 <div class="wrapper">
-
   <!--\\\\\\\ wrapper Start \\\\\\-->
   <div class="lock_page">
     <div class="lock_content">
       <div class="lock_image"><img src="assets/images/l-image.png" alt="lock" /><h5 style="margin-top: 5px;">Acceso de administrador</h5></div>	<br><br>
-     <?php
-        if(isset($error))
-        {
-          ?>
-          <div class="alert alert-danger">
-            <i class="glyphicon glyphicon-warning-sign"></i><?php echo $error?>
-          </div>
-          <?php
-        }
-        ?>
-       
-        
+      <?php if(isset($error)){ ?>
+      <div class="alert alert-danger">
+        <i class="fa fa-warning"></i><?php echo $error?>
+      </div>
+      <?php } ?>
       <form role="form" class="form-horizontal" method="post" action="?c=Lockscreen&a=Acceso&ct=<?php echo $c;?>&at=<?php echo $a;?><?php if(isset($_REQUEST['idUsuario'])){?>&idUsuario=<?php echo $idUsuario; }?>">
         <div class="form-group">
-
           <div class="col-sm-10">
-            <input type="text" placeholder="Usuario administrador" id="inputEmail3" class="form-control" name="usuario" autocomplete="false">
-          </div>
-        </div>
-        <div class="form-group">
-
-          <div class="col-sm-10">
-            <input type="password" placeholder="Contraseña" id="inputPassword3" class="form-control" name="password" autocomplete="false">
+            <input autofocus type="password" placeholder="Contraseña" id="inputPassword3" class="form-control" name="password" autocomplete="false">
           </div>
         </div>
         <div class="form-group">
           <div class=" col-sm-10">
             <div class="checkbox checkbox_margin">
-
-              <a href="index.html">
-                <button class="btn btn-default pull-right" type="submit">
-                  <i class="fa fa-unlock-alt"></i>
-                </button>
-              </a></div>
+              <button class="btn btn-default pull-right" type="submit">
+                <i class="fa fa-unlock-alt"></i>
+              </button>
             </div>
           </div>
-
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
-  <!--\\\\\\\ wrapper end\\\\\\-->
-
-  <script src="assets/js/jquery-2.1.0.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/common-script.js"></script>
-  <script src="assets/js/jquery.slimscroll.min.js"></script>
+</div>
+<!--\\\\\\\ wrapper end\\\\\\-->
+<script src="assets/js/jquery-2.1.0.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/common-script.js"></script>
+<script src="assets/js/jquery.slimscroll.min.js"></script>
 </body>
 </html>

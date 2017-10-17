@@ -32,6 +32,12 @@ if (!isset($_SESSION['seguridad'])){
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-timepicker/compiled/timepicker.css" />
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css" />
 </head>
+<style type="text/css">
+  .disabled {
+    pointer-events:none; /*This makes it not clickable*/
+    opacity:0.6;         /*This grays it out to look disabled*/
+}
+</style>
 <body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE">
   <div class="wrapper">
     <!--\\\\\\\ wrapper Start \\\\\\-->
@@ -68,7 +74,7 @@ if (!isset($_SESSION['seguridad'])){
         <br>
         <div class="left_nav_slidebar">
           <ul>
-           <?php if (isset($inicio)){  ?>
+           <?php if (isset($inicio)){ ?>
            <li class="left_nav_active theme_border"> 
             <?php } else { ?>
             <li class="theme_border">
@@ -83,57 +89,56 @@ if (!isset($_SESSION['seguridad'])){
                   <ul>
                     <?php }  ?>
                     <li> 
-                      <a href="?c=Programa&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                        <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b> 
-                      </a> 
-                    </li>
-                    <li> 
-                      <a href="?c=Subprograma&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                       <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
+                      <a href="?c=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                       <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
                      </a> 
                    </li>
                    <li> 
-                    <a href="?c=Apoyos&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                     <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+                    <a href="?c=Beneficiario"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                     <?php if (isset($beneficiarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>
                    </a> 
                  </li>
                  <li> 
-                  <a href="?c=Beneficiario&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                   <?php if (isset($beneficiarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>
+                  <a href="?c=Usuario" <?php if($_SESSION['user_type']!=1){?> class="disabled" <?php } ?>> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                   <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
+                 </a> 
+               </li>
+             </ul>
+           </li>
+           <?php if(isset($catalogos)){ ?>
+           <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catalogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+            <ul class="opened" style="display:block">
+              <?php  }else{ ?>
+              <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catalogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+                <ul>
+                  <?php }  ?>
+                  <li> 
+                    <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                      <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>                 </a> 
+                 </li>
+                 <li> 
+                  <a href="?c=Localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                   <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
                  </a> 
                </li>
                <li> 
-                <a href="?c=Usuario&a=Index"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                 <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
-               </a> 
-             </li>
-           </ul>
-         </li>
-         <?php if(isset($catalogos)){ ?>
-         <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catalogos <span class="plus"><i class="fa fa-plus"></i></span></a>
-          <ul class="opened" style="display:block">
-            <?php  }else{ ?>
-            <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catalogos <span class="plus"><i class="fa fa-plus"></i></span></a>
-              <ul>
-                <?php }  ?>
-                <li> 
-                  <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                   <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>
-                 </a> 
-               </li>
-               <li> 
-                <a href="?c=Localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                 <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
+                <a href="?c=Asentamiento"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                 <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Asentamientos</b>
                </a> 
              </li>
              <li> 
-              <a href="?c=Asentamiento"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-               <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Asentamientos</b>
+              <a href="?c=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+               <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
              </a> 
            </li>
            <li> 
-            <a href="?c=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-             <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+            <a href="?c=Programa"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+              <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b> 
+            </a> 
+          </li>
+          <li> 
+            <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+             <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
            </a> 
          </li>
        </ul>
@@ -171,6 +176,7 @@ if (!isset($_SESSION['seguridad'])){
 <script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script> 
 <script type="text/javascript"  src="assets/plugins/dropzone/dropzone.min.js"></script> 
 <script type="text/javascript" src="assets/plugins/ckeditor/ckeditor.js"></script>
+<script src="assets/js/jPushMenu.js"></script> 
 <script src="assets/plugins/validation/parsley.min.js"></script>
 <script src="assets/plugins/data-tables/jquery.dataTables.js"></script>
 <script src="assets/plugins/data-tables/DT_bootstrap.js"></script>
@@ -179,7 +185,7 @@ if (!isset($_SESSION['seguridad'])){
 <script src="assets/plugins/file-uploader/js/vendor/jquery.ui.widget.js"></script>
 <script src="assets/plugins/file-uploader/js/jquery.iframe-transport.js"></script>
 <script src="assets/plugins/file-uploader/js/jquery.fileupload.js"></script>
-
+<script src="assets/plugins/validation/parsley.min.js"></script>
 <script>
   /*==Porlets Actions==*/
   $(document).on('ready', function() {
@@ -193,7 +199,7 @@ if (!isset($_SESSION['seguridad'])){
         $.each(data.result.files, function (index, file) {
           $('<p/>').text(file.name).appendTo('#files');
         }); 
-       },
+      },
       progressall: function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
         $('#progress .progress-bar').css(
@@ -278,7 +284,5 @@ if (!isset($_SESSION['seguridad'])){
     e.preventDefault();
   });
 </script>
-<!-- The template to display files available for upload -->
-<script src="assets/js/jPushMenu.js"></script> 
 </body>
 </html>

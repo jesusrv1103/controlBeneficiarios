@@ -36,15 +36,15 @@ class AsentamientoController{
 	}
 
 	public function Crud(){
-      $asentamiento = new Asentamiento();
-      if(isset($_REQUEST['idAsentamientos'])){
-        $asentamiento = $this->model->Obtener($_REQUEST['idAsentamientos']);
-      }
-      $catalogos=true;
-      $asentamientos=true;
-      $page="view/asentamiento/asentamiento.php";
-      require_once 'view/index.php';
-    }
+		$asentamiento = new Asentamiento();
+		if(isset($_REQUEST['idAsentamientos'])){
+			$asentamiento = $this->model->Obtener($_REQUEST['idAsentamientos']);
+		}
+		$catalogos=true;
+		$asentamientos=true;
+		$page="view/asentamiento/asentamiento.php";
+		require_once 'view/index.php';
+	}
 
 	public function Importar(){
 		if (file_exists("./assets/files/asentamientos.xlsx")) {
@@ -59,7 +59,7 @@ class AsentamientoController{
   			//Obtengo el numero de filas del archivo
 			$numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
 			$this->Asentamientos($objPHPExcel,$numRows);
-			$mensaje="success";
+			$mensaje="Se han importado correctamente los asentamientos";
 			$page="view/asentamiento/index.php";
 			$asentamientos = true;
 			$catalogos=true;
@@ -67,7 +67,12 @@ class AsentamientoController{
 		}
         //si por algo no cargo el archivo bak_ 
 		else {
-			echo "Necesitas primero importar el archivo";
+			$error=true;
+			$mensaje="El archivo <strong>asentamientos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+			$page="view/asentamiento/index.php";
+			$asentamientos = true;
+			$catalogos=true;
+			require_once 'view/index.php';
 		}
 	}
 
@@ -97,4 +102,16 @@ class AsentamientoController{
 			require_once 'view/index.php';
 		}
 	}
+
+	public function Eliminar(){
+		if (isset($_POST['idAsentamientos'])){
+			//echo $_POST['idAsentamientos'];
+			$catalogos=true;
+			$asentamientos=true;
+			$mensaje="success";
+			$page="view/asentamiento/index.php";
+			require_once 'view/index.php';
+		}
+	}
+
 }

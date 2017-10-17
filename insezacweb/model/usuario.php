@@ -83,7 +83,31 @@ class Usuario
 			);
 		} catch (Exception $e) 
 		{
-			die($e->getMessage());
+			$error=true;
+			$mensaje="Error al actualizar el usuario";
+			$page="view/usuario/index.php";
+			require_once "view/index.php";
+		}
+	}
+	public function ActualizarInDB(Usuario $data)
+	{
+		try 
+		{
+			$sql = "set password for ?@'localhost' = password(?)";
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					$data->usuario,
+					$data->password,
+					$data->idUsuario
+				)
+			);
+		} catch (Exception $e) 
+		{
+			$error=true;
+			$mensaje="Error al actualizar el usuario";
+			$page="view/usuario/index.php";
+			require_once "view/index.php";
 		}
 	}
 	public function Registrar(Usuario $data)
@@ -101,6 +125,25 @@ class Usuario
 					$data->password,
 					$data->direccion,
 					$data->tipoUsuario
+				)
+			);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function RegistrarInDB(Usuario $data)
+	{
+		try 
+		{
+			$sql = "grant all privileges on *.* to ?@'localhost' identified by ? with grant option";
+
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					
+					$data->usuario, 
+					$data->password,	
 				)
 			);
 		} catch (Exception $e) 
