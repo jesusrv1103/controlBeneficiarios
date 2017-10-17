@@ -37,7 +37,7 @@ body{
             <i class="fa fa-warning"></i><?php echo $error?>
           </div>
           <?php } ?>
-        <form role="form" action="?c=Login&a=Acceder" class="form-horizontal" method="post">
+        <form role="form" action="index.php?c=Login&a=Acceder" class="form-horizontal" method="post">
           <div class="form-group">
             <div class="col-sm-10">
               <input type="text" placeholder="Usuario" name="usuario" id="inputEmail3" class="form-control">

@@ -29,7 +29,6 @@ if(isset($mensaje))
  <?php
 }
 ?>
-
 <div class="container clear_both padding_fix">
  <div class="row">
    <div class="col-md-12">
