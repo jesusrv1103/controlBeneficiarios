@@ -154,6 +154,15 @@ public function Importar($archivo){
   }
 }
 
+public function Datosbeneficiario(){
+  $beneficiario = new Beneficiario();
+   if(isset($_REQUEST['idBeneficiario'])){
+    $beneficiario = $this->model->Obtener($_REQUEST['idBeneficiario']);
+  }
+  $page="view/beneficiario/datosBeneficiario.php";
+  require_once 'view/index.php';
+}
+
 }
 /*
 public $pdo;

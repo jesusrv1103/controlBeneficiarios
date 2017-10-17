@@ -64,8 +64,8 @@
 									<th>Localidad</th>
 									<th>Ámbito</th>
 									<?php if($_SESSION['user_type']==1){?>
-									<th>Editar</th>
-									<th>Borrar</th> 
+									<td><center><b>Editar</b></center></td>
+									<td><center><b>Eliminar</b></center></td>						
 									<?php } ?>
 								</tr>
 							</thead>
@@ -94,8 +94,8 @@
 									<th>Localidad</th>
 									<th>Ámbito</th>
 									<?php if($_SESSION['user_type']==1){?>
-									<th>Editar</th>
-									<th>Borrar</th> 
+									<td><center><b>Editar</b></center></td>
+									<td><center><b>Eliminar</b></center></td>	
 									<?php } ?>
 								</tr>
 							</tfoot>
@@ -118,7 +118,7 @@
 						</div>
 						<div class="porlets-content" style="margin-bottom: -65px;">
 							<p>Importa tu archivo excel con los datos de las localidades en caso de que haya algun cambio, si no tienes el archivo puedes descargarlo y agregar o eliminar los datos necesarios.</p>
-							<p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">localidades.xmls</strong> para poder ser leído correctamente</p>	
+							<p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">localidades.xmls</strong> para poder ser leído correctamente.</p>	
 							<br>
 							<span class="btn btn-success fileinput-button">
 								<i class="glyphicon glyphicon-plus"></i>
@@ -139,46 +139,43 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-					<!--div class="progress">
-						<div class="progress-bar" style="width: 0%; margin-left: -5px;"></div>
-					</div-->
-					<div class="row col-md-5 col-md-offset-7">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-						<a href="?c=Localidad&a=Importar" class="btn btn-primary">Importar datos</a>
-					</div>
+				<div class="row col-md-5 col-md-offset-7">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					<a href="?c=Localidad&a=Importar" class="btn btn-primary">Importar datos</a>
 				</div>
-			</div><!--/modal-content--> 
-		</div><!--/modal-dialog--> 
-	</div><!--/modal-fade--> 
-	<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-body"> 
-					<div class="row">
-						<div class="block-web">
-							<div class="header">
-								<h3 class="content-header theme_color">&nbsp;Eliminar localidad</h3>
-							</div>
-							<div class="porlets-content" style="margin-bottom: -50px;">
-								<h4>¿Esta segúro que desea eliminar la localidad?</h4>
-							</div><!--/porlets-content--> 
-						</div><!--/block-web--> 
-					</div>
+			</div>
+		</div><!--/modal-content--> 
+	</div><!--/modal-dialog--> 
+</div><!--/modal-fade--> 
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body"> 
+				<div class="row">
+					<div class="block-web">
+						<div class="header">
+							<h3 class="content-header theme_color">&nbsp;Eliminar localidad</h3>
+						</div>
+						<div class="porlets-content" style="margin-bottom: -50px;">
+							<h4>¿Esta segúro que desea eliminar la localidad?</h4>
+						</div><!--/porlets-content--> 
+					</div><!--/block-web--> 
 				</div>
-				<div class="modal-footer" style="margin-top: -10px;">
-					<div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-						<form action="?c=Localidad&a=Eliminar" enctype="multipart/form-data" method="post">
-							<input hidden type="text" name="idLocalidad" id="txtIdLocalidad">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-							<button type="submit" class="btn btn-danger">Eliminar</button>
-						</form>
-					</div>
+			</div>
+			<div class="modal-footer" style="margin-top: -10px;">
+				<div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
+					<form action="?c=Localidad&a=Eliminar" enctype="multipart/form-data" method="post">
+						<input hidden type="text" name="idLocalidad" id="txtIdLocalidad">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger">Eliminar</button>
+					</form>
 				</div>
-			</div><!--/modal-content--> 
-		</div><!--/modal-dialog--> 
-	</div><!--/modal-fade--> 
-	<script>
-		eliminarLocalidad = function(idLocalidad){
-			$('#txtIdLocalidad').val(idLocalidad);	
-		};
-	</script>
+			</div>
+		</div><!--/modal-content--> 
+	</div><!--/modal-dialog--> 
+</div><!--/modal-fade--> 
+<script>
+	eliminarLocalidad = function(idLocalidad){
+		$('#txtIdLocalidad').val(idLocalidad);	
+	};
+</script>
