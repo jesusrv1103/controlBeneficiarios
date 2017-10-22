@@ -76,7 +76,7 @@
                 <td>
                  <div class="col-md-12">
                    <label class="col-sm-6 lbldetalle">Identificación oficial:</label>
-                   <label class="col-sm-6 control-label"><?php echo $ben->identificacion; ?></label>
+                   <label class="col-sm-6 control-label"><?php echo $ben->nomTipoI; ?></label>
                  </div>
                </td>
              </tr>
@@ -133,7 +133,7 @@
                 <td>
                   <div class="col-md-12">
                     <label class="col-sm-6 lbldetalle">Vialidad:</label>
-                    <label class="col-sm-6 control-label"><?php echo $ben->vialidad; ?></label>
+                    <label class="col-sm-6 control-label"><?php echo $ben->tipoVialidad; ?></label>
                   </div>
                 </td>
               </tr>
@@ -149,7 +149,7 @@
               <td>
                <div class="col-md-12">
                  <label class="col-sm-6 lbldetalle">Número exterior:</label>
-                 <label class="col-sm-6 control-label"><?php echo $ben->numeroExterior; ?></label>
+                 <label class="col-sm-6 control-label"><?php echo $ben->noExterior; ?></label>
                </div>
              </td>
            </tr>
@@ -157,7 +157,7 @@
             <td>
              <div class="col-md-12">
                <label class="col-sm-6 lbldetalle">Numero interior:</label>
-               <label class="col-sm-6 control-label"><?php echo $ben->numeroInterior; ?></label>
+               <label class="col-sm-6 control-label"><?php echo $ben->noInterior; ?></label>
              </div>
            </td>
          </tr>
@@ -165,7 +165,7 @@
           <td>
            <div class="col-md-12">
              <label class="col-sm-6 lbldetalle">Asentamiento:</label>
-             <label class="col-sm-6 control-label"><?php echo $ben->asentamiento; ?></label>
+             <label class="col-sm-6 control-label"><?php echo $ben->nombreAsentamiento; ?></label>
            </div>
          </td>
        </tr>
@@ -306,7 +306,7 @@
                 <td>
                   <div class="col-md-12">
                    <label class="col-sm-6 lbldetalle">Tipo de vivienda:</label>
-                   <label class="col-sm-6 control-label"><?php echo $ben->tipoVivienda; ?></label>
+                   <label class="col-sm-6 control-label"><?php echo $ben->vivienda; ?></label>
                  </div>
                </td>
              </tr>
