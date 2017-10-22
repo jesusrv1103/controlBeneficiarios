@@ -69,23 +69,24 @@
                </tr>
              </thead>
              <tbody>
-               <tr class="grade">
-              
-                <td><?php echo $beneficiario->curp = $_REQUEST['curp']; ?> </td>
-                <td><?php echo $beneficiario->primerApellido= $_REQUEST['primerApellido']; ?> </td>
-                <td><?php echo $beneficiario->segundoApellido = $_REQUEST['segundoApellido']; ?> </td>
-                <td><?php echo $beneficiario->nombres = $_REQUEST['nombres']; ?> </td>
+              <?php foreach($this->model->Listar1() as $r): ?>
+                <tr class="grade">
+                <td><?php echo $r->curp ?> </td>
+                <td><?php echo $r->primerApellido ?> </td>
+                <td><?php echo $r->segundoApellido ?> </td>
+                <td><?php echo $r->nombres ?> </td>
 
                 <td class="center">
-                  <a class="btn btn-primary"  role="button" href="?c=Beneficiario&a=Crud&idBenenficiario"><i class="fa fa-edit"></i></a>
+                  <a class="btn btn-primary"  role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
                 </td>
                 <td class="center">
                  <a class="btn btn-danger" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                </td>
-               <td class="center"><td><?php echo $beneficiario->idBeneficiario = $_REQUEST['idBeneficiario']; ?>
-                <a class="btn btn-info"  role="button" href="?c=Beneficiario&a=Datosbeneficiario&idBenenficiario=1"><i class="fa fa-eye"></i></a>
+               <td class="center">
+                <a class="btn btn-info"  role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-eye"></i></a>
               </td>
             </tr>
+          <?php endforeach; ?>
         </tbody>
         <tfoot>
          <tr>
@@ -99,35 +100,13 @@
          </tr>
        </tfoot>
      </table>
-     
-    
-               <!--tr class="grade">
-                <th><td><?php echo <?php echo $r->curp; ?></th>
-                <th><td><?php echo <?php echo $r->primerApellido; ?></th>
-                <th><td><?php echo <?php echo $r->segundoApellido; ?></th>
-                <th><td><?php echo <?php echo $r->nombres; ?></th>
-                <th><td><?php echo <?php echo $r->localidad;?></th>
-                <td class="center">
-                  <a class="btn btn-primary"  role="button" href="?c=Beneficiario&a=Crud&idBenenficiario=<td><?php echo <?php echo $r->idBenenficiario; ?>"><i class="fa fa-edit"></i>Editar</a>
-                </td>
-                <td class="center">
-                 <a onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="?c=Beneficiario&a=Eliminar&id=<td><?php echo <?php echo $r->idBenenficiario; ?>"><i class="fa fa-eraser"></i>Eliminar</a>
-               </td>
-               <td class="center">
-                <a class="btn btn-info"  role="button" href="?c=Beneficiario&a=Crud&idBenenficiario=<td><?php echo <?php echo $r->idBenenficiario; ?>"><i class="fa fa-eye"></i>Ver</a>
-              </td>
-            </tr-->
 
-
-        </div><!--/table-responsive-->
-      </div><!--/porlets-content-->
-
-
-    </div><!--/block-web-->
-  </div><!--/col-md-12-->
+   </div><!--/table-responsive-->
+ </div><!--/porlets-content-->
+</div><!--/block-web-->
+</div><!--/col-md-12-->
 </div><!--/row-->
 </div>
-
 <div class="modal fade" id="modalImportar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

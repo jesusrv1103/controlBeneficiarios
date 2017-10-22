@@ -29,7 +29,7 @@ class BeneficiarioController{
  }  
 
 //Metodo Guardar  si trae un id actualiza, no registra
-public function Guardar(){
+ public function Guardar(){
   $beneficiario= new Beneficiario();
   $beneficiario->idBeneficiario = $_REQUEST['idBeneficiario'];
   $beneficiario->curp = $_REQUEST['curp'];
@@ -37,30 +37,30 @@ public function Guardar(){
   $beneficiario->segundoApellido = $_REQUEST['segundoApellido'];
   $beneficiario->nombres = $_REQUEST['nombres'];
   $beneficiario->idIdentificacion = $_REQUEST['idIdentificacion'];
-   $beneficiario->idNivelEstudios = $_REQUEST['idNivelEstudios'];
+  $beneficiario->idNivelEstudios = $_REQUEST['idNivelEstudios'];
   $beneficiario->idSeguridadSocial = $_REQUEST['idSeguridadSocial'];
   $beneficiario->idDiscapacidad = $_REQUEST['idDiscapacidad'];
   $beneficiario->beneficiarioColectivo=$_REQUEST['beneficiarioColectivo'];
+ 
   //vialidad
   $beneficiario->idTipoVialidad = $_REQUEST['idTipoVialidad'];
   $beneficiario->nombreVialidad = $_REQUEST['nombreVialidad'];
- $beneficiario->noExterior = $_REQUEST['noExterior'];
- $beneficiario->noInterior = $_REQUEST['noInterior'];
- $beneficiario->idAsentamientos = $_REQUEST['idAsentamientos'];
- $beneficiario->idLocalidad = $_REQUEST['idLocalidad'];
- $beneficiario->entreVialidades = $_REQUEST['entreVialidades'];
- $beneficiario->descripcionUbicacion = $_REQUEST['descripcionUbicacion'];
+  $beneficiario->noExterior = $_REQUEST['noExterior'];
+  $beneficiario->noInterior = $_REQUEST['noInterior'];
+  $beneficiario->idAsentamientos = $_REQUEST['idAsentamientos'];
+  $beneficiario->idLocalidad = $_REQUEST['idLocalidad'];
+  $beneficiario->entreVialidades = $_REQUEST['entreVialidades'];
+  $beneficiario->descripcionUbicacion = $_REQUEST['descripcionUbicacion'];
+ 
  //estado social
- $beneficiario->estudioSocioeconomico=$_REQUEST['estudioSocioeconomico'];
- $beneficiario->idEstadoCivil=$_REQUEST['idEstadoCivil'];
- $beneficiario->jefeFamilia=$_REQUEST['jefeFamilia'];
- $beneficiario->idOcupacion=$_REQUEST['idOcupacion']; 
- $beneficiario->idIngresoMensual=$_REQUEST['idIngresoMensual'];
- $beneficiario->integrantesFamilia=$_REQUEST['integrantesFamilia'];
+  $beneficiario->estudioSocioeconomico=$_REQUEST['estudioSocioeconomico'];
+  $beneficiario->idEstadoCivil=$_REQUEST['idEstadoCivil'];
+  $beneficiario->jefeFamilia=$_REQUEST['jefeFamilia'];
+  $beneficiario->idOcupacion=$_REQUEST['idOcupacion']; 
+  $beneficiario->idIngresoMensual=$_REQUEST['idIngresoMensual'];
+  $beneficiario->integrantesFamilia=$_REQUEST['integrantesFamilia'];
   $beneficiario->dependientesEconomicos=$_REQUEST['dependientesEconomicos'];
   $beneficiario->idGrupoVulnerable=$_REQUEST['idGrupoVulnerable'];
-
-
 
  //Vivienda
   $beneficiario->idVivienda=$_REQUEST['idVivienda'];
@@ -75,15 +75,15 @@ public function Guardar(){
 
 
   $beneficiario->idBeneficiario > 0 
-    ? $this->model->Actualizar($beneficiario)
-    : $this->model->Registrar($beneficiario);
+  ? $this->model->Actualizar($beneficiario)
+  : $this->model->Registrar($beneficiario);
   $administracion = true;
   $inicio = false;
   $beneficiarios = false;
   $page="view/beneficiario/index.php";
   require_once 'view/index.php';
-  }
- 
+}
+
 public function Upload(){
   $archivo = $_FILES['file']['name'];
   $tipo = $_FILES['file']['type'];
@@ -97,14 +97,13 @@ public function Upload(){
   }
 }
 
-
- public function Crud(){
-   $beneficiario = new Beneficiario();
-   if(isset($_REQUEST['idBeneficiario'])){
-    $beneficiario = $this->model->Obtener($_REQUEST['idBeneficiario']);
-  }
-  $page="view/beneficiario/beneficiario.php";
-  require_once 'view/index.php';
+public function Crud(){
+ $beneficiario = new Beneficiario();
+ if(isset($_REQUEST['idBeneficiario'])){
+  $beneficiario = $this->model->Obtener($_REQUEST['idBeneficiario']);
+}
+$page="view/beneficiario/beneficiario.php";
+require_once 'view/index.php';
 }
 
 public function Importar($archivo){
@@ -139,30 +138,29 @@ public function Importar($archivo){
     }
 
    /* echo '<table>';
-    echo '<br> Importación con éxito'; */
-    $mensaje="El archivo se ha importado correctamente";
-    $page="view/beneficiario/index.php";
-    $administracion = true;
-    $inicio = false;
-    $beneficiarios = true;
-    require_once 'view/index.php';
+   echo '<br> Importación con éxito'; */
+   $mensaje="El archivo se ha importado correctamente";
+   $page="view/beneficiario/index.php";
+   $administracion = true;
+   $inicio = false;
+   $beneficiarios = true;
+   require_once 'view/index.php';
 
-  }
+ }
         //si por algo no cargo el archivo bak_ 
-  else {
-    echo "Necesitas primero importar el archivo";
-  }
+ else {
+  echo "Necesitas primero importar el archivo";
+}
 }
 
-public function Datosbeneficiario(){
-  $beneficiario = new Beneficiario();
-   if(isset($_REQUEST['idBeneficiario'])){
-    $beneficiario = $this->model->Obtener($_REQUEST['idBeneficiario']);
-  }
-  $page="view/beneficiario/datosBeneficiario.php";
+public function Detalles(){
+  $administracion=true;
+  $beneficiarios=true;
+  $ben = new Beneficiario();
+  $ben = $this->model->Obtener($_REQUEST['idBeneficiario']);
+  $page="view/beneficiario/detalles.php";
   require_once 'view/index.php';
 }
-
 }
 /*
 public $pdo;

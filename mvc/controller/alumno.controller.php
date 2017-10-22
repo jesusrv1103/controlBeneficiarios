@@ -10,9 +10,8 @@ class AlumnoController{
     }
     
     public function Index(){
-        require_once 'view/header.php';
-        require_once 'view/alumno/alumno.php';
-        require_once 'view/footer.php';
+        $page="/view/alumno/alumno.php";
+        require_once 'view/index.php';
     }
     
     public function Crud(){

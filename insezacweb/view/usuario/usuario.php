@@ -49,7 +49,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">Contraseña<strog class="theme_color">*</strog></label>
             <div class="col-sm-3">
-              <input type="password" type="pass-security" name="password" id="password" class="form-control" required placeholder="Password" />
+              <input type="password" name="password" id="password" class="form-control" required placeholder="Password" />
             </div>
             <div class="col-sm-3">
               <input type="password" class="form-control" required parsley-equalto="#password" placeholder="Confirme la contraseña" />

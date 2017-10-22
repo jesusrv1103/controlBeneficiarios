@@ -71,7 +71,7 @@ class Beneficiario
 				b.descripcionUbicacion,
 				b.estudioSocioeconomico,
 				eC.estadoCivil, 
-				b.jefeFamilia
+				b.jefeFamilia,
 				o.ocupacion, 
 				iM.ingresoMensual,
 				b.integrantesFamilia,
@@ -171,67 +171,45 @@ class Beneficiario
 	{
 		try
 		{
-			$stm = $this->pdo->prepare(" SELECT
+			$stm = $this->pdo
+			->prepare("SELECT * FROM beneficiarios WHERE idBeneficiario = ?");
+
+
+			$stm->execute(array($idBeneficiario));
+			return $stm->fetch(PDO::FETCH_OBJ);
+
+				/*"SELECT
 				b.idBeneficiario, 
 				b.curp, 
 				b.primerApellido, 
 				b.segundoApellido,
 				b.nombres, 
-				idOf.identificacion as nomTipoI, 
-				tV.tipoVialidad,
-				b.nombreVialidad,
-				b.noExterior,
-				b.noInterior,
-				a.nombreAsentamiento,
-				l.localidad,
-				b.entreVialidades,
-				b.descripcionUbicacion,
-				b.estudioSocioeconomico,
-				eC.estadoCivil, 
-				b.jefeFamilia
-				o.ocupacion, 
-				iM.ingresoMensual,
-				b.integrantesFamilia,
-				b.dependientesEconomicos,
-				v.vivienda, 
-				b.noHabitantes,
-				b.viviendaElectricidad,
-				b.viviendaAgua,
-				b.viviendaDrenaje,
-				b.viviendaGas,
-				b.viviendaTelefono,
-				b.viviendaInternet
-				nE.nivelEstudios, 
-				sS.seguridadSocial,
-				d.discapacidad, 
-				gV.grupoVulnerable,
-				b.beneficiarioColectivo
-				FROM identificacionOficial idOf, 
+				idOf.identificacion as nomTipoI
+				from identificacionOficial idOf, 
 				tipoVialidad tV, estadoCivil eC, 
 				ocupacion o, vivienda v, 
 				nivelEstudio nE,
 				seguridadSocial sS, 
 				discapacidad d, 
 				grupoVulnerable gV, 
-				asentamientos a, localidades l, 
-				ingresoMensual iM, beneficiarios  b
-				WHERE  b.idIdentificacion = idOf.idIdentificacion AND   
-				b.idTipoVialidad = tV.idTipoVialidad AND 	
-				b.estadoCivil = eC.idEstadoCivil AND 
-				b.ocupacion = o.idOcupacion AND 
-				b.ingresoMensual = iM.idIngresoMensual AND 
-				b.vivienda =  v.idVivienda AND   
-				b.nivelEstudios = nE.idNivelEstudios AND  
-				b.tipoSeguridadSocial = sS.idSeguridadSocial AND  
-				b.discapacidad = d.idDiscapacidad AND  
-				b.grupoVulnerable =gV.idGrupoVulnerable AND 
-				b.claveAsentamiento = a.idAsentamientos AND 
-				b.claveLocalidad = l.idLocalidad AND 
-				b.idBeneficiario=$idBeneficiario");
+				asentamientos a, 
+				localidades l, 
+				ingresoMensual iM, 
+				beneficiarios  b
+				where  b.idIdentificacion = idOf.idIdentificacion AND
+				b.idTipoVialidad = tV.idTipoVialidad AND 
+				b.idEstadoCivil = eC.idEstadoCivil AND  
+				b.idOcupacion = o.idOcupacion AND  
+				b.idIngresoMensual = iM.idIngresoMensual AND 
+				b.idVivienda =  v.idVivienda AND  
+				b.idNivelEstudios = nE.idNivelEstudios AND  
+				b.idSeguridadSocial = sS.idSeguridadSocial AND   
+				b.idDiscapacidad = d.idDiscapacidad AND
+				b.idGrupoVulnerable =gV.idGrupoVulnerable AND 
+				b.idAsentamientos = a.idAsentamientos AND  
+				b.idLocalidad = l.idLocalidad AND 
+				b.idBeneficiario=$idBeneficiario;");*/
 			
-			$stm->execute();
-
-			return $stm->fetchAll(PDO::FETCH_OBJ);
 		}
 		catch(Exception $e)
 		{
@@ -392,7 +370,22 @@ class Beneficiario
 	}
 
 	
+	public function Listar1()
+	{
+		try
+		{
+			//$result = array();
 
+			$stm = $this->pdo->prepare("SELECT * FROM beneficiarios");
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
 
 }
 
