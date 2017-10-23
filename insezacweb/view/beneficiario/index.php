@@ -63,47 +63,53 @@
                  <th>Primer apellido</th>
                  <th>Segunda apellido</th>
                  <th>Nombre</th>
+                 <?php if($_SESSION['user_type']==1){?>
                  <td><center><b>Editar</b></center></td>
                  <td><center><b>Borrar</b></center></td>
+                 <?php } ?>
                  <td><center><b>Ver</b></center></td>
                </tr>
              </thead>
              <tbody>
               <?php foreach($this->model->Listar1() as $r): ?>
                 <tr class="grade">
-                <td><?php echo $r->curp ?> </td>
-                <td><?php echo $r->primerApellido ?> </td>
-                <td><?php echo $r->segundoApellido ?> </td>
-                <td><?php echo $r->nombres ?> </td>
+                  <td><?php echo $r->curp ?> </td>
+                  <td><?php echo $r->primerApellido ?> </td>
+                  <td><?php echo $r->segundoApellido ?> </td>
+                  <td><?php echo $r->nombres ?> </td>
+                  <?php if($_SESSION['user_type']==1){?>
 
-                <td class="center">
-                  <a class="btn btn-primary"  role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+                  <td class="center">
+                    <a class="btn btn-primary"  role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+                  </td>
+                  <td class="center">
+                   <a class="btn btn-danger" onclick="eliminarBeneficiario(<?php echo $r->idBeneficiario;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+                 </td>
+                 <?php } ?>
+                 <td class="center">
+                  <a class="btn btn-info"  role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>"><i class="fa fa-eye"></i></a>
                 </td>
-                <td class="center">
-                 <a class="btn btn-danger" onclick="eliminarBeneficiario(<?php echo $r->idBeneficiario;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-               </td>
-               <td class="center">
-                <a class="btn btn-info"  role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>"><i class="fa fa-eye"></i></a>
-              </td>
-            </tr>
-          <?php endforeach; ?>
-        </tbody>
-        <tfoot>
-         <tr>
-           <th>CURP</th>
-           <th>Primer apellido</th>
-           <th>Segunda apellido</th>
-           <th>Nombre</th>
-           <th><center><b>Editar</b></center></th>
-           <td><center><b>Borrar</b></center></td>
-           <td><center><b>Ver</b></center></td>
-         </tr>
-       </tfoot>
-     </table>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+          <tfoot>
+           <tr>
+             <th>CURP</th>
+             <th>Primer apellido</th>
+             <th>Segunda apellido</th>
+             <th>Nombre</th>
+             <?php if($_SESSION['user_type']==1){?>
+             <th><center><b>Editar</b></center></th>
+             <td><center><b>Borrar</b></center></td>
+             <?php } ?>
+             <td><center><b>Ver</b></center></td>
+           </tr>
+         </tfoot>
+       </table>
 
-   </div><!--/table-responsive-->
- </div><!--/porlets-content-->
-</div><!--/block-web-->
+     </div><!--/table-responsive-->
+   </div><!--/porlets-content-->
+ </div><!--/block-web-->
 </div><!--/col-md-12-->
 </div><!--/row-->
 </div>
@@ -147,10 +153,9 @@
     </div><!--/modal-content--> 
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
-
 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content panel default red_border horizontal_border_1">
       <div class="modal-body"> 
         <div class="row">
           <div class="block-web">

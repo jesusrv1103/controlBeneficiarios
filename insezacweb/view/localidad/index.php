@@ -106,7 +106,6 @@
 		</div><!--/col-md-12-->
 	</div><!--/row-->
 </div>
-
 <div class="modal fade" id="modalImportar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">

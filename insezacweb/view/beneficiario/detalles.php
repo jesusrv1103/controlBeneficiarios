@@ -1,13 +1,13 @@
  <style type="text/css">
  .lbldetalle{
-  color:blue;
+  color:#2196F3;
 }
 </style>
 
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
-    <h1>Inicio</h1>
-    <h2 class="">Beneficiarios</h2>
+    <h1>Beneficiarios</h1>
+    <h2 class="">Detalles de beneficiario</h2>
   </div>
   <div class="pull-right">
     <ol class="breadcrumb">
@@ -24,7 +24,7 @@
         <div class="row">         
           <div class="block-web">
             <div class="col-md-12">
-              <h2 class="content-header" style="margin-top: -10px;"><label class="theme_color">Beneficiario:</label> <?php echo $ben->nombres." ".$ben->primerApellido." ".$ben->segundoApellido; ?></h2>
+              <h2 class="content-header theme_color" style="margin-top: -10px;"><?php echo $ben->nombres." ".$ben->primerApellido." ".$ben->segundoApellido; ?></h2>
             </div>                         
           </div><!--/block-web--> 
         </div><!--/row--> 
