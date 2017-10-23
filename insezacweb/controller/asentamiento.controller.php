@@ -37,6 +37,9 @@ class AsentamientoController{
 
 	public function Crud(){
 		$asentamiento = new Asentamiento();
+		if(isset($_REQUEST['nuevoRegistro'])){
+			$nuevoRegistro=true;
+		}
 		if(isset($_REQUEST['idAsentamientos'])){
 			$asentamiento = $this->model->Obtener($_REQUEST['idAsentamientos']);
 		}
@@ -113,5 +116,25 @@ class AsentamientoController{
 			require_once 'view/index.php';
 		}
 	}
+	public function Guardar(){
+		$asentamiento= new Asentamiento();
+		$asentamiento->idAsentamientos = $_REQUEST['idAsentamientos'];
+		$asentamiento->municipio = $_REQUEST['municipio'];
+		$asentamiento->localidad = $_REQUEST['localidad'];
+		$asentamiento->nombreAsentamiento = $_REQUEST['nombreAsentamiento'];
+		$asentamiento->tipoAsentamiento = $_REQUEST['tipoAsentamiento'];
+		if(!isset($_REQUEST['nuevoRegistro'])){
+				$this->model->Actualizar($asentamiento);
+				$mensaje="Se han actualizado correctamente los datos del Asentamiento";
+			}else{
+				$this->model->Registrar($asentamiento);
+				$mensaje="Se ha registrado correctamente el Asentamiento";
+			}	
+		$asentamientos = true;
+		$catalogos=true; 
+		$page="view/asentamiento/index.php";
+		require_once 'view/index.php';
+	}
+
 
 }

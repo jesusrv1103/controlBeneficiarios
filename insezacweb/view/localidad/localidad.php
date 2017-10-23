@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="porlets-content">
-          <form action="?c=Localidad&a=Guardar" method="post" class="form-horizontal row-border"  parsley-validate novalidate>
+          <form action="?c=Localidad&a=Guardar<?php if(isset($nuevoRegistro)){ echo "&nuevoRegistro=true"; } ?>" method="post" class="form-horizontal row-border"  parsley-validate novalidate>
             <div class="form-group">
               <label class="col-sm-3 control-label">Clave de localidad<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">

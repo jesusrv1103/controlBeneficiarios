@@ -84,4 +84,64 @@ class Asentamiento
 			die($e->getMessage());
 		}
 	}
+	public function Eliminar($id)
+	{
+		try 
+		{
+			$stm = $this->pdo
+			->prepare("DELETE FROM asentamientos WHERE idAsentamientos = ?");			          
+
+			$stm->execute(array($id));
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function Actualizar(Asentamiento $data)
+	{
+		try 
+		{
+			$sql = "UPDATE asentamientos SET 
+			municipio = ?, localidad= ?, nombreAsentamiento =?, tipoAsentamiento = ?
+			WHERE idAsentamientos = ?";
+
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					$data->municipio,
+					$data->localidad,
+					$data->nombreAsentamiento, 
+					$data->tipoAsentamiento,
+					$data->idAsentamientos
+				)
+			);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	//Metdod para registrar
+	public function Registrar(Asentamiento $data)
+	{
+		try 
+		{
+			$sql = "INSERT INTO asentamientos
+			VALUES (?,?,?,?,?)";
+
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					$data->idAsentamientos,
+					$data->municipio,
+					$data->localidad,
+					$data->nombreAsentamiento, 
+					$data->tipoAsentamiento,
+					
+				)
+			);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
 }

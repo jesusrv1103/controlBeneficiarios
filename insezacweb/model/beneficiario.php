@@ -377,6 +377,7 @@ class Beneficiario
 	}
 
 	
+
 	public function Listar1()
 	{
 		try
