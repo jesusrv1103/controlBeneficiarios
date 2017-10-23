@@ -24,7 +24,7 @@
         <div class="row">         
           <div class="block-web">
             <div class="col-md-12">
-              <h2 class="content-header" style="margin-top: -10px;"><label class="theme_color">Benerficiario:</label> <?php echo $ben->nombres." ".$ben->primerApellido." ".$ben->segundoApellido; ?></h2>
+              <h2 class="content-header" style="margin-top: -10px;"><label class="theme_color">Beneficiario:</label> <?php echo $ben->nombres." ".$ben->primerApellido." ".$ben->segundoApellido; ?></h2>
             </div>                         
           </div><!--/block-web--> 
         </div><!--/row--> 
