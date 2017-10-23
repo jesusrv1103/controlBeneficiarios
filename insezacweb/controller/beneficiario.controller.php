@@ -157,7 +157,7 @@ public function Detalles(){
   $administracion=true;
   $beneficiarios=true;
   $ben = new Beneficiario();
-  $ben = $this->model->Obtener($_REQUEST['idBeneficiario']);
+  $ben = $this->model->Listar($_REQUEST['idBeneficiario']);
   $page="view/beneficiario/detalles.php";
   require_once 'view/index.php';
 }

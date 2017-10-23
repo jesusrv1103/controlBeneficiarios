@@ -83,7 +83,7 @@
                  <a class="btn btn-danger" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                </td>
                <td class="center">
-                <a class="btn btn-info"  role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-eye"></i></a>
+                <a class="btn btn-info"  role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>"><i class="fa fa-eye"></i></a>
               </td>
             </tr>
           <?php endforeach; ?>
