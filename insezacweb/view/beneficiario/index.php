@@ -80,7 +80,7 @@
                   <a class="btn btn-primary"  role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
                 </td>
                 <td class="center">
-                 <a class="btn btn-danger" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+                 <a class="btn btn-danger" onclick="eliminarBeneficiario(<?php echo $r->idBeneficiario;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                </td>
                <td class="center">
                 <a class="btn btn-info"  role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>"><i class="fa fa-eye"></i></a>
@@ -147,3 +147,36 @@
     </div><!--/modal-content--> 
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
+
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body"> 
+        <div class="row">
+          <div class="block-web">
+            <div class="header">
+              <h3 class="content-header theme_color">&nbsp;Eliminar Beneficiario</h3>
+            </div>
+            <div class="porlets-content" style="margin-bottom: -50px;">
+              <h4>¿Esta segúro que desea eliminar el Beneficiario?</h4>
+            </div><!--/porlets-content--> 
+          </div><!--/block-web--> 
+        </div>
+      </div>
+      <div class="modal-footer" style="margin-top: -10px;">
+        <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
+          <form action="?c=Beneficiario&a=Eliminar" enctype="multipart/form-data" method="post">
+            <input hidden type="text" name="idBeneficiario" id="txtIdBeneficiario">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+          </form>
+        </div>
+      </div>
+    </div><!--/modal-content--> 
+  </div><!--/modal-dialog--> 
+</div><!--/modal-fade--> 
+<script>
+  eliminarBeneficiario = function(idBeneficiario){
+    $('#txtIdBeneficiario').val(idBeneficiario);  
+  };
+</script>
