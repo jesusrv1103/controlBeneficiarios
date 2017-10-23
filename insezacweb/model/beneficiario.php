@@ -376,20 +376,8 @@ class Beneficiario
 		}
 	}
 
-	public function Eliminar($id)
-	{
-		try 
-		{
-			$stm = $this->pdo
-			->prepare("DELETE FROM beneficiarios WHERE idBeneficiario = ?");			          
-
-			$stm->execute(array($id));
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
-	}
 	
+
 	public function Listar1()
 	{
 		try

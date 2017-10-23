@@ -150,7 +150,12 @@ public function Importar($archivo){
 }
 }
 
-
+public function Eliminar(){
+    $administracion=true; //variable cargada para activar la opcion administracion en el menu
+    $beneficiarios=true; //variable cargada para activar la opcion programas en el menu
+    $this->model->Eliminar($_REQUEST['idBeneficiario']);
+    header ('Location: index.php?c=Beneficiario&a=Index');
+  }
 
 public function Detalles(){
   $administracion=true;
@@ -161,11 +166,6 @@ public function Detalles(){
   require_once 'view/index.php';
 }
 
-public function Eliminar(){
-    $administracion=true; //variable cargada para activar la opcion administracion en el menu
-    $beneficiarios=true; //variable cargada para activar la opcion programas en el menu
-    $this->model->Eliminar($_REQUEST['idBeneficiario']);
-    header ('Location: index.php?c=Beneficiario&a=Index');
-  }
+
 
 }
