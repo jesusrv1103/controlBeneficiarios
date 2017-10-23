@@ -66,6 +66,7 @@ class BeneficiarioController{
   $beneficiario->idVivienda=$_REQUEST['idVivienda'];
   $beneficiario->noHabitantes=$_REQUEST['noHabitantes'];
   $beneficiario->viviendaElectricidad=$_REQUEST['viviendaElectricidad'];
+
   $beneficiario->viviendaAgua=$_REQUEST['viviendaAgua'];
   $beneficiario->viviendaDrenaje=$_REQUEST['viviendaDrenaje'];
   $beneficiario->viviendaGas=$_REQUEST['viviendaGas'];
@@ -153,6 +154,8 @@ public function Importar($archivo){
 }
 }
 
+
+
 public function Detalles(){
   $administracion=true;
   $beneficiarios=true;
@@ -161,40 +164,13 @@ public function Detalles(){
   $page="view/beneficiario/detalles.php";
   require_once 'view/index.php';
 }
+
+public function OnorNull($valor){
+  if($valor=="on"){
+    return "Si";
+  }else {
+    return "No";
+  }
 }
-/*
-public $pdo;
-  public $idBeneficiario;
-  public $curp;
-  public $primerApellido;
-  public $segundoApellido;
-  public $nombres;
-  public $idIdentificacion;
-  public $idTipoVialidad;
-  public $nombreVialidad;
-  public $noExterior;
-  public $noInterior;
-  public $idAsentamientos;
-  public $idLocalidad;
-  public $entreVialidades;
-  public $descripcionUbicacion;
-  public $estudioSocioeconomico;
-  public $idEstadoCivil;
-  public $jefeFamilia;
-  public $idOcupacion;
-  public $idIngresoMensual;
-  public $integrantesFamilia;
-  public $dependientesEconomicos;
-  public $idVivienda;
-  public $noHabitantes;
-  public $viviendaElectricidad;
-  public $viviendaAgua;
-  public $viviendaDrenaje;
-  public $viviendaGas;
-  public $viviendaTelefono;
-  public $viviendaInternet;
-  public $idNivelEstudios;
-  public $idSeguridadSocial;
-  public $idDiscapacidad;
-  public $idGrupoVulnerable;
-  public $beneficiarioColectivo;*/
+
+}
