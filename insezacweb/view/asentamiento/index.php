@@ -25,7 +25,7 @@
 								<b>
 									<?php if($_SESSION['user_type']==1){?>
 									<div class="btn-group" style="margin-right: 10px;"> 
-										<a class="btn btn-sm btn-success" href="?c=Asentamiento&a=Crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title=""> <i class="fa fa-plus"></i> Registrar asentamiento </a>
+										<a class="btn btn-sm btn-success" href="?c=Asentamiento&a=Crud&nuevoRegistro=true" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title=""> <i class="fa fa-plus"></i> Registrar asentamiento </a>
 										<a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="left" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
 										<a href="assets/files/asentamientos.xlsx" download="asentamientos.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar ejemplo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
 									</div>
