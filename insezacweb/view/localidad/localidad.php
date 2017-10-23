@@ -59,7 +59,7 @@
                 </option>
                 <?php } if($localidad->idLocalidad != null){ ?>
                 <option value="<?php echo $localidad->idLocalidad != null ? $localidad->ambito : "";  ?>"> 
-                  <?php  echo $localidad->idLocalidad != null ? $localidad->ambito : "";  ?>                 
+                  <?php  echo $localidad->idLocalidad != null ? $localidad->ambito : "";  ?>                
                 </option>
                 <?php } if($localidad->ambito!="Urbano"){?>
                 <option value="Rural"> 
