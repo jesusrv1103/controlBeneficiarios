@@ -151,7 +151,7 @@
 </div><!--/modal-fade--> 
 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-		<div class="modal-content">
+		<div class="modal-content  panel default red_border horizontal_border_1">
 			<div class="modal-body"> 
 				<div class="row">
 					<div class="block-web">
