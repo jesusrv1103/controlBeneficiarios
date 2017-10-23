@@ -226,13 +226,13 @@
                           <div class="col-sm-9">
                             <div class="radio">
                              <label>
-                              <input type="radio" name="estudioSocioeconomico"  value="1" checked="">
+                              <input type="radio" name="estudioSocioeconomico"  value="Si" checked="">
                                Si
                              </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                  <input type="radio" name="estudioSocioeconomico"  value="0">
+                                  <input type="radio" name="estudioSocioeconomico"  value="No">
                                    No 
                                 </label>
                             </div>
@@ -364,7 +364,7 @@
                             </div>
                              <div class="checkbox">
                               <label>
-                                <input type="checkbox" name="viviendaDrenaje" id ="viviendaDrenaje" >
+                                <input type="checkbox" name="viviendaDrenaje"  >
                                 <span class="custom-checkbox"></span> Vivienda Drenaje</label>
                             </div>
                              <div class="checkbox">
@@ -380,7 +380,7 @@
                             </div>
                              <div class="checkbox">
                               <label>
-                                <input type="checkbox"   name="viviendaInternet" >
+                                <input type="checkbox"   name="viviendaInternet">
                                 <span class="custom-checkbox"></span> Vivienda Internet</label>
                             </div>
                           </div>

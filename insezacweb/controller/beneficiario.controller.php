@@ -65,16 +65,12 @@ class BeneficiarioController{
  //Vivienda
   $beneficiario->idVivienda=$_REQUEST['idVivienda'];
   $beneficiario->noHabitantes=$_REQUEST['noHabitantes'];
-  $beneficiario->viviendaElectricidad=$_REQUEST['viviendaElectricidad'];
-
-  $beneficiario->viviendaAgua=$_REQUEST['viviendaAgua'];
-  $beneficiario->viviendaDrenaje=$_REQUEST['viviendaDrenaje'];
-  $beneficiario->viviendaGas=$_REQUEST['viviendaGas'];
-  $beneficiario->viviendaTelefono=$_REQUEST['viviendaTelefono'];
-  $beneficiario->viviendaInternet=$_REQUEST['viviendaInternet'];
-
-
-
+  isset($_REQUEST['viviendaElectricidad'])? $beneficiario->viviendaElectricidad="Si": $beneficiario->viviendaElectricidad="No";
+  isset($_REQUEST['viviendaAgua'])? $beneficiario->viviendaAgua="Si": $beneficiario->viviendaAgua="No";
+  isset($_REQUEST['viviendaDrenaje'])? $beneficiario->viviendaDrenaje="Si": $beneficiario->viviendaDrenaje="No";
+  isset($_REQUEST['viviendaGas'])? $beneficiario->viviendaGas="Si": $beneficiario->viviendaGas="No";
+  isset($_REQUEST['viviendaTelefono'])? $beneficiario->viviendaTelefono="Si": $beneficiario->viviendaTelefono="No";
+  isset($_REQUEST['viviendaInternet'])? $beneficiario->viviendaInternet="Si": $beneficiario->viviendaInternet="No";
   $beneficiario->idBeneficiario > 0 
   ? $this->model->Actualizar($beneficiario)
   : $this->model->Registrar($beneficiario);
@@ -165,12 +161,11 @@ public function Detalles(){
   require_once 'view/index.php';
 }
 
-public function OnorNull($valor){
-  if($valor=="on"){
-    return "Si";
-  }else {
-    return "No";
+public function Eliminar(){
+    $administracion=true; //variable cargada para activar la opcion administracion en el menu
+    $beneficiarios=true; //variable cargada para activar la opcion programas en el menu
+    $this->model->Eliminar($_REQUEST['idBeneficiario']);
+    header ('Location: index.php?c=Beneficiario&a=Index');
   }
-}
 
 }
