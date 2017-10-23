@@ -350,34 +350,37 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Servicios vivienda</label>
                           <div class="col-sm-9">
+
                             <div class="checkbox">
                               <label>
-                                <input type="checkbox" name="viviendaElectricidad">
+                                <input type="checkbox"   name="viviendaElectricidad" >
                                 <span class="custom-checkbox"></span> Vivienda Electricidad</label>
                             </div>
+                            
                             <div class="checkbox">
                               <label>
-                                <input type="checkbox" name="viviendaAgua">
+                                <input type="checkbox" name="viviendaAgua" >
                                 <span class="custom-checkbox"></span> Vivienda Agua </label>
                             </div>
                              <div class="checkbox">
                               <label>
-                                <input type="checkbox" name="viviendaDrenaje">
+                                <input type="checkbox" name="viviendaDrenaje" id ="viviendaDrenaje" >
                                 <span class="custom-checkbox"></span> Vivienda Drenaje</label>
                             </div>
                              <div class="checkbox">
                               <label>
-                                <input type="checkbox" name="viviendaGas">
+
+                                <input type="checkbox" name="viviendaGas"  >
                                 <span class="custom-checkbox"></span> Vivienda Gas</label>
                             </div>
                              <div class="checkbox">
                               <label>
-                                <input type="checkbox" name="viviendaTelefono">
+                                <input type="checkbox" name="viviendaTelefono" >
                                 <span class="custom-checkbox"></span> Vivienda Telefono</label>
                             </div>
                              <div class="checkbox">
                               <label>
-                                <input type="checkbox"   name="viviendaInternet">
+                                <input type="checkbox"   name="viviendaInternet" >
                                 <span class="custom-checkbox"></span> Vivienda Internet</label>
                             </div>
                           </div>
@@ -407,41 +410,3 @@
   </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
 
-<!--
-public $pdo;
-  public $idBeneficiario;
-  public $curp;
-  public $primerApellido;
-  public $segundoApellido;
-  public $nombres;
-  public $idIdentificacion;
-  public $idTipoVialidad;
-  public $nombreVialidad;
-  public $noExterior;
-  public $noInterior;
-  public $idAsentamientos;
-  public $idLocalidad;
-  public $entreVialidades;
-  public $descripcionUbicacion;
-  public $estudioSocioeconomico;
-  public $idEstadoCivil;
-  public $jefeFamilia;
-  public $idOcupacion;
-  public $idIngresoMensual;
-  public $integrantesFamilia;
-  public $dependientesEconomicos;
-  public $idVivienda;
-  public $noHabitantes;
-  public $viviendaElectricidad;
-  public $viviendaAgua;
-  public $viviendaDrenaje;
-  public $viviendaGas;
-  public $viviendaTelefono;
-  public $viviendaInternet;
-  public $idNivelEstudios;
-  public $idSeguridadSocial;
-  public $idDiscapacidad;
-  public $idGrupoVulnerable;
-  public $beneficiarioColectivo;
-
--->
