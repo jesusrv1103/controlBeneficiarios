@@ -133,14 +133,7 @@
                         </div><!--/form-group--> 
                        
 
-                        <div class="form-group">
-                          <div class="col-sm-offset-7 col-sm-5">
-
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                            <a href="?c=Beneficiario" class="btn btn-default"> Cancelar</a>
-                          </div>
-                        </div><!--/form-group-->-->
-                      </form>
+                     
 
 
                       <!--+++++++++++++++++++++++++++++++++++++++++Vialid***************************-->
@@ -149,8 +142,7 @@
                   <div class="tab-pane animated fadeInRight" id="vialidad">
                     <div class="user-profile-content">
                         <h5><strong>Vialidad</strong></h5>
-                      <form id="frm-beneficiario" action="?c=Beneficiario&a=Guardar" method="post" role="form" enctype="multipart/form-data">
-                         <input type="hidden" name="idBeneficiario" value="14" />
+                    
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Vialidad</label>
                           <div class="col-sm-6">
@@ -220,14 +212,7 @@
                           </div>
                         </div><!--/form-group-->
 
-                        <div class="form-group">
-                          <div class="col-sm-offset-7 col-sm-5">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                            <a href="?c=Beneficiario" class="btn btn-default"> Cancelar</a>
-                          </div>
-                        </div><!--/form-group-->
-
-                      </form>
+                       
                     </div>
                   </div>
 
@@ -235,20 +220,19 @@
                     <div class="tab-pane animated fadeInRight" id="estadoSocial">
                     <div class="user-profile-content">
                         <h5><strong>Estado Social</strong></h5>
-                      <form id="frm-beneficiario" action="?c=Beneficiario&a=Guardar" method="post" role="form" enctype="multipart/form-data">
-                        <input type="hidden" name="idBeneficiario" value="14" />
+                     
                          <div class="form-group">
                          <label class="col-sm-3 control-label">Estudio Socioeconomico</label>
                           <div class="col-sm-9">
                             <div class="radio">
                              <label>
-                              <input type="radio" name="jefeFamilia"  value="si" checked="">
+                              <input type="radio" name="estudioSocioeconomico"  value="Si" checked="">
                                Si
                              </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                  <input type="radio" name="jefeFamilia"  value="no">
+                                  <input type="radio" name="estudioSocioeconomico"  value="No">
                                    No 
                                 </label>
                             </div>
@@ -259,13 +243,13 @@
                           <div class="col-sm-9">
                             <div class="radio">
                              <label>
-                              <input type="radio" name="beneficiarioColec"  value="si" checked="">
+                              <input type="radio" name="jefeFamilia"  value="si" checked="">
                                Si
                              </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                  <input type="radio" name="beneficiarioColectivo"  value="no">
+                                  <input type="radio" name="jefeFamilia"  value="no">
                                    No 
                                 </label>
                             </div>
@@ -335,21 +319,14 @@
                         </div><!--/form-group-->
                 
                         
-                        <div class="form-group">
-                          <div class="col-sm-offset-7 col-sm-5">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                            <a href="?c=Beneficiario" class="btn btn-default"> Cancelar</a>
-                          </div>
-                        </div><!--/form-group-->
+                      
 
-                      </form>
                     </div>
                   </div>
                    <div class="tab-pane animated fadeInRight" id="vivienda">
                     <div class="user-profile-content">
                         <h5><strong>Vivienda</strong></h5>
-                      <form id="frm-beneficiario" action="?c=Beneficiario&a=Guardar" method="post" role="form" enctype="multipart/form-data">
-                        <input type="hidden" name="idBeneficiario" value="10" />
+                     
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Tipo Vivienda</label>
                           <div class="col-sm-6">
@@ -366,41 +343,44 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">No Habitantes </label>
                           <div class="col-sm-6">
-                            <input name="entreVialidades" type="text" class="form-control" required placeholder="Ingrese el N° de Habitantes que residen en la vivienda" />
+                            <input name="noHabitantes" type="text" class="form-control" required placeholder="Ingrese el N° de Habitantes que residen en la vivienda" />
                           </div>
                         </div><!--/form-group-->
 
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Servicios vivienda</label>
                           <div class="col-sm-9">
+
                             <div class="checkbox">
                               <label>
-                                <input type="checkbox" value="viviendaElectricidad">
+                                <input type="checkbox"   name="viviendaElectricidad" >
                                 <span class="custom-checkbox"></span> Vivienda Electricidad</label>
                             </div>
+                            
                             <div class="checkbox">
                               <label>
-                                <input type="checkbox" value="viviendaAgua">
+                                <input type="checkbox" name="viviendaAgua" >
                                 <span class="custom-checkbox"></span> Vivienda Agua </label>
                             </div>
                              <div class="checkbox">
                               <label>
-                                <input type="checkbox" value="viviendaDrenaje">
+                                <input type="checkbox" name="viviendaDrenaje"  >
                                 <span class="custom-checkbox"></span> Vivienda Drenaje</label>
                             </div>
                              <div class="checkbox">
                               <label>
-                                <input type="checkbox" value="viviendaGas">
+
+                                <input type="checkbox" name="viviendaGas"  >
                                 <span class="custom-checkbox"></span> Vivienda Gas</label>
                             </div>
                              <div class="checkbox">
                               <label>
-                                <input type="checkbox" value="viviendaTelefonos">
+                                <input type="checkbox" name="viviendaTelefono" >
                                 <span class="custom-checkbox"></span> Vivienda Telefono</label>
                             </div>
                              <div class="checkbox">
                               <label>
-                                <input type="checkbox" value="viviendaInternet">
+                                <input type="checkbox"   name="viviendaInternet">
                                 <span class="custom-checkbox"></span> Vivienda Internet</label>
                             </div>
                           </div>
@@ -430,41 +410,3 @@
   </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
 
-<!--
-public $pdo;
-  public $idBeneficiario;
-  public $curp;
-  public $primerApellido;
-  public $segundoApellido;
-  public $nombres;
-  public $idIdentificacion;
-  public $idTipoVialidad;
-  public $nombreVialidad;
-  public $noExterior;
-  public $noInterior;
-  public $idAsentamientos;
-  public $idLocalidad;
-  public $entreVialidades;
-  public $descripcionUbicacion;
-  public $estudioSocioeconomico;
-  public $idEstadoCivil;
-  public $jefeFamilia;
-  public $idOcupacion;
-  public $idIngresoMensual;
-  public $integrantesFamilia;
-  public $dependientesEconomicos;
-  public $idVivienda;
-  public $noHabitantes;
-  public $viviendaElectricidad;
-  public $viviendaAgua;
-  public $viviendaDrenaje;
-  public $viviendaGas;
-  public $viviendaTelefono;
-  public $viviendaInternet;
-  public $idNivelEstudios;
-  public $idSeguridadSocial;
-  public $idDiscapacidad;
-  public $idGrupoVulnerable;
-  public $beneficiarioColectivo;
-
--->

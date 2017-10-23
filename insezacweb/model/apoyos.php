@@ -25,7 +25,7 @@ class Apoyos
 	}
 
 		//Metdodo para listar
-		public function Listar($nomPrograma)
+		public function Listar()
 		{
 			try
 			{

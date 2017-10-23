@@ -16,11 +16,11 @@
 			<div class="block-web">
 				<div class="header">
 					<div class="row" style="margin-top: 15px; margin-bottom: 12px;">
-						<div class="col-sm-7">
+						<div class="col-sm-6">
 							<div class="actions"> </div>
 							<h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Localidades</h2>
 						</div>
-						<div class="col-md-5">
+						<div class="col-md-6">
 							<div class="btn-group pull-right">
 								<b> 
 									<?php if($_SESSION['user_type']==1){?>
