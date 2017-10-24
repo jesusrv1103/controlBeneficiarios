@@ -61,6 +61,9 @@ class UsuarioController{
 		$page="view/usuario/index.php";
 		require_once 'view/index.php';
 	}
+
+
+
 	//Metodo  para eliminar
 	public function Eliminar(){
 		if(isset($_REQUEST['acceso'])){
