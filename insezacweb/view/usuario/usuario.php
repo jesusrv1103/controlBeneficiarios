@@ -31,7 +31,6 @@
       </div>
       <div class="porlets-content">
         <form action="?c=Usuario&a=Guardar" method="post" class="form-horizontal row-border" parsley-validate novalidate>
-<<<<<<< HEAD
 
           <input hidden name="idUsuario"  value="<?php echo $usuario->idUsuario != null ? $usuario->idUsuario : 0;  ?>"/>
 
@@ -51,14 +50,12 @@
             <label class="col-sm-3 control-label">Contraseña<strog class="theme_color">*</strog></label>
             <div class="col-sm-3">
               <input type="password" name="password" id="password" class="form-control" required placeholder="Password" />
-=======
          <?php if(isset($mensaje) && !isset($error)){?>
          <div class="row">
           <div class="col-md-12">
             <div class="alert alert-success fade in">
               <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
               <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
->>>>>>> 662d0e4f0c101516b6ad3d4c35d0a1467722eecf
             </div>
           </div>
         </div> 

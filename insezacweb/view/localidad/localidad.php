@@ -30,11 +30,11 @@
           </div>
         </div>
         <div class="porlets-content">
-          <form action="?c=Localidad&a=Guardar<?php if(isset($nuevoRegistro)){ echo "&nuevoRegistro=true"; } ?>" method="post" class="form-horizontal row-border"  parsley-validate novalidate>
+          <form action="?c=Localidad&a=Guardar<?php if(isset($nuevoRegistro)){ echo "&nuevoRegistro=true"; } ?>" method="POST" class="form-horizontal row-border"  parsley-validate novalidate>
             <div class="form-group">
               <label class="col-sm-3 control-label">Clave de localidad<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-               <input autofocus name="idLocalidad" parsley-type="number" class="form-control" <?php if ($localidad->idLocalidad!= null){ ?> disable <?php } ?>  required value="<?php echo $localidad->idLocalidad != null ? $localidad->idLocalidad  : "";  ?>" placeholder="Ingrese la clave de la localidad"  <?php if($localidad->idLocalidad != null){ ?> disabled <?php } ?>/>
+               <input autofocus name="idLocalidad" id="idLocalidad" parsley-type="number" class="form-control" required value="<?php echo $localidad->idLocalidad != null ? $localidad->idLocalidad  : "";  ?>" placeholder="Ingrese la clave de la localidad"/>
              </div>
            </div><!--/form-group-->
            <div class="form-group">
