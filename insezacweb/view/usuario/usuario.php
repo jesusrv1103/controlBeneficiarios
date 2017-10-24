@@ -31,28 +31,7 @@
       </div>
       <div class="porlets-content">
         <form action="?c=Usuario&a=Guardar" method="post" class="form-horizontal row-border" parsley-validate novalidate>
-<<<<<<< HEAD
 
-          <input hidden name="idUsuario"  value="<?php echo $usuario->idUsuario != null ? $usuario->idUsuario : 0;  ?>"/>
-
-          <div class="form-group">
-            <label class="col-sm-3 control-label">Usuario<strog class="theme_color">*</strog></label>
-            <div class="col-sm-6">
-              <input name="usuario" type="text" class="form-control" required value="<?php echo $usuario->idUsuario != null ? $usuario->usuario : "";  ?>" placeholder="Ingrese el nombre de usuario" <?php if($usuario->idUsuario != null){ ?>  <?php } ?> autofocus/>
-            </div>
-          </div><!--/form-group-->
-          <div class="form-group">
-            <label class="col-sm-3 control-label">Dirección<strog class="theme_color">*</strog></label>
-            <div class="col-sm-6">
-              <input name="direccion" type="text" class="form-control" required value="<?php echo $usuario->idUsuario != null ? $usuario->direccion : "";  ?>" placeholder="Ingrese la direccion que pertenece el usuario"/>
-            </div>
-          </div><!--/form-group-->
-          <div class="form-group">
-            <label class="col-sm-3 control-label">Contraseña<strog class="theme_color">*</strog></label>
-            <div class="col-sm-3">
-              <input type="password" name="password" id="password" class="form-control" required placeholder="Password" />
-=======
->>>>>>> 6a74e07bdd7cbb180662e78d420ed18476d14a7c
          <?php if(isset($mensaje) && !isset($error)){?>
          <div class="row">
           <div class="col-md-12">
@@ -73,7 +52,6 @@
         </div>
         <?php } ?>
         <input hidden name="idUsuario"  value="<?php echo $usuario->idUsuario != null ? $usuario->idUsuario : 0;  ?>"/>
-
         <div class="form-group">
           <label class="col-sm-3 control-label">Usuario<strog class="theme_color">*</strog></label>
           <div class="col-sm-6">
