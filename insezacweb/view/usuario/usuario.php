@@ -1,7 +1,7 @@
  <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
-    <h1>Inicio</h1>
-    <h2 class="">Usuarios</h2>
+    <h1>Usuarios</h1>
+    <h2 class=""><?php echo $usuario->idUsuario != null ? 'Actualizar usuario' : 'Alta usuario'; ?></h2>
   </div>
   <div class="pull-right">
     <ol class="breadcrumb">
@@ -31,6 +31,7 @@
       </div>
       <div class="porlets-content">
         <form action="?c=Usuario&a=Guardar" method="post" class="form-horizontal row-border" parsley-validate novalidate>
+<<<<<<< HEAD
 
           <input hidden name="idUsuario"  value="<?php echo $usuario->idUsuario != null ? $usuario->idUsuario : 0;  ?>"/>
 
@@ -50,6 +51,8 @@
             <label class="col-sm-3 control-label">Contraseña<strog class="theme_color">*</strog></label>
             <div class="col-sm-3">
               <input type="password" name="password" id="password" class="form-control" required placeholder="Password" />
+=======
+>>>>>>> 6a74e07bdd7cbb180662e78d420ed18476d14a7c
          <?php if(isset($mensaje) && !isset($error)){?>
          <div class="row">
           <div class="col-md-12">

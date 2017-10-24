@@ -193,39 +193,3 @@
  </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
 
-
-
-
-
-<!--div class="container clear_both padding_fix">
- <div class="row">
-   <div class="col-md-12">
-     <a href="#" class="ticket_open_comment">
-       <div class="btn-group"><i class="fa fa-user"></i></div>
-       <span>Programa 1</span>
-       <p>Descripción de programa 1</p>
-       <div class="ticket_action" style="margin-top: -35px;">
-         <div class="ticket_action_view">i</div>
-       </div>
-     </a>
-   </div>
- </div>
-</div>
-<div class="container clear_both padding_fix">
- <div class="row">
-   <div class="col-md-12">
-     <a href="#" class="ticket_open_comment">
-       <div class="btn-group"><i class="fa fa-user"></i></div>
-       <span>Programa 2</span>
-       <p>Descripción de programa 1</p>
-       <div class="ticket_action" style="margin-top: -35px;">
-         <div class="ticket_action_view">i</div>
-       </div>
-     </a>
-   </div>
- </div>
-</div-->
-
-
-
-
