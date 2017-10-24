@@ -36,29 +36,32 @@
                     <div class="user-profile-content">
                       <h5><strong>Datos Generales</strong></h5>
                       <form id="frm-beneficiario" action="?c=Beneficiario&a=Guardar" method="post" role="form" enctype="multipart/form-data">
-                         <input type="hidden" name="idBeneficiario" value="<?php echo $beneficario->idBeneficiario; ?>" />
+                        <input type="hidden" name="idBeneficiario"  value="<?php echo $beneficiario->idBeneficiario != null ? $beneficiario->idBeneficiario : 0;  ?>"/>
+                           
+                       
                         <div class="form-group">
                           <label class="col-sm-3 control-label">CURP</label>
                           <div class="col-sm-6">
-                            <input name="curp" type="text" class="form-control" required placeholder="Ingrese su curp" />
+                        
+                            <input name="curp" type="text" class="form-control" value="<?php echo $beneficiario->curp;?>" required placeholder="Ingrese su curp" />
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Primer Apellido</label>
                           <div class="col-sm-6">
-                            <input name="primerApellido" type="text" class="form-control" required placeholder="Ingrese su Primer Apellido" />
+                            <input name="primerApellido" value="<?php echo $beneficiario->primerApellido;?>" type="text" class="form-control" required placeholder="Ingrese su Primer Apellido" />
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
                           <label class="col-sm-3 control-label">*Segundo Apillido</label>
                           <div class="col-sm-6">
-                            <input name="segundoApellido" type="text" class="form-control" required placeholder="Ingrese su Segundo Apellido" />
+                            <input name="segundoApellido" value="<?php echo $beneficiario->segundoApellido;?>" type="text" class="form-control" required placeholder="Ingrese su Segundo Apellido" />
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Nombres</label>
                           <div class="col-sm-6">
-                            <input name="nombres" type="text" class="form-control" required placeholder="Ingrese sus Nombres" />
+                            <input name="nombres" value="<?php echo $beneficiario->nombres;?>" type="text" class="form-control" required placeholder="Ingrese sus Nombres" />
                           </div>
                         </div><!--/form-group-->
                         
@@ -119,13 +122,13 @@
                           <div class="col-sm-9">
                             <div class="radio">
                              <label>
-                              <input type="radio" name="beneficiarioColectivo"  value="si" checked="">
+                              <input type="radio" name="beneficiarioColectivo"  value="Si"  <?php if($beneficiario->beneficiarioColectivo=="Si"){ ?> checked <?php } ?>>
                                Si
                              </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                  <input type="radio" name="beneficiarioColectivo"  value="no">
+                                  <input type="radio" name="beneficiarioColectivo"  <?php if($beneficiario->beneficiarioColectivo=="Si"){ ?> checked <?php } ?>  value="No">
                                    No 
                                 </label>
                             </div>
@@ -159,19 +162,19 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Nombre de la vialidad</label>
                           <div class="col-sm-6">
-                            <input name="nombreVialidad" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" />
+                            <input name="nombreVialidad" value="<?php echo $beneficiario->nombreVialidad;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" />
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Numero Exterior</label>
                           <div class="col-sm-6">
-                            <input name="noExterior"  class="form-control" required placeholder="Ingrese el numero exterior de su vivienda" type="text" />
+                            <input name="noExterior" value="<?php echo $beneficiario->noExterior;?>"  class="form-control" required placeholder="Ingrese el numero exterior de su vivienda" type="text" />
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
                           <label class="col-sm-3 control-label">*Numero Interior</label>
                           <div class="col-sm-6">
-                            <input name="noInterior"  class="form-control" required placeholder="Ingrese el nombre de su vialidad" type="text" />
+                            <input name="noInterior" value="<?php echo $beneficiario->noInterior;?>" class="form-control" required placeholder="Ingrese el nombre de su vialidad" type="text" />
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
@@ -202,13 +205,13 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Entre que vialidades</label>
                           <div class="col-sm-6">
-                            <input name="entreVialidades" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" />
+                            <input name="entreVialidades" value="<?php echo $beneficiario->entreVialidades;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" />
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Descripcion de la ubicacion</label>
-                          <div class="col-sm-6">
-                            <textarea name="descripcionUbicacion" rows="8" cols="68"></textarea>
+                          <div class="col-sm-6">  
+                            <textarea name="descripcionUbicacion"  rows="8" cols="68"><?php echo $beneficiario->descripcionUbicacion;?></textarea>
                           </div>
                         </div><!--/form-group-->
 
@@ -226,13 +229,13 @@
                           <div class="col-sm-9">
                             <div class="radio">
                              <label>
-                              <input type="radio" name="estudioSocioeconomico"  value="Si" checked="">
+                              <input type="radio" name="estudioSocioeconomico"  value="Si"  <?php if($beneficiario->estudioSocioeconomico=="Si"){ ?> checked <?php } ?> >
                                Si
                              </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                  <input type="radio" name="estudioSocioeconomico"  value="No">
+                                  <input type="radio" name="estudioSocioeconomico"  value="No"  <?php if($beneficiario->estudioSocioeconomico=="Si"){ ?> checked <?php } ?>>
                                    No 
                                 </label>
                             </div>
@@ -243,13 +246,13 @@
                           <div class="col-sm-9">
                             <div class="radio">
                              <label>
-                              <input type="radio" name="jefeFamilia"  value="si" checked="">
+                              <input type="radio" name="jefeFamilia"  value="Si" <?php if($beneficiario->jefeFamilia=="Si"){ ?> checked <?php } ?>>
                                Si
                              </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                  <input type="radio" name="jefeFamilia"  value="no">
+                                  <input type="radio" name="jefeFamilia"  value="No"  <?php if($beneficiario->jefeFamilia=="No"){ ?> checked <?php } ?>>
                                    No 
                                 </label>
                             </div>
@@ -294,20 +297,20 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Integrantes Familia</label>
                           <div class="col-sm-6">
-                            <input name="integrantesFamilia" type="text" class="form-control" required placeholder="Ingrese el numero de integrantes de su familia" />
+                            <input name="integrantesFamilia" value="<?php echo $beneficiario->integrantesFamilia;?>" type="text" class="form-control" required placeholder="Ingrese el numero de integrantes de su familia" />
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Dependientes Economicos</label>
                           <div class="col-sm-6">
-                            <input name="dependientesEconomicos" type="text" class="form-control" required placeholder="Ingrese el numero de personas que dependen  de usted" />
+                            <input name="dependientesEconomicos" value="<?php echo $beneficiario->dependientesEconomicos;?>" type="text" class="form-control" required placeholder="Ingrese el numero de personas que dependen  de usted" />
                           </div>
                         </div><!--/form-group-->
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Grupo Vulnerable</label>
                           <div class="col-sm-6">
-                          
                             <select name="idGrupoVulnerable" class="form-control" >
+
                               <?php foreach($this->model2->Listar('grupoVulnerable') as $r): ?>
                               <option value="<?php echo $r->idGrupoVulnerable; ?>"> 
                                 <?php echo $r->grupoVulnerable; ?>
@@ -343,7 +346,7 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">No Habitantes </label>
                           <div class="col-sm-6">
-                            <input name="noHabitantes" type="text" class="form-control" required placeholder="Ingrese el N° de Habitantes que residen en la vivienda" />
+                            <input name="noHabitantes"   type="text" class="form-control" required placeholder="Ingrese el N° de Habitantes que residen en la vivienda" value="<?php echo $beneficiario->noHabitantes;?>" />
                           </div>
                         </div><!--/form-group-->
 
@@ -353,34 +356,34 @@
 
                             <div class="checkbox">
                               <label>
-                                <input type="checkbox"   name="viviendaElectricidad" >
+                                <input type="checkbox"   name="viviendaElectricidad" <?php if($beneficiario->viviendaElectricidad=="Si"){ ?> checked <?php } ?>  >
                                 <span class="custom-checkbox"></span> Vivienda Electricidad</label>
                             </div>
                             
                             <div class="checkbox">
                               <label>
-                                <input type="checkbox" name="viviendaAgua" >
+                                <input type="checkbox" name="viviendaAgua" <?php if($beneficiario->viviendaAgua=="Si"){ ?> checked <?php } ?>  >
                                 <span class="custom-checkbox"></span> Vivienda Agua </label>
                             </div>
                              <div class="checkbox">
                               <label>
-                                <input type="checkbox" name="viviendaDrenaje"  >
+                                <input type="checkbox" name="viviendaDrenaje" <?php if($beneficiario->viviendaDrenaje=="Si"){ ?> checked <?php } ?>   >
                                 <span class="custom-checkbox"></span> Vivienda Drenaje</label>
                             </div>
                              <div class="checkbox">
                               <label>
 
-                                <input type="checkbox" name="viviendaGas"  >
+                                <input type="checkbox" name="viviendaGas" <?php if($beneficiario->viviendaGas=="Si"){ ?> checked <?php } ?>  value="<?php echo $beneficiario->viviendaGas;?>">
                                 <span class="custom-checkbox"></span> Vivienda Gas</label>
                             </div>
                              <div class="checkbox">
                               <label>
-                                <input type="checkbox" name="viviendaTelefono" >
+                                <input type="checkbox" name="viviendaTelefono" <?php if($beneficiario->viviendaTelefono=="Si"){ ?> checked <?php } ?> >
                                 <span class="custom-checkbox"></span> Vivienda Telefono</label>
                             </div>
                              <div class="checkbox">
                               <label>
-                                <input type="checkbox"   name="viviendaInternet">
+                                <input type="checkbox"    name="viviendaInternet" <?php if($beneficiario->viviendaInternet=="Si"){ ?> checked <?php } ?> >
                                 <span class="custom-checkbox"></span> Vivienda Internet</label>
                             </div>
                           </div>

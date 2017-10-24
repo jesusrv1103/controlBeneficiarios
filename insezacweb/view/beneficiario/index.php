@@ -27,6 +27,7 @@
                   <?php if($_SESSION['user_type']==1){?>
                   <div class="btn-group" style="margin-right: 10px;"> 
                     <a class="btn btn-sm btn-success" href="?c=beneficiario&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title=""> <i class="fa fa-plus"></i> Registrar beneficiario </a>
+                         <a class="btn btn-sm btn-success" href="?c=beneficiario&a=crud1" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title=""> <i class="fa fa-plus"></i> Registrar beneficiario </a>
                     <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="left" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
                   </div>
                   <?php } ?>
@@ -75,14 +76,15 @@
                 <td><?php echo $r->primerApellido ?> </td>
                 <td><?php echo $r->segundoApellido ?> </td>
                 <td><?php echo $r->nombres ?> </td>
-
+              
                 <td class="center">
-                  <a class="btn btn-primary"  role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+                  <a class="btn btn-primary"  role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario;?>"><i class="fa fa-edit"></i></a>
                 </td>
                 <td class="center">
                  <a class="btn btn-danger" onclick="eliminarBeneficiario(<?php echo $r->idBeneficiario;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                </td>
                <td class="center">
+              
                 <a class="btn btn-info"  role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>"><i class="fa fa-eye"></i></a>
               </td>
             </tr>
