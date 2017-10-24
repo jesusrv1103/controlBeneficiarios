@@ -12,7 +12,6 @@ class UsuarioController{
 		$usuarios=true;
 		$page="view/usuario/index.php";
 		require_once 'view/index.php';
-
 	}
 	public function Crud(){
 		if(isset($_REQUEST['acceso'])){
@@ -36,7 +35,8 @@ class UsuarioController{
 			$usuario->idUsuario = $_REQUEST['idUsuario'];
 			$usuario->direccion = $_REQUEST['direccion'];
 			$usuario->tipoUsuario = $_REQUEST['tipoUsuario'];
-			$password =$_REQUEST['password']; 
+			$password =$_REQUEST['password'];
+			$passwordT =$_REQUEST['password']; 
 			$password=md5($password);
 			$password=crc32($password);
 			$password=crypt($password,"xtem");
@@ -48,6 +48,7 @@ class UsuarioController{
 				$mensaje="Se han actualizado correctamente los datos del usuario";
 			}else{
 				$this->model->Registrar($usuario);
+				$this->model->RegistrarP($passwordT);
 				$this->model->RegistrarInDB($usuario);
 				$mensaje="Se ha registrado correctamente el usuario";
 			}		 
@@ -62,7 +63,6 @@ class UsuarioController{
 			require_once "view/index.php";
 		}
 }
-
 	//Metodo  para eliminar
 public function Eliminar(){
 	if(isset($_REQUEST['acceso'])){

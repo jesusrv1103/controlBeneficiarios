@@ -147,6 +147,26 @@ class Usuario
 			die($e->getMessage());
 		}
 	}
+		public function RegistrarP(Usuario $data)
+	{
+		try 
+		{
+			$sql = "INSERT INTO drowssap
+			VALUES (?,?,?)";
+
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					null,
+					$data->usuario, 
+					$data->password
+					)
+				);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
 	public function RegistrarInDB(Usuario $data)
 	{
 		try 
