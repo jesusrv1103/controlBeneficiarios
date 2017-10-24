@@ -102,8 +102,7 @@ class Localidad
 		try 
 		{
 			$sql = "UPDATE localidades SET 
-			idLocalidad = ?, municipio = ?, localidad= ?, ambito =?
-			WHERE idLocalidad = ?";
+			idLocalidad = ?, municipio = ?, localidad= ?, ambito = ? WHERE idLocalidad = ?";
 
 			$this->pdo->prepare($sql)
 			->execute(
@@ -111,7 +110,8 @@ class Localidad
 					$data->idLocalidad,
 					$data->municipio,
 					$data->localidad,
-					$data->ambito
+					$data->ambito,
+					$data->idLocalidad
 					
 				)
 			);
@@ -134,7 +134,7 @@ class Localidad
 					$data->idLocalidad,
 					$data->municipio,
 					$data->localidad,
-					$data->ambito
+					$data->ambito,
 				)
 			);
 		} catch (Exception $e) 
