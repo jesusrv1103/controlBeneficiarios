@@ -8,8 +8,14 @@ class Database
 		try
 		{
 			if (!isset($_SESSION['seguridad']) || $_SESSION['user_type']==1) {
+<<<<<<< HEAD
 				//$pdo = new PDO('mysql:host=localhost;dbname=INSEZAC;charset=utf8', 'root', '123-horses');//USO JRV	
 				$pdo = new PDO('mysql:host=localhost;dbname=INSEZAC;charset=utf8', 'root', '123-horses');
+=======
+
+				//$pdo = new PDO('mysql:host=localhost;dbname=INSEZAC;charset=utf8', 'root', '123-horses');//USO JRV
+				$pdo = new PDO('mysql:host=localhost;dbname=INSEZAC;charset=utf8', 'root', '');
+>>>>>>> 4dc71605340b4f666da03c599267803ca8791fba
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);	
 				return $pdo;
 			}else{
@@ -25,5 +31,4 @@ class Database
 			echo $e->getMessage();
 		}
 	}
-
 }

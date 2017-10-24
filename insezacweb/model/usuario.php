@@ -48,13 +48,15 @@ class Usuario
 			die($e->getMessage());
 		}
 	}
-	public function Obtener2()
+	public function Obtener2($username)
 	{
 		try 
 		{
 			$stm = $this->pdo
-			->prepare("SELECT usuario FROM usuarios");
-			$stm->execute();
+			->prepare("SELECT * FROM usuarios WHERE usuario=?");
+			$stm->execute(
+				array($username)
+			);
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) 
 		{
@@ -113,7 +115,6 @@ class Usuario
 	}
 	public function ActualizarInDB(Usuario $data,$password)
 	{
-		echo $data->usuario;
 		try 
 		{
 			$sql = "set password for $data->usuario@'localhost'=password('$password')";
@@ -128,7 +129,7 @@ class Usuario
 	{
 		try 
 		{
-			$sql = "INSERT INTO usuarioS
+			$sql = "INSERT INTO usuarios
 			VALUES (?,?,?,?,?)";
 
 			$this->pdo->prepare($sql)

@@ -121,7 +121,7 @@ public function Guardar(){
         $mensaje="Se ha registrado correctamente la localidad";
       } 
     $localidad = true;
-    $catalogos=true; 
+    $catalogos=true;
     $page="view/localidad/index.php";
     require_once 'view/index.php';
   }

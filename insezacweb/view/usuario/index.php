@@ -18,7 +18,7 @@
          <div class="row" style="margin-top: 15px; margin-bottom: 12px;">
           <div class="col-sm-8">
             <div class="actions"> </div>
-            <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Administracion de usuarios</h2>
+            <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Administración de usuarios</h2>
           </div>
           <div class="col-sm-4">
            <div class="btn-group pull-right" style="margin-right: 10px;">
@@ -102,7 +102,7 @@
 </div><!--container clear_both padding_fix-->
 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content panel default red_border horizontal_border_1">
       <div class="modal-body"> 
         <div class="row">
           <div class="block-web">
