@@ -48,6 +48,9 @@
               </button>
             </div>
           </div>
+          <div class="col-sm-10" style="margin-top: -25px">
+            <a href="?c=usuario">Volver</a>
+         </div>
         </div>
       </form>
     </div>

@@ -29,10 +29,10 @@ class UsuarioController{
 	}
 	public function Guardar(){
 		$usuario= new Usuario();
-		$consulta=$this->model->Obtener2($usuario);
+		$usuario->usuario = $_REQUEST['usuario'];
+		$consulta=$this->model->Obtener2($usuario->usuario);
 		if($consulta==null){
 			$usuario->idUsuario = $_REQUEST['idUsuario'];
-			$usuario->usuario = $_REQUEST['usuario'];
 			$usuario->direccion = $_REQUEST['direccion'];
 			$usuario->tipoUsuario = $_REQUEST['tipoUsuario'];
 			$password =$_REQUEST['password'];
@@ -56,12 +56,12 @@ class UsuarioController{
 		$usuarios=true; //variable cargada para activar la opcion usuarios en el menu
 		$page="view/usuario/index.php";
 		require_once 'view/index.php';
-	}else{
-		$error=true;
-		$mensaje="Usuario Existente";
-		$page="view/usuario/usuario.php";
-		require_once "view/index.php";
-	}
+		}else{
+			$error=true;
+			$mensaje="Usuario Existente";
+			$page="view/usuario/usuario.php";
+			require_once "view/index.php";
+		}
 }
 	//Metodo  para eliminar
 public function Eliminar(){

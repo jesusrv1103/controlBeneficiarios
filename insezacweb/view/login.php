@@ -34,7 +34,7 @@ body{
         <div class="panel-heading border login_heading">INICIAR SESIÓN</div>	
         <?php if(isset($error)){ ?>
           <div class="alert alert-danger">
-            <i class="fa fa-warning"></i><?php echo $error?>
+            <i class="fa fa-warning"></i><?php echo $error;?>
           </div>
           <?php } ?>
         <form role="form" action="index.php?c=Login&a=Acceder" class="form-horizontal" method="post">

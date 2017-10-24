@@ -46,6 +46,7 @@ class Login
        header("Location: $url");
    }
  
+ 
    public function logOut()
    {
         session_destroy();
