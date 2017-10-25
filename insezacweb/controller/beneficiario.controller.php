@@ -98,11 +98,12 @@ public function Upload(){
 public function Crud(){
  $beneficiario = new Beneficiario();
  if(isset($_REQUEST['idBeneficiario'])){
-  $beneficiario = $this->model->Obtener($_REQUEST['idBeneficiario']);
+  $beneficiario = $this->model->Listar($_REQUEST['idBeneficiario']);  
 }
 $page="view/beneficiario/beneficiario.php";
 require_once 'view/index.php';
 }
+
 
 public function Importar($archivo){
   if (file_exists("./assets/importaciones/bak_" . $archivo)) {

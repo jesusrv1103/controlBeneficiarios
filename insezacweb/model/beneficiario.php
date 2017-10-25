@@ -60,6 +60,7 @@ class Beneficiario
 				b.primerApellido, 
 				b.segundoApellido,
 				b.nombres, 
+				b.idIdentificacion,
 				idOf.identificacion as nomTipoI, 
 				tV.tipoVialidad,
 				b.nombreVialidad,
@@ -85,6 +86,8 @@ class Beneficiario
 				b.viviendaTelefono,
 				b.viviendaInternet,
 				nE.nivelEstudios, 
+				b.idNivelEstudios,
+				b.idSeguridadSocial,
 				sS.seguridadSocial,
 				d.discapacidad, 
 				gV.grupoVulnerable,
@@ -207,6 +210,15 @@ class Beneficiario
 		try 
 		{
 			$sql = "UPDATE beneficiarios SET 
+			curp = ?,
+			primerApellido = ?,
+			segundoApellido = ?,
+			nombres = ?,
+			idIdentificacion = ?,
+			idNivelEstudios = ?,
+			idSeguridadSocial = ?,
+			idDiscapacidad = ?,
+			beneficiarioColectivo =?,
 			idTipoVialidad = ?,
 			nombreVialidad = ?,
 			noExterior = ?,
@@ -214,71 +226,15 @@ class Beneficiario
 			idAsentamientos = ?,
 			idLocalidad = ?,
 			entreVialidades = ?,
-			descripcionUbicacion = ?
-			WHERE idBeneficiario = ?";
-
-			$this->pdo->prepare($sql)
-			->execute(
-				array(
-					$data->idTipoVialidad, 
-					$data->nombreVialidad,
-					$data->noExterior,
-					$data->noInterior,
-					$data->idAsentamientos,
-					$data->idLocalidad,
-					$data->entreVialidades,
-					$data->descripcionUbicacion,
-					$data->idBeneficiario
-				)
-			);
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
-	}
-
-		//Metodo para actualizar
-	public function Actualizar1($data)
-	{
-		try 
-		{
-			$sql = "UPDATE beneficiarios SET 
+			descripcionUbicacion = ?,
 			estudioSocioeconomico = ?,
-			jefeFamilia = ?,
 			idEstadoCivil = ?,
+			jefeFamilia = ?,
 			idOcupacion = ?,
 			idIngresoMensual = ?,
 			integrantesFamilia = ?,
 			dependientesEconomicos = ?,
-			idGrupoVulnerable =?
-			WHERE idBeneficiario = ?";
-
-			$this->pdo->prepare($sql)
-			->execute(
-				array(
-					$data->estudioSocioeconomico,
-					$data->jefeFamilia,
-					$data->idEstadoCivil,
-					$data->idOcupacion,
-					$data->idIngresoMensual,
-					$data->integrantesFamilia,
-					$data->dependientesEconomicos,
-					$data->idGrupoVulnerable,
-					$data->idBeneficiario
-				)
-			);
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
-	}
-
-
-	public function Actualizar2($data)
-	{
-		try 
-		{
-			$sql = "UPDATE beneficiarios SET 
+			idGrupoVulnerable = ?,
 			idVivienda = ?,
 			noHabitantes = ?,
 			viviendaElectricidad = ?,
@@ -292,7 +248,16 @@ class Beneficiario
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
-					$data->idTipoVialidad, 
+					$data->curp,
+					$data->primerApellido,
+					$data->segundoApellido,
+					$data->nombres,
+					$data->idIdentificacion,
+					$data->idNivelEstudios,
+					$data->idSeguridadSocial,
+					$data->idDiscapacidad,
+					$data->beneficiarioColectivo,
+					$data->idTipoVialidad,
 					$data->nombreVialidad,
 					$data->noExterior,
 					$data->noInterior,
@@ -300,14 +265,36 @@ class Beneficiario
 					$data->idLocalidad,
 					$data->entreVialidades,
 					$data->descripcionUbicacion,
+					$data->estudioSocioeconomico,
+					$data->idEstadoCivil,
+					$data->jefeFamilia,
+					$data->idOcupacion,
+					$data->idIngresoMensual,
+					$data->integrantesFamilia,
+					$data->dependientesEconomicos,
+					$data->idGrupoVulnerable,
+					$data->idVivienda,
+					$data->noHabitantes,
+					$data->viviendaElectricidad,
+					$data->viviendaAgua,
+					$data->viviendaDrenaje,
+					$data->viviendaGas,
+					$data->viviendaTelefono,
+					$data->viviendaInternet,
 					$data->idBeneficiario
-				)
+
+					)
 			);
+			
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
 		}
 	}
+
+	
+
+	
 
 
 	public function Registrar(Beneficiario $data)

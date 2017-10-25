@@ -61,7 +61,7 @@
                <tr>
                  <th>CURP</th>
                  <th>Primer apellido</th>
-                 <th>Segunda apellido</th>
+                 <th>Segundo apellido</th>
                  <th>Nombre</th>
                  <?php if($_SESSION['user_type']==1){?>
                  <td><center><b>Editar</b></center></td>
@@ -73,6 +73,7 @@
              <tbody>
               <?php foreach($this->model->Listar1() as $r): ?>
                 <tr class="grade">
+
                   <td><?php echo $r->curp ?> </td>
                   <td><?php echo $r->primerApellido ?> </td>
                   <td><?php echo $r->segundoApellido ?> </td>
@@ -106,7 +107,6 @@
            </tr>
          </tfoot>
        </table>
-
      </div><!--/table-responsive-->
    </div><!--/porlets-content-->
  </div><!--/block-web-->
