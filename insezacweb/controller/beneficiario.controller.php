@@ -70,13 +70,14 @@ class BeneficiarioController{
   isset($_REQUEST['viviendaDrenaje'])? $beneficiario->viviendaDrenaje="Si": $beneficiario->viviendaDrenaje="No";
   isset($_REQUEST['viviendaGas'])? $beneficiario->viviendaGas="Si": $beneficiario->viviendaGas="No";
   isset($_REQUEST['viviendaTelefono'])? $beneficiario->viviendaTelefono="Si": $beneficiario->viviendaTelefono="No";
-  isset($_REQUEST['viviendaInternet'])? $beneficiario->viviendaInternet="Si": $beneficiario->viviendaInternet="No";
+  isset($_REQUEST['viviendaInternet'])? $beneficiario->viiendaInternet="Si": $beneficiario->viviendaInternet="No";
   $beneficiario->idBeneficiario > 0 
   ? $this->model->Actualizar($beneficiario)
   : $this->model->Registrar($beneficiario);
   $administracion = true;
   $inicio = false;
   $beneficiarios = false;
+  $mensaje="El beneficiario se ha registrado correctamente";
   $page="view/beneficiario/index.php";
   require_once 'view/index.php';
 }
