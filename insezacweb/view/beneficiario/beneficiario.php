@@ -44,26 +44,28 @@
                     <h5><strong>Datos Generales</strong></h5>
                     <form id="frm-beneficiario" action="?c=Beneficiario&a=Guardar" method="post" role="form" enctype="multipart/form-data" parsley-validate novalidate>
                       <input type="hidden" name="idBeneficiario"  value="<?php echo $beneficiario->idBeneficiario != null ? $beneficiario->idBeneficiario : 0;  ?>"/>
-
+                      
                       <div class="form-group">
                         <label class="col-sm-3 control-label">CURP<strog class="theme_color">*</strog></label>
                         <div class="col-sm-6">
-
                           <input name="curp" type="text" class="form-control" value="<?php echo $beneficiario->curp;?>" required placeholder="Ingrese la curp del beneficiario"/>
                         </div>
                       </div><!--/form-group-->
+
                       <div class="form-group">
                         <label class="col-sm-3 control-label">Primer Apellido<strog class="theme_color">*</strog></label>
                         <div class="col-sm-6">
                           <input name="primerApellido" value="<?php echo $beneficiario->primerApellido;?>" type="text" class="form-control" required placeholder="Ingrese el primer apellido del beneficiario" />
                         </div>
                       </div><!--/form-group-->
+
                       <div class="form-group">
                         <label class="col-sm-3 control-label">Segundo Apellido</label>
                         <div class="col-sm-6">
                           <input name="segundoApellido" value="<?php echo $beneficiario->segundoApellido;?>" type="text" class="form-control" placeholder="Ingrese el segundo apellido del beneficiario" />
                         </div>
                       </div><!--/form-group-->
+
                       <div class="form-group">
                         <label class="col-sm-3 control-label">Nombre(s)<strog class="theme_color">*</strog></label>
                         <div class="col-sm-6">
@@ -72,7 +74,7 @@
                       </div><!--/form-group-->
 
                       <div class="form-group">
-                        <label class="col-sm-3 control-label">Identificacion<strog class="theme_color">*</strog></label>
+                        <label class="col-sm-3 control-label">Identificación<strog class="theme_color">*</strog></label>
                         <div class="col-sm-6">
                           <select name="idIdentificacion" class="form-control" required>
                             <?php if($beneficiario->idBeneficiario==null){ ?>   
@@ -119,7 +121,6 @@
                         <label class="col-sm-3 control-label">Tipo de seguridad social<strog class="theme_color">*</strog></label>
                         <div class="col-sm-6">
                          <select name="idSeguridadSocial" class="form-control" required>
-
                           <?php if($beneficiario->idBeneficiario==null){ ?>   
                           <option value=""> 
                             Seleccione el tipo de seguridad social del beneficiario
@@ -143,7 +144,6 @@
                       <label class="col-sm-3 control-label">Discapacidad<strog class="theme_color">*</strog></label>
                       <div class="col-sm-6">
                        <select name="idDiscapacidad" class="form-control">
-
                         <?php if($beneficiario->idBeneficiario==null){ ?>   
                         <option value="1"> 
                           Seleccione en caso de que el beneficiario padesca de una discapacidad
@@ -168,7 +168,7 @@
                    <div class="col-sm-9">
                     <div class="radio">
                       <?php if($beneficiario->idBeneficiario==null){ ?>
-                        <input type="radio" name="beneficiarioColectivo"  value="Si" checked>Si
+                      <input type="radio" name="beneficiarioColectivo"  value="Si" checked>Si
                       <?php }else{ ?>
                       <input type="radio" name="beneficiarioColectivo"  value="Si" <?php if($beneficiario->beneficiarioColectivo=="Si"){ ?> checked <?php } ?>>Si <?php } ?>
                     </div>
@@ -180,280 +180,357 @@
                   </div>
                 </div><!--/form-group--> 
 
-
-
-
-
-
-
-
-
-
-
-                <!--+++++++++++++++++++++++++++++++++++++++++Vialid***************************-->
               </div>
             </div>
+
+            <!--+++++++++++++++++++++++++++Vialidad***************************-->
+
             <div class="tab-pane animated fadeInRight" id="vialidad">
               <div class="user-profile-content">
                 <h5><strong>Vialidad</strong></h5>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Tipo de vialidad<strog class="theme_color">*</strog></label>
+                  <div class="col-sm-6">
+                   <select name="idTipoVialidad" class="form-control">
 
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Vialidad</label>
-                  <div class="col-sm-6">
-                    <select name="idTipoVialidad" class="form-control" >
-                      <?php foreach($this->model2->Listar('tipoVialidad') as $r): ?>
-                        <option value="<?php echo $r->idTipoVialidad; ?>"> 
-                          <?php echo $r->tipoVialidad; ?>
-                        </option>
-                      <?php endforeach; ?>
-                    </select>
+                    <?php if($beneficiario->idBeneficiario==null){ ?>   
+                    <option value=""> 
+                      Seleccione el tipo de vialidad del beneficiario
+                    </option>
+                    <?php } if($beneficiario->idBeneficiario!=null){ ?>   
+                    <option value="<?php echo $beneficiario->idTipoVialidad?>"> 
+                      <?php echo $beneficiario->tipoVialidad; ?>
+                    </option>
+                    <?php } foreach($this->model2->Listar('tipoVialidad') as $r): 
+                    if($r->tipoVialidad!=$beneficiario->tipoVialidad){ ?>
+                    ?>
+                    <option value="<?php echo $r->idTipoVialidad; ?>"> 
+                      <?php echo $r->tipoVialidad; ?>
+                    </option>
+                    <?php } endforeach; ?>
+                  </select>
+                </div>
+              </div><!--/form-group-->
 
-                  </div>
-                </div><!--/form-group-->
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Nombre de la vialidad</label>
-                  <div class="col-sm-6">
-                    <input name="nombreVialidad" value="<?php echo $beneficiario->nombreVialidad;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" />
-                  </div>
-                </div><!--/form-group-->
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Numero Exterior</label>
-                  <div class="col-sm-6">
-                    <input name="noExterior" value="<?php echo $beneficiario->noExterior;?>"  class="form-control" required placeholder="Ingrese el numero exterior de su vivienda" type="text" />
-                  </div>
-                </div><!--/form-group-->
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">*Numero Interior</label>
-                  <div class="col-sm-6">
-                    <input name="noInterior" value="<?php echo $beneficiario->noInterior;?>" class="form-control" required placeholder="Ingrese el nombre de su vialidad" type="text" />
-                  </div>
-                </div><!--/form-group-->
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Asentamineto</label>
-                  <div class="col-sm-6">
-                    <select name="idAsentamientos" class="form-control" >
-                      <?php foreach($this->model2->Listar('asentamientos') as $r): ?>
-                        <option value="<?php echo $r->idAsentamientos; ?>"> 
-                          <?php echo $r->nombreAsentamiento; ?>
-                        </option>
-                      <?php endforeach; ?>
-                    </select>
-                  </div>
-                </div><!--/form-group-->
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Localidad</label>
-                  <div class="col-sm-6">
-                    <select name="idLocalidad" class="form-control" >
-                      <?php foreach($this->model2->Listar('localidades') as $r): ?>
-                        <option value="<?php echo $r->idLocalidad; ?>"> 
-                         <?php echo $r->localidad; ?>
-                       </option>
-                     <?php endforeach; ?>
-                   </select>
-
-                 </div>
-               </div><!--/form-group-->
-               <div class="form-group">
-                <label class="col-sm-3 control-label">Entre que vialidades</label>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Nombre de la vialidad<strog class="theme_color">*</strog></label>
                 <div class="col-sm-6">
-                  <input name="entreVialidades" value="<?php echo $beneficiario->entreVialidades;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" />
+                  <input name="nombreVialidad" value="<?php echo $beneficiario->nombreVialidad;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" required/>
                 </div>
               </div><!--/form-group-->
-              <div class="form-group">
-                <label class="col-sm-3 control-label">Descripcion de la ubicacion</label>
-                <div class="col-sm-6">  
-                  <textarea name="descripcionUbicacion"  rows="8" cols="68"><?php echo $beneficiario->descripcionUbicacion;?></textarea>
-                </div>
-              </div><!--/form-group-->
-            </div>
-          </div>
-          <div class="tab-pane animated fadeInRight" id="estadoSocial">
-            <div class="user-profile-content">
-              <h5><strong>Estado Social</strong></h5>
 
               <div class="form-group">
-               <label class="col-sm-3 control-label">Estudio Socioeconomico</label>
-               <div class="col-sm-9">
-                <div class="radio">
-                 <label>
-                  <input type="radio" name="estudioSocioeconomico"  value="Si"  <?php if($beneficiario->estudioSocioeconomico=="Si"){ ?> checked <?php } ?> >
-                  Si
-                </label>
+                <label class="col-sm-3 control-label">Número exterior<strog class="theme_color">*</strog></label>
+                <div class="col-sm-6">
+                  <input name="noExterior" value="<?php echo $beneficiario->noExterior;?>"  class="form-control" required placeholder="Ingrese el numero exterior de su vivienda" type="text"/>
+                </div>
+              </div><!--/form-group-->
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Número interior</label>
+                <div class="col-sm-6">
+                  <input name="noInterior" value="<?php echo $beneficiario->noInterior;?>" class="form-control" required placeholder="Ingrese el nombre de su vialidad" type="text" />
+                </div>
+              </div><!--/form-group-->
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Asentamiento<strog class="theme_color">*</strog></label>
+                <div class="col-sm-6">
+                  <select name="idAsentamientos" class="form-control" required>
+                    <?php if($beneficiario->idBeneficiario==null){ ?>   
+                    <option value=""> 
+                      Seleccione en caso de que el beneficiario pertenezca a un asentamiento
+                    </option>
+                    <?php } if($beneficiario->idBeneficiario!=null){ ?>   
+                    <option value="<?php echo $beneficiario->idAsentamientos?>"> 
+                      <?php echo $beneficiario->nombreAsentamiento; ?>
+                    </option>
+                    <?php } foreach($this->model2->Listar('asentamientos') as $r): 
+                    if($r->nombreAsentamiento!=$beneficiario->nombreAsentamiento){ ?>
+                    ?>
+                    <option value="<?php echo $r->idAsentamientos; ?>"> 
+                      <?php echo $r->nombreAsentamiento; ?>
+                    </option>
+                    <?php } endforeach; ?>
+                  </select>
+                </div>
+              </div><!--/form-group-->
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Localidad<strog class="theme_color">*</strog></label>
+                <div class="col-sm-6">
+                 <select name="idLocalidad" class="form-control">
+                  <?php if($beneficiario->idBeneficiario==null){ ?>   
+                  <option value=""> 
+                    Seleccione la localidad a la que pertenece el beneficiario
+                  </option>
+                  <?php } if($beneficiario->idBeneficiario!=null){ ?>   
+                  <option value="<?php echo $beneficiario->idLocalidad?>"> 
+                    <?php echo $beneficiario->localidad; ?>
+                  </option>
+                  <?php } foreach($this->model2->Listar('localidades') as $r): 
+                  if($r->localidad!=$beneficiario->localidad){ ?>
+                  ?>
+                  <option value="<?php echo $r->idLocalidad; ?>"> 
+                    <?php echo $r->localidad; ?>
+                  </option>
+                  <?php } endforeach; ?>
+                </select>
+              </div>
+            </div><!--/form-group-->
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Entre que vialidades<strog class="theme_color">*</strog></label>
+              <div class="col-sm-6">
+                <input name="entreVialidades" value="<?php echo $beneficiario->entreVialidades;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" />
+              </div>
+            </div><!--/form-group-->
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Descripción de la ubicación<strog class="theme_color">*</strog></label>
+              <div class="col-sm-6">  
+                <textarea style="height: 60px;" name="descripcionUbicacion" placeholder="Ejemplo: Entre las calles perpendiculares Zaragoza y Abasolo" rows="8" cols="68"><?php echo $beneficiario->descripcionUbicacion;?></textarea>
+              </div>
+            </div><!--/form-group-->
+          </div>
+        </div>
+
+        <!--+++++++++++++++++++++++++++++Estado social***************************-->
+
+        <div class="tab-pane animated fadeInRight" id="estadoSocial">
+          <div class="user-profile-content">
+            <h5><strong>Estado Social</strong></h5>
+            <div class="form-group">
+             <label class="col-sm-3 control-label">Estudio socioeconomico<strog class="theme_color">*</strog></label>
+             <div class="col-sm-9">
+              <div class="radio">
+                <?php if($beneficiario->idBeneficiario==null){ ?>
+                <input type="radio" name="estudioSocioeconomico"  value="Si" checked>Si
+                <?php }else{ ?>
+                <input type="radio" name="estudioSocioeconomico"  value="Si" <?php if($beneficiario->estudioSocioeconomico=="Si"){ ?> checked <?php } ?>>Si <?php } ?>
               </div>
               <div class="radio">
                 <label>
-                  <input type="radio" name="estudioSocioeconomico"  value="No"  <?php if($beneficiario->estudioSocioeconomico=="Si"){ ?> checked <?php } ?>>
-                  No 
+                  <input type="radio" name="estudioSocioeconomico" value="No" <?php if($beneficiario->estudioSocioeconomico=="No"){ ?> checked <?php } ?>>No 
                 </label>
               </div>
             </div>
           </div><!--/form-group--> 
+
           <div class="form-group">
-           <label class="col-sm-3 control-label">Jefe de Familia</label>
+           <label class="col-sm-3 control-label">Jefe de familia<strog class="theme_color">*</strog></label>
            <div class="col-sm-9">
             <div class="radio">
-             <label>
-              <input type="radio" name="jefeFamilia"  value="Si" <?php if($beneficiario->jefeFamilia=="Si"){ ?> checked <?php } ?>>
-              Si
-            </label>
-          </div>
-          <div class="radio">
-            <label>
-              <input type="radio" name="jefeFamilia"  value="No"  <?php if($beneficiario->jefeFamilia=="No"){ ?> checked <?php } ?>>
-              No 
-            </label>
-          </div>
-        </div>
-      </div><!--/form-group--> 
-      <div class="form-group">
-        <label class="col-sm-3 control-label">Estado Civil</label>
-        <div class="col-sm-6">
-          <select name="idEstadoCivil" class="form-control" >
-           <?php foreach($this->model2->Listar('estadoCivil') as $r): ?>
-            <option value="<?php echo $r->idEstadoCivil; ?>"> 
-              <?php echo $r->estadoCivil; ?>
-            </option>
-          <?php endforeach; ?>
-        </select>  
-      </div>
-    </div><!--/form-group-->
-    <div class="form-group">
-      <label class="col-sm-3 control-label">Ocupacion</label>
-      <div class="col-sm-6">
-        <select name="idOcupacion" class="form-control" >
-          <?php foreach($this->model2->Listar('ocupacion') as $r): ?>
-            <option value="<?php echo $r->idOcupacion; ?>"> 
-              <?php echo $r->ocupacion; ?>
-            </option>
-          <?php endforeach; ?>
-        </select>
-      </div>
-    </div><!--/form-group-->
-    <div class="form-group">
-      <label class="col-sm-3 control-label">Ingreso Mensual</label>
-      <div class="col-sm-6">
-        <select name="idIngresoMensual" class="form-control" >
-         <?php foreach($this->model2->Listar('ingresoMensual') as $r): ?>
-          <option value="<?php echo $r->idIngresoMensual; ?>"> 
-            <?php echo $r->ingresoMensual; ?>
-          </option>
-        <?php endforeach; ?>
-      </select>
-    </div>
-  </div><!--/form-group-->
-  <div class="form-group">
-    <label class="col-sm-3 control-label">Integrantes Familia</label>
-    <div class="col-sm-6">
-      <input name="integrantesFamilia" value="<?php echo $beneficiario->integrantesFamilia;?>" type="text" class="form-control" required placeholder="Ingrese el numero de integrantes de su familia" />
-    </div>
-  </div><!--/form-group-->
-  <div class="form-group">
-    <label class="col-sm-3 control-label">Dependientes Economicos</label>
-    <div class="col-sm-6">
-      <input name="dependientesEconomicos" value="<?php echo $beneficiario->dependientesEconomicos;?>" type="text" class="form-control" required placeholder="Ingrese el numero de personas que dependen  de usted" />
-    </div>
-  </div><!--/form-group-->
-  <div class="form-group">
-    <label class="col-sm-3 control-label">Grupo Vulnerable</label>
-    <div class="col-sm-6">
-      <select name="idGrupoVulnerable" class="form-control" >
-
-        <?php foreach($this->model2->Listar('grupoVulnerable') as $r): ?>
-          <option value="<?php echo $r->idGrupoVulnerable; ?>"> 
-            <?php echo $r->grupoVulnerable; ?>
-          </option>
-        <?php endforeach; ?>
-      </select>
-
-    </div>
-  </div><!--/form-group-->
-
-
-
-
-</div>
-</div>
-<div class="tab-pane animated fadeInRight" id="vivienda">
-  <div class="user-profile-content">
-    <h5><strong>Vivienda</strong></h5>
-
-    <div class="form-group">
-      <label class="col-sm-3 control-label">Tipo Vivienda</label>
-      <div class="col-sm-6">
-        <select name="idVivienda" class="form-control" >
-          <?php foreach($this->model2->Listar('vivienda') as $r): ?>
-            <option value="<?php echo $r->idVivienda; ?>"> 
-              <?php echo $r->vivienda; ?>
-            </option>
-          <?php endforeach; ?>
-        </select>
-
-      </div>
-    </div><!--/form-group-->
-    <div class="form-group">
-      <label class="col-sm-3 control-label">No Habitantes </label>
-      <div class="col-sm-6">
-        <input name="noHabitantes"   type="text" class="form-control" required placeholder="Ingrese el N° de Habitantes que residen en la vivienda" value="<?php echo $beneficiario->noHabitantes;?>" />
-      </div>
-    </div><!--/form-group-->
-
-    <div class="form-group">
-      <label class="col-sm-3 control-label">Servicios vivienda</label>
-      <div class="col-sm-9">
-
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"   name="viviendaElectricidad" <?php if($beneficiario->viviendaElectricidad=="Si"){ ?> checked <?php } ?>  >
-            <span class="custom-checkbox"></span> Vivienda Electricidad</label>
-          </div>
-
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" name="viviendaAgua" <?php if($beneficiario->viviendaAgua=="Si"){ ?> checked <?php } ?>  >
-              <span class="custom-checkbox"></span> Vivienda Agua </label>
+              <?php if($beneficiario->idBeneficiario==null){ ?>
+              <input type="radio" name="jefeFamilia"  value="Si" checked>Si
+              <?php }else{ ?>
+              <input type="radio" name="jefeFamilia"  value="Si" <?php if($beneficiario->jefeFamilia=="Si"){ ?> checked <?php } ?>>Si <?php } ?>
             </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="jefeFamilia" value="No" <?php if($beneficiario->jefeFamilia=="No"){ ?> checked <?php } ?>>No 
+              </label>
+            </div>
+          </div>
+        </div><!--/form-group-->  
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Estado civil<strog class="theme_color">*</strog></label>
+          <div class="col-sm-6">
+            <select name="idEstadoCivil" class="form-control" required>
+
+              <?php if($beneficiario->idBeneficiario==null){ ?>   
+              <option value=""> 
+                Seleccione el estado civil del beneficiario
+              </option>
+              <?php } if($beneficiario->idBeneficiario!=null){ ?>   
+              <option value="<?php echo $beneficiario->idEstadoCivil?>"> 
+                <?php echo $beneficiario->estadoCivil; ?>
+              </option>
+              <?php } foreach($this->model2->Listar('estadoCivil') as $r): 
+              if($r->estadoCivil!=$beneficiario->estadoCivil){ ?>
+              ?>
+              <option value="<?php echo $r->idEstadoCivil; ?>"> 
+                <?php echo $r->estadoCivil; ?>
+              </option>
+              <?php } endforeach; ?>
+            </select>
+          </div>
+        </div><!--/form-group-->
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Ocupación<strog class="theme_color">*</strog></label>
+          <div class="col-sm-6">
+            <select name="idOcupacion" class="form-control" required>
+              <?php if($beneficiario->idBeneficiario==null){ ?>   
+              <option value=""> 
+                Seleccione la ocupación del beneficiario
+              </option>
+              <?php } if($beneficiario->idBeneficiario!=null){ ?>   
+              <option value="<?php echo $beneficiario->idOcupacion?>"> 
+                <?php echo $beneficiario->ocupacion; ?>
+              </option>
+              <?php } foreach($this->model2->Listar('ocupacion') as $r): 
+              if($r->ocupacion!=$beneficiario->ocupacion){ ?>
+              ?>
+              <option value="<?php echo $r->idOcupacion; ?>"> 
+                <?php echo $r->ocupacion; ?>
+              </option>
+              <?php } endforeach; ?>
+            </select>
+          </div>
+        </div><!--/form-group-->
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Ingreso mensual<strog class="theme_color">*</strog></label>
+          <div class="col-sm-6">
+            <select name="idIngresoMensual" class="form-control" required>
+              <?php if($beneficiario->idBeneficiario==null){ ?>   
+              <option value=""> 
+                Seleccione el ingreso mensual del beneficiario
+              </option>
+              <?php } if($beneficiario->idBeneficiario!=null){ ?>   
+              <option value="<?php echo $beneficiario->idIngresoMensual?>"> 
+                <?php echo $beneficiario->ingresoMensual; ?>
+              </option>
+              <?php } foreach($this->model2->Listar('ingresoMensual') as $r): 
+              if($r->ingresoMensual!=$beneficiario->ingresoMensual){ ?>
+              ?>
+              <option value="<?php echo $r->idIngresoMensual; ?>"> 
+                <?php echo $r->ingresoMensual; ?>
+              </option>
+              <?php } endforeach; ?>
+            </select>
+          </div>
+        </div><!--/form-group-->
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Integrantes familia<strog class="theme_color">*</strog></label>
+          <div class="col-sm-6">
+            <input name="integrantesFamilia" value="<?php echo $beneficiario->integrantesFamilia;?>" type="text" class="form-control" required placeholder="Ingrese el numero de integrantes de su familia" />
+          </div>
+        </div><!--/form-group-->
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Dependientes economicos<strog class="theme_color">*</strog></label>
+          <div class="col-sm-6">
+            <input name="dependientesEconomicos" value="<?php echo $beneficiario->dependientesEconomicos;?>" type="text" class="form-control" required placeholder="Ingrese el numero de personas que dependen  de usted" />
+          </div>
+        </div><!--/form-group-->
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Grupo vulnerable<strog class="theme_color">*</strog></label>
+          <div class="col-sm-6">
+            <select name="idGrupoVulnerable" class="form-control" required>
+              <?php if($beneficiario->idBeneficiario==null){ ?>   
+              <option value="1"> 
+                Seleccione en caso de que el beneficiario pertenezca a un grupo vulnerable
+              </option>
+              <?php } if($beneficiario->idBeneficiario!=null){ ?>   
+              <option value="<?php echo $beneficiario->idGrupoVulnerable?>"> 
+                <?php echo $beneficiario->grupoVulnerable; ?>
+              </option>
+              <?php } foreach($this->model2->Listar('grupoVulnerable') as $r): 
+              if($r->grupoVulnerable!=$beneficiario->grupoVulnerable){ ?>
+              ?>
+              <option value="<?php echo $r->idGrupoVulnerable; ?>"> 
+                <?php echo $r->grupoVulnerable; ?>
+              </option>
+              <?php } endforeach; ?>
+            </select>
+          </div>
+        </div><!--/form-group-->
+
+      </div>
+    </div>
+
+    <!--+++++++++++++++++++++++++++++Vivienda***************************-->
+
+    <div class="tab-pane animated fadeInRight" id="vivienda">
+      <div class="user-profile-content">
+        <h5><strong>Vivienda</strong></h5>
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Tipo de vivienda<strog class="theme_color">*</strog></label>
+          <div class="col-sm-6">
+            <select name="idVivienda" class="form-control" required>
+              <?php if($beneficiario->idBeneficiario==null){ ?>   
+              <option value=""> 
+                Seleccione el tipo de vivienda del beneficiario
+              </option>
+              <?php } if($beneficiario->idBeneficiario!=null){ ?>   
+              <option value="<?php echo $beneficiario->idVivienda?>"> 
+                <?php echo $beneficiario->vivienda; ?>
+              </option>
+              <?php } foreach($this->model2->Listar('vivienda') as $r): 
+              if($r->vivienda!=$beneficiario->vivienda){ ?>
+              ?>
+              <option value="<?php echo $r->idVivienda; ?>"> 
+                <?php echo $r->vivienda; ?>
+              </option>
+              <?php } endforeach; ?>
+            </select>
+          </div>
+        </div><!--/form-group-->
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Número de habitantes<strog class="theme_color">*</strog></label>
+          <div class="col-sm-6">
+            <input name="noHabitantes" type="text" class="form-control" placeholder="Ingrese el N° de Habitantes que residen en la vivienda" value="<?php echo $beneficiario->noHabitantes;?>" required/>
+          </div>
+        </div><!--/form-group-->
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Servicios de vivienda</label>
+          <div class="col-sm-9">
             <div class="checkbox">
               <label>
-                <input type="checkbox" name="viviendaDrenaje" <?php if($beneficiario->viviendaDrenaje=="Si"){ ?> checked <?php } ?>   >
-                <span class="custom-checkbox"></span> Vivienda Drenaje</label>
+                <input type="checkbox"   name="viviendaElectricidad" <?php if($beneficiario->viviendaElectricidad=="Si"){ ?> checked <?php } ?>  >
+                <span class="custom-checkbox"></span> Vivienda Electricidad</label>
               </div>
+
               <div class="checkbox">
                 <label>
-
-                  <input type="checkbox" name="viviendaGas" <?php if($beneficiario->viviendaGas=="Si"){ ?> checked <?php } ?>  value="<?php echo $beneficiario->viviendaGas;?>">
-                  <span class="custom-checkbox"></span> Vivienda Gas</label>
+                  <input type="checkbox" name="viviendaAgua" <?php if($beneficiario->viviendaAgua=="Si"){ ?> checked <?php } ?>  >
+                  <span class="custom-checkbox"></span> Vivienda Agua</label>
                 </div>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="viviendaTelefono" <?php if($beneficiario->viviendaTelefono=="Si"){ ?> checked <?php } ?> >
-                    <span class="custom-checkbox"></span> Vivienda Telefono</label>
+                    <input type="checkbox" name="viviendaDrenaje" <?php if($beneficiario->viviendaDrenaje=="Si"){ ?> checked <?php } ?>   >
+                    <span class="custom-checkbox"></span> Vivienda Drenaje</label>
                   </div>
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox"    name="viviendaInternet" <?php if($beneficiario->viviendaInternet=="Si"){ ?> checked <?php } ?> >
-                      <span class="custom-checkbox"></span> Vivienda Internet</label>
+
+                      <input type="checkbox" name="viviendaGas" <?php if($beneficiario->viviendaGas=="Si"){ ?> checked <?php } ?>  value="<?php echo $beneficiario->viviendaGas;?>">
+                      <span class="custom-checkbox"></span> Vivienda Gas</label>
                     </div>
-                  </div>
-                </div><!--/form-group-->
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="viviendaTelefono" <?php if($beneficiario->viviendaTelefono=="Si"){ ?> checked <?php } ?> >
+                        <span class="custom-checkbox"></span> Vivienda Teléfono</label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"    name="viviendaInternet" <?php if($beneficiario->viviendaInternet=="Si"){ ?> checked <?php } ?> >
+                          <span class="custom-checkbox"></span> Vivienda Internet</label>
+                        </div>
+                      </div>
+                    </div><!--/form-group-->
 
-                <div class="form-group">
-                  <div class="col-sm-offset-7 col-sm-5">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a href="?c=Beneficiario" class="btn btn-default"> Cancelar</a>
-                  </div>
-                </div><!--/form-group-->
+                    <div class="form-group">
+                      <div class="col-sm-offset-7 col-sm-5">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a href="?c=Beneficiario" class="btn btn-default"> Cancelar</a>
+                      </div>
+                    </div><!--/form-group-->
 
-              </form>
-            </div>
-          </div>
+                  </form>
+                </div>
+              </div>
+            </div><!--/tab-content-->
+          </div><!--/block-web-->
         </div>
-        <!--/tab-content-->
-      </div>
-      <!--/block-web-->
-    </div>
-  </div><!--/porlets-content-->
-</div><!--/block-web-->
-</div><!--/col-md-12-->
+      </div><!--/porlets-content-->
+    </div><!--/block-web-->
+  </div><!--/col-md-12-->
 </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
 

@@ -91,8 +91,8 @@
            <tr>
             <td>
              <div class="col-md-12">
-               <label class="col-sm-6 lbldetalle">Tipo de seguridad:</label>
-               <label class="col-sm-6 control-label"><?php echo $ben->curp; ?></label>
+               <label class="col-sm-6 lbldetalle">Seguridad social:</label>
+               <label class="col-sm-6 control-label"><?php echo $ben->seguridadSocial; ?></label>
              </div>
            </td>
          </tr>

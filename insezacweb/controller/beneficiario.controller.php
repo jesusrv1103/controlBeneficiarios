@@ -41,7 +41,7 @@ class BeneficiarioController{
   $beneficiario->idSeguridadSocial = $_REQUEST['idSeguridadSocial'];
   $beneficiario->idDiscapacidad = $_REQUEST['idDiscapacidad'];
   $beneficiario->beneficiarioColectivo=$_REQUEST['beneficiarioColectivo'];
- 
+
   //vialidad
   $beneficiario->idTipoVialidad = $_REQUEST['idTipoVialidad'];
   $beneficiario->nombreVialidad = $_REQUEST['nombreVialidad'];
@@ -51,7 +51,7 @@ class BeneficiarioController{
   $beneficiario->idLocalidad = $_REQUEST['idLocalidad'];
   $beneficiario->entreVialidades = $_REQUEST['entreVialidades'];
   $beneficiario->descripcionUbicacion = $_REQUEST['descripcionUbicacion'];
- 
+
  //estado social
   $beneficiario->estudioSocioeconomico=$_REQUEST['estudioSocioeconomico'];
   $beneficiario->idEstadoCivil=$_REQUEST['idEstadoCivil'];
@@ -71,13 +71,16 @@ class BeneficiarioController{
   isset($_REQUEST['viviendaGas'])? $beneficiario->viviendaGas="Si": $beneficiario->viviendaGas="No";
   isset($_REQUEST['viviendaTelefono'])? $beneficiario->viviendaTelefono="Si": $beneficiario->viviendaTelefono="No";
   isset($_REQUEST['viviendaInternet'])? $beneficiario->viiendaInternet="Si": $beneficiario->viviendaInternet="No";
-  $beneficiario->idBeneficiario > 0 
-  ? $this->model->Actualizar($beneficiario)
-  : $this->model->Registrar($beneficiario);
+  if($beneficiario->idBeneficiario > 0){ 
+    $this->model->Actualizar($beneficiario);
+    $mensaje="El beneficiario se ha actualizado correctamente";
+  }else{
+    $this->model->Registrar($beneficiario);
+    $mensaje="El beneficiario se ha registrado correctamente";
+  }
   $administracion = true;
   $inicio = false;
   $beneficiarios = false;
-  $mensaje="El beneficiario se ha registrado correctamente";
   $page="view/beneficiario/index.php";
   require_once 'view/index.php';
 }
@@ -100,6 +103,8 @@ public function Crud(){
  if(isset($_REQUEST['idBeneficiario'])){
   $beneficiario = $this->model->Listar($_REQUEST['idBeneficiario']);  
 }
+$administracion=true;
+$beneficiarios=true;
 $page="view/beneficiario/beneficiario.php";
 require_once 'view/index.php';
 }
@@ -159,14 +164,14 @@ public function Eliminar(){
     header ('Location: index.php?c=Beneficiario&a=Index');
   }
 
-public function Detalles(){
-  $administracion=true;
-  $beneficiarios=true;
-  $ben = new Beneficiario();
-  $ben = $this->model->Listar($_REQUEST['idBeneficiario']);
-  $page="view/beneficiario/detalles.php";
-  require_once 'view/index.php';
-}
+  public function Detalles(){
+    $administracion=true;
+    $beneficiarios=true;
+    $ben = new Beneficiario();
+    $ben = $this->model->Listar($_REQUEST['idBeneficiario']);
+    $page="view/beneficiario/detalles.php";
+    require_once 'view/index.php';
+  }
 
 
 

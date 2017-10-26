@@ -28,7 +28,7 @@
   <!--\\\\\\\ wrapper Start \\\\\\-->
   <div class="lock_page">
     <div class="lock_content">
-      <div class="lock_image"><img src="assets/images/l-image.png" alt="lock" /><h5 style="margin-top: 5px;">Acceso de administrador</h5></div>	<br><br>
+      <div class="lock_image"><img style="max-width: 100%;" src="assets/images/lock.png" alt="lock" /><h5 style="margin-top: 5px;">Acceso de administrador</h5></div>	<br><br>
       <?php if(isset($error)){ ?>
       <div class="alert alert-danger">
         <i class="fa fa-warning"></i><?php echo $error?>
