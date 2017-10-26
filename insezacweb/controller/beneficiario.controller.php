@@ -70,13 +70,14 @@ class BeneficiarioController{
   isset($_REQUEST['viviendaDrenaje'])? $beneficiario->viviendaDrenaje="Si": $beneficiario->viviendaDrenaje="No";
   isset($_REQUEST['viviendaGas'])? $beneficiario->viviendaGas="Si": $beneficiario->viviendaGas="No";
   isset($_REQUEST['viviendaTelefono'])? $beneficiario->viviendaTelefono="Si": $beneficiario->viviendaTelefono="No";
-  isset($_REQUEST['viviendaInternet'])? $beneficiario->viviendaInternet="Si": $beneficiario->viviendaInternet="No";
+  isset($_REQUEST['viviendaInternet'])? $beneficiario->viiendaInternet="Si": $beneficiario->viviendaInternet="No";
   $beneficiario->idBeneficiario > 0 
   ? $this->model->Actualizar($beneficiario)
   : $this->model->Registrar($beneficiario);
   $administracion = true;
   $inicio = false;
   $beneficiarios = false;
+  $mensaje="El beneficiario se ha registrado correctamente";
   $page="view/beneficiario/index.php";
   require_once 'view/index.php';
 }
@@ -101,14 +102,15 @@ public function Upload(){
 public function Crud(){
  $beneficiario = new Beneficiario();
  if(isset($_REQUEST['idBeneficiario'])){
-  $beneficiario = $this->model->Obtener($_REQUEST['idBeneficiario']);
+  $beneficiario = $this->model->Listar($_REQUEST['idBeneficiario']);  
 }
 $page="view/beneficiario/beneficiario.php";
 require_once 'view/index.php';
 }
-public function Importar(){
-  if (file_exists("./assets/files/beneficiarios.xlsx")) {
-          //Agregamos la librería 
+
+public function Importar($archivo){
+  if (file_exists("./assets/importaciones/bak_" . $archivo)) {
+  //Agregamos la librería 
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
         //Variable con el nombre del archivo
     $nombreArchivo = './assets/files/beneficiarios.xlsx';

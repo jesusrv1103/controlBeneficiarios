@@ -61,6 +61,7 @@ class Beneficiario
 				b.primerApellido, 
 				b.segundoApellido,
 				b.nombres, 
+				b.idIdentificacion,
 				idOf.identificacion as nomTipoI, 
 				tV.tipoVialidad,
 				b.nombreVialidad,
@@ -86,6 +87,8 @@ class Beneficiario
 				b.viviendaTelefono,
 				b.viviendaInternet,
 				nE.nivelEstudios, 
+				b.idNivelEstudios,
+				b.idSeguridadSocial,
 				sS.seguridadSocial,
 				d.discapacidad, 
 				gV.grupoVulnerable,
@@ -208,6 +211,15 @@ class Beneficiario
 		try 
 		{
 			$sql = "UPDATE beneficiarios SET 
+			curp = ?,
+			primerApellido = ?,
+			segundoApellido = ?,
+			nombres = ?,
+			idIdentificacion = ?,
+			idNivelEstudios = ?,
+			idSeguridadSocial = ?,
+			idDiscapacidad = ?,
+			beneficiarioColectivo =?,
 			idTipoVialidad = ?,
 			nombreVialidad = ?,
 			noExterior = ?,
@@ -215,6 +227,7 @@ class Beneficiario
 			idAsentamientos = ?,
 			idLocalidad = ?,
 			entreVialidades = ?,
+<<<<<<< HEAD
 			descripcionUbicacion = ?
 			WHERE idBeneficiario = ?";
 
@@ -244,13 +257,17 @@ class Beneficiario
 		try 
 		{
 			$sql = "UPDATE beneficiarios SET 
+=======
+			descripcionUbicacion = ?,
+>>>>>>> e56679d4ecfdc51a8a0535bd9edd13ec281c3c5f
 			estudioSocioeconomico = ?,
-			jefeFamilia = ?,
 			idEstadoCivil = ?,
+			jefeFamilia = ?,
 			idOcupacion = ?,
 			idIngresoMensual = ?,
 			integrantesFamilia = ?,
 			dependientesEconomicos = ?,
+<<<<<<< HEAD
 			idGrupoVulnerable =?
 			WHERE idBeneficiario = ?";
 
@@ -280,6 +297,9 @@ class Beneficiario
 		try 
 		{
 			$sql = "UPDATE beneficiarios SET 
+=======
+			idGrupoVulnerable = ?,
+>>>>>>> e56679d4ecfdc51a8a0535bd9edd13ec281c3c5f
 			idVivienda = ?,
 			noHabitantes = ?,
 			viviendaElectricidad = ?,
@@ -293,7 +313,16 @@ class Beneficiario
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
-					$data->idTipoVialidad, 
+					$data->curp,
+					$data->primerApellido,
+					$data->segundoApellido,
+					$data->nombres,
+					$data->idIdentificacion,
+					$data->idNivelEstudios,
+					$data->idSeguridadSocial,
+					$data->idDiscapacidad,
+					$data->beneficiarioColectivo,
+					$data->idTipoVialidad,
 					$data->nombreVialidad,
 					$data->noExterior,
 					$data->noInterior,
@@ -301,14 +330,41 @@ class Beneficiario
 					$data->idLocalidad,
 					$data->entreVialidades,
 					$data->descripcionUbicacion,
+					$data->estudioSocioeconomico,
+					$data->idEstadoCivil,
+					$data->jefeFamilia,
+					$data->idOcupacion,
+					$data->idIngresoMensual,
+					$data->integrantesFamilia,
+					$data->dependientesEconomicos,
+					$data->idGrupoVulnerable,
+					$data->idVivienda,
+					$data->noHabitantes,
+					$data->viviendaElectricidad,
+					$data->viviendaAgua,
+					$data->viviendaDrenaje,
+					$data->viviendaGas,
+					$data->viviendaTelefono,
+					$data->viviendaInternet,
 					$data->idBeneficiario
+<<<<<<< HEAD
 					)
 				);
+=======
+
+					)
+			);
+			
+>>>>>>> e56679d4ecfdc51a8a0535bd9edd13ec281c3c5f
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
 		}
 	}
+
+	
+
+	
 
 
 	public function Registrar(Beneficiario $data)

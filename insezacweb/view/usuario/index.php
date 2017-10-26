@@ -18,7 +18,7 @@
          <div class="row" style="margin-top: 15px; margin-bottom: 12px;">
           <div class="col-sm-8">
             <div class="actions"> </div>
-            <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Administracion de usuarios</h2>
+            <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Administración de usuarios</h2>
           </div>
           <div class="col-sm-4">
            <div class="btn-group pull-right" style="margin-right: 10px;">
