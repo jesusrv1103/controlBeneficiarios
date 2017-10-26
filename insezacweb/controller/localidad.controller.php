@@ -59,7 +59,7 @@ public function Importar(){
           //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
     $this->Localidades($objPHPExcel,$numRows);
-    $mensaje="Se han importado correctamente las localidades";
+    $mensaje="Se ha leído correctamente el archivo <strong>localidades.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de localidades.";
     $page="view/localidad/index.php";
     $localidades=true;
     $catalogos=true;

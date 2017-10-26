@@ -58,7 +58,7 @@ class CatalogosController{
       $this->SeguridadSocial($objPHPExcel,$numRows);
       $this->Discapacidad($objPHPExcel,$numRows);
       $this->GrupoVulnerable($objPHPExcel,$numRows);
-      $mensaje="Se han importado correctamente los catálogos";
+      $mensaje="Se ha leído correctamente el archivo <strong>catalogo_beneficiarios.xlsx</strong>.<br><i class='fa fa-check'></i> Se han registrado correctamente los identificadores del catálogo.";
       $page="view/catalogos/beneficiarios.php";
       $beneficiarios2 = true;
       $catalogos=true;

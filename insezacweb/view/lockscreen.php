@@ -15,7 +15,7 @@
   margin-left: 20px; 
 }
 #titulo{
-  margin-bottom: -180px;
+  margin-bottom: -100px;
   margin-top: -70px;
 }
 </style>

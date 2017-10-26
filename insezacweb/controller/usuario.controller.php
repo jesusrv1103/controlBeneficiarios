@@ -62,13 +62,12 @@ class UsuarioController{
 		require_once 'view/index.php';
 	}
 
-
-
 	//Metodo  para eliminar
 	public function Eliminar(){
 		if(isset($_REQUEST['acceso'])){
 			$this->model->Eliminar($_REQUEST['idUsuario']);
-			$this->model->EliminarInDB($_REQUEST['idUsuario']);
+			//$this->model->EliminarInDB($_REQUEST['idUsuario']);
+
 		    $administracion=true; //variable cargada para activar la opcion administracion en el menu
 			$usuarios=true; //variable cargada para activar la opcion usuarios en el menu
 			$page="view/usuario/index.php";

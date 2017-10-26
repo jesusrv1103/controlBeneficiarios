@@ -26,8 +26,8 @@
                 <b> 
                   <?php if($_SESSION['user_type']==1){?>
                   <div class="btn-group" style="margin-right: 10px;"> 
-                    <a class="btn btn-sm btn-success" href="?c=beneficiario&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title=""> <i class="fa fa-plus"></i> Registrar beneficiario </a>
-                    <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar catálogo" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="left" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
+                    <a class="btn btn-sm btn-success tooltips" href="?c=beneficiario&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo beneficiario"> <i class="fa fa-plus"></i> Registrar </a>
+                    <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar catálogo para registrar beneficiarios" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
                   </div>
                   <?php } ?>
                 </b>
@@ -63,11 +63,12 @@
                  <th>Primer apellido</th>
                  <th>Segundo apellido</th>
                  <th>Nombre</th>
+                 <td><center><b>Ver</b></center></td>
                  <?php if($_SESSION['user_type']==1){?>
                  <td><center><b>Editar</b></center></td>
                  <td><center><b>Borrar</b></center></td>
                  <?php } ?>
-                 <td><center><b>Ver</b></center></td>
+                 
                </tr>
              </thead>
              <tbody>
@@ -79,38 +80,38 @@
                   <td><?php echo $r->segundoApellido ?> </td>
                   <td><?php echo $r->nombres ?> </td>
                   <?php if($_SESSION['user_type']==1){?>
-
                   <td class="center">
-                    <a class="btn btn-primary"  role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-info tooltips" role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+                  </td>
+                  <td class="center">
+                    <a class="btn btn-primary" role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
                   </td>
                   <td class="center">
                    <a class="btn btn-danger" onclick="eliminarBeneficiario(<?php echo $r->idBeneficiario;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                  </td>
                  <?php } ?>
-                 <td class="center">
-                  <a class="btn btn-info"  role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>"><i class="fa fa-eye"></i></a>
-                </td>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-          <tfoot>
-           <tr>
-             <th>CURP</th>
-             <th>Primer apellido</th>
-             <th>Segunda apellido</th>
-             <th>Nombre</th>
-             <?php if($_SESSION['user_type']==1){?>
-             <th><center><b>Editar</b></center></th>
-             <td><center><b>Borrar</b></center></td>
-             <?php } ?>
-             <td><center><b>Ver</b></center></td>
-           </tr>
-         </tfoot>
-       </table>
-     </div><!--/table-responsive-->
-   </div><!--/porlets-content-->
- </div><!--/block-web-->
-</div><!--/col-md-12-->
+
+               </tr>
+             <?php endforeach; ?>
+           </tbody>
+           <tfoot>
+             <tr>
+               <th>CURP</th>
+               <th>Primer apellido</th>
+               <th>Segunda apellido</th>
+               <th>Nombre</th>
+               <td><center><b>Ver</b></center></td>
+               <?php if($_SESSION['user_type']==1){?>
+               <th><center><b>Editar</b></center></th>
+               <td><center><b>Borrar</b></center></td>
+               <?php } ?>        
+             </tr>
+           </tfoot>
+         </table>
+       </div><!--/table-responsive-->
+     </div><!--/porlets-content-->
+   </div><!--/block-web-->
+ </div><!--/col-md-12-->
 </div><!--/row-->
 </div>
 <div class="modal fade" id="modalImportar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -130,7 +131,7 @@
                 <i class="glyphicon glyphicon-plus"></i>
                 <span>Seleccionar archivo</span>
                 <!-- The file input field used as target for the file upload widget -->
-                <input id="fileupload" type="file" name="files[]" multiple class="localidades">
+                <input id="fileupload" type="file" name="files[]" multiple class="beneficiarios">
               </span>
               <br>
               <br>
@@ -147,7 +148,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Localidad&a=Importar" class="btn btn-primary">Importar datos</a>
+          <a href="?c=Beneficiario&a=Importar" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
     </div><!--/modal-content--> 

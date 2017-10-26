@@ -62,7 +62,7 @@ class AsentamientoController{
   			//Obtengo el numero de filas del archivo
 			$numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
 			$this->Asentamientos($objPHPExcel,$numRows);
-			$mensaje="Se han importado correctamente los asentamientos";
+			$mensaje="Se ha leído correctamente el archivo <strong>asentamientos.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de asentamientos.";
 			$page="view/asentamiento/index.php";
 			$asentamientos = true;
 			$catalogos=true;

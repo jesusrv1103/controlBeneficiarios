@@ -1,6 +1,4 @@
 <?php
-//session_start();
-require_once 'model/login.php';
 class Database
 {
 	public static function StartUp()
