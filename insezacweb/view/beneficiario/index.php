@@ -24,12 +24,12 @@
             <div class="col-md-5">
               <div class="btn-group pull-right">
                 <b> 
-                  <?php if($_SESSION['user_type']==1){?>
                   <div class="btn-group" style="margin-right: 10px;"> 
                     <a class="btn btn-sm btn-success tooltips" href="?c=beneficiario&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo beneficiario"> <i class="fa fa-plus"></i> Registrar </a>
+                    <?php if($_SESSION['user_type']==1){?>
                     <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar catálogo para registrar beneficiarios" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
-                  </div>
                   <?php } ?>
+                   </div>
                 </b>
               </div>
             </div>    
