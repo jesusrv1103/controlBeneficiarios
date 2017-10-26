@@ -1,4 +1,5 @@
 <?php
+require_once 'model/database.php';
 class Beneficiario
 {
 	public $pdo;
@@ -229,8 +230,8 @@ class Beneficiario
 					$data->entreVialidades,
 					$data->descripcionUbicacion,
 					$data->idBeneficiario
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -265,8 +266,8 @@ class Beneficiario
 					$data->dependientesEconomicos,
 					$data->idGrupoVulnerable,
 					$data->idBeneficiario
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -301,8 +302,8 @@ class Beneficiario
 					$data->entreVialidades,
 					$data->descripcionUbicacion,
 					$data->idBeneficiario
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -316,19 +317,19 @@ class Beneficiario
 		{
 			
 			$sql = "INSERT INTO beneficiarios 
-			                                (curp,primerApellido,segundoApellido,nombres,idIdentificacion,
-					 						idNivelEstudios,idSeguridadSocial,idDiscapacidad,beneficiarioColectivo,idTipoVialidad,
-					 						nombreVialidad,noExterior,noInterior,idAsentamientos,idLocalidad,
-					 						entreVialidades,descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,jefeFamilia,idOcupacion,
-					 						idIngresoMensual,integrantesFamilia,dependientesEconomicos,idGrupoVulnerable,idVivienda,
-					 						noHabitantes,viviendaElectricidad,viviendaAgua,viviendaDrenaje,viviendaGas,
-					 						viviendaTelefono,viviendaInternet) values (?,?,?,?,?,
-					 																	?,?,?,?,?,
-					 																	?,?,?,?,?,
-					 																	?,?,?,?,?,
-					 																	?,?,?,?,?,
-					 																	?,?,?,?,?,
-					 																	?,?,?)";
+			(curp,primerApellido,segundoApellido,nombres,idIdentificacion,
+			idNivelEstudios,idSeguridadSocial,idDiscapacidad,beneficiarioColectivo,idTipoVialidad,
+			nombreVialidad,noExterior,noInterior,idAsentamientos,idLocalidad,
+			entreVialidades,descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,jefeFamilia,idOcupacion,
+			idIngresoMensual,integrantesFamilia,dependientesEconomicos,idGrupoVulnerable,idVivienda,
+			noHabitantes,viviendaElectricidad,viviendaAgua,viviendaDrenaje,viviendaGas,
+			viviendaTelefono,viviendaInternet) values (?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?)";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
@@ -368,8 +369,8 @@ class Beneficiario
 					$data->viviendaGas,
 					$data->viviendaTelefono,
 					$data->viviendaInternet//8
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -395,12 +396,68 @@ class Beneficiario
 		}
 	}
 
+
+public function ImportarBeneficiario(Beneficiario $data){
+		try 
+		{
+			$sql =$this->pdo->prepare("INSERT INTO beneficiarios 
+			(curp,primerApellido,segundoApellido,nombres,idIdentificacion,
+			idNivelEstudios,idSeguridadSocial,idDiscapacidad,beneficiarioColectivo,idTipoVialidad,
+			nombreVialidad,noExterior,noInterior,idAsentamientos,idLocalidad,
+			entreVialidades,descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,jefeFamilia,idOcupacion,
+			idIngresoMensual,integrantesFamilia,dependientesEconomicos,idGrupoVulnerable,idVivienda,
+			noHabitantes,viviendaElectricidad,viviendaAgua,viviendaDrenaje,viviendaGas,
+			viviendaTelefono,viviendaInternet) values (?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?)");
+			$resultado=$sql->execute(
+				array(
+					$data->curp,
+					$data->primerApellido,
+					$data->segundoApellido,
+					$data->nombres,
+					$data->idIdentificacion,
+					$data->idNivelEstudios,
+					$data->idSeguridadSocial,
+					$data->idDiscapacidad,
+					$data->beneficiarioColectivo,//9
+					//vialidad
+					$data->idTipoVialidad, 
+					$data->nombreVialidad,
+					$data->noExterior,
+					$data->noInterior,
+					$data->idAsentamientos,
+					$data->idLocalidad,
+					$data->entreVialidades,
+					$data->descripcionUbicacion,//8
+					//estudio
+					$data->estudioSocioeconomico,
+					$data->idEstadoCivil,
+					$data->jefeFamilia,
+					$data->idOcupacion,
+					$data->idIngresoMensual,
+					$data->integrantesFamilia,
+					$data->dependientesEconomicos,
+					$data->idGrupoVulnerable,//8
+					//vivienda
+					$data->idVivienda,
+					$data->noHabitantes,				
+					$data->viviendaElectricidad,
+					$data->viviendaAgua,
+					$data->viviendaDrenaje,
+					$data->viviendaGas,
+					$data->viviendaTelefono,
+					$data->viviendaInternet//8
+					)
+				);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
 }
-
-
-
-
-
-
-
-

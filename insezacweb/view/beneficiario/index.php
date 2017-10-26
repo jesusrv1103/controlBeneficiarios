@@ -130,7 +130,7 @@
                 <i class="glyphicon glyphicon-plus"></i>
                 <span>Seleccionar archivo</span>
                 <!-- The file input field used as target for the file upload widget -->
-                <input id="fileupload" type="file" name="files[]" multiple class="localidades">
+                <input id="fileupload" type="file" name="files[]" multiple class="beneficiarios">
               </span>
               <br>
               <br>
@@ -147,7 +147,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Localidad&a=Importar" class="btn btn-primary">Importar datos</a>
+          <a href="?c=Beneficiario&a=Importar" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
     </div><!--/modal-content--> 

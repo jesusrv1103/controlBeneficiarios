@@ -41,7 +41,7 @@ class BeneficiarioController{
   $beneficiario->idSeguridadSocial = $_REQUEST['idSeguridadSocial'];
   $beneficiario->idDiscapacidad = $_REQUEST['idDiscapacidad'];
   $beneficiario->beneficiarioColectivo=$_REQUEST['beneficiarioColectivo'];
- 
+
   //vialidad
   $beneficiario->idTipoVialidad = $_REQUEST['idTipoVialidad'];
   $beneficiario->nombreVialidad = $_REQUEST['nombreVialidad'];
@@ -51,7 +51,7 @@ class BeneficiarioController{
   $beneficiario->idLocalidad = $_REQUEST['idLocalidad'];
   $beneficiario->entreVialidades = $_REQUEST['entreVialidades'];
   $beneficiario->descripcionUbicacion = $_REQUEST['descripcionUbicacion'];
- 
+
  //estado social
   $beneficiario->estudioSocioeconomico=$_REQUEST['estudioSocioeconomico'];
   $beneficiario->idEstadoCivil=$_REQUEST['idEstadoCivil'];
@@ -84,13 +84,17 @@ class BeneficiarioController{
 public function Upload(){
   $archivo = $_FILES['file']['name'];
   $tipo = $_FILES['file']['type'];
-  $destino = "./assets/importaciones/bak_" . $archivo;
+  $destino = "./assets/files/beneficiarios.xlsx";
   if (copy($_FILES['file']['tmp_name'], $destino)){
     //echo "Archivo Cargado Con Éxito" . "<br><br>";
     $this->Importar($archivo);
   }
   else{
-    //echo "Error Al Cargar el Archivo". "<br><br>";
+    $mensaje="Error al cargar el archivo";
+    $page="view/beneficiario/index.php";
+    $beneficiarios = true;
+    $catalogos=true;
+    require_once 'view/index.php';
   }
 }
 
@@ -102,54 +106,89 @@ public function Crud(){
 $page="view/beneficiario/beneficiario.php";
 require_once 'view/index.php';
 }
-
-public function Importar($archivo){
-  if (file_exists("./assets/importaciones/bak_" . $archivo)) {
-  //Agregamos la librería 
+public function Importar(){
+  if (file_exists("./assets/files/beneficiarios.xlsx")) {
+          //Agregamos la librería 
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
-  //Variable con el nombre del archivo
-    $nombreArchivo = './assets/importaciones/bak_' . $archivo;
-  // Cargo la hoja de cálculo
+        //Variable con el nombre del archivo
+    $nombreArchivo = './assets/files/beneficiarios.xlsx';
+        // Cargo la hoja de cálculo
     $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
-  //Asigno la hoja de calculo activa
+        //Asigno la hoja de calculo activa
     $objPHPExcel->setActiveSheetIndex(0);
-  //Obtengo el numero de filas del archivo
+        //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-
-    //echo '<table border=1><tr><td>Producto</td><td>Precio</td><td>Existencia</td></tr>';
-
-    for ($i = 2; $i <= $numRows; $i++) {
-
-      $ben = new Beneficiario();
-      $ben->nombre = $objPHPExcel->getActiveSheet()->getCell('A'.$i)->getCalculatedValue();
-      $ben->precio = $objPHPExcel->getActiveSheet()->getCell('B'.$i)->getCalculatedValue();
-      $ben->existencia = $objPHPExcel->getActiveSheet()->getCell('C'.$i)->getCalculatedValue();
-      $this->model->Importar($ben);
-
-     /* echo '<tr>';
-      echo '<td>'. $ben->nombre.'</td>';
-      echo '<td>'. $ben->precio.'</td>';
-      echo '<td>'. $ben->existencia.'</td>';
-      echo '</tr>';
-      */
-    }
-
-   /* echo '<table>';
-   echo '<br> Importación con éxito'; */
-   $mensaje="El archivo se ha importado correctamente";
-   $page="view/beneficiario/index.php";
-   $administracion = true;
-   $inicio = false;
-   $beneficiarios = true;
-   require_once 'view/index.php';
-
- }
+    $this->Beneficiario($objPHPExcel,$numRows);
+    $mensaje="Se han importado correctamente los beneficiarios";
+    $page="view/beneficiario/index.php";
+    $beneficiarios = true;
+    $catalogos=true;
+    require_once 'view/index.php';
+  }
         //si por algo no cargo el archivo bak_ 
- else {
-  echo "Necesitas primero importar el archivo";
+  else {
+    $error=true;
+    $mensaje="El archivo <strong>beneficiarios.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+    $page="view/beneficiarios/index.php";
+    $beneficiarios = true;
+    $catalogos=true;
+    require_once 'view/index.php';
+  }
 }
-}
+public function Beneficiario($objPHPExcel,$numRows){
+  try{
+    $numRow=2;
+    do {
+            //echo "Entra";
+   $cat= new Beneficiario;
+       $cat->curp = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
+       $cat->primerApellido = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
+       $cat->segundoApellido = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
+       $cat->nombres = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
+       $cat->idIdentificacion = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
+       $cat->idTipoVialidad = $objPHPExcel->getActiveSheet()->getCell('F'.$numRow)->getCalculatedValue();
+       $cat->nombreVialidad = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
+       $cat->noExterior = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
+       $cat->noInterior = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
+       $cat->idAsentamientos = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
+       $cat->idLocalidad = $objPHPExcel->getActiveSheet()->getCell('K'.$numRow)->getCalculatedValue();
+       $cat->entreVialidades = $objPHPExcel->getActiveSheet()->getCell('L'.$numRow)->getCalculatedValue();
+       $cat->descripcionUbicacion = $objPHPExcel->getActiveSheet()->getCell('M'.$numRow)->getCalculatedValue();
+       $cat->estudioSocioeconomico = $objPHPExcel->getActiveSheet()->getCell('N'.$numRow)->getCalculatedValue();
+       $cat->idEstadoCivil = $objPHPExcel->getActiveSheet()->getCell('O'.$numRow)->getCalculatedValue();
+       $cat->jefeFamilia = $objPHPExcel->getActiveSheet()->getCell('P'.$numRow)->getCalculatedValue();
+       $cat->idOcupacion = $objPHPExcel->getActiveSheet()->getCell('Q'.$numRow)->getCalculatedValue();
+       $cat->idIngresoMensual = $objPHPExcel->getActiveSheet()->getCell('R'.$numRow)->getCalculatedValue();
+       $cat->integrantesFamilia = $objPHPExcel->getActiveSheet()->getCell('S'.$numRow)->getCalculatedValue();
+       $cat->dependientesEconomicos = $objPHPExcel->getActiveSheet()->getCell('T'.$numRow)->getCalculatedValue();
+       $cat->idVivienda =$objPHPExcel->getActiveSheet()->getCell('U'.$numRow)->getCalculatedValue();
+       $cat->noHabitantes = $objPHPExcel->getActiveSheet()->getCell('V'.$numRow)->getCalculatedValue();
+       $cat->viviendaElectricidad = $objPHPExcel->getActiveSheet()->getCell('W'.$numRow)->getCalculatedValue();
+       $cat->viviendaAgua = $objPHPExcel->getActiveSheet()->getCell('X'.$numRow)->getCalculatedValue();
+       $cat->viviendaDrenaje = $objPHPExcel->getActiveSheet()->getCell('Y'.$numRow)->getCalculatedValue();
+       $cat->viviendaGas = $objPHPExcel->getActiveSheet()->getCell('Z'.$numRow)->getCalculatedValue();
+       $cat->viviendaTelefono = $objPHPExcel->getActiveSheet()->getCell('AA'.$numRow)->getCalculatedValue();
+       $cat->viviendaInternet = $objPHPExcel->getActiveSheet()->getCell('AB'.$numRow)->getCalculatedValue();
+       $cat->idNivelEstudios = $objPHPExcel->getActiveSheet()->getCell('AC'.$numRow)->getCalculatedValue();
+       $cat->idSeguridadSocial = $objPHPExcel->getActiveSheet()->getCell('AD'.$numRow)->getCalculatedValue();
+       $cat->idDiscapacidad = $objPHPExcel->getActiveSheet()->getCell('AE'.$numRow)->getCalculatedValue();        
+       $cat->idGrupoVulnerable = $objPHPExcel->getActiveSheet()->getCell('AF'.$numRow)->getCalculatedValue();
+       $cat->beneficiarioColectivo = $objPHPExcel->getActiveSheet()->getCell('AG'.$numRow)->getCalculatedValue();
 
+      if (!$cat->curp == null) {
+        $this->model->ImportarBeneficiario($cat);
+      }
+      $numRow+=1;
+    } while(!$cat->curp == null);
+
+  }catch (Exception $e) {
+    $mensaje="error";
+    $page="view/beneficiario/index.php";
+    $beneficiarios = true;
+    $catalogos=true;
+    require_once 'view/index.php';
+  }
+}
 public function Eliminar(){
     $administracion=true; //variable cargada para activar la opcion administracion en el menu
     $beneficiarios=true; //variable cargada para activar la opcion programas en el menu
@@ -157,15 +196,12 @@ public function Eliminar(){
     header ('Location: index.php?c=Beneficiario&a=Index');
   }
 
-public function Detalles(){
-  $administracion=true;
-  $beneficiarios=true;
-  $ben = new Beneficiario();
-  $ben = $this->model->Listar($_REQUEST['idBeneficiario']);
-  $page="view/beneficiario/detalles.php";
-  require_once 'view/index.php';
-}
-
-
-
+  public function Detalles(){
+    $administracion=true;
+    $beneficiarios=true;
+    $ben = new Beneficiario();
+    $ben = $this->model->Listar($_REQUEST['idBeneficiario']);
+    $page="view/beneficiario/detalles.php";
+    require_once 'view/index.php';
+  }
 }
