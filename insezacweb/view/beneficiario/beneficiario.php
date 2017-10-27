@@ -1,3 +1,5 @@
+
+
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
     <h1>Beneficiarios</h1>
@@ -48,28 +50,28 @@
                       <div class="form-group">
                         <label class="col-sm-3 control-label">CURP<strog class="theme_color">*</strog></label>
                         <div class="col-sm-6">
-                          <input name="curp" type="text" class="form-control" value="<?php echo $beneficiario->curp;?>" required placeholder="Ingrese la curp del beneficiario"/>
+                          <input name="curp" id="curp" type="text" required parsley-rangelength="[18,18]"  onchange="mayus(this);" class="form-control" value="<?php echo $beneficiario->curp;?>" required placeholder="Ingrese la curp del beneficiario"/>
                         </div>
                       </div><!--/form-group-->
 
                       <div class="form-group">
                         <label class="col-sm-3 control-label">Primer Apellido<strog class="theme_color">*</strog></label>
                         <div class="col-sm-6">
-                          <input name="primerApellido" value="<?php echo $beneficiario->primerApellido;?>" type="text" class="form-control" required placeholder="Ingrese el primer apellido del beneficiario" />
+                          <input name="primerApellido" onchange="mayus(this);"  value="<?php echo $beneficiario->primerApellido;?>" type="text" class="form-control" required placeholder="Ingrese el primer apellido del beneficiario" />
                         </div>
                       </div><!--/form-group-->
 
                       <div class="form-group">
                         <label class="col-sm-3 control-label">Segundo Apellido</label>
                         <div class="col-sm-6">
-                          <input name="segundoApellido" value="<?php echo $beneficiario->segundoApellido;?>" type="text" class="form-control" placeholder="Ingrese el segundo apellido del beneficiario" />
+                          <input name="segundoApellido" onchange="mayus(this);" value="<?php echo $beneficiario->segundoApellido;?>" type="text" class="form-control" placeholder="Ingrese el segundo apellido del beneficiario" />
                         </div>
                       </div><!--/form-group-->
 
                       <div class="form-group">
                         <label class="col-sm-3 control-label">Nombre(s)<strog class="theme_color">*</strog></label>
                         <div class="col-sm-6">
-                          <input name="nombres" value="<?php echo $beneficiario->nombres;?>" type="text" class="form-control" required placeholder="Ingrese el/los nombre(s) del beneficiario"/>
+                          <input name="nombres" onchange="mayus(this);" value="<?php echo $beneficiario->nombres;?>" type="text" class="form-control" required placeholder="Ingrese el/los nombre(s) del beneficiario"/>
                         </div>
                       </div><!--/form-group-->
 
@@ -215,7 +217,7 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Nombre de la vialidad<strog class="theme_color">*</strog></label>
                 <div class="col-sm-6">
-                  <input name="nombreVialidad" value="<?php echo $beneficiario->nombreVialidad;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" required/>
+                  <input name="nombreVialidad" onchange="mayus(this);" value="<?php echo $beneficiario->nombreVialidad;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" required/>
                 </div>
               </div><!--/form-group-->
 
@@ -281,13 +283,13 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Entre que vialidades<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-                <input name="entreVialidades" value="<?php echo $beneficiario->entreVialidades;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" />
+                <input name="entreVialidades" onchange="mayus(this);" value="<?php echo $beneficiario->entreVialidades;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" />
               </div>
             </div><!--/form-group-->
             <div class="form-group">
               <label class="col-sm-3 control-label">Descripción de la ubicación<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">  
-                <textarea style="height: 60px;" name="descripcionUbicacion" placeholder="Ejemplo: Entre las calles perpendiculares Zaragoza y Abasolo" rows="8" cols="68"><?php echo $beneficiario->descripcionUbicacion;?></textarea>
+                <textarea style="height: 60px;" onchange="mayus(this);" name="descripcionUbicacion" placeholder="Ejemplo: Entre las calles perpendiculares Zaragoza y Abasolo" rows="8" cols="68"><?php echo $beneficiario->descripcionUbicacion;?></textarea>
               </div>
             </div><!--/form-group-->
           </div>
@@ -533,4 +535,10 @@
   </div><!--/col-md-12-->
 </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
+ 
+ <script>
+function mayus(e) {
+    e.value = e.value.toUpperCase();
+}
+</script>
 
