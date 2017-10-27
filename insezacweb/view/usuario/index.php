@@ -54,8 +54,8 @@
              <th>Usuario</th>
              <th>Dirección</th>
              <th>Tipo usuario</th>
-             <th>Editar</th>
-             <th>Borrar</th>
+             <td align="center"><b>Editar</b></td></center>
+             <td align="center"><b>Borrar</b></td>
            </tr>
          </thead>
          <tbody>
@@ -89,8 +89,8 @@
         <th>Usuario</th>
         <th>Dirección</th>
         <th>Tipo usuario</th>
-        <th>Editar</th>
-        <th>Borrar</th>
+        <td align="center"><b>Editar</b></td></center>
+        <td align="center"><b>Borrar</b></td>
       </tr>
     </tfoot>
   </table>

@@ -51,66 +51,95 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">Dirección<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
-              <input name="direccion" type="text" class="form-control" required value="<?php echo $usuario->idUsuario != null ? $usuario->direccion : ""; ?>" placeholder="Ingrese la direccion que pertenece el usuario"/>
-            </div>
-          </div><!--/form-group-->
-          <div class="form-group">
-            <label class="col-sm-3 control-label">Contraseña<strog class="theme_color">*</strog></label>
-            <div class="col-sm-3">
-              <input type="password" type="pass-security" name="password" id="password" class="form-control" required placeholder="Password" />
-            </div>
-            <div class="col-sm-3">
-              <input type="password" class="form-control" required parsley-equalto="#password" placeholder="Confirme la contraseña" />
-            </div>
-          </div><!--/form-group--> 
-          <div class="form-group">
-            <label class="col-sm-3 control-label">Tipo usuario<strog class="theme_color">*</strog></label>
-            <div class="col-sm-6">
-              <select class="form-control" name="tipoUsuario" id="tipoUsuario" required>
-               <?php if($usuario->idUsuario == null){ ?>
-               <option value=""> 
-                Seleccione el tipo de usuario               
-              </option>
-              <?php } if($usuario->idUsuario != null){ ?>
-              <option value="<?php echo $usuario->tipoUsuario; ?>"> 
-                <?php 
-                switch ($usuario->tipoUsuario) {
-                  case 1:
-                  echo "Administrador";
-                  break;
-                  case 2:
-                  echo "Secretario";
-                  break;
-                  case 3:
-                  echo "Regular";
-                  break;
-                } ?>
-              </option>
-              <?php } if($usuario->tipoUsuario!=1){?>
-              <option value="1"> 
-                Administrador
-              </option>
-              <?php } if($usuario->tipoUsuario!=2){?>
-              <option value="2"> 
-                Secretario
-              </option>
-              <?php } if($usuario->tipoUsuario!=3){?>
-              <option value="3"> 
-                Regular
-              </option>
-              <?php } ?>
-            </select>
-          </div>
-        </div><!--/form-group-->
-        <div class="form-group">
-          <div class="col-sm-offset-7 col-sm-5">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a href="?c=Usuario" class="btn btn-default"> Cancelar</a>
-          </div>
-        </div><!--/form-group-->
-      </form>
-    </div><!--/porlets-content-->
-  </div><!--/block-web-->
-</div><!--/col-md-12-->
-</div><!--/row-->
+              <select class="form-control select2" style="width: 100%;" name="direccion" required>
+                <?php if ($usuario->idUsuario != null){ ?>
+                <option value="<?php echo $usuario->direccion; ?>"><?php echo $usuario->direccion; ?></option>
+                <?php }else{ ?>
+                <option value="">Seleccione la dirección a la que pertenece el usuario</option>
+                <?php } ?>
+                <option value="COMISIÓN DE MEJORA REGULATORIA">COMISIÓN DE MEJORA REGULATORIA</option>
+                <option value="DIRECCIÓN DE AGROINDUSTRIA">DIRECCIÓN DE AGROINDUSTRIA</option>
+                <option value="DIRECCIÓN DE COMERCIO EXTERIOR">DIRECCIÓN DE COMERCIO EXTERIOR</option>
+                <option value="DIRECCIÓN DE COMERCIO INTERIOR">DIRECCIÓN DE COMERCIO INTERIOR</option>
+                <option value="DIRECCIÓN DE EMPRENDIMIENTO Y VINCULACIÓN">DIRECCIÓN DE EMPRENDIMIENTO Y VINCULACIÓN</option>
+                <option value="DIRECCIÓN DE FINANCIAMIENTO">DIRECCIÓN DE FINANCIAMIENTO</option>
+                <option value="DIRECCIÓN DE FOMENTO A LA CALIDAD ARTESANAL">DIRECCIÓN DE FOMENTO A LA CALIDAD ARTESANAL</option>
+                <option value="DIRECCIÓN DE INDUSTRIA">DIRECCIÓN DE INDUSTRIA</option>
+                <option value="DIRECCIÓN DE MINAS">DIRECCIÓN DE MINAS</option>
+                <option value="DIRECCIÓN DE PRESERVACIÓN Y PROMOCIÓN DEL PATRIMONIO ARTESANAL">DIRECCIÓN DE PRESERVACIÓN Y PROMOCIÓN DEL PATRIMONIO ARTESANAL</option>
+                <option value="DIRECCIÓN DE PROMOCIÓN Y GESTIÓN DE INVERSIONES">DIRECCIÓN DE PROMOCIÓN Y GESTIÓN DE INVERSIONES</option>
+                <option value="DIRECCIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN">DIRECCIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN</option>
+                <option value="DIRECCIÓN DE TRABAJO Y PREVISIÓN SOCIAL">DIRECCIÓN DE TRABAJO Y PREVISIÓN SOCIAL</option>
+                <option value="IRECCIÓN DEINFRAESTRUCTURA">DIRECCIÓN DEINFRAESTRUCTURA</option>
+                <option value="DIRECCIÓN DEL CENTRO DE INVESTIGACIÓN Y EXPERIMENTACIÓN EN ARTE POPULAR">DIRECCIÓN DEL CENTRO DE INVESTIGACIÓN Y EXPERIMENTACIÓN EN ARTE POPULAR</option>
+                <option value="DIRECCIÓN DEL CENTRO DE OPERACIONES">DIRECCIÓN DEL CENTRO DE OPERACIONES</option>
+                <option value="DIRECCIÓN PARA EL DESARROLLO EMPRESARIAL Y DE EMPRENDEDORES">DIRECCIÓN PARA EL DESARROLLO EMPRESARIAL Y DE EMPRENDEDORES</option>
+                <option value="DIRECIÓN DE PROGRAMAS. PROYECTOS Y FORTALECIMIENTO ARTESANAL">DIRECIÓN DE PROGRAMAS. PROYECTOS Y FORTALECIMIENTO ARTESANAL</option>
+                <option value="SUBSECRETARÍA DE DESARROLLO ARTESANAL">SUBSECRETARÍA DE DESARROLLO ARTESANAL</option>
+                <option value="SUBSECRETARÍA DE FINANCIAMIENTO">SUBSECRETARÍA DE FINANCIAMIENTO</option>
+                <option value="SUBSECRETARÍA DE INDUSTRIA, COMERCIO Y SERVICIOS">SUBSECRETARÍA DE INDUSTRIA, COMERCIO Y SERVICIOS</option>
+                <option value="SUBSECRETARÍA DE INVERSIÓN Y FOMENTO INDUSTRIAL">SUBSECRETARÍA DE INVERSIÓN Y FOMENTO INDUSTRIAL</option>
+                <option value="SUBSECRETARÍA DEL SERVICIO NACIONAL DE EMPLEO">SUBSECRETARÍA DEL SERVICIO NACIONAL DE EMPLEO</option>
+                <select>
+                </div>
+              </div><!--/form-group-->
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Contraseña<strog class="theme_color">*</strog></label>
+                <div class="col-sm-3">
+                  <input type="password" type="pass-security" name="password" id="password" class="form-control" required placeholder="Password" />
+                </div>
+                <div class="col-sm-3">
+                  <input type="password" class="form-control" required parsley-equalto="#password" placeholder="Confirme la contraseña" />
+                </div>
+              </div><!--/form-group--> 
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Tipo usuario<strog class="theme_color">*</strog></label>
+                <div class="col-sm-6">
+                  <select class="form-control" name="tipoUsuario" id="tipoUsuario" required>
+                   <?php if($usuario->idUsuario == null){ ?>
+                   <option value=""> 
+                    Seleccione el tipo de usuario               
+                  </option>
+                  <?php } if($usuario->idUsuario != null){ ?>
+                  <option value="<?php echo $usuario->tipoUsuario; ?>"> 
+                    <?php 
+                    switch ($usuario->tipoUsuario) {
+                      case 1:
+                      echo "Administrador";
+                      break;
+                      case 2:
+                      echo "Secretario";
+                      break;
+                      case 3:
+                      echo "Regular";
+                      break;
+                    } ?>
+                  </option>
+                  <?php } if($usuario->tipoUsuario!=1){?>
+                  <option value="1"> 
+                    Administrador
+                  </option>
+                  <?php } if($usuario->tipoUsuario!=2){?>
+                  <option value="2"> 
+                    Secretario
+                  </option>
+                  <?php } if($usuario->tipoUsuario!=3){?>
+                  <option value="3"> 
+                    Regular
+                  </option>
+                  <?php } ?>
+                </select>
+              </div>
+            </div><!--/form-group-->
+            <div class="form-group">
+              <div class="col-sm-offset-7 col-sm-5">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="?c=Usuario" class="btn btn-default"> Cancelar</a>
+              </div>
+            </div><!--/form-group-->
+          </form>
+        </div><!--/porlets-content-->
+      </div><!--/block-web-->
+    </div><!--/col-md-12-->
+  </div><!--/row-->
 </div><!--/container clear_both padding_fix-->

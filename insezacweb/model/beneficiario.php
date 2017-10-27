@@ -37,6 +37,10 @@ class Beneficiario
 	public $idDiscapacidad;
 	public $idGrupoVulnerable;
 	public $beneficiarioColectivo;
+	public $idUsuario;
+	public $fechaRegistro;
+	public $horaRegistro;
+	public $estado;
 	
 	public function __CONSTRUCT()
 	{

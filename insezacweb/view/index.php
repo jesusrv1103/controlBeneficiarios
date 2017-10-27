@@ -31,6 +31,7 @@ if (!isset($_SESSION['seguridad'])){
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datepicker/css/datepicker.css" />
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-timepicker/compiled/timepicker.css" />
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css" />
+  <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.min.css">
 </head>
 <style type="text/css">
 .disabled {
@@ -188,8 +189,11 @@ if (!isset($_SESSION['seguridad'])){
 <script src="assets/plugins/file-uploader/js/jquery.iframe-transport.js"></script>
 <script src="assets/plugins/file-uploader/js/jquery.fileupload.js"></script>
 <script src="assets/plugins/validation/parsley.min.js"></script>
+<script src="assets/plugins/select2/dist/js/select2.full.min.js"></script>
 <script>
-  /*==Porlets Actions==*/
+
+  //*************Subir archivos automaicos************
+
   $(document).on('ready', function() {
     'use strict';
     // Change this to the location of your server-side upload handler:
@@ -212,6 +216,8 @@ if (!isset($_SESSION['seguridad'])){
     }).prop('disabled', !$.support.fileInput)
     .parent().addClass($.support.fileInput ? undefined : 'disabled');
   });
+
+  //**********Elimina archivos existentes para importar otros archivos******************
 
   $('.catalogos').change(function(e) {
     e.preventDefault();
@@ -285,6 +291,47 @@ if (!isset($_SESSION['seguridad'])){
     });
     e.preventDefault();
   });
+
+  //******************SELEC2*********************
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    //Date range picker
+    $('#reservation').daterangepicker()
+
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass   : 'iradio_minimal-red'
+    })
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    //Timepicker
+    $('.timepicker').timepicker({
+      showInputs: false
+    })
+  })
+</script>
+<script>
+  
 </script>
 </body>
 </html>
