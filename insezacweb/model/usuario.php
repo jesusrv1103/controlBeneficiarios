@@ -25,7 +25,7 @@ class Usuario
 		try
 		{
 			//$result = array();
-			$stm = $this->pdo->prepare("SELECT * FROM usuarios");
+			$stm = $this->pdo->prepare("SELECT * from usuarios");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -56,7 +56,7 @@ class Usuario
 			->prepare("SELECT * FROM usuarios WHERE usuario=?");
 			$stm->execute(
 				array($username)
-			);
+				);
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) 
 		{
@@ -76,13 +76,17 @@ class Usuario
 			die($e->getMessage());
 		}
 	}
-	public function EliminarInDB($id)
+	public function EliminarInDB($usuario)
 	{
 		try 
 		{
 			$stm = $this->pdo
-			->prepare("drop user 'usuario'@'localhost'");			          
-			$stm->execute(array($id));
+			->prepare("drop user ? @'localhost'");			          
+			$stm->execute(
+				array(
+					$usuario
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -161,6 +165,23 @@ class Usuario
 					$data->password,	
 					)
 				);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
+public function ObtenerUsuario($idUsuario)
+	{
+		try 
+		{
+			$sql= $this->pdo->prepare("SELECT * FROM usuarios WHERE idUsuario=?");
+			$resultado=$sql->execute(
+				array(
+                    $idUsuario
+                )
+			);
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());

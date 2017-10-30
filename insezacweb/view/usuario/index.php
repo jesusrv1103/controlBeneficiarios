@@ -64,37 +64,37 @@
             <td><?php echo $r->usuario; ?></td>
             <td><?php echo $r->direccion; ?></td>
             <td><?php 
-            switch ($r->tipoUsuario) {
-              case 1:
-              echo "Administrador";
-              break;
-              case 2:
-              echo "Secretario";
-              break;
-              case 3:
-              echo "Regular";
-              break;
-            }?></td>
-            <td class="center">
-              <a href="index.php?c=Usuario&a=Crud&idUsuario=<?php echo $r->idUsuario; ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>
-            </td>
-            <td class="center">
-             <a onclick="eliminarUsuario(<?php echo $r->idUsuario;?>);" class="btn btn-danger" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-           </td>
-         </tr>
-       <?php endforeach; ?>
-     </tbody>
-     <tfoot>
-       <tr>
-        <th>Usuario</th>
-        <th>Dirección</th>
-        <th>Tipo usuario</th>
-        <th>Editar</th>
-        <th>Borrar</th>
-      </tr>
-    </tfoot>
-  </table>
-</div><!--/table-responsive-->
+              switch ($r->tipoUsuario) {
+                case 1:
+                echo "Administrador";
+                break;
+                case 2:
+                echo "Secretario";
+                break;
+                case 3:
+                echo "Regular";
+                break;
+              }?></td>
+              <td class="center">
+                <a href="index.php?c=Usuario&a=Crud&idUsuario=<?php echo $r->idUsuario; ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>
+              </td>
+              <td class="center">
+               <a onclick="eliminarUsuario(<?php echo $r->idUsuario; ?>);" class="btn btn-danger" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+             </td>
+           </tr>
+         <?php endforeach; ?>
+       </tbody>
+       <tfoot>
+         <tr>
+          <th>Usuario</th>
+          <th>Dirección</th>
+          <th>Tipo usuario</th>
+          <th>Editar</th>
+          <th>Borrar</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div><!--/table-responsive-->
 </div><!--/porlets-content-->
 </div><!--/block-web-->
 </div><!--/col-md-12-->
@@ -118,7 +118,7 @@
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
           <form action="?c=Usuario&a=Eliminar" enctype="multipart/form-data" method="post">
-            <input hidden type="text" name="idUsuario" id="txtIdUsuario">
+          <input hidden type="text" name="idUsuario" id="txtIdUsuario">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
           </form>
@@ -129,6 +129,8 @@
 </div><!--/modal-fade--> 
 <script>
   eliminarUsuario = function(idUsuario){
-    $('#txtIdUsuario').val(idUsuario);  
+    $('#txtIdUsuario').val(idUsuario);
+    //$('#txtUsuario').val(usuario);  
+
   };
 </script>

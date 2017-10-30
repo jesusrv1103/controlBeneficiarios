@@ -34,7 +34,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Clave de localidad<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-               <input autofocus name="idLocalidad" id="idLocalidad" parsley-type="number" class="form-control" required value="<?php echo $localidad->idLocalidad != null ? $localidad->idLocalidad  : "";  ?>" placeholder="Ingrese la clave de la localidad"/>
+               <input autofocus name="idLocalidad" id="idLocalidad" parsley-type="number" class="form-control" required value="<?php echo $localidad->idLocalidad != null ? $localidad->idLocalidad  : "";  ?>" placeholder="Ingrese la clave de la localidad" <?php if($localidad->idLocalidad != null){ ?> readonly <?php } ?>/>
              </div>
            </div><!--/form-group-->
            <div class="form-group">
