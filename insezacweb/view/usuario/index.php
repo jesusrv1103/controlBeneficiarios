@@ -118,7 +118,7 @@
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
           <form action="?c=Usuario&a=Eliminar" enctype="multipart/form-data" method="post">
-            <input hidden type="text" name="idUsuario" id="txtIdUsuario">
+          <input hidden type="text" name="idUsuario" id="txtIdUsuario">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
           </form>
@@ -129,6 +129,8 @@
 </div><!--/modal-fade--> 
 <script>
   eliminarUsuario = function(idUsuario){
-    $('#txtIdUsuario').val(idUsuario);  
+    $('#txtIdUsuario').val(idUsuario);
+    //$('#txtUsuario').val(usuario);  
+
   };
 </script>

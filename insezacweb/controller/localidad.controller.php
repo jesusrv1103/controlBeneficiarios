@@ -126,5 +126,3 @@ public function Guardar(){
     require_once 'view/index.php';
   }
 }
-
-
