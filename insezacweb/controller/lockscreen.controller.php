@@ -23,7 +23,7 @@ class LockscreenController{
 		if(isset($_REQUEST['idUsuario'])){
 			$idUsuario=$_REQUEST['idUsuario'];
 		}
-		$usuario=$log->usuario = $_SESSION['user_session'];
+		$usuario=$log->usuario = $_SESSION['usuario'];
 		$password = $_REQUEST['password'];
 		$password=md5($password);
 		$password=crc32($password);

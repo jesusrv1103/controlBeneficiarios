@@ -1,6 +1,11 @@
  <style type="text/css">
  .lbldetalle{
+  color:#424242;
+   font-weight: bold;
+}
+ .h3subtitulo{
   color:#2196F3;
+  font-weight: bold;
 }
 </style>
 
@@ -33,7 +38,7 @@
         <div class="col-md-6">
           <div class="block-web">
             <div class="header">
-              <h3 class="content-header">Datos generales</h3>
+              <h3 class="content-header h3subtitulo">Datos generales</h3>
             </div>
             <div class="porlets-content">
               <div class="panel-body">
@@ -122,7 +127,7 @@
 <div class="col-md-6">
   <div class="block-web">
     <div class="header">
-      <h3 class="content-header">Vialidad</h3>
+      <h3 class="content-header h3subtitulo">Vialidad</h3>
     </div>
     <div class="porlets-content">
       <div class="panel-body">
@@ -205,7 +210,7 @@
   <div class="col-md-6">
     <div class="block-web">
       <div class="header">
-        <h3 class="content-header">Estado social</h3>
+        <h3 class="content-header h3subtitulo">Estado social</h3>
       </div>
       <div class="porlets-content">
         <div class="panel-body">
@@ -295,7 +300,7 @@
 <div class="col-md-6">
   <div class="block-web">
     <div class="header">
-      <h3 class="content-header">Vivienda</h3>
+      <h3 class="content-header h3subtitulo">Vivienda</h3>
     </div>
     <div class="porlets-content">
       <div class="panel-body">

@@ -1,5 +1,8 @@
-
-
+ <style type="text/css">
+ .lbldetalle{
+  color:#2196F3;
+}
+</style>
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
     <h1>Beneficiarios</h1>

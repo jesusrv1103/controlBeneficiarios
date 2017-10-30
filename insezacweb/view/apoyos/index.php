@@ -64,7 +64,7 @@ if(isset($mensaje))
                   <th>Numero de apoyos</th>
                   <th>Ultimo apoyo</th>
                   <th>Periocidad</th>
-                  <?php if($_SESSION['user_type']==1){?>
+                  <?php if($_SESSION['tipoUsuario']==1){?>
                   <th>Editar</th>
                   <th>Eliminar</th> 
                   <?php } ?>
@@ -82,8 +82,8 @@ if(isset($mensaje))
                   <td>Numero de apoyos</td>
                   <td>Ultimo apoyo</td>
                   <td>Periocidad</td>
-                  <?php if($_SESSION['user_type']==1){?><td>Editar</td><?php } ?>
-                  <?php if($_SESSION['user_type']==1){?><td>Eliminar</td><?php } ?>
+                  <?php if($_SESSION['tipoUsuario']==1){?><td>Editar</td><?php } ?>
+                  <?php if($_SESSION['tipoUsuario']==1){?><td>Eliminar</td><?php } ?>
                 </tr>
               </tbody>
               <tfoot>
@@ -96,7 +96,7 @@ if(isset($mensaje))
                   <th>Importe del apoyo</th>
                   <th>Numero de apoyos</th>
                   <th>Ultimo apoyo</th>
-                   <?php if($_SESSION['user_type']==1){?>
+                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <th>Editar</th>
                   <th>Eliminar</th> 
                   <?php } ?>

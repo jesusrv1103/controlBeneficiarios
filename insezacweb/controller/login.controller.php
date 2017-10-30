@@ -23,7 +23,8 @@ class LoginController{
    $consulta=$this->model->verificar($log);
    if($consulta!=null){
     if($consulta->password == $password){
-      $this->login($usuario,$password,$consulta->tipoUsuario);
+      $direccion=$consulta->direccion;
+      $this->login($usuario,$password,$consulta->tipoUsuario,$direccion);
       header ('Location: index.php?c=Inicio');
     }else{
       $error="  La contraseña es incorrrecta";
@@ -35,11 +36,12 @@ class LoginController{
  }
 }
 
-public function login($usuario,$password,$type)
+public function login($usuario,$password,$tipo,$direccion)
 {
- $_SESSION['user_session'] = $usuario;
- $_SESSION['user_password'] = $password;
- $_SESSION['user_type'] = $type;
+ $_SESSION['usuario'] = $usuario;
+ $_SESSION['password'] = $password;
+ $_SESSION['tipoUsuario'] = $tipo;
+ $_SESSION['direccion']=$direccion;
  $_SESSION['seguridad'] = "ok";
 }
 
@@ -51,7 +53,8 @@ public function redirect($url)
 public function logout()
 {
   session_destroy();
-  unset($_SESSION['user_session']);
+  unset($_SESSION['usuario']);
+  unset($_SESSION['password']);
   unset($_SESSION['seguridad']);
   header ('Location: index.php');
 }

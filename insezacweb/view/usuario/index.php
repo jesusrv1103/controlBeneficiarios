@@ -1,6 +1,6 @@
 <div class="pull-left breadcrumb_admin clear_both">
  <div class="pull-left page_title theme_color">
-   <h1>Inicio</h1>
+   <h1>Administración</h1>
    <h2 class="">Usuarios</h2>
  </div>
  <div class="pull-right">
@@ -22,7 +22,7 @@
           </div>
           <div class="col-sm-4">
            <div class="btn-group pull-right" style="margin-right: 10px;">
-             <div class="btn-group"> <a class="btn btn-sm btn-success" href="?c=Usuario&a=Crud"> <i class="fa fa-plus"></i> Alta de usuario </a> </div>
+             <div class="btn-group"> <a class="btn btn-sm btn-default" href="?c=Usuario&a=Crud"> <i class="fa fa-user"></i> Alta de usuario </a> </div>
            </div>
          </div>
        </div>
@@ -54,8 +54,8 @@
              <th>Usuario</th>
              <th>Dirección</th>
              <th>Tipo usuario</th>
-             <th>Editar</th>
-             <th>Borrar</th>
+             <td align="center"><b>Editar</b></td></center>
+             <td align="center"><b>Borrar</b></td>
            </tr>
          </thead>
          <tbody>
@@ -64,37 +64,37 @@
             <td><?php echo $r->usuario; ?></td>
             <td><?php echo $r->direccion; ?></td>
             <td><?php 
-              switch ($r->tipoUsuario) {
-                case 1:
-                echo "Administrador";
-                break;
-                case 2:
-                echo "Secretario";
-                break;
-                case 3:
-                echo "Regular";
-                break;
-              }?></td>
-              <td class="center">
-                <a href="index.php?c=Usuario&a=Crud&idUsuario=<?php echo $r->idUsuario; ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>
-              </td>
-              <td class="center">
-               <a onclick="eliminarUsuario(<?php echo $r->idUsuario; ?>);" class="btn btn-danger" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-             </td>
-           </tr>
-         <?php endforeach; ?>
-       </tbody>
-       <tfoot>
-         <tr>
-          <th>Usuario</th>
-          <th>Dirección</th>
-          <th>Tipo usuario</th>
-          <th>Editar</th>
-          <th>Borrar</th>
-        </tr>
-      </tfoot>
-    </table>
-  </div><!--/table-responsive-->
+            switch ($r->tipoUsuario) {
+              case 1:
+              echo "Administrador";
+              break;
+              case 2:
+              echo "Secretario";
+              break;
+              case 3:
+              echo "Regular";
+              break;
+            }?></td>
+            <td class="center">
+              <a href="index.php?c=Usuario&a=Crud&idUsuario=<?php echo $r->idUsuario; ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>
+            </td>
+            <td class="center">
+             <a onclick="eliminarUsuario(<?php echo $r->idUsuario;?>);" class="btn btn-danger" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+           </td>
+         </tr>
+       <?php endforeach; ?>
+     </tbody>
+     <tfoot>
+       <tr>
+        <th>Usuario</th>
+        <th>Dirección</th>
+        <th>Tipo usuario</th>
+        <td align="center"><b>Editar</b></td></center>
+        <td align="center"><b>Borrar</b></td>
+      </tr>
+    </tfoot>
+  </table>
+</div><!--/table-responsive-->
 </div><!--/porlets-content-->
 </div><!--/block-web-->
 </div><!--/col-md-12-->

@@ -1,6 +1,11 @@
+<style type="text/css">
+.lblinfo{
+  color:#2196F3;
+}
+</style>
 <div class="pull-left breadcrumb_admin clear_both">
  <div class="pull-left page_title theme_color">
-   <h1>Inicio</h1>
+   <h1>Administración</h1>
    <h2 class="">Beneficiarios</h2>
  </div>
  <div class="pull-right">
@@ -10,7 +15,6 @@
    </ol>
  </div>
 </div>
-
 <div class="container clear_both padding_fix">
   <div class="row">
     <div class="col-md-12">
@@ -26,10 +30,10 @@
                 <b> 
                   <div class="btn-group" style="margin-right: 10px;"> 
                     <a class="btn btn-sm btn-success tooltips" href="?c=beneficiario&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo beneficiario"> <i class="fa fa-plus"></i> Registrar </a>
-                    <?php if($_SESSION['user_type']==1){?>
+                    
                     <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar catálogo para registrar beneficiarios" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
-                  <?php } ?>
-                   </div>
+
+                  </div>
                 </b>
               </div>
             </div>    
@@ -56,62 +60,65 @@
         <?php } }?>
         <div class="porlets-content">
           <div class="table-responsive">
-            <table  class="display table table-bordered table-striped" id="dynamic-table">
+            <table class="display table table-bordered table-striped" id="dynamic-table">
              <thead>
                <tr>
+                 <td><center><b>Info</b></center></td>
                  <th>CURP</th>
-                 <th>Primer apellido</th>
-                 <th>Segundo apellido</th>
-                 <th>Nombre</th>
+                 <th>Nombre de beneficiario</th>
                  <td><center><b>Ver</b></center></td>
-                 <?php if($_SESSION['user_type']==1){?>
+                 <?php if($_SESSION['tipoUsuario']==1){?>
                  <td><center><b>Editar</b></center></td>
                  <td><center><b>Borrar</b></center></td>
                  <?php } ?>
-                 
                </tr>
              </thead>
              <tbody>
+
               <?php foreach($this->model->Listar1() as $r): ?>
                 <tr class="grade">
 
+                  <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+
                   <td><?php echo $r->curp ?> </td>
-                  <td><?php echo $r->primerApellido ?> </td>
-                  <td><?php echo $r->segundoApellido ?> </td>
-                  <td><?php echo $r->nombres ?> </td>
-                  <?php if($_SESSION['user_type']==1){?>
+
+                  <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+
                   <td class="center">
-                    <a class="btn btn-info tooltips" role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+                    <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
                   </td>
+
+                  <?php if($_SESSION['tipoUsuario']==1){?>
                   <td class="center">
-                    <a class="btn btn-primary" role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-primary btn-sm" role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
                   </td>
+
                   <td class="center">
-                   <a class="btn btn-danger" onclick="eliminarBeneficiario(<?php echo $r->idBeneficiario;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+                   <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idBeneficiario;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                  </td>
                  <?php } ?>
 
                </tr>
              <?php endforeach; ?>
+
            </tbody>
            <tfoot>
              <tr>
-               <th>CURP</th>
-               <th>Primer apellido</th>
-               <th>Segunda apellido</th>
-               <th>Nombre</th>
-               <td><center><b>Ver</b></center></td>
-               <?php if($_SESSION['user_type']==1){?>
-               <th><center><b>Editar</b></center></th>
-               <td><center><b>Borrar</b></center></td>
-               <?php } ?>        
-             </tr>
-           </tfoot>
-         </table>
-       </div><!--/table-responsive-->
-     </div><!--/porlets-content-->
-   </div><!--/block-web-->
- </div><!--/col-md-12-->
+              <th>Info</th>
+              <th>CURP</th>
+              <th>Nombre de beneficiario</th>
+              <td><center><b>Ver</b></center></td>
+              <?php if($_SESSION['tipoUsuario']==1){?>
+              <th><center><b>Editar</b></center></th>
+              <td><center><b>Borrar</b></center></td>
+              <?php } ?>        
+            </tr>
+          </tfoot>
+        </table>
+      </div><!--/table-responsive-->
+    </div><!--/porlets-content-->
+  </div><!--/block-web-->
+</div><!--/col-md-12-->
 </div><!--/row-->
 </div>
 <div class="modal fade" id="modalImportar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -154,6 +161,13 @@
     </div><!--/modal-content--> 
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
+<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width: 50%;">
+    <div class="modal-content" id="div-modal-content">
+      <!--************************En esta sección se incluye el modal de informacion de registro y apoyo***************************-->
+  </div><!--/modal-content--> 
+</div><!--/modal-dialog--> 
+</div><!--/modal-fade--> 
 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default red_border horizontal_border_1">
@@ -185,4 +199,10 @@
   eliminarBeneficiario = function(idBeneficiario){
     $('#txtIdBeneficiario').val(idBeneficiario);  
   };
+  infoRegistro = function (idBeneficiario){
+    var idBenficiario=idBenficiario;
+    $.post("index.php?c=beneficiario&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
+      $("#div-modal-content").html(info);
+    }); 
+  }
 </script>
