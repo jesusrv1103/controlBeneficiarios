@@ -11,14 +11,6 @@ class BeneficiarioController{
   public function __CONSTRUCT(){
     $this->model = new Beneficiario();
     $this->model2 = new Catalogos();
-    /*try
-    {
-      $this->pdo = Database::StartUp();     
-    }
-    catch(Exception $e)
-    {
-      die($e->getMessage());
-    }*/
   }
   public function Index(){
    $administracion = true;
@@ -71,12 +63,25 @@ class BeneficiarioController{
   isset($_REQUEST['viviendaGas'])? $beneficiario->viviendaGas="Si": $beneficiario->viviendaGas="No";
   isset($_REQUEST['viviendaTelefono'])? $beneficiario->viviendaTelefono="Si": $beneficiario->viviendaTelefono="No";
   isset($_REQUEST['viviendaInternet'])? $beneficiario->viiendaInternet="Si": $beneficiario->viviendaInternet="No";
+
+  //Datos de registro
+  $beneficiario->usuario=$_SESSION['usuario'];
+  $beneficiario->fecha=date("Y-m-d");
+  $beneficiario->hora=date("H:i:s");
+  $beneficiario->direccion=$_SESSION['direccion'];
+  $beneficiario->estado="Activo";
+
   if($beneficiario->idBeneficiario > 0){ 
+    $idRegistro=$this->model->ObtenerIdRegistro($beneficiario->idBeneficiario);
+    $beneficiario->idRegistro=$idRegistro->idRegistro;
+    $this->model->RegistraActualizacion($beneficiario);
     $this->model->Actualizar($beneficiario);
-    $mensaje="El beneficiario se ha actualizado correctamente";
+    
+    $mensaje="Los datos del beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha actualizado correctamente";
   }else{
     $this->model->Registrar($beneficiario);
-    $mensaje="El beneficiario se ha registrado correctamente";
+    $this->model->RegistraDatosRegistro($beneficiario);
+    $mensaje="El beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha registrado correctamente";
   }
   $administracion = true;
   $inicio = false;
@@ -130,55 +135,62 @@ public function Leearchivo($objPHPExcel,$numRows){
     $numRow=2;
     do {
             //echo "Entra";
-   $cat= new Beneficiario;
-       $cat->curp = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
-       $cat->primerApellido = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
-       $cat->segundoApellido = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
-       $cat->nombres = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
-       $cat->idIdentificacion = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
-       $cat->idTipoVialidad = $objPHPExcel->getActiveSheet()->getCell('F'.$numRow)->getCalculatedValue();
-       $cat->nombreVialidad = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
-       $cat->noExterior = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
-       $cat->noInterior = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
-       $cat->idAsentamientos = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
-       $cat->idLocalidad = $objPHPExcel->getActiveSheet()->getCell('K'.$numRow)->getCalculatedValue();
-       $cat->entreVialidades = $objPHPExcel->getActiveSheet()->getCell('L'.$numRow)->getCalculatedValue();
-       $cat->descripcionUbicacion = $objPHPExcel->getActiveSheet()->getCell('M'.$numRow)->getCalculatedValue();
-       $cat->estudioSocioeconomico = $objPHPExcel->getActiveSheet()->getCell('N'.$numRow)->getCalculatedValue();
-       $cat->idEstadoCivil = $objPHPExcel->getActiveSheet()->getCell('O'.$numRow)->getCalculatedValue();
-       $cat->jefeFamilia = $objPHPExcel->getActiveSheet()->getCell('P'.$numRow)->getCalculatedValue();
-       $cat->idOcupacion = $objPHPExcel->getActiveSheet()->getCell('Q'.$numRow)->getCalculatedValue();
-       $cat->idIngresoMensual = $objPHPExcel->getActiveSheet()->getCell('R'.$numRow)->getCalculatedValue();
-       $cat->integrantesFamilia = $objPHPExcel->getActiveSheet()->getCell('S'.$numRow)->getCalculatedValue();
-       $cat->dependientesEconomicos = $objPHPExcel->getActiveSheet()->getCell('T'.$numRow)->getCalculatedValue();
-       $cat->idVivienda =$objPHPExcel->getActiveSheet()->getCell('U'.$numRow)->getCalculatedValue();
-       $cat->noHabitantes = $objPHPExcel->getActiveSheet()->getCell('V'.$numRow)->getCalculatedValue();
-       $cat->viviendaElectricidad = $objPHPExcel->getActiveSheet()->getCell('W'.$numRow)->getCalculatedValue();
-       $cat->viviendaAgua = $objPHPExcel->getActiveSheet()->getCell('X'.$numRow)->getCalculatedValue();
-       $cat->viviendaDrenaje = $objPHPExcel->getActiveSheet()->getCell('Y'.$numRow)->getCalculatedValue();
-       $cat->viviendaGas = $objPHPExcel->getActiveSheet()->getCell('Z'.$numRow)->getCalculatedValue();
-       $cat->viviendaTelefono = $objPHPExcel->getActiveSheet()->getCell('AA'.$numRow)->getCalculatedValue();
-       $cat->viviendaInternet = $objPHPExcel->getActiveSheet()->getCell('AB'.$numRow)->getCalculatedValue();
-       $cat->idNivelEstudios = $objPHPExcel->getActiveSheet()->getCell('AC'.$numRow)->getCalculatedValue();
-       $cat->idSeguridadSocial = $objPHPExcel->getActiveSheet()->getCell('AD'.$numRow)->getCalculatedValue();
-       $cat->idDiscapacidad = $objPHPExcel->getActiveSheet()->getCell('AE'.$numRow)->getCalculatedValue();        
-       $cat->idGrupoVulnerable = $objPHPExcel->getActiveSheet()->getCell('AF'.$numRow)->getCalculatedValue();
-       $cat->beneficiarioColectivo = $objPHPExcel->getActiveSheet()->getCell('AG'.$numRow)->getCalculatedValue();
+     $ben= new Beneficiario;
+     $ben->curp = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
+     $ben->primerApellido = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
+     $ben->segundoApellido = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
+     $ben->nombres = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
+     $ben->idIdentificacion = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
+     $ben->idTipoVialidad = $objPHPExcel->getActiveSheet()->getCell('F'.$numRow)->getCalculatedValue();
+     $ben->nombreVialidad = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
+     $ben->noExterior = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
+     $ben->noInterior = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
+     $ben->idAsentamientos = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
+     $ben->idLocalidad = $objPHPExcel->getActiveSheet()->getCell('K'.$numRow)->getCalculatedValue();
+     $ben->entreVialidades = $objPHPExcel->getActiveSheet()->getCell('L'.$numRow)->getCalculatedValue();
+     $ben->descripcionUbicacion = $objPHPExcel->getActiveSheet()->getCell('M'.$numRow)->getCalculatedValue();
+     $ben->estudioSocioeconomico = $objPHPExcel->getActiveSheet()->getCell('N'.$numRow)->getCalculatedValue();
+     $ben->idEstadoCivil = $objPHPExcel->getActiveSheet()->getCell('O'.$numRow)->getCalculatedValue();
+     $ben->jefeFamilia = $objPHPExcel->getActiveSheet()->getCell('P'.$numRow)->getCalculatedValue();
+     $ben->idOcupacion = $objPHPExcel->getActiveSheet()->getCell('Q'.$numRow)->getCalculatedValue();
+     $ben->idIngresoMensual = $objPHPExcel->getActiveSheet()->getCell('R'.$numRow)->getCalculatedValue();
+     $ben->integrantesFamilia = $objPHPExcel->getActiveSheet()->getCell('S'.$numRow)->getCalculatedValue();
+     $ben->dependientesEconomicos = $objPHPExcel->getActiveSheet()->getCell('T'.$numRow)->getCalculatedValue();
+     $ben->idVivienda =$objPHPExcel->getActiveSheet()->getCell('U'.$numRow)->getCalculatedValue();
+     $ben->noHabitantes = $objPHPExcel->getActiveSheet()->getCell('V'.$numRow)->getCalculatedValue();
+     $ben->viviendaElectricidad = $objPHPExcel->getActiveSheet()->getCell('W'.$numRow)->getCalculatedValue();
+     $ben->viviendaAgua = $objPHPExcel->getActiveSheet()->getCell('X'.$numRow)->getCalculatedValue();
+     $ben->viviendaDrenaje = $objPHPExcel->getActiveSheet()->getCell('Y'.$numRow)->getCalculatedValue();
+     $ben->viviendaGas = $objPHPExcel->getActiveSheet()->getCell('Z'.$numRow)->getCalculatedValue();
+     $ben->viviendaTelefono = $objPHPExcel->getActiveSheet()->getCell('AA'.$numRow)->getCalculatedValue();
+     $ben->viviendaInternet = $objPHPExcel->getActiveSheet()->getCell('AB'.$numRow)->getCalculatedValue();
+     $ben->idNivelEstudios = $objPHPExcel->getActiveSheet()->getCell('AC'.$numRow)->getCalculatedValue();
+     $ben->idSeguridadSocial = $objPHPExcel->getActiveSheet()->getCell('AD'.$numRow)->getCalculatedValue();
+     $ben->idDiscapacidad = $objPHPExcel->getActiveSheet()->getCell('AE'.$numRow)->getCalculatedValue();        
+     $ben->idGrupoVulnerable = $objPHPExcel->getActiveSheet()->getCell('AF'.$numRow)->getCalculatedValue();
+     $ben->beneficiarioColectivo = $objPHPExcel->getActiveSheet()->getCell('AG'.$numRow)->getCalculatedValue();
+       //Datos de registro
+     $ben->usuario=$_SESSION['usuario'];
+     $ben->fecha=date("Y-m-d");
+     $ben->hora=date("H:i:s");
+     $ben->direccion=$_SESSION['direccion'];
+     $ben->estado="Activo";
 
-      if (!$cat->curp == null) {
-        $this->model->ImportarBeneficiario($cat);
-      }
-      $numRow+=1;
-    } while(!$cat->curp == null);
+     if (!$ben->curp == null) {
+      $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
+      $this->model->ImportarBeneficiario($ben);
+    }
+    $numRow+=1;
+  } while(!$ben->curp == null);
 
-  }catch (Exception $e) {
-    $error=true;
-    $mensaje="Error al insertar datos del archivo";
-    $page="view/beneficiario/index.php";
-    $beneficiarios = true;
-    $catalogos=true;
-    require_once 'view/index.php';
-  }
+}catch (Exception $e) {
+  $error=true;
+  $mensaje="Error al insertar datos del archivo";
+  $page="view/beneficiario/index.php";
+  $beneficiarios = true;
+  $catalogos=true;
+  require_once 'view/index.php';
+}
 }
 public function Eliminar(){
     $administracion=true; //variable cargada para activar la opcion administracion en el menu
@@ -194,5 +206,145 @@ public function Eliminar(){
     $ben = $this->model->Listar($_REQUEST['idBeneficiario']);
     $page="view/beneficiario/detalles.php";
     require_once 'view/index.php';
+  }
+
+  public function Inforegistro(){
+    $idBeneficiario = $_POST['idBeneficiario'];
+    $infoRegistro=$this->model->ObtenerInfoRegistro($idBeneficiario);
+    $infoActualizacion=$this->model->ListarActualizacion($infoRegistro->idRegistro);
+    echo   '  
+<div class="modal-body"> 
+  <div class="row">
+    <div class="block-web">
+     <div class="header">
+      <div class="row" style="margin-bottom: 12px;">
+        <div class="col-sm-9">
+          <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Detalles de apoyo y registro</h2>
+        </div>
+        <div class="col-md-3">
+          <div class="btn-group pull-right">
+            <b> 
+              <div class="btn-group" style="margin-right: 10px; margin-top: 5px;"> 
+                <a class="btn btn-sm btn-primary tooltips" href="?c=beneficiario&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo beneficiario"> <i class="fa fa-print"></i></a>
+              </div>
+            </b>
+          </div>
+        </div>    
+      </div>
+    </div>        
+    <div class="porlets-content" style="margin-bottom: -65px;">
+      <table class="table table-striped">
+        <tbody>
+          <tr>
+           <td>
+             <div class="col-md-12">   
+               <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Información de apoyo a beneficiario</b></label>
+             </div>
+           </td>
+         </tr>
+         <tr>
+          <td>
+            <div class="col-md-12">
+             <label class="col-sm-4 lbl-detalle"><b>Beneficiario:</b></label>
+             <label class="col-sm-7 control-label">'.$infoRegistro->nombres." ".$infoRegistro->primerApellido." ".$infoRegistro->segundoApellido.'</label>
+           </div>
+           <div class="col-md-12">
+             <label class="col-sm-4 lbl-detalle"><b>Localidad:</b></label>
+             <label class="col-sm-7 control-label">Valparaíso</label>
+           </div>
+           <div class="col-md-12">
+             <label class="col-sm-4 lbl-detalle"><b>Dirección que lo apoya:</b></label>
+             <label class="col-sm-7 control-label">'.$infoRegistro->direccion.'</label>
+           </div>
+           <div class="col-md-12">
+            <label class="col-sm-4 lbl-detalle"><b>Tipo de apoyo:</b></label>
+            <label class="col-sm-7 control-label">Federal</label>
+          </div>
+          <div class="col-md-12">
+            <label class="col-sm-4 lbl-detalle"><b>Programa:</b></label>
+            <label class="col-sm-7 control-label">Red de apoyo al emprendedor</label>
+          </div>
+          <div class="col-md-12">
+            <label class="col-sm-4 lbl-detalle"><b>Descripción de apoyo:</b></label>
+            <label class="col-sm-8 control-label">Es una comunidad conformada por organizaciones gubernamentales y privadas (aliados), que ofrece sus programas, productos, servicios y soluciones a ciudadanos como tú que buscan emprender de forma exitosa un negocio o que ya cuentan con uno y lo quieren mejorar o hacer crecer.</label>
+          </div>
+          <div class="col-md-12">
+            <label class="col-sm-4 lbl-detalle"><b>Costo:</b></label>
+            <label class="col-sm-7 control-label">$80,000.00</label>
+          </div>
+          <div class="col-md-12">
+            <label class="col-sm-4 lbl-detalle"><b>Número de apoyos:</b></label>
+            <label class="col-sm-7 control-label">5</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="col-md-12">   
+           <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de registro</b></label>
+         </div>
+       </td>
+     </tr>
+     <tr>
+      <td>
+        <div class="col-md-12">
+         <label class="col-sm-4 lbl-detalle"><strong>Fecha de registro:</strong></label>
+         <label class="col-sm-6">'.$infoRegistro->fecha.'</label><br>
+       </div>
+       <div class="col-md-12">
+         <label class="col-sm-4 lbl-detalle"><strong>Hora de registro:</strong></label>
+         <label class="col-sm-6">'.$infoRegistro->hora.'</label><br>
+       </div>
+       <div class="col-md-12">
+         <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
+         <label class="col-sm-6">'.$infoRegistro->usuario.'</label><br>
+       </div>
+       <div class="col-md-12">
+         <label class="col-sm-4 lbl-detallet"><strong>Estado de registro:</strong></label>
+         <label class="col-sm-6" style="color:#64DD17"><b>'.$infoRegistro->estado.'</b></label><br>
+       </div>
+     </td>
+   </tr>';
+   if($infoActualizacion!=null) {
+    echo '
+     <tr>
+        <td>
+          <div class="col-md-12">   
+           <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de actualización</b></label>
+         </div>
+       </td>
+     </tr>
+     <tr><td><br>';
+  foreach ($infoActualizacion as $r):
+      echo '
+      <div class="col-md-12">
+         <label class="col-sm-4 lbl-detallet"><strong>Fecha de actualización:</strong></label>
+         <label class="col-sm-6">'.$r->fecha.'</label><br>
+       </div>
+      <div class="col-md-12">
+         <label class="col-sm-4 lbl-detallet"><strong>Hora de actualización:</strong></label>
+         <label class="col-sm-6">'.$r->hora.'</label><br>
+       </div>
+      <div class="col-md-12">
+         <label class="col-sm-4 lbl-detallet"><strong>Usuario que actualizó:</strong></label>
+         <label class="col-sm-6">'.$r->usuario.'</label><br>
+       </div><hr>
+       ';
+   endforeach;
+     echo '</td></tr>';
+}
+echo '
+ </tbody>
+</table>
+</div><!--/porlets-content--> 
+</div><!--/block-web--> 
+</div>
+</div>
+<div class="modal-footer">
+  <div class="row col-md-6 col-md-offset-6">
+    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+    <a href="?c=Beneficiario&a=Detalles&idBeneficiario='.$idBeneficiario.'" class="btn btn-info btn-sm">Ver detalles de beneficiario</a>
+  </div>
+</div>';
   }
 }

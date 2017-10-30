@@ -1,6 +1,6 @@
 <div class="pull-left breadcrumb_admin clear_both">
  <div class="pull-left page_title theme_color">
-   <h1>Inicio</h1>
+   <h1>Administración</h1>
    <h2 class="">Usuarios</h2>
  </div>
  <div class="pull-right">
@@ -22,7 +22,7 @@
           </div>
           <div class="col-sm-4">
            <div class="btn-group pull-right" style="margin-right: 10px;">
-             <div class="btn-group"> <a class="btn btn-sm btn-success" href="?c=Usuario&a=Crud"> <i class="fa fa-plus"></i> Alta de usuario </a> </div>
+             <div class="btn-group"> <a class="btn btn-sm btn-default" href="?c=Usuario&a=Crud"> <i class="fa fa-user"></i> Alta de usuario </a> </div>
            </div>
          </div>
        </div>

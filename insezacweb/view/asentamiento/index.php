@@ -23,7 +23,7 @@
 						<div class="col-md-5">
 							<div class="btn-group pull-right">
 								<b>
-									<?php if($_SESSION['user_type']==1){?>
+									<?php if($_SESSION['tipoUsuario']==1){?>
 									<div class="btn-group" style="margin-right: 10px;"> 
 										<a class="btn btn-sm btn-success tooltips" href="?c=Asentamiento&a=Crud&nuevoRegistro=true" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nuevo asentamiento"> <i class="fa fa-plus"></i> Registrar </a>
 										<a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar asentamientos" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
@@ -64,7 +64,7 @@
 									<th>Localidad</th>
 									<th>Nombre de asentamiento</th>
 									<th>Tipo de asentamiento</th>
-									<?php if($_SESSION['user_type']==1){?>
+									<?php if($_SESSION['tipoUsuario']==1){?>
 									<td><center><b>Editar</b></center></td>
 									<td><center><b>Eliminar</b></center></td>	
 									<?php } ?>
@@ -78,12 +78,12 @@
 										<td><?php echo $r->localidad; ?></td>
 										<td><?php echo $r->nombreAsentamiento; ?></td>
 										<td><?php echo $r->tipoAsentamiento; ?></td>
-										<?php if($_SESSION['user_type']==1){?>
+										<?php if($_SESSION['tipoUsuario']==1){?>
 										<td class="center">
-											<a href="index.php?c=Asentamiento&a=Crud&idAsentamientos=<?php echo $r->idAsentamientos ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>
+											<a href="index.php?c=Asentamiento&a=Crud&idAsentamientos=<?php echo $r->idAsentamientos ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
 										</td>
 										<td class="center">
-											<a onclick="eliminarAsentamiento(<?php echo $r->idAsentamientos;?>);" class="btn btn-danger" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+											<a onclick="eliminarAsentamiento(<?php echo $r->idAsentamientos;?>);" class="btn btn-danger btn-sm" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
 										</td>
 										<?php } ?>
 									</tr>
@@ -96,7 +96,7 @@
 									<th>Localidad</th>
 									<th>Nombre de asentamiento</th>
 									<th>Tipo de asentamiento</th>
-									<?php if($_SESSION['user_type']==1){?>
+									<?php if($_SESSION['tipoUsuario']==1){?>
 									<td><center><b>Editar</b></center></td>
 									<td><center><b>Eliminar</b></center></td>	
 									<?php } ?>

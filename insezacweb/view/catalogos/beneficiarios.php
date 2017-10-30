@@ -16,13 +16,13 @@
 			<div class="header">
 				<div class="row">					
 					<div class="block-web">
-						<div class="col-md-8">
+						<div class="col-md-9">
 							<h2 class="content-header theme_color" style="margin-top: -10px;">Identificadores para el registro de beneficiarios</h2>
 						</div>							
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<div class="btn-group pull-right">
 								<b>
-									<?php if($_SESSION['user_type']==1){?>
+									<?php if($_SESSION['tipoUsuario']==1){?>
 									<div class="btn-group"> 
 										<a class="btn btn-sm btn-warning tooltips" href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal" data-original-title="Importar catálogo
 										 para el registro de identficadores" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
@@ -60,7 +60,7 @@
 					<div class="block-web">
 						<div class="header">
 							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header">Identificación oficial</h3>
+							<h3 class="content-header lblheader">Identificación oficial</h3>
 						</div>
 						<div class="porlets-content">
 							<div class="panel-body">
@@ -84,7 +84,7 @@
 					<div class="block-web">
 						<div class="header">
 							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header">Ingreso mensual</h3>
+							<h3 class="content-header lblheader">Ingreso mensual</h3>
 						</div>
 						<div class="porlets-content">
 							<div class="panel-body">
@@ -111,7 +111,7 @@
 					<div class="block-web">
 						<div class="header">
 							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header">Tipo de seguridad social</h3>
+							<h3 class="content-header lblheader">Tipo de seguridad social</h3>
 						</div>
 						<div class="porlets-content">
 							<div class="panel-body">
@@ -135,7 +135,7 @@
 					<div class="block-web">
 						<div class="header">
 							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header">Grupo vulnerable</h3>
+							<h3 class="content-header lblheader">Grupo vulnerable</h3>
 						</div>
 						<div class="porlets-content">
 							<div class="panel-body">
@@ -159,7 +159,7 @@
 					<div class="block-web">
 						<div class="header">
 							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header">Nivel de estudios</h3>
+							<h3 class="content-header lblheader">Nivel de estudios</h3>
 						</div>
 						<div class="porlets-content">
 							<div class="panel-body">
@@ -183,7 +183,7 @@
 					<div class="block-web">
 						<div class="header">
 							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header">Discapacidad</h3>
+							<h3 class="content-header lblheader">Discapacidad</h3>
 						</div>
 						<div class="porlets-content">
 							<div class="panel-body">
@@ -208,7 +208,7 @@
 					<div class="block-web">
 						<div class="header">
 							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header">Vivienda</h3>
+							<h3 class="content-header lblheader">Vivienda</h3>
 						</div>
 						<div class="porlets-content">
 							<div class="panel-body">
@@ -234,7 +234,7 @@
 					<div class="block-web">
 						<div class="header">
 							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header">Estado civil</h3>
+							<h3 class="content-header lblheader">Estado civil</h3>
 						</div>
 						<div class="porlets-content">
 							<div class="panel-body">
@@ -258,7 +258,7 @@
 					<div class="block-web">
 						<div class="header">
 							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header">Tipo Vialidad</h3>
+							<h3 class="content-header lblheader">Tipo Vialidad</h3>
 						</div>
 						<div class="porlets-content">
 							<div class="panel-body">
@@ -282,7 +282,7 @@
 					<div class="block-web">
 						<div class="header">
 							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header">Ocupación</h3>
+							<h3 class="content-header lblheader">Ocupación</h3>
 						</div>
 						<div class="porlets-content">
 							<div class="panel-body">

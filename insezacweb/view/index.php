@@ -38,6 +38,9 @@ if (!isset($_SESSION['seguridad'])){
   pointer-events:none; /*This makes it not clickable*/
   opacity:0.6;         /*This grays it out to look disabled*/
 }
+ .lblheader{
+  color:#2196F3;
+}
 </style>
 <body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE">
   <div class="wrapper">
@@ -60,7 +63,7 @@ if (!isset($_SESSION['seguridad'])){
         </div>
         <div class="top_right_bar">
           <div style="margin-top: -33%;">
-            <span class="user_adminname">Hola <?php echo $_SESSION['user_session']; ?></span> 
+            <span class="user_adminname">Hola <?php echo $_SESSION['usuario']; ?></span> 
             <span class="user_adminname"><a href="?c=Login&a=logout"><i class="fa fa-power-off"></i> Salir</span></a>
           </div>
         </div>
@@ -94,12 +97,13 @@ if (!isset($_SESSION['seguridad'])){
                        <?php if (isset($beneficiarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>
                      </a> 
                    </li>
+                   <br><br>
                    <li> 
                     <a href="?c=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                      <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
                    </a> 
-                 </li>
-                 <?php if($_SESSION['user_type']==1){?> 
+                 </li><br><br>
+                 <?php if($_SESSION['tipoUsuario']==1){?> 
                  <li> 
                   <a href="?c=Usuario"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                    <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
@@ -118,32 +122,32 @@ if (!isset($_SESSION['seguridad'])){
                   <li> 
                     <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                       <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>                 </a> 
-                    </li>
+                    </li><br><br>
                     <li> 
                       <a href="?c=Localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                        <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
                      </a> 
-                   </li>
+                   </li><br><br>
                    <li> 
                     <a href="?c=Asentamiento"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                      <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Asentamientos</b>
                    </a> 
-                 </li>
+                 </li><br><br>
                  <li> 
                   <a href="?c=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                    <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
                  </a> 
-               </li>
+               </li><br><br>
                <li> 
                 <a href="?c=Programa"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                   <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b> 
                 </a> 
-              </li>
+              </li><br><br>
               <li> 
                 <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                  <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
                </a> 
-             </li>
+             </li><br><br>
            </ul>
          </li>
        </ul>
@@ -292,8 +296,12 @@ if (!isset($_SESSION['seguridad'])){
     e.preventDefault();
   });
 
+  
+</script>
+<script>
   //******************SELEC2*********************
-  $(function () {
+  $(document).on('ready', function()  {
+
     //Initialize Select2 Elements
     $('.select2').select2()
 
@@ -329,9 +337,6 @@ if (!isset($_SESSION['seguridad'])){
       showInputs: false
     })
   })
-</script>
-<script>
-  
 </script>
 </body>
 </html>

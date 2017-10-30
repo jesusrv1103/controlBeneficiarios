@@ -35,7 +35,7 @@ class Login
 	}
 	public function logIn()
    {
-      if(isset($_SESSION['user_session']))
+      if(isset($_SESSION['usuario']))
       {
          return true;
       }

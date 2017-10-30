@@ -45,9 +45,27 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">Usuario<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
-              <input name="usuario" type="text" class="form-control" required value="<?php echo $usuario->idUsuario != null ? $usuario->usuario : "";  ?>" placeholder="Ingrese el nombre de usuario" <?php if($usuario->idUsuario != null){ ?>  <?php } ?> autofocus/>
+              <input name="usuario" type="text" class="form-control" required value="<?php echo $usuario->idUsuario != null ? $usuario->usuario : "";  ?>" placeholder="Ingrese el nombre de usuario" <?php if($usuario->idUsuario != null){ ?>  <?php } ?> autofocus <?php if($usuario->idUsuario != null && !isset($nuevoRegistro)){ ?> readonly <?php } ?>/>
             </div>
           </div><!--/form-group-->
+          <?php if($usuario->idUsuario==null || isset($cambiarPass)){?>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Contraseña<strog class="theme_color">*</strog></label>
+            <div class="col-sm-3">
+              <input type="password" id="password" name="password" class="form-control" required placeholder="Password" />
+            </div>
+            <div class="col-sm-3">
+              <input type="password" class="form-control" required parsley-equalto="#password" placeholder="Confirme la contraseña" />
+            </div>
+          </div><!--/form-group--> 
+          <?php }elseif($usuario->idUsuario!=null || !isset($cambiarPass)){ ?>
+          <div class="form-group">
+            <div class="col-sm-5 col-sm-offset-7">
+              <a href="?c=Usuario&a=CambiarPass&idUsuario=<?php echo $usuario->idUsuario; ?>">Cambiar contraseña</a>
+              <input type="hidden" disabled value="<?php echo $usuario->password; ?>" name="password" class="form-control" required placeholder="Password" />
+            </div>
+          </div>
+          <?php } ?>
           <div class="form-group">
             <label class="col-sm-3 control-label">Dirección<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
@@ -83,15 +101,6 @@
                 <select>
                 </div>
               </div><!--/form-group-->
-              <div class="form-group">
-                <label class="col-sm-3 control-label">Contraseña<strog class="theme_color">*</strog></label>
-                <div class="col-sm-3">
-                  <input type="password" type="pass-security" name="password" id="password" class="form-control" required placeholder="Password" />
-                </div>
-                <div class="col-sm-3">
-                  <input type="password" class="form-control" required parsley-equalto="#password" placeholder="Confirme la contraseña" />
-                </div>
-              </div><!--/form-group--> 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Tipo usuario<strog class="theme_color">*</strog></label>
                 <div class="col-sm-6">
@@ -143,3 +152,13 @@
     </div><!--/col-md-12-->
   </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#password_show_button").mouseup(function(){
+      $("#password_show").attr("type", "password");
+    });
+    $("#password_show_button").mousedown(function(){
+      $("#password_show").attr("type", "text");
+    });
+  });
+</script>

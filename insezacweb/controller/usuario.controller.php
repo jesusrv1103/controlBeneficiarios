@@ -33,25 +33,35 @@ class UsuarioController{
 		$usuario->idUsuario = $_REQUEST['idUsuario'];
 		$usuario->direccion = $_REQUEST['direccion'];
 		$usuario->tipoUsuario = $_REQUEST['tipoUsuario'];
-		$password =$_REQUEST['password'];
-		$password=md5($password);
-		$password=crc32($password);
-		$password=crypt($password,"xtem");
-		$password=sha1($password);
-		$usuario->password=$password;   		
-		if($usuario->idUsuario > 0){
+		if(isset($_REQUEST['password'])){
+			$password =$_REQUEST['password'];
+			$password=md5($password);
+			$password=crc32($password);
+			$password=crypt($password,"xtem");
+			$password=sha1($password);
+			$usuario->password=$password;   	
+		}
+		if($usuario->idUsuario > 0 && isset($_REQUEST['password'])){
+			//Actualiza el usuario cambiando password
 			$this->model->Actualizar($usuario);
 			$this->model->ActualizarInDB($usuario,$password);
-			$mensaje="Se han actualizado correctamente los datos del usuario";
+			$mensaje="Los datos del usuario <b>$usuario->usuario</b> se han actualizado correctamente";
+		}elseif(!isset($_REQUEST['password'])){
+			//Actualizar usuario sin cambiar password
+			$this->model->ActualizaSP($usuario);
+			$mensaje="Los datos del usuario <b>$usuario->usuario</b> se han actualizado correctamente";
 		}else{
+			//Registra usuario nuevo
 			$consulta=$this->model->Obtener2($usuario->usuario);
 			if($consulta==null){
 				$this->model->Registrar($usuario);
 				$this->model->RegistrarInDB($usuario);
-				$mensaje="Se ha registrado correctamente el usuario";
+				$mensaje="El usuario <b>$usuario->usuario</b> se ha registrado correctamente";
 			}else{
 				$error=true;
-				$mensaje="<b>El usuario ya existe</b> ingrese otro nombre de usuario";
+				$cambiarPass=true;
+				$nuevoRegistro=true;
+				$mensaje="El usuario <b>$usuario->usuario</b> ya existe, ingrese otro nombre de usuario";
 				$page="view/usuario/usuario.php";
 				require_once "view/index.php";
 			}
@@ -84,6 +94,14 @@ class UsuarioController{
 		require_once 'controller/lockscreen.controller.php';
 		$controller = new LockscreenController;
 		call_user_func( array( $controller, 'index' ));
+	}
+	public function CambiarPass(){
+		$usuario = $this->model->Obtener($_REQUEST['idUsuario']);
+		$cambiarPass=true;
+		$administracion=true;
+		$usuarios=true;
+		$page="view/usuario/usuario.php";
+		require_once 'view/index.php';
 	}
 }
 

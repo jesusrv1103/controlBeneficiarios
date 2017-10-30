@@ -37,11 +37,13 @@ class Beneficiario
 	public $idDiscapacidad;
 	public $idGrupoVulnerable;
 	public $beneficiarioColectivo;
-	public $idUsuario;
-	public $fechaRegistro;
-	public $horaRegistro;
+	public $usuario;
+	public $fecha;
+	public $hora;
 	public $estado;
-	
+	public $direccion;
+	public $idRegistro;
+
 	public function __CONSTRUCT()
 	{
 		try
@@ -252,6 +254,8 @@ class Beneficiario
 		}
 	}
 
+	
+
 	public function Obtener($idBeneficiario)
 	{
 		try
@@ -383,14 +387,14 @@ class Beneficiario
 				entreVialidades,descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,jefeFamilia,idOcupacion,
 				idIngresoMensual,integrantesFamilia,dependientesEconomicos,idGrupoVulnerable,idVivienda,
 				noHabitantes,viviendaElectricidad,viviendaAgua,viviendaDrenaje,viviendaGas,
-				viviendaTelefono,viviendaInternet) values 
+				viviendaTelefono,viviendaInternet,idRegistro) values 
 				(?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
-				?,?,?)");
+				?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->curp,
@@ -428,7 +432,9 @@ class Beneficiario
 					$data->viviendaDrenaje,
 					$data->viviendaGas,
 					$data->viviendaTelefono,
-					$data->viviendaInternet//8
+					$data->viviendaInternet,//8
+
+					$data->idRegistro
 				)
 			);
 		} catch (Exception $e) 
@@ -449,6 +455,105 @@ class Beneficiario
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		}
 		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+	
+//Funciones para registrar los detalles de cada registro de beneficiarios.
+
+	public function RegistraDatosRegistro(Beneficiario $data){
+
+		try 
+		{
+
+			$sql = "INSERT INTO registro VALUES (?,?,?,?,?,?)";
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					null,
+					$data->usuario,
+					$data->direccion,
+					$data->fecha,
+					$data->hora,
+					$data->estado
+				)
+			);
+			return $this->pdo->lastInsertId();
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function ObtenerIdRegistro($idBeneficiario)
+	{
+		try 
+		{
+			$sql= $this->pdo->prepare("SELECT registro.idRegistro from registro, beneficiarios where registro.idregistro=beneficiarios.idregistro and idBeneficiario=$idBeneficiario");
+			$resultado=$sql->execute();
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function RegistraActualizacion(Beneficiario $data){
+		try 
+		{
+			$sql = "INSERT INTO actualizacion VALUES (?,?,?,?,?,?)";
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					null,
+					$data->usuario,
+					$data->direccion,
+					$data->fecha,
+					$data->hora,
+					$data->idRegistro
+				)
+			);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function ObtenerInfoRegistro($idBeneficiario)
+	{
+		try 
+		{
+			$sql= $this->pdo->prepare("SELECT * FROM registro, beneficiarios WHERE beneficiarios.idregistro=registro.idregistro AND beneficiarios.idbeneficiario=?;");
+			$resultado=$sql->execute(array($idBeneficiario));
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ListarActualizacion($idRegistro)
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("SELECT * FROM actualizacion WHERE idRegistro=?");
+			$stm->execute(array($idRegistro));
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+		public function ObtenerInfoActualizacion2()
+	{
+		try 
+		{
+			$sql= $this->pdo->prepare("SELECT * FROM actualizacion;");
+			$stm->execute(array($id));
+			return $stm->fetch(PDO::FETCH_OBJ);
+		} catch (Exception $e) 
 		{
 			die($e->getMessage());
 		}

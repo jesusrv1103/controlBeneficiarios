@@ -23,10 +23,10 @@
 						<div class="col-md-6">
 							<div class="btn-group pull-right">
 								<b> 
-									<?php if($_SESSION['user_type']==1){?>
+									<?php if($_SESSION['tipoUsuario']==1){?>
 									<div class="btn-group" style="margin-right: 10px;"> 
 										<a class="btn btn-sm btn-success tooltips" href="?c=Localidad&a=Crud&nuevoRegistro=true" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nueva localidad"> <i class="fa fa-plus"></i> Registrar</a>
-										<a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" data-original-title="Importar localidades" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
+										<a class="btn btn-sm tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" data-original-title="Importar localidades" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
 										<a href="assets/files/localidades.xlsx" download="localidades.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar archivo localidades.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
 									</div>
 									<?php } ?>
@@ -63,7 +63,7 @@
 									<th>Municipio</th>
 									<th>Localidad</th>
 									<th>Ámbito</th>
-									<?php if($_SESSION['user_type']==1){?>
+									<?php if($_SESSION['tipoUsuario']==1){?>
 									<td><center><b>Editar</b></center></td>
 									<td><center><b>Eliminar</b></center></td>						
 									<?php } ?>
@@ -76,12 +76,12 @@
 										<td><?php echo $r->municipio; ?></td>
 										<td><?php echo $r->localidad; ?></td>
 										<td><?php echo $r->ambito; ?></td>
-										<?php if($_SESSION['user_type']==1){?>
+										<?php if($_SESSION['tipoUsuario']==1){?>
 										<td class="center">
-											<a href="index.php?c=Localidad&a=Crud&idLocalidad=<?php echo $r->idLocalidad ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>
+											<a href="index.php?c=Localidad&a=Crud&idLocalidad=<?php echo $r->idLocalidad ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
 										</td>
 										<td class="center">
-											<a onclick="eliminarLocalidad(<?php echo $r->idLocalidad;?>);" class="btn btn-danger" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+											<a onclick="eliminarLocalidad(<?php echo $r->idLocalidad;?>);" class="btn btn-danger btn-sm" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
 										</td>
 										<?php } ?>
 									</tr>
@@ -93,7 +93,7 @@
 									<th>Municipio</th>
 									<th>Localidad</th>
 									<th>Ámbito</th>
-									<?php if($_SESSION['user_type']==1){?>
+									<?php if($_SESSION['tipoUsuario']==1){?>
 									<td><center><b>Editar</b></center></td>
 									<td><center><b>Eliminar</b></center></td>	
 									<?php } ?>
@@ -162,21 +162,22 @@
 					</div><!--/block-web--> 
 				</div>
 			</section>
+		</div>
+		<div class="modal-footer" style="margin-top: -10px;">
+			<div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
+				<form action="?c=Localidad&a=Eliminar" enctype="multipart/form-data" method="post">
+					<input hidden type="text" name="idLocalidad" id="txtIdLocalidad">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-danger">Eliminar</button>
+				</form>
 			</div>
-			<div class="modal-footer" style="margin-top: -10px;">
-				<div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-					<form action="?c=Localidad&a=Eliminar" enctype="multipart/form-data" method="post">
-						<input hidden type="text" name="idLocalidad" id="txtIdLocalidad">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-danger">Eliminar</button>
-					</form>
-				</div>
-			</div>
-		</div><!--/modal-content--> 
-	</div><!--/modal-dialog--> 
+		</div>
+	</div><!--/modal-content--> 
+</div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
 <script>
 	eliminarLocalidad = function(idLocalidad){
 		$('#txtIdLocalidad').val(idLocalidad);	
 	};
+	
 </script>
