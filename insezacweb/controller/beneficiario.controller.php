@@ -315,21 +315,27 @@ public function Eliminar(){
        </td>
      </tr>
      <tr><td><br>';
+     $i=1;
   foreach ($infoActualizacion as $r):
       echo '
-      <div class="col-md-12">
-         <label class="col-sm-4 lbl-detallet"><strong>Fecha de actualización:</strong></label>
+      <div class="col-md-6">
+          <label class="col-md-12" lbl-detalle>'.$i.'°actualización</label>
+         <label class="col-sm-6 lbl-detallet"><strong>Fecha:</strong></label>
          <label class="col-sm-6">'.$r->fecha.'</label><br>
-       </div>
-      <div class="col-md-12">
-         <label class="col-sm-4 lbl-detallet"><strong>Hora de actualización:</strong></label>
+      
+    
+         <label class="col-sm-6 lbl-detallet"><strong>Hora:</strong></label>
          <label class="col-sm-6">'.$r->hora.'</label><br>
-       </div>
-      <div class="col-md-12">
-         <label class="col-sm-4 lbl-detallet"><strong>Usuario que actualizó:</strong></label>
+       
+
+         <label class="col-sm-6 lbl-detallet"><strong>Usuario:</strong></label>
          <label class="col-sm-6">'.$r->usuario.'</label><br>
-       </div><hr>
-       ';
+       </div>
+       '; 
+       
+       if($i%2==0){
+        echo "<hr>";
+       }$i++;
    endforeach;
      echo '</td></tr>';
 }
