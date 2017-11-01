@@ -62,7 +62,7 @@ public function Guardar(){
     $this->Programas($objPHPExcel,$numRows);
   //  $this->model->Check(1);
     $mensaje="Se ha leído correctamente el archivo <strong>programas.xlsx</strong>.<br><i class='fa fa-check'></i> Se han registrado correctamente los programas.";
-    $page="view/programa/programa.php";
+    $page="view/programa/index.php";
     $catalogos=true;
     require_once 'view/index.php';
   }
