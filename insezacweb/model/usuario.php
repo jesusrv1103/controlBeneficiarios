@@ -117,6 +117,30 @@ class Usuario
 			require_once "view/index.php";
 		}
 	}
+	public function ActualizaSP(Usuario $data)
+	{
+		try 
+		{
+			$sql = "UPDATE usuarios SET
+			usuario = ?, direccion =?, tipoUsuario = ? 
+			WHERE idUsuario = ?";
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					$data->usuario,
+					$data->direccion,
+					$data->tipoUsuario,
+					$data->idUsuario
+					)
+				);
+		} catch (Exception $e) 
+		{
+			$error=true;
+			$mensaje="Error al actualizar el usuario";
+			$page="view/usuario/index.php";
+			require_once "view/index.php";
+		}
+	}
 	public function ActualizarInDB(Usuario $data,$password)
 	{
 		try 
