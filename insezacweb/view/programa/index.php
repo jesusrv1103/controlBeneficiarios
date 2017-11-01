@@ -25,9 +25,9 @@
                 <b>
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <div class="btn-group" style="margin-right: 10px;"> 
-                    <a class="btn btn-sm btn-success tooltips" href="?c=Asentamiento&a=Crud&nuevoRegistro=true" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nuevo asentamiento"> <i class="fa fa-plus"></i> Registrar </a>
+                    <a onclick="registrarPrograma();" class="btn btn-sm btn-success tooltips" data-toggle="modal" href="#modalCrud" data-target="#modalCrud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nuevo programa"> <i class="fa fa-plus"></i> Registrar </a>
                     <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar programas" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
-                    <a href="assets/files/programas.xlsx" download="programas.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar archivo asentamiento.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
+                    <a href="assets/files/programas.xlsx" download="programas.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar archivo programa.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
                   </div>
                   <?php } ?>
                 </b>
@@ -67,37 +67,37 @@
                 </tr>
               </thead>
               <tbody>
-                 <?php foreach($this->model->Listar() as $r): ?>
-                  <tr class="gradeA">
-                    <td> <?php echo $r->programa; ?></td>
-                    <?php if($_SESSION['tipoUsuario']==1){?>
-                     <td class="center">
-                       <a class="btn btn-primary btn-sm" role="button" onclick="actualizarPrograma(<?php echo $r->idPrograma; ?>);" data-target="#modalCrud" href="#modalCrud" role="button" data-toggle="modal"><i class="fa fa-edit"></i></a>
-                     </td>
-                    <td class="center">
-                      <a onclick="eliminarPrograma(<?php echo $r->idPrograma;?>);" class="btn btn-danger btn-sm" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-                    </td>
-                    <?php } ?>
-                  </tr>
-                <?php endforeach; ?>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Nombre del programa</th>
+               <?php foreach($this->model->Listar() as $r): ?>
+                <tr class="gradeA">
+                  <td> <?php echo $r->programa; ?></td>
                   <?php if($_SESSION['tipoUsuario']==1){?>
-                  <td><center><b>Editar</b></center></td>
-                  <td><center><b>Borrar</b></center></td> 
-                  <?php } ?>
-                </tr>
-              </tfoot>
-            </table>
-          </div><!--/table-responsive-->
-        </div><!--/porlets-content-->
-      </div><!--/block-web-->
-    </div><!--/col-md-12-->
-  </div><!--/row-->
+                  <td class="center">
+                   <a class="btn btn-primary btn-sm" role="button" onclick="actualizarPrograma(<?php echo $r->idPrograma; ?>);" data-target="#modalCrud" href="#modalCrud" role="button" data-toggle="modal"><i class="fa fa-edit"></i></a>
+                 </td>
+                 <td class="center">
+                  <a onclick="eliminarPrograma(<?php echo $r->idPrograma;?>);" class="btn btn-danger btn-sm" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+                </td>
+                <?php } ?>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>Nombre del programa</th>
+              <?php if($_SESSION['tipoUsuario']==1){?>
+              <td><center><b>Editar</b></center></td>
+              <td><center><b>Borrar</b></center></td> 
+              <?php } ?>
+            </tr>
+          </tfoot>
+        </table>
+      </div><!--/table-responsive-->
+    </div><!--/porlets-content-->
+  </div><!--/block-web-->
+</div><!--/col-md-12-->
+</div><!--/row-->
 </div>
-   <div class="modal fade" id="modalImportar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalImportar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body"> 
@@ -137,15 +137,14 @@
     </div><!--/modal-content--> 
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
-<div class="modal fade" div-modal-content id="modalCud" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <form action="?c=Programa&a=Guardar" method="post" class="form-horizontal row-border">
+
+<div class="modal fade" div-modal-content id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="width: 50%;">
       <div class="modal-content" id="div-modal-content">
-
       </div><!--/modal-content--> 
     </div><!--/modal-dialog--> 
-  </form>
 </div><!--/modal-fade--> 
+
 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content  panel default red_border horizontal_border_1">
@@ -196,8 +195,9 @@
     } 
   }
 }*/
-registraPrograma = function (){
-  $.post("index.php?c=programa&a=crud", {}, function(modal) {
+registrarPrograma = function (){
+  var idPrograma=null;
+  $.post("index.php?c=Programa&a=Crud", {idPrograma: idPrograma}, function(modal) {
     $("#div-modal-content").html(modal);
   }); 
 }
@@ -208,6 +208,6 @@ actualizarPrograma = function (idPrograma){
   }); 
 }
 eliminarPrograma = function(idPrograma){
-    $('#txtIdPrograma').val(idPrograma);  
-  };
+  $('#txtIdPrograma').val(idPrograma);  
+};
 </script>
