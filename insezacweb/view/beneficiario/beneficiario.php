@@ -137,9 +137,9 @@
  								</div><!--/form-group-->
 
  								<div class="form-group">
- 									<label class="col-sm-3 control-label">Discapacidad<strog class="theme_color">*</strog></label>
+ 									<label class="col-sm-3 control-label">Discapacidad<strog class="theme_color"></strog></label>
  									<div class="col-sm-6">
- 										<select name="idDiscapacidad" class="form-control" required>
+ 										<select name="idDiscapacidad" class="form-control" >
  											<?php if($beneficiario->idBeneficiario==null){ ?>   
  											<option value="1"> 
  												Seleccione en caso de que el beneficiario padesca de una discapacidad
@@ -204,14 +204,14 @@
  								<div class="form-group">
  									<label class="col-sm-3 control-label">Número interior</label>
  									<div class="col-sm-6">
- 										<input name="noInterior" maxlength="8"  value="<?php echo $beneficiario->noInterior;?>" class="form-control" required placeholder="Ingrese el nombre de su vialidad" type="text" />
+ 										<input name="noInterior" maxlength="8"  value="<?php echo $beneficiario->noInterior;?>" class="form-control"  placeholder="Ingrese el nombre de su vialidad" type="text" />
  									</div>
  								</div><!--/form-group-->
 
  								<div class="form-group">
- 									<label class="col-sm-3 control-label">Asentamiento<strog class="theme_color">*</strog></label>
+ 									<label class="col-sm-3 control-label">Asentamiento<strog class="theme_color"></strog></label>
  									<div class="col-sm-6">
- 										<select name="idAsentamientos" class="form-control" >
+ 										<select name="idAsentamientos" class="form-control select2" >
  											<?php if($beneficiario->idBeneficiario==null){ ?>   
  											<option value=""> 
  												Seleccione en caso de que el beneficiario pertenezca a un asentamiento
@@ -234,7 +234,7 @@
  								<div class="form-group">
  									<label class="col-sm-3 control-label">Localidad<strog class="theme_color">*</strog></label>
  									<div class="col-sm-6">
- 										<select name="idLocalidad" class="form-control" required>
+ 										<select name="idLocalidad" class="form-control select2" required>
  											<?php if($beneficiario->idBeneficiario==null){ ?>   
  											<option value=""> 
  												Seleccione la localidad a la que pertenece el beneficiario
@@ -274,34 +274,28 @@
  							<div class="user-profile-content">
  								<h5><strong>Estado Social</strong></h5>
  								<div class="form-group">
- 									<label class="col-sm-3 control-label">Estudio socioeconomico<strog class="theme_color">*</strog></label>
+ 									<label class="col-sm-3 control-label">Estudio socioeconomico<strog class="theme_color"></strog></label>
  									<div class="col-sm-9">
  										<div class="radio">
- 											<?php if($beneficiario->idBeneficiario==null){ ?>
- 											<input type="radio" name="estudioSocioeconomico"  value="Si" checked>Si
- 											<?php }else{ ?>
- 											<input type="radio" name="estudioSocioeconomico"  value="Si" <?php if($beneficiario->estudioSocioeconomico=="Si"){ ?> checked <?php } ?>>Si <?php } ?>
+ 											<input type="radio" name="estudioSocioeconomico"  value="Si" <?php if($beneficiario->estudioSocioeconomico=="Si"){ ?> checked <?php } ?>>Si 
  										</div>
  										<div class="radio">
  											<label>
- 												<input type="radio" name="estudioSocioeconomico" value="No" <?php if($beneficiario->estudioSocioeconomico=="No"){ ?> checked <?php } ?>>No 
+ 												<input type="radio" name="estudioSocioeconomico" value="No" <?php if($beneficiario->estudioSocioeconomico=="No" || $beneficiario->idBeneficiario==null ){ ?> checked <?php } ?>>No 
  											</label>
  										</div>
  									</div>
  								</div><!--/form-group--> 
 
  								<div class="form-group">
- 									<label class="col-sm-3 control-label">Jefe de familia<strog class="theme_color">*</strog></label>
+ 									<label class="col-sm-3 control-label">Jefe de familia<strog class="theme_color"></strog></label>
  									<div class="col-sm-9">
  										<div class="radio">
- 											<?php if($beneficiario->idBeneficiario==null){ ?>
- 											<input type="radio" name="jefeFamilia"  value="Si" checked>Si
- 											<?php }else{ ?>
- 											<input type="radio" name="jefeFamilia"  value="Si" <?php if($beneficiario->jefeFamilia=="Si"){ ?> checked <?php } ?>>Si <?php } ?>
+ 											<input type="radio" name="jefeFamilia"   value="Si" <?php if($beneficiario->jefeFamilia=="Si"){ ?> checked <?php } ?>>Si 
  										</div>
  										<div class="radio">
  											<label>
- 												<input type="radio" name="jefeFamilia" value="No" <?php if($beneficiario->jefeFamilia=="No"){ ?> checked <?php } ?>>No 
+ 												<input type="radio" name="jefeFamilia" value="No" value="No" <?php if($beneficiario->jefeFamilia=="No" || $beneficiario->idBeneficiario==null ){ ?> checked <?php } ?>>No 
  											</label>
  										</div>
  									</div>
@@ -392,9 +386,9 @@
  								</div><!--/form-group-->
 
  								<div class="form-group">
- 									<label class="col-sm-3 control-label">Grupo vulnerable<strog class="theme_color">*</strog></label>
+ 									<label class="col-sm-3 control-label">Grupo vulnerable<strog class="theme_color"></strog></label>
  									<div class="col-sm-6">
- 										<select name="idGrupoVulnerable" class="form-control" required>
+ 										<select name="idGrupoVulnerable" class="form-control" >
  											<?php if($beneficiario->idBeneficiario==null){ ?>   
  											<option value="1"> 
  												Seleccione en caso de que el beneficiario pertenezca a un grupo vulnerable
