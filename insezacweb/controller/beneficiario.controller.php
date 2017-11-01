@@ -238,7 +238,7 @@ public function Eliminar(){
           <tr>
            <td>
              <div class="col-md-12">   
-               <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Información de apoyo a beneficiario</b></label>
+               <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Información de beneficiario</b></label>
              </div>
            </td>
          </tr>
@@ -257,6 +257,20 @@ public function Eliminar(){
              <label class="col-sm-7 control-label">'.$infoRegistro->direccion.'</label>
            </div>
            <div class="col-md-12">
+            <label class="col-sm-4 lbl-detalle"><b>Número de apoyos:</b></label>
+            <label class="col-sm-7 control-label">3</label>
+          </div>
+           </tr>
+           <tr>
+           <td>
+             <div class="col-md-12">   
+               <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Información de apoyo</b></label>
+             </div>
+           </td>
+         </tr>
+         <tr>
+         <td>
+           <div class="col-md-12">
             <label class="col-sm-4 lbl-detalle"><b>Tipo de apoyo:</b></label>
             <label class="col-sm-7 control-label">Federal</label>
           </div>
@@ -272,12 +286,43 @@ public function Eliminar(){
             <label class="col-sm-4 lbl-detalle"><b>Costo:</b></label>
             <label class="col-sm-7 control-label">$80,000.00</label>
           </div>
+          <hr>
           <div class="col-md-12">
-            <label class="col-sm-4 lbl-detalle"><b>Número de apoyos:</b></label>
-            <label class="col-sm-7 control-label">5</label>
+            <label class="col-sm-4 lbl-detalle"><b>Tipo de apoyo:</b></label>
+            <label class="col-sm-7 control-label">Federal</label>
+          </div>
+          <div class="col-md-12">
+            <label class="col-sm-4 lbl-detalle"><b>Programa:</b></label>
+            <label class="col-sm-7 control-label">Red de apoyo al emprendedor</label>
+          </div>
+          <div class="col-md-12">
+            <label class="col-sm-4 lbl-detalle"><b>Descripción de apoyo:</b></label>
+            <label class="col-sm-8 control-label">Es una comunidad conformada por organizaciones gubernamentales y privadas (aliados), que ofrece sus programas, productos, servicios y soluciones a ciudadanos como tú que buscan emprender de forma exitosa un negocio o que ya cuentan con uno y lo quieren mejorar o hacer crecer.</label>
+          </div>
+          <div class="col-md-12">
+            <label class="col-sm-4 lbl-detalle"><b>Costo:</b></label>
+            <label class="col-sm-7 control-label">$80,000.00</label>
+          </div>
+          <hr>
+          <div class="col-md-12">
+            <label class="col-sm-4 lbl-detalle"><b>Tipo de apoyo:</b></label>
+            <label class="col-sm-7 control-label">Estatal</label>
+          </div>
+          <div class="col-md-12">
+            <label class="col-sm-4 lbl-detalle"><b>Programa:</b></label>
+            <label class="col-sm-7 control-label">Red de apoyo al emprendedor</label>
+          </div>
+          <div class="col-md-12">
+            <label class="col-sm-4 lbl-detalle"><b>Descripción de apoyo:</b></label>
+            <label class="col-sm-8 control-label">Es una comunidad conformada por organizaciones gubernamentales y privadas (aliados), que ofrece sus programas, productos, servicios y soluciones a ciudadanos como tú que buscan emprender de forma exitosa un negocio o que ya cuentan con uno y lo quieren mejorar o hacer crecer.</label>
+          </div>
+          <div class="col-md-12">
+            <label class="col-sm-4 lbl-detalle"><b>Costo:</b></label>
+            <label class="col-sm-7 control-label">$80,000.00</label>
           </div>
         </td>
       </tr>
+
       <tr>
         <td>
           <div class="col-md-12">   
@@ -315,21 +360,27 @@ public function Eliminar(){
        </td>
      </tr>
      <tr><td><br>';
+     $i=1;
   foreach ($infoActualizacion as $r):
       echo '
-      <div class="col-md-12">
-         <label class="col-sm-4 lbl-detallet"><strong>Fecha de actualización:</strong></label>
+      <div class="col-md-6">
+         <label class="col-md-12" style="color:#2196F3">'.$i.'° actualización<br></label>
+         <label class="col-sm-6 lbl-detallet"><strong>Fecha:</strong></label>
          <label class="col-sm-6">'.$r->fecha.'</label><br>
-       </div>
-      <div class="col-md-12">
-         <label class="col-sm-4 lbl-detallet"><strong>Hora de actualización:</strong></label>
+      
+    
+         <label class="col-sm-6 lbl-detallet"><strong>Hora:</strong></label>
          <label class="col-sm-6">'.$r->hora.'</label><br>
-       </div>
-      <div class="col-md-12">
-         <label class="col-sm-4 lbl-detallet"><strong>Usuario que actualizó:</strong></label>
+       
+
+         <label class="col-sm-6 lbl-detallet"><strong>Usuario:</strong></label>
          <label class="col-sm-6">'.$r->usuario.'</label><br>
-       </div><hr>
-       ';
+       </div>
+       '; 
+       
+       if($i%2==0){
+        echo "<hr>";
+       }$i++;
    endforeach;
      echo '</td></tr>';
 }
