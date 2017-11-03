@@ -37,7 +37,34 @@ class Programa
 			die($e->getMessage());
 		}
 	}
+public function ImportarPrograma(Programa $data){
+		try 
+		{
+			$sql= $this->pdo->prepare("INSERT INTO programa VALUES(?,?)");
+			$resultado=$sql->execute(
+				array(
+					$data->idPrograma,
+					$data->programa
+					)
+				);
 
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function Limpiar($nomTabla)
+	{
+		try 
+		{
+			
+			$stm = $this->pdo->prepare("DELETE FROM $nomTabla");			          
+			$stm->execute();
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
 	public function Obtener($id)
 	{
 		try 
