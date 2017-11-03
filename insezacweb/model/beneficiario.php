@@ -247,8 +247,8 @@ class Beneficiario
 						$data->viviendaTelefono,
 						$data->viviendaInternet,//8
 						$data->idRegistro
-						)
-				);
+					)
+			);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -289,7 +289,7 @@ class Beneficiario
 			$stm->execute(array(
 				$data->estado,
 				$data->idRegistro
-				));
+			));
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -375,8 +375,8 @@ class Beneficiario
 					$data->viviendaInternet,
 					$data->idBeneficiario
 
-					)
-				);
+				)
+			);
 			
 		} catch (Exception $e) 
 		{
@@ -442,8 +442,8 @@ class Beneficiario
 					$data->viviendaInternet,//8
 
 					$data->idRegistro
-					)
-				);
+				)
+			);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -477,6 +477,23 @@ class Beneficiario
 		}
 	}
 	
+	public function Listar2()
+	{
+		try
+		{
+			//$result = array();
+
+			$stm = $this->pdo->prepare("SELECT * FROM beneficiarios, registro WHERE registro.idRegistro=beneficiarios.idRegistro and registro.estado='Activo';");
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
 //Funciones para registrar los detalles de cada registro de beneficiarios.
 
 	public function RegistraDatosRegistro(Beneficiario $data){
@@ -494,8 +511,8 @@ class Beneficiario
 					$data->fecha,
 					$data->hora,
 					$data->estado
-					)
-				);
+				)
+			);
 			return $this->pdo->lastInsertId();
 		} catch (Exception $e) 
 		{
@@ -529,8 +546,8 @@ class Beneficiario
 					$data->fecha,
 					$data->hora,
 					$data->idRegistro
-					)
-				);
+				)
+			);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
