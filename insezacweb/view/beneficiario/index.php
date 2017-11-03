@@ -94,7 +94,8 @@
                   </td>
 
                   <td class="center">
-                   <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idBeneficiario;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+
+                   <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                  </td>
                  <?php } ?>
 
@@ -186,7 +187,7 @@
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
           <form action="?c=Beneficiario&a=Eliminar" enctype="multipart/form-data" method="post">
-            <input hidden type="text" name="idBeneficiario" id="txtIdBeneficiario">
+            <input hidden type="text" name="idRegistro" id="txtIdRegistro">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
           </form>
@@ -196,12 +197,13 @@
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
 <script>
-  eliminarBeneficiario = function(idBeneficiario){
-    $('#txtIdBeneficiario').val(idBeneficiario);  
+  eliminarBeneficiario = function(idRegistro){
+
+    $('#txtIdRegistro').val(idRegistro);  
   };
-  infoRegistro = function (idBeneficiario){
-    var idBenficiario=idBenficiario;
-    $.post("index.php?c=beneficiario&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
+  infoRegistro = function (idRegistro){
+    var idRegistro=idRegistro;
+    $.post("index.php?c=beneficiario&a=Inforegistro", {idRegistro: idRegistro}, function(info) {
       $("#div-modal-content").html(info);
     }); 
   }

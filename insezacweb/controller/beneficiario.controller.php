@@ -79,15 +79,20 @@ class BeneficiarioController{
     
     $mensaje="Los datos del beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha actualizado correctamente";
   }else{
+
+    $beneficiario->idRegistro=$this->model->RegistraDatosRegistro($beneficiario);
     $this->model->Registrar($beneficiario);
-    $this->model->RegistraDatosRegistro($beneficiario);
+    echo "entre </b>";
+    echo $beneficiario->idRegistro;
     $mensaje="El beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha registrado correctamente";
   }
+
   $administracion = true;
   $inicio = false;
   $beneficiarios = false;
   $page="view/beneficiario/index.php";
   require_once 'view/index.php';
+  
 }
 
 public function Crud(){
@@ -195,8 +200,11 @@ public function Leearchivo($objPHPExcel,$numRows){
 public function Eliminar(){
     $administracion=true; //variable cargada para activar la opcion administracion en el menu
     $beneficiarios=true; //variable cargada para activar la opcion programas en el menu
-    $this->model->Eliminar($_REQUEST['idBeneficiario']);
-    header ('Location: index.php?c=Beneficiario&a=Index');
+    $beneficiario= new Beneficiario();
+    $beneficiario->idRegistro = $_REQUEST['idRegistro'];
+    $beneficiario->estado='Inactivo';
+    $this->model->Eliminar($beneficiario);
+     header ('Location: index.php?c=Beneficiario&a=Index');
   }
 
   public function Detalles(){
@@ -213,135 +221,135 @@ public function Eliminar(){
     $infoRegistro=$this->model->ObtenerInfoRegistro($idBeneficiario);
     $infoActualizacion=$this->model->ListarActualizacion($infoRegistro->idRegistro);
     echo   '  
-<div class="modal-body"> 
-  <div class="row">
-    <div class="block-web">
-     <div class="header">
-      <div class="row" style="margin-bottom: 12px;">
-        <div class="col-sm-9">
-          <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Detalles de apoyo y registro</h2>
-        </div>
-        <div class="col-md-3">
-          <div class="btn-group pull-right">
-            <b> 
-              <div class="btn-group" style="margin-right: 10px; margin-top: 5px;"> 
-                <a class="btn btn-sm btn-primary tooltips" href="?c=beneficiario&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo beneficiario"> <i class="fa fa-print"></i></a>
+    <div class="modal-body"> 
+      <div class="row">
+        <div class="block-web">
+         <div class="header">
+          <div class="row" style="margin-bottom: 12px;">
+            <div class="col-sm-9">
+              <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Detalles de apoyo y registro</h2>
+            </div>
+            <div class="col-md-3">
+              <div class="btn-group pull-right">
+                <b> 
+                  <div class="btn-group" style="margin-right: 10px; margin-top: 5px;"> 
+                    <a class="btn btn-sm btn-primary tooltips" href="?c=beneficiario&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo beneficiario"> <i class="fa fa-print"></i></a>
+                  </div>
+                </b>
               </div>
-            </b>
+            </div>    
           </div>
-        </div>    
-      </div>
-    </div>        
-    <div class="porlets-content" style="margin-bottom: -65px;">
-      <table class="table table-striped">
-        <tbody>
+        </div>        
+        <div class="porlets-content" style="margin-bottom: -65px;">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+               <td>
+                 <div class="col-md-12">   
+                   <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Información de apoyo a beneficiario</b></label>
+                 </div>
+               </td>
+             </tr>
+             <tr>
+              <td>
+                <div class="col-md-12">
+                 <label class="col-sm-4 lbl-detalle"><b>Beneficiario:</b></label>
+                 <label class="col-sm-7 control-label">'.$infoRegistro->nombres." ".$infoRegistro->primerApellido." ".$infoRegistro->segundoApellido.'</label>
+               </div>
+               <div class="col-md-12">
+                 <label class="col-sm-4 lbl-detalle"><b>Localidad:</b></label>
+                 <label class="col-sm-7 control-label">Valparaíso</label>
+               </div>
+               <div class="col-md-12">
+                 <label class="col-sm-4 lbl-detalle"><b>Dirección que lo apoya:</b></label>
+                 <label class="col-sm-7 control-label">'.$infoRegistro->direccion.'</label>
+               </div>
+               <div class="col-md-12">
+                <label class="col-sm-4 lbl-detalle"><b>Tipo de apoyo:</b></label>
+                <label class="col-sm-7 control-label">Federal</label>
+              </div>
+              <div class="col-md-12">
+                <label class="col-sm-4 lbl-detalle"><b>Programa:</b></label>
+                <label class="col-sm-7 control-label">Red de apoyo al emprendedor</label>
+              </div>
+              <div class="col-md-12">
+                <label class="col-sm-4 lbl-detalle"><b>Descripción de apoyo:</b></label>
+                <label class="col-sm-8 control-label">Es una comunidad conformada por organizaciones gubernamentales y privadas (aliados), que ofrece sus programas, productos, servicios y soluciones a ciudadanos como tú que buscan emprender de forma exitosa un negocio o que ya cuentan con uno y lo quieren mejorar o hacer crecer.</label>
+              </div>
+              <div class="col-md-12">
+                <label class="col-sm-4 lbl-detalle"><b>Costo:</b></label>
+                <label class="col-sm-7 control-label">$80,000.00</label>
+              </div>
+              <div class="col-md-12">
+                <label class="col-sm-4 lbl-detalle"><b>Número de apoyos:</b></label>
+                <label class="col-sm-7 control-label">5</label>
+              </div>
+            </td>
+          </tr>
           <tr>
-           <td>
-             <div class="col-md-12">   
-               <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Información de apoyo a beneficiario</b></label>
+            <td>
+              <div class="col-md-12">   
+               <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de registro</b></label>
              </div>
            </td>
          </tr>
          <tr>
           <td>
             <div class="col-md-12">
-             <label class="col-sm-4 lbl-detalle"><b>Beneficiario:</b></label>
-             <label class="col-sm-7 control-label">'.$infoRegistro->nombres." ".$infoRegistro->primerApellido." ".$infoRegistro->segundoApellido.'</label>
+             <label class="col-sm-4 lbl-detalle"><strong>Fecha de registro:</strong></label>
+             <label class="col-sm-6">'.$infoRegistro->fecha.'</label><br>
            </div>
            <div class="col-md-12">
-             <label class="col-sm-4 lbl-detalle"><b>Localidad:</b></label>
-             <label class="col-sm-7 control-label">Valparaíso</label>
+             <label class="col-sm-4 lbl-detalle"><strong>Hora de registro:</strong></label>
+             <label class="col-sm-6">'.$infoRegistro->hora.'</label><br>
            </div>
            <div class="col-md-12">
-             <label class="col-sm-4 lbl-detalle"><b>Dirección que lo apoya:</b></label>
-             <label class="col-sm-7 control-label">'.$infoRegistro->direccion.'</label>
+             <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
+             <label class="col-sm-6">'.$infoRegistro->usuario.'</label><br>
            </div>
            <div class="col-md-12">
-            <label class="col-sm-4 lbl-detalle"><b>Tipo de apoyo:</b></label>
-            <label class="col-sm-7 control-label">Federal</label>
-          </div>
-          <div class="col-md-12">
-            <label class="col-sm-4 lbl-detalle"><b>Programa:</b></label>
-            <label class="col-sm-7 control-label">Red de apoyo al emprendedor</label>
-          </div>
-          <div class="col-md-12">
-            <label class="col-sm-4 lbl-detalle"><b>Descripción de apoyo:</b></label>
-            <label class="col-sm-8 control-label">Es una comunidad conformada por organizaciones gubernamentales y privadas (aliados), que ofrece sus programas, productos, servicios y soluciones a ciudadanos como tú que buscan emprender de forma exitosa un negocio o que ya cuentan con uno y lo quieren mejorar o hacer crecer.</label>
-          </div>
-          <div class="col-md-12">
-            <label class="col-sm-4 lbl-detalle"><b>Costo:</b></label>
-            <label class="col-sm-7 control-label">$80,000.00</label>
-          </div>
-          <div class="col-md-12">
-            <label class="col-sm-4 lbl-detalle"><b>Número de apoyos:</b></label>
-            <label class="col-sm-7 control-label">5</label>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="col-md-12">   
-           <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de registro</b></label>
-         </div>
-       </td>
-     </tr>
-     <tr>
-      <td>
-        <div class="col-md-12">
-         <label class="col-sm-4 lbl-detalle"><strong>Fecha de registro:</strong></label>
-         <label class="col-sm-6">'.$infoRegistro->fecha.'</label><br>
-       </div>
-       <div class="col-md-12">
-         <label class="col-sm-4 lbl-detalle"><strong>Hora de registro:</strong></label>
-         <label class="col-sm-6">'.$infoRegistro->hora.'</label><br>
-       </div>
-       <div class="col-md-12">
-         <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
-         <label class="col-sm-6">'.$infoRegistro->usuario.'</label><br>
-       </div>
-       <div class="col-md-12">
-         <label class="col-sm-4 lbl-detallet"><strong>Estado de registro:</strong></label>
-         <label class="col-sm-6" style="color:#64DD17"><b>'.$infoRegistro->estado.'</b></label><br>
-       </div>
-     </td>
-   </tr>';
-   if($infoActualizacion!=null) {
-    echo '
-     <tr>
-        <td>
-          <div class="col-md-12">   
-           <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de actualización</b></label>
-         </div>
-       </td>
-     </tr>
-     <tr><td><br>';
-     $i=1;
-  foreach ($infoActualizacion as $r):
-      echo '
-      <div class="col-md-6">
+             <label class="col-sm-4 lbl-detallet"><strong>Estado de registro:</strong></label>
+             <label class="col-sm-6" style="color:#64DD17"><b>'.$infoRegistro->estado.'</b></label><br>
+           </div>
+         </td>
+       </tr>';
+       if($infoActualizacion!=null) {
+        echo '
+        <tr>
+          <td>
+            <div class="col-md-12">   
+             <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de actualización</b></label>
+           </div>
+         </td>
+       </tr>
+       <tr><td><br>';
+         $i=1;
+         foreach ($infoActualizacion as $r):
+          echo '
+        <div class="col-md-6">
           <label class="col-md-12" lbl-detalle>'.$i.'°actualización</label>
-         <label class="col-sm-6 lbl-detallet"><strong>Fecha:</strong></label>
-         <label class="col-sm-6">'.$r->fecha.'</label><br>
-      
-    
-         <label class="col-sm-6 lbl-detallet"><strong>Hora:</strong></label>
-         <label class="col-sm-6">'.$r->hora.'</label><br>
-       
+          <label class="col-sm-6 lbl-detallet"><strong>Fecha:</strong></label>
+          <label class="col-sm-6">'.$r->fecha.'</label><br>
 
-         <label class="col-sm-6 lbl-detallet"><strong>Usuario:</strong></label>
-         <label class="col-sm-6">'.$r->usuario.'</label><br>
-       </div>
-       '; 
-       
-       if($i%2==0){
-        echo "<hr>";
-       }$i++;
-   endforeach;
-     echo '</td></tr>';
-}
-echo '
- </tbody>
-</table>
+
+          <label class="col-sm-6 lbl-detallet"><strong>Hora:</strong></label>
+          <label class="col-sm-6">'.$r->hora.'</label><br>
+
+
+          <label class="col-sm-6 lbl-detallet"><strong>Usuario:</strong></label>
+          <label class="col-sm-6">'.$r->usuario.'</label><br>
+        </div>
+        '; 
+
+        if($i%2==0){
+          echo "<hr>";
+        }$i++;
+        endforeach;
+        echo '</td></tr>';
+      }
+      echo '
+    </tbody>
+  </table>
 </div><!--/porlets-content--> 
 </div><!--/block-web--> 
 </div>
@@ -352,5 +360,5 @@ echo '
     <a href="?c=Beneficiario&a=Detalles&idBeneficiario='.$idBeneficiario.'" class="btn btn-info btn-sm">Ver detalles de beneficiario</a>
   </div>
 </div>';
-  }
+}
 }

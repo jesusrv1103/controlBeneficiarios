@@ -196,17 +196,17 @@ class Beneficiario
 			(curp,primerApellido,segundoApellido,nombres,idIdentificacion,
 			idNivelEstudios,idSeguridadSocial,idDiscapacidad,beneficiarioColectivo,idTipoVialidad,
 			nombreVialidad,noExterior,noInterior,idAsentamientos,idLocalidad,
-			entreVialidades,descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,jefeFamilia,idOcupacion,
-			idIngresoMensual,integrantesFamilia,dependientesEconomicos,idGrupoVulnerable,idVivienda,
-			noHabitantes,viviendaElectricidad,viviendaAgua,viviendaDrenaje,viviendaGas,
-			viviendaTelefono,viviendaInternet) values 
+			entreVialidades,descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,jefeFamilia,
+			idOcupacion,idIngresoMensual,integrantesFamilia,dependientesEconomicos,idGrupoVulnerable,
+			idVivienda,noHabitantes,viviendaElectricidad,viviendaAgua,viviendaDrenaje,
+			viviendaGas,viviendaTelefono,viviendaInternet,idRegistro) values 
 			(?,?,?,?,?,
 			?,?,?,?,?,
 			?,?,?,?,?,
 			?,?,?,?,?,
 			?,?,?,?,?,
 			?,?,?,?,?,
-			?,?,?)";
+			?,?,?,?)";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
@@ -245,9 +245,10 @@ class Beneficiario
 						$data->viviendaDrenaje,
 						$data->viviendaGas,
 						$data->viviendaTelefono,
-						$data->viviendaInternet//8
-					)
-			);
+						$data->viviendaInternet,//8
+						$data->idRegistro
+						)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -275,14 +276,20 @@ class Beneficiario
 		}
 	}
 
-	public function Eliminar($id)
+	public function Eliminar($data)
 	{
 		try 
 		{
 			$stm = $this->pdo
-			->prepare("DELETE FROM beneficiarios WHERE idBeneficiario = ?");			          
+			->prepare("UPDATE registro r INNER JOIN beneficiarios b
+				ON r.idRegistro = b.idRegistro
+				SET estado = ?
+				WHERE r.idRegistro = ?");			          
 
-			$stm->execute(array($id));
+			$stm->execute(array(
+				$data->estado,
+				$data->idRegistro
+				));
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -368,8 +375,8 @@ class Beneficiario
 					$data->viviendaInternet,
 					$data->idBeneficiario
 
-				)
-			);
+					)
+				);
 			
 		} catch (Exception $e) 
 		{
@@ -435,8 +442,8 @@ class Beneficiario
 					$data->viviendaInternet,//8
 
 					$data->idRegistro
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -449,7 +456,16 @@ class Beneficiario
 		{
 			//$result = array();
 
-			$stm = $this->pdo->prepare("SELECT * FROM beneficiarios");
+			$stm = $this->pdo->prepare("SELECT idBeneficiario,
+				b.idRegistro,
+				curp,
+				primerApellido,
+				segundoApellido,
+				nombres
+				FROM beneficiarios b
+				INNER JOIN 
+				registro r
+				where estado='Activo'");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -477,8 +493,8 @@ class Beneficiario
 					$data->fecha,
 					$data->hora,
 					$data->estado
-				)
-			);
+					)
+				);
 			return $this->pdo->lastInsertId();
 		} catch (Exception $e) 
 		{
@@ -512,8 +528,8 @@ class Beneficiario
 					$data->fecha,
 					$data->hora,
 					$data->idRegistro
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -546,7 +562,7 @@ class Beneficiario
 			die($e->getMessage());
 		}
 	}
-		public function ObtenerInfoActualizacion2()
+	public function ObtenerInfoActualizacion2()
 	{
 		try 
 		{
