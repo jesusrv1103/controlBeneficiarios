@@ -23,6 +23,15 @@ class Catalogos
 	public $discapacidad;
 	public $idGrupoVulnerable;
 	public $grupoVulnerable;
+	public $idOrigen;
+	public $origen;
+	public $idTipoApoyo;
+	public $tipoApoyo;
+	public $idPeriodicidad;
+	public $periodicidad;
+	public $idCaracteristicasApoyo;
+	public $caracteristicasApoyo;
+
 	public function __CONSTRUCT()
 	{
 		try
@@ -187,6 +196,67 @@ class Catalogos
 				array(
 					$data->idGrupoVulnerable,
 					$data->grupoVulnerable
+					)
+				);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ImportarOrigen(Catalogos $data){
+		try 
+		{
+			$sql= $this->pdo->prepare("INSERT INTO origen VALUES(?,?)");
+			$resultado=$sql->execute(
+				array(
+					$data->idOrigen,
+					$data->origen
+					)
+				);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ImportarTipoApoyo(Catalogos $data){
+		try 
+		{
+			$sql= $this->pdo->prepare("INSERT INTO tipoApoyo VALUES(?,?)");
+			$resultado=$sql->execute(
+				array(
+					$data->idTipoApoyo,
+					$data->tipoApoyo
+					)
+				);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ImportarPeriodicidad(Catalogos $data){
+		try 
+		{
+			$sql= $this->pdo->prepare("INSERT INTO periodicidad VALUES(?,?)");
+			$resultado=$sql->execute(
+				array(
+					$data->idPeriodicidad,
+					$data->periodicidad
+					)
+				);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ImportarCaracteristicasApoyo(Catalogos $data){
+		try 
+		{
+			$sql= $this->pdo->prepare("INSERT INTO caracteristicasApoyo VALUES(?,?,?)");
+			$resultado=$sql->execute(
+				array(
+					$data->idCaracteristicasApoyo,
+					$data->caracteristicasApoyo,
+					$data->tipoApoyo
 					)
 				);
 		} catch (Exception $e) 
