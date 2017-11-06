@@ -83,7 +83,7 @@
 
                   <td><?php echo $r->curp ?> </td>
 
-                  <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?>> </td>
+                  <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
 
                   <td class="center">
                     <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>

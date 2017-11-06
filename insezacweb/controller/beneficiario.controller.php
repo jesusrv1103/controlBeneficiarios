@@ -197,6 +197,7 @@ public function Leearchivo($objPHPExcel,$numRows){
   require_once 'view/index.php';
 }
 }
+
 public function Eliminar(){
     $administracion=true; //variable cargada para activar la opcion administracion en el menu
     $beneficiarios=true; //variable cargada para activar la opcion programas en el menu
@@ -204,7 +205,7 @@ public function Eliminar(){
     $beneficiario->idRegistro = $_REQUEST['idRegistro'];
     $beneficiario->estado='Inactivo';
     $this->model->Eliminar($beneficiario);
-     header ('Location: index.php?c=Beneficiario&a=Index');
+    header ('Location: index.php?c=Beneficiario&a=Index');
   }
 
   public function Detalles(){
@@ -220,7 +221,13 @@ public function Eliminar(){
     $idBeneficiario = $_POST['idBeneficiario'];
     $infoRegistro=$this->model->ObtenerInfoRegistro($idBeneficiario);
     $infoActualizacion=$this->model->ListarActualizacion($infoRegistro->idRegistro);
-    echo   '  
+     $jsondata = array();
+    $jsondata["success"] = true;
+    $jsondata["data"]=$infoRegistro;
+    echo json_encode($jsondata, JSON_FORCE_OBJECT);
+  }
+  }
+    /*echo   '  
     <div class="modal-body"> 
       <div class="row">
         <div class="block-web">
@@ -361,4 +368,4 @@ public function Eliminar(){
   </div>
 </div>';
 }
-}
+}*/

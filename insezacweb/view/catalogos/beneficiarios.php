@@ -25,9 +25,9 @@
 									<?php if($_SESSION['tipoUsuario']==1){?>
 									<div class="btn-group"> 
 										<a class="btn btn-sm btn-warning tooltips" href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal" data-original-title="Importar catálogo
-										 para el registro de identficadores" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
+										para el registro de identficadores" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
 
-										<a class="btn btn-sm btn-primary tooltips" href="assets/files/catalogo_beneficiarios.xlsx" download="catalogo_beneficiarios.xlsx" data-original-title="Descargar catálogo.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
+										<a class="btn btn-sm btn-primary tooltips" href="assets/files/catalogo_beneficiarios.xlsx" download="catalogo_beneficiarios.xlsx" data-original-title="Descargar catalogo_beneficiarios.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
 									</div>
 									<?php } ?>
 								</b>
@@ -215,15 +215,14 @@
 								<div class="col-md-12">
 									<table class="table table-striped">
 										<tbody>
-											<tbody>
-												<?php foreach($this->model->Listar('vivienda') as $r): ?>
-													<tr>
-														<td><?php echo $r->idVivienda; ?></td>
-														<td><?php echo $r->vivienda; ?></td>
-													</tr>
-												<?php endforeach; ?>
-											</tbody>
+											<?php foreach($this->model->Listar('vivienda') as $r): ?>
+												<tr>
+													<td><?php echo $r->idVivienda; ?></td>
+													<td><?php echo $r->vivienda; ?></td>
+												</tr>
+											<?php endforeach; ?>
 										</tbody>
+
 									</table>
 								</div>
 							</div>
@@ -324,7 +323,8 @@
 								<i class="glyphicon glyphicon-plus"></i>
 								<span>Seleccionar archivo</span>
 								<!-- The file input field used as target for the file upload widget -->
-								<input id="fileupload" class="catalogos" type="file" name="files[]" multiple>
+								<input id="fileupload" class="catalogos" type="file" name="files[]" multiple onchange="getFilename(this);">
+
 							</span>
 							<br>
 							<br>
@@ -341,9 +341,18 @@
 			<div class="modal-footer">
 				<div class="row col-md-5 col-md-offset-7">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					<input type="hidden" id="fileImport">
 					<a href="?c=Catalogos&a=Importar" class="btn btn-primary">Importar datos</a>
 				</div>
 			</div>
 		</div><!--/modal-content--> 
 	</div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
+
+<script type="text/javascript">
+	getFilename = function(file){
+		var fn = $(file).val();
+		alert(fn);
+		$("#fileImport").val(fn);
+	}
+</script>

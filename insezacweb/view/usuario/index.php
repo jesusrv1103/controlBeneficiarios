@@ -22,7 +22,7 @@
           </div>
           <div class="col-sm-4">
            <div class="btn-group pull-right" style="margin-right: 10px;">
-             <div class="btn-group"> <a class="btn btn-sm btn-default" href="?c=Usuario&a=Crud"> <i class="fa fa-user"></i> Alta de usuario </a> </div>
+             <div class="btn-group"> <a class="btn btn-sm btn-default" onclick="cargar();"> <i class="fa fa-user"></i> Alta de usuario </a> </div>
            </div>
          </div>
        </div>
@@ -133,4 +133,12 @@
     //$('#txtUsuario').val(usuario);  
 
   };
+  function cargar(){
+            alert('entra'); 
+            var url="index.php?c=usuario&a=crud";
+            $.ajax({   
+                url:url,
+                data:{},
+            });
+        }
 </script>

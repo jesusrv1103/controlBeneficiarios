@@ -8,6 +8,9 @@ class CatalogosController{
   {
    $this->model = new Catalogos();
  }
+
+ /******C A T Á L O G O S - B E N E F I C I A R I O S*****/
+
  public function Beneficiarios(){
   $catalogos=true;
   $beneficiarios2=true;
@@ -355,5 +358,15 @@ public function Descargar(){
     readfile($enlace);
   }
 }
+
+/******C A T Á L O G O S - A P O Y O S*****/ 
+
+public function Apoyos(){
+  $catalogos=true;
+  $apoyos2=true;
+  $page="view/catalogos/apoyos.php";
+  require_once 'view/index.php';
+}
+
 }
 ?>
