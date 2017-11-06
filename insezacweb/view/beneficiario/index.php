@@ -1,3 +1,4 @@
+
 <style type="text/css">
 .lblinfo{
   color:#2196F3;
@@ -75,14 +76,14 @@
              </thead>
              <tbody>
 
-              <?php foreach($this->model->Listar1() as $r): ?>
+              <?php foreach($this->model->Listar2() as $r): ?>
                 <tr class="grade">
 
                   <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
 
                   <td><?php echo $r->curp ?> </td>
 
-                  <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+                  <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?>> </td>
 
                   <td class="center">
                     <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
@@ -94,7 +95,8 @@
                   </td>
 
                   <td class="center">
-                   <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idBeneficiario;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+
+                   <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                  </td>
                  <?php } ?>
 
@@ -186,7 +188,7 @@
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
           <form action="?c=Beneficiario&a=Eliminar" enctype="multipart/form-data" method="post">
-            <input hidden type="text" name="idBeneficiario" id="txtIdBeneficiario">
+            <input hidden type="text" name="idRegistro" id="txtIdRegistro">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
           </form>
@@ -196,11 +198,12 @@
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
 <script>
-  eliminarBeneficiario = function(idBeneficiario){
-    $('#txtIdBeneficiario').val(idBeneficiario);  
+  eliminarBeneficiario = function(idRegistro){
+
+    $('#txtIdRegistro').val(idRegistro);  
   };
   infoRegistro = function (idBeneficiario){
-    var idBenficiario=idBenficiario;
+    var idBeneficiario=idBeneficiario;
     $.post("index.php?c=beneficiario&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
       $("#div-modal-content").html(info);
     }); 
