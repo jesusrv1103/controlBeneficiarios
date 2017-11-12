@@ -1,4 +1,14 @@
+<?php
 
+
+$json = file_get_contents('php: model/asentamientos/listar');
+$data=json_decode($json);
+$municipio = $data->municipio;
+
+echo $codigo; 
+
+
+?>
 <style type="text/css">
 .lblinfo{
   color:#2196F3;
@@ -76,14 +86,14 @@
              </thead>
              <tbody>
 
-              <?php foreach($this->model->Listar2() as $r): ?>
+              <?php foreach($this->model->Listar1() as $r): ?>
                 <tr class="grade">
 
                   <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
 
                   <td><?php echo $r->curp ?> </td>
 
-                  <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?>> </td>
+                  <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
 
                   <td class="center">
                     <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
@@ -207,5 +217,20 @@
     $.post("index.php?c=beneficiario&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
       $("#div-modal-content").html(info);
     }); 
+  }
+
+</script>
+
+<script type="text/javascript">
+  $(function listar(){
+
+  });
+
+  function listar(){
+
+  }
+
+  function __ajax(){
+
   }
 </script>

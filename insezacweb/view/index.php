@@ -148,6 +148,11 @@ if (!isset($_SESSION['seguridad'])){
                  <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
                </a> 
              </li><br><br>
+               <li> 
+                <a href="?c=Direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                 <?php if (isset($direccion)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
+               </a> 
+             </li><br><br>
            </ul>
          </li>
        </ul>

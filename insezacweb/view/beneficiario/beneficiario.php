@@ -70,6 +70,22 @@
  								</div><!--/form-group-->
 
  								<div class="form-group">
+ 									<label class="col-sm-3 control-label">Telefono<strog class="theme_color">*</strog></label>
+ 									<div class="col-sm-6">
+ 										<input type="text" value="<?php echo $beneficiario->telefono;?>" class="form-control mask" data-inputmask="'mask':'(999) 999-9999'">
+ 									</div>
+ 								</div><!--/form-group-->
+
+ 								<div class="form-group">
+ 									<label class="col-sm-3 control-label">Correo<strog class="theme_color">*</strog></label>
+ 									<div class="col-sm-6">
+ 										<input type="email" value="<?php echo $beneficiario->email;?>" required parsley-type="email" class="form-control mask" >
+ 									</div>
+ 								</div><!--/form-group-->
+
+ 								
+
+ 								<div class="form-group">
  									<label class="col-sm-3 control-label">Identificación<strog class="theme_color">*</strog></label>
  									<div class="col-sm-6">
  										<select name="idIdentificacion" class="form-control" required>
@@ -209,6 +225,32 @@
  								</div><!--/form-group-->
 
  								<div class="form-group">
+ 									<label class="col-sm-3 control-label">Municipio<strog class="theme_color"></strog></label>
+ 									<div class="col-sm-6">
+ 										<select name="idmunicipio" class="form-control select2" >
+ 											<?php if($beneficiario->idBeneficiario==null){ ?>   
+ 											<option value=""> 
+ 												Seleccione en caso de que el beneficiario pertenezca a un Municipio
+ 											</option>
+ 											<?php } if($beneficiario->idBeneficiario!=null){ ?>   
+ 											<option value="<?php echo $beneficiario->idmunicipio?>"> 
+ 												<?php echo $beneficiario->nombreMunicipio; ?>
+ 											</option>
+ 											<?php } foreach($this->model2->Listar('municipio') as $r): 
+ 											if($r->nombreMunicipio!=$beneficiario->nombreMunicipio){ ?>
+ 											?>
+ 											<option value="<?php echo $r->idmunicipio; ?>"> 
+ 												<?php echo $r->nombreMunicipio; ?>
+ 											</option>
+ 											<?php } endforeach; ?>
+ 										</select>
+ 									</div>
+ 								</div><!--/form-group-->
+
+
+
+
+ 								<div class="form-group">
  									<label class="col-sm-3 control-label">Asentamiento<strog class="theme_color"></strog></label>
  									<div class="col-sm-6">
  										<select name="idAsentamientos" class="form-control select2" >
@@ -277,11 +319,11 @@
  									<label class="col-sm-3 control-label">Estudio socioeconomico<strog class="theme_color"></strog></label>
  									<div class="col-sm-9">
  										<div class="radio">
- 											<input type="radio" name="estudioSocioeconomico"  value="Si" <?php if($beneficiario->estudioSocioeconomico=="Si"){ ?> checked <?php } ?>>Si 
+ 											<input type="radio" name="estudioSocioeconomico"  value="1" <?php if($beneficiario->estudioSocioeconomico=="1"){ ?> checked <?php } ?>>Si 
  										</div>
  										<div class="radio">
  											<label>
- 												<input type="radio" name="estudioSocioeconomico" value="No" <?php if($beneficiario->estudioSocioeconomico=="No" || $beneficiario->idBeneficiario==null ){ ?> checked <?php } ?>>No 
+ 												<input type="radio" name="estudioSocioeconomico" value="0" <?php if($beneficiario->estudioSocioeconomico=="0" || $beneficiario->idBeneficiario==null ){ ?> checked <?php } ?>>No 
  											</label>
  										</div>
  									</div>
@@ -291,15 +333,30 @@
  									<label class="col-sm-3 control-label">Jefe de familia<strog class="theme_color"></strog></label>
  									<div class="col-sm-9">
  										<div class="radio">
- 											<input type="radio" name="jefeFamilia"   value="Si" <?php if($beneficiario->jefeFamilia=="Si"){ ?> checked <?php } ?>>Si 
+ 											<input type="radio" name="jefeFamilia"   value="1" <?php if($beneficiario->jefeFamilia=="1"){ ?> checked <?php } ?>>Si 
  										</div>
  										<div class="radio">
  											<label>
- 												<input type="radio" name="jefeFamilia" value="No" value="No" <?php if($beneficiario->jefeFamilia=="No" || $beneficiario->idBeneficiario==null ){ ?> checked <?php } ?>>No 
+ 												<input type="radio" name="jefeFamilia" value="0" <?php if($beneficiario->jefeFamilia=="0" || $beneficiario->idBeneficiario==null ){ ?> checked <?php } ?>>No 
  											</label>
  										</div>
  									</div>
  								</div><!--/form-group-->  
+
+
+ 								<div class="form-group">
+ 									<label class="col-sm-3 control-label">Beneficiario Colectivo<strog class="theme_color"></strog></label>
+ 									<div class="col-sm-9">
+ 										<div class="radio">
+ 											<input type="radio" name="beneficiarioColectivo"  value="1" <?php if($beneficiario->beneficiarioColectivo=="1"){ ?> checked <?php } ?>>Si 
+ 										</div>
+ 										<div class="radio">
+ 											<label>
+ 												<input type="radio" name="beneficiarioColectivo" value="0" <?php if($beneficiario->beneficiarioColectivo=="0" || $beneficiario->beneficiarioColectivo==null ){ ?> checked <?php } ?>>No 
+ 											</label>
+ 										</div>
+ 									</div>
+ 								</div><!--/form-group-->   
 
  								<div class="form-group">
  									<label class="col-sm-3 control-label">Estado civil<strog class="theme_color">*</strog></label>
@@ -448,34 +505,34 @@
  									<div class="col-sm-9">
  										<div class="checkbox">
  											<label>
- 												<input type="checkbox"   name="viviendaElectricidad" <?php if($beneficiario->viviendaElectricidad=="Si"){ ?> checked <?php } ?>  >
+ 												<input type="checkbox"   name="viviendaElectricidad" <?php if($beneficiario->viviendaElectricidad=="1"){ ?> checked <?php } ?>  >
  												<span class="custom-checkbox"></span>Electricidad</label>
  											</div>
 
  											<div class="checkbox">
  												<label>
- 													<input type="checkbox" name="viviendaAgua" <?php if($beneficiario->viviendaAgua=="Si"){ ?> checked <?php } ?>  >
+ 													<input type="checkbox" name="viviendaAgua" <?php if($beneficiario->viviendaAgua=="1"){ ?> checked <?php } ?>  >
  													<span class="custom-checkbox"></span>Agua</label>
  												</div>
  												<div class="checkbox">
  													<label>
- 														<input type="checkbox" name="viviendaDrenaje" <?php if($beneficiario->viviendaDrenaje=="Si"){ ?> checked <?php } ?>   >
+ 														<input type="checkbox" name="viviendaDrenaje" <?php if($beneficiario->viviendaDrenaje=="1"){ ?> checked <?php } ?>   >
  														<span class="custom-checkbox"></span>Drenaje</label>
  													</div>
  													<div class="checkbox">
  														<label>
 
- 															<input type="checkbox" name="viviendaGas" <?php if($beneficiario->viviendaGas=="Si"){ ?> checked <?php } ?>  value="<?php echo $beneficiario->viviendaGas;?>">
+ 															<input type="checkbox" name="viviendaGas" <?php if($beneficiario->viviendaGas=="1"){ ?> checked <?php } ?>  value="<?php echo $beneficiario->viviendaGas;?>">
  															<span class="custom-checkbox"></span>Gas</label>
  														</div>
  														<div class="checkbox">
  															<label>
- 																<input type="checkbox" name="viviendaTelefono" <?php if($beneficiario->viviendaTelefono=="Si"){ ?> checked <?php } ?> >
+ 																<input type="checkbox" name="viviendaTelefono" <?php if($beneficiario->viviendaTelefono=="1"){ ?> checked <?php } ?> >
  																<span class="custom-checkbox"></span>Teléfono</label>
  															</div>
  															<div class="checkbox">
  																<label>
- 																	<input type="checkbox"    name="viviendaInternet" <?php if($beneficiario->viviendaInternet=="Si"){ ?> checked <?php } ?> >
+ 																	<input type="checkbox"    name="viviendaInternet" <?php if($beneficiario->viviendaInternet=="1"){ ?> checked <?php } ?> >
  																	<span class="custom-checkbox"></span>Internet</label>
  																</div>
  															</div>
@@ -551,4 +608,16 @@
  					}
  				}
  			</script>
+
+ 			<script >
+ 				function curp2date(curp) {
+ 					var m = miCurp.match( /^\w{4}(\w{2})(\w{2})(\w{2})/ );
+				//miFecha = new Date(año,mes,dia) 
+				var anyo = parseInt(m[1],10)+1900;
+				if( anyo < 1950 ) anyo += 100;
+				var mes = parseInt(m[2], 10)-1;
+				var dia = parseInt(m[3], 10);
+				return (new Date( anyo, mes, dia ));
+			}
+		</script>
 
