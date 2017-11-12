@@ -9,6 +9,12 @@ class Beneficiario
 	public $segundoApellido;
 	public $nombres;
 	public $idIdentificacion;
+	public $fechaNacimiento;
+	public $genero;
+	public $idmunicipio;
+	public $perfilSociodemografico;
+	public $email;
+	public $telefono;
 	public $idTipoVialidad;
 	public $nombreVialidad;
 	public $noExterior;
@@ -106,7 +112,13 @@ class Beneficiario
 				d.idDiscapacidad,
 				gV.grupoVulnerable,
 				b.idGrupoVulnerable,
-				b.beneficiarioColectivo
+				b.beneficiarioColectivo,
+				b.idmunicipio,
+				m.nombreMunicipio,
+				b.telefono,
+				b.email,
+				b.fechaNacimiento,
+				b.genero
 				FROM identificacionOficial idOf, 
 				tipoVialidad tV, estadoCivil eC, 
 				ocupacion o, vivienda v, 
@@ -116,6 +128,7 @@ class Beneficiario
 				grupoVulnerable gV, 
 				asentamientos a, 
 				localidades l, 
+				municipio m,
 				ingresoMensual iM, beneficiarios  b
 				where  b.idIdentificacion = idOf.idIdentificacion AND   
 				b.idTipoVialidad = tV.idTipoVialidad AND 	
@@ -129,6 +142,7 @@ class Beneficiario
 				b.idGrupoVulnerable =gV.idGrupoVulnerable AND 
 				b.idAsentamientos = a.idAsentamientos AND 
 				b.idLocalidad = l.idLocalidad AND
+				b.idmunicipio = m.idmunicipio AND
 				b.idBeneficiario = ?");
 
 			$stm->execute(array($id));
@@ -193,20 +207,22 @@ class Beneficiario
 		{
 
 			$sql = "INSERT INTO beneficiarios 
-			(curp,primerApellido,segundoApellido,nombres,idIdentificacion,
+			(curp, primerApellido, segundoApellido, nombres, idIdentificacion,
 			idNivelEstudios,idSeguridadSocial,idDiscapacidad,beneficiarioColectivo,idTipoVialidad,
 			nombreVialidad,noExterior,noInterior,idAsentamientos,idLocalidad,
 			entreVialidades,descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,jefeFamilia,
 			idOcupacion,idIngresoMensual,integrantesFamilia,dependientesEconomicos,idGrupoVulnerable,
 			idVivienda,noHabitantes,viviendaElectricidad,viviendaAgua,viviendaDrenaje,
-			viviendaGas,viviendaTelefono,viviendaInternet,idRegistro) values 
-			(?,?,?,?,?,
-			?,?,?,?,?,
-			?,?,?,?,?,
-			?,?,?,?,?,
-			?,?,?,?,?,
-			?,?,?,?,?,
-			?,?,?,?)";
+			viviendaGas,viviendaTelefono,viviendaInternet,idRegistro,fechaNacimiento,
+			genero,perfilSociodemografico,email,telefono,idmunicipio) values 
+		  (?,?,?,?,?,
+		   ?,?,?,?,?,
+		   ?,?,?,?,?,
+		   ?,?,?,?,?,
+		   ?,?,?,?,?,
+		   ?,?,?,?,?,
+		   ?,?,?,?,?,
+		   ?,?,?,?,?)";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
@@ -218,7 +234,7 @@ class Beneficiario
 					$data->idNivelEstudios,
 					$data->idSeguridadSocial,
 					$data->idDiscapacidad,
-						$data->beneficiarioColectivo,//9
+					$data->beneficiarioColectivo,//9
 					//vialidad
 						$data->idTipoVialidad, 
 						$data->nombreVialidad,
@@ -246,7 +262,14 @@ class Beneficiario
 						$data->viviendaGas,
 						$data->viviendaTelefono,
 						$data->viviendaInternet,//8
-						$data->idRegistro
+						$data->idRegistro,
+					//Ultimos campos
+						$data->fechaNacimiento,
+						$data->genero,
+						$data->perfilSociodemografico,
+						$data->email,
+						$data->telefono,
+						$data->idmunicipio
 					)
 			);
 		} catch (Exception $e) 
@@ -334,7 +357,13 @@ class Beneficiario
 			viviendaDrenaje = ?,
 			viviendaGas = ?,
 			viviendaTelefono = ?,
-			viviendaInternet = ?
+			viviendaInternet = ?,
+			fechaNacimiento = ?,
+			genero = ?,
+			perfilSociodemografico = ?,
+			email = ?,
+			telefono = ?,
+			idmunicipio = ?
 			WHERE idBeneficiario = ?";
 
 			$this->pdo->prepare($sql)
@@ -373,6 +402,15 @@ class Beneficiario
 					$data->viviendaGas,
 					$data->viviendaTelefono,
 					$data->viviendaInternet,
+
+
+					//Ultimos campos
+					$data->fechaNacimiento,
+					$data->genero,
+					$data->perfilSociodemografico,
+					$data->email,
+					$data->telefono,
+					$data->idmunicipio,
 					$data->idBeneficiario
 
 				)
@@ -440,7 +478,6 @@ class Beneficiario
 					$data->viviendaGas,
 					$data->viviendaTelefono,
 					$data->viviendaInternet,//8
-
 					$data->idRegistro
 				)
 			);
@@ -501,7 +538,7 @@ class Beneficiario
 		try 
 		{
 
-			$sql = "INSERT INTO registro VALUES (?,?,?,?,?,?)";
+			$sql = "INSERT INTO registro VALUES (?,?,?,?,?)";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
@@ -509,7 +546,6 @@ class Beneficiario
 					$data->usuario,
 					$data->direccion,
 					$data->fecha,
-					$data->hora,
 					$data->estado
 				)
 			);
@@ -536,7 +572,7 @@ class Beneficiario
 	public function RegistraActualizacion(Beneficiario $data){
 		try 
 		{
-			$sql = "INSERT INTO actualizacion VALUES (?,?,?,?,?,?)";
+			$sql = "INSERT INTO actualizacion VALUES (?,?,?,?,?)";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
@@ -544,7 +580,6 @@ class Beneficiario
 					$data->usuario,
 					$data->direccion,
 					$data->fecha,
-					$data->hora,
 					$data->idRegistro
 				)
 			);
@@ -594,3 +629,50 @@ class Beneficiario
 	}
 
 }
+
+/*
++------------------------+--------------+------+-----+---------+----------------+
+| Field                  | Type         | Null | Key | Default | Extra          |
++------------------------+--------------+------+-----+---------+----------------+
+| idBeneficiario         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| curp                   | varchar(18)  | YES  |     | NULL    |                |
+| primerApellido         | varchar(20)  | YES  |     | NULL    |                |
+| segundoApellido        | varchar(25)  | YES  |     | NULL    |                |
+| nombres                | varchar(25)  | YES  |     | NULL    |                |
+| email                  | varchar(128) | YES  |     | NULL    |                |
+| idIdentificacion       | int(11)      | YES  | MUL | NULL    |                |
+| idTipoVialidad         | int(11)      | YES  | MUL | NULL    |                |
+| nombreVialidad         | varchar(65)  | YES  |     | NULL    |                |
+| noExterior             | varchar(8)   | YES  |     | NULL    |                |
+| noInterior             | varchar(8)   | YES  |     | NULL    |                |
+| idAsentamientos        | varchar(45)  | YES  | MUL | NULL    |                |
+| idLocalidad            | varchar(10)  | YES  | MUL | NULL    |                |
+| entreVialidades        | varchar(100) | YES  |     | NULL    |                |
+| descripcionUbicacion   | text         | YES  |     | NULL    |                |
+| estudioSocioeconomico  | tinyint(1)   | YES  |     | NULL    |                |
+| idEstadoCivil          | int(11)      | YES  | MUL | NULL    |                |
+| jefeFamilia            | varchar(2)   | YES  |     | NULL    |                |
+| idOcupacion            | int(11)      | YES  | MUL | NULL    |                |
+| idIngresoMensual       | int(11)      | YES  | MUL | NULL    |                |
+| integrantesFamilia     | varchar(2)   | YES  |     | NULL    |                |
+| dependientesEconomicos | varchar(2)   | YES  |     | NULL    |                |
+| idVivienda             | int(11)      | YES  | MUL | NULL    |                |
+| noHabitantes           | varchar(2)   | YES  |     | NULL    |                |
+| viviendaElectricidad   | tinyint(1)   | YES  |     | NULL    |                |
+| viviendaAgua           | tinyint(1)   | YES  |     | NULL    |                |
+| viviendaDrenaje        | tinyint(1)   | YES  |     | NULL    |                |
+| viviendaGas            | tinyint(1)   | YES  |     | NULL    |                |
+| viviendaTelefono       | tinyint(1)   | YES  |     | NULL    |                |
+| viviendaInternet       | tinyint(1)   | YES  |     | NULL    |                |
+| idNivelEstudios        | int(11)      | YES  | MUL | NULL    |                |
+| idSeguridadSocial      | int(11)      | YES  | MUL | NULL    |                |
+| idDiscapacidad         | int(11)      | YES  | MUL | NULL    |                |
+| idGrupoVulnerable      | int(11)      | YES  | MUL | NULL    |                |
+| beneficiarioColectivo  | tinyint(1)   | YES  |     | NULL    |                |
+| idRegistro             | int(11)      | YES  | MUL | NULL    |                |
+| fechaNacimiento        | date         | YES  |     | NULL    |                |
+| genero                 | tinyint(1)   | YES  |     | NULL    |                |
+| perfilSociodemografico | tinyint(3)   | YES  |     | NULL    |                |
+| telefono               | char(11)     | YES  |     | NULL    |                |
+| idmunicipio            | tinyint(3)   | NO   | MUL | NULL    |                |
+*/

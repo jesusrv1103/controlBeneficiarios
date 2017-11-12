@@ -39,11 +39,6 @@
     b.claveLocalidad = l.idLocalidad;
 
 
-
-
-  
- 
-
         select b.idBeneficiario, 
         b.curp, 
         b.primerApellido, 
