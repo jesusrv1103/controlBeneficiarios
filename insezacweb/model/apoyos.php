@@ -11,7 +11,7 @@ class Apoyos
 	public $idTipoApoyo;  //int
 	public $idCaracteristica; //int
 	public $importeApoyo; //int
-	public $numerosApoyo;  //int
+	public $numeroApoyo;  //int
 	public $fechaUltimoApoyo; //Date
 	public $idPeriodicidad;  //int
 	public $apoyoEconomico;
@@ -98,7 +98,7 @@ class Apoyos
 					$data->idTipoApoyo, 
 					$data->idCaracteristica, 
 					$data->importeApoyo, 
-					$data->numerosApoyo, 
+					$data->numeroApoyo, 
 					$data->fechaUltimoApoyo, 
 					$data->idPeriodicidad, 
 					$data->apoyoEconomico
@@ -128,7 +128,7 @@ class Apoyos
 					$data->idTipoApoyo, 
 					$data->idCaracteristica, 
 					$data->importeApoyo, 
-					$data->numerosApoyo, 
+					$data->numeroApoyo, 
 					$data->fechaUltimoApoyo, 
 					$data->idPeriodicidad, 
 					$data->apoyoEconomico
