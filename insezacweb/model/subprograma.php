@@ -28,8 +28,8 @@ class Subprograma
 					$data->subprograma,
 					$data->idPrograma,
 					$data->programa
-					)
-				);
+				)
+			);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -135,6 +135,34 @@ class Subprograma
 				)
 			);
 		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ConsultaProgramas()
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("SELECT * FROM programa");
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ConsultaSubprogramas($valor)
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("SELECT * FROM subprograma WHERE programa like '%$valor%' || subprograma like '%$valor%'");
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
 		{
 			die($e->getMessage());
 		}

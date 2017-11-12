@@ -465,6 +465,7 @@ class Beneficiario
 				FROM beneficiarios b
 				INNER JOIN 
 				registro r
+				ON r.idRegistro= b.idRegistro
 				where estado='Activo'");
 			$stm->execute();
 

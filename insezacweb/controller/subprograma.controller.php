@@ -97,82 +97,57 @@ public function Guardar(){
    require_once 'view/index.php';
  }
 }
-public function consultas(){
-  echo'
-<div class="container clear_both padding_fix">
+public function Consultas(){
+  $subprograma=$_REQUEST['valorBusqueda'];
+  //$programas=$this->model->ConsultaProgramas();
+  $subprogramas=$this->model->ConsultaSubprogramas($subprograma);
+  $programa="";
+  foreach ($subprogramas as $p) :
+    if($programa!=$p->programa){ $programa=$p->programa;
+   echo '
+  <div class="container clear_both padding_fix">
  <div class="row">
    <div class="col-md-12">
      <div class="block-web">
-            <div class="header">
-              <div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-              <h3 class="content-header lblheader">Programa 1</h3>
-            </div>
-       <div class="porlets-content">
-        <div class="row">
-         <div class="col-md-6">
-           <a href="#" class="open_ticket_comment">
-             <div class="open_ticket_thumnail">
-               <img src="assets/images/programa1.jpg" alt="" style="max-width: 80px; max-height: 80px; margin-top: 5px; margin-left: 10px; margin-right: 20px;">
-
-             </div>
-             <div class="ticket_problem" style="margin-top: 10px;">Subprograma 1</div>
-             <span>Descripción de subprograma 1</span>
-             <p><b>Periodo:</b> 29/09/2017 - 20/09/2018</p>
-             <div class="ticket_action" style="margin-top: -45px;">
-               <div class="ticket_action_view">i</div>
-             </div>
-           </a>
-         </div>
-         <div class="col-md-6">
-           <a href="#" class="open_ticket_comment">
-             <div class="open_ticket_thumnail">
-               <img src="assets/images/programa2.jpg" alt="" style="max-width: 80px; max-height: 80px; margin-top: 5px; margin-left: 10px; margin-right: 20px;">
-
-             </div>
-             <div class="ticket_problem" style="margin-top: 10px;">Subprograma 2</div>
-             <span>Descripción de subprograma 2</span>
-             <p><b>Periodo:</b> 29/09/2017 - 20/09/2018</p>
-             <div class="ticket_action" style="margin-top: -45px;">
-               <div class="ticket_action_view">i</div>
-             </div>
-           </a>
-         </div>
-         <div class="col-md-6">
-           <a href="#" class="open_ticket_comment">
-             <div class="open_ticket_thumnail">
-               <img src="assets/images/programa3.jpg" alt="" style="max-width: 80px; max-height: 80px; margin-top: 5px; margin-left: 10px; margin-right: 20px;">
-
-             </div>
-             <div class="ticket_problem" style="margin-top: 10px;">Subprograma 3</div>
-             <span>Descripción de subprograma 3</span>
-             <p><b>Periodo:</b> 29/09/2017 - 20/09/2018</p>
-             <div class="ticket_action" style="margin-top: -45px;">
-               <div class="ticket_action_view">i</div>
-             </div>
-           </a>
-         </div>
-         <div class="col-md-6">
-           <!--div class="ticket_open"-->
-           <a href="#" class="open_ticket_comment">
-             <div class="open_ticket_thumnail">
-               <img src="assets/images/programa4.png" alt="" style="max-width: 80px; max-height: 80px; margin-top: 5px; margin-left: 10px; margin-right: 20px;">
-
-             </div>
-             <div class="ticket_problem" style="margin-top: 10px;">Subprograma 4</div>
-             <span>Descripción de subprograma 4</span>
-             <p><b>Periodo:</b> 29/09/2017 - 20/09/2018</p>
-             <div class="ticket_action" style="margin-top: -45px;">
-               <div class="ticket_action_view">i</div>
-             </div>
-           </a>
-           <!--/div-->
-         </div>
+      <div class="header">
+        <div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+        <h3 class="content-header lblheader">'.$p->programa.'</h3>
+      </div>
+      <div class="porlets-content">
+        <div class="row"> ';
+        foreach ($subprogramas as $sp) :
+          if($sp->programa==$p->programa){
+              echo '
+           <div class="col-md-6">
+             <a href="#" class="open_ticket_comment">
+               <div class="open_ticket_thumnail">
+                 <img src="assets/images/programa1.jpg" alt="" style="max-width: 80px; max-height: 80px; margin-top: 5px; margin-left: 10px; margin-right: 20px;">
+               </div>
+               <div class="ticket_problem" style="margin-top: 10px;">'.$sp->subprograma.'</div>
+               <span>Descripción de subprograma 1</span>
+               <p><b>Periodo:</b> 29/09/2017 - 20/09/2018</p>
+               <div class="ticket_action" style="margin-top: -45px;">
+                 <div class="ticket_action_view">i</div>
+               </div>
+             </a>
+           </div>';
+          }
+        endforeach;
+        echo '
        </div>
      </div><!--/porlets-content-->
    </div><!--/block-web-->
  </div><!--/col-md-12-->
 </div><!--/row-->
-</div><!--/container clear_both padding_fix-->
-';
+</div><!--/container clear_both padding_fix-->';
+}
+   
+   endforeach;
+}
+public function VerTabla(){
+  $tabla=true;
+  $page="view/subprograma/index.php";
+  require_once "view/index.php";
 }
 }
+?>
