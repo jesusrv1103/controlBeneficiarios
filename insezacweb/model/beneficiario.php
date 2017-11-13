@@ -44,7 +44,7 @@ class Beneficiario
 	public $idGrupoVulnerable;
 	public $beneficiarioColectivo;
 	public $usuario;
-	public $fecha;
+	public $fechaAlta;
 	public $hora;
 	public $estado;
 	public $direccion;
@@ -545,7 +545,7 @@ class Beneficiario
 					null,
 					$data->usuario,
 					$data->direccion,
-					$data->fecha,
+					$data->fechaAlta,
 					$data->estado
 				)
 			);
@@ -579,7 +579,7 @@ class Beneficiario
 					null,
 					$data->usuario,
 					$data->direccion,
-					$data->fecha,
+					$data->fechaAlta,
 					$data->idRegistro
 				)
 			);

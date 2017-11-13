@@ -69,8 +69,8 @@ class BeneficiarioController{
 
   //Datos de registro
   $beneficiario->usuario=$_SESSION['usuario'];
-  $beneficiario->fecha=date("Y-m-d");
-  $beneficiario->hora=date("H:i:s");
+  $beneficiario->fechaAlta=date("Y-m-d H:i:s");
+
   $beneficiario->direccion=$_SESSION['direccion'];
   $beneficiario->estado="Activo";
 
@@ -179,8 +179,8 @@ public function Leearchivo($objPHPExcel,$numRows){
      $ben->beneficiarioColectivo = $objPHPExcel->getActiveSheet()->getCell('AG'.$numRow)->getCalculatedValue();
        //Datos de registro
      $ben->usuario=$_SESSION['usuario'];
-     $ben->fecha=date("Y-m-d");
-     $ben->hora=date("H:i:s");
+     $ben->fechaAlta=date("Y-m-d H:i:s");
+     
      $ben->direccion=$_SESSION['direccion'];
      $ben->estado="Activo";
 
