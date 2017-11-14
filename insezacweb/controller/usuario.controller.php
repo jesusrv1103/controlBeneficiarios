@@ -31,7 +31,7 @@ class UsuarioController{
 		$usuario= new Usuario();
 		$usuario->usuario = $_REQUEST['usuario'];
 		$usuario->idUsuario = $_REQUEST['idUsuario'];
-		$usuario->direccion = $_REQUEST['direccion'];
+	    $usuario->idDireccion = $_REQUEST['idDireccion'];
 		$usuario->tipoUsuario = $_REQUEST['tipoUsuario'];
 		if(isset($_REQUEST['password'])){
 			$password =$_REQUEST['password'];
@@ -52,7 +52,7 @@ class UsuarioController{
 			$mensaje="Los datos del usuario <b>$usuario->usuario</b> se han actualizado correctamente";
 		}else{
 			//Registra usuario nuevo
-			$consulta=$this->model->Obtener2($usuario->usuario);
+			$consulta=$this->model->VerificaUsuario($usuario->usuario);
 			if($consulta==null){
 				$this->model->Registrar($usuario);
 				$this->model->RegistrarInDB($usuario);
@@ -75,7 +75,6 @@ class UsuarioController{
 	public function Eliminar(){
 		$idUsuario = $_REQUEST['idUsuario'];
 		if(isset($_REQUEST['acceso'])){
-		
 			$consultausuario=$this->model->ObtenerUsuario($idUsuario);
 			$this->model->Eliminar($idUsuario);
 			$this->model->EliminarInDB($consultausuario->usuario);

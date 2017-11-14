@@ -2,6 +2,7 @@
 require_once 'model/subprograma.php';
 
 class SubprogramaController{
+  private $model;
 
   public function __CONSTRUCT(){
     $this->model = new Subprograma();
@@ -14,10 +15,12 @@ class SubprogramaController{
    require_once 'view/index.php';
  }
  public function Crud(){
-   $programa = new Subprograma();
+   $subprograma = new Subprograma();
    if(isset($_REQUEST['idSubprograma'])){
     $subprograma = $this->model->Obtener($_REQUEST['idSubprograma']);
   }
+  $catalogos=true;
+  $subprogramas=true;
   $page= "view/subprograma/subprograma.php";
   require_once 'view/index.php';
 } 
@@ -25,8 +28,10 @@ public function Guardar(){
   $subprograma= new Subprograma();
   $subprograma->idSubprograma = $_REQUEST['idSubprograma'];
   $subprograma->subprograma = $_REQUEST['subprograma'];
-  $subprograma->programa = $_REQUEST['programa'];
+  //$subprograma->programa = $_REQUEST['programa'];
   $subprograma->idPrograma = $_REQUEST['idPrograma'];
+  $programa=$this->model->ConsultaPrograma($subprograma->idPrograma);
+  $subprograma->programa=$programa->programa;
   $subprograma->idSubprograma > 0 
   ? $this->model->Actualizar($subprograma)
   : $this->model->Registrar($subprograma);
@@ -145,6 +150,8 @@ public function Consultas(){
    endforeach;
 }
 public function VerTabla(){
+  $catalogos=true;
+  $subprogramas=true;
   $tabla=true;
   $page="view/subprograma/index.php";
   require_once "view/index.php";

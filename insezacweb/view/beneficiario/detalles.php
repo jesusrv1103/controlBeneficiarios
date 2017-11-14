@@ -1,12 +1,12 @@
  <style type="text/css">
- .lbldetalle{
-  color:#424242;
-   font-weight: bold;
-}
- .h3subtitulo{
-  color:#2196F3;
-  font-weight: bold;
-}
+   .lbldetalle{
+    color:#424242;
+    font-weight: bold;
+  }
+  .h3subtitulo{
+    color:#2196F3;
+    font-weight: bold;
+  }
 </style>
 
 <div class="pull-left breadcrumb_admin clear_both">
@@ -113,12 +113,13 @@
         <td>
           <div class="col-md-12">
            <label class="col-sm-6 lbldetalle">Beneficiario Colectivo:</label>
-           <label class="col-sm-6 control-label"><?php echo $ben->beneficiarioColectivo; ?></label>
-         </div>
-       </td>
-     </tr>
-   </tbody>
- </table>
+           <label class="col-sm-6 control-label"><?php if($ben->beneficiarioColectivo=1 ){
+            echo "Si";} else {echo"No";}?></label>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 </div>
 </div><!--/porlets-content-->
@@ -221,75 +222,77 @@
                   <td>
                     <div class="col-md-12">
                      <label class="col-sm-6 lbldetalle">Estudio socioeconomico:</label>
-                     <label class="col-sm-6 control-label"><?php echo $ben->estudioSocioeconomico; ?></label>
+                     <label class="col-sm-6 control-label"><?php if($ben->estudioSocioeconomico==1 ){
+                      echo "Si";} else {echo"No";}?></label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                   <div class="col-md-12">
+                     <label class="col-sm-6 lbldetalle">Jefe de familia:</label>
+                     <label class="col-sm-6 control-label"><?php if($ben->jefeFamilia==1 ){
+                      echo "Si";} else {echo"No";}?></label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                   <div class="col-md-12">
+                     <label class="col-sm-6 lbldetalle">Estado civil:</label>
+                     <label class="col-sm-6 control-label"><?php echo $ben->estadoCivil; ?></label>
                    </div>
                  </td>
                </tr>
                <tr>
                 <td>
                  <div class="col-md-12">
-                   <label class="col-sm-6 lbldetalle">Jefe de familia:</label>
-                   <label class="col-sm-6 control-label"><?php echo $ben->jefeFamilia; ?></label>
+                   <label class="col-sm-6 lbldetalle">Ocupación:</label>
+                   <label class="col-sm-6 control-label"><?php echo $ben->ocupacion; ?></label>
                  </div>
                </td>
              </tr>
              <tr>
               <td>
                <div class="col-md-12">
-                 <label class="col-sm-6 lbldetalle">Estado civil:</label>
-                 <label class="col-sm-6 control-label"><?php echo $ben->estadoCivil; ?></label>
+                 <label class="col-sm-6 lbldetalle">Ingreso mensual:</label>
+                 <label class="col-sm-6 control-label"><?php echo $ben->ingresoMensual; ?></label>
                </div>
              </td>
            </tr>
            <tr>
             <td>
              <div class="col-md-12">
-               <label class="col-sm-6 lbldetalle">Ocupación:</label>
-               <label class="col-sm-6 control-label"><?php echo $ben->ocupacion; ?></label>
+               <label class="col-sm-6 lbldetalle">Nivel de estudio:</label>
+               <label class="col-sm-6 control-label"><?php echo $ben->nivelEstudios; ?></label>
              </div>
            </td>
          </tr>
          <tr>
           <td>
            <div class="col-md-12">
-             <label class="col-sm-6 lbldetalle">Ingreso mensual:</label>
-             <label class="col-sm-6 control-label"><?php echo $ben->ingresoMensual; ?></label>
+             <label class="col-sm-6 lbldetalle">Integrantes familia:</label>
+             <label class="col-sm-6 control-label"><?php echo $ben->integrantesFamilia; ?></label>
            </div>
          </td>
        </tr>
        <tr>
         <td>
          <div class="col-md-12">
-           <label class="col-sm-6 lbldetalle">Nivel de estudio:</label>
-           <label class="col-sm-6 control-label"><?php echo $ben->nivelEstudios; ?></label>
+           <label class="col-sm-6 lbldetalle">Dependientes economicos:</label>
+           <label class="col-sm-6 control-label"><?php echo $ben->dependientesEconomicos; ?></label>
          </div>
        </td>
      </tr>
      <tr>
       <td>
-       <div class="col-md-12">
-         <label class="col-sm-6 lbldetalle">Integrantes familia:</label>
-         <label class="col-sm-6 control-label"><?php echo $ben->integrantesFamilia; ?></label>
+        <div class="col-md-12">
+         <label class="col-sm-6 lbldetalle">Grupo vulnerable:</label>
+         <label class="col-sm-6 control-label"><?php echo $ben->grupoVulnerable; ?></label>
        </div>
      </td>
    </tr>
-   <tr>
-    <td>
-     <div class="col-md-12">
-       <label class="col-sm-6 lbldetalle">Dependientes economicos:</label>
-       <label class="col-sm-6 control-label"><?php echo $ben->dependientesEconomicos; ?></label>
-     </div>
-   </td>
- </tr>
- <tr>
-  <td>
-    <div class="col-md-12">
-     <label class="col-sm-6 lbldetalle">Grupo vulnerable:</label>
-     <label class="col-sm-6 control-label"><?php echo $ben->grupoVulnerable; ?></label>
-   </div>
- </td>
-</tr>
-</tbody>
+ </tbody>
 </table>
 </div>
 </div>
@@ -327,54 +330,60 @@
             <td>
              <div class="col-md-12">
                <label class="col-sm-6 lbldetalle">Electricidad:</label>
-               <label class="col-sm-6 control-label"><?php echo $ben->viviendaElectricidad; ?></label>
-             </div>
-           </td>
-         </tr>
-         <tr>
-          <td>
-           <div class="col-md-12">
-             <label class="col-sm-6 lbldetalle">Agua:</label>
-             <label class="col-sm-6 control-label"><?php echo $ben->viviendaAgua; ?></label>
-           </div>
-         </td>
-       </tr>
-       <tr>
-        <td>
-         <div class="col-md-12">
-           <label class="col-sm-6 lbldetalle">Drenaje:</label>
-           <label class="col-sm-6 control-label"><?php echo $ben->viviendaDrenaje; ?></label>
-         </div>
-       </td>
-     </tr>
-     <tr>
-      <td>
-       <div class="col-md-12">
-         <label class="col-sm-6 lbldetalle">Gas:</label>
-         <label class="col-sm-6 control-label"><?php echo $ben->viviendaGas; ?></label>
-       </div>
-     </td>
-   </tr>
-   <tr>
-    <td>
-     <div class="col-md-12">
-       <label class="col-sm-6 lbldetalle">Teléfono:</label>
-       <label class="col-sm-6 control-label"><?php echo $ben->viviendaTelefono; ?></label>
-     </div>
-   </td>
- </tr>
- <tr>
-  <td>
-   <div class="col-md-12">
-     <label class="col-sm-6 lbldetalle">Internet:</label>
-     <label class="col-sm-6 control-label"><?php echo $ben->viviendaInternet; ?></label>
-   </div>
- </td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+               <label class="col-sm-6 control-label"><?php if($ben->viviendaElectricidad==1 ){
+                echo "Si";} else {echo"No";}?></label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+             <div class="col-md-12">
+               <label class="col-sm-6 lbldetalle">Agua:</label>
+               <label class="col-sm-6 control-label"><?php if($ben->viviendaAgua==1 ){
+                echo "Si";} else {echo"No";}?></label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+             <div class="col-md-12">
+               <label class="col-sm-6 lbldetalle">Drenaje:</label>
+               <label class="col-sm-6 control-label"><?php if($ben->viviendaDrenaje==1 ){
+                echo "Si";} else {echo"No";}?></label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+             <div class="col-md-12">
+               <label class="col-sm-6 lbldetalle">Gas:</label>
+               <label class="col-sm-6 control-label"><?php if($ben->viviendaGas==1 ){
+                echo "Si";} else {echo"No";}?></label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+             <div class="col-md-12">
+               <label class="col-sm-6 lbldetalle">Teléfono:</label>
+               <label class="col-sm-6 control-label"><?php if($ben->viviendaTelefono==1 ){
+                echo "Si";} else {echo"No";}?></label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+             <div class="col-md-12">
+               <label class="col-sm-6 lbldetalle">Internet:</label>
+               <label class="col-sm-6 control-label"><?php if($ben->viviendaDrenaje==1 ){
+                echo "Si";} else {echo"No";}?></label>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div><!--/porlets-content-->
 </div><!--/block-web-->
 </div><!--/col-md-6-->

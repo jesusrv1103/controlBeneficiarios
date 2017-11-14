@@ -1,11 +1,10 @@
 <?php
 class Usuario
 {
-
 	public $idUsuario;
 	public $usuario;
 	public $password;
-	public $direccion;
+	public $idDireccion;
 	public $tipoUsuario;
 	private $pdo;
 
@@ -25,7 +24,7 @@ class Usuario
 		try
 		{
 			//$result = array();
-			$stm = $this->pdo->prepare("SELECT * from usuarios");
+			$stm = $this->pdo->prepare("SELECT * from usuarios, direccion WHERE usuarios.idDireccion=direccion.idDireccion");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -40,7 +39,7 @@ class Usuario
 		try 
 		{
 			$stm = $this->pdo
-			->prepare("SELECT * FROM usuarios WHERE idUsuario = ?");
+			->prepare("SELECT * FROM usuarios,direccion WHERE idUsuario = ? AND usuarios.idDireccion=direccion.idDireccion");
 			$stm->execute(array($id));
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) 
@@ -48,7 +47,7 @@ class Usuario
 			die($e->getMessage());
 		}
 	}
-	public function Obtener2($username)
+	public function VerificaUsuario($username)
 	{
 		try 
 		{
@@ -56,7 +55,7 @@ class Usuario
 			->prepare("SELECT * FROM usuarios WHERE usuario=?");
 			$stm->execute(
 				array($username)
-				);
+			);
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) 
 		{
@@ -85,8 +84,8 @@ class Usuario
 			$stm->execute(
 				array(
 					$usuario
-					)
-				);
+				)
+			);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -107,8 +106,8 @@ class Usuario
 					$data->direccion,
 					$data->tipoUsuario,
 					$data->idUsuario
-					)
-				);
+				)
+			);
 		} catch (Exception $e) 
 		{
 			$error=true;
@@ -122,17 +121,17 @@ class Usuario
 		try 
 		{
 			$sql = "UPDATE usuarios SET
-			usuario = ?, direccion =?, tipoUsuario = ? 
+			usuario = ?, idDireccion =?, tipoUsuario = ? 
 			WHERE idUsuario = ?";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
 					$data->usuario,
-					$data->direccion,
+					$data->idDireccion,
 					$data->tipoUsuario,
 					$data->idUsuario
-					)
-				);
+				)
+			);
 		} catch (Exception $e) 
 		{
 			$error=true;
@@ -166,10 +165,10 @@ class Usuario
 					null,
 					$data->usuario, 
 					$data->password,
-					$data->direccion,
-					$data->tipoUsuario
-					)
-				);
+					$data->tipoUsuario,
+					$data->idDireccion
+				)
+			);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -184,29 +183,45 @@ class Usuario
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
-					
 					$data->usuario, 
 					$data->password,	
-					)
-				);
+				)
+			);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
 		}
 	}
 
-public function ObtenerUsuario($idUsuario)
+	public function ObtenerUsuario($idUsuario)
 	{
 		try 
 		{
 			$sql= $this->pdo->prepare("SELECT * FROM usuarios WHERE idUsuario=?");
 			$resultado=$sql->execute(
 				array(
-                    $idUsuario
-                )
+					$idUsuario
+				)
 			);
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+			//Metdodo para listar
+	public function ConsultarDirecciones()
+	{
+		try
+		{
+
+			$stm = $this->pdo->prepare("SELECT * from direccion WHERE estado='activo'");
+			
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
 		{
 			die($e->getMessage());
 		}

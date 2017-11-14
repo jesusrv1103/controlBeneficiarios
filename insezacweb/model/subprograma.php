@@ -128,7 +128,7 @@ class Subprograma
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
-					$data->idSubprograma,
+					null,
 					$data->subprograma,
 					$data->programa,
 					$data->idPrograma
@@ -149,6 +149,20 @@ class Subprograma
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		}
 		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+	//Método para consultar el programa especifico de el id en el combo seleccionado.
+	public function ConsultaPrograma($idPrograma)
+	{
+		try 
+		{
+			$stm = $this->pdo
+			->prepare("SELECT * FROM programa WHERE idPrograma = ?");
+			$stm->execute(array($idPrograma));
+			return $stm->fetch(PDO::FETCH_OBJ);
+		} catch (Exception $e) 
 		{
 			die($e->getMessage());
 		}

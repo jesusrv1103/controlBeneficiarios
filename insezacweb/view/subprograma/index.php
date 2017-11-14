@@ -88,8 +88,8 @@
                   <td> <?php echo $r->programa; ?></td>
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <td class="center">
-                   <a class="btn btn-primary btn-sm" role="button" onclick="actualizarPrograma(<?php echo $r->idPrograma; ?>);" data-target="#modalCrud" href="#modalCrud" role="button" data-toggle="modal"><i class="fa fa-edit"></i></a>
-                 </td>
+                      <a href="index.php?c=Subprograma&a=Crud&idSubprograma=<?php echo $r->idSubprograma ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
+                    </td>
                  <td class="center">
                   <a onclick="eliminarPrograma(<?php echo $r->idPrograma;?>);" class="btn btn-danger btn-sm" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                 </td>
@@ -223,8 +223,10 @@
 </div>
 </div>
 <?php } ?>
+<?php if (!isset($tabla)){ ?>
 <div id="ajax">
 </div>
+<?php } ?>
 <p></p>
 <script type="text/javascript">
  window.onload=function(){

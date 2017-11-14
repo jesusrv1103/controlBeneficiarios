@@ -1,4 +1,14 @@
+<?php
 
+/*
+$json = file_get_contents('php: model/asentamientos/listar');
+$data=json_decode($json);
+$municipio = $data->municipio;
+
+echo $codigo; 
+*/
+
+?>
 <style type="text/css">
 .lblinfo{
   color:#2196F3;
@@ -76,7 +86,7 @@
              </thead>
              <tbody>
 
-              <?php foreach($this->model->Listar2() as $r): ?>
+              <?php foreach($this->model->Listar1() as $r): ?>
                 <tr class="grade">
 
                   <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
@@ -106,7 +116,7 @@
            </tbody>
            <tfoot>
              <tr>
-              <th>Info</th>
+              <td><center><b>Info</b></center></td>
               <th>CURP</th>
               <th>Nombre de beneficiario</th>
               <td><center><b>Ver</b></center></td>
@@ -207,5 +217,20 @@
     $.post("index.php?c=beneficiario&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
       $("#div-modal-content").html(info);
     }); 
+  }
+
+</script>
+
+<script type="text/javascript">
+  $(function listar(){
+
+  });
+
+  function listar(){
+
+  }
+
+  function __ajax(){
+
   }
 </script>

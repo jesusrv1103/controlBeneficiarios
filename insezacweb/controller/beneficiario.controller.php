@@ -33,17 +33,21 @@ class BeneficiarioController{
   $beneficiario->idSeguridadSocial = $_REQUEST['idSeguridadSocial'];
   $beneficiario->idDiscapacidad = $_REQUEST['idDiscapacidad'];
   $beneficiario->beneficiarioColectivo=$_REQUEST['beneficiarioColectivo'];
-
+  $beneficiario->fechaNacimiento="2013-11-03";
+  $beneficiario->genero=1;
+  $beneficiario->idmunicipio=1;
+  $beneficiario->email='jesus21c@hotmail.com';
+  $beneficiario->telefono='4991058738';
+  $beneficiario->perfilSociodemografico=111;
   //vialidad
   $beneficiario->idTipoVialidad = $_REQUEST['idTipoVialidad'];
   $beneficiario->nombreVialidad = $_REQUEST['nombreVialidad'];
   $beneficiario->noExterior = $_REQUEST['noExterior'];
   $beneficiario->noInterior = $_REQUEST['noInterior'];
-  $beneficiario->idAsentamientos = $_REQUEST['idAsentamientos'];
+  $beneficiario->idAsentamientos =$_REQUEST['idAsentamientos'];
   $beneficiario->idLocalidad = $_REQUEST['idLocalidad'];
   $beneficiario->entreVialidades = $_REQUEST['entreVialidades'];
   $beneficiario->descripcionUbicacion = $_REQUEST['descripcionUbicacion'];
-
  //estado social
   $beneficiario->estudioSocioeconomico=$_REQUEST['estudioSocioeconomico'];
   $beneficiario->idEstadoCivil=$_REQUEST['idEstadoCivil'];
@@ -53,16 +57,15 @@ class BeneficiarioController{
   $beneficiario->integrantesFamilia=$_REQUEST['integrantesFamilia'];
   $beneficiario->dependientesEconomicos=$_REQUEST['dependientesEconomicos'];
   $beneficiario->idGrupoVulnerable=$_REQUEST['idGrupoVulnerable'];
-
  //Vivienda
   $beneficiario->idVivienda=$_REQUEST['idVivienda'];
   $beneficiario->noHabitantes=$_REQUEST['noHabitantes'];
-  isset($_REQUEST['viviendaElectricidad'])? $beneficiario->viviendaElectricidad="Si": $beneficiario->viviendaElectricidad="No";
-  isset($_REQUEST['viviendaAgua'])? $beneficiario->viviendaAgua="Si": $beneficiario->viviendaAgua="No";
-  isset($_REQUEST['viviendaDrenaje'])? $beneficiario->viviendaDrenaje="Si": $beneficiario->viviendaDrenaje="No";
-  isset($_REQUEST['viviendaGas'])? $beneficiario->viviendaGas="Si": $beneficiario->viviendaGas="No";
-  isset($_REQUEST['viviendaTelefono'])? $beneficiario->viviendaTelefono="Si": $beneficiario->viviendaTelefono="No";
-  isset($_REQUEST['viviendaInternet'])? $beneficiario->viiendaInternet="Si": $beneficiario->viviendaInternet="No";
+  isset($_REQUEST['viviendaElectricidad'])? $beneficiario->viviendaElectricidad="1": $beneficiario->viviendaElectricidad="0";
+  isset($_REQUEST['viviendaAgua'])? $beneficiario->viviendaAgua="1": $beneficiario->viviendaAgua="0";
+  isset($_REQUEST['viviendaDrenaje'])? $beneficiario->viviendaDrenaje="1": $beneficiario->viviendaDrenaje="0";
+  isset($_REQUEST['viviendaGas'])? $beneficiario->viviendaGas="1": $beneficiario->viviendaGas="0";
+  isset($_REQUEST['viviendaTelefono'])? $beneficiario->viviendaTelefono="1": $beneficiario->viviendaTelefono="0";
+  isset($_REQUEST['viviendaInternet'])? $beneficiario->viviendaInternet="1": $beneficiario->viviendaInternet="0";
 
   //Datos de registro
   $beneficiario->usuario=$_SESSION['usuario'];
@@ -197,7 +200,6 @@ public function Leearchivo($objPHPExcel,$numRows){
   require_once 'view/index.php';
 }
 }
-
 public function Eliminar(){
     $administracion=true; //variable cargada para activar la opcion administracion en el menu
     $beneficiarios=true; //variable cargada para activar la opcion programas en el menu
@@ -342,7 +344,6 @@ public function Eliminar(){
               <label class="col-sm-6">'.$r->usuario.'</label><br>
             </div>
             '; 
-
             if($i%2==0){
               echo "<hr>";
             }$i++;
@@ -365,3 +366,52 @@ public function Eliminar(){
   }
   }
  
+
+/*
+
++------------------------+--------------+------+-----+---------+----------------+
+| Field                  | Type         | Null | Key | Default | Extra          |
++------------------------+--------------+------+-----+---------+----------------+
+| idBeneficiario         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| curp                   | varchar(18)  | YES  |     | NULL    |                |
+| primerApellido         | varchar(20)  | YES  |     | NULL    |                |
+| segundoApellido        | varchar(25)  | YES  |     | NULL    |                |
+| nombres                | varchar(25)  | YES  |     | NULL    |                |
+| email                  | varchar(128) | YES  |     | NULL    |                |
+| idIdentificacion       | int(11)      | YES  | MUL | NULL    |                |
+| idTipoVialidad         | int(11)      | YES  | MUL | NULL    |                |
+| nombreVialidad         | varchar(65)  | YES  |     | NULL    |                |
+| noExterior             | varchar(8)   | YES  |     | NULL    |                |
+| noInterior             | varchar(8)   | YES  |     | NULL    |                |
+| idAsentamientos        | varchar(45)  | YES  | MUL | NULL    |                |
+| idLocalidad            | varchar(10)  | YES  | MUL | NULL    |                |
+| entreVialidades        | varchar(100) | YES  |     | NULL    |                |
+| descripcionUbicacion   | text         | YES  |     | NULL    |                |
+| estudioSocioeconomico  | tinyint(1)   | YES  |     | NULL    |                |
+| idEstadoCivil          | int(11)      | YES  | MUL | NULL    |                |
+| jefeFamilia            | varchar(2)   | YES  |     | NULL    |                |
+| idOcupacion            | int(11)      | YES  | MUL | NULL    |                |
+| idIngresoMensual       | int(11)      | YES  | MUL | NULL    |                |
+| integrantesFamilia     | varchar(2)   | YES  |     | NULL    |                |
+| dependientesEconomicos | varchar(2)   | YES  |     | NULL    |                |
+| idVivienda             | int(11)      | YES  | MUL | NULL    |                |
+| noHabitantes           | varchar(2)   | YES  |     | NULL    |                |
+| viviendaElectricidad   | tinyint(1)   | YES  |     | NULL    |                |
+| viviendaAgua           | tinyint(1)   | YES  |     | NULL    |                |
+| viviendaDrenaje        | tinyint(1)   | YES  |     | NULL    |                |
+| viviendaGas            | tinyint(1)   | YES  |     | NULL    |                |
+| viviendaTelefono       | tinyint(1)   | YES  |     | NULL    |                |
+| viviendaInternet       | tinyint(1)   | YES  |     | NULL    |                |
+| idNivelEstudios        | int(11)      | YES  | MUL | NULL    |                |
+| idSeguridadSocial      | int(11)      | YES  | MUL | NULL    |                |
+| idDiscapacidad         | int(11)      | YES  | MUL | NULL    |                |
+| idGrupoVulnerable      | int(11)      | YES  | MUL | NULL    |                |
+| beneficiarioColectivo  | tinyint(1)   | YES  |     | NULL    |                |
+| idRegistro             | int(11)      | YES  | MUL | NULL    |                |
+| fechaNacimiento        | date         | YES  |     | NULL    |                |
+| genero                 | tinyint(1)   | YES  |     | NULL    |                |
+| perfilSociodemografico | tinyint(3)   | YES  |     | NULL    |                |
+| telefono               | char(11)     | YES  |     | NULL    |                |
+| idmunicipio            | tinyint(3)   | NO   | MUL | NULL    |                |
+*/
+

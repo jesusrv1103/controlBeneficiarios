@@ -120,7 +120,12 @@ if (!isset($_SESSION['seguridad'])){
                   <a href="?c=Usuario"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                    <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
                  </a> 
-               </li>
+               </li><br><br>
+               <li> 
+                <a href="?c=Direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                 <?php if (isset($direccion)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
+               </a> 
+             </li><br><br>
                <?php } ?>
              </ul>
            </li>
@@ -177,9 +182,38 @@ if (!isset($_SESSION['seguridad'])){
 <!--\\\\\\\ inner end\\\\\\-->
 </div>
 <!--\\\\\\\ wrapper end\\\\\\-->
+<script src="assets/js/jquery-2.1.0.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/common-script.js"></script>
+<script src="assets/js/jquery.slimscroll.min.js"></script>
+<script type="text/javascript"  src="assets/plugins/toggle-switch/toggles.min.js"></script> 
+<script src="assets/plugins/checkbox/zepto.js"></script>
+<script src="assets/plugins/checkbox/icheck.js"></script>
+<script src="assets/js/icheck-init.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> 
+<script type="text/javascript" src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script> 
+<script type="text/javascript" src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script> 
+<script type="text/javascript" src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script> 
+<script type="text/javascript" src="assets/js/form-components.js"></script> 
+<script type="text/javascript"  src="assets/plugins/input-mask/jquery.inputmask.min.js"></script> 
+<script type="text/javascript"  src="assets/plugins/input-mask/demo-mask.js"></script> 
+<script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script> 
+<script type="text/javascript"  src="assets/plugins/dropzone/dropzone.min.js"></script> 
+<script type="text/javascript" src="assets/plugins/ckeditor/ckeditor.js"></script>
+<script src="assets/js/jPushMenu.js"></script> 
+<script src="assets/plugins/validation/parsley.min.js"></script>
+<script src="assets/plugins/data-tables/jquery.dataTables.js"></script>
+<script src="assets/plugins/data-tables/DT_bootstrap.js"></script>
+<script src="assets/plugins/data-tables/dynamic_table_init.js"></script>
+<script src="assets/plugins/edit-table/edit-table.js"></script>
+<script src="assets/plugins/file-uploader/js/vendor/jquery.ui.widget.js"></script>
+<script src="assets/plugins/file-uploader/js/jquery.iframe-transport.js"></script>
+<script src="assets/plugins/file-uploader/js/jquery.fileupload.js"></script>
+<script src="assets/plugins/validation/parsley.min.js"></script>
+<script src="assets/plugins/select2/dist/js/select2.full.min.js"></script>
 <script>
 
-  //*************Subir archivos automaicos************
+  //****Subir archivos automaicos*****
 
   $(document).on('ready', function() {
     'use strict';
@@ -204,7 +238,7 @@ if (!isset($_SESSION['seguridad'])){
     .parent().addClass($.support.fileInput ? undefined : 'disabled');
   });
 
-  //**********Elimina archivos existentes para importar otros archivos******************
+  //***Elimina archivos existentes para importar otros archivos*******
 
   $('.catalogos').change(function(e) {
     e.preventDefault();
@@ -278,7 +312,11 @@ if (!isset($_SESSION['seguridad'])){
     });
     e.preventDefault();
   });
- //******************SELEC2*********************
+
+  
+</script>
+<script>
+  //*******SELEC2********
   $(document).on('ready', function()  {
 
     //Initialize Select2 Elements
@@ -316,40 +354,7 @@ if (!isset($_SESSION['seguridad'])){
       showInputs: false
     })
   })
-  
 </script>
-<script src="assets/js/jquery-2.1.0.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/common-script.js"></script>
-<script src="assets/js/jquery.slimscroll.min.js"></script>
-<script type="text/javascript"  src="assets/plugins/toggle-switch/toggles.min.js"></script> 
-<script src="assets/plugins/checkbox/zepto.js"></script>
-<script src="assets/plugins/checkbox/icheck.js"></script>
-<script src="assets/js/icheck-init.js"></script>
-<script type="text/javascript" src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> 
-<script type="text/javascript" src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script> 
-<script type="text/javascript" src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script> 
-<script type="text/javascript" src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script> 
-<script type="text/javascript" src="assets/js/form-components.js"></script> 
-<script type="text/javascript"  src="assets/plugins/input-mask/jquery.inputmask.min.js"></script> 
-<script type="text/javascript"  src="assets/plugins/input-mask/demo-mask.js"></script> 
-<script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script> 
-<script type="text/javascript"  src="assets/plugins/dropzone/dropzone.min.js"></script> 
-<script type="text/javascript" src="assets/plugins/ckeditor/ckeditor.js"></script>
-<script src="assets/js/jPushMenu.js"></script> 
-<script src="assets/plugins/validation/parsley.min.js"></script>
-<script src="assets/plugins/data-tables/jquery.dataTables.js"></script>
-<script src="assets/plugins/data-tables/DT_bootstrap.js"></script>
-<script src="assets/plugins/data-tables/dynamic_table_init.js"></script>
-<script src="assets/plugins/edit-table/edit-table.js"></script>
-<script src="assets/plugins/file-uploader/js/vendor/jquery.ui.widget.js"></script>
-<script src="assets/plugins/file-uploader/js/jquery.iframe-transport.js"></script>
-<script src="assets/plugins/file-uploader/js/jquery.fileupload.js"></script>
-<script src="assets/plugins/validation/parsley.min.js"></script>
-<script src="assets/plugins/select2/dist/js/select2.full.min.js"></script>
-<!-- Script para checkbox -->
-<script type="text/javascript"  src="assets/plugins/toggle-switch/toggles.min.js"></script> 
-<script src="assets/plugins/checkbox/icheck.js"></script>
-<script src="assets/js/icheck.js"></script>
+
 </body>
 </html>
