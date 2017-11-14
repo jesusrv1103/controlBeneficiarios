@@ -5,6 +5,8 @@ class Municipio
 	private $pdo;
 	public $idMunicipio;
 	public $nombreMunicipio;
+	public $claveMunicipio;
+	public $estado;
 
 	public function __CONSTRUCT()
 	{
@@ -102,13 +104,15 @@ public function ImportarMunicipio(Municipio $data){
 		try 
 		{
 			$sql = "UPDATE municipio SET 
-			municipio = ?
+			nombreMunicipio = ?,
+			claveMunicipio = ?
 			WHERE idMunicipio = ?";
 
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
 					$data->nombreMunicipio, 
+					$data->claveMunicipio,
 					$data->idMunicipio
 				)
 			);
@@ -122,13 +126,15 @@ public function ImportarMunicipio(Municipio $data){
 	{
 		try 
 		{
-			$sql = "INSERT INTO municipio (nombreMunicipio) 
-			VALUES (?)";
+			$sql = "INSERT INTO municipio(nombreMunicipio,estado,claveMunicipio) 
+			VALUES (?,?,?)";
 
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
-					$data->Municipio
+					$data->nombreMunicipio,
+					$data->estado,
+					$data->claveMunicipio
 				)
 			);
 		} catch (Exception $e) 

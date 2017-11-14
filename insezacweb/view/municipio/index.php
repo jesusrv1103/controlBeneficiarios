@@ -1,12 +1,12 @@
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
     <h1>Catálogos</h1>
-    <h2 class="">Municipios</h2>
+    <h2 class="">Municipio</h2>
   </div>
   <div class="pull-right">
     <ol class="breadcrumb">
       <li><a href="?c=Inicio">Inicio</a></li>
-      <li class="active">Municipios</a></li>
+      <li class="active">Municipio</a></li>
     </ol>
   </div>
 </div>
@@ -25,9 +25,9 @@
                 <b>
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <div class="btn-group" style="margin-right: 10px;"> 
-                    <a onclick="registrarmunicipio();" class="btn btn-sm btn-success tooltips" data-toggle="modal" href="#modalCrud" data-target="#modalCrud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nuevo municipio"> <i class="fa fa-plus"></i> Registrar </a>
-                    <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar Municipios" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
-                    <a href="assets/files/Municipios.xlsx" download="Municipios.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar archivo municipio.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
+                      <a class="btn btn-sm btn-success tooltips" href="?c=Municipio&a=Crud&nuevoRegistro=true" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nuevo Municipio"> <i class="fa fa-plus"></i> Registrar </a>
+                    <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar programas" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
+                    <a href="assets/files/programas.xlsx" download="programas.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar archivo programa.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
                   </div>
                   <?php } ?>
                 </b>
@@ -59,7 +59,8 @@
             <table  class="display table table-bordered table-striped" id="dynamic-table">
               <thead>
                 <tr>
-                  <th>Nombre del Municipio</th>
+                  <th>Clave Municipio</th>
+                  <th>Nombre Municipio</th>
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <td><center><b>Editar</b></center></td>
                   <td><center><b>Borrar</b></center></td> 
@@ -69,13 +70,16 @@
               <tbody>
                <?php foreach($this->model->Listar() as $r): ?>
                 <tr class="gradeA">
+                  <td> <?php echo $r->claveMunicipio; ?></td>
                   <td> <?php echo $r->nombreMunicipio; ?></td>
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <td class="center">
-                   <a class="btn btn-primary btn-sm" role="button" onclick="actualizarmunicipio(<?php echo $r->idMunicipio; ?>);" data-target="#modalCrud" href="#modalCrud" role="button" data-toggle="modal"><i class="fa fa-edit"></i></a>
-                 </td>
+
+                    <a href="index.php?c=Municipio&a=Crud&idMunicipio=<?php echo $r->idMunicipio ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
+
+                  </td>
                  <td class="center">
-                  <a onclick="eliminarmunicipio(<?php echo $r->idMunicipio;?>);" class="btn btn-danger btn-sm" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+                  <a onclick="eliminarMunicipio(<?php echo $r->idMunicipio;?>);" class="btn btn-danger btn-sm" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                 </td>
                 <?php } ?>
               </tr>
@@ -83,7 +87,9 @@
           </tbody>
           <tfoot>
             <tr>
-              <th>Nombre del municipio</th>
+              <th>Clave Municipio</th>
+              <th>Nombre del programa</th>
+
               <?php if($_SESSION['tipoUsuario']==1){?>
               <td><center><b>Editar</b></center></td>
               <td><center><b>Borrar</b></center></td> 
@@ -104,17 +110,17 @@
         <div class="row">
           <div class="block-web">
             <div class="header">
-              <h3 class="content-header theme_color">&nbsp;Importar Municipios</h3>
+              <h3 class="content-header theme_color">&nbsp;Importar programas</h3>
             </div>
             <div class="porlets-content" style="margin-bottom: -65px;">
-              <p>Importa tu archivo excel con los datos de los Municipios en caso de que haya algun cambio, si no tienes el archivo puedes descargarlo y agregar o eliminar los datos necesarios.</p>
-              <p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">Municipios.xlsx</strong> para poder ser leído correctamente.</p>  
+              <p>Importa tu archivo excel con los datos de los programas en caso de que haya algun cambio, si no tienes el archivo puedes descargarlo y agregar o eliminar los datos necesarios.</p>
+              <p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">programas.xlsx</strong> para poder ser leído correctamente.</p>  
               <br>
               <span class="btn btn-success fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
                 <span>Seleccionar archivo</span>
                 <!-- The file input field used as target for the file upload widget -->
-                <input id="fileupload" type="file" name="files[]" multiple class="Municipios">
+                <input id="fileupload" type="file" name="files[]" multiple class="programas">
               </span>
               <br>
               <br>
@@ -131,7 +137,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=municipio&a=Importar" class="btn btn-primary">Importar datos</a>
+          <a href="?c=Programa&a=Importar" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
     </div><!--/modal-content--> 
@@ -152,18 +158,18 @@
         <div class="row">
           <div class="block-web">
             <div class="header">
-              <h3 class="content-header theme_color">&nbsp;Eliminar municipio</h3>
+              <h3 class="content-header theme_color">&nbsp;Eliminar Direccion</h3>
             </div>
             <div class="porlets-content" style="margin-bottom: -50px;">
-              <h4>¿Esta segúro que desea eliminar el municipio?</h4>
+              <h4>¿Esta segúro que desea eliminar la  Direccion?</h4>
             </div><!--/porlets-content--> 
           </div><!--/block-web--> 
         </div>
       </div>
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-          <form action="?c=municipio&a=Eliminar" enctype="multipart/form-data" method="post">
-            <input hidden name="idMunicipio" id="txtidMunicipio">
+          <form action="?c=Municipio&a=Eliminar" enctype="multipart/form-data" method="post">
+            <input  name="idMunicipio" id="txtIdMunicipio">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
           </form>
@@ -195,19 +201,11 @@
     } 
   }
 }*/
-registrarmunicipio = function (){
-  var idMunicipio=null;
-  $.post("index.php?c=municipio&a=Crud", {idMunicipio: idMunicipio}, function(modal) {
-    $("#div-modal-content").html(modal);
-  }); 
-}
-actualizarmunicipio = function (idMunicipio){
-  var idMunicipio=idMunicipio;
-  $.post("index.php?c=municipio&a=Crud", {idMunicipio: idMunicipio}, function(modal) {
-    $("#div-modal-content").html(modal);
-  }); 
-}
-eliminarmunicipio = function(idMunicipio){
-  $('#txtidMunicipio').val(idMunicipio);  
-};
+
+
+  eliminarMunicipio = function(idMunicipio){
+    alert(idMunicipio);
+    $('#txtIdMunicipio').val(idMunicipio);  
+  };
 </script>
+
