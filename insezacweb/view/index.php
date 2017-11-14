@@ -134,6 +134,11 @@ if (!isset($_SESSION['seguridad'])){
                    </a> 
                  </li><br><br>
                  <li> 
+                    <a href="?c=Municipio"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                     <?php if (isset($municipios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Municipios</b>
+                   </a> 
+                 </li><br><br>
+                 <li> 
                   <a href="?c=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
                    <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
                  </a> 
