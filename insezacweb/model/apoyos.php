@@ -15,6 +15,7 @@ class Apoyos
 	public $fechaUltimoApoyo; //Date
 	public $idPeriodicidad;  //int
 	public $apoyoEconomico;
+	public $idProgramaSocial;
 
 	public function __CONSTRUCT()
 	{
@@ -154,7 +155,7 @@ class Apoyos
 	public function ImportarApoyo(Apoyos $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
 					null,
@@ -168,7 +169,8 @@ class Apoyos
 					$data->numeroApoyo, 
 					$data->fechaUltimoApoyo, 
 					$data->idPeriodicidad, 
-					$data->apoyoEconomico
+					$data->apoyoEconomico,
+					$data->idProgramaSocial
 					)
 				);
 		} catch (Exception $e) 

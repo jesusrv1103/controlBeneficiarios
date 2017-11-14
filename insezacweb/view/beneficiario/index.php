@@ -1,11 +1,11 @@
 <?php
 
 
-$json = file_get_contents('php: model/asentamientos/listar');
-$data=json_decode($json);
-$municipio = $data->municipio;
+//$json = file_get_contents('php: model/asentamientos/listar');
+//$data=json_decode($json);
+//$municipio = $data->municipio;
 
-echo $codigo; 
+//echo $codigo; 
 
 
 ?>

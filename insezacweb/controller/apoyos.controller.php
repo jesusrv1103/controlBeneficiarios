@@ -111,6 +111,7 @@ public function Apoyos($objPHPExcel,$numRows){
     $apoyos->fechaUltimoApoyo = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
     $apoyos->idPeriodicidad = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
     $apoyos->apoyoEconomico = $objPHPExcel->getActiveSheet()->getCell('K'.$numRow)->getCalculatedValue();
+    $apoyos->idProgramaSocial = $objPHPExcel->getActiveSheet()->getCell('L'.$numRow)->getCalculatedValue();
     if (!$apoyos->curp == null) {
       $this->model->ImportarApoyo($apoyos);
     }
