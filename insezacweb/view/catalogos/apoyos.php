@@ -118,7 +118,7 @@
 								<div class="col-md-12">
 									<table class="table table-striped">
 										<tbody>
-											<?php foreach($this->model->Listar('caracteristicaApoyo') as $r): ?>
+											<?php foreach($this->model->Listar('caracteristicasApoyo') as $r): ?>
 												<tr>
 													<td><?php echo $r->idCaracteristicaApoyo; ?></td>
 													<td><?php echo $r->caracteristicaApoyo; ?></td>

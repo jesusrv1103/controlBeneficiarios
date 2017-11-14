@@ -1,14 +1,3 @@
-<?php
-
-/*
-$json = file_get_contents('php: model/asentamientos/listar');
-$data=json_decode($json);
-$municipio = $data->municipio;
-
-echo $codigo; 
-*/
-
-?>
 <style type="text/css">
 .lblinfo{
   color:#2196F3;

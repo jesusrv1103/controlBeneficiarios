@@ -15,6 +15,7 @@ class Apoyos
 	public $fechaUltimoApoyo; //Date
 	public $idPeriodicidad;  //int
 	public $apoyoEconomico;
+	public $idProgramaSocial;
 
 	public function __CONSTRUCT()
 	{
@@ -83,14 +84,14 @@ class Apoyos
 	{
 		try 
 		{
-			$sql = "UPDATE apoyos SET idApoyo = ?,
+			$sql = "UPDATE apoyos SET null,
 			curp = ?, idOrigen = ?, idPrograma = ?, idSubprograma = ?, idTipoApoyo = ?, idCaracteristica = ?, importeApoyo = ?, numerosApoyo = ?, fechaUltimoApoyo = ?, idPeriodicidad = ?, apoyoEconomico = ?
 			WHERE idApoyo = ?";
 
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
-					$data->idApoyo,
+					null,
 					$data->curp,
 					$data->idOrigen, 
 					$data->idPrograma, 
@@ -120,7 +121,7 @@ class Apoyos
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
-					$data->idApoyo,
+					null,
 					$data->curp,
 					$data->idOrigen, 
 					$data->idPrograma, 
@@ -132,6 +133,44 @@ class Apoyos
 					$data->fechaUltimoApoyo, 
 					$data->idPeriodicidad, 
 					$data->apoyoEconomico
+					)
+				);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function Limpiar($nomTabla)
+	{
+		try 
+		{
+			
+			$stm = $this->pdo->prepare("DELETE FROM $nomTabla");			          
+			$stm->execute();
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ImportarApoyo(Apoyos $data){
+		try 
+		{
+			$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+			$resultado=$sql->execute(
+				array(
+					null,
+					$data->curp,
+					$data->idOrigen, 
+					$data->idPrograma, 
+					$data->idSubprograma, 
+					$data->idTipoApoyo, 
+					$data->idCaracteristica, 
+					$data->importeApoyo, 
+					$data->numeroApoyo, 
+					$data->fechaUltimoApoyo, 
+					$data->idPeriodicidad, 
+					$data->apoyoEconomico,
+					$data->idProgramaSocial
 					)
 				);
 		} catch (Exception $e) 

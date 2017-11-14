@@ -69,8 +69,8 @@ class BeneficiarioController{
 
   //Datos de registro
   $beneficiario->usuario=$_SESSION['usuario'];
-  $beneficiario->fecha=date("Y-m-d");
-  $beneficiario->hora=date("H:i:s");
+  $beneficiario->fechaAlta=date("Y-m-d H:i:s");
+
   $beneficiario->direccion=$_SESSION['direccion'];
   $beneficiario->estado="Activo";
 
@@ -177,15 +177,24 @@ public function Leearchivo($objPHPExcel,$numRows){
      $ben->idDiscapacidad = $objPHPExcel->getActiveSheet()->getCell('AE'.$numRow)->getCalculatedValue();        
      $ben->idGrupoVulnerable = $objPHPExcel->getActiveSheet()->getCell('AF'.$numRow)->getCalculatedValue();
      $ben->beneficiarioColectivo = $objPHPExcel->getActiveSheet()->getCell('AG'.$numRow)->getCalculatedValue();
+     $ben->email = $objPHPExcel->getActiveSheet()->getCell('AH'.$numRow)->getCalculatedValue();
+     $ben->fechaNacimiento = $objPHPExcel->getActiveSheet()->getCell('AI'.$numRow)->getCalculatedValue();
+     $ben->genero = $objPHPExcel->getActiveSheet()->getCell('AJ'.$numRow)->getCalculatedValue();
+     $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();        
+     $ben->telefono = $objPHPExcel->getActiveSheet()->getCell('AL'.$numRow)->getCalculatedValue();
+     $ben->idmunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
+
        //Datos de registro
      $ben->usuario=$_SESSION['usuario'];
-     $ben->fecha=date("Y-m-d");
-     $ben->hora=date("H:i:s");
+     
+     $ben->fechaAlta=date("Y-m-d H:i:s");
+
+     
      $ben->direccion=$_SESSION['direccion'];
      $ben->estado="Activo";
 
      if (!$ben->curp == null) {
-      $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
+      //$ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
       $this->model->ImportarBeneficiario($ben);
     }
     $numRow+=1;

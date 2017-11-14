@@ -8,12 +8,12 @@ class Beneficiario
 	public $primerApellido;
 	public $segundoApellido;
 	public $nombres;
+	public $email;
 	public $idIdentificacion;
 	public $fechaNacimiento;
 	public $genero;
 	public $idmunicipio;
 	public $perfilSociodemografico;
-	public $email;
 	public $telefono;
 	public $idTipoVialidad;
 	public $nombreVialidad;
@@ -44,7 +44,7 @@ class Beneficiario
 	public $idGrupoVulnerable;
 	public $beneficiarioColectivo;
 	public $usuario;
-	public $fecha;
+	public $fechaAlta;
 	public $hora;
 	public $estado;
 	public $direccion;
@@ -426,14 +426,14 @@ class Beneficiario
 		try 
 		{
 			$sql =$this->pdo->prepare("INSERT INTO beneficiarios 
-				(curp,primerApellido,segundoApellido,nombres,idIdentificacion,
-				idNivelEstudios,idSeguridadSocial,idDiscapacidad,beneficiarioColectivo,idTipoVialidad,
-				nombreVialidad,noExterior,noInterior,idAsentamientos,idLocalidad,
-				entreVialidades,descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,jefeFamilia,idOcupacion,
-				idIngresoMensual,integrantesFamilia,dependientesEconomicos,idGrupoVulnerable,idVivienda,
-				noHabitantes,viviendaElectricidad,viviendaAgua,viviendaDrenaje,viviendaGas,
-				viviendaTelefono,viviendaInternet,idRegistro) values 
+				(curp,primerApellido,segundoApellido,nombres,email,idIdentificacion,idTipoVialidad,nombreVialidad,noExterior,
+				noInterior,idAsentamientos,idLocalidad,entreVialidades,descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,
+				jefeFamilia,idOcupacion,idIngresoMensual,integrantesFamilia,dependientesEconomicos,idVivienda,noHabitantes,
+				viviendaElectricidad,viviendaAgua,viviendaDrenaje,viviendaGas,viviendaTelefono,viviendaInternet,
+				idNivelEstudios,idSeguridadSocial,idDiscapacidad,idGrupoVulnerable,beneficiarioColectivo,fechaNacimiento,
+				genero,perfilSociodemografico,telefono,idmunicipio) values 
 				(?,?,?,?,?,
+				?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
@@ -446,12 +446,12 @@ class Beneficiario
 					$data->primerApellido,
 					$data->segundoApellido,
 					$data->nombres,
+					$data->email,
 					$data->idIdentificacion,
 					$data->idNivelEstudios,
 					$data->idSeguridadSocial,
 					$data->idDiscapacidad,
 					$data->beneficiarioColectivo,//9
-					//vialidad
 					$data->idTipoVialidad, 
 					$data->nombreVialidad,
 					$data->noExterior,
@@ -460,7 +460,6 @@ class Beneficiario
 					$data->idLocalidad,
 					$data->entreVialidades,
 					$data->descripcionUbicacion,//8
-					//estudio
 					$data->estudioSocioeconomico,
 					$data->idEstadoCivil,
 					$data->jefeFamilia,
@@ -469,7 +468,6 @@ class Beneficiario
 					$data->integrantesFamilia,
 					$data->dependientesEconomicos,
 					$data->idGrupoVulnerable,//8
-					//vivienda
 					$data->idVivienda,
 					$data->noHabitantes,				
 					$data->viviendaElectricidad,
@@ -478,7 +476,11 @@ class Beneficiario
 					$data->viviendaGas,
 					$data->viviendaTelefono,
 					$data->viviendaInternet,//8
-					$data->idRegistro
+					$data->fechaNacimiento,
+					$data->genero,
+					$data->perfilSociodemografico,
+					$data->telefono,
+					$data->idmunicipio
 				)
 			);
 		} catch (Exception $e) 
@@ -545,7 +547,7 @@ class Beneficiario
 					null,
 					$data->usuario,
 					$data->direccion,
-					$data->fecha,
+					$data->fechaAlta,
 					$data->estado
 				)
 			);
@@ -579,7 +581,7 @@ class Beneficiario
 					null,
 					$data->usuario,
 					$data->direccion,
-					$data->fecha,
+					$data->fechaAlta,
 					$data->idRegistro
 				)
 			);
