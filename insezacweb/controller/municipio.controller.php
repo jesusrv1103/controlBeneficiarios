@@ -18,24 +18,6 @@ class MunicipioController{
    require_once 'view/index.php';
  } 
 
- public function Upload(){
-  $archivo = $_FILES['file']['name'];
-  $tipo = $_FILES['file']['type'];
-  $destino = "./assets/files/municipios.xlsx";
-  if(copy($_FILES['file']['tmp_name'], $destino)){
-    //echo "Archivo Cargado Con Éxito" . "<br><br>";
-    $this->Importar();
-    //mandar llamar todas las funciones a importar
-  }
-  else{
-    $mensaje="Error al cargar el archivo";
-    $page="view/municipio/index.php";
-    $municipios = true;
-    $catalogos=true;
-    require_once 'view/index.php';
-  }
-}
-
 public function Crud(){
  $municipio = new Municipio();
 
@@ -50,8 +32,6 @@ $page="view/municipio/municipio.php";
 require_once 'view/index.php';
 }
 
-
-
 public function Importar(){
   if (file_exists("./assets/files/municipios.xlsx")) {
           //Agregamos la librería 
@@ -64,9 +44,9 @@ public function Importar(){
     $objPHPExcel->setActiveSheetIndex(0);
         //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-    $this->municipios($objPHPExcel,$numRows);
+    $this->Municipios($objPHPExcel,$numRows);
     $mensaje="Se ha leído correctamente el archivo <strong>municipios.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de municipios.";
-    $page="view/asentamiento/index.php";
+    $page="view/municipio/index.php";
     $municipios = true;
     $catalogos=true;
     require_once 'view/index.php';
@@ -75,31 +55,32 @@ public function Importar(){
   else {
     $error=true;
     $mensaje="El archivo <strong>municipios.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
-    $page="view/municipio/index.php";
+    $page="view/municipio/municipio.php";
     $municipios = true;
     $catalogos=true;
     require_once 'view/index.php';
   }
 }
 
-public function municipios($objPHPExcel,$numRows){
+public function Municipios($objPHPExcel,$numRows){
   try{
     $this->model->Limpiar("municipio");
     $numRow=2;
     do {
             //echo "Entra";
-      $cat = new Municipio();
-      $cat->idMunicipio= $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
-      $cat->nombreMunicipio = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
-      if (!$cat->idMunicipio== null) {
-        $this->model->Importarmunicipios($cat);
+      $muni = new Municipio();
+      $muni->idMunicipio= $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
+      $muni->nombreMunicipio = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
+      if (!$muni->idMunicipio == null) {
+        $this->model->ImportarMunicipio($muni);
       }
       $numRow+=1;
-    } while (!$cat->idMunicipio== null);
+    } while (!$muni->idMunicipio == null);
 
   }catch (Exception $e) {
-    $mensaje="error";
-    $page="view/municipio/index.php";
+    $error=true;
+    $mensaje="Error al importar los datos de Municipios";
+    $page="view/municipio/municipio.php";
     $municipios = true;
     $catalogos=true;
     require_once 'view/index.php';
