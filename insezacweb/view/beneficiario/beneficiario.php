@@ -43,6 +43,8 @@
 								<h5><strong>Datos Generales</strong></h5>
 								<input type="hidden" name="idBeneficiario"  value="<?php echo $beneficiario->idBeneficiario != null ? $beneficiario->idBeneficiario : 0;  ?>"/>
 
+								<input type="hidden" name="fechaNacimiento" id="fechaNacimiento"  value="<?php echo $beneficiario->fechaNacimiento != null ? $beneficiario->fechaNacimiento : 0;  ?>"/>
+
 								<div class="form-group">
 									<label class="col-sm-3 control-label">CURP<strog class="theme_color">*</strog></label>
 									<div class="col-sm-6">
@@ -624,19 +626,23 @@
 		</script>
 
 
-		<script >
-//var miCurp = "RAVJ931103HZSMRS03";
+<script >
+
 
 function curp2date() {
 	var miCurp =document.getElementById('curp').value;
-	alert(miCurp);
 	var m = miCurp.match( /^\w{4}(\w{2})(\w{2})(\w{2})/ );
+
 	//miFecha = new Date(año,mes,dia) 
 	var anyo = parseInt(m[1],10)+1900;
 	if( anyo < 1950 ) anyo += 100;
 	var mes = parseInt(m[2], 10)-1;
 	var dia = parseInt(m[3], 10);
-	var  fech = Date( anyo, mes, dia );
+
+
+	var fech = new Date( anyo, mes, dia );
+	document.getElementById("fechaNacimiento").value = fech;
+}
 
 Date.prototype.toString = function() {
 	var anyo = this.getFullYear();
@@ -644,11 +650,11 @@ Date.prototype.toString = function() {
 	if( mes<=9 ) mes = "0"+mes;
 	var dia = this.getDate();
 	if( dia<=9 ) dia = "0"+dia;
-	var cu = anyo+"-"+mes+"-"+dia;
-	alert(cu);
+	return anyo+"-"+mes+"-"+dia;
 }
 
-}
+
+
 
 </script>
 
