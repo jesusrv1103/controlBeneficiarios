@@ -28,7 +28,7 @@ class Municipio
 			//$result = array();
 		    // SELECT p.idMunicipio, p.Municipio, sum(techoPresupuestal) as suma   FROM Municipio p , subMunicipio s where p.idMunicipio =  s.idMunicipio group by p.idMunicipio
 
-			$stm = $this->pdo->prepare("SELECT * from municipio");
+			$stm = $this->pdo->prepare("SELECT * from municipio WHERE estado ='Activo'");
 			
 			$stm->execute();
 
@@ -83,15 +83,24 @@ public function ImportarMunicipio(Municipio $data){
 		}
 	}
 	// select * from Municipio WHERE Municipio like '%TRA%';
-	
-	public function Eliminar($id)
+
+
+	public function Eliminar(Municipio $data)
 	{
 		try 
 		{
-			$stm = $this->pdo
-			->prepare("DELETE FROM municipio WHERE idMunicipio = ?");			          
+			$sql = "UPDATE municipio SET 
+			estado = ?
+			WHERE idMunicipio = ?";
 
-			$stm->execute(array($id));
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					$data->estado,
+					$data->idMunicipio
+					
+				)
+			);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());

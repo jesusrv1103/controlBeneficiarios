@@ -12,7 +12,7 @@ class Beneficiario
 	public $idIdentificacion;
 	public $fechaNacimiento;
 	public $genero;
-	public $idmunicipio;
+	public $idMunicipio;
 	public $perfilSociodemografico;
 	public $telefono;
 	public $idTipoVialidad;
@@ -269,7 +269,7 @@ class Beneficiario
 						$data->perfilSociodemografico,
 						$data->email,
 						$data->telefono,
-						$data->idmunicipio
+						$data->idMunicipio
 					)
 			);
 		} catch (Exception $e) 
@@ -431,7 +431,7 @@ class Beneficiario
 				jefeFamilia,idOcupacion,idIngresoMensual,integrantesFamilia,dependientesEconomicos,idVivienda,noHabitantes,
 				viviendaElectricidad,viviendaAgua,viviendaDrenaje,viviendaGas,viviendaTelefono,viviendaInternet,
 				idNivelEstudios,idSeguridadSocial,idDiscapacidad,idGrupoVulnerable,beneficiarioColectivo,fechaNacimiento,
-				genero,perfilSociodemografico,telefono,idmunicipio) values 
+				genero,perfilSociodemografico,telefono,idMunicipio) values 
 				(?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
