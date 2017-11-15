@@ -251,12 +251,12 @@ class Catalogos
 	public function ImportarCaracteristicasApoyo(Catalogos $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO caracteristicaApoyo VALUES(?,?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO caracteristicasApoyo VALUES(?,?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->idCaracteristicasApoyo,
 					$data->caracteristicasApoyo,
-					$data->tipoApoyo
+					$data->idTipoApoyo
 					)
 				);
 		} catch (Exception $e) 
@@ -308,5 +308,20 @@ class Catalogos
 			die($e->getMessage());
 		}
 	}
-	
+	public function ListarCaracteristicasApoyo()
+	{
+		try
+		{
+			//$result = array();
+
+			$stm = $this->pdo->prepare("SELECT * FROM caracteristicasApoyo, tipoApoyo WHERE tipoApoyo.idTipoApoyo=caracteristicasApoyo.idTipoApoyo;");
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
 }

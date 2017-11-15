@@ -20,7 +20,7 @@ class ApoyosController{
   if(isset($_REQUEST['nuevoRegistro'])){
     $nuevoRegistro=true;
   }
-  $apoyo = new Apoyo();
+  $apoyo = new Apoyos();
   if(isset($_REQUEST['idApoyo'])){
     $apoyo = $this->model->Obtener($_REQUEST['idApoyo']);
   }
@@ -104,6 +104,7 @@ public function Apoyos($objPHPExcel,$numRows){
     $apoyos->idOrigen = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
     $apoyos->idPrograma = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
     $apoyos->idSubprograma = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
+    //$apoyos->idSubprograma=null;
     $apoyos->idTipoApoyo = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
     $apoyos->idCaracteristica = $objPHPExcel->getActiveSheet()->getCell('F'.$numRow)->getCalculatedValue();
     $apoyos->importeApoyo = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
@@ -111,7 +112,7 @@ public function Apoyos($objPHPExcel,$numRows){
     $apoyos->fechaUltimoApoyo = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
     $apoyos->idPeriodicidad = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
     $apoyos->apoyoEconomico = $objPHPExcel->getActiveSheet()->getCell('K'.$numRow)->getCalculatedValue();
-    $apoyos->idProgramaSocial = $objPHPExcel->getActiveSheet()->getCell('L'.$numRow)->getCalculatedValue();
+    $apoyos->idProgramaSocial = null;
     if (!$apoyos->curp == null) {
       $this->model->ImportarApoyo($apoyos);
     }
