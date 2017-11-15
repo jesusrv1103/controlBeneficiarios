@@ -30,7 +30,7 @@
               <div class="btn-group pull-right">
                 <b> 
                   <div class="btn-group" style="margin-right: 10px;"> 
-                    <a class="btn btn-sm btn-success tooltips" href="?c=Apoyo&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo Apoyo"> <i class="fa fa-plus"></i> Registrar </a>
+                    <a class="btn btn-sm btn-success tooltips" href="?c=Apoyos&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo Apoyo"> <i class="fa fa-plus"></i> Registrar </a>
                     
                     <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar catálogo para registrar Apoyos" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
 
@@ -86,17 +86,17 @@
                   <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
 
                   <td class="center">
-                    <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Apoyo&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de Apoyo"><i class="fa fa-eye"></i></a>
+                    <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Apoyos&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de Apoyo"><i class="fa fa-eye"></i></a>
                   </td>
 
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <td class="center">
-                    <a class="btn btn-primary btn-sm" role="button" href="?c=Apoyo&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-primary btn-sm" role="button" href="?c=Apoyos&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
                   </td>
 
                   <td class="center">
 
-                   <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+                   <a class="btn btn-danger btn-sm" onclick="eliminarApoyo(<?php echo $r->idRegistro;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                  </td>
                  <?php } ?>
 
@@ -134,7 +134,7 @@
             </div>
             <div class="porlets-content" style="margin-bottom: -65px;">
               <p>Importa tu archivo excel con los datos de los Apoyos para registrarlos.</p>
-              <p><strong>Nota: </strong>El archivo debe conener el nombre de <strong class="theme_color">Apoyos.xmls</strong> para poder ser leído correctamente.</p> 
+              <p><strong>Nota: </strong>El archivo debe conener el nombre de <strong class="theme_color">apoyos.xmls</strong> para poder ser leído correctamente.</p> 
               <br>
               <span class="btn btn-success fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
@@ -157,7 +157,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Apoyo&a=Importar" class="btn btn-primary">Importar datos</a>
+          <a href="?c=Apoyos&a=Importar" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
     </div><!--/modal-content--> 
@@ -187,7 +187,7 @@
       </div>
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-          <form action="?c=Apoyo&a=Eliminar" enctype="multipart/form-data" method="post">
+          <form action="?c=Apoyos&a=Eliminar" enctype="multipart/form-data" method="post">
             <input hidden type="text" name="idRegistro" id="txtIdRegistro">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -198,13 +198,13 @@
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
 <script>
-  eliminarBeneficiario = function(idRegistro){
+  eliminarApoyo = function(idRegistro){
 
     $('#txtIdRegistro').val(idRegistro);  
   };
   infoRegistro = function (idBeneficiario){
     var idBeneficiario=idBeneficiario;
-    $.post("index.php?c=Apoyo&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
+    $.post("index.php?c=Apoyos&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
       $("#div-modal-content").html(info);
     }); 
   }

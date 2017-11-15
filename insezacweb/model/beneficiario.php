@@ -2,7 +2,13 @@
 require_once 'model/database.php';
 class Beneficiario
 {
+	public $usuario;
+	public $fechaAlta;
+	public $hora;
+	public $estado;
+	public $direccion;
 	public $pdo;
+
 	public $idBeneficiario;
 	public $curp;
 	public $primerApellido;
@@ -10,13 +16,10 @@ class Beneficiario
 	public $nombres;
 	public $email;
 	public $idIdentificacion;
-	public $fechaNacimiento;
-	public $genero;
-	public $idmunicipio;
-	public $perfilSociodemografico;
-	public $telefono;
+
+
 	public $idTipoVialidad;
-	public $nombreVialidad;
+	public $nombreVialidad;	
 	public $noExterior;
 	public $noInterior;
 	public $idAsentamientos;
@@ -43,13 +46,15 @@ class Beneficiario
 	public $idDiscapacidad;
 	public $idGrupoVulnerable;
 	public $beneficiarioColectivo;
-	public $usuario;
-	public $fechaAlta;
-	public $hora;
-	public $estado;
-	public $direccion;
 	public $idRegistro;
+	public $fechaNacimiento;
+	public $genero;
+	public $idMunicipio;
+	public $perfilSociodemografico;
+	public $telefono;
 
+
+	
 	public function __CONSTRUCT()
 	{
 		try
@@ -113,7 +118,7 @@ class Beneficiario
 				gV.grupoVulnerable,
 				b.idGrupoVulnerable,
 				b.beneficiarioColectivo,
-				b.idmunicipio,
+				b.idMunicipio,
 				m.nombreMunicipio,
 				b.telefono,
 				b.email,
@@ -142,7 +147,7 @@ class Beneficiario
 				b.idGrupoVulnerable =gV.idGrupoVulnerable AND 
 				b.idAsentamientos = a.idAsentamientos AND 
 				b.idLocalidad = l.idLocalidad AND
-				b.idmunicipio = m.idmunicipio AND
+				b.idMunicipio = m.idMunicipio AND
 				b.idBeneficiario = ?");
 
 			$stm->execute(array($id));
@@ -214,7 +219,7 @@ class Beneficiario
 			idOcupacion,idIngresoMensual,integrantesFamilia,dependientesEconomicos,idGrupoVulnerable,
 			idVivienda,noHabitantes,viviendaElectricidad,viviendaAgua,viviendaDrenaje,
 			viviendaGas,viviendaTelefono,viviendaInternet,idRegistro,fechaNacimiento,
-			genero,perfilSociodemografico,email,telefono,idmunicipio) values 
+			genero,perfilSociodemografico,email,telefono,idMunicipio) values 
 		  (?,?,?,?,?,
 		   ?,?,?,?,?,
 		   ?,?,?,?,?,
@@ -269,7 +274,7 @@ class Beneficiario
 						$data->perfilSociodemografico,
 						$data->email,
 						$data->telefono,
-						$data->idmunicipio
+						$data->idMunicipio
 					)
 			);
 		} catch (Exception $e) 
@@ -363,7 +368,7 @@ class Beneficiario
 			perfilSociodemografico = ?,
 			email = ?,
 			telefono = ?,
-			idmunicipio = ?
+			idMunicipio = ?
 			WHERE idBeneficiario = ?";
 
 			$this->pdo->prepare($sql)
@@ -410,7 +415,7 @@ class Beneficiario
 					$data->perfilSociodemografico,
 					$data->email,
 					$data->telefono,
-					$data->idmunicipio,
+					$data->idMunicipio,
 					$data->idBeneficiario
 
 				)
@@ -426,12 +431,18 @@ class Beneficiario
 		try 
 		{
 			$sql =$this->pdo->prepare("INSERT INTO beneficiarios 
-				(curp,primerApellido,segundoApellido,nombres,email,idIdentificacion,idTipoVialidad,nombreVialidad,noExterior,
-				noInterior,idAsentamientos,idLocalidad,entreVialidades,descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,
-				jefeFamilia,idOcupacion,idIngresoMensual,integrantesFamilia,dependientesEconomicos,idVivienda,noHabitantes,
+				(curp,primerApellido,segundoApellido,nombres,email,idIdentificacion,idTipoVialidad,
+				nombreVialidad,noExterior,noInterior,idAsentamientos,idLocalidad,entreVialidades,
+				descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,jefeFamilia,idOcupacion,
+				idIngresoMensual, integrantesFamilia, dependientesEconomicos,idVivienda,noHabitantes,
 				viviendaElectricidad,viviendaAgua,viviendaDrenaje,viviendaGas,viviendaTelefono,viviendaInternet,
+<<<<<<< HEAD
 				idNivelEstudios,idSeguridadSocial,idDiscapacidad,idGrupoVulnerable,beneficiarioColectivo,fechaNacimiento,
-				genero,perfilSociodemografico,telefono,idmunicipio) values 
+				genero,perfilSociodemografico,telefono,idMunicipio) values 
+=======
+				idNivelEstudios,idSeguridadSocial,idDiscapacidad,idGrupoVulnerable,beneficiarioColectivo,
+				idRegistro,fechaNacimiento,genero,perfilSociodemografico,telefono,idMunicipio) values 
+>>>>>>> d3fab7b67882d84af68c0f17a0c681ed060efc15
 				(?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
@@ -439,7 +450,7 @@ class Beneficiario
 				?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
-				?,?,?,?)");
+				?,?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->curp,
@@ -448,10 +459,6 @@ class Beneficiario
 					$data->nombres,
 					$data->email,
 					$data->idIdentificacion,
-					$data->idNivelEstudios,
-					$data->idSeguridadSocial,
-					$data->idDiscapacidad,
-					$data->beneficiarioColectivo,//9
 					$data->idTipoVialidad, 
 					$data->nombreVialidad,
 					$data->noExterior,
@@ -467,7 +474,7 @@ class Beneficiario
 					$data->idIngresoMensual,
 					$data->integrantesFamilia,
 					$data->dependientesEconomicos,
-					$data->idGrupoVulnerable,//8
+					
 					$data->idVivienda,
 					$data->noHabitantes,				
 					$data->viviendaElectricidad,
@@ -476,11 +483,17 @@ class Beneficiario
 					$data->viviendaGas,
 					$data->viviendaTelefono,
 					$data->viviendaInternet,//8
+					$data->idNivelEstudios,
+					$data->idSeguridadSocial,
+					$data->idDiscapacidad,
+					$data->idGrupoVulnerable,//8
+					$data->beneficiarioColectivo,//9
+					$data->idRegistro,
 					$data->fechaNacimiento,
 					$data->genero,
 					$data->perfilSociodemografico,
 					$data->telefono,
-					$data->idmunicipio
+					$data->idMunicipio
 				)
 			);
 		} catch (Exception $e) 
@@ -676,5 +689,5 @@ class Beneficiario
 | genero                 | tinyint(1)   | YES  |     | NULL    |                |
 | perfilSociodemografico | tinyint(3)   | YES  |     | NULL    |                |
 | telefono               | char(11)     | YES  |     | NULL    |                |
-| idmunicipio            | tinyint(3)   | NO   | MUL | NULL    |                |
+| idMunicipio            | tinyint(3)   | NO   | MUL | NULL    |                |
 */

@@ -90,13 +90,13 @@ public function Municipios($objPHPExcel,$numRows){
 public function Eliminar(){
 
   $municipio= new Municipio();
-  $municipio->idDireccion = $_REQUEST['idMunicipio'];
+  $municipio->idMunicipio = $_REQUEST['idMunicipio'];
   $municipio->estado='Inactivo';
   $this->model->Eliminar($municipio);
   $catalogos=true;
   $municipios=true;
   $mensaje="Eliminacion exitosa";
-  $page="view/direccion/index.php";
+  $page="view/municipio/index.php";
   require_once 'view/index.php';
   
 }

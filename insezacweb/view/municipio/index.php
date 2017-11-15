@@ -161,7 +161,7 @@
               <h3 class="content-header theme_color">&nbsp;Eliminar Direccion</h3>
             </div>
             <div class="porlets-content" style="margin-bottom: -50px;">
-              <h4>¿Esta segúro que desea eliminar la  Direccion?</h4>
+              <h4>¿Esta segúro que desea eliminar el Municipio</h4>
             </div><!--/porlets-content--> 
           </div><!--/block-web--> 
         </div>

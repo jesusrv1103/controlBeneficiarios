@@ -377,7 +377,7 @@ public function ImportarApoyos(){
     $this->model->Check(1);
     $mensaje="Se ha leído correctamente el archivo <strong>catalogo_apoyos.xlsx</strong>.<br><i class='fa fa-check'></i> Se han registrado correctamente los identificadores del catálogo.";
     $page="view/catalogos/apoyos.php";
-    $beneficiarios2 = true;
+    $apoyos2 = true;
     $catalogos=true;
     require_once 'view/index.php';
   }
@@ -386,8 +386,8 @@ public function ImportarApoyos(){
     $error=true;
     $mensaje="El archivo <strong>catalogo_apoyos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
     $page="view/catalogos/apoyos.php";
-    $beneficiarios2 = true;
     $catalogos=true;
+    $apoyos2 = true;
     require_once 'view/index.php';
   }
 }
@@ -414,7 +414,7 @@ public function Origen($objPHPExcel,$numRows){
  $error=true;
  $mensaje="Error al importar los datos de Origen.";
  $page="view/catalogos/apoyos.php";
- $beneficiarios2 = true;
+ $apoyos2 = true;
  $catalogos=true;
  require_once 'view/index.php';
 }
@@ -441,7 +441,7 @@ public function TipoApoyo($objPHPExcel,$numRows){
  $error=true;
  $mensaje="Error al importar los datos de Origen.";
  $page="view/catalogos/apoyos.php";
- $beneficiarios2 = true;
+ $apoyos2 = true;
  $catalogos=true;
  require_once 'view/index.php';
 }
@@ -468,14 +468,14 @@ public function Periodicidad($objPHPExcel,$numRows){
  $error=true;
  $mensaje="Error al importar los datos de Periodicidad.";
  $page="view/catalogos/apoyos.php";
- $beneficiarios2 = true;
+ $apoyos2 = true;
  $catalogos=true;
  require_once 'view/index.php';
 }
 }
 public function CaracteristicasApoyo($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("caracteristicaApoyo");
+  $this->model->Limpiar("caracteristicasApoyo");
   $numRow=3;
 
   do {
@@ -483,7 +483,7 @@ public function CaracteristicasApoyo($objPHPExcel,$numRows){
     $cat = new Catalogos();
     $cat->idCaracteristicasApoyo = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
     $cat->caracteristicasApoyo = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
-     $cat->tipoApoyo = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
+     $cat->idTipoApoyo = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
     if (!$cat->idCaracteristicasApoyo == null) {
 
       $this->model->ImportarCaracteristicasApoyo($cat);
@@ -496,7 +496,7 @@ public function CaracteristicasApoyo($objPHPExcel,$numRows){
  $error=true;
  $mensaje="Error al importar los datos de Caracteristicas de Apoyos.";
  $page="view/catalogos/apoyos.php";
- $beneficiarios2 = true;
+ $apoyos2 = true;
  $catalogos=true;
  require_once 'view/index.php';
 }
