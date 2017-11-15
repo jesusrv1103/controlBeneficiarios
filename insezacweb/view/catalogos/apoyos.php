@@ -25,7 +25,7 @@
 									<?php if($_SESSION['tipoUsuario']==1){?>
 									<div class="btn-group"> 
 										<a class="btn btn-sm btn-warning tooltips" href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal" data-original-title="Importar catálogo
-										 para el registro de identficadores" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
+										para el registro de identficadores" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
 
 										<a class="btn btn-sm btn-primary tooltips" href="assets/files/catalogo_beneficiarios.xlsx" download="catalogo_apoyos.xlsx" data-original-title="Descargar catálogo_apoyos.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
 									</div>
@@ -118,11 +118,17 @@
 								<div class="col-md-12">
 									<table class="table table-striped">
 										<tbody>
-											<?php foreach($this->model->Listar('caracteristicasApoyo') as $r): ?>
+											<tr>
+												<th>Id de caracterisica</th>
+												<th>Caracteristica</th>
+												<th>Tipo de apoyo</th>
+											</tr>
+											<?php foreach($this->model->ListarCaracteristicasApoyo() as $r): ?>
+
 												<tr>
-													<td><?php echo $r->idCaracteristicaApoyo; ?></td>
-													<td><?php echo $r->caracteristicaApoyo; ?></td>
-													<td><?php echo $r->idTipoApoyo; ?></td>
+													<td><?php echo $r->idCaracteristicasApoyo; ?></td>
+													<td><?php echo $r->caracteristicasApoyo; ?></td>
+													<td><?php echo $r->tipoApoyo; ?></td>
 												</tr>
 											<?php endforeach; ?>
 										</tbody>

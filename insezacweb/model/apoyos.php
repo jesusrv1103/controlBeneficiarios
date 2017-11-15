@@ -36,7 +36,7 @@ class Apoyos
 		{
 
 
-			$stm = $this->pdo->prepare("SELECT * from apoyos");
+			$stm = $this->pdo->prepare("SELECT * from apoyos,beneficiarios WHERE idApoyo");
 
 			$stm->execute();
 
@@ -155,7 +155,7 @@ class Apoyos
 	public function ImportarApoyo(Apoyos $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
 					null,

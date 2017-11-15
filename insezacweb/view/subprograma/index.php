@@ -70,7 +70,6 @@
             <table  class="display table table-bordered table-striped" id="dynamic-table">
               <thead>
                 <tr>
-                  <th>Id subprograma</th>
                   <th>Subprograma</th>
                   <th>Programa</th>
                   <?php if($_SESSION['tipoUsuario']==1){?>
@@ -83,7 +82,6 @@
                <?php foreach($this->model->Listar() as $r): ?>
 
                 <tr class="gradeA">
-                  <td> <?php echo $r->idSubprograma; ?></td>
                   <td><?php echo $r->subprograma; ?></td>
                   <td> <?php echo $r->programa; ?></td>
                   <?php if($_SESSION['tipoUsuario']==1){?>
@@ -99,7 +97,6 @@
           </tbody>
           <tfoot>
            <tr>
-            <th>Id subprograma</th>
             <th>Subprograma</th>
             <th>Programa</th>
             <?php if($_SESSION['tipoUsuario']==1){?>

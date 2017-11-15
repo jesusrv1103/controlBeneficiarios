@@ -21,7 +21,7 @@ class Login
 	{
 		try 
 		{
-			$sql= $this->pdo->prepare("SELECT * FROM usuarios WHERE BINARY usuario=?");
+			$sql= $this->pdo->prepare("SELECT * FROM usuarios,direccion WHERE BINARY usuario=? AND usuarios.idDireccion = direccion.idDireccion");
 			$resultado=$sql->execute(
 				array(
                     $data->usuario,

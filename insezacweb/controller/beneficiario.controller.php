@@ -34,11 +34,11 @@ class BeneficiarioController{
   $beneficiario->idDiscapacidad = $_REQUEST['idDiscapacidad'];
   $beneficiario->beneficiarioColectivo=$_REQUEST['beneficiarioColectivo'];
   $beneficiario->fechaNacimiento="2013-11-03";
-  $beneficiario->genero=1;
-  $beneficiario->idmunicipio=1;
+  $beneficiario->genero=null;
+  $beneficiario->idMunicipio=null;
   $beneficiario->email='jesus21c@hotmail.com';
   $beneficiario->telefono='4991058738';
-  $beneficiario->perfilSociodemografico=111;
+  $beneficiario->perfilSociodemografico=null;
   //vialidad
   $beneficiario->idTipoVialidad = $_REQUEST['idTipoVialidad'];
   $beneficiario->nombreVialidad = $_REQUEST['nombreVialidad'];
@@ -182,7 +182,8 @@ public function Leearchivo($objPHPExcel,$numRows){
      $ben->genero = $objPHPExcel->getActiveSheet()->getCell('AJ'.$numRow)->getCalculatedValue();
      $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();        
      $ben->telefono = $objPHPExcel->getActiveSheet()->getCell('AL'.$numRow)->getCalculatedValue();
-     $ben->idmunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
+     //$ben->idMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
+     $ben->idMunicipio=null;
 
        //Datos de registro
      $ben->usuario=$_SESSION['usuario'];
@@ -194,7 +195,7 @@ public function Leearchivo($objPHPExcel,$numRows){
      $ben->estado="Activo";
 
      if (!$ben->curp == null) {
-      //$ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
+      $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
       $this->model->ImportarBeneficiario($ben);
     }
     $numRow+=1;
@@ -421,6 +422,6 @@ public function Eliminar(){
 | genero                 | tinyint(1)   | YES  |     | NULL    |                |
 | perfilSociodemografico | tinyint(3)   | YES  |     | NULL    |                |
 | telefono               | char(11)     | YES  |     | NULL    |                |
-| idmunicipio            | tinyint(3)   | NO   | MUL | NULL    |                |
+| idMunicipio            | tinyint(3)   | NO   | MUL | NULL    |                |
 */
 
