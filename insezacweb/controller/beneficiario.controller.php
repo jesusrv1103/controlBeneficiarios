@@ -35,14 +35,14 @@ class BeneficiarioController{
   $beneficiario->beneficiarioColectivo=$_REQUEST['beneficiarioColectivo'];
   $beneficiario->fechaNacimiento="2013-11-03";
 
- 
+
   if(substr($_REQUEST['curp'], 10,1) == "H")
   {
     $beneficiario->genero=1;
   }
   else{
    $beneficiario->genero=0;
-  }
+ }
   //echo $genero;
  $beneficiario->idMunicipio=$_REQUEST['idMunicipio'];
  $beneficiario->email=$_REQUEST['email'];
@@ -192,18 +192,22 @@ public function Leearchivo($objPHPExcel,$numRows){
      $ben->genero = $objPHPExcel->getActiveSheet()->getCell('AJ'.$numRow)->getCalculatedValue();
      $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();        
      $ben->telefono = $objPHPExcel->getActiveSheet()->getCell('AL'.$numRow)->getCalculatedValue();
-     //$ben->idMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
-     $ben->idMunicipio=null;
+     $claveMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
+    // echo $claveMunicipio;
+    $consult=$this->model->ObtenerIdMunicipio($claveMunicipio);
+     //$ben->idMunicipio=315;
 
+
+     // $idRegistro=$this->model->ObtenerIdRegistro($beneficiario->idBeneficiario);
+
+    // echo  $this->model->ObtenerIdMunicipio($claveMunicipio);
+     $ben->idMunicipio=$municipio->idMunicipio;
+    // echo  $ben->$idMunicipio;
        //Datos de registro
      $ben->usuario=$_SESSION['usuario'];
-     
      $ben->fechaAlta=date("Y-m-d H:i:s");
-
-     
      $ben->direccion=$_SESSION['direccion'];
      $ben->estado="Activo";
-
      if (!$ben->curp == null) {
       $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
       $this->model->ImportarBeneficiario($ben);
