@@ -42,11 +42,13 @@ class Municipio
 public function ImportarMunicipio(Municipio $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO municipio VALUES(?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO municipio VALUES(?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
-					$data->idMunicipio,
-					$data->nombreMunicipio
+					NULL,
+					$data->nombreMunicipio,
+					$data->claveMunicipio,
+					$data->estado
 					)
 				);
 

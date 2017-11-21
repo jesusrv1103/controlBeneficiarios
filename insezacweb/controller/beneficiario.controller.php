@@ -33,16 +33,16 @@ class BeneficiarioController{
   $beneficiario->idSeguridadSocial = $_REQUEST['idSeguridadSocial'];
   $beneficiario->idDiscapacidad = $_REQUEST['idDiscapacidad'];
   $beneficiario->beneficiarioColectivo=$_REQUEST['beneficiarioColectivo'];
-  $beneficiario->fechaNacimiento="2013-11-03";
+  $beneficiario->fechaNacimiento=$_REQUEST['fechaNacimiento'];
 
- 
+
   if(substr($_REQUEST['curp'], 10,1) == "H")
   {
     $beneficiario->genero=1;
   }
   else{
    $beneficiario->genero=0;
-  }
+ }
   //echo $genero;
  $beneficiario->idMunicipio=$_REQUEST['idMunicipio'];
  $beneficiario->email=$_REQUEST['email'];
@@ -192,18 +192,22 @@ public function Leearchivo($objPHPExcel,$numRows){
      $ben->genero = $objPHPExcel->getActiveSheet()->getCell('AJ'.$numRow)->getCalculatedValue();
      $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();        
      $ben->telefono = $objPHPExcel->getActiveSheet()->getCell('AL'.$numRow)->getCalculatedValue();
-     //$ben->idMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
-     $ben->idMunicipio=null;
+     $claveMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
+    // echo $claveMunicipio;
+    $consult=$this->model->ObtenerIdMunicipio($claveMunicipio);
+     //$ben->idMunicipio=315;
 
+
+     // $idRegistro=$this->model->ObtenerIdRegistro($beneficiario->idBeneficiario);
+
+    // echo  $this->model->ObtenerIdMunicipio($claveMunicipio);
+     $ben->idMunicipio=$municipio->idMunicipio;
+    // echo  $ben->$idMunicipio;
        //Datos de registro
      $ben->usuario=$_SESSION['usuario'];
-     
      $ben->fechaAlta=date("Y-m-d H:i:s");
-
-     
      $ben->direccion=$_SESSION['direccion'];
      $ben->estado="Activo";
-
      if (!$ben->curp == null) {
       $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
       $this->model->ImportarBeneficiario($ben);
@@ -361,52 +365,4 @@ public function Eliminar(){
 }
 }
 
-
-/*
-
-+------------------------+--------------+------+-----+---------+----------------+
-| Field                  | Type         | Null | Key | Default | Extra          |
-+------------------------+--------------+------+-----+---------+----------------+
-| idBeneficiario         | int(11)      | NO   | PRI | NULL    | auto_increment |
-| curp                   | varchar(18)  | YES  |     | NULL    |                |
-| primerApellido         | varchar(20)  | YES  |     | NULL    |                |
-| segundoApellido        | varchar(25)  | YES  |     | NULL    |                |
-| nombres                | varchar(25)  | YES  |     | NULL    |                |
-| email                  | varchar(128) | YES  |     | NULL    |                |
-| idIdentificacion       | int(11)      | YES  | MUL | NULL    |                |
-| idTipoVialidad         | int(11)      | YES  | MUL | NULL    |                |
-| nombreVialidad         | varchar(65)  | YES  |     | NULL    |                |
-| noExterior             | varchar(8)   | YES  |     | NULL    |                |
-| noInterior             | varchar(8)   | YES  |     | NULL    |                |
-| idAsentamientos        | varchar(45)  | YES  | MUL | NULL    |                |
-| idLocalidad            | varchar(10)  | YES  | MUL | NULL    |                |
-| entreVialidades        | varchar(100) | YES  |     | NULL    |                |
-| descripcionUbicacion   | text         | YES  |     | NULL    |                |
-| estudioSocioeconomico  | tinyint(1)   | YES  |     | NULL    |                |
-| idEstadoCivil          | int(11)      | YES  | MUL | NULL    |                |
-| jefeFamilia            | varchar(2)   | YES  |     | NULL    |                |
-| idOcupacion            | int(11)      | YES  | MUL | NULL    |                |
-| idIngresoMensual       | int(11)      | YES  | MUL | NULL    |                |
-| integrantesFamilia     | varchar(2)   | YES  |     | NULL    |                |
-| dependientesEconomicos | varchar(2)   | YES  |     | NULL    |                |
-| idVivienda             | int(11)      | YES  | MUL | NULL    |                |
-| noHabitantes           | varchar(2)   | YES  |     | NULL    |                |
-| viviendaElectricidad   | tinyint(1)   | YES  |     | NULL    |                |
-| viviendaAgua           | tinyint(1)   | YES  |     | NULL    |                |
-| viviendaDrenaje        | tinyint(1)   | YES  |     | NULL    |                |
-| viviendaGas            | tinyint(1)   | YES  |     | NULL    |                |
-| viviendaTelefono       | tinyint(1)   | YES  |     | NULL    |                |
-| viviendaInternet       | tinyint(1)   | YES  |     | NULL    |                |
-| idNivelEstudios        | int(11)      | YES  | MUL | NULL    |                |
-| idSeguridadSocial      | int(11)      | YES  | MUL | NULL    |                |
-| idDiscapacidad         | int(11)      | YES  | MUL | NULL    |                |
-| idGrupoVulnerable      | int(11)      | YES  | MUL | NULL    |                |
-| beneficiarioColectivo  | tinyint(1)   | YES  |     | NULL    |                |
-| idRegistro             | int(11)      | YES  | MUL | NULL    |                |
-| fechaNacimiento        | date         | YES  |     | NULL    |                |
-| genero                 | tinyint(1)   | YES  |     | NULL    |                |
-| perfilSociodemografico | tinyint(3)   | YES  |     | NULL    |                |
-| telefono               | char(11)     | YES  |     | NULL    |                |
-| idMunicipio            | tinyint(3)   | NO   | MUL | NULL    |                |
-*/
 

@@ -49,10 +49,10 @@ class Beneficiario
 	public $idRegistro;
 	public $fechaNacimiento;
 	public $genero;
-	public $idMunicipio;
+	public $claveMunicipio;
 	public $perfilSociodemografico;
 	public $telefono;
-
+	public $idMunicipio;
 
 	
 	public function __CONSTRUCT()
@@ -432,12 +432,8 @@ class Beneficiario
 				descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,jefeFamilia,idOcupacion,
 				idIngresoMensual, integrantesFamilia, dependientesEconomicos,idVivienda,noHabitantes,
 				viviendaElectricidad,viviendaAgua,viviendaDrenaje,viviendaGas,viviendaTelefono,viviendaInternet,
-
-			
-		
 				idNivelEstudios,idSeguridadSocial,idDiscapacidad,idGrupoVulnerable,beneficiarioColectivo,
 				idRegistro,fechaNacimiento,genero,perfilSociodemografico,telefono,idMunicipio) values 
-
 				(?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
@@ -578,7 +574,18 @@ class Beneficiario
 			die($e->getMessage());
 		}
 	}
-
+public function ObtenerIdMunicipio($claveMunicipio)
+	{
+		try 
+		{
+			$sql= $this->pdo->prepare("SELECT idMunicipio from municipio where claveMunicipio=$claveMunicipio");
+			$resultado=$sql->execute();
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
 	public function RegistraActualizacion(Beneficiario $data){
 		try 
 		{

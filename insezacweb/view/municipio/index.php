@@ -26,8 +26,8 @@
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <div class="btn-group" style="margin-right: 10px;"> 
                       <a class="btn btn-sm btn-success tooltips" href="?c=Municipio&a=Crud&nuevoRegistro=true" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nuevo Municipio"> <i class="fa fa-plus"></i> Registrar </a>
-                    <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar programas" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
-                    <a href="assets/files/programas.xlsx" download="programas.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar archivo programa.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
+                    <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar Municipios" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
+                    <a href="assets/files/municipios.xlsx" download="municipios.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar archivo municipios.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
                   </div>
                   <?php } ?>
                 </b>
@@ -110,11 +110,11 @@
         <div class="row">
           <div class="block-web">
             <div class="header">
-              <h3 class="content-header theme_color">&nbsp;Importar programas</h3>
+              <h3 class="content-header theme_color">&nbsp;Importar Municipios</h3>
             </div>
             <div class="porlets-content" style="margin-bottom: -65px;">
-              <p>Importa tu archivo excel con los datos de los programas en caso de que haya algun cambio, si no tienes el archivo puedes descargarlo y agregar o eliminar los datos necesarios.</p>
-              <p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">programas.xlsx</strong> para poder ser leído correctamente.</p>  
+              <p>Importa tu archivo excel con los datos de los municipios en caso de que haya algun cambio, si no tienes el archivo puedes descargarlo y agregar o eliminar los datos necesarios.</p>
+              <p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">municipios.xlsx</strong> para poder ser leído correctamente.</p>  
               <br>
               <span class="btn btn-success fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
@@ -137,7 +137,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Programa&a=Importar" class="btn btn-primary">Importar datos</a>
+          <a href="?c=Municipio&a=Importar" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
     </div><!--/modal-content--> 
