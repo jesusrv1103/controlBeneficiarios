@@ -163,7 +163,7 @@
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
 <div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="width: 50%;">
+  <div class="modal-dialog" style="width: 60%;">
     <div class="modal-content" id="div-modal-content">
       <!--************************En esta sección se incluye el modal de informacion de registro y apoyo***************************-->
   </div><!--/modal-content--> 

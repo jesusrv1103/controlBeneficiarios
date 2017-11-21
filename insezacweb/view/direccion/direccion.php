@@ -37,14 +37,14 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Nombre <strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-              <input name="direccion" type="text" onkeypress=" return soloLetras(event);" onchange="mayus(this);"  class="form-control" required value="<?php echo $direccion->direccion != null ? $direccion->direccion : "";  ?>" placeholder="Ingrese nombre de la dirección"/>
+              <input name="direccion" type="text" onkeypress=" return soloLetras(event);" onkeyup="mayus(this);"  class="form-control" required value="<?php echo $direccion->direccion != null ? $direccion->direccion : "";  ?>" placeholder="Ingrese nombre de la dirección"/>
               </div>
             </div><!--/form-group-->
 
             <div class="form-group">
               <label class="col-sm-3 control-label">Descripción <strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-                <input name="descripcion" type="text" onkeypress=" return soloLetras(event);" onchange="mayus(this);" class="form-control" required value="<?php echo $direccion->descripcion != null ? $direccion->descripcion : "";  ?>" placeholder="Ingrese descripción de la dirección"/>
+                <input name="descripcion" type="text" onkeypress=" return soloLetras(event);" onkeyup="mayus(this);" class="form-control" required value="<?php echo $direccion->descripcion != null ? $direccion->descripcion : "";  ?>" placeholder="Ingrese descripción de la dirección"/>
               </div>
             </div><!--/form-group-->
 

@@ -1,12 +1,12 @@
  <style type="text/css">
-   .lbldetalle{
-    color:#424242;
-    font-weight: bold;
-  }
-  .h3subtitulo{
-    color:#2196F3;
-    font-weight: bold;
-  }
+ .lbldetalle{
+  color:#424242;
+  font-weight: bold;
+}
+.h3subtitulo{
+  color:#2196F3;
+  font-weight: bold;
+}
 </style>
 
 <div class="pull-left breadcrumb_admin clear_both">
@@ -47,79 +47,95 @@
                     <tbody>
                       <tr>
                         <td>
-                          <div class="col-md-12">
-                           <label class="col-sm-6 lbldetalle">CURP:</label>
-                           <label class="col-sm-6 control-label"><?php echo $ben->curp; ?></label>
+                          <div class="col-md-12">   
+                            <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Información de beneficiario</b></label>
+                         </div>
+                       </td>
+                     </tr>
+                     <tr>
+                       <td>
+                         <table class="table table-striped">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <div class="col-md-12">
+                                 <label class="col-sm-6 lbldetalle">CURP:</label>
+                                 <label class="col-sm-6 control-label"><?php echo $ben->curp; ?></label>
+                               </div>
+                             </td>
+                           </tr>
+                           <tr>
+                            <td>
+                             <div class="col-md-12">
+                               <label class="col-sm-6 lbldetalle">Primer apellido:</label>
+                               <label class="col-sm-6 control-label"><?php echo $ben->primerApellido; ?></label>
+                             </div>
+                           </td>
+                         </tr>
+                         <tr>
+                          <td>
+                           <div class="col-md-12">
+                             <label class="col-sm-6 lbldetalle">Segundo apellido:</label>
+                             <label class="col-sm-6 control-label"><?php echo $ben->segundoApellido; ?></label>
+                           </div>
+                         </td>
+                       </tr>
+                       <tr>
+                        <td>
+                         <div class="col-md-12">
+                           <label class="col-sm-6 lbldetalle">Nombre:</label>
+                           <label class="col-sm-6 control-label"><?php echo $ben->nombres; ?></label>
                          </div>
                        </td>
                      </tr>
                      <tr>
                       <td>
                        <div class="col-md-12">
-                         <label class="col-sm-6 lbldetalle">Primer apellido:</label>
-                         <label class="col-sm-6 control-label"><?php echo $ben->primerApellido; ?></label>
+                         <label class="col-sm-6 lbldetalle">Identificación oficial:</label>
+                         <label class="col-sm-6 control-label"><?php echo $ben->nomTipoI; ?></label>
                        </div>
                      </td>
                    </tr>
                    <tr>
                     <td>
                      <div class="col-md-12">
-                       <label class="col-sm-6 lbldetalle">Segundo apellido:</label>
-                       <label class="col-sm-6 control-label"><?php echo $ben->segundoApellido; ?></label>
+                       <label class="col-sm-6 lbldetalle">Nivel de estudio:</label>
+                       <label class="col-sm-6 control-label"><?php echo $ben->nivelEstudios; ?></label>
                      </div>
                    </td>
                  </tr>
                  <tr>
                   <td>
                    <div class="col-md-12">
-                     <label class="col-sm-6 lbldetalle">Nombre:</label>
-                     <label class="col-sm-6 control-label"><?php echo $ben->nombres; ?></label>
+                     <label class="col-sm-6 lbldetalle">Seguridad social:</label>
+                     <label class="col-sm-6 control-label"><?php echo $ben->seguridadSocial; ?></label>
                    </div>
                  </td>
                </tr>
                <tr>
                 <td>
                  <div class="col-md-12">
-                   <label class="col-sm-6 lbldetalle">Identificación oficial:</label>
-                   <label class="col-sm-6 control-label"><?php echo $ben->nomTipoI; ?></label>
+                   <label class="col-sm-6 lbldetalle">Discapacidad:</label>
+                   <label class="col-sm-6 control-label"><?php echo $ben->discapacidad; ?></label>
                  </div>
                </td>
              </tr>
              <tr>
               <td>
-               <div class="col-md-12">
-                 <label class="col-sm-6 lbldetalle">Nivel de estudio:</label>
-                 <label class="col-sm-6 control-label"><?php echo $ben->nivelEstudios; ?></label>
-               </div>
-             </td>
-           </tr>
-           <tr>
-            <td>
-             <div class="col-md-12">
-               <label class="col-sm-6 lbldetalle">Seguridad social:</label>
-               <label class="col-sm-6 control-label"><?php echo $ben->seguridadSocial; ?></label>
-             </div>
-           </td>
-         </tr>
-         <tr>
-          <td>
-           <div class="col-md-12">
-             <label class="col-sm-6 lbldetalle">Discapacidad:</label>
-             <label class="col-sm-6 control-label"><?php echo $ben->discapacidad; ?></label>
-           </div>
-         </td>
-       </tr>
-       <tr>
-        <td>
-          <div class="col-md-12">
-           <label class="col-sm-6 lbldetalle">Beneficiario Colectivo:</label>
-           <label class="col-sm-6 control-label"><?php if($ben->beneficiarioColectivo=1 ){
-            echo "Si";} else {echo"No";}?></label>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+                <div class="col-md-12">
+                 <label class="col-sm-6 lbldetalle">Beneficiario Colectivo:</label>
+                 <label class="col-sm-6 control-label"><?php if($ben->beneficiarioColectivo=1 ){
+                  echo "Si";} else {echo"No";}?></label>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 </div>
 </div>
 </div><!--/porlets-content-->

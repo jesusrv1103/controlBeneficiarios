@@ -118,8 +118,6 @@ class Beneficiario
 				gV.grupoVulnerable,
 				b.idGrupoVulnerable,
 				b.beneficiarioColectivo,
-				b.idMunicipio,
-				m.nombreMunicipio,
 				b.telefono,
 				b.email,
 				b.fechaNacimiento,
@@ -133,7 +131,6 @@ class Beneficiario
 				grupoVulnerable gV, 
 				asentamientos a, 
 				localidades l, 
-				municipio m,
 				ingresoMensual iM, beneficiarios  b
 				where  b.idIdentificacion = idOf.idIdentificacion AND   
 				b.idTipoVialidad = tV.idTipoVialidad AND 	
@@ -147,7 +144,6 @@ class Beneficiario
 				b.idGrupoVulnerable =gV.idGrupoVulnerable AND 
 				b.idAsentamientos = a.idAsentamientos AND 
 				b.idLocalidad = l.idLocalidad AND
-				b.idMunicipio = m.idMunicipio AND
 				b.idBeneficiario = ?");
 
 			$stm->execute(array($id));
@@ -436,13 +432,12 @@ class Beneficiario
 				descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,jefeFamilia,idOcupacion,
 				idIngresoMensual, integrantesFamilia, dependientesEconomicos,idVivienda,noHabitantes,
 				viviendaElectricidad,viviendaAgua,viviendaDrenaje,viviendaGas,viviendaTelefono,viviendaInternet,
-<<<<<<< HEAD
-				idNivelEstudios,idSeguridadSocial,idDiscapacidad,idGrupoVulnerable,beneficiarioColectivo,fechaNacimiento,
-				genero,perfilSociodemografico,telefono,idMunicipio) values 
-=======
+
+			
+		
 				idNivelEstudios,idSeguridadSocial,idDiscapacidad,idGrupoVulnerable,beneficiarioColectivo,
 				idRegistro,fechaNacimiento,genero,perfilSociodemografico,telefono,idMunicipio) values 
->>>>>>> d3fab7b67882d84af68c0f17a0c681ed060efc15
+
 				(?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
