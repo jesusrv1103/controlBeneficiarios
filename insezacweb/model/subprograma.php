@@ -7,6 +7,8 @@ class Subprograma
 	public $subprograma;
 	public $idPrograma;
 	public $programa;
+	public $techoPresupuestal;
+
 	public function __CONSTRUCT()
 	{
 		try
@@ -21,13 +23,14 @@ class Subprograma
 	public function ImportarSubprograma(Subprograma $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO subprograma VALUES(?,?,?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO subprograma VALUES(?,?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->idSubprograma,
 					$data->subprograma,
 					$data->idPrograma,
-					$data->programa
+					$data->programa,
+					null
 				)
 			);
 		} catch (Exception $e) 
@@ -99,17 +102,14 @@ class Subprograma
 	{
 		try 
 		{
-			$sql = "UPDATE subprograma SET 
-			idSubprograma = ?,subprograma = ?,programa = ?, 
-			WHERE idPrograma = ?";
+			$sql = "UPDATE subprograma SET techoPresupuestal=? 
+			WHERE idSubPrograma = ?";
 
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
-					$data->idSubprograma,
-					$data->subprograma,
-					$data->programa,
-					$data->idPrograma
+					$data->techoPresupuestal,
+					$data->idSubprograma
 				)
 			);
 		} catch (Exception $e) 
@@ -123,7 +123,7 @@ class Subprograma
 		try 
 		{
 			$sql = "INSERT INTO subprograma
-			VALUES (?,?,?,?)";
+			VALUES (?,?,?,?,?)";
 
 			$this->pdo->prepare($sql)
 			->execute(
@@ -131,7 +131,9 @@ class Subprograma
 					null,
 					$data->subprograma,
 					$data->programa,
-					$data->idPrograma
+					$data->idPrograma,
+					$data->techoPresupuestal,
+					$data->idSubprograma
 				)
 			);
 		} catch (Exception $e) 

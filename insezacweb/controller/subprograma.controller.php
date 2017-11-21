@@ -8,7 +8,7 @@ class SubprogramaController{
     $this->model = new Subprograma();
   }
   public function Index(){
-   $catalogos = true;
+   $administracion = true;
    $inicio = false;
    $subprogramas=true;
    $page="view/subprograma/index.php";
@@ -19,7 +19,7 @@ class SubprogramaController{
    if(isset($_REQUEST['idSubprograma'])){
     $subprograma = $this->model->Obtener($_REQUEST['idSubprograma']);
   }
-  $catalogos=true;
+  $administracion=true;
   $subprogramas=true;
   $page= "view/subprograma/subprograma.php";
   require_once 'view/index.php';
@@ -28,23 +28,32 @@ public function Guardar(){
   $subprograma= new Subprograma();
   $subprograma->idSubprograma = $_REQUEST['idSubprograma'];
   $subprograma->subprograma = $_REQUEST['subprograma'];
-  //$subprograma->programa = $_REQUEST['programa'];
+  $subprograma->techoPresupuestal = $_REQUEST['techoPresupuestal'];
   $subprograma->idPrograma = $_REQUEST['idPrograma'];
   $programa=$this->model->ConsultaPrograma($subprograma->idPrograma);
   $subprograma->programa=$programa->programa;
-  $subprograma->idSubprograma > 0 
-  ? $this->model->Actualizar($subprograma)
-  : $this->model->Registrar($subprograma);
+  if($subprograma->idSubprograma > 0){
+    $this->model->Actualizar($subprograma);
+    $mensaje="Se ha actualizado correctamente el techo presupuestal de <strong>$subprograma->subprograma</strong>";
+  } 
+  else{
+    $this->model->Registrar($subprograma);
+    $mensaje="Se ha registrado correctamente subprograma";
+  }
+    $tabla=true;
     $administracion=true; //variable cargada para activar la opcion administracion en el menu
     $subprogramas=true; //variable cargada para activar la opcion programas en el menu
     $page="view/subprograma/index.php";
     require_once 'view/index.php';
   } 
   public function Eliminar(){
-    $administracion=true; //variable cargada para activar la opcion administracion en el menu
-    $programas=true; //variable cargada para activar la opcion programas en el menu
-    $this->model->Eliminar($_REQUEST['idSubprograma']);
-    header ('Location: index.php?c=Subprograma&a=Index');
+     $this->model->Eliminar($_REQUEST['idSubprograma']);
+     $administracion = true;
+     $subprograma = true;
+     $tabla=true;
+     $page="view/subprograma/index.php";
+     $mensaje="Se ha eliminado correctamente el subprograma";
+     require_once 'view/index.php';
   }
   public function Importar(){
     if (file_exists("./assets/files/subprogramas.xlsx")) {
@@ -64,7 +73,7 @@ public function Guardar(){
   //  $this->model->Check(1);
       $mensaje="Se ha leído correctamente el archivo <strong>subprogramas.xlsx</strong>.<br><i class='fa fa-check'></i> Se han registrado correctamente los subprogramas.";
       $page="view/subprograma/index.php";
-      $catalogos=true;
+      $administracion=true;
       require_once 'view/index.php';
     }
           //si por algo no cargo el archivo bak_ 
@@ -72,7 +81,7 @@ public function Guardar(){
       $error=true;
       $mensaje="El archivo <strong>subprogramas.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
       $page="view/subprograma/index.php";
-      $catalogos=true;
+      $administracion=true;
       require_once 'view/index.php';
     }
   }
@@ -98,7 +107,7 @@ public function Guardar(){
    $error=true;
    $mensaje="Error al importar los datos de Subprogramas.";
    $page="view/subprograma/index.php";
-   $catalogos=true;
+   $administracion=true;
    require_once 'view/index.php';
  }
 }
@@ -123,19 +132,13 @@ public function Consultas(){
         foreach ($subprogramas as $sp) :
           if($sp->programa==$p->programa){
               echo '
-           <div class="col-md-6">
-             <a href="#" class="open_ticket_comment">
-               <div class="open_ticket_thumnail">
-                 <img src="assets/images/programa1.jpg" alt="" style="max-width: 80px; max-height: 80px; margin-top: 5px; margin-left: 10px; margin-right: 20px;">
-               </div>
-               <div class="ticket_problem" style="margin-top: 10px;">'.$sp->subprograma.'</div>
-               <span>Descripción de subprograma 1</span>
-               <p><b>Periodo:</b> 29/09/2017 - 20/09/2018</p>
-               <div class="ticket_action" style="margin-top: -45px;">
-                 <div class="ticket_action_view">i</div>
-               </div>
-             </a>
-           </div>';
+              <a href="#" class="tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoSubprograma('.$sp->idSubprograma.')" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro">
+                <div class="col-md-6">
+                  <div class="row-fluid"><br>
+                    <div class="well well-large"><p style="color:#37474F">'.$sp->subprograma.'</p></div>
+                  </div>
+                </div>
+              </a>';
           }
         endforeach;
         echo '
@@ -145,16 +148,67 @@ public function Consultas(){
  </div><!--/col-md-12-->
 </div><!--/row-->
 </div><!--/container clear_both padding_fix-->';
-}
-   
+}  
    endforeach;
 }
 public function VerTabla(){
-  $catalogos=true;
+  $administracion=true;
   $subprogramas=true;
   $tabla=true;
   $page="view/subprograma/index.php";
   require_once "view/index.php";
+}
+public function infoSubprograma(){
+  $subprograma = $this->model->Obtener($_REQUEST['idSubprograma']);
+   echo '<div class="modal-body"> 
+      <div class="row">
+        <div class="block-web">
+         <div class="header">
+          <div class="row" style="margin-bottom: 12px;">
+            <div class="col-sm-12">
+              <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Detalles de subprograma</h2>
+            </div>
+          </div>
+        </div>        
+        <div class="porlets-content" style="margin-bottom: -65px;">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+               <td>
+                 <div class="col-md-12">   
+                   <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Información de subprograma</b></label>
+                 </div>
+               </td>
+             </tr>
+             <tr>
+          <td>
+            <div class="col-md-12">
+             <label class="col-sm-4 lbl-detalle"><strong>Subprograma:</strong></label>
+             <label class="col-sm-8">'.$subprograma->subprograma.'</label><br>
+           </div>
+           <div class="col-md-12">
+             <label class="col-sm-4 lbl-detalle"><strong>Programa:</strong></label>
+             <label class="col-sm-8">'.$subprograma->programa.'</label><br>
+           </div>
+           <div class="col-md-12">
+             <label class="col-sm-4 lbl-detallet"><strong>Techo presupuestal:</strong></label>
+             <label class="col-sm-8">$ '.$subprograma->techoPresupuestal.'</label><br>
+           </div>
+         </td>
+       </tr>
+    </tbody>
+  </table>
+</div><!--/porlets-content--> 
+</div><!--/block-web--> 
+</div>
+</div>
+<div class="modal-footer">
+  <div class="row col-md-6 col-md-offset-6">
+    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+    <a href="?c=Beneficiario&a=Detalles&idBeneficiario=" class="btn btn-info btn-sm">Ver beneficiarios de subprograma</a>
+  </div>
+</div>';
+
 }
 }
 ?>

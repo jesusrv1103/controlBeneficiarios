@@ -86,33 +86,40 @@
                   <td> <?php echo $r->programa; ?></td>
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <td class="center">
-                      <a href="index.php?c=Subprograma&a=Crud&idSubprograma=<?php echo $r->idSubprograma ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
-                    </td>
-                 <td class="center">
-                  <a onclick="eliminarPrograma(<?php echo $r->idPrograma;?>);" class="btn btn-danger btn-sm" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-                </td>
-                <?php } ?>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-          <tfoot>
-           <tr>
-            <th>Subprograma</th>
-            <th>Programa</th>
-            <?php if($_SESSION['tipoUsuario']==1){?>
-            <td><center><b>Editar</b></center></td>
-            <td><center><b>Borrar</b></center></td> 
-            <?php } ?>
-          </tr>
-        </tfoot>
-      </table>
-    </div><!--/table-responsive-->
-  </div><!--/porlets-content-->
-</div><!--/block-web-->
+                    <a href="index.php?c=Subprograma&a=Crud&idSubprograma=<?php echo $r->idSubprograma ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
+                  </td>
+                  <td class="center">
+                    <a onclick="eliminarSubprograma(<?php echo $r->idSubprograma;?>);" class="btn btn-danger btn-sm" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+                  </td>
+                  <?php } ?>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
+            <tfoot>
+             <tr>
+              <th>Subprograma</th>
+              <th>Programa</th>
+              <?php if($_SESSION['tipoUsuario']==1){?>
+              <td><center><b>Editar</b></center></td>
+              <td><center><b>Borrar</b></center></td> 
+              <?php } ?>
+            </tr>
+          </tfoot>
+        </table>
+      </div><!--/table-responsive-->
+    </div><!--/porlets-content-->
+  </div><!--/block-web-->
 </div><!--/col-md-12-->
 </div><!--/row-->
 </div>
 <?php } ?>
+<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width: 50%;">
+    <div class="modal-content" id="div-modal-content">
+      <!--***********************En esta sección se incluye el modal de informacion del subprograma***************************-->
+    </div><!--/modal-content--> 
+  </div><!--/modal-dialog--> 
+</div><!--/modal-fade-->
 <div class="modal fade" id="modalImportar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -148,6 +155,33 @@
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
           <a href="?c=Subprograma&a=Importar" class="btn btn-primary">Importar datos</a>
+        </div>
+      </div>
+    </div><!--/modal-content--> 
+  </div><!--/modal-dialog--> 
+</div><!--/modal-fade--> 
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content  panel default red_border horizontal_border_1">
+      <div class="modal-body"> 
+        <div class="row">
+          <div class="block-web">
+            <div class="header">
+              <h3 class="content-header theme_color">&nbsp;Eliminar subprograma</h3>
+            </div>
+            <div class="porlets-content" style="margin-bottom: -50px;">
+              <h4>¿Esta segúro que desea eliminar el subprograma?</h4>
+            </div><!--/porlets-content--> 
+          </div><!--/block-web--> 
+        </div>
+      </div>
+      <div class="modal-footer" style="margin-top: -10px;">
+        <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
+          <form action="?c=Subprograma&a=Eliminar" enctype="multipart/form-data" method="post">
+            <input  hidden name="idSubprograma" id="txtIdSubprograma">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+          </form>
         </div>
       </div>
     </div><!--/modal-content--> 
@@ -228,11 +262,20 @@
 <script type="text/javascript">
  window.onload=function(){
   consultaSubprogramas();
- }
-  function consultaSubprogramas(){
-   var busqueda=$("input#buscar").val();
-   $.post("index.php?c=Subprograma&a=Consultas", {valorBusqueda: busqueda}, function(mensaje) {
-    $("#ajax").html(mensaje);
+}
+function consultaSubprogramas(){
+ var busqueda=$("input#buscar").val();
+ $.post("index.php?c=Subprograma&a=Consultas", {valorBusqueda: busqueda}, function(mensaje) {
+  $("#ajax").html(mensaje);
+}); 
+}
+eliminarSubprograma = function(idSubprograma){
+  $('#txtIdSubprograma').val(idSubprograma);  
+};
+infoSubprograma = function (idSubprograma){
+  var idSubprograma=idSubprograma;
+  $.post("index.php?c=Subprograma&a=infoSubprograma", {idSubprograma: idSubprograma}, function(info) {
+    $("#div-modal-content").html(info);
   }); 
- }
+}
 </script>

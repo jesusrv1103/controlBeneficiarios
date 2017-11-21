@@ -39,7 +39,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Nombre de Subprograma</label>
               <div class="col-sm-6">
-                <input name="subprograma" type="text" value="<?php echo $subprograma->idSubprograma != null ? $subprograma->subprograma : ''; ?>" class="form-control" required placeholder="Ingrese el nombre del programa" />
+                <input name="subprograma" type="text" value="<?php echo $subprograma->idSubprograma != null ? $subprograma->subprograma : ''; ?>" class="form-control" autofocus required placeholder="Ingrese el nombre del programa" />
               </div>
             </div><!--/form-group--> 
             <div class="form-group">
@@ -63,34 +63,15 @@
                 </select>
               </div>
             </div><!--/form-group-->
-              <!--
-              <div class="form-group">
-                <label class="col-sm-3 control-label">Fecha inicial</label>
-                <div class="col-sm-6">
-                  <div class="input-group"> <span class="input-group-addon "><i class="fa fa-calendar"></i></span>
-                    <input name="fechaInicial" type="date" class="form-control" required placeholder="Seleccione a fecha inicial del programa" />
-                  </div>
-                </div>
-              </div><!-/form-group-->
-              <!-- 
-              <div class="form-group">
-                <label class="col-sm-3 control-label">Fecha final</label>
-                <div class="col-sm-6">
-                  <div class="input-group"> <span class="input-group-addon "><i class="fa fa-calendar"></i></span>
-                    <input name="fechaFinal" type="date" class="form-control" required placeholder="Seleccione a fecha final del programa" />
-                  </div>
-                </div>
-              </div><!-/form-group--> 
-              <!--
               <div class="form-group">
                <label class="col-sm-3 control-label">Techo presupuestal</label>
                <div class="col-sm-6">
-                <div class="input-group"> <span class="input-group-addon "><strong>$</strong></span>
-                  <input name="techoPresupuestal" type="number" class="form-control" placeholder="Ingrese el techo presupuestal del programa" pattern="[0-9]" required>
+                 <div class="input-group"> <span class="input-group-addon">$</span>
+                  <input value="<?php echo $subprograma->idSubprograma != null ? $subprograma->techoPresupuestal : ""; ?>" style="text-align:right;" onkeypress="return soloNumeros(event);" class="form-control" name="techoPresupuestal" placeholder="0" type="text" required>
                   <span class="input-group-addon "><strong>.00</strong></span>
                 </div>
               </div>
-            </div><!-/form-group--> 
+            </div><!--/form-group--> 
             <div class="form-group">
               <div class="col-sm-offset-7 col-sm-5">
                 <button type="submit" class="btn btn-primary">Guardar</button>

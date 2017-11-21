@@ -118,8 +118,6 @@ class Beneficiario
 				gV.grupoVulnerable,
 				b.idGrupoVulnerable,
 				b.beneficiarioColectivo,
-				b.idMunicipio,
-				m.nombreMunicipio,
 				b.telefono,
 				b.email,
 				b.fechaNacimiento,
@@ -133,7 +131,6 @@ class Beneficiario
 				grupoVulnerable gV, 
 				asentamientos a, 
 				localidades l, 
-				municipio m,
 				ingresoMensual iM, beneficiarios  b
 				where  b.idIdentificacion = idOf.idIdentificacion AND   
 				b.idTipoVialidad = tV.idTipoVialidad AND 	
@@ -147,7 +144,6 @@ class Beneficiario
 				b.idGrupoVulnerable =gV.idGrupoVulnerable AND 
 				b.idAsentamientos = a.idAsentamientos AND 
 				b.idLocalidad = l.idLocalidad AND
-				b.idMunicipio = m.idMunicipio AND
 				b.idBeneficiario = ?");
 
 			$stm->execute(array($id));

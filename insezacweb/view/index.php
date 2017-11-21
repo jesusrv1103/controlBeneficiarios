@@ -17,7 +17,7 @@ if (!isset($_SESSION['seguridad'])){
   <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
   <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
   <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/select2.css" rel="stylesheet">
+  <!--link href="assets/css/select2.css" rel="stylesheet"-->
   <link href="assets/plugins/bootstrap-editable/bootstrap-editable.css" rel="stylesheet">
   <link href="assets/plugins/dropzone/dropzone.css" rel="stylesheet">
   <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
@@ -31,9 +31,9 @@ if (!isset($_SESSION['seguridad'])){
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datepicker/css/datepicker.css" />
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-timepicker/compiled/timepicker.css" />
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css" />
-  <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.css">
 
-<!--Estilos Para radio buton y switch -->
+  <!--Estilos Para radio buton y switch -->
   <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
   <link href="assets/plugins/checkbox/icheck.css" rel="stylesheet" type="text/css" />
   <link href="assets/plugins/checkbox/minimal/blue.css" rel="stylesheet" type="text/css" />
@@ -50,9 +50,10 @@ if (!isset($_SESSION['seguridad'])){
   pointer-events:none; /*This makes it not clickable*/
   opacity:0.6;         /*This grays it out to look disabled*/
 }
- .lblheader{
+.lblheader{
   color:#2196F3;
 }
+
 </style>
 <body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE">
   <div class="wrapper">
@@ -126,63 +127,68 @@ if (!isset($_SESSION['seguridad'])){
                  <?php if (isset($direccion)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
                </a> 
              </li><br><br>
-               <?php } ?>
-             </ul>
-           </li>
-           <?php if(isset($catalogos)){ ?>
-           <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
-            <ul class="opened" style="display:block">
-              <?php  }else{ ?>
-              <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
-                <ul>
-                  <?php }  ?>
+              <li> 
+            <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+             <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
+           </a> 
+         </li><br><br>
+             <?php } ?>
+           </ul>
+         </li>
+         <?php if(isset($catalogos)){ ?>
+         <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+          <ul class="opened" style="display:block">
+            <?php  }else{ ?>
+            <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+              <ul>
+                <?php }  ?>
+                <li> 
+                  <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                    <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>                 </a> 
+                  </li><br><br>
                   <li> 
-                    <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                      <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>                 </a> 
-                    </li><br><br>
-                    <li> 
-                      <a href="?c=Localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                       <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
-                     </a> 
-                   </li><br><br>
-                   <li> 
-                    <a href="?c=Asentamiento"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                     <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Asentamientos</b>
+                    <a href="?c=Localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                     <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
                    </a> 
                  </li><br><br>
                  <li> 
-                    <a href="?c=Municipio"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                     <?php if (isset($municipios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Municipios</b>
-                   </a> 
-                 </li><br><br>
-                 <li> 
-                  <a href="?c=Catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                   <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+                  <a href="?c=Asentamiento"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                   <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Asentamientos</b>
                  </a> 
                </li><br><br>
                <li> 
-                <a href="?c=Programa"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                  <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b> 
-                </a> 
-              </li><br><br>
-              <li> 
-                <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                 <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
+                <a href="?c=Municipio"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                 <?php if (isset($municipios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Municipios</b>
                </a> 
              </li><br><br>
-           </ul>
-         </li>
+             <li> 
+              <a href="?c=Catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+               <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+             </a> 
+           </li><br><br>
+           <li> 
+            <a href="?c=Programa"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+              <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b> 
+            </a> 
+          </li><br><br>
+          <li> 
+            <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+             <?php if (isset($programasSociales)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas sociales</b>
+           </a> 
+         </li><br><br>
        </ul>
-     </div>
-   </div>
-   <!--\\\\\\\left_nav end \\\\\\-->
-   <div class="contentpanel">
-    <!--\\\\\\\ contentpanel start\\\\\\-->
+     </li>
+   </ul>
+ </div>
+</div>
+<!--\\\\\\\left_nav end \\\\\\-->
+<div class="contentpanel">
+  <!--\\\\\\\ contentpanel start\\\\\\-->
 
-    <?php include($page); ?>      
+  <?php include($page); ?>      
 
-  </div>
-  <!--\\\\\\\ content panel end \\\\\\-->
+</div>
+<!--\\\\\\\ content panel end \\\\\\-->
 </div>
 <!--\\\\\\\ inner end\\\\\\-->
 </div>
@@ -319,6 +325,44 @@ if (!isset($_SESSION['seguridad'])){
   });
 
   
+</script>
+<script>
+  function soloNumeros(e){
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key);
+    letras = " 1,2,3,4,5,6,7,8,9,0";
+    especiales = "8-37-39-46";
+
+    tecla_especial = false
+    for(var i in especiales){
+      if(key == especiales[i]){
+        tecla_especial = true;
+        break;
+      }
+    }
+
+    if(letras.indexOf(tecla)==-1 && !tecla_especial){
+      return false;
+    }
+  }
+  function soloLetras(e){
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+    especiales = "8-37-39-46";
+
+    tecla_especial = false
+    for(var i in especiales){
+      if(key == especiales[i]){
+        tecla_especial = true;
+        break;
+      }
+    }
+
+    if(letras.indexOf(tecla)==-1 && !tecla_especial){
+      return false;
+    }
+  }
 </script>
 <script>
   //*******SELEC2********
