@@ -23,16 +23,32 @@
           <div class="row" style="margin-top: 15px; margin-bottom: 12px;">
             <div class="col-sm-7">
               <div class="actions"> </div>
-              <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Libro de beneficiarios</h2>
+              <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Libro de beneficiarios con <?php echo $tipoBen; ?></h2>
             </div>
             <div class="col-md-5">
               <div class="btn-group pull-right">
                 <b> 
                   <div class="btn-group" style="margin-right: 10px;"> 
-                    <a class="btn btn-sm btn-success tooltips" href="?c=beneficiario&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo beneficiario"> <i class="fa fa-plus"></i> Registrar </a>
-                    
-                    <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar catálogo para registrar beneficiarios" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
-
+                    <div class="btn-group">
+                     <a data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-eye"></i>&nbsp;Ver<span class="caret"></span></a>
+                     <ul role="menu" class="dropdown-menu">
+                      <li><a href="?c=Beneficiario">Beneficiarios con CURP</a></li>
+                      <li><a href="?c=Beneficiario&a=RFC">Beneficiarios con RFC</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <a data-toggle="dropdown" class="btn btn-sm btn-success dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar<span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu" >
+                      <li><a data-toggle="modal" data-target="#modalBuscarCurp" href="#modalBuscarCurp">Benenficiario CURP</a></li>
+                      <li><a href="#">Beneficiario RFC</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button data-toggle="dropdown" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a data-toggle="modal" data-target="#modalImportar" href="#modalImportar">Beneficiarios con CURP</a></li>
+                      <li><a href="#">Beneficiarios con RFC</a></li>
+                    </ul>
                   </div>
                 </b>
               </div>
@@ -60,12 +76,14 @@
         <?php } }?>
         <div class="porlets-content">
           <div class="table-responsive">
+            <?php if ($tipoBen=="CURP"){ ?>
             <table class="display table table-bordered table-striped" id="dynamic-table">
              <thead>
                <tr>
                  <td><center><b>Info</b></center></td>
                  <th>CURP</th>
                  <th>Nombre de beneficiario</th>
+                 <th>Municipio</th>
                  <td><center><b>Ver</b></center></td>
                  <?php if($_SESSION['tipoUsuario']==1){?>
                  <td><center><b>Editar</b></center></td>
@@ -74,40 +92,32 @@
                </tr>
              </thead>
              <tbody>
-
               <?php foreach($this->model->Listar1() as $r): ?>
                 <tr class="grade">
-
                   <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
-
                   <td><?php echo $r->curp ?> </td>
-
                   <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
-
+                  <td><?php echo $r->nombreMunicipio ?> </td>
                   <td class="center">
                     <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
                   </td>
-
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <td class="center">
                     <a class="btn btn-primary btn-sm" role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
                   </td>
-
                   <td class="center">
-
                    <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                  </td>
                  <?php } ?>
-
                </tr>
              <?php endforeach; ?>
-
            </tbody>
            <tfoot>
              <tr>
               <td><center><b>Info</b></center></td>
               <th>CURP</th>
               <th>Nombre de beneficiario</th>
+              <th>Municipio</th>
               <td><center><b>Ver</b></center></td>
               <?php if($_SESSION['tipoUsuario']==1){?>
               <th><center><b>Editar</b></center></th>
@@ -116,9 +126,61 @@
             </tr>
           </tfoot>
         </table>
-      </div><!--/table-responsive-->
-    </div><!--/porlets-content-->
-  </div><!--/block-web-->
+        <?php } ?>
+        <?php if ($tipoBen=="RFC"){ ?>
+        <table class="display table table-bordered table-striped" id="dynamic-table">
+         <thead>
+           <tr>
+             <td><center><b>Info</b></center></td>
+             <th>CURP</th>
+             <th>Nombre de beneficiario</th>
+             <th>Municipio</th>
+             <td><center><b>Ver</b></center></td>
+             <?php if($_SESSION['tipoUsuario']==1){?>
+             <td><center><b>Editar</b></center></td>
+             <td><center><b>Borrar</b></center></td>
+             <?php } ?>
+           </tr>
+         </thead>
+         <tbody>
+          <?php foreach($this->model->Listar1() as $r): ?>
+            <tr class="grade">
+              <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+              <td><?php echo $r->curp ?> </td>
+              <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+              <td><?php echo $r->nombreMunicipio ?> </td>
+              <td class="center">
+                <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+              </td>
+              <?php if($_SESSION['tipoUsuario']==1){?>
+              <td class="center">
+                <a class="btn btn-primary btn-sm" role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+              </td>
+              <td class="center">
+               <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+             </td>
+             <?php } ?>
+           </tr>
+         <?php endforeach; ?>
+       </tbody>
+       <tfoot>
+         <tr>
+          <td><center><b>Info</b></center></td>
+          <th>CURP</th>
+          <th>Nombre de beneficiario</th>
+          <th>Municipio</th>
+          <td><center><b>Ver</b></center></td>
+          <?php if($_SESSION['tipoUsuario']==1){?>
+          <th><center><b>Editar</b></center></th>
+          <td><center><b>Borrar</b></center></td>
+          <?php } ?>        
+        </tr>
+      </tfoot>
+    </table>
+    <?php } ?>
+  </div><!--/table-responsive-->
+</div><!--/porlets-content-->
+</div><!--/block-web-->
 </div><!--/col-md-12-->
 </div><!--/row-->
 </div>
@@ -166,8 +228,8 @@
   <div class="modal-dialog" style="width: 60%;">
     <div class="modal-content" id="div-modal-content">
       <!--************************En esta sección se incluye el modal de informacion de registro y apoyo***************************-->
-  </div><!--/modal-content--> 
-</div><!--/modal-dialog--> 
+    </div><!--/modal-content--> 
+  </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -196,6 +258,36 @@
     </div><!--/modal-content--> 
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
+<div class="modal fade" id="modalBuscarCurp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content panel default blue_border horizontal_border_1">
+     <form action="?c=Beneficiario&a=Crud" enctype="multipart/form-data" method="post">
+      <div class="modal-body"> 
+        <div class="row">
+          <div class="block-web">
+            <div class="header">
+              <h3 class="content-header h3subtitulo">&nbsp;Beneficiario por CURP</h3>
+            </div>
+            <div class="porlets-content" style="margin-bottom: -50px;">
+                <div class="form-group">
+                  <div class="col-sm-10">
+                    <input type="text" autofocus class="form-control" placeholder="Ingresa la curp del beneficiario">
+                  </div>
+                </div><!--/form-group-->
+            </div><!--/porlets-content--> 
+          </div><!--/block-web--> 
+        </div>
+      </div>
+      <div class="modal-footer" style="margin-top: -10px;">
+        <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
+          <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-sm btn-primary">Aceptar</button>
+        </div>
+      </div>
+    </form>
+  </div><!--/modal-content--> 
+</div><!--/modal-dialog--> 
+</div><!--/modal-fade--> 
 <script>
   eliminarBeneficiario = function(idRegistro){
 
@@ -208,18 +300,4 @@
     }); 
   }
 
-</script>
-
-<script type="text/javascript">
-  $(function listar(){
-
-  });
-
-  function listar(){
-
-  }
-
-  function __ajax(){
-
-  }
 </script>

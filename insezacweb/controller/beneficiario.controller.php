@@ -13,12 +13,22 @@ class BeneficiarioController{
     $this->model2 = new Catalogos();
   }
   public function Index(){
+   $tipoBen="CURP";
    $administracion = true;
    $inicio = false;
    $beneficiarios = true;
    $page="view/beneficiario/index.php";
    require_once 'view/index.php';
  }  
+
+public function RFC(){
+  $tipoBen="RFC";
+   $administracion = true;
+   $inicio = false;
+   $beneficiarios = true;
+   $page="view/beneficiario/index.php";
+   require_once 'view/index.php';
+}
 
 //Metodo Guardar  si trae un id actualiza, no registra
  public function Guardar(){
@@ -239,6 +249,7 @@ public function Eliminar(){
     $beneficiarios=true;
     $ben = new Beneficiario();
     $ben = $this->model->Listar($_REQUEST['idBeneficiario']);
+    $infoApoyo = $this->model->ObtenerInfoApoyo($_REQUEST['idBeneficiario']);
     $page="view/beneficiario/detalles.php";
     require_once 'view/index.php';
   }
@@ -254,17 +265,8 @@ public function Eliminar(){
         <div class="block-web">
          <div class="header">
           <div class="row" style="margin-bottom: 12px;">
-            <div class="col-sm-9">
-              <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Detalles de apoyo y registro</h2>
-            </div>
-            <div class="col-md-3">
-              <div class="btn-group pull-right">
-                <b> 
-                  <div class="btn-group" style="margin-right: 10px; margin-top: 5px;"> 
-                    <a class="btn btn-sm btn-primary tooltips" href="?c=beneficiario&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo beneficiario"> <i class="fa fa-print"></i></a>
-                  </div>
-                </b>
-              </div>
+            <div class="col-sm-12">
+              <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Información general de registro</h2>
             </div>    
           </div>
         </div>        
@@ -274,28 +276,28 @@ public function Eliminar(){
               <tr>
                <td>
                  <div class="col-md-12">   
-                   <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Información de apoyo a beneficiario</b></label>
+                   <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Beneficiario</b></label>
                  </div>
                </td>
              </tr>
              <tr>
               <td>
+              <div class="col-md-12">
+                 <label class="col-sm-4 lbl-detalle"><b>Curp:</b></label>
+                 <label class="col-sm-7 control-label">'.$infoRegistro->curp.'</label>
+               </div>
                 <div class="col-md-12">
                  <label class="col-sm-4 lbl-detalle"><b>Primer apellido:</b></label>
-                 <label class="col-sm-7 control-label">'.$infoRegistro->nombres." ".$infoRegistro->primerApellido." ".$infoRegistro->segundoApellido.'</label>
+                 <label class="col-sm-7 control-label">'.$infoRegistro->primerApellido.'</label>
                </div>
                <div class="col-md-12">
                  <label class="col-sm-4 lbl-detalle"><b>Segundo apellido:</b></label>
-                 <label class="col-sm-7 control-label">Valparaíso</label>
+                 <label class="col-sm-7 control-label">'.$infoRegistro->segundoApellido.'</label>
                </div>
                <div class="col-md-12">
-                 <label class="col-sm-4 lbl-detalle"><b>Dirección que lo apoya:</b></label>
-                 <label class="col-sm-7 control-label">'.$infoRegistro->direccion.'</label>
+                 <label class="col-sm-4 lbl-detalle"><b>Nombre(s):</b></label>
+                 <label class="col-sm-7 control-label">'.$infoRegistro->nombres.'</label>
                </div>
-              <div class="col-md-12">
-                <label class="col-sm-4 lbl-detalle"><b>Apoyos:</b></label>
-                <label class="col-sm-7 control-label">5</label>
-              </div>
             </td>
           </tr>
           <tr>
@@ -307,13 +309,17 @@ public function Eliminar(){
          </tr>
          <tr>
           <td>
+          <div class="col-md-12">
+             <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
+             <label class="col-sm-6">'.$infoRegistro->usuario.'</label><br>
+           </div>
+           <div class="col-md-12">
+             <label class="col-sm-4 lbl-detalle"><strong>Dirección:</strong></label>
+             <label class="col-sm-6">'.$infoRegistro->direccion.'</label><br>
+           </div>
             <div class="col-md-12">
              <label class="col-sm-4 lbl-detalle"><strong>Fecha y hora de registro:</strong></label>
              <label class="col-sm-6">'.$infoRegistro->fechaAlta.'</label><br>
-           </div>
-           <div class="col-md-12">
-             <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
-             <label class="col-sm-6">'.$infoRegistro->usuario.'</label><br>
            </div>
            <div class="col-md-12">
              <label class="col-sm-4 lbl-detallet"><strong>Estado de registro:</strong></label>
@@ -338,7 +344,6 @@ public function Eliminar(){
          <label class="col-md-12" lbl-detalle style="color:#607D8B;">'.$i.'° actualización</label>
           <label class="col-sm-5 lbl-detallet"><strong>Fecha y hora:</strong></label>
           <label class="col-sm-7">'.$r->fechaActualizacion.'</label><br>
-
           <label class="col-sm-5 lbl-detallet"><strong>Usuario:</strong></label>
           <label class="col-sm-7">'.$r->usuario.'</label><br>
         </div>
