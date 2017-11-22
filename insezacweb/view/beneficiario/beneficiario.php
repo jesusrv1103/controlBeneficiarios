@@ -76,7 +76,7 @@
 								<div class="form-group">
 									<label class="col-sm-3 control-label">Telefono<strog class="theme_color">*</strog></label>
 									<div class="col-sm-6">
-										<input type="text" value="<?php echo $beneficiario->telefono;?>" class="form-control mask" data-inputmask="'mask':'(999) 999-9999'">
+										<input type="text" required name="telefono" value="<?php echo $beneficiario->telefono;?>" class="form-control mask" data-inputmask="'mask':'(999) 999-9999'">
 									</div>
 								</div><!--/form-group-->
 
@@ -224,7 +224,7 @@
 								<div class="form-group">
 									<label class="col-sm-3 control-label">Número interior</label>
 									<div class="col-sm-6">
-										<input name="noInterior" maxlength="8"  value="<?php echo $beneficiario->noInterior;?>" class="form-control"  placeholder="Ingrese el nombre de su vialidad" type="text" />
+										<input name="noInterior" maxlength="8"  value="<?php echo $beneficiario->noInterior;?>" class="form-control"  placeholder="Ingrese numero interior de su casa en caso de tener" type="text" />
 									</div>
 								</div><!--/form-group-->
 
@@ -259,7 +259,7 @@
 									<div class="col-sm-6">
 										<select name="idAsentamientos" class="form-control select2" >
 											<?php if($beneficiario->idBeneficiario==null){ ?>   
-											<option value=""> 
+											<option value="1"> 
 												Seleccione en caso de que el beneficiario pertenezca a un asentamiento
 											</option>
 											<?php } if($beneficiario->idBeneficiario!=null){ ?>   
@@ -304,7 +304,7 @@
 								<div class="form-group">
 									<label class="col-sm-3 control-label">Entre que vialidades<strog class="theme_color">*</strog></label>
 									<div class="col-sm-6">
-										<input name="entreVialidades" onchange="mayus(this);" value="<?php echo $beneficiario->entreVialidades;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" />
+										<input name="entreVialidades" onchange="mayus(this);" value="<?php echo $beneficiario->entreVialidades;?>" type="text" class="form-control" required placeholder="Ingrese las vialidades perpendiculares a su casa" />
 									</div>
 								</div><!--/form-group-->
 
