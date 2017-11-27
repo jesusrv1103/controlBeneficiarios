@@ -6,6 +6,7 @@ class Apoyos
 	public $idApoyo;
 	public $curp;
 	public $idOrigen; //int
+	public $programa;
 	public $idSubprograma;  //int
 	public $idCaracteristica; //int
 	public $importeApoyo; //int

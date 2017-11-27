@@ -79,9 +79,9 @@
               </div>
             </div><!--/form-group-->
             <div class="form-group">
-              <label class="col-sm-3 control-label">Subprograma<strog class="theme_color">*</strog></label>
+              <label class="col-sm-3 control-label">Programa<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-                <select name="idSubprograma" class="form-control select2" required>
+                <select name="idSubprograma" class="form-control select2" id="programa" onchange="listarSubprogramas(this)" required>
                   <?php if($apoyo->idApoyo==null){ ?>   
                   <option value=""> 
                     Seleccione la subprograma a la que pertenece el beneficiario
@@ -90,15 +90,16 @@
                   <option value="<?php echo $apoyo->idSubprograma?>"> 
                     <?php echo $apoyo->subprograma; ?>
                   </option>
-                  <?php } foreach($this->model->ListarSelects('subprograma') as $r): 
-                  if($r->subprograma!=$apoyo->subprograma){ ?>
-                  ?>
-                  <option value="<?php echo $r->idSubprograma; ?>"> 
-                    <?php echo $r->subprograma; ?>
+                  <?php } foreach($this->model->ListarSelects('programa') as $r): ?>
+                  <option value="<?php echo $r->idprograma; ?>"> 
+                    <?php echo $r->programa; ?>
                   </option>
-                  <?php } endforeach; ?>
+                  <?php  endforeach; ?>
                 </select>
               </div>
+            </div><!--/form-group-->
+            <div class="form-group" id="subprogramas">
+              
             </div><!--/form-group-->
 
             <div class="form-group">
@@ -172,3 +173,10 @@
     </div><!--/col-md-12-->
   </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
+<script type="text/javascript">
+
+  listarSubprogramas = function (programa){
+    var programa2=programa;
+    alert(programa2);
+  }
+</script>
