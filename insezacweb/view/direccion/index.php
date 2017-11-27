@@ -1,12 +1,12 @@
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
     <h1>Catálogos</h1>
-    <h2 class="">Direccion</h2>
+    <h2 class="">Dirección</h2>
   </div>
   <div class="pull-right">
     <ol class="breadcrumb">
       <li><a href="?c=Inicio">Inicio</a></li>
-      <li class="active">Direccion</a></li>
+      <li class="active">Dirección</a></li>
     </ol>
   </div>
 </div>
@@ -71,18 +71,6 @@
               <tbody>
                <?php foreach($this->model->Listar() as $r): ?>
                 <tr class="gradeA">
-                  <td> <?php echo $r->direccion; ?></td>
-                  <td> <?php echo $r->descripcion; ?></td>
-                  <td> <?php echo $r->titular; ?></td>
-                  <?php if($_SESSION['tipoUsuario']==1){?>
-                  <td class="center">
-                    <a href="index.php?c=Direccion&a=Crud&idDireccion=<?php echo $r->idDireccion ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
-
-                  </td>
-                  <td class="center">
-                    <a onclick="eliminarDireccion(<?php echo $r->idDireccion;?>);" class="btn btn-danger btn-sm" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-                  </td>
-                  <?php } ?>
                 </tr>
               <?php endforeach; ?>
             </tbody>

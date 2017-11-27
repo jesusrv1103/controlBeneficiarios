@@ -127,46 +127,42 @@ if (!isset($_SESSION['seguridad'])){
                  <?php if (isset($direccion)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
                </a> 
              </li><br><br>
+             <li> 
+              <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+               <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
+             </a> 
+           </li><br><br>
+           <?php } ?>
+         </ul>
+       </li>
+       <?php if(isset($catalogos)){ ?>
+       <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+        <ul class="opened" style="display:block">
+          <?php  }else{ ?>
+          <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+            <ul>
+              <?php }  ?>
               <li> 
-            <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-             <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
-           </a> 
-         </li><br><br>
-             <?php } ?>
-           </ul>
-         </li>
-         <?php if(isset($catalogos)){ ?>
-         <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
-          <ul class="opened" style="display:block">
-            <?php  }else{ ?>
-            <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
-              <ul>
-                <?php }  ?>
+                <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                  <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>                 </a> 
+                </li><br><br>
                 <li> 
-                  <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                    <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>                 </a> 
-                  </li><br><br>
-                  <li> 
-                    <a href="?c=Localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                     <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
-                   </a> 
-                 </li><br><br>
-                 <li> 
-                  <a href="?c=Asentamiento"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                   <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Asentamientos</b>
+                  <a href="?c=Localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                   <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
                  </a> 
                </li><br><br>
                <li> 
-                <a href="?c=Municipio"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                 <?php if (isset($municipios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Municipios</b>
+                <a href="?c=Asentamiento"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                 <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Asentamientos</b>
                </a> 
              </li><br><br>
              <li> 
-              <a href="?c=Catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-               <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+              <a href="?c=Municipio"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+               <?php if (isset($municipios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Municipios</b>
              </a> 
            </li><br><br>
            <li> 
+
             <a href="?c=Programa"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
               <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b> 
             </a> 
@@ -174,12 +170,17 @@ if (!isset($_SESSION['seguridad'])){
           <li> 
             <a href="?c=ProgramaSocial"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
              <?php if (isset($programasSociales)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas sociales</b>
+
+            <a href="?c=Catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+             <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+
            </a> 
          </li><br><br>
-       </ul>
-     </li>
-   </ul>
- </div>
+        
+     </ul>
+   </li>
+ </ul>
+</div>
 </div>
 <!--\\\\\\\left_nav end \\\\\\-->
 <div class="contentpanel">
@@ -327,42 +328,56 @@ if (!isset($_SESSION['seguridad'])){
   
 </script>
 <script>
-  function soloNumeros(e){
-    key = e.keyCode || e.which;
-    tecla = String.fromCharCode(key);
-    letras = " 1,2,3,4,5,6,7,8,9,0";
-    especiales = "8-37-39-46";
 
-    tecla_especial = false
-    for(var i in especiales){
-      if(key == especiales[i]){
-        tecla_especial = true;
-        break;
-      }
-    }
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
 
-    if(letras.indexOf(tecla)==-1 && !tecla_especial){
-      return false;
+Date.prototype.toString = function() {
+  var anyo = this.getFullYear();
+  var mes = this.getMonth()+1;
+  if( mes<=9 ) mes = "0"+mes;
+  var dia = this.getDate();
+  if( dia<=9 ) dia = "0"+dia;
+  return anyo+"-"+mes+"-"+dia;
+}
+
+function soloNumeros(e){
+  key = e.keyCode || e.which;
+  tecla = String.fromCharCode(key);
+  letras = " 1,2,3,4,5,6,7,8,9,0";
+  especiales = "8-37-39-46";
+
+  tecla_especial = false
+  for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
     }
   }
-  function soloLetras(e){
-    key = e.keyCode || e.which;
-    tecla = String.fromCharCode(key).toLowerCase();
-    letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-    especiales = "8-37-39-46";
 
-    tecla_especial = false
-    for(var i in especiales){
-      if(key == especiales[i]){
-        tecla_especial = true;
-        break;
-      }
-    }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+}
+function soloLetras(e){
+  key = e.keyCode || e.which;
+  tecla = String.fromCharCode(key).toLowerCase();
+  letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+  especiales = "8-37-39-46";
 
-    if(letras.indexOf(tecla)==-1 && !tecla_especial){
-      return false;
+  tecla_especial = false
+  for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
     }
   }
+
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+}
 </script>
 <script>
   //*******SELEC2********

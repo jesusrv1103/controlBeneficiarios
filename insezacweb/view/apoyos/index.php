@@ -65,10 +65,14 @@
                <tr>
                  <td><center><b>Info</b></center></td>
                  <th>CURP</th>
-                 <th>Nombre de Apoyo</th> 
-                 <th>Subprograma</th> 
+                 <th>Fecha</th> 
+                 <th width="22%">Programa</th>
+                 <th>Subprograma</th>
+                 <!--th>Prog social</th-->
+                 <th>Tipo</th>
+                 <th>Caracteristica</th>
+                 <th>Origen</th> 
                  <th>Importe</th>
-                 <td><center><b>Ver</b></center></td>
                  <?php if($_SESSION['tipoUsuario']==1){?>
                  <td><center><b>Editar</b></center></td>
                  <td><center><b>Borrar</b></center></td>
@@ -78,14 +82,16 @@
              <tbody>
               <?php foreach($this->model->Listar() as $r): ?>
                 <tr class="grade">
-                  <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idApoyo; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+                  <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoApoyo(<?php echo $r->idApoyo; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
                   <td><?php echo $r->curp ?> </td>
-                  <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+                  <td><?php echo $r->fechaApoyo ?> </td>
+                  <td><?php echo $r->programa; ?> </td>
                   <td><?php echo $r->subprograma; ?> </td>
-                  <td align="right">$<?php echo " ".$r->importeApoyo; ?>.00</td>
-                  <td class="center">
-                    <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Apoyos&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de Apoyo"><i class="fa fa-eye"></i></a>
-                  </td>
+                  <!--td><?php echo "r->programaSocial;" ?></td-->
+                  <td><?php echo $r->tipoApoyo; ?> </td>
+                  <td><?php echo $r->caracteristicasApoyo; ?> </td>
+                  <td><?php echo $r->origen; ?> </td>
+                  <td>$<?php echo $r->importeApoyo; ?></td>
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <td class="center">
                     <a class="btn btn-primary btn-sm" role="button" href="?c=Apoyos&a=Crud&idApoyo=<?php echo $r->idApoyo ?>"><i class="fa fa-edit"></i></a>
@@ -101,10 +107,14 @@
             <tr>
              <td><center><b>Info</b></center></td>
              <th>CURP</th>
-             <th>Nombre de Apoyo</th> 
-             <th>Subprograma</th> 
+             <th>Fecha</th>
+             <th>Programa</h> 
+             <th>Subprograma</th>
+             <!--th>Prog social</th-->
+             <th>Tipo</th>
+             <th>Caracteristica</th>
+             <th>Origen</th> 
              <th>Importe</th>
-             <td><center><b>Ver</b></center></td>
              <?php if($_SESSION['tipoUsuario']==1){?>
              <td><center><b>Editar</b></center></td>
              <td><center><b>Borrar</b></center></td>
@@ -196,7 +206,7 @@
   eliminarApoyo = function(idApoyo){
     $('#txtIdApoyo').val(idApoyo);  
   };
-  infoRegistro = function (idApoyo){
+  infoApoyo = function (idApoyo){
     var idApoyo=idApoyo;
     $.post("index.php?c=Apoyos&a=InfoApoyo", {idApoyo: idApoyo}, function(info) {
       $("#div-modal-content").html(info);

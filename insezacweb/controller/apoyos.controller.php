@@ -128,6 +128,31 @@ public function Apoyos($objPHPExcel,$numRows){
  require_once 'view/index.php';
 }
 }
+public function ListarSubprogramas(){
+  $programa=$_POST['programa'];
+echo '
+<label class="col-sm-3 control-label">Subprograma<strog class="theme_color">*</strog></label>
+              <div class="col-sm-6">
+                <select name="idSubprograma" class="form-control select2" required>
+                  <?php if($apoyo->idApoyo==null){ ?>   
+                  <option value=""> 
+                    Seleccione la subprograma a la que pertenece el beneficiario
+                  </option>
+                  <?php } if($apoyo->idApoyo!=null){ ?>   
+                  <option value="<?php echo $apoyo->idSubprograma?>"> 
+                    <?php echo $apoyo->subprograma; ?>
+                  </option>
+                  <?php } foreach($this->model->ListarSubprogramas($programa) as $r): 
+                  if($r->subprograma!=$apoyo->subprograma){ ?>
+                  ?>
+                  <option value="<?php echo $r->idSubprograma; ?>"> 
+                    <?php echo $r->subprograma; ?>
+                  </option>
+                  <?php } endforeach; ?>
+                </select>
+              </div> 
+';
+}
 public function InfoApoyo(){
     $idApoyo = $_POST['idApoyo'];
     $infoApoyo=$this->model->ObtenerInfoApoyo($idApoyo);
@@ -138,18 +163,9 @@ public function InfoApoyo(){
         <div class="block-web">
          <div class="header">
           <div class="row" style="margin-bottom: 12px;">
-            <div class="col-sm-9">
-              <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Detalles de apoyo y registro</h2>
-            </div>
-            <div class="col-md-3">
-              <div class="btn-group pull-right">
-                <b> 
-                  <div class="btn-group" style="margin-right: 10px; margin-top: 5px;"> 
-                    <a class="btn btn-sm btn-primary tooltips" href="?c=beneficiario&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo beneficiario"> <i class="fa fa-print"></i></a>
-                  </div>
-                </b>
-              </div>
-            </div>    
+            <div class="col-sm-12">
+              <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Información de apoyo y registro</h2>
+            </div> 
           </div>
         </div>        
         <div class="porlets-content" style="margin-bottom: -65px;">
@@ -214,7 +230,6 @@ public function InfoApoyo(){
                 <label class="col-sm-4 lbl-detalle"><b>Programa social:</b></label>
                 <label class="col-sm-7 control-label" style="color:red"><strong>P E N D I E N T E</strong></label>
               </div>
-             
               <div class="col-md-12">
                 <label class="col-sm-4 lbl-detalle"><b>Importe:</b></label>
                 <label class="col-sm-7 control-label">$ '.$infoApoyo->importeApoyo.'.00</label>

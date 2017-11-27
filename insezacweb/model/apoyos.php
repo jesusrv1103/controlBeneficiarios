@@ -6,6 +6,7 @@ class Apoyos
 	public $idApoyo;
 	public $curp;
 	public $idOrigen; //int
+	public $programa;
 	public $idSubprograma;  //int
 	public $idCaracteristica; //int
 	public $importeApoyo; //int
@@ -37,11 +38,9 @@ class Apoyos
 	{
 		try
 		{
-
-
-			$stm = $this->pdo->prepare("SELECT * from apoyos,subprograma,beneficiarios WHERE apoyos.idSubprograma=subprograma.idSubprograma AND apoyos.idBeneficiario=beneficiarios.idBeneficiario");
-
-			$stm->execute();
+			$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiarios,origen,registroApoyo,subprograma,programa,periodicidad,tipoApoyo,caracteristicasApoyo WHERE apoyos.idBeneficiario=beneficiarios.idBeneficiario AND apoyos.idRegistroApoyo=registroApoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasApoyo.idTipoApoyo=tipoApoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasApoyo.idCaracteristicasApoyo");
+			
+			$stm->execute(array());
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		}

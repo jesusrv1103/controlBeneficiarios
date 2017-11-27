@@ -216,14 +216,14 @@ class Beneficiario
 			idVivienda,noHabitantes,viviendaElectricidad,viviendaAgua,viviendaDrenaje,
 			viviendaGas,viviendaTelefono,viviendaInternet,idRegistro,fechaNacimiento,
 			genero,perfilSociodemografico,email,telefono,idMunicipio) values 
-		  (?,?,?,?,?,
-		   ?,?,?,?,?,
-		   ?,?,?,?,?,
-		   ?,?,?,?,?,
-		   ?,?,?,?,?,
-		   ?,?,?,?,?,
-		   ?,?,?,?,?,
-		   ?,?,?,?,?)";
+			(?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?)";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
@@ -237,13 +237,13 @@ class Beneficiario
 					$data->idDiscapacidad,
 					$data->beneficiarioColectivo,//9
 					//vialidad
-						$data->idTipoVialidad, 
-						$data->nombreVialidad,
-						$data->noExterior,
-						$data->noInterior,
-						$data->idAsentamientos,
-						$data->idLocalidad,
-						$data->entreVialidades,
+					$data->idTipoVialidad, 
+					$data->nombreVialidad,
+					$data->noExterior,
+					$data->noInterior,
+					$data->idAsentamientos,
+					$data->idLocalidad,
+					$data->entreVialidades,
 						$data->descripcionUbicacion,//8
 					//estudio
 						$data->estudioSocioeconomico,
@@ -498,18 +498,9 @@ class Beneficiario
 		try
 		{
 			//$result = array();
-
-			$stm = $this->pdo->prepare("SELECT idBeneficiario,
-				b.idRegistro,
-				curp,
-				primerApellido,
-				segundoApellido,
-				nombres
-				FROM beneficiarios b
-				INNER JOIN 
-				registro r
-				ON r.idRegistro= b.idRegistro
-				where estado='Activo'");
+			$stm = $this->pdo->prepare("SELECT 				
+				*
+				FROM beneficiarios b, registro r, municipio m WHERE b.idRegistro= b.idRegistro AND b.idMunicipio=m.idMunicipio AND r.estado='Activo'");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -526,7 +517,7 @@ class Beneficiario
 		{
 			//$result = array();
 
-			$stm = $this->pdo->prepare("SELECT * FROM beneficiarios, registro WHERE registro.idRegistro=beneficiarios.idRegistro and registro.estado='Activo';");
+			$stm = $this->pdo->prepare("SELECT * FROM beneficiarios, registro, municipio WHERE registro.idRegistro=beneficiarios.idRegistro and registro.estado='Activo'");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -574,7 +565,7 @@ class Beneficiario
 			die($e->getMessage());
 		}
 	}
-public function ObtenerIdMunicipio($claveMunicipio)
+	public function ObtenerIdMunicipio($claveMunicipio)
 	{
 		try 
 		{
@@ -645,6 +636,21 @@ public function ObtenerIdMunicipio($claveMunicipio)
 		}
 	}
 
+	public function ObtenerInfoApoyo($idBeneficiario)
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiarios,origen,registroApoyo,subprograma,programa,periodicidad,tipoApoyo,caracteristicasApoyo WHERE apoyos.idBeneficiario=beneficiarios.idBeneficiario AND apoyos.idRegistroApoyo=registroApoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasApoyo.idTipoApoyo=tipoApoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasApoyo.idCaracteristicasApoyo AND beneficiarios.idBeneficiario=? ORDER BY apoyos.idApoyo;");
+			
+			$stm->execute(array($idBeneficiario));
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
 }
 
 /*
