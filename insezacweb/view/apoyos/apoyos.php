@@ -81,7 +81,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Programa<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-                <select name="idSubprograma" class="form-control select2" id="programa" onchange="listarSubprogramas(this)" required>
+                <select name="idPrograma" class="form-control select2" id="idPrograma" onchange="listarSubprogramas()" required>
                   <?php if($apoyo->idApoyo==null){ ?>   
                   <option value=""> 
                     Seleccione la subprograma a la que pertenece el beneficiario
@@ -91,85 +91,99 @@
                     <?php echo $apoyo->subprograma; ?>
                   </option>
                   <?php } foreach($this->model->ListarSelects('programa') as $r): ?>
-                  <option value="<?php echo $r->idprograma; ?>"> 
+                  <option value="<?php echo $r->idPrograma; ?>"> 
                     <?php echo $r->programa; ?>
                   </option>
-                  <?php  endforeach; ?>
-                </select>
-              </div>
-            </div><!--/form-group-->
-            <div class="form-group" id="subprogramas">
-              
-            </div><!--/form-group-->
+                <?php  endforeach; ?>
+              </select>
+            </div>
+          </div><!--/form-group-->
+          <div class="form-group" id="idSubprogramas">
 
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Caracteristica de apoyo<strog class="theme_color">*</strog></label>
-              <div class="col-sm-6">
-                <select name="idCaracteristica" class="form-control select2" required>
-                  <?php if($apoyo->idApoyo==null){ ?>   
-                  <option value=""> 
-                    Seleccione caracteristica del apoyo
-                  </option>
-                  <?php } if($apoyo->idApoyo!=null){ ?>   
-                  <option value="<?php echo $apoyo->idCaracteristicasApoyo?>"> 
-                    <?php echo $apoyo->caracteristicasApoyo; ?>
-                  </option>
-                  <?php } foreach($this->model->ListarSelects('caracteristicasApoyo') as $r): 
-                  if($r->caracteristicasApoyo!=$apoyo->caracteristicasApoyo){ ?>
-                  ?>
-                  <option value="<?php echo $r->idCaracteristicasApoyo; ?>"> 
-                    <?php echo $r->caracteristicasApoyo; ?>
-                  </option>
-                  <?php } endforeach; ?>
-                </select>
+          </div><!--/form-group-->
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Caracteristica de apoyo<strog class="theme_color">*</strog></label>
+            <div class="col-sm-6">
+              <select name="idCaracteristica" class="form-control select2" required>
+                <?php if($apoyo->idApoyo==null){ ?>   
+                <option value=""> 
+                  Seleccione caracteristica del apoyo
+                </option>
+                <?php } if($apoyo->idApoyo!=null){ ?>   
+                <option value="<?php echo $apoyo->idCaracteristicasApoyo?>"> 
+                  <?php echo $apoyo->caracteristicasApoyo; ?>
+                </option>
+                <?php } foreach($this->model->ListarSelects('caracteristicasApoyo') as $r): 
+                if($r->caracteristicasApoyo!=$apoyo->caracteristicasApoyo){ ?>
+                ?>
+                <option value="<?php echo $r->idCaracteristicasApoyo; ?>"> 
+                  <?php echo $r->caracteristicasApoyo; ?>
+                </option>
+                <?php } endforeach; ?>
+              </select>
+            </div>
+          </div><!--/form-group-->
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Periodicidad<strog class="theme_color">*</strog></label>
+            <div class="col-sm-6">
+              <select name="idPeriodicidad" class="form-control" required>
+                <?php if($apoyo->idApoyo==null){ ?>   
+                <option value=""> 
+                  Seleccione la periodicidad del apoyo
+                </option>
+                <?php } if($apoyo->idApoyo!=null){ ?>   
+                <option value="<?php echo $apoyo->idPeriodicidad?>"> 
+                  <?php echo $apoyo->periodicidad; ?>
+                </option>
+                <?php } foreach($this->model->ListarSelects('periodicidad') as $r): 
+                if($r->periodicidad!=$apoyo->periodicidad){ ?>
+                ?>
+                <option value="<?php echo $r->idPeriodicidad; ?>"> 
+                  <?php echo $r->periodicidad; ?>
+                </option>
+                <?php } endforeach; ?>
+              </select>
+            </div>
+          </div><!--/form-group-->
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Fecha de apoyo<strog class="theme_color">*</strog></label>
+            <div class="col-sm-2">
+              <div class="input-group"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input name="fechaApoyo" type="date" value="<?php echo $apoyo->idApoyo!=null ? $apoyo->fechaApoyo : "" ?>" class="form-control" required>
               </div>
-            </div><!--/form-group-->
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Periodicidad<strog class="theme_color">*</strog></label>
-              <div class="col-sm-6">
-                <select name="idPeriodicidad" class="form-control" required>
-                  <?php if($apoyo->idApoyo==null){ ?>   
-                  <option value=""> 
-                    Seleccione la periodicidad del apoyo
-                  </option>
-                  <?php } if($apoyo->idApoyo!=null){ ?>   
-                  <option value="<?php echo $apoyo->idPeriodicidad?>"> 
-                    <?php echo $apoyo->periodicidad; ?>
-                  </option>
-                  <?php } foreach($this->model->ListarSelects('periodicidad') as $r): 
-                  if($r->periodicidad!=$apoyo->periodicidad){ ?>
-                  ?>
-                  <option value="<?php echo $r->idPeriodicidad; ?>"> 
-                    <?php echo $r->periodicidad; ?>
-                  </option>
-                  <?php } endforeach; ?>
-                </select>
+            </div>
+            <label class="col-sm-2 control-label">Importe de apoyo<strog class="theme_color">*</strog></label>
+            <div class="col-sm-2">
+              <div class="input-group"> <span class="input-group-addon">$</span>
+                <input value="<?php echo $apoyo->idApoyo != null ? $apoyo->importeApoyo : ""; ?>" style="text-align:right;" onkeypress="return soloNumeros(event);" class="form-control" name="importeApoyo" placeholder="0" type="text" required>
+                <span class="input-group-addon">.00</span>
               </div>
-            </div><!--/form-group-->
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Fecha de apoyo<strog class="theme_color">*</strog></label>
-              <div class="col-sm-2">
-                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                  <input name="fechaApoyo" type="date" value="<?php echo $apoyo->idApoyo!=null ? $apoyo->fechaApoyo : "" ?>" class="form-control" required>
-                </div>
-              </div>
-              <label class="col-sm-2 control-label">Importe de apoyo<strog class="theme_color">*</strog></label>
-              <div class="col-sm-2">
-                <div class="input-group"> <span class="input-group-addon">$</span>
-                  <input value="<?php echo $apoyo->idApoyo != null ? $apoyo->importeApoyo : ""; ?>" style="text-align:right;" onkeypress="return soloNumeros(event);" class="form-control" name="importeApoyo" placeholder="0" type="text" required>
-                  <span class="input-group-addon">.00</span>
-                </div>
-              </div>
-            </div><!--form-group end--> 
-            <div class="form-group">
-              <div class="col-sm-offset-7 col-sm-5">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="?c=Programa" class="btn btn-default"> Cancelar</a>
-              </div>
-            </div><!--/form-group-->
-          </form>
-        </div><!--/porlets-content-->
-      </div><!--/block-web-->
-    </div><!--/col-md-12-->
-  </div><!--/row-->
+            </div>
+          </div><!--form-group end--> 
+          <div class="form-group">
+            <div class="col-sm-offset-7 col-sm-5">
+              <button type="submit" class="btn btn-primary">Guardar</button>
+              <a href="?c=Programa" class="btn btn-default"> Cancelar</a>
+            </div>
+          </div><!--/form-group-->
+        </form>
+      </div><!--/porlets-content-->
+    </div><!--/block-web-->
+  </div><!--/col-md-12-->
+</div><!--/row-->
 </div><!--/container clear_both padding_fix-->
+<script type="text/javascript">
+  window.onload=function(){
+    listarSubprogramas();
+  }
+  listarSubprogramas = function (){
+    var idPrograma = $('#idPrograma').val();
+    $.post("index.php?c=Apoyos&a=ListarSubprogramas", {idPrograma: idPrograma}, function(mensaje) {
+      $("#idSubprogramas").html(mensaje);
+    }); 
+  }
+
+
+  
+</script>
