@@ -1,0 +1,13 @@
+public  class Nueva {
+public static void  main (String  args[]){
+
+int num=6;
+int  num2=8;
+
+String  cad1="No se duerman";
+
+String cad2="Vamonos"+num2+cad1;
+System.out.println(cad2);
+
+}
+}
