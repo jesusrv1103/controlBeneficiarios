@@ -41,7 +41,7 @@
                     <a data-toggle="dropdown" class="btn btn-sm btn-success dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar<span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu" >
                       <li><a data-toggle="modal" data-target="#modalBuscarCurp" href="#modalBuscarCurp">Benenficiario CURP</a></li>
-                      <li><a href="#">Beneficiario RFC</a></li>
+                      <li><a href="?c=Beneficiario&a=CrudRFC&nuevoRegistro=true">Beneficiario RFC</a></li>
                     </ul>
                   </div>
                   <div class="btn-group">

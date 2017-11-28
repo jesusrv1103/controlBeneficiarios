@@ -173,10 +173,3 @@
     </div><!--/col-md-12-->
   </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
-<script type="text/javascript">
-
-  listarSubprogramas = function (programa){
-    var programa2=programa;
-    alert(programa2);
-  }
-</script>

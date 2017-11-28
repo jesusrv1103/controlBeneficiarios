@@ -23,7 +23,7 @@ public function Crud(){
 
  if(isset($_REQUEST['idMunicipio'])){
   $municipio = $this->model->Obtener($_REQUEST['idMunicipio']);
-  echo $this->model->idMunicipio;
+ // echo $this->model->idMunicipio;
   
 }
 $catalogos=true;

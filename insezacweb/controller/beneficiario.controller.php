@@ -146,12 +146,10 @@ public function Crud(){
 
 public function CrudRFC(){
  $beneficiario = new Beneficiario();
- if(isset($_REQUEST['idBeneficiarioRFC'])){
-  $beneficiario = $this->model->Listar($_REQUEST['idBeneficiarioRFC']);  
-}
+
 $administracion=true;
 $beneficiarios=true;
-$page="view/beneficiario/beneficiario.php";
+$page="view/beneficiario/beneficiarioRFC.php";
 require_once 'view/index.php';
 }
 
