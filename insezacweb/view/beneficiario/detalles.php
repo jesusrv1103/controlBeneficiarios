@@ -1,12 +1,12 @@
  <style type="text/css">
-   .lbldetalle{
-    color:#424242;
-    font-weight: bold;
-  }
-  .h3subtitulo{
-    color:#2196F3;
-    font-weight: bold;
-  }
+ .lbldetalle{
+  color:#424242;
+  font-weight: bold;
+}
+.h3subtitulo{
+  color:#2196F3;
+  font-weight: bold;
+}
 </style>
 
 <div class="pull-left breadcrumb_admin clear_both">
@@ -43,83 +43,83 @@
             <div class="porlets-content">
               <div class="panel-body">
                 <div class="col-md-12">
-                  <table class="table table-striped">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="col-md-12">
-                           <label class="col-sm-6 lbldetalle">CURP:</label>
-                           <label class="col-sm-6 control-label"><?php echo $ben->curp; ?></label>
-                         </div>
-                       </td>
-                     </tr>
-                     <tr>
+                 <table class="table table-striped">
+                  <tbody>
+                    <tr>
                       <td>
-                       <div class="col-md-12">
-                         <label class="col-sm-6 lbldetalle">Primer apellido:</label>
-                         <label class="col-sm-6 control-label"><?php echo $ben->primerApellido; ?></label>
+                        <div class="col-md-12">
+                         <label class="col-sm-6 lbldetalle">CURP:</label>
+                         <label class="col-sm-6 control-label"><?php echo $ben->curp; ?></label>
                        </div>
                      </td>
                    </tr>
                    <tr>
                     <td>
                      <div class="col-md-12">
-                       <label class="col-sm-6 lbldetalle">Segundo apellido:</label>
-                       <label class="col-sm-6 control-label"><?php echo $ben->segundoApellido; ?></label>
+                       <label class="col-sm-6 lbldetalle">Primer apellido:</label>
+                       <label class="col-sm-6 control-label"><?php echo $ben->primerApellido; ?></label>
                      </div>
                    </td>
                  </tr>
                  <tr>
                   <td>
                    <div class="col-md-12">
-                     <label class="col-sm-6 lbldetalle">Nombre:</label>
-                     <label class="col-sm-6 control-label"><?php echo $ben->nombres; ?></label>
+                     <label class="col-sm-6 lbldetalle">Segundo apellido:</label>
+                     <label class="col-sm-6 control-label"><?php echo $ben->segundoApellido; ?></label>
                    </div>
                  </td>
                </tr>
                <tr>
                 <td>
                  <div class="col-md-12">
-                   <label class="col-sm-6 lbldetalle">Identificación oficial:</label>
-                   <label class="col-sm-6 control-label"><?php echo $ben->nomTipoI; ?></label>
+                   <label class="col-sm-6 lbldetalle">Nombre:</label>
+                   <label class="col-sm-6 control-label"><?php echo $ben->nombres; ?></label>
                  </div>
                </td>
              </tr>
              <tr>
               <td>
                <div class="col-md-12">
-                 <label class="col-sm-6 lbldetalle">Nivel de estudio:</label>
-                 <label class="col-sm-6 control-label"><?php echo $ben->nivelEstudios; ?></label>
+                 <label class="col-sm-6 lbldetalle">Identificación oficial:</label>
+                 <label class="col-sm-6 control-label"><?php echo $ben->nomTipoI; ?></label>
                </div>
              </td>
            </tr>
            <tr>
             <td>
              <div class="col-md-12">
-               <label class="col-sm-6 lbldetalle">Seguridad social:</label>
-               <label class="col-sm-6 control-label"><?php echo $ben->seguridadSocial; ?></label>
+               <label class="col-sm-6 lbldetalle">Nivel de estudio:</label>
+               <label class="col-sm-6 control-label"><?php echo $ben->nivelEstudios; ?></label>
              </div>
            </td>
          </tr>
          <tr>
           <td>
            <div class="col-md-12">
-             <label class="col-sm-6 lbldetalle">Discapacidad:</label>
-             <label class="col-sm-6 control-label"><?php echo $ben->discapacidad; ?></label>
+             <label class="col-sm-6 lbldetalle">Seguridad social:</label>
+             <label class="col-sm-6 control-label"><?php echo $ben->seguridadSocial; ?></label>
            </div>
          </td>
        </tr>
        <tr>
         <td>
-          <div class="col-md-12">
-           <label class="col-sm-6 lbldetalle">Beneficiario Colectivo:</label>
-           <label class="col-sm-6 control-label"><?php if($ben->beneficiarioColectivo=1 ){
-            echo "Si";} else {echo"No";}?></label>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+         <div class="col-md-12">
+           <label class="col-sm-6 lbldetalle">Discapacidad:</label>
+           <label class="col-sm-6 control-label"><?php echo $ben->discapacidad; ?></label>
+         </div>
+       </td>
+     </tr>
+     <tr>
+      <td>
+        <div class="col-md-12">
+         <label class="col-sm-6 lbldetalle">Beneficiario Colectivo:</label>
+         <label class="col-sm-6 control-label"><?php if($ben->beneficiarioColectivo=1 ){
+          echo "Si";} else {echo"No";}?></label>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
 </div>
 </div>
 </div><!--/porlets-content-->
@@ -387,6 +387,75 @@
 </div><!--/porlets-content-->
 </div><!--/block-web-->
 </div><!--/col-md-6-->
+</div><!--/row-->
+<div class="row">
+  <div class="col-md-12">
+    <div class="block-web">
+      <div class="header">
+        <h3 class="content-header h3subtitulo">Apoyos generados</h3>
+      </div>
+      <div class="porlets-content">
+        <div class="panel-body">
+          <?php $i=1; foreach ($infoApoyo as $infoApoyo): ?>
+          <div class="col-md-6">
+           <table class="table table-striped">
+            <tbody>
+              <tr>
+                <td>
+                  <div class="col-md-12">   
+                   <label class="col-sm-5 lblinfo" style="margin-top: 5px; color:#607D8B;"><b>Información del <?php echo $i ?>° apoyo</b></label>
+                 </div>
+               </td>
+             </tr>
+             <tr>
+              <td>
+                <div class="col-md-12">
+                 <label class="col-sm-4 lbl-detalle"><b>Dirección que lo apoya:</b></label>
+                 <label class="col-sm-7 control-label"><?php echo $infoApoyo->direccion ?></label>
+               </div>
+               <div class="col-md-12">
+                <label class="col-sm-4 lbl-detalle"><b>Tipo de apoyo:</b></label>
+                <label class="col-sm-7 control-label"><?php echo $infoApoyo->tipoApoyo; ?></label>
+              </div>
+              <div class="col-md-12">
+                <label class="col-sm-4 lbl-detalle"><b>Origen:</b></label>
+                <label class="col-sm-7 control-label"><?php echo $infoApoyo->origen; ?></label>
+              </div>
+              <div class="col-md-12">
+                <label class="col-sm-4 lbl-detalle"><b>Programa:</b></label>
+                <label class="col-sm-7 control-label"><?php echo $infoApoyo->programa; ?></label>
+              </div>
+              <div class="col-md-12">
+                <label class="col-sm-4 lbl-detalle"><b>Subprograma:</b></label>
+                <label class="col-sm-7 control-label"><?php echo $infoApoyo->subprograma; ?></label>
+              </div>
+              <div class="col-md-12">
+                <label class="col-sm-4 lbl-detalle"><b>Periodicidad:</b></label>
+                <label class="col-sm-7 control-label"><?php echo $infoApoyo->periodicidad; ?></label>
+              </div>
+              <div class="col-md-12">
+                <label class="col-sm-4 lbl-detalle"><b>Programa social:</b></label>
+                <label class="col-sm-7 control-label" style="color:red"><strong>P E N D I E N T E</strong></label>
+              </div>
+              <div class="col-md-12">
+                <label class="col-sm-4 lbl-detalle"><b>Importe:</b></label>
+                <label class="col-sm-7 control-label">$ <?php echo $infoApoyo->importeApoyo; ?></label>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <?php  
+    if ($i%2==0){
+      echo "<hr>";
+    }$i++;
+  endforeach; 
+  ?>
+</div>
+</div><!--/porlets-content-->
+</div><!--/block-web-->
+</div><!--/col-md-12-->
 </div><!--/row-->
 </div><!--/block-web--> 
 </div><!--/row-col-md-12--> 

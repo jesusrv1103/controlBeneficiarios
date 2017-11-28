@@ -13,12 +13,22 @@ class BeneficiarioController{
     $this->model2 = new Catalogos();
   }
   public function Index(){
+   $tipoBen="CURP";
    $administracion = true;
    $inicio = false;
    $beneficiarios = true;
    $page="view/beneficiario/index.php";
    require_once 'view/index.php';
  }  
+
+public function RFC(){
+  $tipoBen="RFC";
+   $administracion = true;
+   $inicio = false;
+   $beneficiarios = true;
+   $page="view/beneficiario/index.php";
+   require_once 'view/index.php';
+}
 
 //Metodo Guardar  si trae un id actualiza, no registra
  public function Guardar(){
@@ -35,14 +45,14 @@ class BeneficiarioController{
   $beneficiario->beneficiarioColectivo=$_REQUEST['beneficiarioColectivo'];
   $beneficiario->fechaNacimiento=$_REQUEST['fechaNacimiento'];
 
- 
+
   if(substr($_REQUEST['curp'], 10,1) == "H")
   {
     $beneficiario->genero=1;
   }
   else{
    $beneficiario->genero=0;
-  }
+ }
   //echo $genero;
  $beneficiario->idMunicipio=$_REQUEST['idMunicipio'];
  $beneficiario->email=$_REQUEST['email'];
@@ -112,6 +122,17 @@ public function Crud(){
  $beneficiario = new Beneficiario();
  if(isset($_REQUEST['idBeneficiario'])){
   $beneficiario = $this->model->Listar($_REQUEST['idBeneficiario']);  
+}
+$administracion=true;
+$beneficiarios=true;
+$page="view/beneficiario/beneficiario.php";
+require_once 'view/index.php';
+}
+
+public function CrudRFC(){
+ $beneficiario = new Beneficiario();
+ if(isset($_REQUEST['idBeneficiarioRFC'])){
+  $beneficiario = $this->model->Listar($_REQUEST['idBeneficiarioRFC']);  
 }
 $administracion=true;
 $beneficiarios=true;
@@ -192,18 +213,22 @@ public function Leearchivo($objPHPExcel,$numRows){
      $ben->genero = $objPHPExcel->getActiveSheet()->getCell('AJ'.$numRow)->getCalculatedValue();
      $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();        
      $ben->telefono = $objPHPExcel->getActiveSheet()->getCell('AL'.$numRow)->getCalculatedValue();
-     //$ben->idMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
-     $ben->idMunicipio=null;
+     $claveMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
+    // echo $claveMunicipio;
+    $consult=$this->model->ObtenerIdMunicipio($claveMunicipio);
+     //$ben->idMunicipio=315;
 
+
+     // $idRegistro=$this->model->ObtenerIdRegistro($beneficiario->idBeneficiario);
+
+    // echo  $this->model->ObtenerIdMunicipio($claveMunicipio);
+     $ben->idMunicipio=$municipio->idMunicipio;
+    // echo  $ben->$idMunicipio;
        //Datos de registro
      $ben->usuario=$_SESSION['usuario'];
-     
      $ben->fechaAlta=date("Y-m-d H:i:s");
-
-     
      $ben->direccion=$_SESSION['direccion'];
      $ben->estado="Activo";
-
      if (!$ben->curp == null) {
       $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
       $this->model->ImportarBeneficiario($ben);
@@ -235,6 +260,7 @@ public function Eliminar(){
     $beneficiarios=true;
     $ben = new Beneficiario();
     $ben = $this->model->Listar($_REQUEST['idBeneficiario']);
+    $infoApoyo = $this->model->ObtenerInfoApoyo($_REQUEST['idBeneficiario']);
     $page="view/beneficiario/detalles.php";
     require_once 'view/index.php';
   }
@@ -250,17 +276,8 @@ public function Eliminar(){
         <div class="block-web">
          <div class="header">
           <div class="row" style="margin-bottom: 12px;">
-            <div class="col-sm-9">
-              <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Detalles de apoyo y registro</h2>
-            </div>
-            <div class="col-md-3">
-              <div class="btn-group pull-right">
-                <b> 
-                  <div class="btn-group" style="margin-right: 10px; margin-top: 5px;"> 
-                    <a class="btn btn-sm btn-primary tooltips" href="?c=beneficiario&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo beneficiario"> <i class="fa fa-print"></i></a>
-                  </div>
-                </b>
-              </div>
+            <div class="col-sm-12">
+              <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Información general de registro</h2>
             </div>    
           </div>
         </div>        
@@ -270,44 +287,28 @@ public function Eliminar(){
               <tr>
                <td>
                  <div class="col-md-12">   
-                   <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Información de apoyo a beneficiario</b></label>
+                   <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Beneficiario</b></label>
                  </div>
                </td>
              </tr>
              <tr>
               <td>
+              <div class="col-md-12">
+                 <label class="col-sm-4 lbl-detalle"><b>Curp:</b></label>
+                 <label class="col-sm-7 control-label">'.$infoRegistro->curp.'</label>
+               </div>
                 <div class="col-md-12">
-                 <label class="col-sm-4 lbl-detalle"><b>Beneficiario:</b></label>
-                 <label class="col-sm-7 control-label">'.$infoRegistro->nombres." ".$infoRegistro->primerApellido." ".$infoRegistro->segundoApellido.'</label>
+                 <label class="col-sm-4 lbl-detalle"><b>Primer apellido:</b></label>
+                 <label class="col-sm-7 control-label">'.$infoRegistro->primerApellido.'</label>
                </div>
                <div class="col-md-12">
-                 <label class="col-sm-4 lbl-detalle"><b>Localidad:</b></label>
-                 <label class="col-sm-7 control-label">Valparaíso</label>
+                 <label class="col-sm-4 lbl-detalle"><b>Segundo apellido:</b></label>
+                 <label class="col-sm-7 control-label">'.$infoRegistro->segundoApellido.'</label>
                </div>
                <div class="col-md-12">
-                 <label class="col-sm-4 lbl-detalle"><b>Dirección que lo apoya:</b></label>
-                 <label class="col-sm-7 control-label">'.$infoRegistro->direccion.'</label>
+                 <label class="col-sm-4 lbl-detalle"><b>Nombre(s):</b></label>
+                 <label class="col-sm-7 control-label">'.$infoRegistro->nombres.'</label>
                </div>
-               <div class="col-md-12">
-                <label class="col-sm-4 lbl-detalle"><b>Tipo de apoyo:</b></label>
-                <label class="col-sm-7 control-label">Federal</label>
-              </div>
-              <div class="col-md-12">
-                <label class="col-sm-4 lbl-detalle"><b>Programa:</b></label>
-                <label class="col-sm-7 control-label">Red de apoyo al emprendedor</label>
-              </div>
-              <div class="col-md-12">
-                <label class="col-sm-4 lbl-detalle"><b>Descripción de apoyo:</b></label>
-                <label class="col-sm-8 control-label">Es una comunidad conformada por organizaciones gubernamentales y privadas (aliados), que ofrece sus programas, productos, servicios y soluciones a ciudadanos como tú que buscan emprender de forma exitosa un negocio o que ya cuentan con uno y lo quieren mejorar o hacer crecer.</label>
-              </div>
-              <div class="col-md-12">
-                <label class="col-sm-4 lbl-detalle"><b>Costo:</b></label>
-                <label class="col-sm-7 control-label">$80,000.00</label>
-              </div>
-              <div class="col-md-12">
-                <label class="col-sm-4 lbl-detalle"><b>Número de apoyos:</b></label>
-                <label class="col-sm-7 control-label">5</label>
-              </div>
             </td>
           </tr>
           <tr>
@@ -319,17 +320,17 @@ public function Eliminar(){
          </tr>
          <tr>
           <td>
-            <div class="col-md-12">
-             <label class="col-sm-4 lbl-detalle"><strong>Fecha de registro:</strong></label>
-             <label class="col-sm-6">'.$infoRegistro->fecha.'</label><br>
-           </div>
-           <div class="col-md-12">
-             <label class="col-sm-4 lbl-detalle"><strong>Hora de registro:</strong></label>
-             <label class="col-sm-6">'.$infoRegistro->hora.'</label><br>
-           </div>
-           <div class="col-md-12">
+          <div class="col-md-12">
              <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
              <label class="col-sm-6">'.$infoRegistro->usuario.'</label><br>
+           </div>
+           <div class="col-md-12">
+             <label class="col-sm-4 lbl-detalle"><strong>Dirección:</strong></label>
+             <label class="col-sm-6">'.$infoRegistro->direccion.'</label><br>
+           </div>
+            <div class="col-md-12">
+             <label class="col-sm-4 lbl-detalle"><strong>Fecha y hora de registro:</strong></label>
+             <label class="col-sm-6">'.$infoRegistro->fechaAlta.'</label><br>
            </div>
            <div class="col-md-12">
              <label class="col-sm-4 lbl-detallet"><strong>Estado de registro:</strong></label>
@@ -351,17 +352,11 @@ public function Eliminar(){
          foreach ($infoActualizacion as $r):
           echo '
         <div class="col-md-6">
-          <label class="col-md-12" lbl-detalle>'.$i.'°actualización</label>
-          <label class="col-sm-6 lbl-detallet"><strong>Fecha:</strong></label>
-          <label class="col-sm-6">'.$r->fecha.'</label><br>
-
-
-          <label class="col-sm-6 lbl-detallet"><strong>Hora:</strong></label>
-          <label class="col-sm-6">'.$r->hora.'</label><br>
-
-
-          <label class="col-sm-6 lbl-detallet"><strong>Usuario:</strong></label>
-          <label class="col-sm-6">'.$r->usuario.'</label><br>
+         <label class="col-md-12" lbl-detalle style="color:#607D8B;">'.$i.'° actualización</label>
+          <label class="col-sm-5 lbl-detallet"><strong>Fecha y hora:</strong></label>
+          <label class="col-sm-7">'.$r->fechaActualizacion.'</label><br>
+          <label class="col-sm-5 lbl-detallet"><strong>Usuario:</strong></label>
+          <label class="col-sm-7">'.$r->usuario.'</label><br>
         </div>
         '; 
         if($i%2==0){

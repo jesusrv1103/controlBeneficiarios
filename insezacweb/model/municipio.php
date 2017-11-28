@@ -28,7 +28,7 @@ class Municipio
 			//$result = array();
 		    // SELECT p.idMunicipio, p.Municipio, sum(techoPresupuestal) as suma   FROM Municipio p , subMunicipio s where p.idMunicipio =  s.idMunicipio group by p.idMunicipio
 
-			$stm = $this->pdo->prepare("SELECT * from municipio WHERE estado ='Activo'");
+			$stm = $this->pdo->prepare("SELECT * from municipio WHERE estado ='Activo' ORDER BY idMunicipio DESC;");
 			
 			$stm->execute();
 
@@ -42,11 +42,13 @@ class Municipio
 public function ImportarMunicipio(Municipio $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO municipio VALUES(?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO municipio VALUES(?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
-					$data->idMunicipio,
-					$data->nombreMunicipio
+					NULL,
+					$data->nombreMunicipio,
+					$data->claveMunicipio,
+					$data->estado
 					)
 				);
 

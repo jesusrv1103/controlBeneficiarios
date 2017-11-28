@@ -14,7 +14,7 @@
     background-color: #FFFFFF;
     background-image: linear-gradient(to top, #EEEEEE 0%, #FFFFFF 50%);
     border: 1px solid #AAAAAA;
-    border-radius: 4px;
+    border-radius: 14px;
     color: #444444;
     display: block;
     height: 26px;
@@ -44,7 +44,7 @@
 }
 .select2-container .select2-choice abbr {
     background: url("../images/select2.png") no-repeat scroll right top rgba(0, 0, 0, 0);
-    border: 0 none;
+    border: 10px;
     cursor: pointer;
     display: none;
     font-size: 1px;

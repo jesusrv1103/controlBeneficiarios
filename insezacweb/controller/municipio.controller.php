@@ -69,13 +69,14 @@ public function Municipios($objPHPExcel,$numRows){
     do {
             //echo "Entra";
       $muni = new Municipio();
-      $muni->idMunicipio= $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
+      $muni->claveMunicipio= $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
       $muni->nombreMunicipio = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
-      if (!$muni->idMunicipio == null) {
+      $muni->estado='Activo';
+      if (!$muni->claveMunicipio == null) {
         $this->model->ImportarMunicipio($muni);
       }
       $numRow+=1;
-    } while (!$muni->idMunicipio == null);
+    } while (!$muni->claveMunicipio == null);
 
   }catch (Exception $e) {
     $error=true;

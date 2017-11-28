@@ -6,16 +6,19 @@ class Apoyos
 	public $idApoyo;
 	public $curp;
 	public $idOrigen; //int
-	public $idPrograma; //int
 	public $idSubprograma;  //int
-	public $idTipoApoyo;  //int
 	public $idCaracteristica; //int
 	public $importeApoyo; //int
 	public $numeroApoyo;  //int
-	public $fechaUltimoApoyo; //Date
+	public $fechaApoyo; //Date
 	public $idPeriodicidad;  //int
 	public $apoyoEconomico;
 	public $idProgramaSocial;
+	public $usuario;
+	public $direccion;
+	public $fechaAlta;
+	public $estado;
+	public $idRegistroApoyo;
 
 	public function __CONSTRUCT()
 	{
@@ -34,10 +37,25 @@ class Apoyos
 	{
 		try
 		{
+			$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiarios,origen,registroApoyo,subprograma,programa,periodicidad,tipoApoyo,caracteristicasApoyo WHERE apoyos.idBeneficiario=beneficiarios.idBeneficiario AND apoyos.idRegistroApoyo=registroApoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasApoyo.idTipoApoyo=tipoApoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasApoyo.idCaracteristicasApoyo");
+			
+			$stm->execute(array());
 
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+		//Metdodo para listar
+	public function ListarSelects($nomTabla)
+	{
+		try
+		{
+			//$result = array();
 
-			$stm = $this->pdo->prepare("SELECT * from apoyos,beneficiarios WHERE idApoyo");
-
+			$stm = $this->pdo->prepare("SELECT * FROM $nomTabla");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -47,15 +65,13 @@ class Apoyos
 			die($e->getMessage());
 		}
 	}
-	
+
 	public function Obtener($id)
 	{
 		try 
 		{
 			$stm = $this->pdo
-			->prepare("SELECT * FROM apoyos WHERE idApoyo = ?");
-
-
+			->prepare("SELECT * FROM apoyos, beneficiarios, origen, tipoApoyo, caracteristicasApoyo, periodicidad, subprograma WHERE apoyos.idOrigen=origen.idOrigen AND apoyos.idCaracteristica=caracteristicasApoyo.idCaracteristicasApoyo AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idSubprograma=subprograma.idSubprograma AND apoyos.idBeneficiario=beneficiarios.idBeneficiario AND idApoyo = ?");
 			$stm->execute(array($id));
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) 
@@ -80,38 +96,32 @@ class Apoyos
 	}
 	
 		//Metodo para actualizar
-	public function Actualizar($data)
+	public function Actualizar(Apoyos $data)
 	{
 		try 
 		{
-			$sql = "UPDATE apoyos SET null,
-			curp = ?, idOrigen = ?, idPrograma = ?, idSubprograma = ?, idTipoApoyo = ?, idCaracteristica = ?, importeApoyo = ?, numerosApoyo = ?, fechaUltimoApoyo = ?, idPeriodicidad = ?, apoyoEconomico = ?
-			WHERE idApoyo = ?";
+			$sql = "UPDATE apoyos SET idBeneficiario = ?, idOrigen = ?, idSubprograma = ?, idCaracteristica = ?, importeApoyo = ?, fechaApoyo = ?, idPeriodicidad = ? WHERE idApoyo = ?";
 
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
-					null,
-					$data->curp,
+					$data->idBeneficiario,
 					$data->idOrigen, 
-					$data->idPrograma, 
 					$data->idSubprograma, 
-					$data->idTipoApoyo, 
 					$data->idCaracteristica, 
 					$data->importeApoyo, 
-					$data->numeroApoyo, 
-					$data->fechaUltimoApoyo, 
-					$data->idPeriodicidad, 
-					$data->apoyoEconomico
-					)
-				);
+					$data->fechaApoyo, 
+					$data->idPeriodicidad,
+					$data->idApoyo
+				)
+			);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
 		}
 	}
 		//Metdod para registrar
-	public function Registrar(Apoyo $data)
+	public function Registrar(Apoyos $data)
 	{
 		try 
 		{
@@ -122,19 +132,19 @@ class Apoyos
 			->execute(
 				array(
 					null,
-					$data->curp,
+					$data->idBeneficiario,
 					$data->idOrigen, 
-					$data->idPrograma, 
-					$data->idSubprograma, 
-					$data->idTipoApoyo, 
+					$data->idSubprograma,  
 					$data->idCaracteristica, 
 					$data->importeApoyo, 
 					$data->numeroApoyo, 
-					$data->fechaUltimoApoyo, 
+					$data->fechaApoyo, 
 					$data->idPeriodicidad, 
-					$data->apoyoEconomico
-					)
-				);
+					$data->idProgramaSocial,
+					$data->idRegistroApoyo,
+					NULL
+				)
+			);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -163,19 +173,100 @@ class Apoyos
 					$data->idOrigen, 
 					$data->idPrograma, 
 					$data->idSubprograma, 
-					$data->idTipoApoyo, 
 					$data->idCaracteristica, 
 					$data->importeApoyo, 
 					$data->numeroApoyo, 
-					$data->fechaUltimoApoyo, 
+					$data->fechaApoyo, 
 					$data->idPeriodicidad, 
 					$data->apoyoEconomico,
 					$data->idProgramaSocial
-					)
-				);
+				)
+			);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
 		}
 	}
+	public function ObtenerInfoApoyo($idApoyo)
+	{
+		try 
+		{
+			$sql= $this->pdo->prepare("SELECT * FROM apoyos,beneficiarios,origen,registroApoyo,subprograma,programa,periodicidad,tipoApoyo,caracteristicasApoyo WHERE apoyos.idBeneficiario=beneficiarios.idBeneficiario AND apoyos.idRegistroApoyo=registroApoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasApoyo.idTipoApoyo=tipoApoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasApoyo.idCaracteristicasApoyo AND apoyos.idApoyo=?;");
+			$resultado=$sql->execute(array($idApoyo));
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function RegistraDatosRegistro(Apoyos $data){
+		try 
+		{
+
+			$sql = "INSERT INTO registroApoyo VALUES (?,?,?,?,?)";
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					null,
+					$data->usuario,
+					$data->direccion,
+					$data->fechaAlta,
+					$data->estado
+				)
+			);
+			return $this->pdo->lastInsertId();
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function ObtenerIdRegistro($idApoyo)
+	{
+		try 
+		{
+			$sql= $this->pdo->prepare("SELECT registroApoyo.idRegistroApoyo from registroApoyo, apoyos where registroApoyo.idRegistroApoyo=apoyos.idRegistroApoyo and idApoyo=$idApoyo");
+			$resultado=$sql->execute();
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function RegistraActualizacion(Apoyos $data){
+		try 
+		{
+			$sql = "INSERT INTO actualizacionApoyo VALUES (?,?,?,?,?)";
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					null,
+					$data->usuario,
+					$data->direccion,
+					$data->fechaAlta,
+					$data->idRegistroApoyo
+				)
+			);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function ListarActualizacion($idRegistro)
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("SELECT * FROM actualizacionApoyo WHERE idRegistroApoyo=?");
+			$stm->execute(array($idRegistro));
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
 }

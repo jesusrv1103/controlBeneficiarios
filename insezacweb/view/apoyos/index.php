@@ -3,6 +3,7 @@
 .lblinfo{
   color:#2196F3;
 }
+
 </style>
 <div class="pull-left breadcrumb_admin clear_both">
  <div class="pull-left page_title theme_color">
@@ -30,10 +31,8 @@
               <div class="btn-group pull-right">
                 <b> 
                   <div class="btn-group" style="margin-right: 10px;"> 
-                    <a class="btn btn-sm btn-success tooltips" href="?c=Apoyos&a=crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo Apoyo"> <i class="fa fa-plus"></i> Registrar </a>
-                    
+                    <a class="btn btn-sm btn-success tooltips" href="?c=Apoyos&a=Crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo Apoyo"> <i class="fa fa-plus"></i> Registrar </a>
                     <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar catálogo para registrar Apoyos" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
-
                   </div>
                 </b>
               </div>
@@ -66,8 +65,14 @@
                <tr>
                  <td><center><b>Info</b></center></td>
                  <th>CURP</th>
-                 <th>Nombre de Apoyo</th>
-                 <td><center><b>Ver</b></center></td>
+                 <th>Fecha</th> 
+                 <th width="22%">Programa</th>
+                 <th>Subprograma</th>
+                 <!--th>Prog social</th-->
+                 <th>Tipo</th>
+                 <th>Caracteristica</th>
+                 <th>Origen</th> 
+                 <th>Importe</th>
                  <?php if($_SESSION['tipoUsuario']==1){?>
                  <td><center><b>Editar</b></center></td>
                  <td><center><b>Borrar</b></center></td>
@@ -75,51 +80,51 @@
                </tr>
              </thead>
              <tbody>
-
               <?php foreach($this->model->Listar() as $r): ?>
                 <tr class="grade">
-
-                  <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
-
+                  <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoApoyo(<?php echo $r->idApoyo; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
                   <td><?php echo $r->curp ?> </td>
-
-                  <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
-
-                  <td class="center">
-                    <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Apoyos&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de Apoyo"><i class="fa fa-eye"></i></a>
-                  </td>
-
+                  <td><?php echo $r->fechaApoyo ?> </td>
+                  <td><?php echo $r->programa; ?> </td>
+                  <td><?php echo $r->subprograma; ?> </td>
+                  <!--td><?php echo "r->programaSocial;" ?></td-->
+                  <td><?php echo $r->tipoApoyo; ?> </td>
+                  <td><?php echo $r->caracteristicasApoyo; ?> </td>
+                  <td><?php echo $r->origen; ?> </td>
+                  <td>$<?php echo $r->importeApoyo; ?></td>
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <td class="center">
-                    <a class="btn btn-primary btn-sm" role="button" href="?c=Apoyos&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-primary btn-sm" role="button" href="?c=Apoyos&a=Crud&idApoyo=<?php echo $r->idApoyo ?>"><i class="fa fa-edit"></i></a>
                   </td>
-
                   <td class="center">
-
-                   <a class="btn btn-danger btn-sm" onclick="eliminarApoyo(<?php echo $r->idRegistro;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+                   <a class="btn btn-danger btn-sm" onclick="eliminarApoyo(<?php echo $r->idApoyo;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                  </td>
                  <?php } ?>
-
                </tr>
              <?php endforeach; ?>
-
            </tbody>
            <tfoot>
-             <tr>
-              <td><center><b>Info</b></center></td>
-              <th>CURP</th>
-              <th>Nombre de Apoyo</th>
-              <td><center><b>Ver</b></center></td>
-              <?php if($_SESSION['tipoUsuario']==1){?>
-              <th><center><b>Editar</b></center></th>
-              <td><center><b>Borrar</b></center></td>
-              <?php } ?>        
-            </tr>
-          </tfoot>
-        </table>
-      </div><!--/table-responsive-->
-    </div><!--/porlets-content-->
-  </div><!--/block-web-->
+            <tr>
+             <td><center><b>Info</b></center></td>
+             <th>CURP</th>
+             <th>Fecha</th>
+             <th>Programa</h> 
+             <th>Subprograma</th>
+             <!--th>Prog social</th-->
+             <th>Tipo</th>
+             <th>Caracteristica</th>
+             <th>Origen</th> 
+             <th>Importe</th>
+             <?php if($_SESSION['tipoUsuario']==1){?>
+             <td><center><b>Editar</b></center></td>
+             <td><center><b>Borrar</b></center></td>
+             <?php } ?>
+           </tr>
+         </tfoot>
+       </table>
+     </div><!--/table-responsive-->
+   </div><!--/porlets-content-->
+ </div><!--/block-web-->
 </div><!--/col-md-12-->
 </div><!--/row-->
 </div>
@@ -164,11 +169,11 @@
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
 <div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="width: 50%;">
+  <div class="modal-dialog" style="width: 60%;">
     <div class="modal-content" id="div-modal-content">
       <!--************************En esta sección se incluye el modal de informacion de registro y apoyo***************************-->
-  </div><!--/modal-content--> 
-</div><!--/modal-dialog--> 
+    </div><!--/modal-content--> 
+  </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -188,7 +193,7 @@
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
           <form action="?c=Apoyos&a=Eliminar" enctype="multipart/form-data" method="post">
-            <input hidden type="text" name="idRegistro" id="txtIdRegistro">
+            <input  type="hidden" name="idApoyo" id="txtIdApoyo">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
           </form>
@@ -198,13 +203,12 @@
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
 <script>
-  eliminarApoyo = function(idRegistro){
-
-    $('#txtIdRegistro').val(idRegistro);  
+  eliminarApoyo = function(idApoyo){
+    $('#txtIdApoyo').val(idApoyo);  
   };
-  infoRegistro = function (idBeneficiario){
-    var idBeneficiario=idBeneficiario;
-    $.post("index.php?c=Apoyos&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
+  infoApoyo = function (idApoyo){
+    var idApoyo=idApoyo;
+    $.post("index.php?c=Apoyos&a=InfoApoyo", {idApoyo: idApoyo}, function(info) {
       $("#div-modal-content").html(info);
     }); 
   }

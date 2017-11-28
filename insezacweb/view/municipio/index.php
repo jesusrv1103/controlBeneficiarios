@@ -70,7 +70,7 @@
               <tbody>
                <?php foreach($this->model->Listar() as $r): ?>
                 <tr class="gradeA">
-                  <td> <?php echo $r->idmunicipio; ?></td>
+                  <td> <?php echo $r->claveMunicipio; ?></td>
                   <td> <?php echo $r->nombreMunicipio; ?></td>
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <td class="center">
