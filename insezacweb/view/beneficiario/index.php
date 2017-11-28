@@ -266,7 +266,7 @@
 <div class="modal fade" id="modalBuscarCurp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default blue_border horizontal_border_1">
-     <form action="?c=Beneficiario&a=Crud" enctype="multipart/form-data" method="post">
+     <form action="?c=Beneficiario&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate>
       <div class="modal-body"> 
         <div class="row">
           <div class="block-web">
@@ -276,7 +276,7 @@
             <div class="porlets-content" style="margin-bottom: -50px;">
                 <div class="form-group">
                   <div class="col-sm-10">
-                    <input type="text" autofocus class="form-control" placeholder="Ingresa la curp del beneficiario">
+                    <input name="curp"  maxlength="18" id="curp" type="text" required parsley-regexp="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required parsley-rangelength="[18,18]"  onkeyup="mayus(this);" onchange="curp2date();" class="form-control" required placeholder="Ingrese la curp del beneficiario">
                   </div>
                 </div><!--/form-group-->
             </div><!--/porlets-content--> 
@@ -295,7 +295,6 @@
 </div><!--/modal-fade--> 
 <script>
   eliminarBeneficiario = function(idRegistro){
-
     $('#txtIdRegistro').val(idRegistro);  
   };
   infoRegistro = function (idBeneficiario){
@@ -304,5 +303,7 @@
       $("#div-modal-content").html(info);
     }); 
   }
+  buscarBeneficiarioCurp = function (){
 
+  }
 </script>

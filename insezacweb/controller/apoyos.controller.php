@@ -128,6 +128,31 @@ public function Apoyos($objPHPExcel,$numRows){
  require_once 'view/index.php';
 }
 }
+public function ListarSubprogramas(){
+  $programa=$_POST['programa'];
+echo '
+<label class="col-sm-3 control-label">Subprograma<strog class="theme_color">*</strog></label>
+              <div class="col-sm-6">
+                <select name="idSubprograma" class="form-control select2" required>
+                  <?php if($apoyo->idApoyo==null){ ?>   
+                  <option value=""> 
+                    Seleccione la subprograma a la que pertenece el beneficiario
+                  </option>
+                  <?php } if($apoyo->idApoyo!=null){ ?>   
+                  <option value="<?php echo $apoyo->idSubprograma?>"> 
+                    <?php echo $apoyo->subprograma; ?>
+                  </option>
+                  <?php } foreach($this->model->ListarSubprogramas($programa) as $r): 
+                  if($r->subprograma!=$apoyo->subprograma){ ?>
+                  ?>
+                  <option value="<?php echo $r->idSubprograma; ?>"> 
+                    <?php echo $r->subprograma; ?>
+                  </option>
+                  <?php } endforeach; ?>
+                </select>
+              </div> 
+';
+}
 public function InfoApoyo(){
     $idApoyo = $_POST['idApoyo'];
     $infoApoyo=$this->model->ObtenerInfoApoyo($idApoyo);
