@@ -227,16 +227,9 @@ public function Leearchivo($objPHPExcel,$numRows){
      $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();        
      $ben->telefono = $objPHPExcel->getActiveSheet()->getCell('AL'.$numRow)->getCalculatedValue();
      $claveMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
-     //echo "claveMunicipio".$claveMunicipio;
      $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
-
-
-    // echo $consult;
     $ben->idMunicipio=$consult->idMunicipio;
-     //$ben->idMunicipio=315;
-     // $idRegistro=$this->model->ObtenerIdRegistro($beneficiario->idBeneficiario);
-    // echo  $ben->$idMunicipio;
-    // $ben->idMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
+
        //Datos de registro
      $ben->usuario=$_SESSION['usuario'];
      $ben->fechaAlta=date("Y-m-d H:i:s");
@@ -245,6 +238,7 @@ public function Leearchivo($objPHPExcel,$numRows){
      if (!$ben->curp == null) {
       $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
       $this->model->ImportarBeneficiario($ben);
+      echo "Importo";
     }
     $numRow+=1;
   } while(!$ben->curp == null);

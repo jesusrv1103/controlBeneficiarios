@@ -424,7 +424,7 @@ class Beneficiario
 		try 
 		{
 			$sql =$this->pdo->prepare("INSERT INTO beneficiarios 
-				(curp,primerApellido,segundoApellido,nombres,email,
+				(idBeneficiario,curp,primerApellido,segundoApellido,nombres,email,
 				idIdentificacion,idTipoVialidad,nombreVialidad,noExterior,noInterior,
 				idAsentamientos,idLocalidad,entreVialidades,descripcionUbicacion,estudioSocioeconomico,
 				idEstadoCivil,jefeFamilia,idOcupacion,idIngresoMensual, integrantesFamilia, 
@@ -439,9 +439,10 @@ class Beneficiario
 				?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
-				?,?,?,?,?)");
+				?,?,?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
+					null,
 					$data->curp,
 					$data->primerApellido,
 					$data->segundoApellido,
