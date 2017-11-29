@@ -38,8 +38,8 @@ class Localidad
 		{
 			die($e->getMessage());
 		}
-	}
-
+	
+}
 	public function Listar()
 	{
 		try
