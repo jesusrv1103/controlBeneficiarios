@@ -270,4 +270,19 @@ class Apoyos
 		}
 	}
 
+	public function ListarSubprogramas($idPrograma)
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("SELECT * FROM subprograma WHERE idPrograma=?");
+			$stm->execute(array($idPrograma));
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
 }

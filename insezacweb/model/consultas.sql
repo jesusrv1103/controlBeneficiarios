@@ -42,6 +42,25 @@ insert into ocupacion values(1,"Obrero");
 insert into vivienda values(1,"Casa");
 
 
+insert into programa (1,"Seguridad");
+
+insert into subprograma values(1,"Subprograma","Programa",1);
+
+insert into caracteristicasApoyo values(1,"Caracteristica",1);
+
+insert into programaSocial values(1,1,"nombrePrograma",1); 
+
+  insert into periodicidad values(1,"semestral");
+
+
+
+
+
+
+insert into apoyos values(1,1,1,1,1,1,1000,2,"1995/11/12",1,1);
+
+
+
   select b.idBeneficiario, 
   b.curp, 
   b.primerApellido, 

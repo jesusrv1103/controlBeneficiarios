@@ -29,6 +29,7 @@
               <div class="btn-group pull-right">
                 <b> 
                   <div class="btn-group" style="margin-right: 10px;"> 
+
                     <div class="btn-group">
                      <a data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-eye"></i>&nbsp;Ver<span class="caret"></span></a>
                      <ul role="menu" class="dropdown-menu">
@@ -40,7 +41,7 @@
                     <a data-toggle="dropdown" class="btn btn-sm btn-success dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar<span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu" >
                       <li><a data-toggle="modal" data-target="#modalBuscarCurp" href="#modalBuscarCurp">Benenficiario CURP</a></li>
-                      <li><a href="#">Beneficiario RFC</a></li>
+                      <li><a href="?c=Beneficiario&a=CrudRFC&nuevoRegistro=true">Beneficiario RFC</a></li>
                     </ul>
                   </div>
                   <div class="btn-group">
@@ -49,6 +50,7 @@
                       <li><a data-toggle="modal" data-target="#modalImportar" href="#modalImportar">Beneficiarios con CURP</a></li>
                       <li><a href="#">Beneficiarios con RFC</a></li>
                     </ul>
+
                   </div>
                 </b>
               </div>
@@ -132,8 +134,9 @@
          <thead>
            <tr>
              <td><center><b>Info</b></center></td>
+             <th>RFC</th>
              <th>CURP</th>
-             <th>Nombre de beneficiario</th>
+             <th>Nombre</th>
              <th>Municipio</th>
              <td><center><b>Ver</b></center></td>
              <?php if($_SESSION['tipoUsuario']==1){?>
@@ -146,6 +149,7 @@
           <?php foreach($this->model->Listar1() as $r): ?>
             <tr class="grade">
               <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+              <td><?php echo $r->RFC ?> </td>
               <td><?php echo $r->curp ?> </td>
               <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
               <td><?php echo $r->nombreMunicipio ?> </td>
@@ -166,6 +170,7 @@
        <tfoot>
          <tr>
           <td><center><b>Info</b></center></td>
+          <th>RFC</th>
           <th>CURP</th>
           <th>Nombre de beneficiario</th>
           <th>Municipio</th>

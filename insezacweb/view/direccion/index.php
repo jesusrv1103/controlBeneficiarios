@@ -71,6 +71,7 @@
               <tbody>
                <?php foreach($this->model->Listar() as $r): ?>
                 <tr class="gradeA">
+
                 <td><?php echo $r->direccion; ?></td>
                 <td><?php echo $r->descripcion; ?></td>
                 <td><?php echo $r->titular; ?></td>
@@ -83,6 +84,13 @@
                     </td>
                     <?php } ?>
                   </tr>
+
+                  <td></td>
+                   <td></td>
+                    <td></td>
+                     <td></td>
+                      <td></td>
+
                 </tr>
               <?php endforeach; ?>
             </tbody>

@@ -44,6 +44,15 @@ if (!isset($_SESSION['seguridad'])){
   <link href="assets/plugins/checkbox/minimal/purple.css" rel="stylesheet" type="text/css" />
   <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
 
+  <!--Wizard  -->
+  <link href="assets/plugins/wizard/css/smart_wizard.css" rel="stylesheet" type="text/css" />
+  <!-- Optional SmartWizard theme -->
+  <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
+    <!-- Optional SmartWizard theme -->
+    <link href="assets/plugins/wizard/css/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/wizard/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
+
 </head>
 <style type="text/css">
 .disabled {
@@ -91,6 +100,9 @@ if (!isset($_SESSION['seguridad'])){
         <br>
         <div class="left_nav_slidebar">
           <ul>
+            <li class="theme_border">
+              <a href="?c=Inicio&a=Wizard"> <i class="fa fa-home"></i>Wizard</a>
+            </li>
            <?php if (isset($inicio)){ ?>
            <li class="left_nav_active theme_border"> 
             <?php } else { ?>
@@ -222,6 +234,8 @@ if (!isset($_SESSION['seguridad'])){
 <script src="assets/plugins/file-uploader/js/jquery.fileupload.js"></script>
 <script src="assets/plugins/validation/parsley.min.js"></script>
 <script src="assets/plugins/select2/dist/js/select2.full.min.js"></script>
+ <!-- Include SmartWizard JavaScript source -->
+    <script type="text/javascript" src="assets/plugins/wizard/js/jquery.smartWizard.js"></script>
 <script>
 
   //****Subir archivos automaicos*****
@@ -332,51 +346,51 @@ if (!isset($_SESSION['seguridad'])){
     e.value = e.value.toUpperCase();
   }
 
-Date.prototype.toString = function() {
-  var anyo = this.getFullYear();
-  var mes = this.getMonth()+1;
-  if( mes<=9 ) mes = "0"+mes;
-  var dia = this.getDate();
-  if( dia<=9 ) dia = "0"+dia;
-  return anyo+"-"+mes+"-"+dia;
-}
+  Date.prototype.toString = function() {
+    var anyo = this.getFullYear();
+    var mes = this.getMonth()+1;
+    if( mes<=9 ) mes = "0"+mes;
+    var dia = this.getDate();
+    if( dia<=9 ) dia = "0"+dia;
+    return anyo+"-"+mes+"-"+dia;
+  }
 
-function soloNumeros(e){
-  key = e.keyCode || e.which;
-  tecla = String.fromCharCode(key);
-  letras = " 1,2,3,4,5,6,7,8,9,0";
-  especiales = "8-37-39-46";
+  function soloNumeros(e){
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key);
+    letras = " 1,2,3,4,5,6,7,8,9,0";
+    especiales = "8-37-39-46";
 
-  tecla_especial = false
-  for(var i in especiales){
-    if(key == especiales[i]){
-      tecla_especial = true;
-      break;
+    tecla_especial = false
+    for(var i in especiales){
+      if(key == especiales[i]){
+        tecla_especial = true;
+        break;
+      }
+    }
+
+    if(letras.indexOf(tecla)==-1 && !tecla_especial){
+      return false;
     }
   }
+  function soloLetras(e){
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+    especiales = "8-37-39-46";
 
-  if(letras.indexOf(tecla)==-1 && !tecla_especial){
-    return false;
-  }
-}
-function soloLetras(e){
-  key = e.keyCode || e.which;
-  tecla = String.fromCharCode(key).toLowerCase();
-  letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-  especiales = "8-37-39-46";
+    tecla_especial = false
+    for(var i in especiales){
+      if(key == especiales[i]){
+        tecla_especial = true;
+        break;
+      }
+    }
 
-  tecla_especial = false
-  for(var i in especiales){
-    if(key == especiales[i]){
-      tecla_especial = true;
-      break;
+    if(letras.indexOf(tecla)==-1 && !tecla_especial){
+      return false;
     }
   }
-
-  if(letras.indexOf(tecla)==-1 && !tecla_especial){
-    return false;
-  }
-}
 </script>
 <script>
   //*******SELEC2********
@@ -418,6 +432,74 @@ function soloLetras(e){
     })
   })
 </script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+            // Step show event 
+            $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
+               //alert("You are on step "+stepNumber+" now");
+               if(stepPosition === 'first'){
+                $("#prev-btn").addClass('disabled');
+               }else if(stepPosition === 'final'){
+                $("#next-btn").addClass('disabled');
+               }else{
+                $("#prev-btn").removeClass('disabled');
+                $("#next-btn").removeClass('disabled');
+               }
+           });
+            
+            // Toolbar extra buttons
+            var btnFinish = $('').text('Finish')
+            .addClass('btn btn-info')
+            .on('click', function(){ alert('Finish Clicked'); });
+            var btnCancel = $('').text('Cancel')
+            .addClass('btn btn-danger')
+            .on('click', function(){ $('#smartwizard').smartWizard("reset"); });                         
+            
+            
+            // Smart Wizard
+            $('#smartwizard').smartWizard({ 
+              selected: 0, 
+              //Estilo de wizard (default, dots, circles)
+              theme: 'arrows',
+              transitionEffect:'fade',
+              showStepURLhash: true,
+              toolbarSettings: {toolbarPosition: 'both',
+              toolbarExtraButtons: [btnFinish, btnCancel]
+            }
+        });
+
+            
+            // External Button Events
+            $("#reset-btn").on("click", function() {
+                // Reset wizard
+                $('#smartwizard').smartWizard("reset");
+                return true;
+            });
+            
+            $("#prev-btn").on("click", function() {
+                // Navigate previous
+                $('#smartwizard').smartWizard("prev");
+                return true;
+            });
+            
+            $("#next-btn").on("click", function() {
+                // Navigate next
+                $('#smartwizard').smartWizard("next");
+                return true;
+            });
+            
+            $("#theme_selector").on("change", function() {
+                // Change theme
+                $('#smartwizard').smartWizard("theme", $(this).val());
+                return true;
+            });
+            
+            // Set selected theme on page refresh
+            $("#theme_selector").change();
+        });   
+  </script>
 
 </body>
 </html>

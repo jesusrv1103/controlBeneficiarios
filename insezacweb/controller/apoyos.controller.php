@@ -129,7 +129,8 @@ public function Apoyos($objPHPExcel,$numRows){
 }
 }
 public function ListarSubprogramas(){
-  $programa=$_POST['programa'];
+  echo "llega";
+  $idPrograma=$_POST['idPrograma'];
 echo '
 <label class="col-sm-3 control-label">Subprograma<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
@@ -142,7 +143,7 @@ echo '
                   <option value="<?php echo $apoyo->idSubprograma?>"> 
                     <?php echo $apoyo->subprograma; ?>
                   </option>
-                  <?php } foreach($this->model->ListarSubprogramas($programa) as $r): 
+                  <?php } foreach($this->model->ListarSubprogramas($idPrograma) as $r): 
                   if($r->subprograma!=$apoyo->subprograma){ ?>
                   ?>
                   <option value="<?php echo $r->idSubprograma; ?>"> 

@@ -144,6 +144,15 @@ public function Crud(){
   }
 }
 
+public function CrudRFC(){
+ $beneficiario = new Beneficiario();
+
+$administracion=true;
+$beneficiarios=true;
+$page="view/beneficiario/beneficiarioRFC.php";
+require_once 'view/index.php';
+}
+
 public function Importar(){
   if (file_exists("./assets/files/beneficiarios.xlsx")) {
   //Agregamos la librería 
