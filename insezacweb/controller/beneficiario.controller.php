@@ -178,7 +178,7 @@ public function Leearchivo($objPHPExcel,$numRows){
     $numRow=2;
     do {
             //echo "Entra";
-     $ben= new Beneficiario;
+     $ben = new Beneficiario;
      $ben->curp = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
      $ben->primerApellido = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
      $ben->segundoApellido = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
@@ -218,16 +218,16 @@ public function Leearchivo($objPHPExcel,$numRows){
      $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();        
      $ben->telefono = $objPHPExcel->getActiveSheet()->getCell('AL'.$numRow)->getCalculatedValue();
      $claveMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
-    // echo $claveMunicipio;
-     $consult=$this->model->ObtenerIdMunicipio($claveMunicipio);
+     //echo "claveMunicipio".$claveMunicipio;
+     $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
+
+
+    // echo $consult;
+    $ben->idMunicipio=$consult->idMunicipio;
      //$ben->idMunicipio=315;
-
-
      // $idRegistro=$this->model->ObtenerIdRegistro($beneficiario->idBeneficiario);
-
-    // echo  $this->model->ObtenerIdMunicipio($claveMunicipio);
-     $ben->idMunicipio=$municipio->idMunicipio;
     // echo  $ben->$idMunicipio;
+    // $ben->idMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
        //Datos de registro
      $ben->usuario=$_SESSION['usuario'];
      $ben->fechaAlta=date("Y-m-d H:i:s");
@@ -276,113 +276,113 @@ public function Eliminar(){
 
     echo   '  
     <div class="modal-body"> 
-    <div class="row">
-    <div class="block-web">
-    <div class="header">
-    <div class="row" style="margin-bottom: 12px;">
-    <div class="col-sm-12">
-    <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Información general de registro</h2>
-    </div>    
-    </div>
-    </div>        
-    <div class="porlets-content" style="margin-bottom: -65px;">
-    <table class="table table-striped">
-    <tbody>
-    <tr>
-    <td>
-    <div class="col-md-12">   
-    <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Beneficiario</b></label>
-    </div>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detalle"><b>Curp:</b></label>
-    <label class="col-sm-7 control-label">'.$infoRegistro->curp.'</label>
-    </div>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detalle"><b>Primer apellido:</b></label>
-    <label class="col-sm-7 control-label">'.$infoRegistro->primerApellido.'</label>
-    </div>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detalle"><b>Segundo apellido:</b></label>
-    <label class="col-sm-7 control-label">'.$infoRegistro->segundoApellido.'</label>
-    </div>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detalle"><b>Nombre(s):</b></label>
-    <label class="col-sm-7 control-label">'.$infoRegistro->nombres.'</label>
-    </div>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <div class="col-md-12">   
-    <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de registro</b></label>
-    </div>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
-    <label class="col-sm-6">'.$infoRegistro->usuario.'</label><br>
-    </div>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detalle"><strong>Dirección:</strong></label>
-    <label class="col-sm-6">'.$infoRegistro->direccion.'</label><br>
-    </div>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detalle"><strong>Fecha y hora de registro:</strong></label>
-    <label class="col-sm-6">'.$infoRegistro->fechaAlta.'</label><br>
-    </div>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detallet"><strong>Estado de registro:</strong></label>
-    <label class="col-sm-6" style="color:#64DD17"><b>'.$infoRegistro->estado.'</b></label><br>
-    </div>
-    </td>
-    </tr>';
-    if($infoActualizacion!=null) {
-      echo '
-      <tr>
-      <td>
-      <div class="col-md-12">   
-      <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de actualización</b></label>
-      </div>
-      </td>
-      </tr>
-      <tr><td><br>';
-      $i=1;
-      foreach ($infoActualizacion as $r):
-        echo '
-        <div class="col-md-6">
-        <label class="col-md-12" lbl-detalle style="color:#607D8B;">'.$i.'° actualización</label>
-        <label class="col-sm-5 lbl-detallet"><strong>Fecha y hora:</strong></label>
-        <label class="col-sm-7">'.$r->fechaActualizacion.'</label><br>
-        <label class="col-sm-5 lbl-detallet"><strong>Usuario:</strong></label>
-        <label class="col-sm-7">'.$r->usuario.'</label><br>
+      <div class="row">
+        <div class="block-web">
+          <div class="header">
+            <div class="row" style="margin-bottom: 12px;">
+              <div class="col-sm-12">
+                <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Información general de registro</h2>
+              </div>    
+            </div>
+          </div>        
+          <div class="porlets-content" style="margin-bottom: -65px;">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="col-md-12">   
+                      <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Beneficiario</b></label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detalle"><b>Curp:</b></label>
+                      <label class="col-sm-7 control-label">'.$infoRegistro->curp.'</label>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detalle"><b>Primer apellido:</b></label>
+                      <label class="col-sm-7 control-label">'.$infoRegistro->primerApellido.'</label>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detalle"><b>Segundo apellido:</b></label>
+                      <label class="col-sm-7 control-label">'.$infoRegistro->segundoApellido.'</label>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detalle"><b>Nombre(s):</b></label>
+                      <label class="col-sm-7 control-label">'.$infoRegistro->nombres.'</label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="col-md-12">   
+                      <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de registro</b></label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
+                      <label class="col-sm-6">'.$infoRegistro->usuario.'</label><br>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detalle"><strong>Dirección:</strong></label>
+                      <label class="col-sm-6">'.$infoRegistro->direccion.'</label><br>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detalle"><strong>Fecha y hora de registro:</strong></label>
+                      <label class="col-sm-6">'.$infoRegistro->fechaAlta.'</label><br>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detallet"><strong>Estado de registro:</strong></label>
+                      <label class="col-sm-6" style="color:#64DD17"><b>'.$infoRegistro->estado.'</b></label><br>
+                    </div>
+                  </td>
+                </tr>';
+                if($infoActualizacion!=null) {
+                  echo '
+                  <tr>
+                    <td>
+                      <div class="col-md-12">   
+                        <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de actualización</b></label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr><td><br>';
+                    $i=1;
+                    foreach ($infoActualizacion as $r):
+                      echo '
+                    <div class="col-md-6">
+                      <label class="col-md-12" lbl-detalle style="color:#607D8B;">'.$i.'° actualización</label>
+                      <label class="col-sm-5 lbl-detallet"><strong>Fecha y hora:</strong></label>
+                      <label class="col-sm-7">'.$r->fechaActualizacion.'</label><br>
+                      <label class="col-sm-5 lbl-detallet"><strong>Usuario:</strong></label>
+                      <label class="col-sm-7">'.$r->usuario.'</label><br>
+                    </div>
+                    '; 
+                    if($i%2==0){
+                      echo "<hr>";
+                    }$i++;
+                    endforeach;
+                    echo '</td></tr>';
+                  }
+                  echo '
+                </tbody>
+              </table>
+            </div><!--/porlets-content--> 
+          </div><!--/block-web--> 
         </div>
-        '; 
-        if($i%2==0){
-          echo "<hr>";
-        }$i++;
-      endforeach;
-      echo '</td></tr>';
+      </div>
+      <div class="modal-footer">
+        <div class="row col-md-6 col-md-offset-6">
+          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+          <a href="?c=Beneficiario&a=Detalles&idBeneficiario='.$idBeneficiario.'" class="btn btn-info btn-sm">Ver detalles de beneficiario</a>
+        </div>
+      </div>';
     }
-    echo '
-    </tbody>
-    </table>
-    </div><!--/porlets-content--> 
-    </div><!--/block-web--> 
-    </div>
-    </div>
-    <div class="modal-footer">
-    <div class="row col-md-6 col-md-offset-6">
-    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
-    <a href="?c=Beneficiario&a=Detalles&idBeneficiario='.$idBeneficiario.'" class="btn btn-info btn-sm">Ver detalles de beneficiario</a>
-    </div>
-    </div>';
   }
-}
 
 

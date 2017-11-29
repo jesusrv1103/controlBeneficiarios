@@ -8,7 +8,7 @@
   <div class="pull-right">
     <ol class="breadcrumb">
       <li><a href="?c=Inicio">Inicio</a></li>
-      <li><a href="?c=direccion">Dirección</a></li>
+      <li><a href="?c=Direccion">Dirección</a></li>
       <li class="active"><?php echo $direccion->idDireccion != null ? 'Actualizar dirección' : 'Alta dirección'; ?></li>
     </ol>
   </div>

@@ -2,7 +2,6 @@
 require_once 'model/programa.php';
 
 class ProgramaController{
-
   private $model;
   public $error;
 
@@ -17,7 +16,6 @@ class ProgramaController{
    $page="view/programa/index.php"; //Vista principal donde se enlistan los programas
    require_once 'view/index.php';
  } 
-
   //Metodo Guardar  si trae un id actualiza, no registra
 public function Guardar(){
   $programa= new Programa();

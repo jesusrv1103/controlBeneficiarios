@@ -7,7 +7,7 @@ class Direccion
 	public $direccion;
 	public $descripcion;
 	public $titular;
-
+	public $estado;
 
 	public function __CONSTRUCT()
 	{
@@ -20,18 +20,13 @@ class Direccion
 			die($e->getMessage());
 		}
 	}
-
-
 		//Metdodo para listar
 	public function Listar()
 	{
 		try
 		{
-
-			$stm = $this->pdo->prepare("SELECT * from direccion where estado='Activo'");
-			
+			$stm = $this->pdo->prepare("SELECT * from direccion where estado='ACTIVO'");
 			$stm->execute();
-
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		}
 		catch(Exception $e)
@@ -39,7 +34,6 @@ class Direccion
 			die($e->getMessage());
 		}
 	}
-
 
 	public function Obtener($id)
 	{
@@ -56,22 +50,15 @@ class Direccion
 			die($e->getMessage());
 		}
 	}
-	public function Eliminar(Direccion $data)
+
+	public function Eliminar($id)
 	{
 		try 
 		{
-			$sql = "UPDATE direccion SET 
-			estado = ?
-			WHERE idDireccion = ?";
+			$stm = $this->pdo
+			->prepare("DELETE FROM direccion WHERE idDireccion = ?");			          
 
-			$this->pdo->prepare($sql)
-			->execute(
-				array(
-					$data->estado,
-					$data->idDireccion
-					
-				)
-			);
+			$stm->execute(array($id));
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -117,6 +104,54 @@ class Direccion
 					$data->estado
 				)
 			);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function Limpiar($nomTabla)
+	{
+		try 
+		{
+			
+			$stm = $this->pdo->prepare("DELETE FROM $nomTabla");			          
+			$stm->execute();
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ImportarDirecciones(Direccion $data){
+		try 
+		{
+			$sql= $this->pdo->prepare("INSERT INTO direccion VALUES(?,?,?,?,?)");
+			$resultado=$sql->execute(
+				array(
+					null,
+					$data->direccion,
+					$data->descripcion,
+					$data->titular,
+					$estado="ACTIVO"
+
+					)
+				);
+
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function Check($valor)
+	{
+		try 
+		{
+			if ($valor==0) {
+				$stm=$this->pdo->prepare("SET GLOBAL FOREIGN_KEY_CHECKS=0");
+			$stm->execute();
+			}else{
+			$stm=$this->pdo->prepare("SET GLOBAL FOREIGN_KEY_CHECKS=1");
+			$stm->execute();
+		}
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
