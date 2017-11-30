@@ -64,7 +64,7 @@ public function Guardar(){
  $beneficiario->nombreVialidad = $_REQUEST['nombreVialidad'];
  $beneficiario->noExterior = $_REQUEST['noExterior'];
  $beneficiario->noInterior = $_REQUEST['noInterior'];
- $beneficiario->idAsentamientos =$_REQUEST['idAsentamientos'];
+ $beneficiario->idAsentamientos =3200200010000;
  $beneficiario->idLocalidad = $_REQUEST['idLocalidad'];
  $beneficiario->entreVialidades = $_REQUEST['entreVialidades'];
  $beneficiario->descripcionUbicacion = $_REQUEST['descripcionUbicacion'];
@@ -93,27 +93,26 @@ public function Guardar(){
 
  $beneficiario->direccion=$_SESSION['direccion'];
  $beneficiario->estado="Activo";
-
- if($beneficiario->idBeneficiario > 0){ 
+ $verificaBen=$this->model->VerificaBeneficiario($beneficiario->curp);
+ if($beneficiario->idBeneficiario > 0 || $verificaBen!=null){ 
   $idRegistro=$this->model->ObtenerIdRegistro($beneficiario->idBeneficiario);
   $beneficiario->idRegistro=$idRegistro->idRegistro;
   $this->model->RegistraActualizacion($beneficiario);
   $this->model->Actualizar($beneficiario);
-
+  $ben = $this->model->Listar($beneficiario->idBeneficiario);
+  $infoApoyo = $this->model->ObtenerInfoApoyo($ben->idBeneficiario);
   $mensaje="Los datos del beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha actualizado correctamente";
 }else{
-
-  $beneficiario->idRegistro=$this->model->RegistraDatosRegistro($beneficiario);
-  $this->model->Registrar($beneficiario);
-  echo "entre </b>";
-  echo $beneficiario->idRegistro;
-  $mensaje="El beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha registrado correctamente";
+ $beneficiario->idRegistro=$this->model->RegistraDatosRegistro($beneficiario);
+ $idBeneficiario=$this->model->Registrar($beneficiario);
+ $mensaje="El beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha registrado correctamente";
+ $ben = $this->model->Listar($idBeneficiario);
+ $infoApoyo = $this->model->ObtenerInfoApoyo($idBeneficiario);
 }
-
 $administracion = true;
 $inicio = false;
 $beneficiarios = false;
-$page="view/beneficiario/index.php";
+$page="view/beneficiario/detalles.php";
 require_once 'view/index.php';
 
 }
@@ -122,35 +121,40 @@ public function Crud(){
   $beneficiario = new Beneficiario();
   if(isset($_REQUEST['curp'])){
     $beneficiario->curp=$_REQUEST['curp'];
-    //$verificaBen=$this->model->VerificaBeneficiario($beneficario->curp);
-    $verificaBen=1;
-    if($verificaBen==1){
+    $verificaBen=$this->model->VerificaBeneficiario($beneficiario->curp);
+    if($verificaBen==null){
       $administracion=true;
       $beneficiarios=true;
       $page="view/beneficiario/beneficiario.php";
       require_once 'view/index.php';
     }else{
-      $mensaje="El beneficiario ya existe, este mensaje aparecera en un recuadro amarillo";
+      $warning=true;
+      $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos son correctos y su <a href='#'>información de registro</a> para comprobar que todo este correcto, si es así, <a href='#'> presione aquí</a> para registrar otro beneficiario, o bien edite su información.";
       $administracion = true;
       $inicio = false;
       $beneficiarios = false;
-      $tipoBen="CURP";
-      $page="view/beneficiario/index.php";
+      $ben = $this->model->Listar($verificaBen->idBeneficiario);
+      $infoApoyo = $this->model->ObtenerInfoApoyo($verificaBen->idBeneficiario);
+      $page="view/beneficiario/detalles.php";
       require_once 'view/index.php';
     }
-  }
-  if(isset($_REQUEST['idBeneficiario'])){
-    $beneficiario = $this->model->Listar($_REQUEST['idBeneficiario']);  
+  }if(isset($_REQUEST['idBeneficiario'])){
+    $administracion=true;
+    $beneficiarios=true;
+    $beneficiario = $this->model->Listar($_REQUEST['idBeneficiario']);
+    $infoApoyo = $this->model->ObtenerInfoApoyo($_REQUEST['idBeneficiario']);
+    $page="view/beneficiario/beneficiario.php";
+    require_once 'view/index.php';
   }
 }
 
 public function CrudRFC(){
  $beneficiario = new Beneficiario();
 
-$administracion=true;
-$beneficiarios=true;
-$page="view/beneficiario/beneficiarioRFC.php";
-require_once 'view/index.php';
+ $administracion=true;
+ $beneficiarios=true;
+ $page="view/beneficiario/beneficiarioRFC.php";
+ require_once 'view/index.php';
 }
 
 public function Importar(){
@@ -392,6 +396,68 @@ public function Eliminar(){
     </div>
     </div>';
   }
+
+public function ListarLocalidades(){
+  $idMunicipio=$_REQUEST['idMunicipio'];
+  $obMunicipio=$this->model->ObtenerMunicipio($idMunicipio);
+  if($obMunicipio!=null){
+  $municipio=$obMunicipio->nombreMunicipio;
+
+  }
+echo '
+             <label class="col-sm-3 control-label">Localidad<strog class="theme_color">*</strog></label>
+              <div class="col-sm-6">
+                <select name="idLocalidad" class="form-control select2" required id="idLocalidad" onchange="ListarAsentamientos()">';
+                 if($beneficiario->idBeneficiario==null){  
+                 echo ' 
+                  <option value=""> 
+                    Seleccione la localidad a la que pertenece el beneficiario
+                  </option> ';
+                  } if($beneficiario->idBeneficiario!=null){ 
+                    echo '
+                  <option value="'. $beneficiario->idLocalidad.'"> 
+                   '. $beneficiario->localidad.'
+                   </option>';
+                 } foreach($this->model->ListarLocalidades($municipio) as $r): 
+                  if($r->localidad!=$beneficiario->localidad){ 
+                  echo '
+                  <option value="'.$r->idLocalidad.'"> 
+                    '. $r->localidad .'
+                  </option> ';
+                  } endforeach; 
+                  echo '
+                </select>
+              </div>';
+}
+
+public function ListarAsentamientos(){
+  $idLocalidad=$_REQUEST['idLocalidad'];
+echo '
+             <label class="col-sm-3 control-label">Asentamiento<strog class="theme_color">*</strog></label>
+              <div class="col-sm-6">
+                <select name="idAsentamiento" class="form-control select2" required>';
+                 if($beneficiario->idBeneficiario==null){  
+                 echo ' 
+                  <option value=""> 
+                    Seleccione la asentamiento a la que pertenece el beneficiario
+                  </option> ';
+                  } if($beneficiario->idBeneficiario!=null){ 
+                    echo '
+                  <option value="'. $beneficiario->idAsentamiento.'"> 
+                   '. $beneficiario->asentamiento.'
+                   </option>';
+                 } foreach($this->model->ListarAsentamientos($localidad) as $r): 
+                  if($r->asentamiento!=$beneficiario->asentamiento){ 
+                  echo '
+                  <option value="'.$r->idAsentamiento.'"> 
+                    '. $r->asentamiento .'
+                  </option> ';
+                  } endforeach; 
+                  echo '
+                </select>
+              </div>';
+}
+
 }
 
 

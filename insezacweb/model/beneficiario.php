@@ -67,6 +67,8 @@ class Beneficiario
 		}
 	}
 
+
+	//Metodo para obtener todos los registros de un beneficiario en especifico, utilizado para editar y par ver detallse
 	public function Listar($id)
 	{
 		try
@@ -77,6 +79,8 @@ class Beneficiario
 				b.primerApellido, 
 				b.segundoApellido,
 				b.nombres, 
+				b.idMunicipio,
+				m.nombreMunicipio,
 				b.idIdentificacion,
 				idOf.identificacion as nomTipoI, 
 				tV.tipoVialidad,
@@ -131,7 +135,9 @@ class Beneficiario
 				grupoVulnerable gV, 
 				asentamientos a, 
 				localidades l, 
-				ingresoMensual iM, beneficiarios  b
+				ingresoMensual iM, 
+				beneficiarios  b,
+				municipio m
 				where  b.idIdentificacion = idOf.idIdentificacion AND   
 				b.idTipoVialidad = tV.idTipoVialidad AND 	
 				b.idEstadoCivil = eC.idEstadoCivil AND 
@@ -144,6 +150,7 @@ class Beneficiario
 				b.idGrupoVulnerable =gV.idGrupoVulnerable AND 
 				b.idAsentamientos = a.idAsentamientos AND 
 				b.idLocalidad = l.idLocalidad AND
+				b.idMunicipio = m.idMunicipio AND
 				b.idBeneficiario = ?");
 
 			$stm->execute(array($id));
@@ -273,6 +280,7 @@ class Beneficiario
 						$data->idMunicipio
 					)
 			);
+			return $this->pdo->lastInsertId();
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -493,6 +501,21 @@ class Beneficiario
 		}
 	}
 
+	public function VerificaBeneficiario($curp)
+	{
+		try 
+		{
+			$sql= $this->pdo->prepare("SELECT * FROM beneficiarios WHERE curp=?");
+			$resultado=$sql->execute(
+				array($curp)
+			);
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
 	public function Listar1()
 	{
 		try
@@ -500,7 +523,7 @@ class Beneficiario
 			//$result = array();
 			$stm = $this->pdo->prepare("SELECT 				
 				*
-				FROM beneficiarios b, registro r, municipio m WHERE b.idRegistro= b.idRegistro AND b.idMunicipio=m.idMunicipio AND r.estado='Activo'");
+				FROM beneficiarios b, registro r, municipio m WHERE b.idRegistro= r.idRegistro AND b.idMunicipio=m.idMunicipio AND r.estado='Activo'");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -647,6 +670,64 @@ class Beneficiario
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		}
 		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ListarLocalidades($municipio)
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("SELECT * FROM localidades WHERE municipio=?");
+			$stm->execute(array($municipio));
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ListarAsentamientos($localidad)
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("SELECT * FROM asentamientos WHERE localidad=?");
+			$stm->execute(array($localidad));
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function ObtenerMunicipio($idMunicipio)
+	{
+		try 
+		{
+			$sql= $this->pdo->prepare("SELECT * FROM municipio WHERE idMunicipio=?");
+			$resultado=$sql->execute(
+				array($idMunicipio)
+			);
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function ObtenerLocalidad($idLocalidad)
+	{
+		try 
+		{
+			$sql= $this->pdo->prepare("SELECT localidad FROM localidades WHERE idLocalidad=?");
+			$resultado=$sql->execute(
+				array($idLocalidad)
+			);
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+		} catch (Exception $e) 
 		{
 			die($e->getMessage());
 		}
