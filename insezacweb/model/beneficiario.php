@@ -8,7 +8,6 @@ class Beneficiario
 	public $estado;
 	public $direccion;
 	public $pdo;
-
 	public $idBeneficiario;
 	public $curp;
 	public $primerApellido;
@@ -16,8 +15,6 @@ class Beneficiario
 	public $nombres;
 	public $email;
 	public $idIdentificacion;
-
-
 	public $idTipoVialidad;
 	public $nombreVialidad;	
 	public $noExterior;
@@ -435,13 +432,14 @@ class Beneficiario
 		try 
 		{
 			$sql =$this->pdo->prepare("INSERT INTO beneficiarios 
-				(curp,primerApellido,segundoApellido,nombres,email,idIdentificacion,idTipoVialidad,
-				nombreVialidad,noExterior,noInterior,idAsentamientos,idLocalidad,entreVialidades,
-				descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,jefeFamilia,idOcupacion,
-				idIngresoMensual, integrantesFamilia, dependientesEconomicos,idVivienda,noHabitantes,
-				viviendaElectricidad,viviendaAgua,viviendaDrenaje,viviendaGas,viviendaTelefono,viviendaInternet,
-				idNivelEstudios,idSeguridadSocial,idDiscapacidad,idGrupoVulnerable,beneficiarioColectivo,
-				idRegistro,fechaNacimiento,genero,perfilSociodemografico,telefono,idMunicipio) values 
+				(idBeneficiario,curp,primerApellido,segundoApellido,nombres,email,
+				idIdentificacion,idTipoVialidad,nombreVialidad,noExterior,noInterior,
+				idAsentamientos,idLocalidad,entreVialidades,descripcionUbicacion,estudioSocioeconomico,
+				idEstadoCivil,jefeFamilia,idOcupacion,idIngresoMensual, integrantesFamilia, 
+				dependientesEconomicos,idVivienda,noHabitantes,viviendaElectricidad,viviendaAgua,
+				viviendaDrenaje,viviendaGas,viviendaTelefono,viviendaInternet,idNivelEstudios,
+				idSeguridadSocial,idDiscapacidad,idGrupoVulnerable,beneficiarioColectivo,idRegistro,
+				fechaNacimiento,genero,perfilSociodemografico,telefono,idMunicipio) values 
 				(?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
@@ -449,9 +447,10 @@ class Beneficiario
 				?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
-				?,?,?,?,?)");
+				?,?,?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
+					null,
 					$data->curp,
 					$data->primerApellido,
 					$data->segundoApellido,
@@ -473,7 +472,6 @@ class Beneficiario
 					$data->idIngresoMensual,
 					$data->integrantesFamilia,
 					$data->dependientesEconomicos,
-					
 					$data->idVivienda,
 					$data->noHabitantes,				
 					$data->viviendaElectricidad,
@@ -521,9 +519,7 @@ class Beneficiario
 		try
 		{
 			//$result = array();
-			$stm = $this->pdo->prepare("SELECT 				
-				*
-				FROM beneficiarios b, registro r, municipio m WHERE b.idRegistro= r.idRegistro AND b.idMunicipio=m.idMunicipio AND r.estado='Activo'");
+			$stm = $this->pdo->prepare("SELECT 	* FROM beneficiarios b, registro r, municipio m WHERE b.idRegistro= r.idRegistro AND b.idMunicipio=m.idMunicipio AND r.estado='Activo'");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -619,7 +615,6 @@ class Beneficiario
 			die($e->getMessage());
 		}
 	}
-
 	public function ObtenerInfoRegistro($idBeneficiario)
 	{
 		try 
@@ -658,7 +653,6 @@ class Beneficiario
 			die($e->getMessage());
 		}
 	}
-
 	public function ObtenerInfoApoyo($idBeneficiario)
 	{
 		try

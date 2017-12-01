@@ -174,20 +174,20 @@ if (!isset($_SESSION['seguridad'])){
              </a> 
            </li><br><br>
            <li> 
+            <a href="?c=Programa"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+              <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b> 
+            </a> 
+          </li><br><br>
+          <li> 
+            <a href="?c=ProgramaSocial"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+             <?php if (isset($programasSociales)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas sociales</b>
+
             <a href="?c=Catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
              <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+
            </a> 
          </li><br><br>
-         <li> 
-          <a href="?c=Programa"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-            <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b> 
-          </a> 
-        </li><br><br>
-        <li> 
-          <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-           <?php if (isset($programasSociales)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas sociales</b>
-         </a> 
-       </li><br><br>
+        
      </ul>
    </li>
  </ul>

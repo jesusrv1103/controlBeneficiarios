@@ -71,11 +71,26 @@
               <tbody>
                <?php foreach($this->model->Listar() as $r): ?>
                 <tr class="gradeA">
+
+                <td><?php echo $r->direccion; ?></td>
+                <td><?php echo $r->descripcion; ?></td>
+                <td><?php echo $r->titular; ?></td>
+               <?php if($_SESSION['tipoUsuario']==1){?>
+                    <td class="center">
+                      <a href="index.php?c=Direccion&a=Crud&idDireccion=<?php echo $r->idDireccion ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
+                    </td>
+                    <td class="center">
+                      <a onclick="eliminarDireccion(<?php echo $r->idDireccion;?>);" class="btn btn-danger btn-sm" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+                    </td>
+                    <?php } ?>
+                  </tr>
+
                   <td></td>
                    <td></td>
                     <td></td>
                      <td></td>
                       <td></td>
+
                 </tr>
               <?php endforeach; ?>
             </tbody>
@@ -108,7 +123,7 @@
             </div>
             <div class="porlets-content" style="margin-bottom: -65px;">
               <p>Importa tu archivo excel con los datos de los direcciones en caso de que haya algun cambio, si no tienes el archivo puedes descargarlo y agregar o eliminar los datos necesarios.</p>
-              <p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">direcciones.xlsx</strong> para poder ser leído correctamente.</p>  
+              <p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">direcciones.xlsx</strong> para poder ser leído correctamente.</p> 
               <br>
               <span class="btn btn-success fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
@@ -137,14 +152,12 @@
     </div><!--/modal-content--> 
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
-
 <div class="modal fade" div-modal-content id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" style="width: 50%;">
     <div class="modal-content" id="div-modal-content">
     </div><!--/modal-content--> 
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
-
 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content  panel default red_border horizontal_border_1">

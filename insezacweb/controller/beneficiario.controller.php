@@ -191,7 +191,7 @@ public function Leearchivo($objPHPExcel,$numRows){
     $numRow=2;
     do {
             //echo "Entra";
-     $ben= new Beneficiario;
+     $ben = new Beneficiario;
      $ben->curp = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
      $ben->primerApellido = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
      $ben->segundoApellido = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
@@ -231,16 +231,9 @@ public function Leearchivo($objPHPExcel,$numRows){
      $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();        
      $ben->telefono = $objPHPExcel->getActiveSheet()->getCell('AL'.$numRow)->getCalculatedValue();
      $claveMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
-    // echo $claveMunicipio;
-     $consult=$this->model->ObtenerIdMunicipio($claveMunicipio);
-     //$ben->idMunicipio=315;
+     $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
+     $ben->idMunicipio=$consult->idMunicipio;
 
-
-     // $idRegistro=$this->model->ObtenerIdRegistro($beneficiario->idBeneficiario);
-
-    // echo  $this->model->ObtenerIdMunicipio($claveMunicipio);
-     $ben->idMunicipio=$municipio->idMunicipio;
-    // echo  $ben->$idMunicipio;
        //Datos de registro
      $ben->usuario=$_SESSION['usuario'];
      $ben->fechaAlta=date("Y-m-d H:i:s");
@@ -249,6 +242,7 @@ public function Leearchivo($objPHPExcel,$numRows){
      if (!$ben->curp == null) {
       $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
       $this->model->ImportarBeneficiario($ben);
+      echo "Importo";
     }
     $numRow+=1;
   } while(!$ben->curp == null);
@@ -396,67 +390,48 @@ public function Eliminar(){
     </div>
     </div>';
   }
+  
+  public function ListarLocalidades(){
+    header('Content-Type: application/json');
+    $idMunicipio=$_REQUEST['idMunicipio'];
+    $obMunicipio=$this->model->ObtenerMunicipio($idMunicipio);
 
-public function ListarLocalidades(){
-  $idMunicipio=$_REQUEST['idMunicipio'];
-  $obMunicipio=$this->model->ObtenerMunicipio($idMunicipio);
-  if($obMunicipio!=null){
-  $municipio=$obMunicipio->nombreMunicipio;
+    if($obMunicipio!=null){
+
+     $municipio=$obMunicipio->nombreMunicipio;
+     $datos = array();
+     $row_array['estado']='ok';
+     array_push($datos, $row_array);
+
+     foreach ($this->model->ListarLocalidades($municipio) as $localidad): 
+
+      $row_array['idLocalidad']  = $localidad->idLocalidad;
+      $row_array['localidad']  = $localidad->localidad;
+      array_push($datos, $row_array);
+
+    endforeach;
 
   }
-echo '
-             <label class="col-sm-3 control-label">Localidad<strog class="theme_color">*</strog></label>
-              <div class="col-sm-6">
-                <select name="idLocalidad" class="form-control select2" required id="idLocalidad" onchange="ListarAsentamientos()">';
-                 if($beneficiario->idBeneficiario==null){  
-                 echo ' 
-                  <option value=""> 
-                    Seleccione la localidad a la que pertenece el beneficiario
-                  </option> ';
-                  } if($beneficiario->idBeneficiario!=null){ 
-                    echo '
-                  <option value="'. $beneficiario->idLocalidad.'"> 
-                   '. $beneficiario->localidad.'
-                   </option>';
-                 } foreach($this->model->ListarLocalidades($municipio) as $r): 
-                  if($r->localidad!=$beneficiario->localidad){ 
-                  echo '
-                  <option value="'.$r->idLocalidad.'"> 
-                    '. $r->localidad .'
-                  </option> ';
-                  } endforeach; 
-                  echo '
-                </select>
-              </div>';
+  echo json_encode($datos, JSON_FORCE_OBJECT);
 }
 
-public function ListarAsentamientos(){
-  $idLocalidad=$_REQUEST['idLocalidad'];
-echo '
-             <label class="col-sm-3 control-label">Asentamiento<strog class="theme_color">*</strog></label>
-              <div class="col-sm-6">
-                <select name="idAsentamiento" class="form-control select2" required>';
-                 if($beneficiario->idBeneficiario==null){  
-                 echo ' 
-                  <option value=""> 
-                    Seleccione la asentamiento a la que pertenece el beneficiario
-                  </option> ';
-                  } if($beneficiario->idBeneficiario!=null){ 
-                    echo '
-                  <option value="'. $beneficiario->idAsentamiento.'"> 
-                   '. $beneficiario->asentamiento.'
-                   </option>';
-                 } foreach($this->model->ListarAsentamientos($localidad) as $r): 
-                  if($r->asentamiento!=$beneficiario->asentamiento){ 
-                  echo '
-                  <option value="'.$r->idAsentamiento.'"> 
-                    '. $r->asentamiento .'
-                  </option> ';
-                  } endforeach; 
-                  echo '
-                </select>
-              </div>';
-}
+  public function ListarAsentamientos(){
+   header('Content-Type: application/json');
+   $idLocalidad=$_REQUEST['idLocalidad'];
+   $obLocalidad=$this->model->ObtenerLocalidad($idLocalidad);
+   if($obLocalidad!=null){
+     $localidad=$obLocalidad->localidad;
+     $datos = array();
+      $row_array['estado']='ok';
+     array_push($datos, $row_array);
+     foreach ($this->model->ListarAsentamientos($localidad) as $asentamiento):     
+      $row_array['idAsentamientos']  = $asentamiento->idAsentamientos;
+      $row_array['nombreAsentamiento']  = $asentamiento->nombreAsentamiento;
+      array_push($datos, $row_array);
+   endforeach;
+  }
+  echo json_encode($datos, JSON_FORCE_OBJECT);
+  }
 
 }
 

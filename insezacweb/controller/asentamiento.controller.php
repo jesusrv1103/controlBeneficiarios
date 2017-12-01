@@ -105,10 +105,9 @@ class AsentamientoController{
 			require_once 'view/index.php';
 		}
 	}
-
 	public function Eliminar(){
 		if (isset($_POST['idAsentamientos'])){
-			//echo $_POST['idAsentamientos'];
+			$this->model->Eliminar($_POST['idAsentamientos']);
 			$catalogos=true;
 			$asentamientos=true;
 			$mensaje="success";

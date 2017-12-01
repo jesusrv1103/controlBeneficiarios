@@ -41,7 +41,7 @@
                     <a data-toggle="dropdown" class="btn btn-sm btn-success dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar<span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu" >
                       <li><a data-toggle="modal" data-target="#modalBuscarCurp" href="#modalBuscarCurp">Benenficiario CURP</a></li>
-                      <li><a href="?c=Beneficiario&a=CrudRFC&nuevoRegistro=true">Beneficiario RFC</a></li>
+                      <li><a  data-toggle="modal" data-target="#modalBuscarRFC" href="#modalBuscarCurp">Beneficiario RFC</a></li>
                     </ul>
                   </div>
                   <div class="btn-group">
@@ -278,6 +278,38 @@
                 <div class="form-group">
                   <div class="col-sm-10">
                     <input name="curp"  maxlength="18" id="curp" type="text" required parsley-regexp="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required parsley-rangelength="[18,18]"  onkeyup="mayus(this);" onchange="curp2date();" class="form-control" required placeholder="Ingrese la curp del beneficiario">
+                  </div>
+                </div><!--/form-group-->
+            </div><!--/porlets-content--> 
+          </div><!--/block-web--> 
+        </div>
+      </div>
+      <div class="modal-footer" style="margin-top: -10px;">
+        <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
+          <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-sm btn-primary">Aceptar</button>
+        </div>
+      </div>
+    </form>
+  </div><!--/modal-content--> 
+</div><!--/modal-dialog--> 
+</div><!--/modal-fade--> 
+
+
+<div class="modal fade" id="modalBuscarRFC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content panel default blue_border horizontal_border_1">
+     <form action="?c=Beneficiario&a=CrudRFC" enctype="multipart/form-data" method="post" parsley-validate novalidate>
+      <div class="modal-body"> 
+        <div class="row">
+          <div class="block-web">
+            <div class="header">
+              <h3 class="content-header h3subtitulo">&nbsp;Beneficiario por RFC</h3>
+            </div>
+            <div class="porlets-content" style="margin-bottom: -50px;">
+                <div class="form-group">
+                  <div class="col-sm-10">
+                    <input name="curp"  maxlength="13" id="curp" type="text" required parsley-regexp="([A-Z,Ñ,&]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\d]{3})"   required parsley-rangelength="[12,13]"  onkeyup="mayus(this);" onchange="curp2date();" class="form-control" required placeholder="Ingrese el RFC del beneficiario">
                   </div>
                 </div><!--/form-group-->
             </div><!--/porlets-content--> 

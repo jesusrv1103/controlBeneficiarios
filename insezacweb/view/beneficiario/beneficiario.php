@@ -243,10 +243,10 @@
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Municipio<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
-														<select name="idMunicipio" class="form-control select2" required style="width: 100%;" id="idMunicipio" onchange="listarLocalidades()">
+														<select name="idMunicipio" class="form-control select2" required style="width: 100%;" id="selectMunicipios" onchange="listarLocalidades()">
 															<?php if($beneficiario->idBeneficiario==null){ ?>   
 															<option value=""> 
-																Seleccione el Municipio  al  que pertenece el beneficiario
+																Seleccione el municipio al que pertenece el beneficiario
 															</option>
 															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
 															<option value="<?php echo $beneficiario->idMunicipio?>"> 
@@ -262,16 +262,45 @@
 														</select>
 													</div>
 												</div><!--/form-group-->
+												
 
-												<div class="form-group" id="idLocalidades">
-													
+												<div class="form-group">
+													<label class="col-sm-3 control-label">Localidad<strog class="theme_color">*</strog></label>
+													<div class="col-sm-6">
+														<select name="idLocalidad" class="form-control select2" required id="selectLocalidades" onchange="listarAsentamientos()" style="width: 100%">		<?php if($beneficiario->idBeneficiario==null){  ?>
+															<option value=""> 
+																Seleccione la localidad a la que pertenece el beneficiario
+															</option> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idLocalidad ?>"> 
+																<?php echo  $beneficiario->localidad ?>
+															</option>
+															<?php } ?>
+														</select>
+													</div>
 												</div><!--/form-group-->
-
-												<label class="col-sm-3 control-label">IdLocalidad</label><input id="idLocalidad" type="number">
 
 												<div class="form-group" id="idAsentamientos">
-													
-												</div><!--/form-group-->
+													<label class="col-sm-3 control-label">Asentamiento<strog class="theme_color">*</strog></label>
+													<div class="col-sm-6">
+														<select name="idAsentamientos" class="form-control select2" required id="selectAsentamientos" style="width: 100%">		
+															<?php if($beneficiario->idBeneficiario==null){  ?>
+															<option value=""> 
+																Seleccione el asentamiento a la que pertenece el beneficiario
+															</option> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idAsentamientos ?>"> 
+																<?php echo  $beneficiario->nombreAsentamiento ?>
+															</option>
+															<?php } ?>
+														</select>
+													</div>
+												</div>
+												<div class="respuesta">
+												</div>
+
+												<div class="respuesta2">
+												</div>
 
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Entre que vialidades<strog class="theme_color">*</strog></label>
@@ -576,22 +605,55 @@
 </script>
 <script type="text/javascript">
 	window.onload=function(){
-		listarLocalidades();
-
+		//listarLocalidades();
 	}
 	listarLocalidades = function (){
-		var idMunicipio = $('#idMunicipio').val();
-		$.post("index.php?c=Beneficiario&a=ListarLocalidades", {idMunicipio: idMunicipio}, function(mensaje) {
-			$("#idLocalidades").html(mensaje);
-		}); 
+		var idMunicipio = $('#selectMunicipios').val();
+		
+		datos = {"idMunicipio":idMunicipio};
+
+		$.ajax({
+			url: "index.php?c=Beneficiario&a=ListarLocalidades",
+			type: "POST",
+			data: datos
+		}).done(function(respuesta){
+			if (respuesta[0].estado === "ok") {
+				//console.log(JSON.stringify(respuesta));
+
+				var selector = document.getElementById("selectLocalidades");
+
+				for (var i =  1; i <= 10; i++) {
+					selector.options[i] = new Option(respuesta[i].localidad,respuesta[i].idLocalidad);
+				}
+
+				//$(".respuesta").html("Localidades:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
+			}
+		});
 	}
 	listarAsentamientos = function (){
-		alert("entro");
-		var  idLocalidad = $('#idLocalidad').val();
-		$.post("index.php?c=Beneficiario&a=ListarAsentamientos", {idLocalidad: idLocalidad}, function(mensaje) {
-			$("#idAsentamientos").html(mensaje);
-		}); 
+
+		var idLocalidad = $('#selectLocalidades').val();
+		
+		datos = {"idLocalidad":idLocalidad};
+
+		$.ajax({
+			url: "index.php?c=Beneficiario&a=ListarAsentamientos",
+			type: "POST",
+			data: datos
+		}).done(function(respuesta){
+			
+			if (respuesta[0].estado === "ok") {
+				
+				console.log(JSON.stringify(respuesta));
+
+				var selector = document.getElementById("selectAsentamientos");
+
+				for (var i =  1; i <= 10; i++) {
+					selector.options[i] = new Option(respuesta[i].nombreAsentamiento,respuesta[i].idAsentamientos);
+				}
+
+				$(".respuesta2").html("Asentamientos:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
+			}
+		});
 	}
-
-
 </script>
