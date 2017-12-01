@@ -419,19 +419,18 @@ class Beneficiario
 			die($e->getMessage());
 		}
 	}
-
 	public function ImportarBeneficiario(Beneficiario $data){
 		try 
 		{
-			$sql =$this->pdo->prepare("INSERT INTO beneficiarios 
-				(idBeneficiario,curp,primerApellido,segundoApellido,nombres,email,
+			$sql= $this->pdo->prepare("INSERT INTO beneficiarios 
+				(curp,primerApellido,segundoApellido,nombres,email,
 				idIdentificacion,idTipoVialidad,nombreVialidad,noExterior,noInterior,
 				idAsentamientos,idLocalidad,entreVialidades,descripcionUbicacion,estudioSocioeconomico,
 				idEstadoCivil,jefeFamilia,idOcupacion,idIngresoMensual, integrantesFamilia, 
 				dependientesEconomicos,idVivienda,noHabitantes,viviendaElectricidad,viviendaAgua,
 				viviendaDrenaje,viviendaGas,viviendaTelefono,viviendaInternet,idNivelEstudios,
 				idSeguridadSocial,idDiscapacidad,idGrupoVulnerable,beneficiarioColectivo,idRegistro,
-				fechaNacimiento,genero,perfilSociodemografico,telefono,idMunicipio) values 
+				fechaNacimiento,genero,perfilSociodemografico,telefono,idMunicipio) VALUES 
 				(?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
@@ -439,10 +438,9 @@ class Beneficiario
 				?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
-				?,?,?,?,?,?)");
+				?,?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
-					null,
 					$data->curp,
 					$data->primerApellido,
 					$data->segundoApellido,
@@ -571,7 +569,7 @@ class Beneficiario
 	{
 		try 
 		{
-			$sql= $this->pdo->prepare("SELECT idMunicipio from municipio where claveMunicipio=$claveMunicipio");
+			$sql= $this->pdo->prepare("SELECT idMunicipio FROM municipio WHERE claveMunicipio=$claveMunicipio");
 			$resultado=$sql->execute();
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
