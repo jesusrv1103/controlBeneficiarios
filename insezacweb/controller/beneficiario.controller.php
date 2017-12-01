@@ -7,7 +7,7 @@ class BeneficiarioController{
   private $model2; 
   private $session;
   public $error;
-
+  public $tipoBen;
   public function __CONSTRUCT(){
     $this->model = new Beneficiario();
     $this->model2 = new Catalogos();
@@ -169,11 +169,12 @@ public function Importar(){
     $objPHPExcel->setActiveSheetIndex(0);
         //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-    $this->Leearchivo($objPHPExcel,$numRows);
+    $this->Beneficiarios($objPHPExcel,$numRows);
     $mensaje="Se ha leído correctamente el archivo <strong>beneficiarios.xlsx</strong>.<br><i class='fa fa-check'></i> Se han insertado correctamente los datos de beneficiarios.";
-    $page="view/beneficiario/index.php";
-    $beneficiarios = true;
+     $beneficiarios = true;
     $catalogos=true;
+    $tipoBen="CURP";
+    $page="view/beneficiario/index.php";
     require_once 'view/index.php';
   }
         //si por algo no cargo el archivo bak_ 
@@ -186,10 +187,11 @@ public function Importar(){
     require_once 'view/index.php';
   }
 }
-public function Leearchivo($objPHPExcel,$numRows){
+public function Beneficiarios($objPHPExcel,$numRows){
   try{
     $numRow=2;
     do {
+
             //echo "Entra";
      $ben = new Beneficiario;
      $ben->curp = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
@@ -231,22 +233,28 @@ public function Leearchivo($objPHPExcel,$numRows){
      $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();        
      $ben->telefono = $objPHPExcel->getActiveSheet()->getCell('AL'.$numRow)->getCalculatedValue();
      $claveMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
-     $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
-     $ben->idMunicipio=$consult->idMunicipio;
-
+     if (!$ben->curp == null) {
+         //echo $ben->idMunicipio;
        //Datos de registro
-     $ben->usuario=$_SESSION['usuario'];
+    $ben->usuario=$_SESSION['usuario'];
      $ben->fechaAlta=date("Y-m-d H:i:s");
      $ben->direccion=$_SESSION['direccion'];
      $ben->estado="Activo";
-     if (!$ben->curp == null) {
+        $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
+    $ben->idMunicipio=$consult->idMunicipio;
+      //echo $ben->curp;
       $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
-      $this->model->ImportarBeneficiario($ben);
-      echo "Importo";
+      //echo $ben->idRegistro;
+      
+    $this->model->ImportarBeneficiario($ben);
+   
+      //echo "ya importo";
     }
-    $numRow+=1;
-  } while(!$ben->curp == null);
 
+    $numRow+=1;
+//echo $numRow;
+  } while(!$ben->curp == null);
+  //echo "SALIO";
 }catch (Exception $e) {
   $error=true;
   $mensaje="Error al insertar datos del archivo";
