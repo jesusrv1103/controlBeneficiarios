@@ -648,7 +648,7 @@
 
 				var selector = document.getElementById("selectAsentamientos");
 
-				for (var i =  1; i <= 10; i++) {
+				for (var i =  1; i <= 20; i++) {
 					selector.options[i] = new Option(respuesta[i].nombreAsentamiento,respuesta[i].idAsentamientos);
 				}
 
