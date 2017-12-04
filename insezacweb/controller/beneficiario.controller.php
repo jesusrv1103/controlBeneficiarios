@@ -171,7 +171,7 @@ public function Importar(){
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
     $this->Beneficiarios($objPHPExcel,$numRows);
     $mensaje="Se ha leído correctamente el archivo <strong>beneficiarios.xlsx</strong>.<br><i class='fa fa-check'></i> Se han insertado correctamente los datos de beneficiarios.";
-     $beneficiarios = true;
+    $beneficiarios = true;
     $catalogos=true;
     $tipoBen="CURP";
     $page="view/beneficiario/index.php";
@@ -236,18 +236,18 @@ public function Beneficiarios($objPHPExcel,$numRows){
      if (!$ben->curp == null) {
          //echo $ben->idMunicipio;
        //Datos de registro
-    $ben->usuario=$_SESSION['usuario'];
-     $ben->fechaAlta=date("Y-m-d H:i:s");
-     $ben->direccion=$_SESSION['direccion'];
-     $ben->estado="Activo";
-        $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
-    $ben->idMunicipio=$consult->idMunicipio;
+      $ben->usuario=$_SESSION['usuario'];
+      $ben->fechaAlta=date("Y-m-d H:i:s");
+      $ben->direccion=$_SESSION['direccion'];
+      $ben->estado="Activo";
+      $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
+      $ben->idMunicipio=$consult->idMunicipio;
       //echo $ben->curp;
       $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
       //echo $ben->idRegistro;
       
-    $this->model->ImportarBeneficiario($ben);
-   
+      $this->model->ImportarBeneficiario($ben);
+
       //echo "ya importo";
     }
 
@@ -403,7 +403,7 @@ public function Eliminar(){
     header('Content-Type: application/json');
     $idMunicipio=$_REQUEST['idMunicipio'];
     $obMunicipio=$this->model->ObtenerMunicipio($idMunicipio);
-
+    
     if($obMunicipio!=null){
 
      $municipio=$obMunicipio->nombreMunicipio;
@@ -412,34 +412,31 @@ public function Eliminar(){
      array_push($datos, $row_array);
 
      foreach ($this->model->ListarLocalidades($municipio) as $localidad): 
-
       $row_array['idLocalidad']  = $localidad->idLocalidad;
       $row_array['localidad']  = $localidad->localidad;
       array_push($datos, $row_array);
-
     endforeach;
-
   }
   echo json_encode($datos, JSON_FORCE_OBJECT);
 }
 
-  public function ListarAsentamientos(){
-   header('Content-Type: application/json');
-   $idLocalidad=$_REQUEST['idLocalidad'];
-   $obLocalidad=$this->model->ObtenerLocalidad($idLocalidad);
-   if($obLocalidad!=null){
-     $localidad=$obLocalidad->localidad;
-     $datos = array();
-      $row_array['estado']='ok';
-     array_push($datos, $row_array);
-     foreach ($this->model->ListarAsentamientos($localidad) as $asentamiento):     
-      $row_array['idAsentamientos']  = $asentamiento->idAsentamientos;
-      $row_array['nombreAsentamiento']  = $asentamiento->nombreAsentamiento;
-      array_push($datos, $row_array);
-   endforeach;
-  }
-  echo json_encode($datos, JSON_FORCE_OBJECT);
-  }
+public function ListarAsentamientos(){
+ header('Content-Type: application/json');
+ $idLocalidad=$_REQUEST['idLocalidad'];
+ $obLocalidad=$this->model->ObtenerLocalidad($idLocalidad);
+ if($obLocalidad!=null){
+   $localidad=$obLocalidad->localidad;
+   $datos = array();
+   $row_array['estado']='ok';
+   array_push($datos, $row_array);
+   foreach ($this->model->ListarAsentamientos($localidad) as $asentamiento):     
+    $row_array['idAsentamientos']  = $asentamiento->idAsentamientos;
+    $row_array['nombreAsentamiento']  = $asentamiento->nombreAsentamiento;
+    array_push($datos, $row_array);
+  endforeach;
+}
+echo json_encode($datos, JSON_FORCE_OBJECT);
+}
 
 }
 

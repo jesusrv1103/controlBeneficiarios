@@ -296,11 +296,6 @@
 														</select>
 													</div>
 												</div>
-												<div class="respuesta">
-												</div>
-
-												<div class="respuesta2">
-												</div>
 
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Entre que vialidades<strog class="theme_color">*</strog></label>
@@ -609,9 +604,7 @@
 	}
 	listarLocalidades = function (){
 		var idMunicipio = $('#selectMunicipios').val();
-		
 		datos = {"idMunicipio":idMunicipio};
-
 		$.ajax({
 			url: "index.php?c=Beneficiario&a=ListarLocalidades",
 			type: "POST",
@@ -619,40 +612,35 @@
 		}).done(function(respuesta){
 			if (respuesta[0].estado === "ok") {
 				//console.log(JSON.stringify(respuesta));
-
 				var selector = document.getElementById("selectLocalidades");
-
-				for (var i =  1; i <= 10; i++) {
-					selector.options[i] = new Option(respuesta[i].localidad,respuesta[i].idLocalidad);
+				selector.options[0] = new Option("Seleccione la localidad a la que pertenece el beneficiario","");
+				var selector2 = document.getElementById("selectAsentamientos");
+				selector2.options[0] = new Option("Seleccione el asentamiento al que petenece el beneficiario","");
+				for (var i in respuesta) {
+					var j=parseInt(i)+1;
+					selector.options[j] = new Option(respuesta[i].localidad,respuesta[i].idLocalidad);
 				}
-
 				//$(".respuesta").html("Localidades:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
 			}
 		});
 	}
 	listarAsentamientos = function (){
-
 		var idLocalidad = $('#selectLocalidades').val();
-		
 		datos = {"idLocalidad":idLocalidad};
-
 		$.ajax({
 			url: "index.php?c=Beneficiario&a=ListarAsentamientos",
 			type: "POST",
 			data: datos
 		}).done(function(respuesta){
-			
 			if (respuesta[0].estado === "ok") {
-				
 				console.log(JSON.stringify(respuesta));
-
 				var selector = document.getElementById("selectAsentamientos");
-
-				for (var i =  1; i <= 20; i++) {
-					selector.options[i] = new Option(respuesta[i].nombreAsentamiento,respuesta[i].idAsentamientos);
+				selector.options[0] = new Option("Seleccione el asentamiento al que petenece el beneficiario","");
+				for (var i in respuesta) {
+					var j=parseInt(i)+1;
+					selector.options[j] = new Option(respuesta[i].nombreAsentamiento,respuesta[i].idAsentamientos);
 				}
-
-				$(".respuesta2").html("Asentamientos:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
+				//$(".respuesta2").html("Asentamientos:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
 			}
 		});
 	}

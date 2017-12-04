@@ -680,7 +680,7 @@ class Beneficiario
 			die($e->getMessage());
 		}
 	}
-	public function ListarAsentamientos($localidad)
+		public function ListarAsentamientos($localidad)
 	{
 		try
 		{
