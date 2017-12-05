@@ -1,16 +1,19 @@
 <?php
 require_once 'model/beneficiario.php';
 require_once 'model/catalogos.php';
+require_once 'model/beneficiariorfc.php';
 class BeneficiarioController{
   private $pdo;
   private $model;
   private $model2; 
+  private $model3;
   private $session;
   public $error;
 
   public function __CONSTRUCT(){
     $this->model = new Beneficiario();
     $this->model2 = new Catalogos();
+    $this->model3= new Beneficiariorfc();    
   }
   public function Index(){
    $tipoBen="CURP";
