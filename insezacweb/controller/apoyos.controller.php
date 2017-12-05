@@ -129,30 +129,31 @@ public function Apoyos($objPHPExcel,$numRows){
 }
 }
 public function ListarSubprogramas(){
-  echo "llega";
   $idPrograma=$_POST['idPrograma'];
 echo '
 <label class="col-sm-3 control-label">Subprograma<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-                <select name="idSubprograma" class="form-control select2" required>
-                  <?php if($apoyo->idApoyo==null){ ?>   
+                <select name="idSubprograma" class="form-control select2" required>';
+                 if($apoyo->idApoyo==null){  
+                 echo ' 
                   <option value=""> 
                     Seleccione la subprograma a la que pertenece el beneficiario
-                  </option>
-                  <?php } if($apoyo->idApoyo!=null){ ?>   
-                  <option value="<?php echo $apoyo->idSubprograma?>"> 
-                    <?php echo $apoyo->subprograma; ?>
-                  </option>
-                  <?php } foreach($this->model->ListarSubprogramas($idPrograma) as $r): 
-                  if($r->subprograma!=$apoyo->subprograma){ ?>
-                  ?>
-                  <option value="<?php echo $r->idSubprograma; ?>"> 
-                    <?php echo $r->subprograma; ?>
-                  </option>
-                  <?php } endforeach; ?>
+                  </option> ';
+                  } if($apoyo->idApoyo!=null){ 
+                    echo '
+                  <option value="'. $apoyo->idSubprograma.'"> 
+                   '. $apoyo->subprograma.'
+                   </option>';
+                 } foreach($this->model->ListarSubprogramas($idPrograma) as $r): 
+                  if($r->subprograma!=$apoyo->subprograma){ 
+                  echo '
+                  <option value="'.$r->idSubprograma.'"> 
+                    '. $r->subprograma .'
+                  </option> ';
+                  } endforeach; 
+                  echo '
                 </select>
-              </div> 
-';
+              </div>';
 }
 public function InfoApoyo(){
     $idApoyo = $_POST['idApoyo'];

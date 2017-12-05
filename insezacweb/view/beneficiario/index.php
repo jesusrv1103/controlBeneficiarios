@@ -33,8 +33,8 @@
                     <div class="btn-group">
                      <a data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-eye"></i>&nbsp;Ver<span class="caret"></span></a>
                      <ul role="menu" class="dropdown-menu">
-                      <li><a href="?c=Beneficiario">Beneficiarios con CURP</a></li>
-                      <li><a href="?c=Beneficiario&a=RFC">Beneficiarios con RFC</a></li>
+                      <li><a href="?c=Beneficiario">Beneficiarios con curp</a></li>
+                      <li><a href="?c=Beneficiario&a=RFC">Beneficiarios con rfc</a></li>
                     </ul>
                   </div>
                   <div class="btn-group">
@@ -52,6 +52,7 @@
                     </ul>
 
                   </div>
+                </div>
                 </b>
               </div>
             </div>    

@@ -44,13 +44,13 @@
 						<form class="" id="frm-beneficiario" action="?c=Beneficiario&a=Guardar" method="post" role="form" enctype="multipart/form-data" parsley-validate novalidate>
 							<div id="smartwizard">
 								<ul>
-									<li><a href="#step-1">General</a></li>
-									<li><a href="#step-2">Vialidad</a></li>
-									<li><a href="#step-3">Estado social</a></li>
-									<li><a href="#step-4">Vivienda</a></li>
+									<li><a href="#general">General</a></li>
+									<li><a href="#vialidad">Vialidad</a></li>
+									<li><a href="#social">Estado social</a></li>
+									<li><a href="#vivienda">Vivienda</a></li>
 								</ul>
 								<div>
-									<div id="step-1" class="">
+									<div id="general" class="">
 										<div class="user-profile-content">
 											<h3 class="h3titulo">Datos generales</h3>
 											<input type="hidden" name="idBeneficiario"  value="<?php echo $beneficiario->idBeneficiario != null ? $beneficiario->idBeneficiario : 0;  ?>"/>
@@ -67,28 +67,28 @@
 											<div class="form-group">
 												<label class="col-sm-3 control-label">Primer Apellido<strog class="theme_color">*</strog></label>
 												<div class="col-sm-6">
-													<input name="primerApellido" maxlength="20" parsley-rangelength="[1,20]" onkeypress=" return soloLetras(event);" onchange="mayus(this);"  value="<?php echo $beneficiario->primerApellido;?>" type="text" class="form-control" required placeholder="Ingrese el primer apellido del beneficiario" />
+													<input name="primerApellido" maxlength="20" parsley-rangelength="[1,20]" onkeypress=" return soloLetras(event);" onkeyup="mayus(this);" onchange="mayus(this);"  value="<?php echo $beneficiario->primerApellido;?>" type="text" class="form-control" required placeholder="Ingrese el primer apellido del beneficiario" />
 												</div>
 											</div><!--/form-group-->
 
 											<div class="form-group">
 												<label class="col-sm-3 control-label">Segundo Apellido</label>
 												<div class="col-sm-6">
-													<input name="segundoApellido" maxlength="20" onchange="mayus(this);"  onkeypress=" return soloLetras(event);" parsley-rangelength="[1,20]" value="<?php echo $beneficiario->segundoApellido;?>" type="text" class="form-control" placeholder="Ingrese el segundo apellido del beneficiario" />
+													<input name="segundoApellido" maxlength="20" onkeyup="mayus(this);"  onchange="mayus(this);"  onkeypress=" return soloLetras(event);" parsley-rangelength="[1,20]" value="<?php echo $beneficiario->segundoApellido;?>" type="text" class="form-control" placeholder="Ingrese el segundo apellido del beneficiario" />
 												</div>
 											</div><!--/form-group-->
 
 											<div class="form-group">
 												<label class="col-sm-3 control-label">Nombre(s)<strog class="theme_color">*</strog></label>
 												<div class="col-sm-6">
-													<input name="nombres" maxlength="30" onkeypress=" return soloLetras(event);" onchange="mayus(this);" value="<?php echo $beneficiario->nombres;?>" type="text" class="form-control" required placeholder="Ingrese el/los nombre(s) del beneficiario"/>
+													<input name="nombres" maxlength="30" onkeypress=" return soloLetras(event);" onkeyup="mayus(this);"  onchange="mayus(this);" value="<?php echo $beneficiario->nombres;?>" type="text" class="form-control" required placeholder="Ingrese el/los nombre(s) del beneficiario"/>
 												</div>
 											</div><!--/form-group-->
 
 											<div class="form-group">
-												<label class="col-sm-3 control-label">Telefono<strog class="theme_color">*</strog></label>
+												<label class="col-sm-3 control-label">Telefono</label>
 												<div class="col-sm-6">
-													<input type="text" value="<?php echo $beneficiario->telefono;?>" class="form-control mask" data-inputmask="'mask':'(999) 999-9999'">
+													<input type="text" placeholder="Ingrese el número de teléfono del beneficiario" name="telefono" value="<?php echo $beneficiario->telefono;?>" class="form-control mask" data-inputmask="'mask':'(999) 999-9999'">
 												</div>
 											</div><!--/form-group-->
 
@@ -190,7 +190,7 @@
 											</div><!--/form-group-->
 										</div>
 									</div>
-									<div id="step-2" class="">
+									<div id="vialidad" class="">
 
 										<!-- <div class="tab-pane animated fadeInRight" id="vialidad">-->
 											<div class="user-profile-content">
@@ -222,7 +222,7 @@
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Nombre de la vialidad<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
-														<input name="nombreVialidad" maxlength="60" onchange="mayus(this);" value="<?php echo $beneficiario->nombreVialidad;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" required/>
+														<input name="nombreVialidad" maxlength="60" onkeyup="mayus(this);"  onchange="mayus(this);" value="<?php echo $beneficiario->nombreVialidad;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" required/>
 													</div>
 												</div><!--/form-group-->
 
@@ -241,12 +241,12 @@
 												</div><!--/form-group-->
 
 												<div class="form-group">
-													<label class="col-sm-3 control-label">Municipio<strog class="theme_color"></strog></label>
+													<label class="col-sm-3 control-label">Municipio<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
-														<select name="idMunicipio" class="form-control select2" required>
+														<select name="idMunicipio" class="form-control select2" required style="width: 100%;" id="selectMunicipios" onchange="listarLocalidades()">
 															<?php if($beneficiario->idBeneficiario==null){ ?>   
 															<option value=""> 
-																Seleccione el Municipio  al  que pertenece el beneficiario
+																Seleccione el municipio al que pertenece el beneficiario
 															</option>
 															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
 															<option value="<?php echo $beneficiario->idMunicipio?>"> 
@@ -262,71 +262,58 @@
 														</select>
 													</div>
 												</div><!--/form-group-->
-
-												<div class="form-group">
-													<label class="col-sm-3 control-label">Asentamiento<strog class="theme_color"></strog></label>
-													<div class="col-sm-6">
-														<select name="idAsentamientos" class="form-control select2" >
-															<?php if($beneficiario->idBeneficiario==null){ ?>   
-															<option value=""> 
-																Seleccione en caso de que el beneficiario pertenezca a un asentamiento
-															</option>
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
-															<option value="<?php echo $beneficiario->idAsentamientos?>"> 
-																<?php echo $beneficiario->nombreAsentamiento; ?>
-															</option>
-															<?php } foreach($this->model2->Listar('asentamientos') as $r): 
-															if($r->nombreAsentamiento!=$beneficiario->nombreAsentamiento){ ?>
-															?>
-															<option value="<?php echo $r->idAsentamientos; ?>"> 
-																<?php echo $r->nombreAsentamiento; ?>
-															</option>
-															<?php } endforeach; ?>
-														</select>
-													</div>
-												</div><!--/form-group-->
+												
 
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Localidad<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
-														<select name="idLocalidad" class="form-control select2" required>
-															<?php if($beneficiario->idBeneficiario==null){ ?>   
+														<select name="idLocalidad" class="form-control select2" required id="selectLocalidades" onchange="listarAsentamientos()" style="width: 100%">		<?php if($beneficiario->idBeneficiario==null){  ?>
 															<option value=""> 
 																Seleccione la localidad a la que pertenece el beneficiario
+															</option> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idLocalidad ?>"> 
+																<?php echo  $beneficiario->localidad ?>
 															</option>
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
-															<option value="<?php echo $beneficiario->idLocalidad?>"> 
-																<?php echo $beneficiario->localidad; ?>
-															</option>
-															<?php } foreach($this->model2->Listar('localidades') as $r): 
-															if($r->localidad!=$beneficiario->localidad){ ?>
-															?>
-															<option value="<?php echo $r->idLocalidad; ?>"> 
-																<?php echo $r->localidad; ?>
-															</option>
-															<?php } endforeach; ?>
+															<?php } ?>
 														</select>
 													</div>
 												</div><!--/form-group-->
 
+												<div class="form-group" id="idAsentamientos">
+													<label class="col-sm-3 control-label">Asentamiento<strog class="theme_color">*</strog></label>
+													<div class="col-sm-6">
+														<select name="idAsentamientos" class="form-control select2" required id="selectAsentamientos" style="width: 100%">		
+															<?php if($beneficiario->idBeneficiario==null){  ?>
+															<option value=""> 
+																Seleccione el asentamiento a la que pertenece el beneficiario
+															</option> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idAsentamientos ?>"> 
+																<?php echo  $beneficiario->nombreAsentamiento ?>
+															</option>
+															<?php } ?>
+														</select>
+													</div>
+												</div>
 
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Entre que vialidades<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
-														<input name="entreVialidades" onchange="mayus(this);" value="<?php echo $beneficiario->entreVialidades;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" />
+														<input name="entreVialidades" onkeyup="mayus(this);"  onchange="mayus(this);" value="<?php echo $beneficiario->entreVialidades;?>" type="text" class="form-control" required placeholder="Ingrese el nombre de su vialidad" />
 													</div>
 												</div><!--/form-group-->
 
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Descripción de la ubicación<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">  
-														<textarea style="height: 60px;" onchange="mayus(this);" name="descripcionUbicacion" placeholder="Ejemplo: Entre las calles perpendiculares Zaragoza y Abasolo" rows="8" cols="68" required><?php echo $beneficiario->descripcionUbicacion;?></textarea>
+														<textarea style="height: 40px; width: 100%;" onkeyup="mayus(this);"  onchange="mayus(this);" name="descripcionUbicacion" placeholder="Ejemplo: Entre las calles perpendiculares Zaragoza y Abasolo" rows="8" cols="68" required><?php echo $beneficiario->descripcionUbicacion;?></textarea>
 													</div>
 												</div><!--/form-group-->
 
 											</div>
 										</div>
-										<div id="step-3" class="">
+										<div id="social" class="">
 											<div class="user-profile-content">
 												<h3 class="h3titulo">Estado Social</h3>
 												<div class="form-group">
@@ -452,7 +439,7 @@
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Dependientes economicos<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
-														<input name="dependientesEconomicos"  maxlength="2" value="<?php echo $beneficiario->dependientesEconomicos;?>" onkeypress=" return soloNumeros(event);"  parsley-type="number" type="text"  class="form-control" required placeholder="Ingrese el numero de personas que dependen  de usted" parsley-range="[1, 20]" />
+														<input name="dependientesEconomicos"  maxlength="2" value="<?php echo $beneficiario->dependientesEconomicos;?>" onkeypress=" return soloNumeros(event);"  parsley-type="number" type="text"  class="form-control" required placeholder="Ingrese el numero de personas que dependen  de usted" parsley-range="[0, 20]" />
 													</div>
 												</div><!--/form-group-->
 
@@ -480,7 +467,7 @@
 												</div><!--/form-group-->
 											</div>
 										</div>
-										<div id="step-4" class="">
+										<div id="vivienda" class="">
 
 											<div class="user-profile-content">
 												<h3 class="h3titulo">Vivienda</h3>
@@ -593,13 +580,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 
-    </script>  
-    <script type="text/javascript">
+</script>  
+<script type="text/javascript">
 
-    	function curp2date() {
-    		var miCurp =document.getElementById('curp').value;
-    		var m = miCurp.match( /^\w{4}(\w{2})(\w{2})(\w{2})/ 
-    			);
+	function curp2date() {
+		var miCurp =document.getElementById('curp').value;
+		var m = miCurp.match( /^\w{4}(\w{2})(\w{2})(\w{2})/ 
+			);
 
 	//miFecha = new Date(año,mes,dia) 
 	var anyo = parseInt(m[1],10)+1900;
@@ -610,4 +597,51 @@
 	var fech = new Date( anyo, mes, dia );
 	document.getElementById("fechaNacimiento").value = fech;
 }
+</script>
+<script type="text/javascript">
+	window.onload=function(){
+		//listarLocalidades();
+	}
+	listarLocalidades = function (){
+		var idMunicipio = $('#selectMunicipios').val();
+		datos = {"idMunicipio":idMunicipio};
+		$.ajax({
+			url: "index.php?c=Beneficiario&a=ListarLocalidades",
+			type: "POST",
+			data: datos
+		}).done(function(respuesta){
+			if (respuesta[0].estado === "ok") {
+				//console.log(JSON.stringify(respuesta));
+				var selector = document.getElementById("selectLocalidades");
+				selector.options[0] = new Option("Seleccione la localidad a la que pertenece el beneficiario","");
+				var selector2 = document.getElementById("selectAsentamientos");
+				selector2.options[0] = new Option("Seleccione el asentamiento al que petenece el beneficiario","");
+				for (var i in respuesta) {
+					var j=parseInt(i)+1;
+					selector.options[j] = new Option(respuesta[i].localidad,respuesta[i].idLocalidad);
+				}
+				//$(".respuesta").html("Localidades:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
+			}
+		});
+	}
+	listarAsentamientos = function (){
+		var idLocalidad = $('#selectLocalidades').val();
+		datos = {"idLocalidad":idLocalidad};
+		$.ajax({
+			url: "index.php?c=Beneficiario&a=ListarAsentamientos",
+			type: "POST",
+			data: datos
+		}).done(function(respuesta){
+			if (respuesta[0].estado === "ok") {
+				console.log(JSON.stringify(respuesta));
+				var selector = document.getElementById("selectAsentamientos");
+				selector.options[0] = new Option("Seleccione el asentamiento al que petenece el beneficiario","");
+				for (var i in respuesta) {
+					var j=parseInt(i)+1;
+					selector.options[j] = new Option(respuesta[i].nombreAsentamiento,respuesta[i].idAsentamientos);
+				}
+				//$(".respuesta2").html("Asentamientos:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
+			}
+		});
+	}
 </script>
