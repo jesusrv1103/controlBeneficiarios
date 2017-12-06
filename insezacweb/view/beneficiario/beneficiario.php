@@ -41,7 +41,7 @@
 				<!-- SmartWizard html -->
 				<div class="porlets-content">
 					<div  class="form-horizontal row-border" > <!--acomodo-->
-						<form class="" id="frm-beneficiario" action="?c=Beneficiario&a=Guardar" method="post" role="form" enctype="multipart/form-data" parsley-validate novalidate>
+						<form class="" id="frm-beneficiario" action="?c=Beneficiario&a=Guardar" method="post" role="form" enctype="multipart/form-data" parsley-validate novalidate data-toggle="validator">
 							<div id="smartwizard">
 								<ul>
 									<li><a href="#general">General</a></li>
@@ -579,8 +579,9 @@
 <!-- Include jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+  <!-- Include jQuery Validator plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 
-</script>  
 <script type="text/javascript">
 
 	function curp2date() {

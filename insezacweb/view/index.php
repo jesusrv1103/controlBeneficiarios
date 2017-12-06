@@ -9,6 +9,7 @@ if (!isset($_SESSION['seguridad'])){
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>INSEZAC</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
   <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -72,7 +73,7 @@ if (!isset($_SESSION['seguridad'])){
       <div class="brand">
         <!--\\\\\\\ brand Start \\\\\\-->
         <!--div class="logo" style="display:block"><h2 style="margin-top: -5px;"><span class="theme_color">INSEZAC</span></h2></div-->
-        <div class="logo" style="display:block"><img width="100%" style="margin-top: -25px;" src="assets/images/sezac.png"></div>
+        <div style="display:block"><img width="100%" style=" margin-top:-15px" src="assets/images/sezac.png"></div>
 
         <div class="small_logo" style="display:none"><img src="images/s-logo.png" width="50" height="47" alt="s-logo" /> <img src="images/r-logo.png" width="122" height="20" alt="r-logo" /></div>
       </div>
@@ -100,9 +101,9 @@ if (!isset($_SESSION['seguridad'])){
         <br>
         <div class="left_nav_slidebar">
           <ul>
-            <!--li class="theme_border">
+            <li class="theme_border">
               <a href="?c=Inicio&a=Wizard"> <i class="fa fa-home"></i>Wizard</a>
-            </li-->
+            </li>
             <?php if (isset($inicio)){ ?>
             <li class="left_nav_active theme_border"> 
               <?php } else { ?>
