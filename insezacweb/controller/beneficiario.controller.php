@@ -1,16 +1,19 @@
 <?php
 require_once 'model/beneficiario.php';
 require_once 'model/catalogos.php';
+require_once 'model/beneficiariorfc.php';
 class BeneficiarioController{
   private $pdo;
   private $model;
   private $model2; 
+  private $model3;
   private $session;
   public $error;
   public $tipoBen;
   public function __CONSTRUCT(){
     $this->model = new Beneficiario();
     $this->model2 = new Catalogos();
+    $this->model3= new Beneficiariorfc();    
   }
   public function Index(){
    $tipoBen="CURP";
@@ -64,7 +67,7 @@ public function Guardar(){
  $beneficiario->nombreVialidad = $_REQUEST['nombreVialidad'];
  $beneficiario->noExterior = $_REQUEST['noExterior'];
  $beneficiario->noInterior = $_REQUEST['noInterior'];
- $beneficiario->idAsentamientos =$_REQUEST['idAsentamientos'];
+ $beneficiario->idAsentamientos =3200200010000;
  $beneficiario->idLocalidad = $_REQUEST['idLocalidad'];
  $beneficiario->entreVialidades = $_REQUEST['entreVialidades'];
  $beneficiario->descripcionUbicacion = $_REQUEST['descripcionUbicacion'];
@@ -93,27 +96,26 @@ public function Guardar(){
 
  $beneficiario->direccion=$_SESSION['direccion'];
  $beneficiario->estado="Activo";
-
- if($beneficiario->idBeneficiario > 0){ 
+ $verificaBen=$this->model->VerificaBeneficiario($beneficiario->curp);
+ if($beneficiario->idBeneficiario > 0 || $verificaBen!=null){ 
   $idRegistro=$this->model->ObtenerIdRegistro($beneficiario->idBeneficiario);
   $beneficiario->idRegistro=$idRegistro->idRegistro;
   $this->model->RegistraActualizacion($beneficiario);
   $this->model->Actualizar($beneficiario);
-
+  $ben = $this->model->Listar($beneficiario->idBeneficiario);
+  $infoApoyo = $this->model->ObtenerInfoApoyo($ben->idBeneficiario);
   $mensaje="Los datos del beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha actualizado correctamente";
 }else{
-
-  $beneficiario->idRegistro=$this->model->RegistraDatosRegistro($beneficiario);
-  $this->model->Registrar($beneficiario);
-  echo "entre </b>";
-  echo $beneficiario->idRegistro;
-  $mensaje="El beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha registrado correctamente";
+ $beneficiario->idRegistro=$this->model->RegistraDatosRegistro($beneficiario);
+ $idBeneficiario=$this->model->Registrar($beneficiario);
+ $mensaje="El beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha registrado correctamente";
+ $ben = $this->model->Listar($idBeneficiario);
+ $infoApoyo = $this->model->ObtenerInfoApoyo($idBeneficiario);
 }
-
 $administracion = true;
 $inicio = false;
 $beneficiarios = false;
-$page="view/beneficiario/index.php";
+$page="view/beneficiario/detalles.php";
 require_once 'view/index.php';
 
 }
@@ -122,35 +124,40 @@ public function Crud(){
   $beneficiario = new Beneficiario();
   if(isset($_REQUEST['curp'])){
     $beneficiario->curp=$_REQUEST['curp'];
-    //$verificaBen=$this->model->VerificaBeneficiario($beneficario->curp);
-    $verificaBen=1;
-    if($verificaBen==1){
+    $verificaBen=$this->model->VerificaBeneficiario($beneficiario->curp);
+    if($verificaBen==null){
       $administracion=true;
       $beneficiarios=true;
       $page="view/beneficiario/beneficiario.php";
       require_once 'view/index.php';
     }else{
-      $mensaje="El beneficiario ya existe, este mensaje aparecera en un recuadro amarillo";
+      $warning=true;
+      $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos son correctos y su <a href='#'>información de registro</a> para comprobar que todo este correcto, si es así, <a href='#'> presione aquí</a> para registrar otro beneficiario, o bien edite su información.";
       $administracion = true;
       $inicio = false;
       $beneficiarios = false;
-      $tipoBen="CURP";
-      $page="view/beneficiario/index.php";
+      $ben = $this->model->Listar($verificaBen->idBeneficiario);
+      $infoApoyo = $this->model->ObtenerInfoApoyo($verificaBen->idBeneficiario);
+      $page="view/beneficiario/detalles.php";
       require_once 'view/index.php';
     }
-  }
-  if(isset($_REQUEST['idBeneficiario'])){
-    $beneficiario = $this->model->Listar($_REQUEST['idBeneficiario']);  
+  }if(isset($_REQUEST['idBeneficiario'])){
+    $administracion=true;
+    $beneficiarios=true;
+    $beneficiario = $this->model->Listar($_REQUEST['idBeneficiario']);
+    $infoApoyo = $this->model->ObtenerInfoApoyo($_REQUEST['idBeneficiario']);
+    $page="view/beneficiario/beneficiario.php";
+    require_once 'view/index.php';
   }
 }
 
 public function CrudRFC(){
  $beneficiario = new Beneficiario();
 
-$administracion=true;
-$beneficiarios=true;
-$page="view/beneficiario/beneficiarioRFC.php";
-require_once 'view/index.php';
+ $administracion=true;
+ $beneficiarios=true;
+ $page="view/beneficiario/beneficiarioRFC.php";
+ require_once 'view/index.php';
 }
 
 public function Importar(){
@@ -167,7 +174,7 @@ public function Importar(){
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
     $this->Beneficiarios($objPHPExcel,$numRows);
     $mensaje="Se ha leído correctamente el archivo <strong>beneficiarios.xlsx</strong>.<br><i class='fa fa-check'></i> Se han insertado correctamente los datos de beneficiarios.";
-     $beneficiarios = true;
+    $beneficiarios = true;
     $catalogos=true;
     $tipoBen="CURP";
     $page="view/beneficiario/index.php";
@@ -232,16 +239,21 @@ public function Beneficiarios($objPHPExcel,$numRows){
      if (!$ben->curp == null) {
          //echo $ben->idMunicipio;
        //Datos de registro
-    $ben->usuario=$_SESSION['usuario'];
-     $ben->fechaAlta=date("Y-m-d H:i:s");
-     $ben->direccion=$_SESSION['direccion'];
-     $ben->estado="Activo";
-        $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
-    $ben->idMunicipio=$consult->idMunicipio;
+      $ben->usuario=$_SESSION['usuario'];
+      $ben->fechaAlta=date("Y-m-d H:i:s");
+      $ben->direccion=$_SESSION['direccion'];
+      $ben->estado="Activo";
+      $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
+      $ben->idMunicipio=$consult->idMunicipio;
       //echo $ben->curp;
       $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
-      //echo $ben->idRegistro;   
-    $this->model->ImportarBeneficiario($ben);
+
+
+      //echo $ben->idRegistro;
+      
+      $this->model->ImportarBeneficiario($ben);
+
+
       //echo "ya importo";
     }
 
@@ -285,113 +297,153 @@ public function Eliminar(){
 
     echo   '  
     <div class="modal-body"> 
-      <div class="row">
-        <div class="block-web">
-          <div class="header">
-            <div class="row" style="margin-bottom: 12px;">
-              <div class="col-sm-12">
-                <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Información general de registro</h2>
-              </div>    
-            </div>
-          </div>        
-          <div class="porlets-content" style="margin-bottom: -65px;">
-            <table class="table table-striped">
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="col-md-12">   
-                      <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Beneficiario</b></label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="col-md-12">
-                      <label class="col-sm-4 lbl-detalle"><b>Curp:</b></label>
-                      <label class="col-sm-7 control-label">'.$infoRegistro->curp.'</label>
-                    </div>
-                    <div class="col-md-12">
-                      <label class="col-sm-4 lbl-detalle"><b>Primer apellido:</b></label>
-                      <label class="col-sm-7 control-label">'.$infoRegistro->primerApellido.'</label>
-                    </div>
-                    <div class="col-md-12">
-                      <label class="col-sm-4 lbl-detalle"><b>Segundo apellido:</b></label>
-                      <label class="col-sm-7 control-label">'.$infoRegistro->segundoApellido.'</label>
-                    </div>
-                    <div class="col-md-12">
-                      <label class="col-sm-4 lbl-detalle"><b>Nombre(s):</b></label>
-                      <label class="col-sm-7 control-label">'.$infoRegistro->nombres.'</label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="col-md-12">   
-                      <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de registro</b></label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="col-md-12">
-                      <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
-                      <label class="col-sm-6">'.$infoRegistro->usuario.'</label><br>
-                    </div>
-                    <div class="col-md-12">
-                      <label class="col-sm-4 lbl-detalle"><strong>Dirección:</strong></label>
-                      <label class="col-sm-6">'.$infoRegistro->direccion.'</label><br>
-                    </div>
-                    <div class="col-md-12">
-                      <label class="col-sm-4 lbl-detalle"><strong>Fecha y hora de registro:</strong></label>
-                      <label class="col-sm-6">'.$infoRegistro->fechaAlta.'</label><br>
-                    </div>
-                    <div class="col-md-12">
-                      <label class="col-sm-4 lbl-detallet"><strong>Estado de registro:</strong></label>
-                      <label class="col-sm-6" style="color:#64DD17"><b>'.$infoRegistro->estado.'</b></label><br>
-                    </div>
-                  </td>
-                </tr>';
-                if($infoActualizacion!=null) {
-                  echo '
-                  <tr>
-                    <td>
-                      <div class="col-md-12">   
-                        <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de actualización</b></label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr><td><br>';
-                    $i=1;
-                    foreach ($infoActualizacion as $r):
-                      echo '
-                    <div class="col-md-6">
-                      <label class="col-md-12" lbl-detalle style="color:#607D8B;">'.$i.'° actualización</label>
-                      <label class="col-sm-5 lbl-detallet"><strong>Fecha y hora:</strong></label>
-                      <label class="col-sm-7">'.$r->fechaActualizacion.'</label><br>
-                      <label class="col-sm-5 lbl-detallet"><strong>Usuario:</strong></label>
-                      <label class="col-sm-7">'.$r->usuario.'</label><br>
-                    </div>
-                    '; 
-                    if($i%2==0){
-                      echo "<hr>";
-                    }$i++;
-                    endforeach;
-                    echo '</td></tr>';
-                  }
-                  echo '
-                </tbody>
-              </table>
-            </div><!--/porlets-content--> 
-          </div><!--/block-web--> 
-        </div>
+    <div class="row">
+    <div class="block-web">
+    <div class="header">
+    <div class="row" style="margin-bottom: 12px;">
+    <div class="col-sm-12">
+    <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Información general de registro</h2>
+    </div>    
+    </div>
+    </div>        
+    <div class="porlets-content" style="margin-bottom: -65px;">
+    <table class="table table-striped">
+    <tbody>
+    <tr>
+    <td>
+    <div class="col-md-12">   
+    <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Beneficiario</b></label>
+    </div>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <div class="col-md-12">
+    <label class="col-sm-4 lbl-detalle"><b>Curp:</b></label>
+    <label class="col-sm-7 control-label">'.$infoRegistro->curp.'</label>
+    </div>
+    <div class="col-md-12">
+    <label class="col-sm-4 lbl-detalle"><b>Primer apellido:</b></label>
+    <label class="col-sm-7 control-label">'.$infoRegistro->primerApellido.'</label>
+    </div>
+    <div class="col-md-12">
+    <label class="col-sm-4 lbl-detalle"><b>Segundo apellido:</b></label>
+    <label class="col-sm-7 control-label">'.$infoRegistro->segundoApellido.'</label>
+    </div>
+    <div class="col-md-12">
+    <label class="col-sm-4 lbl-detalle"><b>Nombre(s):</b></label>
+    <label class="col-sm-7 control-label">'.$infoRegistro->nombres.'</label>
+    </div>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <div class="col-md-12">   
+    <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de registro</b></label>
+    </div>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <div class="col-md-12">
+    <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
+    <label class="col-sm-6">'.$infoRegistro->usuario.'</label><br>
+    </div>
+    <div class="col-md-12">
+    <label class="col-sm-4 lbl-detalle"><strong>Dirección:</strong></label>
+    <label class="col-sm-6">'.$infoRegistro->direccion.'</label><br>
+    </div>
+    <div class="col-md-12">
+    <label class="col-sm-4 lbl-detalle"><strong>Fecha y hora de registro:</strong></label>
+    <label class="col-sm-6">'.$infoRegistro->fechaAlta.'</label><br>
+    </div>
+    <div class="col-md-12">
+    <label class="col-sm-4 lbl-detallet"><strong>Estado de registro:</strong></label>
+    <label class="col-sm-6" style="color:#64DD17"><b>'.$infoRegistro->estado.'</b></label><br>
+    </div>
+    </td>
+    </tr>';
+    if($infoActualizacion!=null) {
+      echo '
+      <tr>
+      <td>
+      <div class="col-md-12">   
+      <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de actualización</b></label>
       </div>
-      <div class="modal-footer">
-        <div class="row col-md-6 col-md-offset-6">
-          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Beneficiario&a=Detalles&idBeneficiario='.$idBeneficiario.'" class="btn btn-info btn-sm">Ver detalles de beneficiario</a>
+      </td>
+      </tr>
+      <tr><td><br>';
+      $i=1;
+      foreach ($infoActualizacion as $r):
+        echo '
+        <div class="col-md-6">
+        <label class="col-md-12" lbl-detalle style="color:#607D8B;">'.$i.'° actualización</label>
+        <label class="col-sm-5 lbl-detallet"><strong>Fecha y hora:</strong></label>
+        <label class="col-sm-7">'.$r->fechaActualizacion.'</label><br>
+        <label class="col-sm-5 lbl-detallet"><strong>Usuario:</strong></label>
+        <label class="col-sm-7">'.$r->usuario.'</label><br>
         </div>
-      </div>';
+        '; 
+        if($i%2==0){
+          echo "<hr>";
+        }$i++;
+      endforeach;
+      echo '</td></tr>';
     }
+    echo '
+    </tbody>
+    </table>
+    </div><!--/porlets-content--> 
+    </div><!--/block-web--> 
+    </div>
+    </div>
+    <div class="modal-footer">
+    <div class="row col-md-6 col-md-offset-6">
+    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+    <a href="?c=Beneficiario&a=Detalles&idBeneficiario='.$idBeneficiario.'" class="btn btn-info btn-sm">Ver detalles de beneficiario</a>
+    </div>
+    </div>';
   }
+  
+  public function ListarLocalidades(){
+    header('Content-Type: application/json');
+    $idMunicipio=$_REQUEST['idMunicipio'];
+    $obMunicipio=$this->model->ObtenerMunicipio($idMunicipio);
+    
+    if($obMunicipio!=null){
+
+     $municipio=$obMunicipio->nombreMunicipio;
+     $datos = array();
+     $row_array['estado']='ok';
+     array_push($datos, $row_array);
+
+     foreach ($this->model->ListarLocalidades($municipio) as $localidad): 
+      $row_array['idLocalidad']  = $localidad->idLocalidad;
+      $row_array['localidad']  = $localidad->localidad;
+      array_push($datos, $row_array);
+    endforeach;
+  }
+  echo json_encode($datos, JSON_FORCE_OBJECT);
+}
+
+public function ListarAsentamientos(){
+ header('Content-Type: application/json');
+ $idLocalidad=$_REQUEST['idLocalidad'];
+ $obLocalidad=$this->model->ObtenerLocalidad($idLocalidad);
+ if($obLocalidad!=null){
+   $localidad=$obLocalidad->localidad;
+   $datos = array();
+   $row_array['estado']='ok';
+   array_push($datos, $row_array);
+   foreach ($this->model->ListarAsentamientos($localidad) as $asentamiento):     
+    $row_array['idAsentamientos']  = $asentamiento->idAsentamientos;
+    $row_array['nombreAsentamiento']  = $asentamiento->nombreAsentamiento;
+    array_push($datos, $row_array);
+  endforeach;
+}
+echo json_encode($datos, JSON_FORCE_OBJECT);
+}
+
+}
 
 

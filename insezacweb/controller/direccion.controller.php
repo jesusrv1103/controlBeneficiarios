@@ -12,6 +12,8 @@ class DireccionController{
   }
   //Index 
   public function Index(){
+
+
     $administracion=true; 
     $direcciones=true; 
    $page="view/direccion/index.php"; //Vista principal donde se enlistan los programas

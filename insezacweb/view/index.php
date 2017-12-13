@@ -9,6 +9,7 @@ if (!isset($_SESSION['seguridad'])){
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>INSEZAC</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
   <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -48,16 +49,16 @@ if (!isset($_SESSION['seguridad'])){
   <link href="assets/plugins/wizard/css/smart_wizard.css" rel="stylesheet" type="text/css" />
   <!-- Optional SmartWizard theme -->
   <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
-    <!-- Optional SmartWizard theme -->
-    <link href="assets/plugins/wizard/css/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/wizard/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
+  <!-- Optional SmartWizard theme -->
+  <link href="assets/plugins/wizard/css/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/wizard/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
 
 </head>
 <style type="text/css">
 .disabled {
-  pointer-events:none; /*This makes it not clickable*/
-  opacity:0.6;         /*This grays it out to look disabled*/
+  pointer-events:none; /This makes it not clickable/
+  opacity:0.6;         /This grays it out to look disabled/
 }
 .lblheader{
   color:#2196F3;
@@ -72,7 +73,7 @@ if (!isset($_SESSION['seguridad'])){
       <div class="brand">
         <!--\\\\\\\ brand Start \\\\\\-->
         <!--div class="logo" style="display:block"><h2 style="margin-top: -5px;"><span class="theme_color">INSEZAC</span></h2></div-->
-        <div class="logo" style="display:block"><img width="100%" style="margin-top: -25px;" src="assets/images/sezac.png"></div>
+        <div style="display:block"><img width="100%" style=" margin-top:-15px" src="assets/images/sezac.png"></div>
 
         <div class="small_logo" style="display:none"><img src="images/s-logo.png" width="50" height="47" alt="s-logo" /> <img src="images/r-logo.png" width="122" height="20" alt="r-logo" /></div>
       </div>
@@ -100,64 +101,70 @@ if (!isset($_SESSION['seguridad'])){
         <br>
         <div class="left_nav_slidebar">
           <ul>
-            <li class="theme_border">
+            <!--li class="theme_border">
               <a href="?c=Inicio&a=Wizard"> <i class="fa fa-home"></i>Wizard</a>
-            </li>
-           <?php if (isset($inicio)){ ?>
-           <li class="left_nav_active theme_border"> 
-            <?php } else { ?>
-            <li class="theme_border">
-              <?php } ?>
-              <a href="?c=Inicio"> <i class="fa fa-home"></i> Inicio </a>
-            </li>
-            <?php if(isset($administracion)){ ?>
-            <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
-              <ul class="opened" style="display:block">
-                <?php  }else{ ?>
-                <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
-                  <ul>
-                    <?php }  ?>
-                    <li> 
-                      <a href="?c=Beneficiario"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                       <?php if (isset($beneficiarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>
+            </li-->
+            <?php if (isset($inicio)){ ?>
+            <li class="left_nav_active theme_border"> 
+              <?php } else { ?>
+              <li class="theme_border">
+                <?php } ?>
+                <a href="?c=Inicio"> <i class="fa fa-home"></i> Inicio </a>
+              </li>
+              <?php if(isset($administracion)){ ?>
+              <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
+                <ul class="opened" style="display:block">
+                  <?php  }else{ ?>
+                  <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
+                    <ul>
+                      <?php }  ?>
+                      <li> 
+                        <a href="?c=Beneficiario"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                         <?php if (isset($beneficiarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>
+                       </a> 
+                     </li>
+                     <br><br>
+                     <li> 
+                      <a href="?c=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                       <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
                      </a> 
-                   </li>
-                   <br><br>
+                   </li><br><br>
+                   <?php if($_SESSION['tipoUsuario']==1){?> 
+
                    <li> 
-                    <a href="?c=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                     <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+                    <a href="?c=Direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                     <?php if (isset($direccion)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
                    </a> 
                  </li><br><br>
-                 <?php if($_SESSION['tipoUsuario']==1){?> 
                  <li> 
-                  <a href="?c=Usuario"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                   <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
+                  <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                   <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
                  </a> 
                </li><br><br>
                <li> 
-                <a href="?c=Direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                 <?php if (isset($direccion)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
+                <a href="?c=Usuario"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                 <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
                </a> 
              </li><br><br>
-             <li> 
-              <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-               <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
-             </a> 
-           </li><br><br>
-           <?php } ?>
-         </ul>
-       </li>
-       <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-       <?php if(isset($catalogos)){ ?>
-       <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
-        <ul class="opened" style="display:block">
-          <?php  }else{ ?>
-          <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
-            <ul>
-              <?php }  ?>
-              <li> 
-                <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                  <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>                 </a> 
+             <?php } ?>
+           </ul>
+         </li>
+         <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?> 
+         <?php if(isset($catalogos)){ ?>
+         <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+          <ul class="opened" style="display:block">
+            <?php  }else{ ?>
+            <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+              <ul>
+                <?php }  ?>
+                <li> 
+                  <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                    <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>                 </a> 
+                  </li><br><br>
+                  <li> 
+                   <a href="?c=Catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                    <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+                  </a> 
                 </li><br><br>
                 <li> 
                   <a href="?c=Localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
@@ -182,18 +189,14 @@ if (!isset($_SESSION['seguridad'])){
           <li> 
             <a href="?c=ProgramaSocial"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
              <?php if (isset($programasSociales)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas sociales</b>
-
-            <a href="?c=Catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-             <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
-
-           </a> 
+           </a>
          </li><br><br>
-        
-     </ul>
+       </ul>
+     </li>
+   </ul>
    </li>
- </ul>
-  <?php }  ?>
-</div>
+      <?php } ?>
+ </div>
 </div>
 <!--\\\\\\\left_nav end \\\\\\-->
 <div class="contentpanel">
@@ -236,11 +239,13 @@ if (!isset($_SESSION['seguridad'])){
 <script src="assets/plugins/file-uploader/js/jquery.fileupload.js"></script>
 <script src="assets/plugins/validation/parsley.min.js"></script>
 <script src="assets/plugins/select2/dist/js/select2.full.min.js"></script>
- <!-- Include SmartWizard JavaScript source -->
-    <script type="text/javascript" src="assets/plugins/wizard/js/jquery.smartWizard.js"></script>
+<!-- Include SmartWizard JavaScript source -->
+<script type="text/javascript" src="assets/plugins/wizard/js/jquery.smartWizard.js"></script>
+<!-- Include jQuery Validator plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <script>
 
-  //****Subir archivos automaicos*****
+  //*Subir archivos automaicos**
 
   $(document).on('ready', function() {
     'use strict';
@@ -265,7 +270,7 @@ if (!isset($_SESSION['seguridad'])){
     .parent().addClass($.support.fileInput ? undefined : 'disabled');
   });
 
-  //***Elimina archivos existentes para importar otros archivos*******
+  //**Elimina archivos existentes para importar otros archivos**
 
   $('.catalogos').change(function(e) {
     e.preventDefault();
@@ -395,7 +400,7 @@ if (!isset($_SESSION['seguridad'])){
   }
 </script>
 <script>
-  //*******SELEC2********
+  //**SELEC2***
   $(document).on('ready', function()  {
 
     //Initialize Select2 Elements
@@ -436,20 +441,20 @@ if (!isset($_SESSION['seguridad'])){
 </script>
 
 <script type="text/javascript">
-  $(document).ready(function(){
+ /* $(document).ready(function(){
 
             // Step show event 
             $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
                //alert("You are on step "+stepNumber+" now");
                if(stepPosition === 'first'){
                 $("#prev-btn").addClass('disabled');
-               }else if(stepPosition === 'final'){
+              }else if(stepPosition === 'final'){
                 $("#next-btn").addClass('disabled');
-               }else{
+              }else{
                 $("#prev-btn").removeClass('disabled');
                 $("#next-btn").removeClass('disabled');
-               }
-           });
+              }
+            });
             
             // Toolbar extra buttons
             var btnFinish = $('').text('Finish')
@@ -470,7 +475,7 @@ if (!isset($_SESSION['seguridad'])){
               toolbarSettings: {toolbarPosition: 'both',
               toolbarExtraButtons: [btnFinish, btnCancel]
             }
-        });
+          });
 
             
             // External Button Events
@@ -478,30 +483,100 @@ if (!isset($_SESSION['seguridad'])){
                 // Reset wizard
                 $('#smartwizard').smartWizard("reset");
                 return true;
-            });
+              });
             
             $("#prev-btn").on("click", function() {
                 // Navigate previous
                 $('#smartwizard').smartWizard("prev");
                 return true;
-            });
+              });
             
             $("#next-btn").on("click", function() {
                 // Navigate next
                 $('#smartwizard').smartWizard("next");
                 return true;
-            });
+              });
             
             $("#theme_selector").on("change", function() {
                 // Change theme
                 $('#smartwizard').smartWizard("theme", $(this).val());
                 return true;
-            });
+              });
             
             // Set selected theme on page refresh
             $("#theme_selector").change();
+          });   */
+            $(document).ready(function(){
+            
+            // Toolbar extra buttons
+            var btnFinish = $('<button></button>').text('Finish')
+                                             .addClass('btn btn-info')
+                                             .on('click', function(){ 
+                                                    if( !$(this).hasClass('disabled')){ 
+                                                        var elmForm = $("#myForm");
+                                                        if(elmForm){
+                                                            elmForm.validator('validate'); 
+                                                            var elmErr = elmForm.find('.has-error');
+                                                            if(elmErr && elmErr.length > 0){
+                                                                alert('Oops we still have error in the form');
+                                                                return false;    
+                                                            }else{
+                                                                alert('Great! we are ready to submit form');
+                                                                elmForm.submit();
+                                                                return false;
+                                                            }
+                                                        }
+                                                    }
+                                                });
+            var btnCancel = $('<button style="margin-left:-200px;"></button>').text('Cancel')
+                                             .addClass('btn btn-danger')
+                                             .on('click', function(){ 
+                                                    $('#smartwizard').smartWizard("reset"); 
+                                                    $('#myForm').find("input, textarea").val(""); 
+                                                });                         
+            
+            
+            
+            // Smart Wizard
+            $('#smartwizard').smartWizard({ 
+                    selected: 0, 
+                    theme: 'arrows',
+                    transitionEffect:'fade',
+                    toolbarSettings: {toolbarPosition: 'bottom'},
+                    anchorSettings: {
+                                markDoneStep: true, // add done css
+                                markAllPreviousStepsAsDone: true, // When a step selected by url hash, all previous steps are marked done
+                                removeDoneStepOnNavigateBack: true, // While navigate back done step after active step will be cleared
+                                enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
+                            }
+                 });
+            
+            $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+                var elmForm = $("#form-step-" + stepNumber);
+                // stepDirection === 'forward' :- this condition allows to do the form validation 
+                // only on forward navigation, that makes easy navigation on backwards still do the validation when going next
+                if(stepDirection === 'forward' && elmForm){
+                    elmForm.validator('validate'); 
+                    var elmErr = elmForm.children('.has-error');
+                    if(elmErr && elmErr.length > 0){
+                        // Form validation failed
+                        return false;    
+                    }
+                }
+                return true;
+            });
+            
+            $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
+                // Enable finish button only on last step
+                if(stepNumber == 3){ 
+                    $('.btn-finish').removeClass('disabled');  
+                }else{
+                    $('.btn-finish').addClass('disabled');
+                }
+            });                               
+            
         });   
-  </script>
+        </script>
 
-</body>
-</html>
+      </body>
+      </html>
