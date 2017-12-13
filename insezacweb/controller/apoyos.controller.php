@@ -129,32 +129,21 @@ public function Apoyos($objPHPExcel,$numRows){
 }
 }
 public function ListarSubprogramas(){
-  $idPrograma=$_POST['idPrograma'];
-echo '
-<label class="col-sm-3 control-label">Subprograma<strog class="theme_color">*</strog></label>
-              <div class="col-sm-6">
-                <select name="idSubprograma" class="form-control select2" required>';
-                 if($apoyo->idApoyo==null){  
-                 echo ' 
-                  <option value=""> 
-                    Seleccione la subprograma a la que pertenece el beneficiario
-                  </option> ';
-                  } if($apoyo->idApoyo!=null){ 
-                    echo '
-                  <option value="'. $apoyo->idSubprograma.'"> 
-                   '. $apoyo->subprograma.'
-                   </option>';
-                 } foreach($this->model->ListarSubprogramas($idPrograma) as $r): 
-                  if($r->subprograma!=$apoyo->subprograma){ 
-                  echo '
-                  <option value="'.$r->idSubprograma.'"> 
-                    '. $r->subprograma .'
-                  </option> ';
-                  } endforeach; 
-                  echo '
-                </select>
-              </div>';
+    header('Content-Type: application/json');
+     $idPrograma=$_REQUEST['idPrograma'];
+     $datos = array();
+     $row_array['estado']='ok';
+     array_push($datos, $row_array);
+
+     foreach ($this->model->ListarSubprogramas($idPrograma) as $subprograma): 
+      $row_array['idSubprograma']  = $subprograma->idSubprograma;
+      $row_array['subprograma']  = $subprograma->subprograma;
+      array_push($datos, $row_array);
+     endforeach;
+  
+  echo json_encode($datos, JSON_FORCE_OBJECT);
 }
+
 public function InfoApoyo(){
     $idApoyo = $_POST['idApoyo'];
     $infoApoyo=$this->model->ObtenerInfoApoyo($idApoyo);

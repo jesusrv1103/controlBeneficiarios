@@ -4,30 +4,52 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>INSEZAC | LOGIN</title>
   <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/admin.css" rel="stylesheet" type="text/css" />
+
 </head>
 <style>
 body{
   background-color: #FAFAFA;  
   }
+<<<<<<< HEAD
 #logotec{
   max-width: 25%; 
   
   margin-left: 20px; 
+=======
+#logosezac{
+  max-width: 100%; 
+ 
+>>>>>>> 6e09434e5744052227504bd9536cf62b09128497
 }
 #titulo{
   margin-bottom: -120px;
-  margin-top: -50px;
+  margin-top: 0px;
 }
 </style>
 <body>
+<<<<<<< HEAD
   <img src="assets/images/tec.png" style="" id="logotec">
   <div id="titulo">
     <center><h1> Bienvenido a <b>SICEITZ</b></h1></center>
   <h4 id="intro" align="center">Sistema de control escolar instituto tecnologico de Zacatecas</h4>
+=======
+  <div class="row">
+  <div class="col-md-3 col-sm-12">
+     <center><img src="assets/images/sezac.png" style="" id="logosezac"></center>
+  </div>
+  <div class="col-md-9">
+  </div>
+</div>
+ 
+  <div id="titulo">
+    <center><h2> Bienvenido a <b>INSEZAC</b></h2></center>
+  <h5 id="intro" align="center">Sistema para el control del padrón de beneficiarios</h5>
+>>>>>>> 6e09434e5744052227504bd9536cf62b09128497
 </div>
   
       <div class="login_content">

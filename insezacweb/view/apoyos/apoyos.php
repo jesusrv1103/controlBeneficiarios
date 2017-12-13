@@ -8,7 +8,7 @@
   <div class="pull-right">
     <ol class="breadcrumb">
       <li><a href="?c=Inicio">Inicio</a></li>
-      <li><a href="?c=Apoyo">Apoyosn</a></li>
+      <li><a href="?c=Apoyo">Apoyos</a></li>
       <li class="active"><?php echo $apoyo->idApoyo != null ? 'Actualizar apoyo' : 'Registrar apoyo'; ?></li>
     </ol>
   </div>
@@ -37,7 +37,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Beneficiario<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-                <select name="idBeneficiario" class="form-control select2" required>
+                <select name="idBeneficiario" class="form-control select2" required style="width: 100%">
                   <?php if($apoyo->idApoyo==null){ ?>   
                   <option value=""> 
                     Seleccione la curp del beneficiario
@@ -81,7 +81,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Programa<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-                <select name="idPrograma" class="form-control select2" id="idPrograma" onchange="listarSubprogramas()" required>
+                <select name="idPrograma" class="form-control select2" id="selectProgramas" onchange="listarSubprogramas()" required style="width: 100%">
                   <?php if($apoyo->idApoyo==null){ ?>   
                   <option value=""> 
                     Seleccione la subprograma a la que pertenece el beneficiario
@@ -98,14 +98,27 @@
               </select>
             </div>
           </div><!--/form-group-->
-          <div class="form-group" id="idSubprogramas">
-
+        
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Subprograma<strog class="theme_color">*</strog></label>
+            <div class="col-sm-6">
+              <select name="idSubprograma" class="form-control select2" required id="selectSubprogramas" style="width: 100%">   <?php if($apoyo->idApoyo==null){  ?>
+                <option value=""> 
+                  Seleccione el subprograma a la que pertenece el beneficiario
+                </option> 
+                <?php } if($apoyo->idApoyo!=null){ ?>
+                <option value="<?php echo $apoyo->idSubprograma ?>"> 
+                  <?php echo  $apoyo->Subprograma ?>
+                </option>
+                <?php } ?>
+              </select>
+            </div>
           </div><!--/form-group-->
 
           <div class="form-group">
             <label class="col-sm-3 control-label">Caracteristica de apoyo<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
-              <select name="idCaracteristica" class="form-control select2" required>
+              <select name="idCaracteristica" class="form-control select2" required style="width: 100%">
                 <?php if($apoyo->idApoyo==null){ ?>   
                 <option value=""> 
                   Seleccione caracteristica del apoyo
@@ -174,16 +187,25 @@
 </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
 <script type="text/javascript">
-  window.onload=function(){
-    listarSubprogramas();
-  }
+ 
   listarSubprogramas = function (){
-    var idPrograma = $('#idPrograma').val();
-    $.post("index.php?c=Apoyos&a=ListarSubprogramas", {idPrograma: idPrograma}, function(mensaje) {
-      $("#idSubprogramas").html(mensaje);
-    }); 
+    var idPrograma = $('#selectProgramas').val();
+    datos = {"idPrograma":idPrograma};
+    $.ajax({
+      url: "index.php?c=Apoyos&a=ListarSubprogramas",
+      type: "POST",
+      data: datos
+    }).done(function(respuesta){
+      if (respuesta[0].estado === "ok") {
+        console.log(JSON.stringify(respuesta));
+        var selector = document.getElementById("selectSubprogramas");
+        selector.options[0] = new Option("Seleccione el subprograma al que petenece el beneficiario","");
+        for (var i in respuesta) {
+          var j=parseInt(i)+1;
+          selector.options[j] = new Option(respuesta[i].subprograma,respuesta[i].idSubprograma);
+        }
+        //$(".respuesta2").html("Asentamientos:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
+      }
+    });
   }
-
-
-  
 </script>
