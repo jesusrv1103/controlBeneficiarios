@@ -15,16 +15,10 @@
 body{
   background-color: #FAFAFA;  
   }
-<<<<<<< HEAD
-#logotec{
-  max-width: 25%; 
-  
-  margin-left: 20px; 
-=======
+
 #logosezac{
   max-width: 100%; 
  
->>>>>>> 6e09434e5744052227504bd9536cf62b09128497
 }
 #titulo{
   margin-bottom: -120px;
@@ -32,12 +26,7 @@ body{
 }
 </style>
 <body>
-<<<<<<< HEAD
-  <img src="assets/images/tec.png" style="" id="logotec">
-  <div id="titulo">
-    <center><h1> Bienvenido a <b>SICEITZ</b></h1></center>
-  <h4 id="intro" align="center">Sistema de control escolar instituto tecnologico de Zacatecas</h4>
-=======
+
   <div class="row">
   <div class="col-md-3 col-sm-12">
      <center><img src="assets/images/sezac.png" style="" id="logosezac"></center>
@@ -49,7 +38,7 @@ body{
   <div id="titulo">
     <center><h2> Bienvenido a <b>INSEZAC</b></h2></center>
   <h5 id="intro" align="center">Sistema para el control del padrón de beneficiarios</h5>
->>>>>>> 6e09434e5744052227504bd9536cf62b09128497
+
 </div>
   
       <div class="login_content">
