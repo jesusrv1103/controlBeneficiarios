@@ -50,16 +50,20 @@ class Beneficiariorfc
 
 	public function Listar($id)
 	{
+
 		try
 		{
 			$stm = $this->pdo->prepare("SELECT
-				b.idbeneficiarioRFC, 
+				b.idBeneficiarioRFC, 
 				b.RFC, 
+				b.curp,
 				b.primerApellido, 
 				b.segundoApellido,
 				b.nombres, 
 				b.fechaAltaSat,
 				b.sexo,
+				b.numeroInterior,
+				b.numeroExterior,
 				a.nombreAsentamiento,
 				b.idAsentamientos,
 				l.localidad,
@@ -80,7 +84,7 @@ class Beneficiariorfc
 				b.idTipoVialidad = tV.idTipoVialidad AND 	
 				b.idAsentamientos = a.idAsentamientos AND 
 				b.idLocalidad = l.idLocalidad AND
-				b.idbeneficiarioRFC = ?");
+				b.idBeneficiarioRFC = ?");
 
 			$stm->execute(array($id));
 			return $stm->fetch(PDO::FETCH_OBJ);
@@ -90,14 +94,14 @@ class Beneficiariorfc
 			die($e->getMessage());
 		}
 	}
-//499 105 55 66
+
 	public function ListarDatosPersonales()
 	{
 		try
 		{
 			$stm = $this->pdo->prepare("
 				SELECT
-				b.idbeneficiarioRFC, 
+				b.idBeneficiarioRFC, 
 				b.RFC,
 				b.curp, 
 				b.primerApellido, 
@@ -169,7 +173,7 @@ class Beneficiariorfc
 		try
 		{
 			$stm = $this->pdo
-			->prepare("SELECT * FROM beneficiarios WHERE idBeneficiario = ?");
+			->prepare("SELECT * FROM beneficiarioRFC WHERE idBeneficiarioRFC = ?");
 
 
 			$stm->execute(array($idBeneficiario));
@@ -225,7 +229,8 @@ class Beneficiariorfc
 			entreVialidades = ?,
 			descripcionUbicacion = ?,
 			actividad = ?,
-			cobertura = ?
+			cobertura = ?,
+			idRegistro = ?
 			WHERE idBeneficiarioRFC = ?";
 
 			$this->pdo->prepare($sql)
@@ -239,7 +244,6 @@ class Beneficiariorfc
 					$data->fechaAltaSat,
 					$data->sexo,
 					$data->idAsentamientos,
-					$data->idLocalidad,
 					$data->idLocalidad,
 					$data->idTipoVialidad,
 					$data->nombreVialidad,
@@ -393,11 +397,11 @@ class Beneficiariorfc
 		}
 	}
 
-	public function ObtenerIdRegistro($idBeneficiario)
+	public function ObtenerIdRegistro($idBeneficiarioRFC)
 	{
 		try 
 		{
-			$sql= $this->pdo->prepare("SELECT registro.idRegistro from registro, beneficiarios where registro.idregistro=beneficiarios.idregistro and idBeneficiario=$idBeneficiario");
+			$sql= $this->pdo->prepare("SELECT registro.idRegistro from registro, beneficiarioRFC where registro.idRegistro=beneficiarioRFC.idRegistro and idBeneficiarioRFC=$idBeneficiarioRFC");
 			$resultado=$sql->execute();
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
@@ -417,7 +421,7 @@ class Beneficiariorfc
 			die($e->getMessage());
 		}
 	}
-	public function RegistraActualizacion(Beneficiario $data){
+	public function RegistraActualizacion(Beneficiariorfc $data){
 		try 
 		{
 			$sql = "INSERT INTO actualizacion VALUES (?,?,?,?,?)";
@@ -437,12 +441,12 @@ class Beneficiariorfc
 		}
 	}
 
-	public function ObtenerInfoRegistro($idBeneficiario)
+	public function ObtenerInfoRegistro($idBeneficiarioRFC)
 	{
 		try 
 		{
-			$sql= $this->pdo->prepare("SELECT * FROM registro, beneficiarios WHERE beneficiarios.idregistro=registro.idregistro AND beneficiarios.idbeneficiario=?;");
-			$resultado=$sql->execute(array($idBeneficiario));
+			$sql= $this->pdo->prepare("SELECT * FROM registro, beneficiarioRFC WHERE beneficiarioRFC.idRegistro=registro.idRegistro AND beneficiarioRFC.idBeneficiarioRFC=?;");
+			$resultado=$sql->execute(array($idBeneficiarioRFC));
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
 		{
@@ -470,6 +474,24 @@ class Beneficiariorfc
 			$sql= $this->pdo->prepare("SELECT * FROM actualizacion;");
 			$stm->execute(array($id));
 			return $stm->fetch(PDO::FETCH_OBJ);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+
+
+
+
+	public function VerificaBeneficiario($RFC)
+	{
+		try 
+		{
+			$sql= $this->pdo->prepare("SELECT * FROM beneficiarioRFC WHERE RFC=?");
+			$resultado=$sql->execute(
+				array($RFC)
+			);
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());

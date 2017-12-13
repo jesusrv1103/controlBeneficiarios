@@ -1,7 +1,7 @@
 <style type="text/css">
-.lblinfo{
-  color:#2196F3;
-}
+  .lblinfo{
+    color:#2196F3;
+  }
 </style>
 <div class="pull-left breadcrumb_admin clear_both">
  <div class="pull-left page_title theme_color">
@@ -34,7 +34,7 @@
                      <a data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-eye"></i>&nbsp;Ver<span class="caret"></span></a>
                      <ul role="menu" class="dropdown-menu">
                       <li><a href="?c=Beneficiario">Beneficiarios con curp</a></li>
-                      <li><a href="?c=Beneficiario&a=RFC">Beneficiarios con rfc</a></li>
+                      <li><a href="?c=Beneficiario&a=RFC">Beneficiarios con RFC</a></li>
                     </ul>
                   </div>
                   <div class="btn-group">
@@ -53,139 +53,139 @@
 
                   </div>
                 </div>
-                </b>
-              </div>
-            </div>    
+              </b>
+            </div>
+          </div>    
+        </div>
+      </div>
+      <?php if(isset($mensaje)){ if(!isset($error)){?>
+      <div class="row" style="margin-bottom: -20px; margin-top: 20px">
+        <div class="col-md-12">
+          <div class="alert alert-success fade in">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
           </div>
         </div>
-        <?php if(isset($mensaje)){ if(!isset($error)){?>
-        <div class="row" style="margin-bottom: -20px; margin-top: 20px">
-          <div class="col-md-12">
-            <div class="alert alert-success fade in">
-              <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-              <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
-            </div>
-          </div>
-        </div> 
-        <?php } if(isset($error)){ ?>
-        <div class="row" style="margin-bottom: -20px; margin-top: 20px">
-          <div class="col-md-12">
-            <div class="alert alert-danger">
-              <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-              <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
-            </div>
+      </div> 
+      <?php } if(isset($error)){ ?>
+      <div class="row" style="margin-bottom: -20px; margin-top: 20px">
+        <div class="col-md-12">
+          <div class="alert alert-danger">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
           </div>
         </div>
-        <?php } }?>
-        <div class="porlets-content">
-          <div class="table-responsive">
-            <?php if ($tipoBen=="CURP"){ ?>
-            <table class="display table table-bordered table-striped" id="dynamic-table">
-             <thead>
-               <tr>
-                 <td><center><b>Info</b></center></td>
-                 <th>CURP</th>
-                 <th>Nombre de beneficiario</th>
-                 <th>Municipio</th>
-                 <td><center><b>Ver</b></center></td>
-                 <?php if($_SESSION['tipoUsuario']==1){?>
-                 <td><center><b>Editar</b></center></td>
-                 <td><center><b>Borrar</b></center></td>
-                 <?php } ?>
-               </tr>
-             </thead>
-             <tbody>
-              <?php foreach($this->model->Listar1() as $r): ?>
-                <tr class="grade">
-                  <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
-                  <td><?php echo $r->curp ?> </td>
-                  <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
-                  <td><?php echo $r->nombreMunicipio ?> </td>
-                  <td class="center">
-                    <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
-                  </td>
-                  <?php if($_SESSION['tipoUsuario']==1){?>
-                  <td class="center">
-                    <a class="btn btn-primary btn-sm" role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
-                  </td>
-                  <td class="center">
-                   <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-                 </td>
-                 <?php } ?>
-               </tr>
-             <?php endforeach; ?>
-           </tbody>
-           <tfoot>
+      </div>
+      <?php } }?>
+      <div class="porlets-content">
+        <div class="table-responsive">
+          <?php if ($tipoBen=="CURP"){ ?>
+          <table class="display table table-bordered table-striped" id="dynamic-table">
+           <thead>
              <tr>
-              <td><center><b>Info</b></center></td>
-              <th>CURP</th>
-              <th>Nombre de beneficiario</th>
-              <th>Municipio</th>
-              <td><center><b>Ver</b></center></td>
-              <?php if($_SESSION['tipoUsuario']==1){?>
-              <th><center><b>Editar</b></center></th>
-              <td><center><b>Borrar</b></center></td>
-              <?php } ?>        
-            </tr>
-          </tfoot>
-        </table>
-        <?php } ?>
-        <?php if ($tipoBen=="RFC"){ ?>
-        <table class="display table table-bordered table-striped" id="dynamic-table">
-         <thead>
+               <td><center><b>Info</b></center></td>
+               <th>CURP</th>
+               <th>Nombre de beneficiario</th>
+               <th>Municipio</th>
+               <td><center><b>Ver</b></center></td>
+               <?php if($_SESSION['tipoUsuario']==1){?>
+               <td><center><b>Editar</b></center></td>
+               <td><center><b>Borrar</b></center></td>
+               <?php } ?>
+             </tr>
+           </thead>
+           <tbody>
+            <?php foreach($this->model->Listar1() as $r): ?>
+              <tr class="grade">
+                <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+                <td><?php echo $r->curp ?> </td>
+                <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+                <td><?php echo $r->nombreMunicipio ?> </td>
+                <td class="center">
+                  <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+                </td>
+                <?php if($_SESSION['tipoUsuario']==1){?>
+                <td class="center">
+                  <a class="btn btn-primary btn-sm" role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+                </td>
+                <td class="center">
+                 <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+               </td>
+               <?php } ?>
+             </tr>
+           <?php endforeach; ?>
+         </tbody>
+         <tfoot>
            <tr>
-             <td><center><b>Info</b></center></td>
-             <th>RFC</th>
-             <th>CURP</th>
-             <th>Nombre</th>
-             <th>Localidad</th>
-             <td><center><b>Ver</b></center></td>
-             <?php if($_SESSION['tipoUsuario']==1){?>
-             <td><center><b>Editar</b></center></td>
-             <td><center><b>Borrar</b></center></td>
-             <?php } ?>
-           </tr>
-         </thead>
-         <tbody>
-          <?php foreach($this->model3->Listar1() as $r): ?>
-            <tr class="grade">
-              <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
-              <td><?php echo $r->RFC ?> </td>
-              <td><?php echo $r->curp ?> </td>
-              <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
-              <td><?php echo $r->localidad ?> </td>
-             
-              <td class="center">
-                <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
-              </td>
-              <?php if($_SESSION['tipoUsuario']==1){?>
-              <td class="center">
-                <a class="btn btn-primary btn-sm" role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
-              </td>
-              <td class="center">
-               <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro;?>);" href="#modalEliminarRFC"  data-toggle="modal" data-target="#modalEliminarRFC" role="button"><i class="fa fa-eraser"></i></a>
-             </td>
-             <?php } ?>
-           </tr>
-         <?php endforeach; ?>
-       </tbody>
-       <tfoot>
+            <td><center><b>Info</b></center></td>
+            <th>CURP</th>
+            <th>Nombre de beneficiario</th>
+            <th>Municipio</th>
+            <td><center><b>Ver</b></center></td>
+            <?php if($_SESSION['tipoUsuario']==1){?>
+            <th><center><b>Editar</b></center></th>
+            <td><center><b>Borrar</b></center></td>
+            <?php } ?>        
+          </tr>
+        </tfoot>
+      </table>
+      <?php } ?>
+      <?php if ($tipoBen=="RFC"){ ?>
+      <table class="display table table-bordered table-striped" id="dynamic-table">
+       <thead>
          <tr>
-          <td><center><b>Info</b></center></td>
-          <th>RFC</th>
-          <th>CURP</th>
-          <th>Nombre de beneficiario</th>
-          <th>Localidad</th>
-          <td><center><b>Ver</b></center></td>
-          <?php if($_SESSION['tipoUsuario']==1){?>
-          <th><center><b>Editar</b></center></th>
-          <td><center><b>Borrar</b></center></td>
-          <?php } ?>        
-        </tr>
-      </tfoot>
-    </table>
-    <?php } ?>
-  </div><!--/table-responsive-->
+           <td><center><b>Info</b></center></td>
+           <th>RFC</th>
+           <th>CURP</th>
+           <th>Nombre</th>
+           <th>Localidad</th>
+           <td><center><b>Ver</b></center></td>
+           <?php if($_SESSION['tipoUsuario']==1){?>
+           <td><center><b>Editar</b></center></td>
+           <td><center><b>Borrar</b></center></td>
+           <?php } ?>
+         </tr>
+       </thead>
+       <tbody>
+        <?php foreach($this->model3->Listar1() as $r): ?>
+          <tr class="grade">
+            <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistroRFC(<?php echo $r->idBeneficiarioRFC; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+            <td><?php echo $r->RFC ?> </td>
+            <td><?php echo $r->curp ?> </td>
+            <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+            <td><?php echo $r->localidad ?> </td>
+
+            <td class="center">
+              <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Beneficiariorfc&a=Detalles&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+            </td>
+            <?php if($_SESSION['tipoUsuario']==1){?>
+            <td class="center">
+              <a class="btn btn-primary btn-sm" role="button" href="?c=Beneficiariorfc&a=Crud&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC ?>"><i class="fa fa-edit"></i></a>
+            </td>
+            <td class="center">
+             <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiarioRFC(<?php echo $r->idRegistro;?>);" href="#modalEliminarRFC"  data-toggle="modal" data-target="#modalEliminarRFC" role="button"><i class="fa fa-eraser"></i></a>
+           </td>
+           <?php } ?>
+         </tr>
+       <?php endforeach; ?>
+     </tbody>
+     <tfoot>
+       <tr>
+        <td><center><b>Info</b></center></td>
+        <th>RFC</th>
+        <th>CURP</th>
+        <th>Nombre de beneficiario</th>
+        <th>Localidad</th>
+        <td><center><b>Ver</b></center></td>
+        <?php if($_SESSION['tipoUsuario']==1){?>
+        <th><center><b>Editar</b></center></th>
+        <td><center><b>Borrar</b></center></td>
+        <?php } ?>        
+      </tr>
+    </tfoot>
+  </table>
+  <?php } ?>
+</div><!--/table-responsive-->
 </div><!--/porlets-content-->
 </div><!--/block-web-->
 </div><!--/col-md-12-->
@@ -287,8 +287,7 @@
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
           <form action="?c=Beneficiariorfc&a=Eliminar" enctype="multipart/form-data" method="post">
-            hola  jdndsjhds
-            <input hidden type="text" name="idRegistro" id="txtIdRegistro">
+            <input  type="text" name="idRegistro" id="txtIdRegistroRFC">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
           </form>
@@ -310,11 +309,11 @@
               <h3 class="content-header h3subtitulo">&nbsp;Beneficiario por CURP</h3>
             </div>
             <div class="porlets-content" style="margin-bottom: -50px;">
-                <div class="form-group">
-                  <div class="col-sm-10">
-                    <input name="curp"  maxlength="18" id="curp" type="text" required parsley-regexp="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required parsley-rangelength="[18,18]"  onkeyup="mayus(this);" onchange="curp2date();" class="form-control" required placeholder="Ingrese la curp del beneficiario">
-                  </div>
-                </div><!--/form-group-->
+              <div class="form-group">
+                <div class="col-sm-10">
+                  <input name="curp"  maxlength="18" id="curp" type="text" required parsley-regexp="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required parsley-rangelength="[18,18]"  onkeyup="mayus(this);" onchange="curp2date();" class="form-control" required placeholder="Ingrese la curp del beneficiario">
+                </div>
+              </div><!--/form-group-->
             </div><!--/porlets-content--> 
           </div><!--/block-web--> 
         </div>
@@ -342,11 +341,11 @@
               <h3 class="content-header h3subtitulo">&nbsp;Beneficiario por RFC</h3>
             </div>
             <div class="porlets-content" style="margin-bottom: -50px;">
-                <div class="form-group">
-                  <div class="col-sm-10">
-                    <input name="RFC"  maxlength="13" id="RFC" type="text" required parsley-regexp="([A-Z,Ñ,&]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\d]{3})"   required parsley-rangelength="[12,13]"  onkeyup="mayus(this);" class="form-control" required placeholder="Ingrese el RFC del beneficiario">
-                  </div>
-                </div><!--/form-group-->
+              <div class="form-group">
+                <div class="col-sm-10">
+                  <input name="RFC"  maxlength="13" id="RFC" type="text" required parsley-regexp="([A-Z,Ñ,&]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\d]{3})"   required parsley-rangelength="[12,13]"  onkeyup="mayus(this);" class="form-control" required placeholder="Ingrese el RFC del beneficiario">
+                </div>
+              </div><!--/form-group-->
             </div><!--/porlets-content--> 
           </div><!--/block-web--> 
         </div>
@@ -365,13 +364,25 @@
   eliminarBeneficiario = function(idRegistro){
     $('#txtIdRegistro').val(idRegistro);  
   };
-  infoRegistro = function (idBeneficiario){
-    var idBeneficiario=idBeneficiario;
-    $.post("index.php?c=beneficiario&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
-      $("#div-modal-content").html(info);
-    }); 
-  }
-  buscarBeneficiarioCurp = function (){
 
-  }
+  eliminarBeneficiarioRFC = function(idRegistro){
+    $('#txtIdRegistroRFC').val(idRegistro);  
+  };
+  infoRegistro = function (idBeneficiario){
+   // var idBeneficiario=idBeneficiario;
+   $.post("index.php?c=beneficiario&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
+    $("#div-modal-content").html(info);
+  }); 
+ }
+
+   infoRegistroRFC = function (idBeneficiarioRFC){
+    alert(idBeneficiarioRFC);
+   // var idBeneficiario=idBeneficiario;
+   $.post("index.php?c=Beneficiariorfc&a=Inforegistro", {idBeneficiarioRFC: idBeneficiarioRFC}, function(info) {
+    $("#div-modal-content").html(info);
+  }); 
+ }
+ buscarBeneficiarioCurp = function (){
+
+ }
 </script>

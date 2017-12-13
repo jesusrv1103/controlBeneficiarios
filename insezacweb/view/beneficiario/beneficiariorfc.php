@@ -45,19 +45,19 @@
 							<div id="smartwizard">
 								<ul>
 									<li><a href="#step-1">Datos  Fiscales</a></li>
-									<li><a href="#step-2">Datos Generales</a></li>
-									<li><a href="#step-3">Datos Ubicacion</a></li>
+									<li><a href="#step-2">Datos de Representante Legal</a></li>
+									<li><a href="#step-3">Domicilio Fiscal</a></li>
 								</ul>
 								<div>
 									<div id="step-1" class="">
 										<div class="user-profile-content">
 											<h3 class="h3titulo">Datos Fiscales</h3>
-											<input type="hidden" name="idBeneficiarioRFC"  value="<?php echo $beneficiarioRFC->idBeneficiarioRFC != null ? $beneficiarioRFC->idBeneficiarioRFC : 0;  ?>"/>
+											<input type="hidden"  name="idBeneficiarioRFC"  value="<?php echo $beneficiario->idBeneficiarioRFC != null ? $beneficiario->idBeneficiarioRFC : 0;  ?>"/>
 
 											<div class="form-group">
 												<label class="col-sm-3 control-label">RFC<strog class="theme_color">*</strog></label>
 												<div class="col-sm-6">
-													<input name="RFC"  maxlength="13" id="RFC" type="text" required parsley-regexp="([A-Z,Ñ,&]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\d]{3})"   required parsley-rangelength="[12,13]"  onkeyup="mayus(this);"  class="form-control" required placeholder="Ingrese el RFC del beneficiario">
+													<input name="RFC" value="<?php echo $beneficiario->RFC;?>"  maxlength="13" id="RFC" type="text" required parsley-regexp="([A-Z,Ñ,&]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\d]{3})"   required parsley-rangelength="[12,13]"  onkeyup="mayus(this);"  class="form-control" required placeholder="Ingrese el RFC del beneficiario">
 												</div>
 											</div><!--/form-group-->
 
@@ -98,7 +98,7 @@
 									</div>
 									<div id="step-2" class="">
 										<div class="user-profile-content">
-											<h3 class="h3titulo">Datos  Generales</h3>
+											<h3 class="h3titulo">Datos  de Representante Legal</h3>
 											<div class="form-group">
 												<label class="col-sm-3 control-label">CURP<strog class="theme_color">*</strog></label>
 												<div class="col-sm-6">
@@ -133,7 +133,7 @@
 
 										<!-- <div class="tab-pane animated fadeInRight" id="vialidad">-->
 										<div class="user-profile-content">
-											<h3 class="h3titulo">Datos Ubicacion</h3>
+											<h3 class="h3titulo">Domicilio Fiscal</h3>
 											<div class="form-group">
 												<label class="col-sm-3 control-label">Tipo de vialidad<strog class="theme_color">*</strog></label>
 												<div class="col-sm-6">
@@ -168,14 +168,14 @@
 											<div class="form-group">
 												<label class="col-sm-3 control-label">Número exterior<strog class="theme_color">*</strog></label>
 												<div class="col-sm-6">
-													<input name="noExterior" maxlength="8" onkeypress=" return soloNumeros(event);" value="<?php echo $beneficiario->noExterior;?>"  class="form-control" required placeholder="Ingrese el numero exterior de su vivienda" type="text"/>
+													<input name="noExterior" maxlength="8" onkeypress=" return soloNumeros(event);" value="<?php echo $beneficiario->numeroExterior;?>"  class="form-control" required placeholder="Ingrese el numero exterior de su vivienda" type="text"/>
 												</div>
 											</div><!--/form-group-->
 
 											<div class="form-group">
 												<label class="col-sm-3 control-label">Número interior</label>
 												<div class="col-sm-6">
-													<input name="noInterior" maxlength="8"  value="<?php echo $beneficiario->noInterior;?>" class="form-control"  placeholder="Ingrese el nombre de su vialidad" type="text" />
+													<input name="noInterior" maxlength="8"  value="<?php echo $beneficiario->numeroInterior;?>" class="form-control"  placeholder="Ingrese el nombre de su vialidad" type="text" />
 												</div>
 											</div><!--/form-group-->
 
