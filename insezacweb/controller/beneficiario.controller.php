@@ -229,8 +229,6 @@ public function Beneficiarios($objPHPExcel,$numRows){
      $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();        
      $ben->telefono = $objPHPExcel->getActiveSheet()->getCell('AL'.$numRow)->getCalculatedValue();
      $claveMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
-   
-
      if (!$ben->curp == null) {
          //echo $ben->idMunicipio;
        //Datos de registro
@@ -242,10 +240,8 @@ public function Beneficiarios($objPHPExcel,$numRows){
     $ben->idMunicipio=$consult->idMunicipio;
       //echo $ben->curp;
       $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
-      //echo $ben->idRegistro;
-      
+      //echo $ben->idRegistro;   
     $this->model->ImportarBeneficiario($ben);
-   
       //echo "ya importo";
     }
 

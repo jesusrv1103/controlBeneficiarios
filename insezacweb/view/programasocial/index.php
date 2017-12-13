@@ -71,6 +71,7 @@
 							<tbody>
 								<?php foreach($this->model->Listar() as $r): ?>
 									<tr class="gradeA">
+									<!--<td><?php echo $r->idprogramaSocial; ?></td>-->
 										<td><?php echo $r->idDependencia; ?></td>
 										<td><?php echo $r->nombreProgramaSocial; ?></td>
 										<td><?php echo $r->cvePadron; ?></td>
@@ -154,7 +155,7 @@
 							<h3 class="content-header theme_color">&nbsp;Eliminar localidad</h3>
 						</div>
 						<div class="porlets-content" style="margin-bottom: -50px;">
-							<h4>¿Esta segúro que desea eliminar la localidad?</h4>
+							<h4>¿Esta segúro que desea eliminar el Programa Social?</h4>
 						</div><!--/porlets-content--> 
 					</div><!--/block-web--> 
 				</div>
@@ -162,8 +163,8 @@
 		</div>
 		<div class="modal-footer" style="margin-top: -10px;">
 			<div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-				<form action="?c=Localidad&a=Eliminar" enctype="multipart/form-data" method="post">
-					<input hidden type="text" name="idLocalidad" id="txtIdLocalidad">
+				<form action="?c=ProgramaSocial&a=Eliminar" enctype="multipart/form-data" method="post">
+					<input hidden type="text" name="idprogramaSocial" id="txtIdLocalidad">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 					<button type="submit" class="btn btn-danger">Eliminar</button>
 				</form>

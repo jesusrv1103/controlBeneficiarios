@@ -147,6 +147,7 @@ if (!isset($_SESSION['seguridad'])){
            <?php } ?>
          </ul>
        </li>
+       <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
        <?php if(isset($catalogos)){ ?>
        <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
         <ul class="opened" style="display:block">
@@ -191,6 +192,7 @@ if (!isset($_SESSION['seguridad'])){
      </ul>
    </li>
  </ul>
+  <?php }  ?>
 </div>
 </div>
 <!--\\\\\\\left_nav end \\\\\\-->
