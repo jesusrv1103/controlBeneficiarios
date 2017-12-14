@@ -14,7 +14,6 @@ class BeneficiariorfcController{
     
   }
 
-
 //Metodo Guardar  si trae un id actualiza, no registra
   public function Guardar(){
     $beneficiario= new Beneficiariorfc();
@@ -44,7 +43,6 @@ class BeneficiariorfcController{
    $beneficiario->cobertura=$_REQUEST['cobertura'];
 
 
-
   //Datos de registro
    $beneficiario->usuario=$_SESSION['usuario'];
    $beneficiario->fechaAlta=date("Y-m-d H:i:s");
@@ -70,11 +68,12 @@ class BeneficiariorfcController{
     $mensaje="El beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha registrado correctamente";
   }
 
-  $administracion = true;
-  $inicio = false;
-  $beneficiarios = false;
-  $page="view/beneficiario/index.php";
-  require_once 'view/index.php';
+   require_once "controller/beneficiario.controller.php";
+    $controller = new BeneficiarioController;
+    $accion='RFC';
+   
+    // Llama la accion
+    call_user_func( array( $controller, $accion ));
 }
 
 
@@ -211,7 +210,7 @@ public function Crud(){
       require_once 'view/index.php';
     }else{
       $warning=true;
-      $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos son correctos y su <a href='#'>información de registro</a> para comprobar que todo este correcto, si es así, <a href='#'> presione aquí</a> para registrar otro beneficiario, o bien edite su información.";
+      $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos y la información de registro sean correctos y esten actualizados si no es así, porfavor, <a href='?c=Beneficiariorfc&a=Crud&idBeneficiarioRFC=".$beneficiario->idBeneficiarioRFC."'>actualice la información</a>.";
       $administracion = true;
       $inicio = false;
       $beneficiarios = false;
