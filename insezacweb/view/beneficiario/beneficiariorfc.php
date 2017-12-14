@@ -57,7 +57,7 @@
 											<div class="form-group">
 												<label class="col-sm-3 control-label">RFC<strog class="theme_color">*</strog></label>
 												<div class="col-sm-6">
-													<input name="RFC" value="<?php echo $beneficiario->RFC;?>"  maxlength="13" id="RFC" type="text" required parsley-regexp="([A-Z,Ñ,&]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\d]{3})"   required parsley-rangelength="[12,13]"  onkeyup="mayus(this);"  class="form-control" required placeholder="Ingrese el RFC del beneficiario">
+													<input name="RFC" value="<?php echo $beneficiario->RFC;?>"  maxlength="13" id="RFC" type="text" required parsley-regexp="([A-Z,Ñ,&]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\d]{3})"   required parsley-rangelength="[12,13]"  onkeyup="mayus(this);"  class="form-control" required placeholder="Ingrese el RFC del beneficiario" readonly >
 												</div>
 											</div><!--/form-group-->
 
