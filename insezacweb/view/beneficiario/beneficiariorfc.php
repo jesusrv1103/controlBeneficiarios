@@ -5,6 +5,7 @@
 .h3titulo{
 	margin-left: 30px;
 	color:#2196F3;
+	margin-top: 30px;
 }
 </style>
 <div class="pull-left breadcrumb_admin clear_both">
@@ -55,6 +56,7 @@
 								<div>
 									<div id="step-1" class="">
 										<div class="user-profile-content">
+
 											<div id="form-step-0" role="form" data-toggle="validator">
 												<h3 class="h3titulo">Datos Fiscales</h3>
 												<input type="hidden"  name="idBeneficiarioRFC"  value="<?php echo $beneficiario->idBeneficiarioRFC != null ? $beneficiario->idBeneficiarioRFC : 0;  ?>"/>
@@ -67,13 +69,16 @@
 												</div><!--/form-group-->
 
 												<div class="form-group">
-													<label class="control-label col-md-3">Fecha  Alta en SAT</label>
+													<label class="control-label col-md-3">Fecha de alta en SAT<strog class="theme_color">*</strog></label>
 													<div class="col-md-6 col-xs-11">
 														<div class="input-group"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-															<input name="fechaAltaSat" type="date" class="form-control" size="30">
+															<input name="fechaAltaSat" type="date" class="form-control" size="30" required="">
+
 														</div>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div><!--/form-group--> 
+
 
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Actividad<strog class="theme_color">*</strog></label>

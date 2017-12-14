@@ -85,10 +85,10 @@ class ProgramaSocial{
 		try {
 			$sql=$this->pdo->prepare("INSERT INTO programaSocial VALUES(?,?,?,?)");
 			$result=$sql->execute(array(
-null,
-$data->idDependencia,
-$data->nombreProgramaSocial,
-$data->cvePadron
+				null,
+				$data->idDependencia,
+				$data->nombreProgramaSocial,
+				$data->cvePadron
 				)
 			);
 		} catch (Exception $e) {

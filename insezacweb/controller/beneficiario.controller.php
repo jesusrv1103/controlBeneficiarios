@@ -247,9 +247,12 @@ public function Beneficiarios($objPHPExcel,$numRows){
       $ben->idMunicipio=$consult->idMunicipio;
       //echo $ben->curp;
       $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
+
+
       //echo $ben->idRegistro;
       
       $this->model->ImportarBeneficiario($ben);
+
 
       //echo "ya importo";
     }

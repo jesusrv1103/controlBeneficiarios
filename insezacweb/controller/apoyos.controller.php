@@ -6,7 +6,6 @@ class ApoyosController{
   private $model;
   private $session;
   public $error;
-
   public function __CONSTRUCT(){
     $this->model = new Apoyos();
   }
