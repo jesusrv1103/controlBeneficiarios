@@ -131,8 +131,9 @@ public function Crud(){
       $page="view/beneficiario/beneficiario.php";
       require_once 'view/index.php';
     }else{
+      echo $beneficiario->idBeneficiario;
       $warning=true;
-      $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos son correctos y su <a href='#'>información de registro</a> para comprobar que todo este correcto, si es así, <a href='#'> presione aquí</a> para registrar otro beneficiario, o bien edite su información.";
+      $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos y la información de registro sean correctos y esten actualizados si no es así, porfavor, <a href='?c=Beneficiario&a=Crud&idBeneficiario=".$verificaBen->idBeneficiario."'>actualice la información</a>.";
       $administracion = true;
       $inicio = false;
       $beneficiarios = false;

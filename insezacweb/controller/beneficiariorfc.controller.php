@@ -210,7 +210,7 @@ public function Crud(){
       require_once 'view/index.php';
     }else{
       $warning=true;
-      $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos y la información de registro sean correctos y esten actualizados si no es así, porfavor, <a href='?c=Beneficiariorfc&a=Crud&idBeneficiarioRFC=".$beneficiario->idBeneficiarioRFC."'>actualice la información</a>.";
+      $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos y la información de registro sean correctos y esten actualizados si no es así, porfavor, <a href='?c=Beneficiariorfc&a=Crud&idBeneficiarioRFC=".$verificaBen->idBeneficiarioRFC."'>actualice la información</a>.";
       $administracion = true;
       $inicio = false;
       $beneficiarios = false;
