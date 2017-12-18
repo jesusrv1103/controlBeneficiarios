@@ -1,10 +1,8 @@
 <?php
 require_once 'model/programasocial.php';
-
 class ProgramaSocialController{
 	private $model;
 	public $error;
-
 	public function _CONSTRUCT(){
 		$this->model = new ProgramaSocial();
 	}

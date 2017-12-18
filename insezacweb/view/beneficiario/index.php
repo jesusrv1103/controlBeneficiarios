@@ -37,6 +37,7 @@
                       <li><a href="?c=Beneficiario&a=RFC">Beneficiarios con RFC</a></li>
                     </ul>
                   </div>
+                  <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                   <div class="btn-group">
                     <a data-toggle="dropdown" class="btn btn-sm btn-success dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar<span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu" >
@@ -50,8 +51,8 @@
                       <li><a data-toggle="modal" data-target="#modalImportar" href="#modalImportar">Beneficiarios con CURP</a></li>
                       <li><a href="#">Beneficiarios con RFC</a></li>
                     </ul>
-
                   </div>
+                   <?php } ?>
                 </div>
               </b>
             </div>
@@ -88,9 +89,11 @@
                <th>Nombre de beneficiario</th>
                <th>Municipio</th>
                <td><center><b>Ver</b></center></td>
-               <?php if($_SESSION['tipoUsuario']==1){?>
+               <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                <td><center><b>Editar</b></center></td>
+               <?php if($_SESSION['tipoUsuario']==1){?>
                <td><center><b>Borrar</b></center></td>
+               <?php } ?>
                <?php } ?>
              </tr>
            </thead>
@@ -104,13 +107,15 @@
                 <td class="center">
                   <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
                 </td>
-                <?php if($_SESSION['tipoUsuario']==1){?>
+                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                 <td class="center">
                   <a class="btn btn-primary btn-sm" role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
                 </td>
+                 <?php if($_SESSION['tipoUsuario']==1){?>
                 <td class="center">
                  <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                </td>
+               <?php } ?>
                <?php } ?>
              </tr>
            <?php endforeach; ?>
@@ -122,10 +127,12 @@
             <th>Nombre de beneficiario</th>
             <th>Municipio</th>
             <td><center><b>Ver</b></center></td>
-            <?php if($_SESSION['tipoUsuario']==1){?>
-            <th><center><b>Editar</b></center></th>
-            <td><center><b>Borrar</b></center></td>
-            <?php } ?>        
+           <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+               <td><center><b>Editar</b></center></td>
+               <?php if($_SESSION['tipoUsuario']==1){?>
+               <td><center><b>Borrar</b></center></td>
+               <?php } ?>
+               <?php } ?>      
           </tr>
         </tfoot>
       </table>
@@ -140,10 +147,12 @@
            <th>Nombre</th>
            <th>Localidad</th>
            <td><center><b>Ver</b></center></td>
-           <?php if($_SESSION['tipoUsuario']==1){?>
-           <td><center><b>Editar</b></center></td>
-           <td><center><b>Borrar</b></center></td>
-           <?php } ?>
+           <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+               <td><center><b>Editar</b></center></td>
+               <?php if($_SESSION['tipoUsuario']==1){?>
+               <td><center><b>Borrar</b></center></td>
+               <?php } ?>
+               <?php } ?>
          </tr>
        </thead>
        <tbody>
@@ -177,9 +186,11 @@
         <th>Nombre de beneficiario</th>
         <th>Localidad</th>
         <td><center><b>Ver</b></center></td>
-        <?php if($_SESSION['tipoUsuario']==1){?>
+        <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
         <th><center><b>Editar</b></center></th>
+        <?php if($_SESSION['tipoUsuario']==1){?>
         <td><center><b>Borrar</b></center></td>
+        <?php } ?>  
         <?php } ?>        
       </tr>
     </tfoot>
@@ -234,7 +245,7 @@
 <div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" style="width: 60%;">
     <div class="modal-content" id="div-modal-content">
-      <!--************************En esta sección se incluye el modal de informacion de registro y apoyo***************************-->
+      <!--*********En esta sección se incluye el modal de informacion de registro y apoyo**********-->
     </div><!--/modal-content--> 
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
@@ -375,8 +386,8 @@
   }); 
  }
 
-   infoRegistroRFC = function (idBeneficiarioRFC){
-    alert(idBeneficiarioRFC);
+ infoRegistroRFC = function (idBeneficiarioRFC){
+  alert(idBeneficiarioRFC);
    // var idBeneficiario=idBeneficiario;
    $.post("index.php?c=Beneficiariorfc&a=Inforegistro", {idBeneficiarioRFC: idBeneficiarioRFC}, function(info) {
     $("#div-modal-content").html(info);
