@@ -11,96 +11,96 @@ if (!isset($_SESSION['seguridad'])){
   <title>INSEZAC</title>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
-  <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/admin.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
-  <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
-  <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
-  <!--link href="assets/css/select2.css" rel="stylesheet"-->
-  <link href="assets/plugins/bootstrap-editable/bootstrap-editable.css" rel="stylesheet">
-  <link href="assets/plugins/dropzone/dropzone.css" rel="stylesheet">
-  <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
-  <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
-  <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
-  <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
-  <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/plugins/file-uploader/css/blueimp-gallery.min.css">
-  <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload.css">
-  <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload-ui.css">
-  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datepicker/css/datepicker.css" />
-  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-timepicker/compiled/timepicker.css" />
-  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css" />
-  <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.css">
+    <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/admin.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
+    <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
+    <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
+    <!--link href="assets/css/select2.css" rel="stylesheet"-->
+    <link href="assets/plugins/bootstrap-editable/bootstrap-editable.css" rel="stylesheet">
+    <link href="assets/plugins/dropzone/dropzone.css" rel="stylesheet">
+    <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
+    <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
+    <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
+    <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
+    <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/plugins/file-uploader/css/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload.css">
+    <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload-ui.css">
+    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datepicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-timepicker/compiled/timepicker.css" />
+    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.css">
 
-  <!--Estilos Para radio buton y switch -->
-  <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/checkbox/icheck.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/checkbox/minimal/blue.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/checkbox/minimal/green.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/checkbox/minimal/grey.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/checkbox/minimal/orange.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/checkbox/minimal/pink.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/checkbox/minimal/purple.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
+    <!--Estilos Para radio buton y switch -->
+    <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/checkbox/icheck.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/checkbox/minimal/blue.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/checkbox/minimal/green.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/checkbox/minimal/grey.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/checkbox/minimal/orange.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/checkbox/minimal/pink.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/checkbox/minimal/purple.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
 
-  <!--Wizard  -->
-  <link href="assets/plugins/wizard/css/smart_wizard.css" rel="stylesheet" type="text/css" />
-  <!-- Optional SmartWizard theme -->
-  <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
-  <!-- Optional SmartWizard theme -->
-  <link href="assets/plugins/wizard/css/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/wizard/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
+    <!--Wizard  -->
+    <link href="assets/plugins/wizard/css/smart_wizard.css" rel="stylesheet" type="text/css" />
+    <!-- Optional SmartWizard theme -->
+    <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
+    <!-- Optional SmartWizard theme -->
+    <link href="assets/plugins/wizard/css/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/wizard/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
 
-</head>
-<style type="text/css">
-.disabled {
-  pointer-events:none; /*This makes it not clickable*/
-  opacity:0.6;         /*This grays it out to look disabled*/
-}
-.lblheader{
-  color:#2196F3;
-}
+  </head>
+  <style type="text/css">
+    .disabled {
+      pointer-events:none; /*This makes it not clickable*/
+      opacity:0.6;         /*This grays it out to look disabled*/
+    }
+    .lblheader{
+      color:#2196F3;
+    }
 
-</style>
-<body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE">
-  <div class="wrapper">
-    <!--\\\\\\\ wrapper Start \\\\\\-->
-    <div class="header_bar">
-      <!--\\\\\\\ header Start \\\\\\-->
-      <div class="brand">
-        <!--\\\\\\\ brand Start \\\\\\-->
-        <!--div class="logo" style="display:block"><h2 style="margin-top: -5px;"><span class="theme_color">INSEZAC</span></h2></div-->
-        <div style="display:block"><img width="100%" style=" margin-top:-15px" src="assets/images/sezac.png"></div>
+  </style>
+  <body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE" onload="nobackbutton();">
+    <div class="wrapper">
+      <!--\\\\\\\ wrapper Start \\\\\\-->
+      <div class="header_bar">
+        <!--\\\\\\\ header Start \\\\\\-->
+        <div class="brand">
+          <!--\\\\\\\ brand Start \\\\\\-->
+          <!--div class="logo" style="display:block"><h2 style="margin-top: -5px;"><span class="theme_color">INSEZAC</span></h2></div-->
+          <div style="display:block"><img width="100%" style=" margin-top:-15px" src="assets/images/sezac.png"></div>
 
-        <div class="small_logo" style="display:none"><img src="images/s-logo.png" width="50" height="47" alt="s-logo" /> <img src="images/r-logo.png" width="122" height="20" alt="r-logo" /></div>
-      </div>
-      <!--\\\\\\\ brand end \\\\\\-->
-      <div class="header_top_bar">
-        <!--\\\\\\\ header top bar start \\\\\\-->
-        <a href="javascript:void(0);" class="menutoggle"> <i class="fa fa-bars"></i> </a>
-        <div class="top_left_bar">
-          <h1>INSEZAC</h1>
+          <div class="small_logo" style="display:none"><img src="images/s-logo.png" width="50" height="47" alt="s-logo" /> <img src="images/r-logo.png" width="122" height="20" alt="r-logo" /></div>
         </div>
-        <div class="top_right_bar">
-          <div style="margin-top: -33%;">
-            <span class="user_adminname">Hola <?php echo $_SESSION['usuario']; ?></span> 
-            <span class="user_adminname"><a href="?c=Login&a=logout"><i class="fa fa-power-off"></i> Salir</span></a>
+        <!--\\\\\\\ brand end \\\\\\-->
+        <div class="header_top_bar">
+          <!--\\\\\\\ header top bar start \\\\\\-->
+          <a href="javascript:void(0);" class="menutoggle"> <i class="fa fa-bars"></i> </a>
+          <div class="top_left_bar">
+            <h1>INSEZAC</h1>
+          </div>
+          <div class="top_right_bar">
+            <div style="margin-top: -33%;">
+              <span class="user_adminname">Hola <?php echo $_SESSION['usuario']; ?></span> 
+              <span class="user_adminname"><a href="?c=Login&a=logout"><i class="fa fa-power-off"></i> Salir</span></a>
+            </div>
           </div>
         </div>
+        <!--\\\\\\\ header top bar end \\\\\\-->
       </div>
-      <!--\\\\\\\ header top bar end \\\\\\-->
-    </div>
-    <!--\\\\\\\ header end \\\\\\-->
-    <div class="inner">
-      <!--\\\\\\\ inner start \\\\\\-->
-      <div class="left_nav">
-        <!--\\\\\\\left_nav start \\\\\\-->
-        <br>
-        <div class="left_nav_slidebar">
-          <ul>
+      <!--\\\\\\\ header end \\\\\\-->
+      <div class="inner">
+        <!--\\\\\\\ inner start \\\\\\-->
+        <div class="left_nav">
+          <!--\\\\\\\left_nav start \\\\\\-->
+          <br>
+          <div class="left_nav_slidebar">
+            <ul>
             <!--li class="theme_border">
               <a href="?c=Inicio&a=Wizard"> <i class="fa fa-home"></i>Wizard</a>
             </li-->
@@ -503,77 +503,84 @@ if (!isset($_SESSION['seguridad'])){
             // Set selected theme on page refresh
             $("#theme_selector").change();
           });   */
-            $(document).ready(function(){
-            
+          $(document).ready(function(){
+
             // Toolbar extra buttons
             var btnFinish = $('<button></button>').text('Finish')
-                                             .addClass('btn btn-info')
-                                             .on('click', function(){ 
-                                                    if( !$(this).hasClass('disabled')){ 
-                                                        var elmForm = $("#myForm");
-                                                        if(elmForm){
-                                                            elmForm.validator('validate'); 
-                                                            var elmErr = elmForm.find('.has-error');
-                                                            if(elmErr && elmErr.length > 0){
-                                                                alert('Oops we still have error in the form');
-                                                                return false;    
-                                                            }else{
-                                                                alert('Great! we are ready to submit form');
-                                                                elmForm.submit();
-                                                                return false;
-                                                            }
-                                                        }
-                                                    }
-                                                });
+            .addClass('btn btn-info')
+            .on('click', function(){ 
+              if( !$(this).hasClass('disabled')){ 
+                var elmForm = $("#myForm");
+                if(elmForm){
+                  elmForm.validator('validate'); 
+                  var elmErr = elmForm.find('.has-error');
+                  if(elmErr && elmErr.length > 0){
+                    alert('Oops we still have error in the form');
+                    return false;    
+                  }else{
+                    alert('Great! we are ready to submit form');
+                    elmForm.submit();
+                    return false;
+                  }
+                }
+              }
+            });
             var btnCancel = $('<button style="margin-left:-200px;"></button>').text('Cancel')
-                                             .addClass('btn btn-danger')
-                                             .on('click', function(){ 
-                                                    $('#smartwizard').smartWizard("reset"); 
-                                                    $('#myForm').find("input, textarea").val(""); 
-                                                });                         
+            .addClass('btn btn-danger')
+            .on('click', function(){ 
+              $('#smartwizard').smartWizard("reset"); 
+              $('#myForm').find("input, textarea").val(""); 
+            });                         
             
             
             
             // Smart Wizard
             $('#smartwizard').smartWizard({ 
-                    selected: 0, 
-                    theme: 'arrows',
-                    transitionEffect:'fade',
-                    toolbarSettings: {toolbarPosition: 'bottom'},
-                    anchorSettings: {
+              selected: 0, 
+              theme: 'arrows',
+              transitionEffect:'fade',
+              toolbarSettings: {toolbarPosition: 'bottom'},
+              anchorSettings: {
                                 markDoneStep: true, // add done css
                                 markAllPreviousStepsAsDone: true, // When a step selected by url hash, all previous steps are marked done
                                 removeDoneStepOnNavigateBack: true, // While navigate back done step after active step will be cleared
                                 enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
-                            }
-                 });
+                              }
+                            });
             
             $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
-                var elmForm = $("#form-step-" + stepNumber);
+              var elmForm = $("#form-step-" + stepNumber);
                 // stepDirection === 'forward' :- this condition allows to do the form validation 
                 // only on forward navigation, that makes easy navigation on backwards still do the validation when going next
                 if(stepDirection === 'forward' && elmForm){
-                    elmForm.validator('validate'); 
-                    var elmErr = elmForm.children('.has-error');
-                    if(elmErr && elmErr.length > 0){
+                  elmForm.validator('validate'); 
+                  var elmErr = elmForm.children('.has-error');
+                  if(elmErr && elmErr.length > 0){
                         // Form validation failed
                         return false;    
+                      }
                     }
-                }
-                return true;
-            });
+                    return true;
+                  });
             
             $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
                 // Enable finish button only on last step
                 if(stepNumber == 3){ 
-                    $('.btn-finish').removeClass('disabled');  
+                  $('.btn-finish').removeClass('disabled');  
                 }else{
-                    $('.btn-finish').addClass('disabled');
+                  $('.btn-finish').addClass('disabled');
                 }
-            });                               
+              });                               
             
-        });   
+          });   
         </script>
+        <script type="text/javascript">
+          function nobackbutton(){
+          window.location.hash="no-back-button";
+         window.location.hash="Again-No-back-button" //chrome
+         window.onhashchange=function(){window.location.hash="no-back-button";}
+       }
+     </script>
 
-      </body>
-      </html>
+   </body>
+   </html>

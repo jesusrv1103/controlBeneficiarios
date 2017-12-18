@@ -1,3 +1,4 @@
+
 <style type="text/css">
 .lbldetalle{
 	color:#2196F3;
