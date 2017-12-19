@@ -11,7 +11,6 @@ if (!isset($_SESSION['seguridad'])){
   <title>INSEZAC</title>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
-<<<<<<< HEAD
     <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
@@ -64,63 +63,9 @@ if (!isset($_SESSION['seguridad'])){
     .lblheader{
       color:#2196F3;
     }
-=======
-  <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/admin.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
-  <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
-  <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
-  <!--link href="assets/css/select2.css" rel="stylesheet"-->
-  <link href="assets/plugins/bootstrap-editable/bootstrap-editable.css" rel="stylesheet">
-  <link href="assets/plugins/dropzone/dropzone.css" rel="stylesheet">
-  <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
-  <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
-  <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
-  <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
-  <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/plugins/file-uploader/css/blueimp-gallery.min.css">
-  <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload.css">
-  <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload-ui.css">
-  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datepicker/css/datepicker.css" />
-  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-timepicker/compiled/timepicker.css" />
-  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css" />
-  <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.css">
-
-  <!--Estilos Para radio buton y switch -->
-  <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/checkbox/icheck.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/checkbox/minimal/blue.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/checkbox/minimal/green.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/checkbox/minimal/grey.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/checkbox/minimal/orange.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/checkbox/minimal/pink.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/checkbox/minimal/purple.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
-
-  <!--Wizard  -->
-  <link href="assets/plugins/wizard/css/smart_wizard.css" rel="stylesheet" type="text/css" />
-  <!-- Optional SmartWizard theme -->
-  <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
-  <!-- Optional SmartWizard theme -->
-  <link href="assets/plugins/wizard/css/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/wizard/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
-  <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
-
-</head>
-<style type="text/css">
-.disabled {
-  pointer-events:none; /This makes it not clickable/
-  opacity:0.6;         /This grays it out to look disabled/
-}
-.lblheader{
-  color:#2196F3;
-}
->>>>>>> 5139f061fcf0440f4f33df8a8edf3915122d3b36
 
   </style>
-  <body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE" onload="nobackbutton();">
+  <body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE">
     <div class="wrapper">
       <!--\\\\\\\ wrapper Start \\\\\\-->
       <div class="header_bar">
@@ -204,7 +149,6 @@ if (!isset($_SESSION['seguridad'])){
              <?php } ?>
            </ul>
          </li>
-         <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?> 
          <?php if(isset($catalogos)){ ?>
          <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
           <ul class="opened" style="display:block">
@@ -249,8 +193,6 @@ if (!isset($_SESSION['seguridad'])){
        </ul>
      </li>
    </ul>
-   </li>
-      <?php } ?>
  </div>
 </div>
 <!--\\\\\\\left_nav end \\\\\\-->
@@ -300,7 +242,7 @@ if (!isset($_SESSION['seguridad'])){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <script>
 
-  //*Subir archivos automaicos**
+  //****Subir archivos automaicos*****
 
   $(document).on('ready', function() {
     'use strict';
@@ -325,7 +267,7 @@ if (!isset($_SESSION['seguridad'])){
     .parent().addClass($.support.fileInput ? undefined : 'disabled');
   });
 
-  //**Elimina archivos existentes para importar otros archivos**
+  //***Elimina archivos existentes para importar otros archivos*******
 
   $('.catalogos').change(function(e) {
     e.preventDefault();
@@ -455,7 +397,7 @@ if (!isset($_SESSION['seguridad'])){
   }
 </script>
 <script>
-  //**SELEC2***
+  //*******SELEC2********
   $(document).on('ready', function()  {
 
     //Initialize Select2 Elements
@@ -632,19 +574,7 @@ if (!isset($_SESSION['seguridad'])){
             
           });   
         </script>
-<<<<<<< HEAD
-        <script type="text/javascript">
-          function nobackbutton(){
-          window.location.hash="no-back-button";
-         window.location.hash="Again-No-back-button" //chrome
-         window.onhashchange=function(){window.location.hash="no-back-button";}
-       }
-     </script>
+
 
    </body>
    </html>
-=======
-
-      </body>
-      </html>
->>>>>>> 5139f061fcf0440f4f33df8a8edf3915122d3b36
