@@ -12,6 +12,7 @@ if (!isset($_SESSION['seguridad'])){
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
+
   <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
@@ -150,7 +151,6 @@ if (!isset($_SESSION['seguridad'])){
              <?php } ?>
            </ul>
          </li>
-         <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?> 
          <?php if(isset($catalogos)){ ?>
          <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
           <ul class="opened" style="display:block">
@@ -195,8 +195,9 @@ if (!isset($_SESSION['seguridad'])){
        </ul>
      </li>
    </ul>
- </li>
- <?php } ?>
+
+ </div>
+
 </div>
 </div>
 <!--\\\\\\\left_nav end \\\\\\-->
@@ -246,7 +247,7 @@ if (!isset($_SESSION['seguridad'])){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <script>
 
-  //*Subir archivos automaicos**
+  //****Subir archivos automaicos*****
 
   $(document).on('ready', function() {
     'use strict';
@@ -271,7 +272,7 @@ if (!isset($_SESSION['seguridad'])){
     .parent().addClass($.support.fileInput ? undefined : 'disabled');
   });
 
-  //**Elimina archivos existentes para importar otros archivos**
+  //***Elimina archivos existentes para importar otros archivos*******
 
   $('.catalogos').change(function(e) {
     e.preventDefault();
@@ -401,7 +402,7 @@ if (!isset($_SESSION['seguridad'])){
   }
 </script>
 <script>
-  //**SELEC2***
+  //*******SELEC2********
   $(document).on('ready', function()  {
 
     //Initialize Select2 Elements
@@ -443,7 +444,7 @@ if (!isset($_SESSION['seguridad'])){
 
 <script type="text/javascript">
   $(document).ready(function(){
-            // Toolbar extra buttons
+  
             var btnFinish = $('<button></button>').text('Finish')
             .addClass('btn btn-info')
             .on('click', function(){ 
@@ -512,8 +513,6 @@ if (!isset($_SESSION['seguridad'])){
           });   
 
         </script>
-
       </body>
       </html>
-
 
