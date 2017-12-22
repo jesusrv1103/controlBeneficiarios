@@ -1,3 +1,4 @@
+
 <style type="text/css">
 .lbldetalle{
 	color:#2196F3;
@@ -10,6 +11,14 @@
 	margin-top: 25px;
 }
 </style>
+
+<script type="text/javascript">
+
+  	window.location = "index.php";
+
+    //location.replace(history.forward(1))
+</script>
+
 <div class="pull-left breadcrumb_admin clear_both">
 	<div class="pull-left page_title theme_color">
 		<h1>Beneficiarios</h1>
@@ -23,6 +32,7 @@
 		</ol>
 	</div>
 </div>
+
 <div class="container clear_both padding_fix">
 	<div class="row">
 		<div class="col-md-12">
@@ -567,7 +577,7 @@
 
 																		<div class="form-group">
 																			<div class="col-sm-offset-7 col-sm-5">
-																				<button type="submit" class="btn btn-primary">Guardar</button>
+																				<button onclick="nobackbutton()" type="submit" class="btn btn-primary">Guardar</button>
 																				<a href="?c=Beneficiario" class="btn btn-default"> Cancelar</a>
 																			</div>
 																		</div><!--/form-group-->
@@ -593,86 +603,82 @@
 								var m = miCurp.match( /^\w{4}(\w{2})(\w{2})(\w{2})/ 
 									);
 
-	//miFecha = new Date(año,mes,dia) 
-	var anyo = parseInt(m[1],10)+1900;
-	if( anyo < 1950 ) anyo += 100;
-	var mes = parseInt(m[2], 10)-1;
-	var dia = parseInt(m[3], 10);
 
-	var fech = new Date( anyo, mes, dia );
-	document.getElementById("fechaNacimiento").value = fech;
-}
-</script>
+								var anyo = parseInt(m[1],10)+1900;
+								if( anyo < 1950 ) anyo += 100;
+								var mes = parseInt(m[2], 10)-1;
+								var dia = parseInt(m[3], 10);
 
-<!-- Include jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+								var fech = new Date( anyo, mes, dia );
+								document.getElementById("fechaNacimiento").value = fech;
+							}
+						</script>
+
+						<!-- Include jQuery -->
+						<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 
-<script type="text/javascript">
+						<script type="text/javascript">
 
-	function curp2date() {
-		var miCurp =document.getElementById('curp').value;
-		var m = miCurp.match( /^\w{4}(\w{2})(\w{2})(\w{2})/ 
-			);
+							function curp2date() {
+								var miCurp =document.getElementById('curp').value;
+								var m = miCurp.match( /^\w{4}(\w{2})(\w{2})(\w{2})/ 
+									);
 
-	//miFecha = new Date(año,mes,dia) 
-	var anyo = parseInt(m[1],10)+1900;
-	if( anyo < 1950 ) anyo += 100;
-	var mes = parseInt(m[2], 10)-1;
-	var dia = parseInt(m[3], 10);
 
-	var fech = new Date( anyo, mes, dia );
-	document.getElementById("fechaNacimiento").value = fech;
-}
-</script>
-<script type="text/javascript">
-	window.onload=function(){
-		//listarLocalidades();
-	}
-	listarLocalidades = function (){
-		var idMunicipio = $('#selectMunicipios').val();
-		datos = {"idMunicipio":idMunicipio};
-		$.ajax({
-			url: "index.php?c=Beneficiario&a=ListarLocalidades",
-			type: "POST",
-			data: datos
-		}).done(function(respuesta){
-			if (respuesta[0].estado === "ok") {
-				//console.log(JSON.stringify(respuesta));
-				var selector = document.getElementById("selectLocalidades");
-				selector.options[0] = new Option("Seleccione la localidad a la que pertenece el beneficiario","");
-				var selector2 = document.getElementById("selectAsentamientos");
-				selector2.options[0] = new Option("Seleccione el asentamiento al que petenece el beneficiario","");
-				for (var i in respuesta) {
-					var j=parseInt(i)+1;
-					selector.options[j] = new Option(respuesta[i].localidad,respuesta[i].idLocalidad);
-				}
-				//$(".respuesta").html("Localidades:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
-			}
-		});
-	}
-	listarAsentamientos = function (){
-		var idLocalidad = $('#selectLocalidades').val();
-		datos = {"idLocalidad":idLocalidad};
-		$.ajax({
-			url: "index.php?c=Beneficiario&a=ListarAsentamientos",
-			type: "POST",
-			data: datos
-		}).done(function(respuesta){
-			if (respuesta[0].estado === "ok") {
-				console.log(JSON.stringify(respuesta));
-				var selector = document.getElementById("selectAsentamientos");
-				selector.options[0] = new Option("Seleccione el asentamiento al que petenece el beneficiario","");
-				for (var i in respuesta) {
-					var j=parseInt(i)+1;
-					selector.options[j] = new Option(respuesta[i].nombreAsentamiento,respuesta[i].idAsentamientos);
-				}
-				//$(".respuesta2").html("Asentamientos:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
-			}
-		});
-	}
-</script>
-<script>
-	if(history.forward(0))
-		location.replace(history.forward(1))
-</script>
+								var anyo = parseInt(m[1],10)+1900;
+								if( anyo < 1950 ) anyo += 100;
+								var mes = parseInt(m[2], 10)-1;
+								var dia = parseInt(m[3], 10);
+
+								var fech = new Date( anyo, mes, dia );
+								document.getElementById("fechaNacimiento").value = fech;
+							}
+						</script>
+						<script type="text/javascript">
+							window.onload=function(){
+
+							}
+							listarLocalidades = function (){
+								var idMunicipio = $('#selectMunicipios').val();
+								datos = {"idMunicipio":idMunicipio};
+								$.ajax({
+									url: "index.php?c=Beneficiario&a=ListarLocalidades",
+									type: "POST",
+									data: datos
+								}).done(function(respuesta){
+									if (respuesta[0].estado === "ok") {
+
+										var selector = document.getElementById("selectLocalidades");
+										selector.options[0] = new Option("Seleccione la localidad a la que pertenece el beneficiario","");
+										var selector2 = document.getElementById("selectAsentamientos");
+										selector2.options[0] = new Option("Seleccione el asentamiento al que petenece el beneficiario","");
+										for (var i in respuesta) {
+											var j=parseInt(i)+1;
+											selector.options[j] = new Option(respuesta[i].localidad,respuesta[i].idLocalidad);
+										}
+
+									}
+								});
+							}
+							listarAsentamientos = function (){
+								var idLocalidad = $('#selectLocalidades').val();
+								datos = {"idLocalidad":idLocalidad};
+								$.ajax({
+									url: "index.php?c=Beneficiario&a=ListarAsentamientos",
+									type: "POST",
+									data: datos
+								}).done(function(respuesta){
+									if (respuesta[0].estado === "ok") {
+										console.log(JSON.stringify(respuesta));
+										var selector = document.getElementById("selectAsentamientos");
+										selector.options[0] = new Option("Seleccione el asentamiento al que petenece el beneficiario","");
+										for (var i in respuesta) {
+											var j=parseInt(i)+1;
+											selector.options[j] = new Option(respuesta[i].nombreAsentamiento,respuesta[i].idAsentamientos);
+										}
+
+									}
+								});
+							}
+						</script>

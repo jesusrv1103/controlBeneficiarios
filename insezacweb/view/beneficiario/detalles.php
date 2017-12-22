@@ -1,3 +1,4 @@
+
  <style type="text/css">
  .lbldetalle{
   color:#424242;
@@ -8,6 +9,10 @@
   font-weight: bold;
 }
 </style>
+
+<script type="text/javascript">
+ window.history.forward();
+</script>
 
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">

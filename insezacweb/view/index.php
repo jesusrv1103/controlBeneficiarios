@@ -11,6 +11,7 @@ if (!isset($_SESSION['seguridad'])){
   <title>INSEZAC</title>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
   <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
@@ -57,16 +58,14 @@ if (!isset($_SESSION['seguridad'])){
 </head>
 <style type="text/css">
 .disabled {
-  pointer-events:none; /This makes it not clickable/
-  opacity:0.6;         /This grays it out to look disabled/
+  pointer-events:none; /*This makes it not clickable*/
+  opacity:0.6;         /*This grays it out to look disabled*/
 }
 .lblheader{
   color:#2196F3;
 }
-
 </style>
-
-<body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE">
+<body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE" onload="nobackbutton();">
   <div class="wrapper">
     <!--\\\\\\\ wrapper Start \\\\\\-->
     <div class="header_bar">
@@ -77,6 +76,7 @@ if (!isset($_SESSION['seguridad'])){
         <div style="display:block"><img width="100%" style=" margin-top:-15px" src="assets/images/sezac.png"></div>
 
         <div class="small_logo" style="display:none"><img src="images/s-logo.png" width="50" height="47" alt="s-logo" /> <img src="images/r-logo.png" width="122" height="20" alt="r-logo" /></div>
+
       </div>
       <!--\\\\\\\ brand end \\\\\\-->
       <div class="header_top_bar">
@@ -442,73 +442,7 @@ if (!isset($_SESSION['seguridad'])){
 </script>
 
 <script type="text/javascript">
- /* $(document).ready(function(){
-
-            // Step show event 
-            $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
-               //alert("You are on step "+stepNumber+" now");
-               if(stepPosition === 'first'){
-                $("#prev-btn").addClass('disabled');
-              }else if(stepPosition === 'final'){
-                $("#next-btn").addClass('disabled');
-              }else{
-                $("#prev-btn").removeClass('disabled');
-                $("#next-btn").removeClass('disabled');
-              }
-            });
-            
-            // Toolbar extra buttons
-            var btnFinish = $('').text('Finish')
-            .addClass('btn btn-info')
-            .on('click', function(){ alert('Finish Clicked'); });
-            var btnCancel = $('').text('Cancel')
-            .addClass('btn btn-danger')
-            .on('click', function(){ $('#smartwizard').smartWizard("reset"); });                         
-            
-            
-            // Smart Wizard
-            $('#smartwizard').smartWizard({ 
-              selected: 0, 
-              //Estilo de wizard (default, dots, circles)
-              theme: 'arrows',
-              transitionEffect:'fade',
-              showStepURLhash: true,
-              toolbarSettings: {toolbarPosition: 'both',
-              toolbarExtraButtons: [btnFinish, btnCancel]
-            }
-          });
-
-            
-            // External Button Events
-            $("#reset-btn").on("click", function() {
-                // Reset wizard
-                $('#smartwizard').smartWizard("reset");
-                return true;
-              });
-            
-            $("#prev-btn").on("click", function() {
-                // Navigate previous
-                $('#smartwizard').smartWizard("prev");
-                return true;
-              });
-            
-            $("#next-btn").on("click", function() {
-                // Navigate next
-                $('#smartwizard').smartWizard("next");
-                return true;
-              });
-            
-            $("#theme_selector").on("change", function() {
-                // Change theme
-                $('#smartwizard').smartWizard("theme", $(this).val());
-                return true;
-              });
-            
-            // Set selected theme on page refresh
-            $("#theme_selector").change();
-          });   */
-          $(document).ready(function(){
-
+  $(document).ready(function(){
             // Toolbar extra buttons
             var btnFinish = $('<button></button>').text('Finish')
             .addClass('btn btn-info')
@@ -535,7 +469,6 @@ if (!isset($_SESSION['seguridad'])){
               $('#smartwizard').smartWizard("reset"); 
               $('#myForm').find("input, textarea").val(""); 
             });                         
-            
             
             
             // Smart Wizard
@@ -577,8 +510,10 @@ if (!isset($_SESSION['seguridad'])){
               });                               
             
           });   
+
         </script>
 
-        
-        </body>
-        </html>
+      </body>
+      </html>
+
+
