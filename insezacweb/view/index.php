@@ -11,6 +11,8 @@ if (!isset($_SESSION['seguridad'])){
   <title>INSEZAC</title>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
   <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
@@ -57,15 +59,14 @@ if (!isset($_SESSION['seguridad'])){
 </head>
 <style type="text/css">
 .disabled {
-  pointer-events:none; /This makes it not clickable/
-  opacity:0.6;         /This grays it out to look disabled/
+  pointer-events:none; /*This makes it not clickable*/
+  opacity:0.6;         /*This grays it out to look disabled*/
 }
 .lblheader{
   color:#2196F3;
 }
-
 </style>
-<body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE">
+<body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE" onload="nobackbutton();">
   <div class="wrapper">
     <!--\\\\\\\ wrapper Start \\\\\\-->
     <div class="header_bar">
@@ -76,6 +77,7 @@ if (!isset($_SESSION['seguridad'])){
         <div style="display:block"><img width="100%" style=" margin-top:-15px" src="assets/images/sezac.png"></div>
 
         <div class="small_logo" style="display:none"><img src="images/s-logo.png" width="50" height="47" alt="s-logo" /> <img src="images/r-logo.png" width="122" height="20" alt="r-logo" /></div>
+
       </div>
       <!--\\\\\\\ brand end \\\\\\-->
       <div class="header_top_bar">
@@ -149,7 +151,6 @@ if (!isset($_SESSION['seguridad'])){
              <?php } ?>
            </ul>
          </li>
-         <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?> 
          <?php if(isset($catalogos)){ ?>
          <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
           <ul class="opened" style="display:block">
@@ -194,7 +195,10 @@ if (!isset($_SESSION['seguridad'])){
    </ul>
    
       <?php } ?>
+
  </div>
+
+</div>
 </div>
 <!--\\\\\\\left_nav end \\\\\\-->
 <div class="contentpanel">
@@ -243,7 +247,7 @@ if (!isset($_SESSION['seguridad'])){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <script>
 
-  //*Subir archivos automaicos**
+  //****Subir archivos automaicos*****
 
   $(document).on('ready', function() {
     'use strict';
@@ -268,7 +272,7 @@ if (!isset($_SESSION['seguridad'])){
     .parent().addClass($.support.fileInput ? undefined : 'disabled');
   });
 
-  //**Elimina archivos existentes para importar otros archivos**
+  //***Elimina archivos existentes para importar otros archivos*******
 
   $('.catalogos').change(function(e) {
     e.preventDefault();
@@ -436,7 +440,7 @@ if (!isset($_SESSION['seguridad'])){
   }
 </script>
 <script>
-  //**SELEC2***
+  //*******SELEC2********
   $(document).on('ready', function()  {
 
     //Initialize Select2 Elements
@@ -477,142 +481,76 @@ if (!isset($_SESSION['seguridad'])){
 </script>
 
 <script type="text/javascript">
- /* $(document).ready(function(){
-
-            // Step show event 
-            $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
-               //alert("You are on step "+stepNumber+" now");
-               if(stepPosition === 'first'){
-                $("#prev-btn").addClass('disabled');
-              }else if(stepPosition === 'final'){
-                $("#next-btn").addClass('disabled');
-              }else{
-                $("#prev-btn").removeClass('disabled');
-                $("#next-btn").removeClass('disabled');
+  $(document).ready(function(){
+  
+            var btnFinish = $('<button></button>').text('Finish')
+            .addClass('btn btn-info')
+            .on('click', function(){ 
+              if( !$(this).hasClass('disabled')){ 
+                var elmForm = $("#myForm");
+                if(elmForm){
+                  elmForm.validator('validate'); 
+                  var elmErr = elmForm.find('.has-error');
+                  if(elmErr && elmErr.length > 0){
+                    alert('Oops we still have error in the form');
+                    return false;    
+                  }else{
+                    alert('Great! we are ready to submit form');
+                    elmForm.submit();
+                    return false;
+                  }
+                }
               }
             });
-            
-            // Toolbar extra buttons
-            var btnFinish = $('').text('Finish')
-            .addClass('btn btn-info')
-            .on('click', function(){ alert('Finish Clicked'); });
-            var btnCancel = $('').text('Cancel')
+            var btnCancel = $('<button style="margin-left:-200px;"></button>').text('Cancel')
             .addClass('btn btn-danger')
-            .on('click', function(){ $('#smartwizard').smartWizard("reset"); });                         
+            .on('click', function(){ 
+              $('#smartwizard').smartWizard("reset"); 
+              $('#myForm').find("input, textarea").val(""); 
+            });                         
             
             
             // Smart Wizard
             $('#smartwizard').smartWizard({ 
               selected: 0, 
-              //Estilo de wizard (default, dots, circles)
               theme: 'arrows',
               transitionEffect:'fade',
-              showStepURLhash: true,
-              toolbarSettings: {toolbarPosition: 'both',
-              toolbarExtraButtons: [btnFinish, btnCancel]
-            }
-          });
-
-            
-            // External Button Events
-            $("#reset-btn").on("click", function() {
-                // Reset wizard
-                $('#smartwizard').smartWizard("reset");
-                return true;
-              });
-            
-            $("#prev-btn").on("click", function() {
-                // Navigate previous
-                $('#smartwizard').smartWizard("prev");
-                return true;
-              });
-            
-            $("#next-btn").on("click", function() {
-                // Navigate next
-                $('#smartwizard').smartWizard("next");
-                return true;
-              });
-            
-            $("#theme_selector").on("change", function() {
-                // Change theme
-                $('#smartwizard').smartWizard("theme", $(this).val());
-                return true;
-              });
-            
-            // Set selected theme on page refresh
-            $("#theme_selector").change();
-          });   */
-            $(document).ready(function(){
-            
-            // Toolbar extra buttons
-            var btnFinish = $('<button></button>').text('Finish')
-                                             .addClass('btn btn-info')
-                                             .on('click', function(){ 
-                                                    if( !$(this).hasClass('disabled')){ 
-                                                        var elmForm = $("#myForm");
-                                                        if(elmForm){
-                                                            elmForm.validator('validate'); 
-                                                            var elmErr = elmForm.find('.has-error');
-                                                            if(elmErr && elmErr.length > 0){
-                                                                alert('Oops we still have error in the form');
-                                                                return false;    
-                                                            }else{
-                                                                alert('Great! we are ready to submit form');
-                                                                elmForm.submit();
-                                                                return false;
-                                                            }
-                                                        }
-                                                    }
-                                                });
-            var btnCancel = $('<button style="margin-left:-200px;"></button>').text('Cancel')
-                                             .addClass('btn btn-danger')
-                                             .on('click', function(){ 
-                                                    $('#smartwizard').smartWizard("reset"); 
-                                                    $('#myForm').find("input, textarea").val(""); 
-                                                });                         
-            
-            
-            
-            // Smart Wizard
-            $('#smartwizard').smartWizard({ 
-                    selected: 0, 
-                    theme: 'arrows',
-                    transitionEffect:'fade',
-                    toolbarSettings: {toolbarPosition: 'bottom'},
-                    anchorSettings: {
+              toolbarSettings: {toolbarPosition: 'bottom'},
+              anchorSettings: {
                                 markDoneStep: true, // add done css
                                 markAllPreviousStepsAsDone: true, // When a step selected by url hash, all previous steps are marked done
                                 removeDoneStepOnNavigateBack: true, // While navigate back done step after active step will be cleared
                                 enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
-                            }
-                 });
+                              }
+                            });
             
             $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
-                var elmForm = $("#form-step-" + stepNumber);
+              var elmForm = $("#form-step-" + stepNumber);
                 // stepDirection === 'forward' :- this condition allows to do the form validation 
                 // only on forward navigation, that makes easy navigation on backwards still do the validation when going next
                 if(stepDirection === 'forward' && elmForm){
-                    elmForm.validator('validate'); 
-                    var elmErr = elmForm.children('.has-error');
-                    if(elmErr && elmErr.length > 0){
+                  elmForm.validator('validate'); 
+                  var elmErr = elmForm.children('.has-error');
+                  if(elmErr && elmErr.length > 0){
                         // Form validation failed
                         return false;    
+                      }
                     }
-                }
-                return true;
-            });
+                    return true;
+                  });
             
             $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
                 // Enable finish button only on last step
                 if(stepNumber == 3){ 
-                    $('.btn-finish').removeClass('disabled');  
+                  $('.btn-finish').removeClass('disabled');  
                 }else{
-                    $('.btn-finish').addClass('disabled');
+                  $('.btn-finish').addClass('disabled');
                 }
-            });                               
+              });                               
             
-        });   
-        </script>
+          });   
 
+        </script>
       </body>
       </html>
+

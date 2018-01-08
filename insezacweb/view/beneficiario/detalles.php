@@ -1,3 +1,4 @@
+
  <style type="text/css">
  .lbldetalle{
   color:#424242;
@@ -8,6 +9,10 @@
   font-weight: bold;
 }
 </style>
+
+<script type="text/javascript">
+ window.history.forward();
+</script>
 
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
@@ -114,45 +119,54 @@
          </tr>
          <tr>
           <td>
-           <div class="col-md-12">
-             <label class="col-sm-6 lbldetalle">Identificación oficial:</label>
-             <label class="col-sm-6 control-label"><?php echo $ben->nomTipoI; ?></label>
+            <div class="col-md-12">
+             <label class="col-sm-6 lbldetalle">Sexo:</label>
+             <label class="col-sm-6 control-label"><?php if($ben->genero==1) echo "MASCULINO"; else echo "FEMENINO"; ?></label>
            </div>
          </td>
        </tr>
        <tr>
         <td>
          <div class="col-md-12">
-           <label class="col-sm-6 lbldetalle">Nivel de estudio:</label>
-           <label class="col-sm-6 control-label"><?php echo $ben->nivelEstudios; ?></label>
+           <label class="col-sm-6 lbldetalle">Identificación oficial:</label>
+           <label class="col-sm-6 control-label"><?php echo $ben->nomTipoI; ?></label>
          </div>
        </td>
      </tr>
      <tr>
       <td>
        <div class="col-md-12">
-         <label class="col-sm-6 lbldetalle">Seguridad social:</label>
-         <label class="col-sm-6 control-label"><?php echo $ben->seguridadSocial; ?></label>
+         <label class="col-sm-6 lbldetalle">Nivel de estudio:</label>
+         <label class="col-sm-6 control-label"><?php echo $ben->nivelEstudios; ?></label>
        </div>
      </td>
    </tr>
    <tr>
     <td>
      <div class="col-md-12">
-       <label class="col-sm-6 lbldetalle">Discapacidad:</label>
-       <label class="col-sm-6 control-label"><?php echo $ben->discapacidad; ?></label>
+       <label class="col-sm-6 lbldetalle">Seguridad social:</label>
+       <label class="col-sm-6 control-label"><?php echo $ben->seguridadSocial; ?></label>
      </div>
    </td>
  </tr>
  <tr>
   <td>
+   <div class="col-md-12">
+     <label class="col-sm-6 lbldetalle">Discapacidad:</label>
+     <label class="col-sm-6 control-label"><?php echo $ben->discapacidad; ?></label>
+   </div>
+ </td>
+</tr>
+<tr>
+  <td>
     <div class="col-md-12">
      <label class="col-sm-6 lbldetalle">Beneficiario Colectivo:</label>
-     <label class="col-sm-6 control-label"><?php if($ben->beneficiarioColectivo=1 ){
+     <label class="col-sm-6 control-label"><?php if($ben->beneficiarioColectivo==1 ){
       echo "Si";} else {echo"No";}?></label>
     </div>
   </td>
 </tr>
+
 </tbody>
 </table>
 </div>
@@ -206,11 +220,11 @@
           <td>
            <div class="col-md-12">
             <label class="col-sm-6 lbldetalle">Municipio:</label>
-             <label class="col-sm-6 control-label"><?php echo $ben->nombreMunicipio; ?></label>
-           </div>
-         </td>
-       </tr>
-       <tr>
+            <label class="col-sm-6 control-label"><?php echo $ben->nombreMunicipio; ?></label>
+          </div>
+        </td>
+      </tr>
+      <tr>
         <td>
          <div class="col-md-12">
            <label class="col-sm-6 lbldetalle">Localidad:</label>
@@ -440,64 +454,64 @@
       <div class="porlets-content">
         <div class="panel-body">
           <?php if($infoApoyo!=null){ $i=1; foreach ($infoApoyo as $infoApoyo): ?>
-          <div class="col-md-6">
-           <table class="table table-striped">
-            <tbody>
-              <tr>
+            <div class="col-md-6">
+             <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="col-md-12">   
+                     <label class="col-sm-5 lblinfo" style="margin-top: 5px; color:#607D8B;"><b>Información del <?php echo $i ?>° apoyo</b></label>
+                   </div>
+                 </td>
+               </tr>
+               <tr>
                 <td>
-                  <div class="col-md-12">   
-                   <label class="col-sm-5 lblinfo" style="margin-top: 5px; color:#607D8B;"><b>Información del <?php echo $i ?>° apoyo</b></label>
+                  <div class="col-md-12">
+                   <label class="col-sm-4 lbl-detalle"><b>Dirección que lo apoya:</b></label>
+                   <label class="col-sm-7 control-label"><?php echo $infoApoyo->direccion ?></label>
                  </div>
-               </td>
-             </tr>
-             <tr>
-              <td>
+                 <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Tipo de apoyo:</b></label>
+                  <label class="col-sm-7 control-label"><?php echo $infoApoyo->tipoApoyo; ?></label>
+                </div>
                 <div class="col-md-12">
-                 <label class="col-sm-4 lbl-detalle"><b>Dirección que lo apoya:</b></label>
-                 <label class="col-sm-7 control-label"><?php echo $infoApoyo->direccion ?></label>
-               </div>
-               <div class="col-md-12">
-                <label class="col-sm-4 lbl-detalle"><b>Tipo de apoyo:</b></label>
-                <label class="col-sm-7 control-label"><?php echo $infoApoyo->tipoApoyo; ?></label>
-              </div>
-              <div class="col-md-12">
-                <label class="col-sm-4 lbl-detalle"><b>Origen:</b></label>
-                <label class="col-sm-7 control-label"><?php echo $infoApoyo->origen; ?></label>
-              </div>
-              <div class="col-md-12">
-                <label class="col-sm-4 lbl-detalle"><b>Programa:</b></label>
-                <label class="col-sm-7 control-label"><?php echo $infoApoyo->programa; ?></label>
-              </div>
-              <div class="col-md-12">
-                <label class="col-sm-4 lbl-detalle"><b>Subprograma:</b></label>
-                <label class="col-sm-7 control-label"><?php echo $infoApoyo->subprograma; ?></label>
-              </div>
-              <div class="col-md-12">
-                <label class="col-sm-4 lbl-detalle"><b>Periodicidad:</b></label>
-                <label class="col-sm-7 control-label"><?php echo $infoApoyo->periodicidad; ?></label>
-              </div>
-              <div class="col-md-12">
-                <label class="col-sm-4 lbl-detalle"><b>Programa social:</b></label>
-                <label class="col-sm-7 control-label" style="color:red"><strong>P E N D I E N T E</strong></label>
-              </div>
-              <div class="col-md-12">
-                <label class="col-sm-4 lbl-detalle"><b>Importe:</b></label>
-                <label class="col-sm-7 control-label">$ <?php echo $infoApoyo->importeApoyo; ?></label>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <?php  
-    if ($i%2==0){
-      echo "<hr>";
-    }$i++;
-  endforeach; }else{
-    echo "<h3>No se han registrado apoyos a este beneficiario<h3>";
-  }
-  ?>
-</div>
+                  <label class="col-sm-4 lbl-detalle"><b>Origen:</b></label>
+                  <label class="col-sm-7 control-label"><?php echo $infoApoyo->origen; ?></label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Programa:</b></label>
+                  <label class="col-sm-7 control-label"><?php echo $infoApoyo->programa; ?></label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Subprograma:</b></label>
+                  <label class="col-sm-7 control-label"><?php echo $infoApoyo->subprograma; ?></label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Periodicidad:</b></label>
+                  <label class="col-sm-7 control-label"><?php echo $infoApoyo->periodicidad; ?></label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Programa social:</b></label>
+                  <label class="col-sm-7 control-label" style="color:red"><strong>P E N D I E N T E</strong></label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Importe:</b></label>
+                  <label class="col-sm-7 control-label">$ <?php echo $infoApoyo->importeApoyo; ?></label>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <?php  
+      if ($i%2==0){
+        echo "<hr>";
+      }$i++;
+    endforeach; }else{
+      echo "<h3>No se han registrado apoyos a este beneficiario<h3>";
+    }
+    ?>
+  </div>
 </div><!--/porlets-content-->
 </div><!--/block-web-->
 </div><!--/col-md-12-->

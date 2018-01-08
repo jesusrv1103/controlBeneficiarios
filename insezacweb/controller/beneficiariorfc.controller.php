@@ -229,6 +229,19 @@ public function Inforegistro(){
 
       $page="view/beneficiario/beneficiariorfc.php";
       require_once 'view/index.php';
+
+    }else{
+      $warning=true;
+      $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos y la información de registro sean correctos y esten actualizados si no es así, porfavor, <a href='?c=Beneficiariorfc&a=Crud&idBeneficiarioRFC=".$verificaBen->idBeneficiarioRFC."'>actualice la información</a>.";
+      $administracion = true;
+      $inicio = false;
+      $beneficiarios = false;
+      $ben = $this->model->Listar($verificaBen->idBeneficiarioRFC);
+      //echo "hola".$VerificaBeneficiario->idbeneficiarioRFC;
+      $infoApoyo = $this->model->ObtenerInfoApoyo($verificaBen->idBeneficiarioRFC);
+      $page="view/beneficiario/detallesRFC.php";
+      require_once 'view/index.php';
+
     }
   }
 

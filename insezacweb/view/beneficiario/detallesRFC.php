@@ -1,12 +1,12 @@
  <style type="text/css">
-   .lbldetalle{
-    color:#424242;
-    font-weight: bold;
-  }
-  .h3subtitulo{
-    color:#2196F3;
-    font-weight: bold;
-  }
+ .lbldetalle{
+  color:#424242;
+  font-weight: bold;
+}
+.h3subtitulo{
+  color:#2196F3;
+  font-weight: bold;
+}
 </style>
 
 <div class="pull-left breadcrumb_admin clear_both">
@@ -33,7 +33,7 @@
         </div>
         <div class="col-md-5">
           <div class="btn-group pull-right" style="margin-right: 10px;">
-            <b> 
+           <b> 
              <div class="btn-group">
               <a  href="#modalInfo"  data-target="#modalInfo" data-toggle="modal" onclick="infoRegistro(<?php echo $ben->idBeneficiarioRFC; ?>)" class="btn btn-sm tooltips btn-default" style="margin-right: 10px;" data-original-title="Ver información de registro y actualizaciones" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-info-circle"  role="button"></i></i>&nbsp;Ver info</a>
             </div>
@@ -45,128 +45,72 @@
               <a href="?c=Beneficiariorfc&a=Crud&idBeneficiarioRFC=<?php echo $ben->idBeneficiarioRFC;?>" class="btn btn-sm tooltips btn-primary dropdown-toggle" style="margin-right: 10px;" data-original-title="Editar beneficiario" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-edit"></i></i>&nbsp;Editar</a>
             </div>
           </b>
-        </div>
-      </div>    
+        </b>
+      </div>
+    </div>    
+  </div>
+</div>
+
+<?php if(isset($mensaje)){ if(!isset($warning)){?>
+<div class="row" style="margin-bottom: -20px; margin-top: 20px">
+  <div class="col-md-12">
+    <div class="alert alert-success fade in">
+      <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+      <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
     </div>
   </div>
-
-  <?php if(isset($mensaje)){ if(!isset($warning)){?>
-  <div class="row" style="margin-bottom: -20px; margin-top: 20px">
-    <div class="col-md-12">
-      <div class="alert alert-success fade in">
-        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-        <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
-      </div>
-    </div>
-  </div> 
-  <?php } if(isset($warning)){ ?>
-  <div class="row" style="margin-bottom: -20px; margin-top: 20px">
-    <div class="col-md-12">
-      <div class="alert alert-warning fade in">
-        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-        <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
-      </div>
+</div> 
+<?php } if(isset($warning)){ ?>
+<div class="row" style="margin-bottom: -20px; margin-top: 20px">
+  <div class="col-md-12">
+    <div class="alert alert-warning fade in">
+      <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+      <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
     </div>
   </div>
-  <?php } }?>
+</div>
+<?php } }?>
 
-  <div class="row">
-    <div class="col-md-6">
-      <div class="block-web">
-        <div class="header">
-          <h3 class="content-header h3subtitulo">Datos Fiscales</h3>
-        </div>
-        <div class="porlets-content">
-          <div class="panel-body">
-            <div class="col-md-12">
-             <table class="table table-striped">
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="col-md-12">
-                     <label class="col-sm-6 lbldetalle">RFC:</label>
-                     <label class="col-sm-6 control-label"><?php echo $ben->RFC; ?></label>
-                   </div>
-                 </td>
-               </tr>
-               <tr>
-                <td>
-                 <div class="col-md-12">
-                   <label class="col-sm-6 lbldetalle">Fecha alta Sat:</label>
-                   <label class="col-sm-6 control-label"><?php echo $ben->fechaAltaSat; ?></label>
-                 </div>
-               </td>
-             </tr>
-             <tr>
-              <td>
-               <div class="col-md-12">
-                 <label class="col-sm-6 lbldetalle">Actividad:</label>
-                 <label class="col-sm-6 control-label"><?php echo $ben->actividad; ?></label>
-               </div>
-             </td>
-           </tr>
-           <tr>
-            <td>
-             <div class="col-md-12">
-               <label class="col-sm-6 lbldetalle">Cobertura:</label>
-               <label class="col-sm-6 control-label"><?php echo $ben->cobertura; ?></label>
-             </div>
-           </td>
-         </tr>
-       </tbody>
-     </table>
-   </div>
- </div>
-</div><!--/porlets-content-->
-</div><!--/block-web-->
-</div><!--/col-md-6-->
-<div class="col-md-6">
-  <div class="block-web">
-    <div class="header">
-      <h3 class="content-header h3subtitulo">Datos del Representante Legal</h3>
-    </div>
-    <div class="porlets-content">
-      <div class="panel-body">
-        <div class="col-md-12">
-          <table class="table table-striped">
+<div class="row">
+  <div class="col-md-6">
+    <div class="block-web">
+      <div class="header">
+        <h3 class="content-header h3subtitulo">Datos fiscales</h3>
+      </div>
+      <div class="porlets-content">
+        <div class="panel-body">
+          <div class="col-md-12">
+           <table class="table table-striped">
             <tbody>
               <tr>
                 <td>
                   <div class="col-md-12">
-                    <label class="col-sm-6 lbldetalle">CURP:</label>
-                    <label class="col-sm-6 control-label"><?php echo $ben->curp; ?></label>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                 <div class="col-md-12">
-                   <label class="col-sm-6 lbldetalle">Nombre(s):</label>
-                   <label class="col-sm-6 control-label"><?php echo $ben->nombres; ?></label>
+                   <label class="col-sm-6 lbldetalle">RFC:</label>
+                   <label class="col-sm-6 control-label"><?php echo $ben->RFC; ?></label>
                  </div>
                </td>
              </tr>
              <tr>
               <td>
                <div class="col-md-12">
-                 <label class="col-sm-6 lbldetalle">Primer Apellido:</label>
-                 <label class="col-sm-6 control-label"><?php echo $ben->primerApellido; ?></label>
+                 <label class="col-sm-6 lbldetalle">Fecha alta Sat:</label>
+                 <label class="col-sm-6 control-label"><?php echo $ben->fechaAltaSat; ?></label>
                </div>
              </td>
            </tr>
            <tr>
             <td>
              <div class="col-md-12">
-               <label class="col-sm-6 lbldetalle">Segundo Apellido:</label>
-               <label class="col-sm-6 control-label"><?php echo $ben->segundoApellido; ?></label>
+               <label class="col-sm-6 lbldetalle">Actividad:</label>
+               <label class="col-sm-6 control-label"><?php echo $ben->actividad; ?></label>
              </div>
            </td>
          </tr>
          <tr>
           <td>
            <div class="col-md-12">
-             <label class="col-sm-6 lbldetalle">Sexo:</label>
-             <label class="col-sm-6 control-label"><?php echo $ben->sexo; ?></label>
+             <label class="col-sm-6 lbldetalle">Cobertura:</label>
+             <label class="col-sm-6 control-label"><?php echo $ben->cobertura; ?></label>
            </div>
          </td>
        </tr>
@@ -177,18 +121,74 @@
 </div><!--/porlets-content-->
 </div><!--/block-web-->
 </div><!--/col-md-6-->
-</div><!--/row-->
-
-
 <div class="col-md-6">
   <div class="block-web">
     <div class="header">
-      <h3 class="content-header h3subtitulo">Domicilio Fiscal</h3>
+      <h3 class="content-header h3subtitulo">Datos del representante legal</h3>
     </div>
     <div class="porlets-content">
       <div class="panel-body">
         <div class="col-md-12">
-          <table class="table table-striped">
+         <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td>
+                <div class="col-md-12">
+                  <label class="col-sm-6 lbldetalle">CURP:</label>
+                  <label class="col-sm-6 control-label"><?php echo $ben->curp; ?></label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+               <div class="col-md-12">
+                 <label class="col-sm-6 lbldetalle">Nombre(s):</label>
+                 <label class="col-sm-6 control-label"><?php echo $ben->nombres; ?></label>
+               </div>
+             </td>
+           </tr>
+           <tr>
+            <td>
+             <div class="col-md-12">
+               <label class="col-sm-6 lbldetalle">Primer Apellido:</label>
+               <label class="col-sm-6 control-label"><?php echo $ben->primerApellido; ?></label>
+             </div>
+           </td>
+         </tr>
+         <tr>
+          <td>
+           <div class="col-md-12">
+             <label class="col-sm-6 lbldetalle">Segundo Apellido:</label>
+             <label class="col-sm-6 control-label"><?php echo $ben->segundoApellido; ?></label>
+           </div>
+         </td>
+       </tr>
+       <tr>
+        <td>
+         <div class="col-md-12">
+           <label class="col-sm-6 lbldetalle">Sexo:</label>
+           <label class="col-sm-6 control-label"><?php if($ben->sexo==1) echo "MASCULINO"; else echo "FEMENINO"; ?></label>
+         </div>
+       </td>
+     </tr>
+   </tbody>
+ </table>
+</div>
+</div>
+</div><!--/porlets-content-->
+</div><!--/block-web-->
+</div><!--/col-md-6-->
+</div><!--/row-->
+<div class="row">
+  <div class="col-md-6">
+    <div class="block-web">
+      <div class="header">
+        <h3 class="content-header h3subtitulo">Domicilio fiscal</h3>
+      </div>
+      <div class="porlets-content">
+        <div class="panel-body">
+          <div class="col-md-12">
+           <table class="table table-striped">
             <tbody>
               <tr>
                 <td>
@@ -238,7 +238,80 @@
 </div><!--/block-web-->
 </div><!--/col-md-6-->
 </div><!--/row-->
-
+<div class="row">
+  <div class="col-md-12">
+    <div class="block-web">
+      <div class="header">
+        <h3 class="content-header h3subtitulo">Apoyos generados</h3>
+      </div>
+      <div class="porlets-content">
+        <div class="panel-body">
+          <?php if($infoApoyo!=null){ $i=1; foreach ($infoApoyo as $infoApoyo): ?>
+            <div class="col-md-6">
+             <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="col-md-12">   
+                     <label class="col-sm-5 lblinfo" style="margin-top: 5px; color:#607D8B;"><b>Información del <?php echo $i ?>° apoyo</b></label>
+                   </div>
+                 </td>
+               </tr>
+               <tr>
+                <td>
+                  <div class="col-md-12">
+                   <label class="col-sm-4 lbl-detalle"><b>Dirección que lo apoya:</b></label>
+                   <label class="col-sm-7 control-label"><?php echo $infoApoyo->direccion ?></label>
+                 </div>
+                 <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Tipo de apoyo:</b></label>
+                  <label class="col-sm-7 control-label"><?php echo $infoApoyo->tipoApoyo; ?></label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Origen:</b></label>
+                  <label class="col-sm-7 control-label"><?php echo $infoApoyo->origen; ?></label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Programa:</b></label>
+                  <label class="col-sm-7 control-label"><?php echo $infoApoyo->programa; ?></label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Subprograma:</b></label>
+                  <label class="col-sm-7 control-label"><?php echo $infoApoyo->subprograma; ?></label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Periodicidad:</b></label>
+                  <label class="col-sm-7 control-label"><?php echo $infoApoyo->periodicidad; ?></label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Programa social:</b></label>
+                  <label class="col-sm-7 control-label" style="color:red"><strong>P E N D I E N T E</strong></label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Importe:</b></label>
+                  <label class="col-sm-7 control-label">$ <?php echo $infoApoyo->importeApoyo; ?></label>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <?php  
+      if ($i%2==0){
+        echo "<hr>";
+      }$i++;
+    endforeach; }else{
+      echo "<h3>No se han registrado apoyos a este beneficiario<h3>";
+    }
+    ?>
+  </div>
+</div><!--/porlets-content-->
+</div><!--/block-web-->
+</div><!--/col-md-12-->
+</div><!--/row-->
+</div><!--/block-web--> 
+</div><!--/row-col-md-12--> 
+</div><!--/container clear_both padding_fix-->
 <div class="modal fade" id="modalBuscarRFC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default blue_border horizontal_border_1">
@@ -277,14 +350,11 @@
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
 <script>
-  infoRegistro = function (idBeneficiarioRFC){
-    var idBeneficiarioRFC=idBeneficiarioRFC;
-    $.post("index.php?c=Beneficiariorfc&a=Inforegistro", {idBeneficiarioRFC: idBeneficiarioRFC}, function(info) {
+  infoRegistro = function (idBeneficiario){
+    var idBeneficiario=idBeneficiario;
+    $.post("index.php?c=beneficiario&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
       $("#div-modal-content").html(info);
     }); 
   }
 </script>
-
-
-
 

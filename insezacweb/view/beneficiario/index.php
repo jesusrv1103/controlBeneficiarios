@@ -3,6 +3,10 @@
     color:#2196F3;
   }
 </style>
+<script type="text/javascript">
+  /*var stateObj = { foo: "index.php" };
+  history.pushState(stateObj, "page 2", "beneficiarios");*/
+</script>
 <div class="pull-left breadcrumb_admin clear_both">
  <div class="pull-left page_title theme_color">
    <h1>Administración</h1>
