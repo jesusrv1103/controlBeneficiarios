@@ -49,7 +49,7 @@
                     <button data-toggle="dropdown" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar<span class="caret"></span></button>
                     <ul role="menu" class="dropdown-menu">
                       <li><a data-toggle="modal" data-target="#modalImportar" href="#modalImportar">Beneficiarios con CURP</a></li>
-                      <li><a href="#">Beneficiarios con RFC</a></li>
+                      <li><a data-toggle="modal" data-target="#modalImportarRFC" href="#modalImportarRFC">Beneficiarios con RFC</a></li>
                     </ul>
                   </div>
                    <?php } ?>
@@ -156,7 +156,7 @@
          </tr>
        </thead>
        <tbody>
-        <?php foreach($this->model3->Listar1() as $r): ?>
+        <?php foreach($this->model->Listar1() as $r): ?>
           <tr class="grade">
             <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistroRFC(<?php echo $r->idBeneficiarioRFC; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
             <td><?php echo $r->RFC ?> </td>
@@ -237,6 +237,54 @@
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
           <a href="?c=Beneficiario&a=Importar" class="btn btn-primary">Importar datos</a>
+        </div>
+      </div>
+    </div><!--/modal-content--> 
+  </div><!--/modal-dialog--> 
+</div><!--/modal-fade--> 
+<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width: 60%;">
+    <div class="modal-content" id="div-modal-content">
+      <!--*********En esta sección se incluye el modal de informacion de registro y apoyo**********-->
+    </div><!--/modal-content--> 
+  </div><!--/modal-dialog--> 
+</div><!--/modal-fade--> 
+
+<div class="modal fade" id="modalImportarRFC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body"> 
+        <div class="row">
+          <div class="block-web">
+            <div class="header">
+              <h3 class="content-header theme_color">&nbsp;Importar beneficiarios con RFC</h3>
+            </div>
+            <div class="porlets-content" style="margin-bottom: -65px;">
+              <p>Importa tu archivo excel con los datos de los beneficiarios para registrarlos.</p>
+              <p><strong>Nota: </strong>El archivo debe contener el nombre de <strong class="theme_color">beneficiariosrfc.xlsx</strong> para poder ser leído correctamente.</p> 
+              <br>
+              <span class="btn btn-success fileinput-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Seleccionar archivo</span>
+                <!-- The file input field used as target for the file upload widget -->
+                <input id="fileupload" type="file" name="files[]" multiple class="beneficiarios">
+              </span>
+              <br>
+              <br>
+              <!-- The global progress bar -->
+              <div id="progress" class="progress">
+                <div class="progress-bar progress-bar-success"></div>
+              </div>
+              <!-- The container for the uploaded files -->
+              <div id="files" class="files"></div>
+            </div><!--/porlets-content--> 
+          </div><!--/block-web--> 
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row col-md-5 col-md-offset-7">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <a href="?c=Beneficiariorfc&a=Importar" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
     </div><!--/modal-content--> 
