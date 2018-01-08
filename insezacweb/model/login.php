@@ -10,7 +10,7 @@ class Login
 	{
 		try
 		{
-			$this->pdo = Database::StartUp();     
+			$this->pdo = Database::StartUp();
 		}
 		catch(Exception $e)
 		{
@@ -19,16 +19,16 @@ class Login
 	}
 	public function verificar(Login $data)
 	{
-		try 
+		try
 		{
-			$sql= $this->pdo->prepare("SELECT * FROM usuarios,direccion WHERE BINARY usuario=? AND usuarios.idDireccion = direccion.idDireccion");
+			$sql= $this->pdo->prepare("SELECT * FROM usuarios WHERE BINARY usuario=?");
 			$resultado=$sql->execute(
 				array(
                     $data->usuario,
                 )
 			);
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
@@ -40,13 +40,13 @@ class Login
          return true;
       }
    }
- 
+
    public function redirect($url)
    {
        header("Location: $url");
    }
- 
- 
+
+
    public function logOut()
    {
         session_destroy();

@@ -29,7 +29,7 @@
 			<li><a href="?c=Beneficiario">Beneficiarios</a></li>
 			<li class="active"><?php echo $beneficiario->idBeneficiario != null ? "Actualizar beneficiario" : "Registrar beneficiario"; ?></li>
 		</ol>
-	</div>
+</div>
 </div>
 
 <div class="container clear_both padding_fix">
@@ -44,10 +44,10 @@
 						</div>
 						<div class="col-md-4">
 							<div class="btn-group pull-right">
-								<div class="actions"> 
+								<div class="actions">
 								</div>
 							</div>
-						</div>    
+						</div>
 					</div>
 				</div><!--hola-->
 				<!-- SmartWizard html -->
@@ -119,17 +119,17 @@
 													<label class="col-sm-3 control-label">Identificación<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
 														<select name="idIdentificacion" class="form-control" required>
-															<?php if($beneficiario->idBeneficiario==null){ ?>   
-															<option value=""> 
+															<?php if($beneficiario->idBeneficiario==null){ ?>
+															<option value="">
 																Seleccione la identificación oficial del beneficiario
 															</option>
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
-															<option value="<?php echo $beneficiario->idIdentificacion?>"> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idIdentificacion?>">
 																<?php echo $beneficiario->nomTipoI; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('identificacionOficial') as $r): 
+															<?php } foreach($this->model2->Listar('identificacionOficial') as $r):
 															if($r->identificacion!=$beneficiario->nomTipoI){ ?>
-															<option value="<?php echo $r->idIdentificacion; ?>"> 
+															<option value="<?php echo $r->idIdentificacion; ?>">
 																<?php echo $r->identificacion; ?>
 															</option>
 															<?php } endforeach; ?>
@@ -142,17 +142,17 @@
 													<label class="col-sm-3 control-label">Nivel de estudio<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
 														<select name="idNivelEstudios" class="form-control" required>
-															<?php if($beneficiario->idBeneficiario==null){ ?>   
-															<option value=""> 
+															<?php if($beneficiario->idBeneficiario==null){ ?>
+															<option value="">
 																Seleccione el nivel de estudio del beneficiario
 															</option>
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
-															<option value="<?php echo $beneficiario->idNivelEstudios?>"> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idNivelEstudios?>">
 																<?php echo $beneficiario->nivelEstudios; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('nivelEstudio') as $r):  
+															<?php } foreach($this->model2->Listar('nivelEstudio') as $r):
 															if($r->nivelEstudios!=$beneficiario->nivelEstudios){ ?>
-															<option value="<?php echo $r->idNivelEstudios; ?>"> 
+															<option value="<?php echo $r->idNivelEstudios; ?>">
 																<?php echo $r->nivelEstudios; ?>
 															</option>
 															<?php } endforeach; ?>
@@ -165,18 +165,18 @@
 													<label class="col-sm-3 control-label">Tipo de seguridad social<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
 														<select name="idSeguridadSocial" class="form-control" required>
-															<?php if($beneficiario->idBeneficiario==null){ ?>   
-															<option value=""> 
+															<?php if($beneficiario->idBeneficiario==null){ ?>
+															<option value="">
 																Seleccione el tipo de seguridad social del beneficiario
 															</option>
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
-															<option value="<?php echo $beneficiario->idSeguridadSocial?>"> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idSeguridadSocial?>">
 																<?php echo $beneficiario->seguridadSocial; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('seguridadSocial') as $r): 
+															<?php } foreach($this->model2->Listar('seguridadSocial') as $r):
 															if($r->seguridadSocial!=$beneficiario->seguridadSocial){ ?>
 															?>
-															<option value="<?php echo $r->idSeguridadSocial; ?>"> 
+															<option value="<?php echo $r->idSeguridadSocial; ?>">
 																<?php echo $r->seguridadSocial; ?>
 															</option>
 															<?php } endforeach; ?>
@@ -189,18 +189,18 @@
 													<label class="col-sm-3 control-label">Discapacidad<strog class="theme_color"></strog></label>
 													<div class="col-sm-6">
 														<select name="idDiscapacidad" class="form-control">
-															<?php if($beneficiario->idBeneficiario==null){ ?>   
-															<option value="1"> 
+															<?php if($beneficiario->idBeneficiario==null){ ?>
+															<option value="1">
 																Seleccione en caso de que el beneficiario padesca de una discapacidad
 															</option>
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
-															<option value="<?php echo $beneficiario->idDiscapacidad?>"> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idDiscapacidad?>">
 																<?php echo $beneficiario->discapacidad; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('discapacidad') as $r): 
+															<?php } foreach($this->model2->Listar('discapacidad') as $r):
 															if($r->discapacidad!=$beneficiario->discapacidad){ ?>
 															?>
-															<option value="<?php echo $r->idDiscapacidad; ?>"> 
+															<option value="<?php echo $r->idDiscapacidad; ?>">
 																<?php echo $r->discapacidad; ?>
 															</option>
 															<?php } endforeach; ?>
@@ -218,18 +218,18 @@
 													<label class="col-sm-3 control-label">Tipo de vialidad<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
 														<select name="idTipoVialidad" class="form-control" required>
-															<?php if($beneficiario->idBeneficiario==null){ ?>   
-															<option value=""> 
+															<?php if($beneficiario->idBeneficiario==null){ ?>
+															<option value="">
 																Seleccione el tipo de vialidad del beneficiario
 															</option>
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
-															<option value="<?php echo $beneficiario->idTipoVialidad?>"> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idTipoVialidad?>">
 																<?php echo $beneficiario->tipoVialidad; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('tipoVialidad') as $r): 
+															<?php } foreach($this->model2->Listar('tipoVialidad') as $r):
 															if($r->tipoVialidad!=$beneficiario->tipoVialidad){ ?>
 															?>
-															<option value="<?php echo $r->idTipoVialidad; ?>"> 
+															<option value="<?php echo $r->idTipoVialidad; ?>">
 																<?php echo $r->tipoVialidad; ?>
 															</option>
 															<?php } endforeach; ?>
@@ -265,18 +265,18 @@
 													<label class="col-sm-3 control-label">Municipio<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
 														<select name="idMunicipio" class="form-control select2" required style="width: 100%;" id="selectMunicipios" onchange="listarLocalidades()">
-															<?php if($beneficiario->idBeneficiario==null){ ?>   
-															<option value=""> 
+															<?php if($beneficiario->idBeneficiario==null){ ?>
+															<option value="">
 																Seleccione el municipio al que pertenece el beneficiario
 															</option>
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
-															<option value="<?php echo $beneficiario->idMunicipio?>"> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idMunicipio?>">
 																<?php echo $beneficiario->nombreMunicipio; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('municipio') as $r): 
+															<?php } foreach($this->model2->Listar('municipio') as $r):
 															if($r->nombreMunicipio!=$beneficiario->nombreMunicipio){ ?>
 															?>
-															<option value="<?php echo $r->idMunicipio; ?>"> 
+															<option value="<?php echo $r->idMunicipio; ?>">
 																<?php echo $r->nombreMunicipio; ?>
 															</option>
 															<?php } endforeach; ?>
@@ -289,11 +289,11 @@
 													<label class="col-sm-3 control-label">Localidad<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
 														<select name="idLocalidad" class="form-control select2" required id="selectLocalidades" onchange="listarAsentamientos()" style="width: 100%">		<?php if($beneficiario->idBeneficiario==null){  ?>
-															<option value=""> 
+															<option value="">
 																Seleccione la localidad a la que pertenece el beneficiario
-															</option> 
+															</option>
 															<?php } if($beneficiario->idBeneficiario!=null){ ?>
-															<option value="<?php echo $beneficiario->idLocalidad ?>"> 
+															<option value="<?php echo $beneficiario->idLocalidad ?>">
 																<?php echo  $beneficiario->localidad ?>
 															</option>
 															<?php } ?>
@@ -305,13 +305,13 @@
 												<div class="form-group" id="idAsentamientos">
 													<label class="col-sm-3 control-label">Asentamiento</label>
 													<div class="col-sm-6">
-														<select name="idAsentamientos" class="form-control select2" id="selectAsentamientos" style="width: 100%">		
+														<select name="idAsentamientos" class="form-control select2" id="selectAsentamientos" style="width: 100%">
 															<?php if($beneficiario->idBeneficiario==null){  ?>
-															<option value=""> 
+															<option value="">
 																Seleccione el asentamiento a la que pertenece el beneficiario
-															</option> 
+															</option>
 															<?php } if($beneficiario->idBeneficiario!=null){ ?>
-															<option value="<?php echo $beneficiario->idAsentamientos ?>"> 
+															<option value="<?php echo $beneficiario->idAsentamientos ?>">
 																<?php echo  $beneficiario->nombreAsentamiento ?>
 															</option>
 															<?php } ?>
@@ -330,7 +330,7 @@
 
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Descripción de la ubicación<strog class="theme_color">*</strog></label>
-													<div class="col-sm-6">  
+													<div class="col-sm-6">
 														<textarea class="form-control"  onkeyup="mayus(this);"  onchange="mayus(this);" name="descripcionUbicacion" placeholder="Ejemplo: Frente a la plaza del centro, a un costado de la farmacia guadalajara" required value="<?php echo $beneficiario->descripcionUbicacion;?>"></textarea>
 														<div class="help-block with-errors"></div>
 													</div>
@@ -348,11 +348,11 @@
 													<label class="col-sm-3 control-label">Estudio socioeconomico<strog class="theme_color"></strog></label>
 													<div class="col-sm-1">
 														<div class="radio">
-															<input type="radio" name="estudioSocioeconomico"  value="1" <?php if($beneficiario->estudioSocioeconomico=="1"){ ?> checked <?php } ?>>Si 
+															<input type="radio" name="estudioSocioeconomico"  value="1" <?php if($beneficiario->estudioSocioeconomico=="1"){ ?> checked <?php } ?>>Si
 														</div>
 														<div class="radio">
 															<label>
-																<input type="radio" name="estudioSocioeconomico" value="0" <?php if($beneficiario->estudioSocioeconomico=="0" || $beneficiario->idBeneficiario==null ){ ?> checked <?php } ?>>No 
+																<input type="radio" name="estudioSocioeconomico" value="0" <?php if($beneficiario->estudioSocioeconomico=="0" || $beneficiario->idBeneficiario==null ){ ?> checked <?php } ?>>No
 															</label>
 														</div>
 													</div>
@@ -360,11 +360,11 @@
 													<label class="col-sm-1 control-label">Jefe de familia<strog class="theme_color"></strog></label>
 													<div class="col-sm-1">
 														<div class="radio">
-															<input type="radio" name="jefeFamilia"   value="1" <?php if($beneficiario->jefeFamilia=="1"){ ?> checked <?php } ?>>Si 
+															<input type="radio" name="jefeFamilia"   value="1" <?php if($beneficiario->jefeFamilia=="1"){ ?> checked <?php } ?>>Si
 														</div>
 														<div class="radio">
 															<label>
-																<input type="radio" name="jefeFamilia" value="0" <?php if($beneficiario->jefeFamilia=="0" || $beneficiario->idBeneficiario==null ){ ?> checked <?php } ?>>No 
+																<input type="radio" name="jefeFamilia" value="0" <?php if($beneficiario->jefeFamilia=="0" || $beneficiario->idBeneficiario==null ){ ?> checked <?php } ?>>No
 															</label>
 														</div>
 													</div>
@@ -372,33 +372,33 @@
 													<label class="col-sm-1 control-label">Beneficiario Colectivo<strog class="theme_color"></strog></label>
 													<div class="col-sm-1">
 														<div class="radio">
-															<input type="radio" name="beneficiarioColectivo"  value="1" <?php if($beneficiario->beneficiarioColectivo=="1"){ ?> checked <?php } ?>>Si 
+															<input type="radio" name="beneficiarioColectivo"  value="1" <?php if($beneficiario->beneficiarioColectivo=="1"){ ?> checked <?php } ?>>Si
 														</div>
 														<div class="radio">
 															<label>
-																<input type="radio" name="beneficiarioColectivo" value="0" <?php if($beneficiario->beneficiarioColectivo=="0" || $beneficiario->beneficiarioColectivo==null ){ ?> checked <?php } ?>>No 
+																<input type="radio" name="beneficiarioColectivo" value="0" <?php if($beneficiario->beneficiarioColectivo=="0" || $beneficiario->beneficiarioColectivo==null ){ ?> checked <?php } ?>>No
 															</label>
 														</div>
 													</div>
-												</div><!--/form-group-->   
+												</div><!--/form-group-->
 
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Estado civil<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
 														<select name="idEstadoCivil" class="form-control" required>
 
-															<?php if($beneficiario->idBeneficiario==null){ ?>   
-															<option value=""> 
+															<?php if($beneficiario->idBeneficiario==null){ ?>
+															<option value="">
 																Seleccione el estado civil del beneficiario
 															</option>
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
-															<option value="<?php echo $beneficiario->idEstadoCivil?>"> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idEstadoCivil?>">
 																<?php echo $beneficiario->estadoCivil; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('estadoCivil') as $r): 
+															<?php } foreach($this->model2->Listar('estadoCivil') as $r):
 															if($r->estadoCivil!=$beneficiario->estadoCivil){ ?>
 															?>
-															<option value="<?php echo $r->idEstadoCivil; ?>"> 
+															<option value="<?php echo $r->idEstadoCivil; ?>">
 																<?php echo $r->estadoCivil; ?>
 															</option>
 															<?php } endforeach; ?>
@@ -411,18 +411,18 @@
 													<label class="col-sm-3 control-label">Ocupación<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
 														<select name="idOcupacion" class="form-control" required>
-															<?php if($beneficiario->idBeneficiario==null){ ?>   
-															<option value=""> 
+															<?php if($beneficiario->idBeneficiario==null){ ?>
+															<option value="">
 																Seleccione la ocupación del beneficiario
 															</option>
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
-															<option value="<?php echo $beneficiario->idOcupacion?>"> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idOcupacion?>">
 																<?php echo $beneficiario->ocupacion; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('ocupacion') as $r): 
+															<?php } foreach($this->model2->Listar('ocupacion') as $r):
 															if($r->ocupacion!=$beneficiario->ocupacion){ ?>
 															?>
-															<option value="<?php echo $r->idOcupacion; ?>"> 
+															<option value="<?php echo $r->idOcupacion; ?>">
 																<?php echo $r->ocupacion; ?>
 															</option>
 															<?php } endforeach; ?>
@@ -435,18 +435,18 @@
 													<label class="col-sm-3 control-label">Ingreso mensual<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
 														<select name="idIngresoMensual" class="form-control" required>
-															<?php if($beneficiario->idBeneficiario==null){ ?>   
-															<option value=""> 
+															<?php if($beneficiario->idBeneficiario==null){ ?>
+															<option value="">
 																Seleccione el ingreso mensual del beneficiario
 															</option>
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
-															<option value="<?php echo $beneficiario->idIngresoMensual?>"> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idIngresoMensual?>">
 																<?php echo $beneficiario->ingresoMensual; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('ingresoMensual') as $r): 
+															<?php } foreach($this->model2->Listar('ingresoMensual') as $r):
 															if($r->ingresoMensual!=$beneficiario->ingresoMensual){ ?>
 															?>
-															<option value="<?php echo $r->idIngresoMensual; ?>"> 
+															<option value="<?php echo $r->idIngresoMensual; ?>">
 																<?php echo $r->ingresoMensual; ?>
 															</option>
 															<?php } endforeach; ?>
@@ -475,18 +475,18 @@
 													<label class="col-sm-3 control-label">Grupo vulnerable<strog class="theme_color"></strog></label>
 													<div class="col-sm-6">
 														<select name="idGrupoVulnerable" class="form-control" >
-															<?php if($beneficiario->idBeneficiario==null){ ?>   
-															<option value="1"> 
+															<?php if($beneficiario->idBeneficiario==null){ ?>
+															<option value="1">
 																Seleccione en caso de que el beneficiario pertenezca a un grupo vulnerable
 															</option>
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
-															<option value="<?php echo $beneficiario->idGrupoVulnerable?>"> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idGrupoVulnerable?>">
 																<?php echo $beneficiario->grupoVulnerable; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('grupoVulnerable') as $r): 
+															<?php } foreach($this->model2->Listar('grupoVulnerable') as $r):
 															if($r->grupoVulnerable!=$beneficiario->grupoVulnerable){ ?>
 															?>
-															<option value="<?php echo $r->idGrupoVulnerable; ?>"> 
+															<option value="<?php echo $r->idGrupoVulnerable; ?>">
 																<?php echo $r->grupoVulnerable; ?>
 															</option>
 															<?php } endforeach; ?>
@@ -508,18 +508,18 @@
 													<label class="col-sm-3 control-label">Tipo de vivienda<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
 														<select name="idVivienda" class="form-control" required>
-															<?php if($beneficiario->idBeneficiario==null){ ?>   
-															<option value=""> 
+															<?php if($beneficiario->idBeneficiario==null){ ?>
+															<option value="">
 																Seleccione el tipo de vivienda del beneficiario
 															</option>
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
-															<option value="<?php echo $beneficiario->idVivienda?>"> 
+															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="<?php echo $beneficiario->idVivienda?>">
 																<?php echo $beneficiario->vivienda; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('vivienda') as $r): 
+															<?php } foreach($this->model2->Listar('vivienda') as $r):
 															if($r->vivienda!=$beneficiario->vivienda){ ?>
 															?>
-															<option value="<?php echo $r->idVivienda; ?>"> 
+															<option value="<?php echo $r->idVivienda; ?>">
 																<?php echo $r->vivienda; ?>
 															</option>
 															<?php } endforeach; ?>
@@ -599,7 +599,7 @@
 
 							function curp2date() {
 								var miCurp =document.getElementById('curp').value;
-								var m = miCurp.match( /^\w{4}(\w{2})(\w{2})(\w{2})/ 
+								var m = miCurp.match( /^\w{4}(\w{2})(\w{2})(\w{2})/
 									);
 
 
@@ -621,7 +621,7 @@
 
 							function curp2date() {
 								var miCurp =document.getElementById('curp').value;
-								var m = miCurp.match( /^\w{4}(\w{2})(\w{2})(\w{2})/ 
+								var m = miCurp.match( /^\w{4}(\w{2})(\w{2})(\w{2})/
 									);
 
 
@@ -636,7 +636,6 @@
 						</script>
 						<script type="text/javascript">
 							window.onload=function(){
-
 							}
 							listarLocalidades = function (){
 								var idMunicipio = $('#selectMunicipios').val();

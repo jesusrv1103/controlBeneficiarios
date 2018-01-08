@@ -12,7 +12,6 @@ if (!isset($_SESSION['seguridad'])){
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
-
   <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
@@ -88,7 +87,7 @@ if (!isset($_SESSION['seguridad'])){
         </div>
         <div class="top_right_bar">
           <div style="margin-top: -33%;">
-            <span class="user_adminname">Hola <?php echo $_SESSION['usuario']; ?></span> 
+            <span class="user_adminname">Hola <?php echo $_SESSION['usuario']; ?></span>
             <span class="user_adminname"><a href="?c=Login&a=logout"><i class="fa fa-power-off"></i> Salir</span></a>
           </div>
         </div>
@@ -107,7 +106,7 @@ if (!isset($_SESSION['seguridad'])){
               <a href="?c=Inicio&a=Wizard"> <i class="fa fa-home"></i>Wizard</a>
             </li-->
             <?php if (isset($inicio)){ ?>
-            <li class="left_nav_active theme_border"> 
+            <li class="left_nav_active theme_border">
               <?php } else { ?>
               <li class="theme_border">
                 <?php } ?>
@@ -120,33 +119,33 @@ if (!isset($_SESSION['seguridad'])){
                   <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
                     <ul>
                       <?php }  ?>
-                      <li> 
-                        <a href="?c=Beneficiario"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                      <li>
+                        <a href="?c=Beneficiario"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                          <?php if (isset($beneficiarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>
-                       </a> 
+                       </a>
                      </li>
                      <br><br>
-                     <li> 
-                      <a href="?c=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                     <li>
+                      <a href="?c=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                        <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
-                     </a> 
+                     </a>
                    </li><br><br>
-                   <?php if($_SESSION['tipoUsuario']==1){?> 
+                   <?php if($_SESSION['tipoUsuario']==1){?>
 
-                   <li> 
-                    <a href="?c=Direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                   <li>
+                    <a href="?c=Direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                      <?php if (isset($direccion)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
-                   </a> 
+                   </a>
                  </li><br><br>
-                 <li> 
-                  <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                 <li>
+                  <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                    <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
-                 </a> 
+                 </a>
                </li><br><br>
-               <li> 
-                <a href="?c=Usuario"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+               <li>
+                <a href="?c=Usuario"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                  <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
-               </a> 
+               </a>
              </li><br><br>
              <?php } ?>
            </ul>
@@ -158,37 +157,37 @@ if (!isset($_SESSION['seguridad'])){
             <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
               <ul>
                 <?php }  ?>
-                <li> 
-                  <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-                    <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>                 </a> 
+                <li>
+                  <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                    <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>                 </a>
                   </li><br><br>
-                  <li> 
-                   <a href="?c=Catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                  <li>
+                   <a href="?c=Catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                     <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
-                  </a> 
+                  </a>
                 </li><br><br>
-                <li> 
-                  <a href="?c=Localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+                <li>
+                  <a href="?c=Localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                    <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
-                 </a> 
+                 </a>
                </li><br><br>
-               <li> 
-                <a href="?c=Asentamiento"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+               <li>
+                <a href="?c=Asentamiento"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                  <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Asentamientos</b>
-               </a> 
+               </a>
              </li><br><br>
-             <li> 
-              <a href="?c=Municipio"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+             <li>
+              <a href="?c=Municipio"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                <?php if (isset($municipios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Municipios</b>
-             </a> 
+             </a>
            </li><br><br>
-           <li> 
-            <a href="?c=Programa"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
-              <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b> 
-            </a> 
+           <li>
+            <a href="?c=Programa"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+              <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b>
+            </a>
           </li><br><br>
-          <li> 
-            <a href="?c=ProgramaSocial"> <span>&nbsp;</span> <i class="fa fa-circle"></i> 
+          <li>
+            <a href="?c=ProgramaSocial"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
              <?php if (isset($programasSociales)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas sociales</b>
            </a>
          </li><br><br>
@@ -204,7 +203,7 @@ if (!isset($_SESSION['seguridad'])){
 <div class="contentpanel">
   <!--\\\\\\\ contentpanel start\\\\\\-->
 
-  <?php include($page); ?>      
+  <?php include($page); ?>
 
 </div>
 <!--\\\\\\\ content panel end \\\\\\-->
@@ -216,21 +215,21 @@ if (!isset($_SESSION['seguridad'])){
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/common-script.js"></script>
 <script src="assets/js/jquery.slimscroll.min.js"></script>
-<script type="text/javascript"  src="assets/plugins/toggle-switch/toggles.min.js"></script> 
+<script type="text/javascript"  src="assets/plugins/toggle-switch/toggles.min.js"></script>
 <script src="assets/plugins/checkbox/zepto.js"></script>
 <script src="assets/plugins/checkbox/icheck.js"></script>
 <script src="assets/js/icheck-init.js"></script>
-<script type="text/javascript" src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> 
-<script type="text/javascript" src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script> 
-<script type="text/javascript" src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script> 
-<script type="text/javascript" src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script> 
-<script type="text/javascript" src="assets/js/form-components.js"></script> 
-<script type="text/javascript"  src="assets/plugins/input-mask/jquery.inputmask.min.js"></script> 
-<script type="text/javascript"  src="assets/plugins/input-mask/demo-mask.js"></script> 
-<script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script> 
-<script type="text/javascript"  src="assets/plugins/dropzone/dropzone.min.js"></script> 
+<script type="text/javascript" src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+<script type="text/javascript" src="assets/js/form-components.js"></script>
+<script type="text/javascript"  src="assets/plugins/input-mask/jquery.inputmask.min.js"></script>
+<script type="text/javascript"  src="assets/plugins/input-mask/demo-mask.js"></script>
+<script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+<script type="text/javascript"  src="assets/plugins/dropzone/dropzone.min.js"></script>
 <script type="text/javascript" src="assets/plugins/ckeditor/ckeditor.js"></script>
-<script src="assets/js/jPushMenu.js"></script> 
+<script src="assets/js/jPushMenu.js"></script>
 <script src="assets/plugins/validation/parsley.min.js"></script>
 <script src="assets/plugins/data-tables/jquery.dataTables.js"></script>
 <script src="assets/plugins/data-tables/DT_bootstrap.js"></script>
@@ -259,7 +258,7 @@ if (!isset($_SESSION['seguridad'])){
       done: function (e, data) {
         $.each(data.result.files, function (index, file) {
           $('<p/>').text(file.name).appendTo('#files');
-        }); 
+        });
       },
       progressall: function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -385,7 +384,7 @@ if (!isset($_SESSION['seguridad'])){
     e.preventDefault();
   });
 
-  
+
 </script>
 <script>
 
@@ -482,18 +481,18 @@ if (!isset($_SESSION['seguridad'])){
 
 <script type="text/javascript">
   $(document).ready(function(){
-  
+            // Toolbar extra buttons
             var btnFinish = $('<button></button>').text('Finish')
             .addClass('btn btn-info')
-            .on('click', function(){ 
-              if( !$(this).hasClass('disabled')){ 
+            .on('click', function(){
+              if( !$(this).hasClass('disabled')){
                 var elmForm = $("#myForm");
                 if(elmForm){
-                  elmForm.validator('validate'); 
+                  elmForm.validator('validate');
                   var elmErr = elmForm.find('.has-error');
                   if(elmErr && elmErr.length > 0){
                     alert('Oops we still have error in the form');
-                    return false;    
+                    return false;
                   }else{
                     alert('Great! we are ready to submit form');
                     elmForm.submit();
@@ -504,15 +503,15 @@ if (!isset($_SESSION['seguridad'])){
             });
             var btnCancel = $('<button style="margin-left:-200px;"></button>').text('Cancel')
             .addClass('btn btn-danger')
-            .on('click', function(){ 
-              $('#smartwizard').smartWizard("reset"); 
-              $('#myForm').find("input, textarea").val(""); 
-            });                         
-            
-            
+            .on('click', function(){
+              $('#smartwizard').smartWizard("reset");
+              $('#myForm').find("input, textarea").val("");
+            });
+
+
             // Smart Wizard
-            $('#smartwizard').smartWizard({ 
-              selected: 0, 
+            $('#smartwizard').smartWizard({
+              selected: 0,
               theme: 'arrows',
               transitionEffect:'fade',
               toolbarSettings: {toolbarPosition: 'bottom'},
@@ -523,34 +522,34 @@ if (!isset($_SESSION['seguridad'])){
                                 enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
                               }
                             });
-            
+
             $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
               var elmForm = $("#form-step-" + stepNumber);
-                // stepDirection === 'forward' :- this condition allows to do the form validation 
+                // stepDirection === 'forward' :- this condition allows to do the form validation
                 // only on forward navigation, that makes easy navigation on backwards still do the validation when going next
                 if(stepDirection === 'forward' && elmForm){
-                  elmForm.validator('validate'); 
+                  elmForm.validator('validate');
                   var elmErr = elmForm.children('.has-error');
                   if(elmErr && elmErr.length > 0){
                         // Form validation failed
-                        return false;    
+                        return false;
                       }
                     }
                     return true;
                   });
-            
+
             $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
                 // Enable finish button only on last step
-                if(stepNumber == 3){ 
-                  $('.btn-finish').removeClass('disabled');  
+                if(stepNumber == 3){
+                  $('.btn-finish').removeClass('disabled');
                 }else{
                   $('.btn-finish').addClass('disabled');
                 }
-              });                               
-            
-          });   
+              });
+
+          });
 
         </script>
+
       </body>
       </html>
-
