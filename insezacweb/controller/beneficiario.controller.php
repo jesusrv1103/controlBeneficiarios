@@ -123,9 +123,11 @@ require_once 'view/index.php';
 public function Crud(){
   $beneficiario = new Beneficiario();
   if(isset($_REQUEST['curp'])){
+    echo "aqui estoy";
     $beneficiario->curp=$_REQUEST['curp'];
     $verificaBen=$this->model->VerificaBeneficiario($beneficiario->curp);
     if($verificaBen==null){
+      echo "dea";
       $administracion=true;
       $beneficiarios=true;
       $page="view/beneficiario/beneficiario.php";
@@ -143,6 +145,7 @@ public function Crud(){
       require_once 'view/index.php';
     }
   }if(isset($_REQUEST['idBeneficiario'])){
+    echo "jssassasa";
     $administracion=true;
     $beneficiarios=true;
     $beneficiario = $this->model->Listar($_REQUEST['idBeneficiario']);
