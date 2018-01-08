@@ -150,7 +150,6 @@ if (!isset($_SESSION['seguridad'])){
              <?php } ?>
            </ul>
          </li>
-         <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
          <?php if(isset($catalogos)){ ?>
          <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
           <ul class="opened" style="display:block">
@@ -195,8 +194,9 @@ if (!isset($_SESSION['seguridad'])){
        </ul>
      </li>
    </ul>
- </li>
- <?php } ?>
+
+ </div>
+
 </div>
 </div>
 <!--\\\\\\\left_nav end \\\\\\-->
@@ -246,7 +246,7 @@ if (!isset($_SESSION['seguridad'])){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <script>
 
-  //*Subir archivos automaicos**
+  //****Subir archivos automaicos*****
 
   $(document).on('ready', function() {
     'use strict';
@@ -271,7 +271,7 @@ if (!isset($_SESSION['seguridad'])){
     .parent().addClass($.support.fileInput ? undefined : 'disabled');
   });
 
-  //**Elimina archivos existentes para importar otros archivos**
+  //***Elimina archivos existentes para importar otros archivos*******
 
   $('.catalogos').change(function(e) {
     e.preventDefault();
@@ -401,7 +401,7 @@ if (!isset($_SESSION['seguridad'])){
   }
 </script>
 <script>
-  //**SELEC2***
+  //*******SELEC2********
   $(document).on('ready', function()  {
 
     //Initialize Select2 Elements
