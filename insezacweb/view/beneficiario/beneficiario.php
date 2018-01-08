@@ -11,12 +11,7 @@
 }
 </style>
 
-<script type="text/javascript">
 
-  	window.location = "index.php";
-
-    //location.replace(history.forward(1))
-</script>
 
 <div class="pull-left breadcrumb_admin clear_both">
 	<div class="pull-left page_title theme_color">
