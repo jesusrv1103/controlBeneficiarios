@@ -23,7 +23,7 @@ class SubprogramaController{
   $subprogramas=true;
   $page= "view/subprograma/subprograma.php";
   require_once 'view/index.php';
-} 
+}
 public function Guardar(){
   $subprograma= new Subprograma();
   $subprograma->idSubprograma = $_REQUEST['idSubprograma'];
@@ -35,7 +35,7 @@ public function Guardar(){
   if($subprograma->idSubprograma > 0){
     $this->model->Actualizar($subprograma);
     $mensaje="Se ha actualizado correctamente el techo presupuestal de <strong>$subprograma->subprograma</strong>";
-  } 
+  }
   else{
     $this->model->Registrar($subprograma);
     $mensaje="Se ha registrado correctamente subprograma";
@@ -45,7 +45,7 @@ public function Guardar(){
     $subprogramas=true; //variable cargada para activar la opcion programas en el menu
     $page="view/subprograma/index.php";
     require_once 'view/index.php';
-  } 
+  }
   public function Eliminar(){
      $this->model->Eliminar($_REQUEST['idSubprograma']);
      $administracion = true;
@@ -58,7 +58,7 @@ public function Guardar(){
   public function Importar(){
     if (file_exists("./assets/files/subprogramas.xlsx")) {
 
-          //Agregamos la librería 
+          //Agregamos la librería
       require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
     //Variable con el nombre del archivo
       $nombreArchivo = './assets/files/subprogramas.xlsx';
@@ -76,7 +76,7 @@ public function Guardar(){
       $administracion=true;
       require_once 'view/index.php';
     }
-          //si por algo no cargo el archivo bak_ 
+          //si por algo no cargo el archivo bak_
     else {
       $error=true;
       $mensaje="El archivo <strong>subprogramas.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
@@ -111,6 +111,7 @@ public function Guardar(){
    require_once 'view/index.php';
  }
 }
+
 public function Consultas(){
   $subprograma=$_REQUEST['valorBusqueda'];
   //$programas=$this->model->ConsultaProgramas();
@@ -148,9 +149,10 @@ public function Consultas(){
  </div><!--/col-md-12-->
 </div><!--/row-->
 </div><!--/container clear_both padding_fix-->';
-}  
+}
    endforeach;
 }
+
 public function VerTabla(){
   $administracion=true;
   $subprogramas=true;
@@ -158,9 +160,10 @@ public function VerTabla(){
   $page="view/subprograma/index.php";
   require_once "view/index.php";
 }
+
 public function infoSubprograma(){
   $subprograma = $this->model->Obtener($_REQUEST['idSubprograma']);
-   echo '<div class="modal-body"> 
+   echo '<div class="modal-body">
       <div class="row">
         <div class="block-web">
          <div class="header">
@@ -169,13 +172,13 @@ public function infoSubprograma(){
               <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Detalles de subprograma</h2>
             </div>
           </div>
-        </div>        
+        </div>
         <div class="porlets-content" style="margin-bottom: -65px;">
           <table class="table table-striped">
             <tbody>
               <tr>
                <td>
-                 <div class="col-md-12">   
+                 <div class="col-md-12">
                    <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Información de subprograma</b></label>
                  </div>
                </td>
@@ -198,17 +201,26 @@ public function infoSubprograma(){
        </tr>
     </tbody>
   </table>
-</div><!--/porlets-content--> 
-</div><!--/block-web--> 
+</div><!--/porlets-content-->
+</div><!--/block-web-->
 </div>
 </div>
 <div class="modal-footer">
   <div class="row col-md-6 col-md-offset-6">
     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
-    <a href="?c=Beneficiario&a=Detalles&idBeneficiario=" class="btn btn-info btn-sm">Ver beneficiarios de subprograma</a>
+    <a href="?c=Subprograma&a=Beneficiarios&subprograma='.$subprograma->subprograma .'&idSubprograma='.$subprograma->idSubprograma.'" class="btn btn-info btn-sm">Ver beneficiarios de subprograma</a>
   </div>
 </div>';
 
+}
+
+public function Beneficiarios(){
+    $subprograma=$_REQUEST['subprograma'];
+    $idSubprograma=$_REQUEST['idSubprograma'];
+    $administracion=true;
+    $subprogramas=true;
+    $page="view/subprograma/beneficiarios.php";
+    require_once "view/index.php";
 }
 }
 ?>
