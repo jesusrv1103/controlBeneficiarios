@@ -10,8 +10,7 @@ class BeneficiariorfcController{
 
   public function __CONSTRUCT(){
     $this->model = new Beneficiariorfc();
-    $this->model2 = new Catalogos();
-    
+    $this->model2 = new Catalogos(); 
   }
 
 //Metodo Guardar  si trae un id actualiza, no registra
@@ -277,7 +276,6 @@ public function Inforegistro(){
     $this->model->Eliminar($beneficiario);
     header ('Location: index.php?c=Beneficiario&a=RFC');
   }
-  
   public function Importar(){
     if (file_exists("./assets/files/beneficiariosrfc.xlsx")) {
   //Agregamos la librería 
@@ -333,9 +331,9 @@ public function Inforegistro(){
        $benrfc->actividad = $objPHPExcel->getActiveSheet()->getCell('P'.$numRow)->getCalculatedValue();
        $benrfc->cobertura = $objPHPExcel->getActiveSheet()->getCell('Q'.$numRow)->getCalculatedValue();
        if (!$benrfc->RFC == null) {
-         $consult = $this->model->VerificaBeneficiarioRFC($benrfc->RFC);
-        if (!$consult == null) {
-         $this->model->ActualizarExc($benrfc);
+         //$consult = $this->model->VerificaBeneficiarioRFC($benrfc->RFC);
+       // if (!$consult == null) {
+         //$this->model->ActualizarExc($benrfc);
        //Datos de registro
          $benrfc->usuario=$_SESSION['usuario'];
          $benrfc->fechaAlta=date("Y-m-d H:i:s");
@@ -344,12 +342,11 @@ public function Inforegistro(){
       //$consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
       //$benrfc->idMunicipio=$consult->idMunicipio;
       //echo $benrfc->curp;
-       }else{
+       //}else{
       //echo $benrfc->idRegistro;
          $benrfc->idRegistro=$this->model->RegistraDatosRegistro($benrfc);
          $this->model->ImportarBeneficiarioRFC($benrfc);
       //echo "ya importo";
-       }
      }
        $numRow+=1;
 //echo $numRow;

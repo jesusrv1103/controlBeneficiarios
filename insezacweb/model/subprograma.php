@@ -199,4 +199,20 @@ class Subprograma
 			die($e->getMessage());
 		}
 	}
+	public function Check($valor)
+	{
+		try 
+		{
+			if ($valor==0) {
+				$stm=$this->pdo->prepare("SET GLOBAL FOREIGN_KEY_CHECKS=0");
+			$stm->execute();
+			}else{
+			$stm=$this->pdo->prepare("SET GLOBAL FOREIGN_KEY_CHECKS=1");
+			$stm->execute();
+		}
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
 }
