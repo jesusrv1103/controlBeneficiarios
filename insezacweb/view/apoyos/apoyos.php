@@ -1,4 +1,4 @@
- 
+
 
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
@@ -21,14 +21,14 @@
           <div class="row" style="margin-top: 15px; margin-bottom: 12px;">
             <div class="col-sm-8">
               <div class="actions"> </div>
-              <h2 class="content-header theme_color" style="margin-top: -5px;"><?php echo $apoyo->idApoyo != null ? '&nbsp; Actualizar apoyo' : '&nbsp; Registrar apoyo'; ?></h2> 
+              <h2 class="content-header theme_color" style="margin-top: -5px;"><?php echo $apoyo->idApoyo != null ? '&nbsp; Actualizar apoyo' : '&nbsp; Registrar apoyo'; ?></h2>
             </div>
             <div class="col-md-4">
               <div class="btn-group pull-right">
-                <div class="actions"> 
+                <div class="actions">
                 </div>
               </div>
-            </div>    
+            </div>
           </div>
         </div>
         <div class="porlets-content">
@@ -38,18 +38,18 @@
               <label class="col-sm-3 control-label">Beneficiario<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
                 <select name="idBeneficiario" class="form-control select2" required style="width: 100%">
-                  <?php if($apoyo->idApoyo==null){ ?>   
-                  <option value=""> 
+                  <?php if($apoyo->idApoyo==null){ ?>
+                  <option value="">
                     Seleccione la curp del beneficiario
                   </option>
-                  <?php } if($apoyo->idApoyo!=null){ ?>   
-                  <option value="<?php echo $apoyo->idBeneficiario?>"> 
+                  <?php } if($apoyo->idApoyo!=null){ ?>
+                  <option value="<?php echo $apoyo->idBeneficiario?>">
                     <?php echo $apoyo->curp; ?>
                   </option>
-                  <?php } foreach($this->model->ListarSelects('beneficiarios') as $r): 
+                  <?php } foreach($this->model->ListarSelects('beneficiarios') as $r):
                   if($r->curp!=$apoyo->curp){ ?>
                   ?>
-                  <option value="<?php echo $r->idBeneficiario; ?>"> 
+                  <option value="<?php echo $r->idBeneficiario; ?>">
                     <?php echo $r->curp; ?>
                   </option>
                   <?php } endforeach; ?>
@@ -60,18 +60,18 @@
               <label class="col-sm-3 control-label">Origen<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
                 <select name="idOrigen" class="form-control" required>
-                  <?php if($apoyo->idApoyo==null){ ?>   
-                  <option value=""> 
+                  <?php if($apoyo->idApoyo==null){ ?>
+                  <option value="">
                     Seleccione el origen del apoyo
                   </option>
-                  <?php } if($apoyo->idApoyo!=null){ ?>   
-                  <option value="<?php echo $apoyo->idOrigen?>"> 
+                  <?php } if($apoyo->idApoyo!=null){ ?>
+                  <option value="<?php echo $apoyo->idOrigen?>">
                     <?php echo $apoyo->origen; ?>
                   </option>
-                  <?php } foreach($this->model->ListarSelects('origen') as $r): 
+                  <?php } foreach($this->model->ListarSelects('origen') as $r):
                   if($r->origen!=$apoyo->origen){ ?>
                   ?>
-                  <option value="<?php echo $r->idOrigen; ?>"> 
+                  <option value="<?php echo $r->idOrigen; ?>">
                     <?php echo $r->origen; ?>
                   </option>
                   <?php } endforeach; ?>
@@ -82,33 +82,33 @@
               <label class="col-sm-3 control-label">Programa<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
                 <select name="idPrograma" class="form-control select2" id="selectProgramas" onchange="listarSubprogramas()" required style="width: 100%">
-                  <?php if($apoyo->idApoyo==null){ ?>   
-                  <option value=""> 
+                  <?php if($apoyo->idApoyo==null){ ?>
+                  <option value="">
                     Seleccione la subprograma a la que pertenece el beneficiario
                   </option>
-                  <?php } if($apoyo->idApoyo!=null){ ?>   
-                  <option value="<?php echo $apoyo->idSubprograma?>"> 
-                    <?php echo $apoyo->subprograma; ?>
+                  <?php } if($apoyo->idApoyo!=null){ ?>
+                  <option value="<?php echo $apoyo->idPrograma?>">
+                    <?php echo $apoyo->programa; ?>
                   </option>
                   <?php } foreach($this->model->ListarSelects('programa') as $r): ?>
-                  <option value="<?php echo $r->idPrograma; ?>"> 
+                  <option value="<?php echo $r->idPrograma; ?>">
                     <?php echo $r->programa; ?>
                   </option>
                 <?php  endforeach; ?>
               </select>
             </div>
           </div><!--/form-group-->
-        
+
           <div class="form-group">
             <label class="col-sm-3 control-label">Subprograma<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
               <select name="idSubprograma" class="form-control select2" required id="selectSubprogramas" style="width: 100%">   <?php if($apoyo->idApoyo==null){  ?>
-                <option value=""> 
+                <option value="">
                   Seleccione el subprograma a la que pertenece el beneficiario
-                </option> 
+                </option>
                 <?php } if($apoyo->idApoyo!=null){ ?>
-                <option value="<?php echo $apoyo->idSubprograma ?>"> 
-                  <?php echo  $apoyo->Subprograma ?>
+                <option value="<?php echo $apoyo->idSubprograma ?>">
+                  <?php echo  $apoyo->subprograma ?>
                 </option>
                 <?php } ?>
               </select>
@@ -119,18 +119,18 @@
             <label class="col-sm-3 control-label">Caracteristica de apoyo<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
               <select name="idCaracteristica" class="form-control select2" required style="width: 100%">
-                <?php if($apoyo->idApoyo==null){ ?>   
-                <option value=""> 
+                <?php if($apoyo->idApoyo==null){ ?>
+                <option value="">
                   Seleccione caracteristica del apoyo
                 </option>
-                <?php } if($apoyo->idApoyo!=null){ ?>   
-                <option value="<?php echo $apoyo->idCaracteristicasApoyo?>"> 
+                <?php } if($apoyo->idApoyo!=null){ ?>
+                <option value="<?php echo $apoyo->idCaracteristicasApoyo?>">
                   <?php echo $apoyo->caracteristicasApoyo; ?>
                 </option>
-                <?php } foreach($this->model->ListarSelects('caracteristicasApoyo') as $r): 
+                <?php } foreach($this->model->ListarSelects('caracteristicasApoyo') as $r):
                 if($r->caracteristicasApoyo!=$apoyo->caracteristicasApoyo){ ?>
                 ?>
-                <option value="<?php echo $r->idCaracteristicasApoyo; ?>"> 
+                <option value="<?php echo $r->idCaracteristicasApoyo; ?>">
                   <?php echo $r->caracteristicasApoyo; ?>
                 </option>
                 <?php } endforeach; ?>
@@ -141,18 +141,18 @@
             <label class="col-sm-3 control-label">Periodicidad<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
               <select name="idPeriodicidad" class="form-control" required>
-                <?php if($apoyo->idApoyo==null){ ?>   
-                <option value=""> 
+                <?php if($apoyo->idApoyo==null){ ?>
+                <option value="">
                   Seleccione la periodicidad del apoyo
                 </option>
-                <?php } if($apoyo->idApoyo!=null){ ?>   
-                <option value="<?php echo $apoyo->idPeriodicidad?>"> 
+                <?php } if($apoyo->idApoyo!=null){ ?>
+                <option value="<?php echo $apoyo->idPeriodicidad?>">
                   <?php echo $apoyo->periodicidad; ?>
                 </option>
-                <?php } foreach($this->model->ListarSelects('periodicidad') as $r): 
+                <?php } foreach($this->model->ListarSelects('periodicidad') as $r):
                 if($r->periodicidad!=$apoyo->periodicidad){ ?>
                 ?>
-                <option value="<?php echo $r->idPeriodicidad; ?>"> 
+                <option value="<?php echo $r->idPeriodicidad; ?>">
                   <?php echo $r->periodicidad; ?>
                 </option>
                 <?php } endforeach; ?>
@@ -173,7 +173,7 @@
                 <span class="input-group-addon">.00</span>
               </div>
             </div>
-          </div><!--form-group end--> 
+          </div><!--form-group end-->
           <div class="form-group">
             <div class="col-sm-offset-7 col-sm-5">
               <button type="submit" class="btn btn-primary">Guardar</button>
@@ -187,7 +187,6 @@
 </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
 <script type="text/javascript">
- 
   listarSubprogramas = function (){
     var idPrograma = $('#selectProgramas').val();
     datos = {"idPrograma":idPrograma};

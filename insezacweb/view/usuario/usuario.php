@@ -76,8 +76,8 @@
                   Seleccione la dirección a la que pertenece el usuario
                 </option>
                 <?php } if($usuario->idUsuario!=null){ ?>   
-                <option value="<?php echo $usuario->idDireccion?>"> 
-                  <?php echo $usuario->direccion; ?>
+                <option value="<?php echo $usuario->direccion; ?>"> 
+                   Seleccione la dirección a la que pertenece el usuario
                 </option>
                 <?php } foreach ($this->model->ConsultarDirecciones() as $direccion): 
                 if($direccion->idDireccion!=$usuario->idDireccion){ ?>

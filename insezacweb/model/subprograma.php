@@ -13,7 +13,7 @@ class Subprograma
 	{
 		try
 		{
-			$this->pdo = Database::StartUp();     
+			$this->pdo = Database::StartUp();
 		}
 		catch(Exception $e)
 		{
@@ -21,7 +21,7 @@ class Subprograma
 		}
 	}
 	public function ImportarSubprograma(Subprograma $data){
-		try 
+		try
 		{
 			$sql= $this->pdo->prepare("INSERT INTO subprograma VALUES(?,?,?,?,?)");
 			$resultado=$sql->execute(
@@ -33,19 +33,19 @@ class Subprograma
 					null
 				)
 			);
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
 	}
 	public function Limpiar($nomTabla)
 	{
-		try 
+		try
 		{
-			
-			$stm = $this->pdo->prepare("DELETE FROM $nomTabla");			          
+
+			$stm = $this->pdo->prepare("DELETE FROM $nomTabla");
 			$stm->execute();
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
@@ -56,7 +56,7 @@ class Subprograma
 		{
 
 			$stm = $this->pdo->prepare("SELECT * from subprograma");
-			
+
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -68,7 +68,7 @@ class Subprograma
 	}
 	public function Obtener($id)
 	{
-		try 
+		try
 		{
 			$stm = $this->pdo
 			->prepare("SELECT * FROM subprograma WHERE idSubprograma = ?");
@@ -76,22 +76,22 @@ class Subprograma
 
 			$stm->execute(array($id));
 			return $stm->fetch(PDO::FETCH_OBJ);
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
 	}
 	// select * from programa WHERE programa like '%TRA%';
-	
+
 	public function Eliminar($id)
 	{
-		try 
+		try
 		{
 			$stm = $this->pdo
-			->prepare("DELETE FROM subprograma WHERE idSubprograma = ?");			          
+			->prepare("DELETE FROM subprograma WHERE idSubprograma = ?");
 
 			$stm->execute(array($id));
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
@@ -100,10 +100,10 @@ class Subprograma
 	//Metodo para actualizar
 	public function Actualizar($data)
 	{
-		try 
+		try
 		{
-			$sql = "UPDATE subprograma SET techoPresupuestal=? 
-			WHERE idSubPrograma = ?";
+			$sql = "UPDATE subprograma SET techoPresupuestal=?
+			WHERE idSubprograma = ?";
 
 			$this->pdo->prepare($sql)
 			->execute(
@@ -112,7 +112,7 @@ class Subprograma
 					$data->idSubprograma
 				)
 			);
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
@@ -120,7 +120,7 @@ class Subprograma
 	//Metdod para registrar
 	public function Registrar(Subprograma $data)
 	{
-		try 
+		try
 		{
 			$sql = "INSERT INTO subprograma
 			VALUES (?,?,?,?,?)";
@@ -132,11 +132,10 @@ class Subprograma
 					$data->subprograma,
 					$data->programa,
 					$data->idPrograma,
-					$data->techoPresupuestal,
-					$data->idSubprograma
+					$data->techoPresupuestal
 				)
 			);
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
@@ -158,13 +157,13 @@ class Subprograma
 	//Método para consultar el programa especifico de el id en el combo seleccionado.
 	public function ConsultaPrograma($idPrograma)
 	{
-		try 
+		try
 		{
 			$stm = $this->pdo
 			->prepare("SELECT * FROM programa WHERE idPrograma = ?");
 			$stm->execute(array($idPrograma));
 			return $stm->fetch(PDO::FETCH_OBJ);
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
@@ -175,6 +174,23 @@ class Subprograma
 		{
 			$stm = $this->pdo->prepare("SELECT * FROM subprograma WHERE programa like '%$valor%' || subprograma like '%$valor%'");
 			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function ListarBeneficiarios($idSubprograma)
+	{
+		try
+		{
+
+			$stm = $this->pdo->prepare("SELECT * from beneficiarios, apoyos WHERE idSubprograma=? AND apoyos.idBeneficiario=beneficiarios.idBeneficiario");
+
+			$stm->execute(array($idSubprograma));
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		}

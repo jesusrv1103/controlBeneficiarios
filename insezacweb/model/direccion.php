@@ -157,4 +157,19 @@ class Direccion
 			die($e->getMessage());
 		}
 	}
+	public function VerificaDireccion($direccion)
+	{
+		try 
+		{
+			$stm = $this->pdo
+			->prepare("SELECT * FROM direccion WHERE direccion=?");
+			$stm->execute(
+				array($direccion)
+			);
+			return $stm->fetch(PDO::FETCH_OBJ);
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
 }

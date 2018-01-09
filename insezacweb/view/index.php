@@ -191,9 +191,9 @@ if (!isset($_SESSION['seguridad'])){
              <?php if (isset($programasSociales)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas sociales</b>
            </a>
          </li><br><br>
-       </ul>
-     </li>
    </ul>
+   
+      
 
  </div>
 
@@ -246,7 +246,7 @@ if (!isset($_SESSION['seguridad'])){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <script>
 
-  //****Subir archivos automaicos*****
+  //****Subir archivos automaticos*****
 
   $(document).on('ready', function() {
     'use strict';
@@ -308,6 +308,62 @@ if (!isset($_SESSION['seguridad'])){
       type: 'post',
       dataType: 'json'
     })
+  });
+
+  $('.beneficiariosrfc').change(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: 'assets/process.php?file=beneficiariosrfc.xlsx',
+      type: 'post',
+      dataType: 'json'
+    })
+  });
+
+  $('.municipios').change(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: 'assets/process.php?file=municipios.xlsx',
+      type: 'post',
+      dataType: 'json'
+    })
+  });
+   $('.apoyos').change(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: 'assets/process.php?file=apoyos.xlsx',
+      type: 'post',
+      dataType: 'json'
+    })
+
+  });
+
+
+ $('.direcciones').change(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: 'assets/process.php?file=direcciones.xlsx',
+      type: 'post',
+      dataType: 'json'
+    })
+
+  });
+  $('.subprogramas').change(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: 'assets/process.php?file=subprogramas.xlsx',
+      type: 'post',
+      dataType: 'json'
+    })
+
+  });
+  $('.programas').change(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: 'assets/process.php?file=programas.xlsx',
+      type: 'post',
+      dataType: 'json'
+    })
+
   });
 
   $('.minimize').click(function(e){
