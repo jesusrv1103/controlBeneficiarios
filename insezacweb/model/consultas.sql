@@ -1,6 +1,9 @@
 
 
 
+insert into asentamientos values("1234","VILLANUEVA","ZACATECAS","EL VERGEL",1);
+
+insert into localidades values ("1234","VILLANUEVA","ZACATECAS","RURAL");
 
 
 insert into direccion values(1,"TI","Dedicada al emprendimiento","Juan","Activo");
