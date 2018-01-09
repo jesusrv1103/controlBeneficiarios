@@ -350,7 +350,7 @@
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
           <form action="?c=Beneficiariorfc&a=Eliminar" enctype="multipart/form-data" method="post">
-            <input  type="text" name="idRegistro" id="txtIdRegistroRFC">
+            <input  type="text" hidden name="idRegistro" id="txtIdRegistroRFC">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
           </form>

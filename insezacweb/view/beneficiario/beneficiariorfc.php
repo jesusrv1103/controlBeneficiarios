@@ -1,18 +1,3 @@
-<scrip language="javascript">
-$(document).ready(function() {
-    $("form").submit(function(){
-    if ($("body").hasClass('sendingForm')) {
-        return false;   
-    }
-    $("body").addClass('sendingForm');
-    $(this).find("input:submit").css({visibility: "hidden"});
-    $(this).find("input:button").css({visibility: "hidden"});
-    $(this).find("a").css({visibility: "hidden"});
-    $(this).find("input:submit").parent().append("Enviando...");
-    return true;
-    })
-});
-</scrip>
 <style type="text/css">
 .lbldetalle{
 	color:#2196F3;
