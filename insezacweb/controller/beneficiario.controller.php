@@ -67,7 +67,7 @@ public function Guardar(){
  $beneficiario->nombreVialidad = $_REQUEST['nombreVialidad'];
  $beneficiario->noExterior = $_REQUEST['noExterior'];
  $beneficiario->noInterior = $_REQUEST['noInterior'];
- $beneficiario->idAsentamientos =3200200010000;
+ $beneficiario->idAsentamientos =$_REQUEST['idAsentamientos'];;
  $beneficiario->idLocalidad = $_REQUEST['idLocalidad'];
  $beneficiario->entreVialidades = $_REQUEST['entreVialidades'];
  $beneficiario->descripcionUbicacion = $_REQUEST['descripcionUbicacion'];
@@ -123,11 +123,9 @@ require_once 'view/index.php';
 public function Crud(){
   $beneficiario = new Beneficiario();
   if(isset($_REQUEST['curp'])){
-    echo "aqui estoy";
     $beneficiario->curp=$_REQUEST['curp'];
     $verificaBen=$this->model->VerificaBeneficiario($beneficiario->curp);
     if($verificaBen==null){
-      echo "dea";
       $administracion=true;
       $beneficiarios=true;
       $page="view/beneficiario/beneficiario.php";
@@ -145,7 +143,7 @@ public function Crud(){
       require_once 'view/index.php';
     }
   }if(isset($_REQUEST['idBeneficiario'])){
-    echo "jssassasa";
+    
     $administracion=true;
     $beneficiarios=true;
     $beneficiario = $this->model->Listar($_REQUEST['idBeneficiario']);
