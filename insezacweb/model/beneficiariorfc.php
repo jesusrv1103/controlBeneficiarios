@@ -265,68 +265,92 @@ class Beneficiariorfc
 		}
 	}
 
-	public function ImportarBeneficiario(Beneficiario $data){
+public function ActualizarExc($data)
+	{
 		try 
 		{
-			$sql =$this->pdo->prepare("INSERT INTO beneficiarios 
-				(curp,primerApellido,segundoApellido,nombres,email,idIdentificacion,idTipoVialidad,
-				nombreVialidad,noExterior,noInterior,idAsentamientos,idLocalidad,entreVialidades,
-				descripcionUbicacion,estudioSocioeconomico,idEstadoCivil,jefeFamilia,idOcupacion,
-				idIngresoMensual, integrantesFamilia, dependientesEconomicos,idVivienda,noHabitantes,
-				viviendaElectricidad,viviendaAgua,viviendaDrenaje,viviendaGas,viviendaTelefono,viviendaInternet,
-				idNivelEstudios,idSeguridadSocial,idDiscapacidad,idGrupoVulnerable,beneficiarioColectivo,
-				idRegistro,fechaNacimiento,genero,perfilSociodemografico,telefono,idMunicipio) values 
-				(?,?,?,?,?,
-				?,?,?,?,?,
-				?,?,?,?,?,
-				?,?,?,?,?,
-				?,?,?,?,?,
-				?,?,?,?,?,
-				?,?,?,?,?,
-				?,?,?,?,?)");
-			$resultado=$sql->execute(
+			$sql = "UPDATE beneficiarioRFC SET 
+			RFC =?,
+			curp = ?,
+			primerApellido = ?,
+			segundoApellido = ?,
+			nombres = ?,
+			fechaAltaSat =?,
+			sexo =?,
+			idAsentamientos =?,
+			idLocalidad = ?,
+			idTipoVialidad =?,
+			nombreVialidad =?,
+			numeroExterior = ?,
+			numeroInterior = ?,
+			entreVialidades = ?,
+			descripcionUbicacion = ?,
+			actividad = ?,
+			cobertura = ?,
+			idRegistro = ?
+			WHERE RFC = ?";
+
+			$this->pdo->prepare($sql)
+			->execute(
 				array(
+					$data->RFC,
 					$data->curp,
 					$data->primerApellido,
 					$data->segundoApellido,
 					$data->nombres,
-					$data->email,
-					$data->idIdentificacion,
-					$data->idTipoVialidad, 
-					$data->nombreVialidad,
-					$data->noExterior,
-					$data->noInterior,
+					$data->fechaAltaSat,
+					$data->sexo,
 					$data->idAsentamientos,
 					$data->idLocalidad,
+					$data->idTipoVialidad,
+					$data->nombreVialidad,
+					$data->numeroExterior,
+					$data->numeroInterior,
 					$data->entreVialidades,
-					$data->descripcionUbicacion,//8
-					$data->estudioSocioeconomico,
-					$data->idEstadoCivil,
-					$data->jefeFamilia,
-					$data->idOcupacion,
-					$data->idIngresoMensual,
-					$data->integrantesFamilia,
-					$data->dependientesEconomicos,
-					
-					$data->idVivienda,
-					$data->noHabitantes,				
-					$data->viviendaElectricidad,
-					$data->viviendaAgua,
-					$data->viviendaDrenaje,
-					$data->viviendaGas,
-					$data->viviendaTelefono,
-					$data->viviendaInternet,//8
-					$data->idNivelEstudios,
-					$data->idSeguridadSocial,
-					$data->idDiscapacidad,
-					$data->idGrupoVulnerable,//8
-					$data->beneficiarioColectivo,//9
+					$data->descripcionUbicacion,
+					$data->actividad,
+					$data->cobertura,
 					$data->idRegistro,
-					$data->fechaNacimiento,
-					$data->genero,
-					$data->perfilSociodemografico,
-					$data->telefono,
-					$data->idMunicipio
+					$data->idBeneficiarioRFC
+
+				)
+			);
+			
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ImportarBeneficiarioRFC(Beneficiariorfc $data){
+		try 
+		{
+			$sql =$this->pdo->prepare("INSERT INTO beneficiarioRFC
+				(RFC,curp,primerApellido,segundoApellido,nombres,fechaAltaSat,sexo,idAsentamientos,idLocalidad,idTipoVialidad,
+				nombreVialidad,numeroExterior,numeroInterior,entreVialidades,descripcionUbicacion,actividad,cobertura,idRegistro) values 
+				(?,?,?,?,?,
+				?,?,?,?,?,
+				?,?,?,?,?,
+				?,?,?)");
+			$resultado=$sql->execute(
+				array(
+					$data->RFC,
+					$data->curp,
+					$data->primerApellido,
+					$data->segundoApellido,
+					$data->nombres,
+					$data->fechaAltaSat,
+					$data->sexo,
+					$data->idAsentamientos,
+					$data->idLocalidad,
+					$data->idTipoVialidad,
+					$data->nombreVialidad,
+					$data->numeroExterior,
+					$data->numeroInterior,
+					$data->entreVialidades,
+					$data->descripcionUbicacion,
+					$data->actividad,
+					$data->cobertura,
+					$data->idRegistro
 				)
 			);
 		} catch (Exception $e) 
@@ -483,7 +507,7 @@ class Beneficiariorfc
 
 
 
-	public function VerificaBeneficiario($RFC)
+	public function VerificaBeneficiarioRFC($RFC)
 	{
 		try 
 		{

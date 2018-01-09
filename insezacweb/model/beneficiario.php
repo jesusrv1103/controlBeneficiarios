@@ -284,8 +284,6 @@ class Beneficiario
 		}
 	}
 
-	
-
 	public function Obtener($idBeneficiario)
 	{
 		try
