@@ -186,14 +186,14 @@ if (!isset($_SESSION['seguridad'])){
               <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b>
             </a>
           </li><br><br>
-          <li>
+          <li class="disabled">
             <a href="?c=ProgramaSocial"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
              <?php if (isset($programasSociales)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas sociales</b>
            </a>
          </li><br><br>
    </ul>
-   
-      
+
+
 
  </div>
 

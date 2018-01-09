@@ -23,10 +23,10 @@
           </div>
           <div class="col-md-4">
             <div class="btn-group pull-right">
-              <div class="actions"> 
+              <div class="actions">
               </div>
             </div>
-          </div>    
+          </div>
         </div>
       </div>
       <div class="porlets-content">
@@ -57,7 +57,7 @@
             <div class="col-sm-3">
               <input type="password" class="form-control" required parsley-equalto="#password" placeholder="Confirme la contraseña" />
             </div>
-          </div><!--/form-group--> 
+          </div><!--/form-group-->
           <?php }elseif($usuario->idUsuario!=null || !isset($cambiarPass)){ ?>
           <div class="form-group">
             <div class="col-sm-5 col-sm-offset-7">
@@ -70,18 +70,18 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">Dirección<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
-              <select class="form-control select2" style="width: 100%;" name="idDireccion" required>
-                <?php if($usuario->idUsuario==null){ ?>   
-                <option value=""> 
+              <select class="form-control select2" style="width: 100%;" name="direccion" required>
+                <?php if($usuario->idUsuario==null){ ?>
+                <option value="">
                   Seleccione la dirección a la que pertenece el usuario
                 </option>
-                <?php } if($usuario->idUsuario!=null){ ?>   
-                <option value="<?php echo $usuario->direccion; ?>"> 
-                   Seleccione la dirección a la que pertenece el usuario
+                <?php } if($usuario->idUsuario!=null){ ?>
+                <option value="<?php echo $usuario->direccion; ?>">
+                <?php echo  $usuario->direccion; ?>
                 </option>
-                <?php } foreach ($this->model->ConsultarDirecciones() as $direccion): 
-                if($direccion->idDireccion!=$usuario->idDireccion){ ?>
-                <option value="<?php echo $direccion->idDireccion; ?>"> 
+                <?php } foreach ($this->model->ConsultarDirecciones() as $direccion):
+                if($direccion->direccion!=$usuario->direccion){ ?>
+                <option value="<?php echo $direccion->direccion; ?>">
                   <?php echo $direccion->direccion; ?>
                 </option>
                 <?php } endforeach; ?>
@@ -94,12 +94,12 @@
             <div class="col-sm-6">
               <select class="form-control" name="tipoUsuario" id="tipoUsuario" required>
                <?php if($usuario->idUsuario == null){ ?>
-               <option value=""> 
-                Seleccione el tipo de usuario               
+               <option value="">
+                Seleccione el tipo de usuario
               </option>
               <?php } if($usuario->idUsuario != null){ ?>
-              <option value="<?php echo $usuario->tipoUsuario; ?>"> 
-                <?php 
+              <option value="<?php echo $usuario->tipoUsuario; ?>">
+                <?php
                 switch ($usuario->tipoUsuario) {
                   case 1:
                   echo "Administrador";
@@ -113,15 +113,15 @@
                 } ?>
               </option>
               <?php } if($usuario->tipoUsuario!=1){?>
-              <option value="1"> 
+              <option value="1">
                 Administrador
               </option>
               <?php } if($usuario->tipoUsuario!=2){?>
-              <option value="2"> 
+              <option value="2">
                 Secretario
               </option>
               <?php } if($usuario->tipoUsuario!=3){?>
-              <option value="3"> 
+              <option value="3">
                 Regular
               </option>
               <?php } ?>
