@@ -111,8 +111,16 @@ public function Guardar(){
     $this->model->Actualizar($direccion);
     $mensaje="Se han actualizado correctamente los datos de la dirección <strong>$direccion->direccion</strong>";
   } else {
-    $this->model->Registrar($direccion);
+    $consulta=$this->model->VerificaDireccion($direccion->direccion);
+    if ($consulta==null) {
+       $this->model->Registrar($direccion);
     $mensaje="Se ha registrado correctamente los datos de la dirección <strong>$direccion->direccion</strong>";
+    }else{
+      $error=true;
+        $mensaje="La dirección <b>$direccion->direccion</b> ya existe, ingrese otro nombre de dirección";
+        $page="view/direccion/direccion.php";
+        require_once "view/index.php";
+    }
   } 
   $direcciones = true;
   $administracion=true; 

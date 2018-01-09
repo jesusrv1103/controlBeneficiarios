@@ -34,10 +34,20 @@
         <div class="porlets-content">
           <form action="?c=Direccion&a=Guardar<?php if(isset($nuevoRegistro)){ echo "&nuevoRegistro=true"; } ?>" method="post" class="form-horizontal row-border" parsley-validate novalidate>
             <input hidden name="idDireccion"  value="<?php echo $direccion->idDireccion != null ? $direccion->idDireccion : 0;  ?>"/>
+            <?php if(isset($error)){ ?>
+          <div class="form-group">
+            <div class="col-sm-6 col-sm-offset-3">
+              <div class="alert alert-danger">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
+              </div>
+            </div>
+          </div><!--/form-group-->
+          <?php } ?>
             <div class="form-group">
               <label class="col-sm-3 control-label">Nombre <strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-              <input name="direccion" type="text" onkeypress=" return soloLetras(event);" onkeyup="mayus(this);"  class="form-control" required value="<?php echo $direccion->direccion != null ? $direccion->direccion : "";  ?>" placeholder="Ingrese nombre de la dirección"/>
+              <input name="direccion" type="text" onkeypress=" return soloLetras(event);" onkeyup="mayus(this);"  class="form-control" required value="<?php echo $direccion->direccion != null ? $direccion->direccion : "";  ?>" placeholder="Ingrese nombre de la dirección" <?php if($direccion->idDireccion != null){ ?>  <?php } ?> autofocus />
               </div>
             </div><!--/form-group-->
 

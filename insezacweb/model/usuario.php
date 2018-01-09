@@ -6,6 +6,7 @@ class Usuario
 	public $password;
 	public $idDireccion;
 	public $tipoUsuario;
+	public $direccion;
 	private $pdo;
 
 	public function __CONSTRUCT()
@@ -24,7 +25,7 @@ class Usuario
 		try
 		{
 			//$result = array();
-			$stm = $this->pdo->prepare("SELECT * from usuarios, direccion WHERE usuarios.idDireccion=direccion.idDireccion");
+			$stm = $this->pdo->prepare("SELECT * from usuarios");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -39,7 +40,7 @@ class Usuario
 		try 
 		{
 			$stm = $this->pdo
-			->prepare("SELECT * FROM usuarios,direccion WHERE idUsuario = ? AND usuarios.idDireccion=direccion.idDireccion");
+			->prepare("SELECT * FROM usuarios,direccion WHERE idUsuario = ? ");
 			$stm->execute(array($id));
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) 
@@ -96,15 +97,15 @@ class Usuario
 		try 
 		{
 			$sql = "UPDATE usuarios SET
-			usuario = ?, password = ?, direccion =?, tipoUsuario = ? 
+			usuario = ?, password = ?, tipoUsuario = ? ,direccion =?
 			WHERE idUsuario = ?";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
 					$data->usuario, 
 					$data->password,
-					$data->direccion,
 					$data->tipoUsuario,
+					$data->direccion,
 					$data->idUsuario
 				)
 			);

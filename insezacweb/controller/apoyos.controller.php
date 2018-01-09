@@ -103,24 +103,21 @@ public function Apoyos($objPHPExcel,$numRows){
     $apoyos = new Apoyos();
     $apoyos->curp = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
     $apoyos->idOrigen = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
-    $apoyos->idPrograma = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
-    $apoyos->idSubprograma = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
-    //$apoyos->idSubprograma=null;
-    $apoyos->idTipoApoyo = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
-    $apoyos->idCaracteristica = $objPHPExcel->getActiveSheet()->getCell('F'.$numRow)->getCalculatedValue();
-    $apoyos->importeApoyo = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
-    $apoyos->numeroApoyo = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
-    $apoyos->fechaApoyo = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
-    $apoyos->idPeriodicidad = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
-    $apoyos->apoyoEconomico = $objPHPExcel->getActiveSheet()->getCell('K'.$numRow)->getCalculatedValue();
+    $apoyos->idSubprograma = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
+    $apoyos->idCaracteristica = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
+    $apoyos->importeApoyo = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
+    $apoyos->numerosApoyo = $objPHPExcel->getActiveSheet()->getCell('F'.$numRow)->getCalculatedValue();
+    $apoyos->fechaApoyo = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
+    $apoyos->idPeriodicidad = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
     $apoyos->idProgramaSocial = null;
+    $apoyos->clavePresupuestal = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
     if (!$apoyos->curp == null) {
       $this->model->ImportarApoyo($apoyos);
     }
     $numRow+=1;
   } while ( !$apoyos->curp == null);
 } catch (Exception $e) {
- $mensaje="error";
+ $mensaje="error al importar los datos de los apoyos";
  $page="view/apoyos/index.php";
  $administracion=true;
  $apoyos=true;
