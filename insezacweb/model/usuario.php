@@ -13,7 +13,7 @@ class Usuario
 	{
 		try
 		{
-			$this->pdo = Database::StartUp();     
+			$this->pdo = Database::StartUp();
 		}
 		catch(Exception $e)
 		{
@@ -37,20 +37,21 @@ class Usuario
 	}
 	public function Obtener($id)
 	{
-		try 
+		try
 		{
 			$stm = $this->pdo
 			->prepare("SELECT * FROM usuarios,direccion WHERE idUsuario = ? ");
+
 			$stm->execute(array($id));
 			return $stm->fetch(PDO::FETCH_OBJ);
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
 	}
 	public function VerificaUsuario($username)
 	{
-		try 
+		try
 		{
 			$stm = $this->pdo
 			->prepare("SELECT * FROM usuarios WHERE usuario=?");
@@ -58,58 +59,59 @@ class Usuario
 				array($username)
 			);
 			return $stm->fetch(PDO::FETCH_OBJ);
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
 	}
 	public function Eliminar($id)
 	{
-		try 
+		try
 		{
 			$stm = $this->pdo
-			->prepare("DELETE FROM usuarios WHERE idUsuario = ?");			          
+			->prepare("DELETE FROM usuarios WHERE idUsuario = ?");
 
 			$stm->execute(array($id));
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
 	}
 	public function EliminarInDB($usuario)
 	{
-		try 
+		try
 		{
 			$stm = $this->pdo
-			->prepare("drop user ? @'localhost'");			          
+			->prepare("drop user ? @'localhost'");
 			$stm->execute(
 				array(
 					$usuario
 				)
 			);
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
 	}
 	public function Actualizar(Usuario $data)
 	{
-		try 
+		try
 		{
 			$sql = "UPDATE usuarios SET
 			usuario = ?, password = ?, tipoUsuario = ? ,direccion =?
+
 			WHERE idUsuario = ?";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
-					$data->usuario, 
+					$data->usuario,
 					$data->password,
 					$data->tipoUsuario,
 					$data->direccion,
 					$data->idUsuario
 				)
 			);
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			$error=true;
 			$mensaje="Error al actualizar el usuario";
@@ -119,10 +121,10 @@ class Usuario
 	}
 	public function ActualizaSP(Usuario $data)
 	{
-		try 
+		try
 		{
 			$sql = "UPDATE usuarios SET
-			usuario = ?, idDireccion =?, tipoUsuario = ? 
+			usuario = ?, idDireccion =?, tipoUsuario = ?
 			WHERE idUsuario = ?";
 			$this->pdo->prepare($sql)
 			->execute(
@@ -133,7 +135,7 @@ class Usuario
 					$data->idUsuario
 				)
 			);
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			$error=true;
 			$mensaje="Error al actualizar el usuario";
@@ -143,19 +145,19 @@ class Usuario
 	}
 	public function ActualizarInDB(Usuario $data,$password)
 	{
-		try 
+		try
 		{
 			$sql = "set password for $data->usuario@'localhost'=password('$password')";
 			$this->pdo->prepare($sql)
 			->execute();
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
 	}
 	public function Registrar(Usuario $data)
 	{
-		try 
+		try
 		{
 			$sql = "INSERT INTO usuarios
 			VALUES (?,?,?,?,?)";
@@ -164,31 +166,31 @@ class Usuario
 			->execute(
 				array(
 					null,
-					$data->usuario, 
+					$data->usuario,
 					$data->password,
 					$data->tipoUsuario,
 					$data->idDireccion
 				)
 			);
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
 	}
 	public function RegistrarInDB(Usuario $data)
 	{
-		try 
+		try
 		{
 			$sql = "grant all privileges on *.* to ?@'localhost' identified by ? with grant option";
 
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
-					$data->usuario, 
-					$data->password,	
+					$data->usuario,
+					$data->password,
 				)
 			);
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
@@ -196,7 +198,7 @@ class Usuario
 
 	public function ObtenerUsuario($idUsuario)
 	{
-		try 
+		try
 		{
 			$sql= $this->pdo->prepare("SELECT * FROM usuarios WHERE idUsuario=?");
 			$resultado=$sql->execute(
@@ -205,7 +207,7 @@ class Usuario
 				)
 			);
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
-		} catch (Exception $e) 
+		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
@@ -217,7 +219,7 @@ class Usuario
 		{
 
 			$stm = $this->pdo->prepare("SELECT * from direccion WHERE estado='activo'");
-			
+
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
