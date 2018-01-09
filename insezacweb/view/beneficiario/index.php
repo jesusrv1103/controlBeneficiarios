@@ -213,7 +213,7 @@
         <div class="row">
           <div class="block-web">
             <div class="header">
-              <h3 class="content-header theme_color">&nbsp;Importar beneficiarios</h3>
+              <h3 class="content-header theme_color">&nbsp;Importar beneficiarios con CURP</h3>
             </div>
             <div class="porlets-content" style="margin-bottom: -65px;">
               <p>Importa tu archivo excel con los datos de los beneficiarios para registrarlos.</p>

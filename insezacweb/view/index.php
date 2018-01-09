@@ -193,7 +193,7 @@ if (!isset($_SESSION['seguridad'])){
          </li><br><br>
    </ul>
    
-      <?php } ?>
+      
 
  </div>
 
