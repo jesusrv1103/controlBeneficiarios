@@ -1,7 +1,7 @@
 <?php
 require_once 'model/usuario.php';
 class UsuarioController{
-	
+
 	private $model;
 
 	public function __CONSTRUCT(){
@@ -17,7 +17,7 @@ class UsuarioController{
 		if(isset($_REQUEST['acceso'])){
 			$usuario = new Usuario();
 			if(isset($_REQUEST['idUsuario'])){
-				$usuario = $this->model->Obtener($_REQUEST['idUsuario']);
+				$usuario = $this->model->ObtenerUsuario($_REQUEST['idUsuario']);
 			}
 			$administracion=true;
 			$usuarios=true;
@@ -31,7 +31,7 @@ class UsuarioController{
 		$usuario= new Usuario();
 		$usuario->usuario = $_REQUEST['usuario'];
 		$usuario->idUsuario = $_REQUEST['idUsuario'];
-	    $usuario->idDireccion = $_REQUEST['idDireccion'];
+	  $usuario->direccion = $_REQUEST['direccion'];
 		$usuario->tipoUsuario = $_REQUEST['tipoUsuario'];
 		if(isset($_REQUEST['password'])){
 			$password =$_REQUEST['password'];
@@ -39,7 +39,7 @@ class UsuarioController{
 			$password=crc32($password);
 			$password=crypt($password,"xtem");
 			$password=sha1($password);
-			$usuario->password=$password;   	
+			$usuario->password=$password;
 		}
 		if($usuario->idUsuario > 0 && isset($_REQUEST['password'])){
 			//Actualiza el usuario cambiando password
@@ -65,7 +65,7 @@ class UsuarioController{
 				$page="view/usuario/usuario.php";
 				require_once "view/index.php";
 			}
-		}		 
+		}
 		$administracion=true; //variable cargada para activar la opcion administracion en el menu
 		$usuarios=true; //variable cargada para activar la opcion usuarios en el menu
 		$page="view/usuario/index.php";
@@ -96,7 +96,7 @@ class UsuarioController{
 		call_user_func( array( $controller, 'index' ));
 	}
 	public function CambiarPass(){
-		$usuario = $this->model->Obtener($_REQUEST['idUsuario']);
+		$usuario = $this->model->ObtenerUsuario($_REQUEST['idUsuario']);
 		$cambiarPass=true;
 		$administracion=true;
 		$usuarios=true;
@@ -104,4 +104,3 @@ class UsuarioController{
 		require_once 'view/index.php';
 	}
 }
-

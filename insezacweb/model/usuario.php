@@ -4,7 +4,6 @@ class Usuario
 	public $idUsuario;
 	public $usuario;
 	public $password;
-	public $idDireccion;
 	public $tipoUsuario;
 	public $direccion;
 	private $pdo;
@@ -40,7 +39,7 @@ class Usuario
 		try
 		{
 			$stm = $this->pdo
-			->prepare("SELECT * FROM usuarios,direccion WHERE idUsuario = ? ");
+			->prepare("SELECT * FROM usuarios WHERE idUsuario = ? ");
 
 			$stm->execute(array($id));
 			return $stm->fetch(PDO::FETCH_OBJ);
@@ -124,13 +123,13 @@ class Usuario
 		try
 		{
 			$sql = "UPDATE usuarios SET
-			usuario = ?, idDireccion =?, tipoUsuario = ?
+			usuario = ?, direccion =?, tipoUsuario = ?
 			WHERE idUsuario = ?";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
 					$data->usuario,
-					$data->idDireccion,
+					$data->direccion,
 					$data->tipoUsuario,
 					$data->idUsuario
 				)
@@ -169,7 +168,7 @@ class Usuario
 					$data->usuario,
 					$data->password,
 					$data->tipoUsuario,
-					$data->idDireccion
+					$data->direccion
 				)
 			);
 		} catch (Exception $e)
@@ -212,6 +211,24 @@ class Usuario
 			die($e->getMessage());
 		}
 	}
+
+	public function ObtenerDireccion($idDireccion)
+	{
+		try
+		{
+			$sql= $this->pdo->prepare("SELECT * FROM direccion WHERE idDireccion=?");
+			$resultado=$sql->execute(
+				array(
+					$idDireccion
+				)
+			);
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+		} catch (Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
 			//Metdodo para listar
 	public function ConsultarDirecciones()
 	{
