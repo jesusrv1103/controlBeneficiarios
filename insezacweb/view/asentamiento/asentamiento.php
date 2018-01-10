@@ -19,23 +19,33 @@
           <div class="row" style="margin-top: 15px; margin-bottom: 12px;">
             <div class="col-sm-8">
               <div class="actions"> </div>
-              <h2 class="content-header theme_color" style="margin-top: -5px;"><?php echo $asentamiento->idAsentamientos != null ? '&nbsp; Actualizar asentamiento' : '&nbsp; Registrar asentamiento'; ?></h2> 
+              <h2 class="content-header theme_color" style="margin-top: -5px;"><?php echo $asentamiento->idAsentamientos != null ? '&nbsp; Actualizar asentamiento' : '&nbsp; Registrar asentamiento'; ?></h2>
             </div>
             <div class="col-md-4">
               <div class="btn-group pull-right">
-                <div class="actions"> 
+                <div class="actions">
                 </div>
               </div>
-            </div>    
+            </div>
           </div>
         </div>
         <div class="porlets-content">
           <form action="?c=asentamiento&a=Guardar<?php if(isset($nuevoRegistro)){ echo "&nuevoRegistro=true"; } ?>" method="post" class="form-horizontal row-border" parsley-validate novalidate>
             <input hidden name="idAsentamientos"  value="<?php echo $asentamiento->idAsentamientos != null ? $asentamiento->idAsentamientos : 0;  ?>"/>
+            <?php if(isset($error)){ ?>
+              <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-3">
+                  <div class="alert alert-danger">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
+                  </div>
+                </div>
+              </div><!--/form-group-->
+            <?php } ?>
             <div class="form-group">
               <label class="col-sm-3 control-label">Clave de asentamiento<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-               <input name="idAsentamientos" parsley-type="number" class="form-control" <?php if ($asentamiento->idAsentamientos!= null){ ?> disable <?php } ?> required value="<?php echo $asentamiento->idAsentamientos != null ? $asentamiento->idAsentamientos  : "";  ?>" placeholder="Ingrese la clave del asentamiento"  <?php if($asentamiento->idAsentamientos != null){ ?> disabled<?php } ?>/>
+               <input name="idAsentamientos" parsley-type="number" class="form-control" <?php if ($asentamiento->idAsentamientos != null && !isset($nuevoRegistro)){ ?> disabled <?php } ?> required value="<?php echo $asentamiento->idAsentamientos != null ? $asentamiento->idAsentamientos  : '';  ?>" placeholder="Ingrese la clave del asentamiento"  <?php if($asentamiento->idAsentamientos != null && !isset($nuevoRegistro)){ ?> disabled <?php } ?>/>
               </div>
             </div><!--/form-group-->
             <div class="form-group">
