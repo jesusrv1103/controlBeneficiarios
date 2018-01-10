@@ -51,7 +51,7 @@ class AsentamientoController{
 
 	public function Importar(){
 		if (file_exists("./assets/files/asentamientos.xlsx")) {
-        	//Agregamos la librería 
+        	//Agregamos la librería
 			require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
   			//Variable con el nombre del archivo
 			$nombreArchivo = './assets/files/asentamientos.xlsx';
@@ -68,7 +68,7 @@ class AsentamientoController{
 			$catalogos=true;
 			require_once 'view/index.php';
 		}
-        //si por algo no cargo el archivo bak_ 
+        //si por algo no cargo el archivo bak_
 		else {
 			$error=true;
 			$mensaje="El archivo <strong>asentamientos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
@@ -118,21 +118,33 @@ class AsentamientoController{
 	public function Guardar(){
 		$asentamiento= new Asentamiento();
 		$asentamiento->idAsentamientos = $_REQUEST['idAsentamientos'];
-		$asentamiento->municipio = $_REQUEST['municipio'];
-		$asentamiento->localidad = $_REQUEST['localidad'];
-		$asentamiento->nombreAsentamiento = $_REQUEST['nombreAsentamiento'];
-		$asentamiento->tipoAsentamiento = $_REQUEST['tipoAsentamiento'];
-		if(!isset($_REQUEST['nuevoRegistro'])){
-				$this->model->Actualizar($asentamiento);
-				$mensaje="Se han actualizado correctamente los datos del Asentamiento";
-			}else{
-				$this->model->Registrar($asentamiento);
-				$mensaje="Se ha registrado correctamente el Asentamiento";
-			}	
-		$asentamientos = true;
-		$catalogos=true; 
-		$page="view/asentamiento/index.php";
-		require_once 'view/index.php';
+		$verificaAsentamiento = $this->model->VerificaAsentamiento($asentamiento->idAsentamientos);
+			$asentamiento->municipio = $_REQUEST['municipio'];
+			$asentamiento->localidad = $_REQUEST['localidad'];
+			$asentamiento->nombreAsentamiento = $_REQUEST['nombreAsentamiento'];
+			$asentamiento->tipoAsentamiento = $_REQUEST['tipoAsentamiento'];
+			if($verificaAsentamiento!=null){
+				$error=true;
+				$asentamientos = true;
+				$catalogos=true;
+				$nuevoRegistro=true;
+				$mensaje="La clave de asentamiento <b>$asentamiento->idAsentamientos</b> ya existe. Pongase en contacto con el administrador de la Unidad de Planeación para que le proporcione correctamente una nueva clave de asentamiento.";
+				$page="view/asentamiento/asentamiento.php";
+				require_once "view/index.php";
+			}
+			else{
+			if(!isset($_REQUEST['nuevoRegistro'])){
+					$this->model->Actualizar($asentamiento);
+					$mensaje="Se han actualizado correctamente los datos del Asentamiento";
+				}else{
+					$this->model->Registrar($asentamiento);
+					$mensaje="Se ha registrado correctamente el Asentamiento";
+				}
+			$asentamientos = true;
+			$catalogos=true;
+			$page="view/asentamiento/index.php";
+			require_once 'view/index.php';
+	 }
 	}
 
 

@@ -31,8 +31,8 @@
             </div>
             <div class="col-md-5">
               <div class="btn-group pull-right">
-                <b> 
-                  <div class="btn-group" style="margin-right: 10px;"> 
+                <b>
+                  <div class="btn-group" style="margin-right: 10px;">
 
                     <div class="btn-group">
                      <a data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-eye"></i>&nbsp;Ver<span class="caret"></span></a>
@@ -52,15 +52,15 @@
                   <div class="btn-group">
                     <button data-toggle="dropdown" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar<span class="caret"></span></button>
                     <ul role="menu" class="dropdown-menu">
-                      <li><a data-toggle="modal" data-target="#modalImportar" href="#modalImportar">Beneficiarios con CURP</a></li>
-                      <li><a data-toggle="modal" data-target="#modalImportarRFC" href="#modalImportarRFC">Beneficiarios con RFC</a></li>
+                      <li><a data-toggle="modal" data-target="#modalImportar" href="#modalImportar">Con CURP</a></li>
+                      <li><a data-toggle="modal" data-target="#modalImportarRFC" href="#modalImportarRFC">Con RFC</a></li>
                     </ul>
                   </div>
                    <?php } ?>
                 </div>
               </b>
             </div>
-          </div>    
+          </div>
         </div>
       </div>
       <?php if(isset($mensaje)){ if(!isset($error)){?>
@@ -71,7 +71,7 @@
             <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
           </div>
         </div>
-      </div> 
+      </div>
       <?php } if(isset($error)){ ?>
       <div class="row" style="margin-bottom: -20px; margin-top: 20px">
         <div class="col-md-12">
@@ -136,7 +136,7 @@
                <?php if($_SESSION['tipoUsuario']==1){?>
                <td><center><b>Borrar</b></center></td>
                <?php } ?>
-               <?php } ?>      
+               <?php } ?>
           </tr>
         </tfoot>
       </table>
@@ -194,8 +194,8 @@
         <th><center><b>Editar</b></center></th>
         <?php if($_SESSION['tipoUsuario']==1){?>
         <td><center><b>Borrar</b></center></td>
-        <?php } ?>  
-        <?php } ?>        
+        <?php } ?>
+        <?php } ?>
       </tr>
     </tfoot>
   </table>
@@ -209,7 +209,7 @@
 <div class="modal fade" id="modalImportar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-body"> 
+      <div class="modal-body">
         <div class="row">
           <div class="block-web">
             <div class="header">
@@ -217,7 +217,7 @@
             </div>
             <div class="porlets-content" style="margin-bottom: -65px;">
               <p>Importa tu archivo excel con los datos de los beneficiarios para registrarlos.</p>
-              <p><strong>Nota: </strong>El archivo debe conener el nombre de <strong class="theme_color">beneficiarios.xmls</strong> para poder ser leído correctamente.</p> 
+              <p><strong>Nota: </strong>El archivo debe conener el nombre de <strong class="theme_color">beneficiarios.xmls</strong> para poder ser leído correctamente.</p>
               <br>
               <span class="btn btn-success fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
@@ -233,8 +233,8 @@
               </div>
               <!-- The container for the uploaded files -->
               <div id="files" class="files"></div>
-            </div><!--/porlets-content--> 
-          </div><!--/block-web--> 
+            </div><!--/porlets-content-->
+          </div><!--/block-web-->
         </div>
       </div>
       <div class="modal-footer">
@@ -243,21 +243,21 @@
           <a href="?c=Beneficiario&a=Importar" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
-    </div><!--/modal-content--> 
-  </div><!--/modal-dialog--> 
-</div><!--/modal-fade--> 
+    </div><!--/modal-content-->
+  </div><!--/modal-dialog-->
+</div><!--/modal-fade-->
 <div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" style="width: 60%;">
     <div class="modal-content" id="div-modal-content">
       <!--*********En esta sección se incluye el modal de informacion de registro y apoyo**********-->
-    </div><!--/modal-content--> 
-  </div><!--/modal-dialog--> 
-</div><!--/modal-fade--> 
+    </div><!--/modal-content-->
+  </div><!--/modal-dialog-->
+</div><!--/modal-fade-->
 
 <div class="modal fade" id="modalImportarRFC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-body"> 
+      <div class="modal-body">
         <div class="row">
           <div class="block-web">
             <div class="header">
@@ -265,13 +265,15 @@
             </div>
             <div class="porlets-content" style="margin-bottom: -65px;">
               <p>Importa tu archivo excel con los datos de los beneficiarios para registrarlos.</p>
-              <p><strong>Nota: </strong>El archivo debe contener el nombre de <strong class="theme_color">beneficiariosrfc.xlsx</strong> para poder ser leído correctamente.</p> 
+              <p><strong>Nota: </strong>El archivo debe contener el nombre de <strong class="theme_color">beneficiariosrfc.xlsx</strong> para poder ser leído correctamente.</p>
               <br>
              <span class="btn btn-success fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
                 <span>Seleccionar archivo</span>
                 <!-- The file input field used as target for the file upload widget -->
-                <input id="fileupload" type="file" name="files[]" multiple class="beneficiariosrfc">
+
+                <input id="fileupload1" type="file" name="files[]" multiple class="beneficiariosrfc">
+
               </span>
               <br>
               <br>
@@ -280,9 +282,9 @@
                 <div class="progress-bar progress-bar-success"></div>
               </div>
               <!-- The container for the uploaded files -->
-              <div id="files" class="files"></div>
-            </div><!--/porlets-content--> 
-          </div><!--/block-web--> 
+              <div id="files1" class="files"></div>
+            </div><!--/porlets-content-->
+          </div><!--/block-web-->
         </div>
       </div>
       <div class="modal-footer">
@@ -291,23 +293,24 @@
           <a href="?c=Beneficiariorfc&a=Importar" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
-    </div><!--/modal-content--> 
-  </div><!--/modal-dialog--> 
-</div><!--/modal-fade--> 
+
+    </div><!--/modal-content-->
+  </div><!--/modal-dialog-->
+</div><!--/modal-fade-->
 
 <div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" style="width: 60%;">
     <div class="modal-content" id="div-modal-content">
       <!--*********En esta sección se incluye el modal de informacion de registro y apoyo**********-->
-    </div><!--/modal-content--> 
-  </div><!--/modal-dialog--> 
-</div><!--/modal-fade--> 
+    </div><!--/modal-content-->
+  </div><!--/modal-dialog-->
+</div><!--/modal-fade-->
 
 
 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default red_border horizontal_border_1">
-      <div class="modal-body"> 
+      <div class="modal-body">
         <div class="row">
           <div class="block-web">
             <div class="header">
@@ -315,8 +318,8 @@
             </div>
             <div class="porlets-content" style="margin-bottom: -50px;">
               <h4>¿Esta segúro que desea eliminar el Beneficiario?</h4>
-            </div><!--/porlets-content--> 
-          </div><!--/block-web--> 
+            </div><!--/porlets-content-->
+          </div><!--/block-web-->
         </div>
       </div>
       <div class="modal-footer" style="margin-top: -10px;">
@@ -328,15 +331,15 @@
           </form>
         </div>
       </div>
-    </div><!--/modal-content--> 
-  </div><!--/modal-dialog--> 
-</div><!--/modal-fade--> 
+    </div><!--/modal-content-->
+  </div><!--/modal-dialog-->
+</div><!--/modal-fade-->
 
 
 <div class="modal fade" id="modalEliminarRFC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default red_border horizontal_border_1">
-      <div class="modal-body"> 
+      <div class="modal-body">
         <div class="row">
           <div class="block-web">
             <div class="header">
@@ -344,8 +347,8 @@
             </div>
             <div class="porlets-content" style="margin-bottom: -50px;">
               <h4>¿Esta segúro que desea eliminar el Beneficiario?</h4>
-            </div><!--/porlets-content--> 
-          </div><!--/block-web--> 
+            </div><!--/porlets-content-->
+          </div><!--/block-web-->
         </div>
       </div>
       <div class="modal-footer" style="margin-top: -10px;">
@@ -357,16 +360,16 @@
           </form>
         </div>
       </div>
-    </div><!--/modal-content--> 
-  </div><!--/modal-dialog--> 
-</div><!--/modal-fade--> 
+    </div><!--/modal-content-->
+  </div><!--/modal-dialog-->
+</div><!--/modal-fade-->
 
 
 <div class="modal fade" id="modalBuscarCurp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default blue_border horizontal_border_1">
      <form action="?c=Beneficiario&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate>
-      <div class="modal-body"> 
+      <div class="modal-body">
         <div class="row">
           <div class="block-web">
             <div class="header">
@@ -378,8 +381,8 @@
                   <input name="curp"  maxlength="18" id="curp" type="text" required parsley-regexp="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required parsley-rangelength="[18,18]"  onkeyup="mayus(this);" onchange="curp2date();" class="form-control" required placeholder="Ingrese la curp del beneficiario">
                 </div>
               </div><!--/form-group-->
-            </div><!--/porlets-content--> 
-          </div><!--/block-web--> 
+            </div><!--/porlets-content-->
+          </div><!--/block-web-->
         </div>
       </div>
       <div class="modal-footer" style="margin-top: -10px;">
@@ -389,16 +392,16 @@
         </div>
       </div>
     </form>
-  </div><!--/modal-content--> 
-</div><!--/modal-dialog--> 
-</div><!--/modal-fade--> 
+  </div><!--/modal-content-->
+</div><!--/modal-dialog-->
+</div><!--/modal-fade-->
 
 
 <div class="modal fade" id="modalBuscarRFC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default blue_border horizontal_border_1">
      <form action="?c=Beneficiariorfc&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate>
-      <div class="modal-body"> 
+      <div class="modal-body">
         <div class="row">
           <div class="block-web">
             <div class="header">
@@ -410,8 +413,8 @@
                   <input name="RFC"  maxlength="13" id="RFC" type="text" required parsley-regexp="([A-Z,Ñ,&]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\d]{3})"   required parsley-rangelength="[12,13]"  onkeyup="mayus(this);" class="form-control" required placeholder="Ingrese el RFC del beneficiario">
                 </div>
               </div><!--/form-group-->
-            </div><!--/porlets-content--> 
-          </div><!--/block-web--> 
+            </div><!--/porlets-content-->
+          </div><!--/block-web-->
         </div>
       </div>
       <div class="modal-footer" style="margin-top: -10px;">
@@ -421,22 +424,22 @@
         </div>
       </div>
     </form>
-  </div><!--/modal-content--> 
-</div><!--/modal-dialog--> 
-</div><!--/modal-fade--> 
+  </div><!--/modal-content-->
+</div><!--/modal-dialog-->
+</div><!--/modal-fade-->
 <script>
   eliminarBeneficiario = function(idRegistro){
-    $('#txtIdRegistro').val(idRegistro);  
+    $('#txtIdRegistro').val(idRegistro);
   };
 
   eliminarBeneficiarioRFC = function(idRegistro){
-    $('#txtIdRegistroRFC').val(idRegistro);  
+    $('#txtIdRegistroRFC').val(idRegistro);
   };
   infoRegistro = function (idBeneficiario){
    // var idBeneficiario=idBeneficiario;
    $.post("index.php?c=beneficiario&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
     $("#div-modal-content").html(info);
-  }); 
+  });
  }
 
  infoRegistroRFC = function (idBeneficiarioRFC){
@@ -444,7 +447,7 @@
    // var idBeneficiario=idBeneficiario;
    $.post("index.php?c=Beneficiariorfc&a=Inforegistro", {idBeneficiarioRFC: idBeneficiarioRFC}, function(info) {
     $("#div-modal-content").html(info);
-  }); 
+  });
  }
  buscarBeneficiarioCurp = function (){
 
