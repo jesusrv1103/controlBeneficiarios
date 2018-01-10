@@ -5,7 +5,7 @@ require_once 'model/beneficiariorfc.php';
 class BeneficiarioController{
   private $pdo;
   private $model;
-  private $model2; 
+  private $model2;
   private $model3;
   private $session;
   public $error;
@@ -13,7 +13,7 @@ class BeneficiarioController{
   public function __CONSTRUCT(){
     $this->model = new Beneficiario();
     $this->model2 = new Catalogos();
-    $this->model3= new Beneficiariorfc();    
+    $this->model3= new Beneficiariorfc();
   }
   public function Index(){
    $tipoBen="CURP";
@@ -22,7 +22,7 @@ class BeneficiarioController{
    $beneficiarios = true;
    $page="view/beneficiario/index.php";
    require_once 'view/index.php';
- }  
+ }
 
  public function RFC(){
   $tipoBen="RFC";
@@ -48,7 +48,6 @@ public function Guardar(){
   $beneficiario->beneficiarioColectivo=$_REQUEST['beneficiarioColectivo'];
   $beneficiario->fechaNacimiento=$_REQUEST['fechaNacimiento'];
 
-
   if(substr($_REQUEST['curp'], 10,1) == "H")
   {
     $beneficiario->genero=1;
@@ -67,7 +66,8 @@ public function Guardar(){
  $beneficiario->nombreVialidad = $_REQUEST['nombreVialidad'];
  $beneficiario->noExterior = $_REQUEST['noExterior'];
  $beneficiario->noInterior = $_REQUEST['noInterior'];
- $beneficiario->idAsentamientos =$_REQUEST['idAsentamientos'];;
+
+ $beneficiario->idAsentamientos = $_REQUEST['idAsentamientos'];
  $beneficiario->idLocalidad = $_REQUEST['idLocalidad'];
  $beneficiario->entreVialidades = $_REQUEST['entreVialidades'];
  $beneficiario->descripcionUbicacion = $_REQUEST['descripcionUbicacion'];
@@ -75,7 +75,7 @@ public function Guardar(){
  $beneficiario->estudioSocioeconomico=$_REQUEST['estudioSocioeconomico'];
  $beneficiario->idEstadoCivil=$_REQUEST['idEstadoCivil'];
  $beneficiario->jefeFamilia=$_REQUEST['jefeFamilia'];
- $beneficiario->idOcupacion=$_REQUEST['idOcupacion']; 
+ $beneficiario->idOcupacion=$_REQUEST['idOcupacion'];
  $beneficiario->idIngresoMensual=$_REQUEST['idIngresoMensual'];
  $beneficiario->integrantesFamilia=$_REQUEST['integrantesFamilia'];
  $beneficiario->dependientesEconomicos=$_REQUEST['dependientesEconomicos'];
@@ -97,7 +97,7 @@ public function Guardar(){
  $beneficiario->direccion=$_SESSION['direccion'];
  $beneficiario->estado="Activo";
  $verificaBen=$this->model->VerificaBeneficiario($beneficiario->curp);
- if($beneficiario->idBeneficiario > 0 || $verificaBen!=null){ 
+ if($beneficiario->idBeneficiario > 0 || $verificaBen!=null){
   $idRegistro=$this->model->ObtenerIdRegistro($beneficiario->idBeneficiario);
   $beneficiario->idRegistro=$idRegistro->idRegistro;
   $this->model->RegistraActualizacion($beneficiario);
@@ -143,7 +143,7 @@ public function Crud(){
       require_once 'view/index.php';
     }
   }if(isset($_REQUEST['idBeneficiario'])){
-    
+
     $administracion=true;
     $beneficiarios=true;
     $beneficiario = $this->model->Listar($_REQUEST['idBeneficiario']);
@@ -164,7 +164,7 @@ public function CrudRFC(){
 
 public function Importar(){
   if (file_exists("./assets/files/beneficiarios.xlsx")) {
-  //Agregamos la librería 
+  //Agregamos la librería
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
         //Variable con el nombre del archivo
     $nombreArchivo = './assets/files/beneficiarios.xlsx';
@@ -182,7 +182,7 @@ public function Importar(){
     $page="view/beneficiario/index.php";
     require_once 'view/index.php';
   }
-        //si por algo no cargo el archivo bak_ 
+        //si por algo no cargo el archivo bak_
   else {
     $error=true;
     $mensaje="El archivo <strong>beneficiarios.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
@@ -229,13 +229,13 @@ public function Beneficiarios($objPHPExcel,$numRows){
      $ben->viviendaInternet = $objPHPExcel->getActiveSheet()->getCell('AB'.$numRow)->getCalculatedValue();
      $ben->idNivelEstudios = $objPHPExcel->getActiveSheet()->getCell('AC'.$numRow)->getCalculatedValue();
      $ben->idSeguridadSocial = $objPHPExcel->getActiveSheet()->getCell('AD'.$numRow)->getCalculatedValue();
-     $ben->idDiscapacidad = $objPHPExcel->getActiveSheet()->getCell('AE'.$numRow)->getCalculatedValue();        
+     $ben->idDiscapacidad = $objPHPExcel->getActiveSheet()->getCell('AE'.$numRow)->getCalculatedValue();
      $ben->idGrupoVulnerable = $objPHPExcel->getActiveSheet()->getCell('AF'.$numRow)->getCalculatedValue();
      $ben->beneficiarioColectivo = $objPHPExcel->getActiveSheet()->getCell('AG'.$numRow)->getCalculatedValue();
      $ben->email = $objPHPExcel->getActiveSheet()->getCell('AH'.$numRow)->getCalculatedValue();
      $ben->fechaNacimiento = $objPHPExcel->getActiveSheet()->getCell('AI'.$numRow)->getCalculatedValue();
      $ben->genero = $objPHPExcel->getActiveSheet()->getCell('AJ'.$numRow)->getCalculatedValue();
-     $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();        
+     $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();
      $ben->telefono = $objPHPExcel->getActiveSheet()->getCell('AL'.$numRow)->getCalculatedValue();
      $claveMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
      if (!$ben->curp == null) {
@@ -252,7 +252,7 @@ public function Beneficiarios($objPHPExcel,$numRows){
 
 
       //echo $ben->idRegistro;
-      
+
       $this->model->ImportarBeneficiario($ben);
 
 
@@ -297,23 +297,23 @@ public function Eliminar(){
     $infoRegistro=$this->model->ObtenerInfoRegistro($idBeneficiario);
     $infoActualizacion=$this->model->ListarActualizacion($infoRegistro->idRegistro);
 
-    echo   '  
-    <div class="modal-body"> 
+    echo   '
+    <div class="modal-body">
     <div class="row">
     <div class="block-web">
     <div class="header">
     <div class="row" style="margin-bottom: 12px;">
     <div class="col-sm-12">
     <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Información general de registro</h2>
-    </div>    
     </div>
-    </div>        
+    </div>
+    </div>
     <div class="porlets-content" style="margin-bottom: -65px;">
     <table class="table table-striped">
     <tbody>
     <tr>
     <td>
-    <div class="col-md-12">   
+    <div class="col-md-12">
     <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Beneficiario</b></label>
     </div>
     </td>
@@ -340,7 +340,7 @@ public function Eliminar(){
     </tr>
     <tr>
     <td>
-    <div class="col-md-12">   
+    <div class="col-md-12">
     <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de registro</b></label>
     </div>
     </td>
@@ -369,7 +369,7 @@ public function Eliminar(){
       echo '
       <tr>
       <td>
-      <div class="col-md-12">   
+      <div class="col-md-12">
       <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de actualización</b></label>
       </div>
       </td>
@@ -385,7 +385,7 @@ public function Eliminar(){
         <label class="col-sm-5 lbl-detallet"><strong>Usuario:</strong></label>
         <label class="col-sm-7">'.$r->usuario.'</label><br>
         </div>
-        '; 
+        ';
         if($i%2==0){
           echo "<hr>";
         }$i++;
@@ -395,8 +395,8 @@ public function Eliminar(){
     echo '
     </tbody>
     </table>
-    </div><!--/porlets-content--> 
-    </div><!--/block-web--> 
+    </div><!--/porlets-content-->
+    </div><!--/block-web-->
     </div>
     </div>
     <div class="modal-footer">
@@ -406,12 +406,12 @@ public function Eliminar(){
     </div>
     </div>';
   }
-  
+
   public function ListarLocalidades(){
     header('Content-Type: application/json');
     $idMunicipio=$_REQUEST['idMunicipio'];
     $obMunicipio=$this->model->ObtenerMunicipio($idMunicipio);
-    
+
     if($obMunicipio!=null){
 
      $municipio=$obMunicipio->nombreMunicipio;
@@ -419,7 +419,7 @@ public function Eliminar(){
      $row_array['estado']='ok';
      array_push($datos, $row_array);
 
-     foreach ($this->model->ListarLocalidades($municipio) as $localidad): 
+     foreach ($this->model->ListarLocalidades($municipio) as $localidad):
       $row_array['idLocalidad']  = $localidad->idLocalidad;
       $row_array['localidad']  = $localidad->localidad;
       array_push($datos, $row_array);
@@ -437,7 +437,7 @@ public function ListarAsentamientos(){
    $datos = array();
    $row_array['estado']='ok';
    array_push($datos, $row_array);
-   foreach ($this->model->ListarAsentamientos($localidad) as $asentamiento):     
+   foreach ($this->model->ListarAsentamientos($localidad) as $asentamiento):
     $row_array['idAsentamientos']  = $asentamiento->idAsentamientos;
     $row_array['nombreAsentamiento']  = $asentamiento->nombreAsentamiento;
     array_push($datos, $row_array);
@@ -447,5 +447,3 @@ echo json_encode($datos, JSON_FORCE_OBJECT);
 }
 
 }
-
-

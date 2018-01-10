@@ -302,7 +302,7 @@
 													<div class="col-sm-6">
 														<select name="idAsentamientos" class="form-control select2" id="selectAsentamientos" style="width: 100%">
 															<?php if($beneficiario->idBeneficiario==null){  ?>
-															<option value="">
+															<option>
 																Seleccione el asentamiento a la que pertenece el beneficiario
 															</option>
 															<?php } if($beneficiario->idBeneficiario!=null){ ?>
@@ -326,7 +326,7 @@
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Descripción de la ubicación<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
-														<textarea class="form-control"  onkeyup="mayus(this);"  onchange="mayus(this);" name="descripcionUbicacion" placeholder="Ejemplo: Frente a la plaza del centro, a un costado de la farmacia guadalajara" required value="<?php echo $beneficiario->descripcionUbicacion;?>"></textarea>
+														<textarea class="form-control"  onkeyup="mayus(this);"  onchange="mayus(this);" name="descripcionUbicacion" placeholder="Ejemplo: Frente a la plaza del centro, a un costado de la farmacia guadalajara" required><?php echo $beneficiario->descripcionUbicacion;?></textarea>
 														<div class="help-block with-errors"></div>
 													</div>
 												</div><!--/form-group-->
