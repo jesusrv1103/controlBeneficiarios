@@ -439,7 +439,7 @@
  }
 
  infoRegistroRFC = function (idBeneficiarioRFC){
-  alert(idBeneficiarioRFC);
+  
    // var idBeneficiario=idBeneficiario;
    $.post("index.php?c=Beneficiariorfc&a=Inforegistro", {idBeneficiarioRFC: idBeneficiarioRFC}, function(info) {
     $("#div-modal-content").html(info);
