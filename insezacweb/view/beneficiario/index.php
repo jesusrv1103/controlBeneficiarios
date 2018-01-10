@@ -160,7 +160,7 @@
          </tr>
        </thead>
        <tbody>
-        <?php foreach($this->model->Listar1() as $r): ?>
+        <?php foreach($this->model3->Listar1() as $r): ?>
           <tr class="grade">
             <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistroRFC(<?php echo $r->idBeneficiarioRFC; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
             <td><?php echo $r->RFC ?> </td>

@@ -323,6 +323,9 @@ class Beneficiario
 		}
 	}
 
+
+	
+
 	//Metodo para actualizar
 	public function Actualizar($data)
 	{
