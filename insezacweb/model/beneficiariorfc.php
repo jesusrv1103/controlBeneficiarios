@@ -9,15 +9,12 @@ class Beneficiariorfc
 	public $estado;
 	public $direccion;
 	public $pdo;
-
-
 	public $idBeneficiarioRFC;
 	public $RFC;
 	public $curp;
 	public $primerApellido;
 	public $segundoApellido;
 	public $nombres;
-	
 	public $fechaAltaSat;
 	public $sexo;
 	public $idAsentamientos;

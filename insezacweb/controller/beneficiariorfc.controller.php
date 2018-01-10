@@ -350,7 +350,7 @@ public function Inforegistro(){
      }
        $numRow+=1;
 //echo $numRow;
-     } while(!$benrfc->curp == null);
+     } while(!$benrfc->RFC == null);
   //echo "SALIO";
    }catch (Exception $e) {
     $error=true;

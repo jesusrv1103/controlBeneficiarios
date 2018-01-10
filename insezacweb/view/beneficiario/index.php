@@ -267,11 +267,11 @@
               <p>Importa tu archivo excel con los datos de los beneficiarios para registrarlos.</p>
               <p><strong>Nota: </strong>El archivo debe contener el nombre de <strong class="theme_color">beneficiariosrfc.xlsx</strong> para poder ser leído correctamente.</p> 
               <br>
-              <span class="btn btn-success fileinput-button">
+             <span class="btn btn-success fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
                 <span>Seleccionar archivo</span>
                 <!-- The file input field used as target for the file upload widget -->
-                <input id="fileupload" type="file" name="files[]" multiple class="beneficiarios">
+                <input id="fileupload" type="file" name="files[]" multiple class="beneficiariosrfc">
               </span>
               <br>
               <br>
@@ -294,6 +294,7 @@
     </div><!--/modal-content--> 
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
+
 <div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" style="width: 60%;">
     <div class="modal-content" id="div-modal-content">
