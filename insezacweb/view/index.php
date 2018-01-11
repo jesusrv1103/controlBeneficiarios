@@ -134,7 +134,7 @@ if (!isset($_SESSION['seguridad'])){
 
                    <li>
                     <a href="?c=Direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                     <?php if (isset($direccion)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
+                     <?php if (isset($direcciones)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
                    </a>
                  </li><br><br>
                  <li>

@@ -10,15 +10,13 @@ class DireccionController{
   public function __CONSTRUCT(){
     $this->model = new Direccion();
   }
-  //Index 
+  //Index
   public function Index(){
-
-
-    $administracion=true; 
-    $direcciones=true; 
+    $administracion=true;
+    $direcciones=true;
    $page="view/direccion/index.php"; //Vista principal donde se enlistan los programas
    require_once 'view/index.php';
- } 
+ }
  public function Crud(){
    $direccion = new Direccion();
    if(isset($_REQUEST['nuevoRegistro'])){
@@ -36,7 +34,7 @@ class DireccionController{
 public function Importar(){
   if (file_exists("./assets/files/direcciones.xlsx")) {
 
-          //Agregamos la librería 
+          //Agregamos la librería
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
         //Variable con el nombre del archivo
     $nombreArchivo = './assets/files/direcciones.xlsx';
@@ -53,7 +51,7 @@ public function Importar(){
     $administracion=true;
     require_once 'view/index.php';
   }
-        //si por algo no cargo el archivo bak_ 
+        //si por algo no cargo el archivo bak_
   else {
     $error=true;
     $mensaje="El archivo <strong>direcciones.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
@@ -68,7 +66,7 @@ public function Direcciones($objPHPExcel,$numRows){
     $this->model->Limpiar("direccion");
     $numRow=2;
     do {
-      
+
       $cat = new Direccion();
       $cat->direccion = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
       $cat->descripcion = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
@@ -121,9 +119,9 @@ public function Guardar(){
         $page="view/direccion/direccion.php";
         require_once "view/index.php";
     }
-  } 
+  }
   $direcciones = true;
-  $administracion=true; 
+  $administracion=true;
   $page="view/direccion/index.php";
   require_once 'view/index.php';
 }
