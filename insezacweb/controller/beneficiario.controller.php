@@ -196,7 +196,6 @@ public function Beneficiarios($objPHPExcel,$numRows){
   try{
     $numRow=2;
     do {
-
             //echo "Entra";
      $ben = new Beneficiario;
      $ben->curp = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
