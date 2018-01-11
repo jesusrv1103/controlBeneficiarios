@@ -234,7 +234,6 @@
 														<div class="help-block with-errors"></div>
 													</div>
 												</div><!--/form-group-->
-
 												<div class="form-group" id="idAsentamientos">
 													<label class="col-sm-3 control-label">Asentamiento</label>
 													<div class="col-sm-6">
@@ -252,7 +251,6 @@
 														<div class="help-block with-errors"></div>
 													</div>
 												</div>	
-
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Entre que vialidades<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">

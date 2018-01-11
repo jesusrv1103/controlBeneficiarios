@@ -10,8 +10,7 @@ class BeneficiariorfcController{
 
   public function __CONSTRUCT(){
     $this->model = new Beneficiariorfc();
-    $this->model2 = new Catalogos();
-    
+    $this->model2 = new Catalogos(); 
   }
 
 //Metodo Guardar  si trae un id actualiza, no registra
@@ -80,11 +79,12 @@ class BeneficiariorfcController{
 public function Inforegistro(){
 
   $idBeneficiarioRFC = $_POST['idBeneficiarioRFC'];
+
   echo     $idBeneficiarioRFC = $_POST['idBeneficiarioRFC'];
   $infoRegistro=$this->model->ObtenerInfoRegistro($idBeneficiarioRFC);
   $infoActualizacion=$this->model->ListarActualizacion($infoRegistro->idRegistro);
 
-  echo   '  
+  echo   ' 
   <div class="modal-body"> 
     <div class="row">
       <div class="block-web">
@@ -108,20 +108,20 @@ public function Inforegistro(){
               <tr>
                 <td>
                   <div class="col-md-12">
-                    <label class="col-sm-4 lbl-detalle"><b>Curp:</b></label>
+                    <label class="col-sm-4 lbl-detalle"><b>RFC Empresa:</b></label>
+                    <label class="col-sm-7 control-label">'.$infoRegistro->RFC.'</label>
+                  </div>
+                   <div class="col-md-12">
+                    <label class="col-sm-4 lbl-detalle"><b>Actividad:</b></label>
+                    <label class="col-sm-7 control-label">'.$infoRegistro->actividad.'</label>
+                  </div>
+                  <div class="col-md-12">
+                    <label class="col-sm-4 lbl-detalle"><b>CURP Representante legal:</b></label>
                     <label class="col-sm-7 control-label">'.$infoRegistro->curp.'</label>
                   </div>
                   <div class="col-md-12">
-                    <label class="col-sm-4 lbl-detalle"><b>Primer apellido:</b></label>
-                    <label class="col-sm-7 control-label">'.$infoRegistro->primerApellido.'</label>
-                  </div>
-                  <div class="col-md-12">
-                    <label class="col-sm-4 lbl-detalle"><b>Segundo apellido:</b></label>
-                    <label class="col-sm-7 control-label">'.$infoRegistro->segundoApellido.'</label>
-                  </div>
-                  <div class="col-md-12">
-                    <label class="col-sm-4 lbl-detalle"><b>Nombre(s):</b></label>
-                    <label class="col-sm-7 control-label">'.$infoRegistro->nombres.'</label>
+                    <label class="col-sm-4 lbl-detalle"><b>Nombre Representante legal:</b></label>
+                    <label class="col-sm-7 control-label">'.$infoRegistro->primerApellido.'&nbsp;'.$infoRegistro->segundoApellido.'&nbsp;'.$infoRegistro->nombres.'</label>
                   </div>
                 </td>
               </tr>
@@ -137,10 +137,6 @@ public function Inforegistro(){
                   <div class="col-md-12">
                     <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
                     <label class="col-sm-6">'.$infoRegistro->usuario.'</label><br>
-                  </div>
-                  <div class="col-md-12">
-                    <label class="col-sm-4 lbl-detalle"><strong>Dirección:</strong></label>
-                    <label class="col-sm-6">'.$infoRegistro->direccion.'</label><br>
                   </div>
                   <div class="col-md-12">
                     <label class="col-sm-4 lbl-detalle"><strong>Fecha y hora de registro:</strong></label>
@@ -249,8 +245,9 @@ public function Inforegistro(){
   public function Detalles(){
     $administracion=true;
     $beneficiarios=true;
-    $benrfc = new Beneficiariorfc();
-    $benrfc = $this->model->Listar($_REQUEST['idBeneficiarioRFC']);
+    $ben = new Beneficiariorfc();
+    $ben = $this->model->Listar($_REQUEST['idBeneficiarioRFC']);
+    echo $_REQUEST['idBeneficiarioRFC'];
     $infoApoyo = $this->model->ObtenerInfoApoyo($_REQUEST['idBeneficiarioRFC']);
     $page="view/beneficiario/detallesRFC.php";
     require_once 'view/index.php';
@@ -277,7 +274,6 @@ public function Inforegistro(){
     $this->model->Eliminar($beneficiario);
     header ('Location: index.php?c=Beneficiario&a=RFC');
   }
-  
   public function Importar(){
     if (file_exists("./assets/files/beneficiariosrfc.xlsx")) {
   //Agregamos la librería 
@@ -333,9 +329,9 @@ public function Inforegistro(){
        $benrfc->actividad = $objPHPExcel->getActiveSheet()->getCell('P'.$numRow)->getCalculatedValue();
        $benrfc->cobertura = $objPHPExcel->getActiveSheet()->getCell('Q'.$numRow)->getCalculatedValue();
        if (!$benrfc->RFC == null) {
-         $consult = $this->model->VerificaBeneficiarioRFC($benrfc->RFC);
-        if (!$consult == null) {
-         $this->model->ActualizarExc($benrfc);
+         //$consult = $this->model->VerificaBeneficiarioRFC($benrfc->RFC);
+       // if (!$consult == null) {
+         //$this->model->ActualizarExc($benrfc);
        //Datos de registro
          $benrfc->usuario=$_SESSION['usuario'];
          $benrfc->fechaAlta=date("Y-m-d H:i:s");
@@ -344,16 +340,15 @@ public function Inforegistro(){
       //$consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
       //$benrfc->idMunicipio=$consult->idMunicipio;
       //echo $benrfc->curp;
-       }else{
+       //}else{
       //echo $benrfc->idRegistro;
          $benrfc->idRegistro=$this->model->RegistraDatosRegistro($benrfc);
          $this->model->ImportarBeneficiarioRFC($benrfc);
       //echo "ya importo";
-       }
      }
        $numRow+=1;
 //echo $numRow;
-     } while(!$benrfc->curp == null);
+     } while(!$benrfc->RFC == null);
   //echo "SALIO";
    }catch (Exception $e) {
     $error=true;

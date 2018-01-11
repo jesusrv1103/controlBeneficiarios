@@ -31,86 +31,69 @@
               <div class="btn-group pull-right">
                 <b> 
                  <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-                 <div class="btn-group" style="margin-right: 10px;"> 
-                  <a class="btn btn-sm btn-success tooltips" href="?c=Apoyos&a=Crud" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" data-original-title="Registrar nuevo Apoyo"> <i class="fa fa-plus"></i> Registrar </a>
-                  <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar catálogo para registrar Apoyos" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
-                </div>
-                <?php } ?>
-              </b>
-            </div>
-          </div>    
+                 <div class="btn-group" style="margin-right: 10px;">
+
+                  <div class="btn-group">
+                   <a data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-eye"></i>&nbsp;Ver<span class="caret"></span></a>
+                   <ul role="menu" class="dropdown-menu">
+                     <li><a href="#modalProceso"  data-toggle="modal" data-target="#modalProceso">Apoyos con curp</a></li>
+                     <li><a href="#">Apoyo con RFC</a></li>
+                   </ul>
+                 </div> 
+
+
+                  <div class="btn-group">
+                    <a data-toggle="dropdown" class="btn btn-sm btn-success dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar<span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu" >
+                      <li><a href="?c=Apoyos&a=Crud">Apoyo CURP</a></li>
+                      <li><a  data-toggle="modal" data-target="#modalProceso" href="#modalProceso">Apoyo RFC</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="btn-group">
+                    <button data-toggle="dropdown" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a data-toggle="modal" data-target="#modalImportar" href="#modalImportar">Con CURP</a></li>
+                      <li><a data-toggle="modal" data-target="#modalProceso" href="#modalProceso">Con RFC</a></li>
+                    </ul>
+                  </div>
+              
+                 
+               </div>
+               <?php } ?>
+             </b>
+           </div>
+         </div>    
+       </div>
+     </div>
+     <?php if(isset($mensaje)){ if(!isset($error)){?>
+     <div class="row" style="margin-bottom: -20px; margin-top: 20px">
+      <div class="col-md-12">
+        <div class="alert alert-success fade in">
+          <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+          <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
         </div>
       </div>
-      <?php if(isset($mensaje)){ if(!isset($error)){?>
-      <div class="row" style="margin-bottom: -20px; margin-top: 20px">
-        <div class="col-md-12">
-          <div class="alert alert-success fade in">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
-          </div>
-        </div>
-      </div> 
-      <?php } if(isset($error)){ ?>
-      <div class="row" style="margin-bottom: -20px; margin-top: 20px">
-        <div class="col-md-12">
-          <div class="alert alert-danger">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
-          </div>
+    </div> 
+    <?php } if(isset($error)){ ?>
+    <div class="row" style="margin-bottom: -20px; margin-top: 20px">
+      <div class="col-md-12">
+        <div class="alert alert-danger">
+          <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+          <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
         </div>
       </div>
-      <?php } }?>
-      <div class="porlets-content">
-        <div class="table-responsive">
-          <table class="display table table-bordered table-striped" id="dynamic-table">
-           <thead>
-             <tr>
-               <td><center><b>Info</b></center></td>
-               <th>CURP</th>
-               <th>Fecha</th> 
-               <th width="22%">Programa</th>
-               <th>Subprograma</th>
-               <!--th>Prog social</th-->
-               <th>Tipo</th>
-               <th>Caracteristica</th>
-               <th>Origen</th> 
-               <th>Importe</th>
-               <?php if($_SESSION['tipoUsuario']==1){?>
-               <td><center><b>Editar</b></center></td>
-               <td><center><b>Borrar</b></center></td>
-               <?php } ?>
-             </tr>
-           </thead>
-           <tbody>
-            <?php foreach($this->model->Listar() as $r): ?>
-              <tr class="grade">
-                <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoApoyo(<?php echo $r->idApoyo; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
-                <td><?php echo $r->curp ?> </td>
-                <td><?php echo $r->fechaApoyo ?> </td>
-                <td><?php echo $r->programa; ?> </td>
-                <td><?php echo $r->subprograma; ?> </td>
-                <!--td><?php echo "r->programaSocial;" ?></td-->
-                <td><?php echo $r->tipoApoyo; ?> </td>
-                <td><?php echo $r->caracteristicasApoyo; ?> </td>
-                <td><?php echo $r->origen; ?> </td>
-                <td>$<?php echo $r->importeApoyo; ?></td>
-                <?php if($_SESSION['tipoUsuario']==1){?>
-                <td class="center">
-                  <a class="btn btn-primary btn-sm" role="button" href="?c=Apoyos&a=Crud&idApoyo=<?php echo $r->idApoyo ?>"><i class="fa fa-edit"></i></a>
-                </td>
-                <td class="center">
-                 <a class="btn btn-danger btn-sm" onclick="eliminarApoyo(<?php echo $r->idApoyo;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-               </td>
-               <?php } ?>
-             </tr>
-           <?php endforeach; ?>
-         </tbody>
-         <tfoot>
-          <tr>
-           <td><center><b>Info</b></center></td>
-           <th>CURP</th>
-           <th>Fecha</th>
-           <th>Programa</h> 
+    </div>
+    <?php } }?>
+    <div class="porlets-content">
+      <div class="table-responsive">
+        <table class="display table table-bordered table-striped" id="dynamic-table">
+         <thead>
+           <tr>
+             <td><center><b>Info</b></center></td>
+             <th>CURP</th>
+             <th>Fecha</th> 
+             <th width="22%">Programa</th>
              <th>Subprograma</th>
              <!--th>Prog social</th-->
              <th>Tipo</th>
@@ -122,11 +105,53 @@
              <td><center><b>Borrar</b></center></td>
              <?php } ?>
            </tr>
-         </tfoot>
-       </table>
-     </div><!--/table-responsive-->
-   </div><!--/porlets-content-->
- </div><!--/block-web-->
+         </thead>
+         <tbody>
+          <?php foreach($this->model->Listar() as $r): ?>
+            <tr class="grade">
+              <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoApoyo(<?php echo $r->idApoyo; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+              <td><?php echo $r->curp ?> </td>
+              <td><?php echo $r->fechaApoyo ?> </td>
+              <td><?php echo $r->programa; ?> </td>
+              <td><?php echo $r->subprograma; ?> </td>
+              <!--td><?php echo "r->programaSocial;" ?></td-->
+              <td><?php echo $r->tipoApoyo; ?> </td>
+              <td><?php echo $r->caracteristicasApoyo; ?> </td>
+              <td><?php echo $r->origen; ?> </td>
+              <td>$<?php echo $r->importeApoyo; ?></td>
+              <?php if($_SESSION['tipoUsuario']==1){?>
+              <td class="center">
+                <a class="btn btn-primary btn-sm" role="button" href="?c=Apoyos&a=Crud&idApoyo=<?php echo $r->idApoyo ?>"><i class="fa fa-edit"></i></a>
+              </td>
+              <td class="center">
+               <a class="btn btn-danger btn-sm" onclick="eliminarApoyo(<?php echo $r->idApoyo;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+             </td>
+             <?php } ?>
+           </tr>
+         <?php endforeach; ?>
+       </tbody>
+       <tfoot>
+        <tr>
+         <td><center><b>Info</b></center></td>
+         <th>CURP</th>
+         <th>Fecha</th>
+         <th>Programa</h> 
+           <th>Subprograma</th>
+           <!--th>Prog social</th-->
+           <th>Tipo</th>
+           <th>Caracteristica</th>
+           <th>Origen</th> 
+           <th>Importe</th>
+           <?php if($_SESSION['tipoUsuario']==1){?>
+           <td><center><b>Editar</b></center></td>
+           <td><center><b>Borrar</b></center></td>
+           <?php } ?>
+         </tr>
+       </tfoot>
+     </table>
+   </div><!--/table-responsive-->
+ </div><!--/porlets-content-->
+</div><!--/block-web-->
 </div><!--/col-md-12-->
 </div><!--/row-->
 </div>
@@ -170,13 +195,36 @@
     </div><!--/modal-content--> 
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
-<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="width: 60%;">
-    <div class="modal-content" id="div-modal-content">
-      <!--************************En esta sección se incluye el modal de informacion de registro y apoyo***************************-->
+
+
+<div class="modal fade" id="modalProceso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content panel default red_border horizontal_border_1">
+      <div class="modal-body"> 
+        <div class="row">
+          <div class="block-web">
+            <div class="header">
+              <h3 class="content-header theme_color">&nbsp;Información</h3>
+            </div>
+            <div class="porlets-content" style="margin-bottom: -50px;">
+              <h4>Funcion en Proceso</h4>
+            </div><!--/porlets-content--> 
+          </div><!--/block-web--> 
+        </div>
+      </div>
+      <div class="modal-footer" style="margin-top: -10px;">
+        <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
+
+
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+
+          
+        </div>
+      </div>
     </div><!--/modal-content--> 
   </div><!--/modal-dialog--> 
-</div><!--/modal-fade--> 
+</div><!--/modal-fade-->
+
 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default red_border horizontal_border_1">

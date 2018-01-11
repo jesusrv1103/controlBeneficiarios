@@ -68,9 +68,9 @@ public function Guardar(){
       $objPHPExcel->setActiveSheetIndex(0);
     //Obtengo el numero de filas del archivo
       $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-   // $this->model->Check(0);
+    $this->model->Check(0);
       $this->Subprogramas($objPHPExcel,$numRows);
-  //  $this->model->Check(1);
+   $this->model->Check(1);
       $mensaje="Se ha leído correctamente el archivo <strong>subprogramas.xlsx</strong>.<br><i class='fa fa-check'></i> Se han registrado correctamente los subprogramas.";
       $page="view/subprograma/index.php";
       $administracion=true;

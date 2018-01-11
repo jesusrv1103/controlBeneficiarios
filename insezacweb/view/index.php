@@ -130,6 +130,7 @@ if (!isset($_SESSION['seguridad'])){
                        <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
                      </a>
                    </li><br><br>
+                   
                    <?php if($_SESSION['tipoUsuario']==1){?>
 
                    <li>
