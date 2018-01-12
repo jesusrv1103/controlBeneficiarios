@@ -16,8 +16,8 @@ public function Index(){
 
 public function Crud(){
   if(isset($_REQUEST['nuevoRegistro'])){
-      $nuevoRegistro=true;
-    }
+    $nuevoRegistro=true;
+  }
   $localidad = new Localidad();
   if(isset($_REQUEST['idLocalidad'])){
     $localidad = $this->model->Obtener($_REQUEST['idLocalidad']);
@@ -108,21 +108,34 @@ public function Eliminar(){
   require_once 'view/index.php';
 }
 public function Guardar(){
-    $localidad= new Localidad();
-    $localidad->idLocalidad = $_REQUEST['idLocalidad'];
-    $localidad->municipio = $_REQUEST['municipio'];
-    $localidad->localidad = $_REQUEST['localidad'];
-    $localidad->ambito = $_REQUEST['ambito'];
-    if(!isset($_REQUEST['nuevoRegistro'])){
-        $this->model->Actualizar($localidad);
-        $mensaje="Se han actualizado correctamente la localidad";
-      }else{
-        $this->model->Registrar($localidad);
-        $mensaje="Se ha registrado correctamente la localidad";
-      } 
+  $localidad= new Localidad();
+  $localidad->idLocalidad = $_REQUEST['idLocalidad'];
+  $verificaLocalidad = $this->model->verificaLocalidad($localidad->idLocalidad);
+  $localidad->municipio = $_REQUEST['municipio'];
+  $localidad->localidad = $_REQUEST['localidad'];
+
+  $localidad->ambito = $_REQUEST['ambito'];
+
+  if($verificaLocalidad!=null){
+    $error=true;
     $localidad = true;
     $catalogos=true;
-    $page="view/localidad/index.php";
-    require_once 'view/index.php';
+    $nuevoRegistro=true;
+    $mensaje="La clave de la localidad <b>$localidad->idLocalidad</b> ya existe. Pongase en contacto con el administrador de la Unidad de Planeación para que le proporcione correctamente una nueva clave de localidad.";
+    $page="view/localidad/localidad.php";
+    require_once "view/index.php";
+  }else{
+    if(!isset($_REQUEST['nuevoRegistro'])){
+      $this->model->Actualizar($localidad);
+      $mensaje="Se han actualizado correctamente la localidad";
+    }else{
+      $this->model->Registrar($localidad);
+      $mensaje="Se ha registrado correctamente la localidad";
+    } 
   }
+  $localidad = true;
+  $catalogos=true;
+  $page="view/localidad/index.php";
+  require_once 'view/index.php';
+}
 }
