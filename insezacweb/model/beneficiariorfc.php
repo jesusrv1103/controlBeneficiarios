@@ -2,7 +2,6 @@
 require_once 'model/database.php';
 class Beneficiariorfc
 {
-
 	public $usuario;
 	public $fechaAlta;
 	public $hora;
