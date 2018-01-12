@@ -181,7 +181,7 @@ class Apoyos
 					$data->idPeriodicidad,
 					$data->idProgramaSocial,
 					$data->idRegistroApoyo,
-					$data->clavePresupuestal
+					NULL
 				)
 			);
 		} catch (Exception $e) 
@@ -201,27 +201,6 @@ class Apoyos
 			die($e->getMessage());
 		}
 	}
-	public function RegistraDatosRegistro($data){
-		try 
-		{
-			$sql = "INSERT INTO registroApoyo VALUES (?,?,?,?,?)";
-			$this->pdo->prepare($sql)
-			->execute(
-				array(
-					null,
-					$data->usuario,
-					$data->direccion,
-					$data->fechaAlta,
-					$data->estado
-				)
-			);
-			return $this->pdo->lastInsertId();
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
-	}
-
 	public function ObtenerIdRegistro($idApoyo)
 	{
 		try 

@@ -99,7 +99,6 @@ public function Apoyos($objPHPExcel,$numRows){
   $this->model->Limpiar("apoyos");
   $numRow=2;
   do {
-
     $apoyos = new Apoyos();
     $curp = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
     $apoyos->idOrigen = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
@@ -110,23 +109,22 @@ public function Apoyos($objPHPExcel,$numRows){
     $apoyos->fechaApoyo = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
     $apoyos->idPeriodicidad = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
     $apoyos->idProgramaSocial = null;
-    $apoyos->clavePresupuestal = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
-    if (! $curp == null) {
+    $apoyos->clavePresupuestal = null;
+    if (!$curp == null) {
       echo 'Entro al metodo';
       $apoyos->usuario=$_SESSION['usuario'];
       $apoyos->fechaAlta=date("Y-m-d H:i:s");
       $apoyos->direccion=$_SESSION['direccion'];
       $apoyos->estado="Activo";
-      //$consult = $this->model->ObtenerIdBen($curp);
-      echo $curp;
-      $apoyos->idBeneficiario=1;
-      echo $apoyos->idBeneficiario;
-      //echo $ben->curp;
-      $apoyos->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyos);
+      $consult = $this->model->ObtenerIdBen($curp);
+      echo $consult;
+      $apoyos->idBeneficiario=$consult->idBeneficiario;
+      //echo $apoyos->idBeneficiario;
+       $apoyos->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyos);
       $this->model->ImportarApoyo($apoyos);
     }
     $numRow+=1;
-  } while ( !$curp == null);
+  } while (!$curp == null);
 } catch (Exception $e) {
  $mensaje="error al importar los datos de los apoyos";
  $page="view/apoyos/index.php";
