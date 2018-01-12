@@ -95,9 +95,7 @@
                <td><center><b>Ver</b></center></td>
                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                <td><center><b>Editar</b></center></td>
-               <?php if($_SESSION['tipoUsuario']==1){?>
-               <td><center><b>Borrar</b></center></td>
-               <?php } ?>
+               
                <?php } ?>
              </tr>
            </thead>
@@ -115,11 +113,7 @@
                 <td class="center">
                   <a class="btn btn-primary btn-sm" role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
                 </td>
-                 <?php if($_SESSION['tipoUsuario']==1){?>
-                <td class="center">
-                 <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-               </td>
-               <?php } ?>
+                 
                <?php } ?>
              </tr>
            <?php endforeach; ?>
@@ -133,9 +127,7 @@
             <td><center><b>Ver</b></center></td>
            <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                <td><center><b>Editar</b></center></td>
-               <?php if($_SESSION['tipoUsuario']==1){?>
-               <td><center><b>Borrar</b></center></td>
-               <?php } ?>
+               
                <?php } ?>
           </tr>
         </tfoot>
