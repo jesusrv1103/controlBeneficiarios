@@ -171,7 +171,6 @@ class Apoyos
 			$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
-					null,
 					$data->idBeneficiario,
 					$data->idOrigen,  
 					$data->idSubprograma, 
@@ -202,10 +201,9 @@ class Apoyos
 			die($e->getMessage());
 		}
 	}
-	public function RegistraDatosRegistro(Apoyos $data){
+	public function RegistraDatosRegistro($data){
 		try 
 		{
-
 			$sql = "INSERT INTO registroApoyo VALUES (?,?,?,?,?)";
 			$this->pdo->prepare($sql)
 			->execute(
@@ -282,6 +280,40 @@ class Apoyos
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		}
 		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+	public function RegistraDatosRegistro(Apoyos $data){
+
+		try 
+		{
+
+			$sql = "INSERT INTO registro VALUES (?,?,?,?,?)";
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					null,
+					$data->usuario,
+					$data->direccion,
+					$data->fechaAlta,
+					$data->estado
+				)
+			);
+			return $this->pdo->lastInsertId();
+		} catch (Exception $e) 
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ObtenerIdBen($curp)
+	{
+		try 
+		{
+			$sql= $this->pdo->prepare("SELECT idBeneficiario FROM beneficiarios WHERE curp=$curp");
+			$resultado=$sql->execute();
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+		} catch (Exception $e) 
 		{
 			die($e->getMessage());
 		}

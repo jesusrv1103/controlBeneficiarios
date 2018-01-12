@@ -166,13 +166,13 @@
             </div>
             <div class="porlets-content" style="margin-bottom: -65px;">
               <p>Importa tu archivo excel con los datos de los Apoyos para registrarlos.</p>
-              <p><strong>Nota: </strong>El archivo debe conener el nombre de <strong class="theme_color">apoyos.xmls</strong> para poder ser leído correctamente.</p> 
+              <p><strong>Nota: </strong>El archivo debe conener el nombre de <strong class="theme_color">apoyos.xlsx</strong> para poder ser leído correctamente.</p> 
               <br>
               <span class="btn btn-success fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
                 <span>Seleccionar archivo</span>
                 <!-- The file input field used as target for the file upload widget -->
-                <input id="fileupload" type="file" name="files[]" multiple class="Apoyos">
+                <input id="fileupload" type="file" name="files[]" multiple class="apoyos">
               </span>
               <br>
               <br>
