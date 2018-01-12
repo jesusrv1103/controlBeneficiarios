@@ -31,6 +31,17 @@
         </div>
         <div class="porlets-content">
           <form action="?c=Localidad&a=Guardar<?php if(isset($nuevoRegistro)){ echo "&nuevoRegistro=true"; } ?>" method="POST" class="form-horizontal row-border"  parsley-validate novalidate>
+
+            <?php if(isset($error)){ ?>
+              <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-3">
+                  <div class="alert alert-danger">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
+                  </div>
+                </div>
+              </div><!--/form-group-->
+            <?php } ?>
             <div class="form-group">
               <label class="col-sm-3 control-label">Clave de localidad<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
@@ -38,38 +49,39 @@
              </div>
            </div><!--/form-group-->
            <div class="form-group">
-            <label class="col-sm-3 control-label">Municipio<strog class="theme_color">*</strog></label>
-            <div class="col-sm-6">
-              <input name="municipio" type="text" class="form-control" required value="<?php echo $localidad->idLocalidad != null ? $localidad->municipio : "";  ?>" placeholder="Ingrese el nombre del municipio"/>
-            </div>
-          </div><!--/form-group-->
-          <div class="form-group">
-            <label class="col-sm-3 control-label">Localidad<strog class="theme_color">*</strog></label>
-            <div class="col-sm-6">
-              <input name="localidad" type="text" class="form-control" required value="<?php echo $localidad->idLocalidad != null ? $localidad->localidad : "";  ?>" placeholder="Ingrese el nombre de localidad"/>
-            </div>
-          </div><!--/form-group-->
-          <div class="form-group">
-            <label class="col-sm-3 control-label">Ámbito<strog class="theme_color">*</strog></label>
-            <div class="col-sm-6">
-              <select class="form-control" name="ambito" required id="ambito">
-                <?php if($localidad->idLocalidad == null){ ?>
-                <option value=""> 
-                  Selecciona el ámbito de localidad                 
-                </option>
-                <?php } if($localidad->idLocalidad != null){ ?>
-                <option value="<?php echo $localidad->idLocalidad != null ? $localidad->ambito : "";  ?>"> 
-                  <?php  echo $localidad->idLocalidad != null ? $localidad->ambito : "";  ?>                
-                </option>
-                <?php } if($localidad->ambito!="Urbano"){?>
-                <option value="Rural"> 
-                  Urbano
-                </option>
-                <?php } if($localidad->ambito!="Rural"){?>
-                <option value="Urbano"> 
-                  Rural
-                </option>
-                <?php } ?>
+
+           <label class="col-sm-3 control-label">Municipio<strog class="theme_color">*</strog></label>
+           <div class="col-sm-6">
+            <input name="municipio" type="text" class="form-control" required value="<?php echo $localidad->idLocalidad != null ? $localidad->municipio : "";  ?>" placeholder="Ingrese el nombre del municipio"/>
+          </div>
+        </div><!--/form-group-->
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Localidad<strog class="theme_color">*</strog></label>
+          <div class="col-sm-6">
+            <input name="localidad" type="text" class="form-control" required value="<?php echo $localidad->idLocalidad != null ? $localidad->localidad : "";  ?>" placeholder="Ingrese el nombre de localidad"/>
+          </div>
+        </div><!--/form-group-->
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Ámbito<strog class="theme_color">*</strog></label>
+          <div class="col-sm-6">
+            <select class="form-control" name="ambito" required id="ambito">
+              <?php if($localidad->idLocalidad == null){ ?>
+              <option value=""> 
+                Selecciona el ámbito de localidad                 
+              </option>
+              <?php } if($localidad->idLocalidad != null){ ?>
+              <option value="<?php echo $localidad->idLocalidad != null ? $localidad->ambito : "";  ?>"> 
+                <?php  echo $localidad->idLocalidad != null ? $localidad->ambito : "";  ?>                
+              </option>
+              <?php } if($localidad->ambito!="Urbano"){?>
+              <option value="Urbano"> 
+                Urbano
+              </option>
+              <?php } if($localidad->ambito!="Rural"){?>
+              <option value="Rural"> 
+                Rural
+              </option>
+              <?php } ?>
             </select>
           </div>
         </div><!--/form-group-->

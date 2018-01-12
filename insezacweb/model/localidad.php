@@ -143,4 +143,20 @@ class Localidad
 		}
 	}
 
+
+	public function VerificaLocalidad($idLocalidad)
+	{
+		try
+		{
+			$sql= $this->pdo->prepare("SELECT * FROM localidades WHERE idLocalidad=?");
+			$resultado=$sql->execute(
+				array($idLocalidad)
+			);
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+		} catch (Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
 }
