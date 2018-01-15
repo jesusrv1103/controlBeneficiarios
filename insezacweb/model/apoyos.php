@@ -145,7 +145,7 @@ class Apoyos
 					$data->idPeriodicidad, 
 					$data->idProgramaSocial,
 					$data->idRegistroApoyo,
-					NULL
+					null
 				)
 			);
 		} catch (Exception $e) 
@@ -268,7 +268,7 @@ class Apoyos
 		try 
 		{
 
-			$sql = "INSERT INTO registro VALUES (?,?,?,?,?)";
+			$sql = "INSERT INTO registroApoyo VALUES (?,?,?,?,?)";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
