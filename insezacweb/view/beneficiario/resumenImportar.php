@@ -63,7 +63,7 @@ window.history.forward();
 
 
           <div class="todo_body ">
-            <!--h5 class="red_bg"> <i class="fa fa-warning"></i>  Error en el registro (
+            <h5 class="red_bg"> <i class="fa fa-warning"></i>  Error en el registro (
               <small>1</small>
               )</h5>
               <ul class="group_sortable1">
@@ -73,7 +73,7 @@ window.history.forward();
                     <a class="font-xs" href="javascript:void(0);">More Details</a>]
                   </p>
                 </li>
-              </ul-->
+              </ul>
               <h5 class="orange_bg"> <i class="fa fa-warning"></i> Registros duplicados (
                 <small>3</small>
                 )</h5>

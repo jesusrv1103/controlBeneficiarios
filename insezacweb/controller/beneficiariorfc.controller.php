@@ -4,13 +4,13 @@ require_once 'model/beneficiariorfc.php';
 class BeneficiariorfcController{
   private $pdo;
   private $model;
-  private $model2; 
+  private $model2;
   private $session;
   public $error;
 
   public function __CONSTRUCT(){
     $this->model = new Beneficiariorfc();
-    $this->model2 = new Catalogos(); 
+    $this->model2 = new Catalogos();
   }
 
 //Metodo Guardar  si trae un id actualiza, no registra
@@ -50,7 +50,7 @@ class BeneficiariorfcController{
    $beneficiario->estado="Activo";
 
 
-   if($beneficiario->idBeneficiarioRFC > 0){ 
+   if($beneficiario->idBeneficiarioRFC > 0){
     $idRegistro=$this->model->ObtenerIdRegistro($beneficiario->idBeneficiarioRFC);
     $beneficiario->idRegistro=$idRegistro->idRegistro;
     $this->model->RegistraActualizacion($beneficiario);
@@ -63,7 +63,7 @@ class BeneficiariorfcController{
     $beneficiario->idRegistro=$this->model->RegistraDatosRegistro($beneficiario);
     $this->model->Registrar($beneficiario);
 
-    
+
     $mensaje="El beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha registrado correctamente";
   }
 
@@ -84,23 +84,23 @@ public function Inforegistro(){
   $infoRegistro=$this->model->ObtenerInfoRegistro($idBeneficiarioRFC);
   $infoActualizacion=$this->model->ListarActualizacion($infoRegistro->idRegistro);
 
-  echo   ' 
-  <div class="modal-body"> 
+  echo   '
+  <div class="modal-body">
     <div class="row">
       <div class="block-web">
         <div class="header">
           <div class="row" style="margin-bottom: 12px;">
             <div class="col-sm-12">
               <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Información general de registro</h2>
-            </div>    
+            </div>
           </div>
-        </div>        
+        </div>
         <div class="porlets-content" style="margin-bottom: -65px;">
           <table class="table table-striped">
             <tbody>
               <tr>
                 <td>
-                  <div class="col-md-12">   
+                  <div class="col-md-12">
                     <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Beneficiario</b></label>
                   </div>
                 </td>
@@ -127,7 +127,7 @@ public function Inforegistro(){
               </tr>
               <tr>
                 <td>
-                  <div class="col-md-12">   
+                  <div class="col-md-12">
                     <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de registro</b></label>
                   </div>
                 </td>
@@ -152,7 +152,7 @@ public function Inforegistro(){
                 echo '
                 <tr>
                   <td>
-                    <div class="col-md-12">   
+                    <div class="col-md-12">
                       <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de actualización</b></label>
                     </div>
                   </td>
@@ -168,7 +168,7 @@ public function Inforegistro(){
                     <label class="col-sm-5 lbl-detallet"><strong>Usuario:</strong></label>
                     <label class="col-sm-7">'.$r->usuario.'</label><br>
                   </div>
-                  '; 
+                  ';
                   if($i%2==0){
                     echo "<hr>";
                   }$i++;
@@ -178,8 +178,8 @@ public function Inforegistro(){
                 echo '
               </tbody>
             </table>
-          </div><!--/porlets-content--> 
-        </div><!--/block-web--> 
+          </div><!--/porlets-content-->
+        </div><!--/block-web-->
       </div>
     </div>
     <div class="modal-footer">
@@ -276,7 +276,7 @@ public function Inforegistro(){
   }
   public function Importar(){
     if (file_exists("./assets/files/beneficiariosrfc.xlsx")) {
-  //Agregamos la librería 
+  //Agregamos la librería
       require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
         //Variable con el nombre del archivo
       $nombreArchivo = './assets/files/beneficiariosrfc.xlsx';
@@ -289,17 +289,17 @@ public function Inforegistro(){
       $this->BeneficiariosRFC($objPHPExcel,$numRows);
       $mensaje="Se ha leído correctamente el archivo <strong>beneficiariosrfc.xlsx</strong>.<br><i class='fa fa-check'></i> Se han insertado correctamente los datos de beneficiarios.";
       $beneficiarios = true;
-      $catalogos=true;
+      $administracion=true;
       $tipoBen="RFC";
       $page="view/beneficiario/index.php";
       require_once 'view/index.php';
     }
-        //si por algo no cargo el archivo bak_ 
+        //si por algo no cargo el archivo bak_
     else {
       $error=true;
       $mensaje="El archivo <strong>beneficiariosrfc.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
       $beneficiarios = true;
-      $catalogos=true;
+      $administracion=true;
       $page="view/beneficiario/index.php";
       require_once 'view/index.php';
     }
@@ -354,12 +354,10 @@ public function Inforegistro(){
     $error=true;
     $mensaje="Error al insertar datos del archivo";
     $beneficiarios = true;
-    $catalogos=true;
+    $administracion=true;
     $page="view/beneficiario/index.php";
     require_once 'view/index.php';
   }
 }
 
 }
-
-
