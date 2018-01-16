@@ -201,27 +201,6 @@ class Apoyos
 			die($e->getMessage());
 		}
 	}
-	public function RegistraDatosRegistro($data){
-		try 
-		{
-			$sql = "INSERT INTO registroApoyo VALUES (?,?,?,?,?)";
-			$this->pdo->prepare($sql)
-			->execute(
-				array(
-					null,
-					$data->usuario,
-					$data->direccion,
-					$data->fechaAlta,
-					$data->estado
-				)
-			);
-			return $this->pdo->lastInsertId();
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
-	}
-
 	public function ObtenerIdRegistro($idApoyo)
 	{
 		try 
@@ -308,12 +287,18 @@ class Apoyos
 	}
 	public function ObtenerIdBen($curp)
 	{
-		try 
+		try
 		{
-			$sql= $this->pdo->prepare("SELECT idBeneficiario FROM beneficiarios WHERE curp=$curp");
-			$resultado=$sql->execute();
-			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
-		} catch (Exception $e) 
+			$stm = $this->pdo
+			->prepare("SELECT * FROM beneficiarios WHERE curp = ?");
+
+
+			$stm->execute(array($curp));
+			return $stm->fetch(PDO::FETCH_OBJ);
+
+
+		}
+		catch(Exception $e)
 		{
 			die($e->getMessage());
 		}
