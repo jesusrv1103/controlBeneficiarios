@@ -162,7 +162,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Subprograma&a=Importar" class="btn btn-primary">Importar datos</a>
+          <a href="?c=Subprograma&a=Importar" id="btnImportar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
     </div><!--/modal-content-->
@@ -286,5 +286,8 @@ infoSubprograma = function (idSubprograma){
   $.post("index.php?c=Subprograma&a=infoSubprograma", {idSubprograma: idSubprograma}, function(info) {
     $("#div-modal-content").html(info);
   });
+}
+ deshabilitar = function (){
+  $('#btnImportar').attr("disabled", true);
 }
 </script>

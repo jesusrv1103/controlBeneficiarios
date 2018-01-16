@@ -232,7 +232,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Beneficiario&a=Importar" class="btn btn-primary">Importar datos</a>
+          <a href="?c=Beneficiario&a=Importar" onclick="deshabilitar();" id="btnImportar"  class="btn btn-primary">Importar datos</a>
         </div>
       </div>
     </div><!--/modal-content-->
@@ -282,7 +282,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Beneficiariorfc&a=Importar" class="btn btn-primary">Importar datos</a>
+          <a href="?c=Beneficiariorfc&a=Importar" onclick="deshabilitar();" id="btnImportar2" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
 
@@ -444,4 +444,10 @@
  buscarBeneficiarioCurp = function (){
 
  }
+  deshabilitar = function (){
+  $('#btnImportar').attr("disabled", true);
+}
+ deshabilitar2 = function (){
+  $('#btnImportar2').attr("disabled", true);
+}
 </script>

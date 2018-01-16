@@ -134,7 +134,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Municipio&a=Importar" class="btn btn-primary">Importar datos</a>
+          <a href="?c=Municipio&a=Importar" id="btnImportar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
     </div><!--/modal-content-->
@@ -204,4 +204,7 @@
    
     $('#txtIdMunicipio').val(idMunicipio);
   };
+   deshabilitar = function (){
+  $('#btnImportar').attr("disabled", true);
+}
 </script>
