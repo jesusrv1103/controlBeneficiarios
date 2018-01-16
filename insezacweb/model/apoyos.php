@@ -145,7 +145,7 @@ class Apoyos
 					$data->idPeriodicidad, 
 					$data->idProgramaSocial,
 					$data->idRegistroApoyo,
-					NULL
+					null
 				)
 			);
 		} catch (Exception $e) 
@@ -168,9 +168,10 @@ class Apoyos
 	public function ImportarApoyo(Apoyos $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
+					null,
 					$data->idBeneficiario,
 					$data->idOrigen,  
 					$data->idSubprograma, 
@@ -268,7 +269,7 @@ class Apoyos
 		try 
 		{
 
-			$sql = "INSERT INTO registro VALUES (?,?,?,?,?)";
+			$sql = "INSERT INTO registroApoyo VALUES (?,?,?,?,?)";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(

@@ -111,7 +111,6 @@ public function Apoyos($objPHPExcel,$numRows){
     $apoyos->idProgramaSocial = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
     $apoyos->clavePresupuestal = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
     if (!$curp == null) {
-      echo 'Entro al metodo';
       $apoyos->usuario=$_SESSION['usuario'];
       $apoyos->fechaAlta=date("Y-m-d H:i:s");
       $apoyos->direccion=$_SESSION['direccion'];
