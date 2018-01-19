@@ -187,7 +187,7 @@ class BeneficiarioController{
       if($this->numActualizados>0)
         $mensaje = $mensaje . "<br><i class='fa fa-check'></i> Se han actualizado $this->numActualizados registros.";
       $beneficiarios = true;
-      $catalogos=true;
+      $administracion=true;
       $tipoBen="CURP";
       $page="view/beneficiario/index.php";
       require_once 'view/index.php';
@@ -278,7 +278,7 @@ class BeneficiarioController{
       $mensaje="Error al insertar datos del archivo";
       $page="view/beneficiario/index.php";
       $beneficiarios = true;
-      $catalogos=true;
+      $administracion=true;
       require_once 'view/index.php';
     }
   }

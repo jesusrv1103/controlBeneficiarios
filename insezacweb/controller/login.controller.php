@@ -19,11 +19,11 @@ class LoginController{
    $password=crc32($password);
    $password=crypt($password,"xtem");
    $password=sha1($password);
-    echo $password;
+  echo $password;
    $consulta=$this->model->verificar($log);
    if($consulta!=null){
     if($consulta->password == $password){
-      
+
       $this->login($usuario, $password, $consulta->tipoUsuario, $consulta->direccion);
       header ('Location: index.php?c=Inicio');
     }else{

@@ -48,7 +48,7 @@ public function Upload(){
 
 public function Importar(){
   if (file_exists("./assets/files/localidades.xlsx")) {
-          //Agregamos la librería 
+          //Agregamos la librería
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
           //Variable con el nombre del archivo
     $nombreArchivo = './assets/files/localidades.xlsx';
@@ -65,7 +65,7 @@ public function Importar(){
     $catalogos=true;
     require_once 'view/index.php';
   }
-        //si por algo no cargo el archivo bak_ 
+        //si por algo no cargo el archivo bak_
   else {
     $error=true;
     $mensaje="El archivo <strong>localidades.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
@@ -114,7 +114,8 @@ public function Guardar(){
   $localidad->municipio = $_REQUEST['municipio'];
   $localidad->localidad = $_REQUEST['localidad'];
   $localidad->ambito = $_REQUEST['ambito'];
-  if($verificaLocalidad!=null){
+  if($verificaLocalidad!=null && isset($_REQUEST['nuevoRegistro'])){
+
     $error=true;
     $localidad = true;
     $catalogos=true;
@@ -129,9 +130,9 @@ public function Guardar(){
     }else{
       $this->model->Registrar($localidad);
       $mensaje="Se ha registrado correctamente la localidad";
-    } 
+    }
   }
-  $localidad = true;
+  $localidades = true;
   $catalogos=true;
   $page="view/localidad/index.php";
   require_once 'view/index.php';

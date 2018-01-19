@@ -145,7 +145,7 @@ class Apoyos
 					$data->idPeriodicidad, 
 					$data->idProgramaSocial,
 					$data->idRegistroApoyo,
-					NULL
+					null
 				)
 			);
 		} catch (Exception $e) 
@@ -168,9 +168,10 @@ class Apoyos
 	public function ImportarApoyo(Apoyos $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
+					null,
 					$data->idBeneficiario,
 					$data->idOrigen,  
 					$data->idSubprograma, 
@@ -181,7 +182,7 @@ class Apoyos
 					$data->idPeriodicidad,
 					$data->idProgramaSocial,
 					$data->idRegistroApoyo,
-					NULL
+					$data->clavePresupuestal
 				)
 			);
 		} catch (Exception $e) 
@@ -268,7 +269,7 @@ class Apoyos
 		try 
 		{
 
-			$sql = "INSERT INTO registro VALUES (?,?,?,?,?)";
+			$sql = "INSERT INTO registroApoyo VALUES (?,?,?,?,?)";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
@@ -287,12 +288,18 @@ class Apoyos
 	}
 	public function ObtenerIdBen($curp)
 	{
-		try 
+		try
 		{
-			$sql= $this->pdo->prepare("SELECT idBeneficiario FROM beneficiarios WHERE curp=$curp");
-			$resultado=$sql->execute();
-			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
-		} catch (Exception $e) 
+			$stm = $this->pdo
+			->prepare("SELECT * FROM beneficiarios WHERE curp = ?");
+
+
+			$stm->execute(array($curp));
+			return $stm->fetch(PDO::FETCH_OBJ);
+
+
+		}
+		catch(Exception $e)
 		{
 			die($e->getMessage());
 		}

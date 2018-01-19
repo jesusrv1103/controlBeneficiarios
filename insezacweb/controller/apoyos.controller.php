@@ -108,16 +108,15 @@ public function Apoyos($objPHPExcel,$numRows){
     $apoyos->numerosApoyo = $objPHPExcel->getActiveSheet()->getCell('F'.$numRow)->getCalculatedValue();
     $apoyos->fechaApoyo = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
     $apoyos->idPeriodicidad = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
-    $apoyos->idProgramaSocial = null;
-    $apoyos->clavePresupuestal = null;
+    $apoyos->idProgramaSocial = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
+    $apoyos->clavePresupuestal = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
     if (!$curp == null) {
-      echo 'Entro al metodo';
       $apoyos->usuario=$_SESSION['usuario'];
       $apoyos->fechaAlta=date("Y-m-d H:i:s");
       $apoyos->direccion=$_SESSION['direccion'];
       $apoyos->estado="Activo";
       $consult = $this->model->ObtenerIdBen($curp);
-      echo $consult;
+      //echo $consult;
       $apoyos->idBeneficiario=$consult->idBeneficiario;
       //echo $apoyos->idBeneficiario;
        $apoyos->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyos);

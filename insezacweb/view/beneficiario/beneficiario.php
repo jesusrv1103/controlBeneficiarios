@@ -302,8 +302,11 @@
 													<div class="col-sm-6">
 														<select name="idAsentamientos" class="form-control select2" id="selectAsentamientos" style="width: 100%">
 															<?php if($beneficiario->idBeneficiario==null){  ?>
-															<option>
+															<option value="1">
 																Seleccione el asentamiento a la que pertenece el beneficiario
+															</option>
+															<option value="1">
+																Ninguno
 															</option>
 															<?php } if($beneficiario->idBeneficiario!=null){ ?>
 															<option value="<?php echo $beneficiario->idAsentamientos ?>">
