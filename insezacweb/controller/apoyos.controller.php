@@ -144,7 +144,7 @@ public function ListarSubprogramas(){
   $row_array['subprograma']  = $subprograma->subprograma;
   array_push($datos, $row_array);
   endforeach;
-  
+
   echo json_encode($datos, JSON_FORCE_OBJECT);
 }
 

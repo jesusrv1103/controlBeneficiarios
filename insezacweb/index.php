@@ -1,9 +1,7 @@
 <?php
-//error_reporting(ERROR_REPORTING_LEVEL);
 require_once 'model/database.php';
 session_start();
 if (!isset($_REQUEST['c']) && isset($_SESSION['seguridad'])){
-    //echo "<script type='text/javascript'> alert('No hay sesion'); </script>";
     header("Location: index.php?c=Inicio"); 
 }
 $controller = 'login';

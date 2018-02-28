@@ -12,58 +12,64 @@ if (!isset($_SESSION['seguridad'])){
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
-    <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/admin.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
-    <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
-    <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
-    <!--link href="assets/css/select2.css" rel="stylesheet"-->
-    <link href="assets/plugins/bootstrap-editable/bootstrap-editable.css" rel="stylesheet">
-    <link href="assets/plugins/dropzone/dropzone.css" rel="stylesheet">
-    <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
-    <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
-    <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
-    <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
-    <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/plugins/file-uploader/css/blueimp-gallery.min.css">
-    <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload.css">
-    <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload-ui.css">
-    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datepicker/css/datepicker.css" />
-    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-timepicker/compiled/timepicker.css" />
-    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css" />
-    <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.css">
+  <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/admin.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
+  <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
+  <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
+  <!--link href="assets/css/select2.css" rel="stylesheet"-->
+  <link href="assets/plugins/bootstrap-editable/bootstrap-editable.css" rel="stylesheet">
+  <link href="assets/plugins/dropzone/dropzone.css" rel="stylesheet">
+  <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
+  <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
+  <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
+  <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
+  <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/plugins/file-uploader/css/blueimp-gallery.min.css">
+  <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload.css">
+  <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload-ui.css">
+  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datepicker/css/datepicker.css" />
+  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-timepicker/compiled/timepicker.css" />
+  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css" />
+  <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.css">
 
-    <!--Estilos Para radio buton y switch -->
-    <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/checkbox/icheck.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/checkbox/minimal/blue.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/checkbox/minimal/green.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/checkbox/minimal/grey.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/checkbox/minimal/orange.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/checkbox/minimal/pink.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/checkbox/minimal/purple.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
+  <!--Estilos Para radio buton y switch -->
+  <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/checkbox/icheck.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/checkbox/minimal/blue.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/checkbox/minimal/green.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/checkbox/minimal/grey.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/checkbox/minimal/orange.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/checkbox/minimal/pink.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/checkbox/minimal/purple.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
 
-    <!--Wizard  -->
-    <link href="assets/plugins/wizard/css/smart_wizard.css" rel="stylesheet" type="text/css" />
-    <!-- Optional SmartWizard theme -->
-    <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
-    <!-- Optional SmartWizard theme -->
-    <link href="assets/plugins/wizard/css/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/wizard/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
+  <!--Wizard  -->
+  <link href="assets/plugins/wizard/css/smart_wizard.css" rel="stylesheet" type="text/css" />
+  <!-- Optional SmartWizard theme -->
+  <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
+  <!-- Optional SmartWizard theme -->
+  <link href="assets/plugins/wizard/css/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/wizard/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
 
-  </head>
-  <style type="text/css">
-  .disabled {
-    pointer-events:none; /*This makes it not clickable*/
-    opacity:0.6;         /*This grays it out to look disabled*/
-  }
-  .lblheader{
-    color:#2196F3;
-  }
+  <!--Estadisticas -->
+  <link href="assets/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <link href="assets/plugins/kalendar/kalendar.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/plugins/scroll/nanoscroller.css">
+  <link href="assets/plugins/morris/morris.css" rel="stylesheet" />
+
+</head>
+<style type="text/css">
+.disabled {
+  pointer-events:none; /*This makes it not clickable*/
+  opacity:0.6;         /*This grays it out to look disabled*/
+}
+.lblheader{
+  color:#2196F3;
+}
 </style>
 <body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE" onload="nobackbutton();">
   <div class="wrapper">
@@ -106,18 +112,22 @@ if (!isset($_SESSION['seguridad'])){
             <a href="?c=Inicio&a=Wizard"> <i class="fa fa-home"></i>Wizard</a>
           </li-->
           <?php if (isset($inicio)){ ?>
-            <li class="left_nav_active theme_border">
+          <li class="left_nav_active theme_border">
             <?php } else { ?>
-              <li class="theme_border">
+            <li class="theme_border">
               <?php } ?>
               <a href="?c=Inicio"> <i class="fa fa-home"></i> Inicio </a>
             </li>
+            <!-- ESTADÍSTICAS -->
+            <li class="<?php if(isset($estadisticas)){ ?>left_nav_active <?php } ?> theme_border"> <a href="?c=estadisticas"> <i class="glyphicon glyphicon-stats"></i> Estadisticas</a>
+            </li>
+            <!-- /ESTADÍSTICAS -->
             <?php if(isset($administracion)){ ?>
-              <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
-                <ul class="opened" style="display:block">
+            <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
+              <ul class="opened" style="display:block">
                 <?php  }else{ ?>
-                  <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
-                    <ul>
+                <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
+                  <ul>
                     <?php }  ?>
                     <li>
                       <a href="?c=Beneficiario"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
@@ -133,30 +143,30 @@ if (!isset($_SESSION['seguridad'])){
 
                     <?php if($_SESSION['tipoUsuario']==1){?>
 
-                      <li>
-                        <a href="?c=Direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                          <?php if (isset($direcciones)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
-                        </a>
-                      </li><br><br>
-                      <li>
-                        <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                          <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
-                        </a>
-                      </li><br><br>
-                      <li>
-                        <a href="?c=Usuario"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                          <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
-                        </a>
-                      </li><br><br>
+                    <li>
+                      <a href="?c=Direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                        <?php if (isset($direcciones)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
+                      </a>
+                    </li><br><br>
+                    <li>
+                      <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                        <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
+                      </a>
+                    </li><br><br>
+                    <li>
+                      <a href="?c=Usuario"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                        <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
+                      </a>
+                    </li><br><br>
                     <?php } ?>
                   </ul>
                 </li>
                 <?php if(isset($catalogos)){ ?> <!-- CATALOGOS -->
-                  <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
-                    <ul class="opened" style="display:block">
+                <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-list"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+                  <ul class="opened" style="display:block">
                     <?php  }else{ ?>
-                      <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
-                        <ul>
+                    <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-list"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+                      <ul>
                         <?php }  ?>
                         <li>
                           <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
@@ -196,58 +206,90 @@ if (!isset($_SESSION['seguridad'])){
                       </ul>
                     </li><!-- /CATALOGOS -->
 
-        
-                      </li>
-                    </div>
-                  </div>
-                </div>
-                <!--\\\\\\\left_nav end \\\\\\-->
-                <div class="contentpanel">
-                  <!--\\\\\\\ contentpanel start\\\\\\-->
 
-                  <?php include($page); ?>
-
+                  </li>
                 </div>
-                <!--\\\\\\\ content panel end \\\\\\-->
               </div>
-              <!--\\\\\\\ inner end\\\\\\-->
             </div>
-            <!--\\\\\\\ wrapper end\\\\\\-->
-            <script src="assets/js/jquery-2.1.0.js"></script>
-            <script src="assets/js/bootstrap.min.js"></script>
-            <script src="assets/js/common-script.js"></script>
-            <script src="assets/js/jquery.slimscroll.min.js"></script>
-            <script type="text/javascript"  src="assets/plugins/toggle-switch/toggles.min.js"></script>
-            <script src="assets/plugins/checkbox/zepto.js"></script>
-            <script src="assets/plugins/checkbox/icheck.js"></script>
-            <script src="assets/js/icheck-init.js"></script>
-            <script type="text/javascript" src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-            <script type="text/javascript" src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-            <script type="text/javascript" src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
-            <script type="text/javascript" src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
-            <script type="text/javascript" src="assets/js/form-components.js"></script>
-            <script type="text/javascript"  src="assets/plugins/input-mask/jquery.inputmask.min.js"></script>
-            <script type="text/javascript"  src="assets/plugins/input-mask/demo-mask.js"></script>
-            <script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
-            <script type="text/javascript"  src="assets/plugins/dropzone/dropzone.min.js"></script>
-            <script type="text/javascript" src="assets/plugins/ckeditor/ckeditor.js"></script>
-            <script src="assets/js/jPushMenu.js"></script>
-            <script src="assets/plugins/validation/parsley.min.js"></script>
-            <script src="assets/plugins/data-tables/jquery.dataTables.js"></script>
-            <script src="assets/plugins/data-tables/DT_bootstrap.js"></script>
-            <script src="assets/plugins/data-tables/dynamic_table_init.js"></script>
-            <script src="assets/plugins/edit-table/edit-table.js"></script>
-            <script src="assets/plugins/file-uploader/js/vendor/jquery.ui.widget.js"></script>
-            <script src="assets/plugins/file-uploader/js/jquery.iframe-transport.js"></script>
-            <script src="assets/plugins/file-uploader/js/jquery.fileupload.js"></script>
-            <script src="assets/plugins/validation/parsley.min.js"></script>
-            <script src="assets/plugins/select2/dist/js/select2.full.min.js"></script>
-            <!-- Include SmartWizard JavaScript source -->
-            <script type="text/javascript" src="assets/plugins/wizard/js/jquery.smartWizard.js"></script>
-            <!-- Include jQuery Validator plugin -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
-            <script>
+            <!--\\\\\\\left_nav end \\\\\\-->
+            <div class="contentpanel">
+              <!--\\\\\\\ contentpanel start\\\\\\-->
 
+              <?php include($page); ?>
+
+            </div>
+            <!--\\\\\\\ content panel end \\\\\\-->
+          </div>
+          <!--\\\\\\\ inner end\\\\\\-->
+        </div>
+        <!--\\\\\\\ wrapper end\\\\\\-->
+      </body>
+
+      <script src="assets/js/jquery-2.1.0.js"></script>
+      <script src="assets/js/bootstrap.min.js"></script>
+      <script src="assets/js/common-script.js"></script>
+      <script src="assets/js/jquery.slimscroll.min.js"></script>
+      <script type="text/javascript"  src="assets/plugins/toggle-switch/toggles.min.js"></script>
+      <script src="assets/plugins/checkbox/zepto.js"></script>
+      <script src="assets/plugins/checkbox/icheck.js"></script>
+      <script src="assets/js/icheck-init.js"></script>
+      <script type="text/javascript" src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+      <script type="text/javascript" src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+      <script type="text/javascript" src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+      <script type="text/javascript" src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+      <script type="text/javascript" src="assets/js/form-components.js"></script>
+      <script type="text/javascript"  src="assets/plugins/input-mask/jquery.inputmask.min.js"></script>
+      <script type="text/javascript"  src="assets/plugins/input-mask/demo-mask.js"></script>
+      <script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+      <script type="text/javascript"  src="assets/plugins/dropzone/dropzone.min.js"></script>
+      <script type="text/javascript" src="assets/plugins/ckeditor/ckeditor.js"></script>
+      <script src="assets/js/jPushMenu.js"></script>
+      <script src="assets/plugins/validation/parsley.min.js"></script>
+      <script src="assets/plugins/data-tables/jquery.dataTables.js"></script>
+      <script src="assets/plugins/data-tables/DT_bootstrap.js"></script>
+      <script src="assets/plugins/data-tables/dynamic_table_init.js"></script>
+      <script src="assets/plugins/edit-table/edit-table.js"></script>
+      <script src="assets/plugins/file-uploader/js/vendor/jquery.ui.widget.js"></script>
+      <script src="assets/plugins/file-uploader/js/jquery.iframe-transport.js"></script>
+      <script src="assets/plugins/file-uploader/js/jquery.fileupload.js"></script>
+      <script src="assets/plugins/validation/parsley.min.js"></script>
+      <script src="assets/plugins/select2/dist/js/select2.full.min.js"></script>
+      <!-- Include SmartWizard JavaScript source -->
+      <script type="text/javascript" src="assets/plugins/wizard/js/jquery.smartWizard.js"></script>
+      <!-- Include jQuery Validator plugin -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+
+
+      <script src="assets/js/jquery.sparkline.js"></script>
+      <script src="assets/js/sparkline-chart.js"></script>
+      <script src="assets/js/graph.js"></script>
+      <script src="assets/js/edit-graph.js"></script>
+      <script src="assets/plugins/kalendar/kalendar.js" type="text/javascript"></script>
+      <script src="assets/plugins/kalendar/edit-kalendar.js" type="text/javascript"></script>
+
+      <script src="assets/plugins/sparkline/jquery.sparkline.js" type="text/javascript"></script>
+      <script src="assets/plugins/sparkline/jquery.customSelect.min.js" ></script> 
+      <script src="assets/plugins/sparkline/sparkline-chart.js"></script> 
+      <script src="assets/plugins/sparkline/easy-pie-chart.js"></script>
+      <script src="assets/plugins/morris/morris.min.js" type="text/javascript"></script> 
+      <script src="assets/plugins/morris/raphael-min.js" type="text/javascript"></script>  
+      <script src="assets/plugins/morris/morris-script.js"></script> 
+
+
+
+
+
+      <script src="assets/plugins/demo-slider/demo-slider.js"></script>
+      <script src="assets/plugins/knob/jquery.knob.min.js"></script> 
+
+
+
+
+      <script src="js/jPushMenu.js"></script> 
+      <script src="js/side-chats.js"></script>
+      <script src="js/jquery.slimscroll.min.js"></script>
+      <script src="plugins/scroll/jquery.nanoscroller.js"></script>
+      <script>
             //****Subir archivos automaticos*****
 
             $(document).on('ready', function() {
@@ -267,7 +309,7 @@ if (!isset($_SESSION['seguridad'])){
                   $('#progress .progress-bar').css(
                     'width',
                     progress + '%'
-                  );
+                    );
                 }
               }).prop('disabled', !$.support.fileInput)
               .parent().addClass($.support.fileInput ? undefined : 'disabled');
@@ -290,7 +332,7 @@ if (!isset($_SESSION['seguridad'])){
                   $('#progress .progress-bar').css(
                     'width',
                     progress + '%'
-                  );
+                    );
                 }
               }).prop('disabled', !$.support.fileInput)
               .parent().addClass($.support.fileInput ? undefined : 'disabled');
@@ -431,57 +473,57 @@ if (!isset($_SESSION['seguridad'])){
           </script>
           <script>
 
-          function mayus(e) {
-            e.value = e.value.toUpperCase();
-          }
+            function mayus(e) {
+              e.value = e.value.toUpperCase();
+            }
 
-          Date.prototype.toString = function() {
-            var anyo = this.getFullYear();
-            var mes = this.getMonth()+1;
-            if( mes<=9 ) mes = "0"+mes;
-            var dia = this.getDate();
-            if( dia<=9 ) dia = "0"+dia;
-            return anyo+"-"+mes+"-"+dia;
-          }
+            Date.prototype.toString = function() {
+              var anyo = this.getFullYear();
+              var mes = this.getMonth()+1;
+              if( mes<=9 ) mes = "0"+mes;
+              var dia = this.getDate();
+              if( dia<=9 ) dia = "0"+dia;
+              return anyo+"-"+mes+"-"+dia;
+            }
 
-          function soloNumeros(e){
-            key = e.keyCode || e.which;
-            tecla = String.fromCharCode(key);
-            letras = " 1,2,3,4,5,6,7,8,9,0";
-            especiales = "8-37-39-46";
+            function soloNumeros(e){
+              key = e.keyCode || e.which;
+              tecla = String.fromCharCode(key);
+              letras = " 1,2,3,4,5,6,7,8,9,0";
+              especiales = "8-37-39-46";
 
-            tecla_especial = false
-            for(var i in especiales){
-              if(key == especiales[i]){
-                tecla_especial = true;
-                break;
+              tecla_especial = false
+              for(var i in especiales){
+                if(key == especiales[i]){
+                  tecla_especial = true;
+                  break;
+                }
+              }
+
+              if(letras.indexOf(tecla)==-1 && !tecla_especial){
+                return false;
               }
             }
+            function soloLetras(e){
+              key = e.keyCode || e.which;
+              tecla = String.fromCharCode(key).toLowerCase();
+              letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+              especiales = "8-37-39-46";
 
-            if(letras.indexOf(tecla)==-1 && !tecla_especial){
-              return false;
-            }
-          }
-          function soloLetras(e){
-            key = e.keyCode || e.which;
-            tecla = String.fromCharCode(key).toLowerCase();
-            letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-            especiales = "8-37-39-46";
+              tecla_especial = false
+              for(var i in especiales){
+                if(key == especiales[i]){
+                  tecla_especial = true;
+                  break;
+                }
+              }
 
-            tecla_especial = false
-            for(var i in especiales){
-              if(key == especiales[i]){
-                tecla_especial = true;
-                break;
+              if(letras.indexOf(tecla)==-1 && !tecla_especial){
+                return false;
               }
             }
-
-            if(letras.indexOf(tecla)==-1 && !tecla_especial){
-              return false;
-            }
-          }
-        </script>
-        <script>
+          </script>
+          <script>
         //*******SELEC2********
         $(document).on('ready', function()  {
 
@@ -523,7 +565,7 @@ if (!isset($_SESSION['seguridad'])){
       </script>
 
       <script type="text/javascript">
-      $(document).ready(function(){
+        $(document).ready(function(){
         // Toolbar extra buttons
         var btnFinish = $('<button></button>').text('Finish')
         .addClass('btn btn-info')
@@ -592,7 +634,8 @@ if (!isset($_SESSION['seguridad'])){
 
       });
 
-      </script>
+    </script>
+    
 
-    </body>
+
     </html>
