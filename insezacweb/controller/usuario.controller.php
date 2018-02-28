@@ -31,7 +31,7 @@ class UsuarioController{
 		$usuario= new Usuario();
 		$usuario->usuario = $_REQUEST['usuario'];
 		$usuario->idUsuario = $_REQUEST['idUsuario'];
-	  $usuario->direccion = $_REQUEST['direccion'];
+		$usuario->direccion = $_REQUEST['direccion'];
 		$usuario->tipoUsuario = $_REQUEST['tipoUsuario'];
 		if(isset($_REQUEST['password'])){
 			$password =$_REQUEST['password'];
@@ -41,6 +41,7 @@ class UsuarioController{
 			$password=sha1($password);
 			$usuario->password=$password;
 		}
+		echo $usuario->password;
 		if($usuario->idUsuario > 0 && isset($_REQUEST['password'])){
 			//Actualiza el usuario cambiando password
 			$this->model->Actualizar($usuario);

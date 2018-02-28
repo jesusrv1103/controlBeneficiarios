@@ -45,7 +45,7 @@
                   <div class="btn-group">
                     <a data-toggle="dropdown" class="btn btn-sm btn-success dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar<span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu" >
-                      <li><a href="?c=Apoyos&a=Crud">Apoyo CURP</a></li>
+                      <li><a href="?c=apoyos&a=Crud">Apoyo CURP</a></li>
                       <li><a  data-toggle="modal" data-target="#modalProceso" href="#modalProceso">Apoyo RFC</a></li>
                     </ul>
                   </div>
@@ -121,7 +121,7 @@
               <td>$<?php echo $r->importeApoyo; ?></td>
               <?php if($_SESSION['tipoUsuario']==1){?>
               <td class="center">
-                <a class="btn btn-primary btn-sm" role="button" href="?c=Apoyos&a=Crud&idApoyo=<?php echo $r->idApoyo ?>"><i class="fa fa-edit"></i></a>
+                <a class="btn btn-primary btn-sm" role="button" href="?c=apoyos&a=Crud&idApoyo=<?php echo $r->idApoyo ?>"><i class="fa fa-edit"></i></a>
               </td>
               <td class="center">
                <a class="btn btn-danger btn-sm" onclick="eliminarApoyo(<?php echo $r->idApoyo;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
@@ -189,7 +189,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Apoyos&a=Importar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
+          <a href="?c=apoyos&a=Importar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
     </div><!--/modal-content--> 
@@ -242,7 +242,7 @@
       </div>
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-          <form action="?c=Apoyos&a=Eliminar" enctype="multipart/form-data" method="post">
+          <form action="?c=apoyos&a=Eliminar" enctype="multipart/form-data" method="post">
             <input  type="hidden" name="idApoyo" id="txtIdApoyo">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -258,7 +258,7 @@
   };
   infoApoyo = function (idApoyo){
     var idApoyo=idApoyo;
-    $.post("index.php?c=Apoyos&a=InfoApoyo", {idApoyo: idApoyo}, function(info) {
+    $.post("index.php?c=apoyos&a=InfoApoyo", {idApoyo: idApoyo}, function(info) {
       $("#div-modal-content").html(info);
     }); 
   }

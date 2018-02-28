@@ -25,7 +25,7 @@
 								<b>
 									<?php if($_SESSION['tipoUsuario']==1){?>
 									<div class="btn-group" style="margin-right: 10px;"> 
-										<a class="btn btn-sm btn-success tooltips" href="?c=Asentamiento&a=Crud&nuevoRegistro=true" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nuevo asentamiento"> <i class="fa fa-plus"></i> Registrar </a>
+										<a class="btn btn-sm btn-success tooltips" href="?c=asentamiento&a=Crud&nuevoRegistro=true" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nuevo asentamiento"> <i class="fa fa-plus"></i> Registrar </a>
 										<a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar asentamientos" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
 										<a href="assets/files/asentamientos.xlsx" download="asentamientos.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar archivo asentamiento.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
 									</div>
@@ -80,7 +80,7 @@
 										<td><?php echo $r->tipoAsentamiento; ?></td>
 										<?php if($_SESSION['tipoUsuario']==1){?>
 										<td class="center">
-											<a href="index.php?c=Asentamiento&a=Crud&idAsentamientos=<?php echo $r->idAsentamientos ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
+											<a href="index.php?c=asentamiento&a=Crud&idAsentamientos=<?php echo $r->idAsentamientos ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
 										</td>
 										<td class="center">
 											<a onclick="eliminarAsentamiento(<?php echo $r->idAsentamientos;?>);" class="btn btn-danger btn-sm" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
@@ -143,7 +143,7 @@
 			<div class="modal-footer">
 				<div class="row col-md-5 col-md-offset-7">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-					<a href="?c=Asentamiento&a=Importar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
+					<a href="?c=asentamiento&a=Importar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
 				</div>
 			</div>
 		</div><!--/modal-content--> 
@@ -166,7 +166,7 @@
 			</div>
 			<div class="modal-footer" style="margin-top: -10px;">
 				<div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-					<form action="?c=Asentamiento&a=Eliminar" enctype="multipart/form-data" method="post">
+					<form action="?c=asentamiento&a=Eliminar" enctype="multipart/form-data" method="post">
 						<input hidden name="idAsentamientos" id="txtIdAsentamientos">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 						<button type="submit" class="btn btn-danger">Eliminar</button>

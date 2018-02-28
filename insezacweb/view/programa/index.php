@@ -5,7 +5,7 @@
   </div>
   <div class="pull-right">
     <ol class="breadcrumb">
-      <li><a href="?c=Inicio">Inicio</a></li>
+      <li><a href="?c=inicio">Inicio</a></li>
       <li class="active">Programas</a></li>
     </ol>
   </div>
@@ -131,7 +131,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Programa&a=Importar" id="btnImportar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
+          <a href="?c=programa&a=Importar" id="btnImportar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
     </div><!--/modal-content--> 
@@ -162,7 +162,7 @@
       </div>
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-          <form action="?c=Programa&a=Eliminar" enctype="multipart/form-data" method="post">
+          <form action="?c=programa&a=Eliminar" enctype="multipart/form-data" method="post">
             <input hidden name="idPrograma" id="txtIdPrograma">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -197,13 +197,13 @@
 }*/
 registrarPrograma = function (){
   var idPrograma=null;
-  $.post("index.php?c=Programa&a=Crud", {idPrograma: idPrograma}, function(modal) {
+  $.post("index.php?c=programa&a=Crud", {idPrograma: idPrograma}, function(modal) {
     $("#div-modal-content").html(modal);
   }); 
 }
 actualizarPrograma = function (idPrograma){
   var idPrograma=idPrograma;
-  $.post("index.php?c=Programa&a=Crud", {idPrograma: idPrograma}, function(modal) {
+  $.post("index.php?c=programa&a=Crud", {idPrograma: idPrograma}, function(modal) {
     $("#div-modal-content").html(modal);
   }); 
 }

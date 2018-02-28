@@ -5,7 +5,7 @@
 	</div>
 	<div class="pull-right">
 		<ol class="breadcrumb">
-			<li><a href="?c=Inicio">Inicio</a></li>
+			<li><a href="?c=inicio">Inicio</a></li>
 			<li class="active">Localidades</a></li>
 		</ol>
 	</div>
@@ -25,7 +25,7 @@
 								<b> 
 									<?php if($_SESSION['tipoUsuario']==1){?>
 									<div class="btn-group" style="margin-right: 10px;"> 
-										<a class="btn btn-sm btn-success tooltips" href="?c=Localidad&a=Crud&nuevoRegistro=true" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nueva localidad"> <i class="fa fa-plus"></i> Registrar</a>
+										<a class="btn btn-sm btn-success tooltips" href="?c=localidad&a=Crud&nuevoRegistro=true" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nueva localidad"> <i class="fa fa-plus"></i> Registrar</a>
 										<a class="btn btn-sm tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" data-original-title="Importar localidades" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
 										<a href="assets/files/localidades.xlsx" download="localidades.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar archivo localidades.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
 									</div>
@@ -78,7 +78,7 @@
 										<td><?php echo $r->ambito; ?></td>
 										<?php if($_SESSION['tipoUsuario']==1){?>
 										<td class="center">
-											<a href="index.php?c=Localidad&a=Crud&idLocalidad=<?php echo $r->idLocalidad ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
+											<a href="index.php?c=localidad&a=Crud&idLocalidad=<?php echo $r->idLocalidad ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
 										</td>
 										<td class="center">
 											<a onclick="eliminarLocalidad(<?php echo $r->idLocalidad;?>);" class="btn btn-danger btn-sm" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
@@ -140,7 +140,7 @@
 			<div class="modal-footer">
 				<div class="row col-md-5 col-md-offset-7">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-					<a href="?c=Localidad&a=Importar" id="btnImportar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
+					<a href="?c=localidad&a=Importar" id="btnImportar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
 				</div>
 			</div>
 		</div><!--/modal-content--> 
@@ -165,7 +165,7 @@
 		</div>
 		<div class="modal-footer" style="margin-top: -10px;">
 			<div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-				<form action="?c=Localidad&a=Eliminar" enctype="multipart/form-data" method="post">
+				<form action="?c=localidad&a=Eliminar" enctype="multipart/form-data" method="post">
 					<input hidden type="text" name="idLocalidad" id="txtIdLocalidad">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 					<button type="submit" class="btn btn-danger">Eliminar</button>

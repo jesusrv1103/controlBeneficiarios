@@ -113,10 +113,9 @@ public function Guardar(){
   $verificaLocalidad = $this->model->verificaLocalidad($localidad->idLocalidad);
   $localidad->municipio = $_REQUEST['municipio'];
   $localidad->localidad = $_REQUEST['localidad'];
-
   $localidad->ambito = $_REQUEST['ambito'];
-
   if($verificaLocalidad!=null && isset($_REQUEST['nuevoRegistro'])){
+
     $error=true;
     $localidad = true;
     $catalogos=true;

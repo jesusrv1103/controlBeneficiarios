@@ -5,7 +5,7 @@
  </div>
  <div class="pull-right">
    <ol class="breadcrumb">
-     <li><a href="?c=Inicio">Inicio</a></li>
+     <li><a href="?c=inicio">Inicio</a></li>
      <li class="active">Subprogramas</a></li>
    </ol>
  </div>
@@ -24,7 +24,7 @@
             <div class="col-sm-2" style="margin-top: -5px; margin-right: -100px;">
               <div class="minimal-blue single-row">
                 <div class="checkbox ">
-                  <a id="verTabla" href="?c=Subprograma">
+                  <a id="verTabla" href="?c=subprograma">
                     <label>Ocultar tabla</label>
                   </div>
                 </div>
@@ -35,7 +35,7 @@
                    <b>
                     <?php if($_SESSION['tipoUsuario']==1){?>
                     <div class="btn-group" style="margin-right: 10px;">
-                      <a href="?c=Subprograma&a=Crud" class="btn btn-sm btn-success tooltips" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nuevo subprograma"> <i class="fa fa-plus"></i> Registrar </a>
+                      <a href="?c=subprograma&a=Crud" class="btn btn-sm btn-success tooltips" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nuevo subprograma"> <i class="fa fa-plus"></i> Registrar </a>
                       <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar subprogramas" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
                       <a href="assets/files/subprogramas.xlsx" download="subprogramas.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar archivo subprogramas.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a>
                     </div>
@@ -88,11 +88,11 @@
                   <td> <?php echo $r->programa; ?></td>
                   <td><?php echo $r->techoPresupuestal; ?></td>
                   <td class="center">
-                    <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Subprograma&a=Beneficiarios&subprograma=<?php echo $r->subprograma; ?>&idSubprograma=<?php echo $r->idSubprograma ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver beneficiarios de subprograma"><i class="fa fa-eye"></i></a>
+                    <a class="btn btn-info btn-sm tooltips" role="button" href="?c=subprograma&a=Beneficiarios&subprograma=<?php echo $r->subprograma; ?>&idSubprograma=<?php echo $r->idSubprograma ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver beneficiarios de subprograma"><i class="fa fa-eye"></i></a>
                   </td>
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <td class="center">
-                    <a href="index.php?c=Subprograma&a=Crud&idSubprograma=<?php echo $r->idSubprograma ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
+                    <a href="index.php?c=subprograma&a=Crud&idSubprograma=<?php echo $r->idSubprograma ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
                   </td>
                   <td class="center">
                     <a onclick="eliminarSubprograma(<?php echo $r->idSubprograma;?>);" class="btn btn-danger btn-sm" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
@@ -162,7 +162,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Subprograma&a=Importar" id="btnImportar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
+          <a href="?c=subprograma&a=Importar" id="btnImportar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
     </div><!--/modal-content-->
@@ -185,7 +185,7 @@
       </div>
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-          <form action="?c=Subprograma&a=Eliminar" enctype="multipart/form-data" method="post">
+          <form action="?c=subprograma&a=Eliminar" enctype="multipart/form-data" method="post">
             <input  hidden name="idSubprograma" id="txtIdSubprograma">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -217,7 +217,7 @@
          <div class="col-sm-2" style="margin-top: -3px;">
           <div class="minimal-blue single-row">
             <div class="checkbox ">
-              <a id="verTabla" href="?c=Subprograma&a=VerTabla">
+              <a id="verTabla" href="?c=subprograma&a=VerTabla">
                 <label>Ver tabla </label>
               </a>
               </div>
@@ -228,7 +228,7 @@
               <b>
                 <?php if($_SESSION['tipoUsuario']==1){?>
                 <div class="btn-group" style="margin-right: 10px;">
-                  <a href="?c=Subprograma&a=Crud" class="btn btn-sm btn-success tooltips" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nuevo subprograma"> <i class="fa fa-plus"></i> Registrar </a>
+                  <a href="?c=subprograma&a=Crud" class="btn btn-sm btn-success tooltips" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nuevo subprograma"> <i class="fa fa-plus"></i> Registrar </a>
                   <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar subprogramas" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
                   <a href="assets/files/subprogramas.xlsx" download="subprogramas.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar archivo subprogramas.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a>
                 </div>
@@ -274,7 +274,7 @@
 }
 function consultaSubprogramas(){
  var busqueda=$("input#buscar").val();
- $.post("index.php?c=Subprograma&a=Consultas", {valorBusqueda: busqueda}, function(mensaje) {
+ $.post("index.php?c=subprograma&a=Consultas", {valorBusqueda: busqueda}, function(mensaje) {
   $("#ajax").html(mensaje);
 });
 }
@@ -283,7 +283,7 @@ eliminarSubprograma = function(idSubprograma){
 };
 infoSubprograma = function (idSubprograma){
   var idSubprograma=idSubprograma;
-  $.post("index.php?c=Subprograma&a=infoSubprograma", {idSubprograma: idSubprograma}, function(info) {
+  $.post("index.php?c=subprograma&a=infoSubprograma", {idSubprograma: idSubprograma}, function(info) {
     $("#div-modal-content").html(info);
   });
 }
