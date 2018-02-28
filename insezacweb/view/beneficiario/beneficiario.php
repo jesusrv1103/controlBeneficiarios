@@ -26,7 +26,6 @@
 		</ol>
 </div>
 </div>
-
 <div class="container clear_both padding_fix">
 	<div class="row">
 		<div class="col-md-12">

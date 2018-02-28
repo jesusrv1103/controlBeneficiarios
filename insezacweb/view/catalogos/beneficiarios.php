@@ -5,7 +5,7 @@
 	</div>
 	<div class="pull-right">
 		<ol class="breadcrumb">
-			<li><a href="?c=Inicio">Inicio</a></li>
+			<li><a href="?c=inicio">Inicio</a></li>
 			<li class="active">Catálogo de beneficiarios</a></li>
 		</ol>
 	</div>
@@ -342,7 +342,7 @@
 				<div class="row col-md-5 col-md-offset-7">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 					<input type="hidden" id="fileImport">
-					<a href="?c=Catalogos&a=Importar"  id="btnImportar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
+					<a href="?c=catalogos&a=Importar"  id="btnImportar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
 				</div>
 			</div>
 		</div><!--/modal-content--> 

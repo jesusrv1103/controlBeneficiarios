@@ -6,7 +6,7 @@
  <div class="pull-right">
    <ol class="breadcrumb">
      <li><a href="?c=Inicio">Inicio</a></li>
-     <li class="active"><a href="?c=Subprograma">Subprogramas</a></li>
+     <li class="active"><a href="?c=subprograma">Subprogramas</a></li>
      <li class="active">Beneficiarios</li>
    </ol>
  </div>

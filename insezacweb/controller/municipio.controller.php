@@ -5,7 +5,6 @@ class MunicipioController{
 
   private $model;
   public $error;
-
   //Constructor
   public function __CONSTRUCT(){
     $this->model = new Municipio();
@@ -17,7 +16,6 @@ class MunicipioController{
    $page="view/municipio/index.php"; //Vista principal donde se enlistan los municipios
    require_once 'view/index.php';
  } 
-
 public function Crud(){
  $municipio = new Municipio();
 
@@ -101,11 +99,6 @@ public function Eliminar(){
   require_once 'view/index.php';
   
 }
-
-
-
-
-
 public function Guardar(){
   $municipio= new Municipio();
   $municipio->idMunicipio = $_REQUEST['idMunicipio'];
@@ -113,23 +106,16 @@ public function Guardar(){
   $municipio->claveMunicipio = $_REQUEST['claveMunicipio'];
   $municipio->estado = "Activo";
 
-
   if($municipio->idMunicipio > 0){
-
     $this->model->Actualizar($municipio);
     $mensaje="Se han actualizado correctamente los datos de el Municipio";
   } else {
     $this->model->Registrar($municipio);
     $mensaje="Se ha registrado correctamente los datos de el Municipio";
   } 
-
-
   $municipios = true;
   $catalogos=true; 
   $page="view/municipio/index.php";
   require_once 'view/index.php';
 }
-
-
-
 }

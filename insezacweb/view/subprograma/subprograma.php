@@ -6,7 +6,7 @@
   <div class="pull-right">
     <ol class="breadcrumb">
       <li><a href="?c=Inicio">Inicio</a></li>
-      <li><a href="?c=Subprograma">Subprogramas</a></li>
+      <li><a href="?c=subprograma">Subprogramas</a></li>
       <li class="active"><?php echo $subprograma->idSubprograma != null ? 'Actualizar subprograma' : 'Registrar subprograma'; ?></li>
     </ol>
   </div>
@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="porlets-content">
-          <form action="?c=Subprograma&a=Guardar" class="form-horizontal row-border" method="POST">
+          <form action="?c=subprograma&a=Guardar" class="form-horizontal row-border" method="POST">
             <div class="form-group">
               <div class="col-sm-6">
                 <input type="hidden" name="idSubprograma" class="form-control" required value="<?php echo $subprograma->idSubprograma != null ? $subprograma->idSubprograma  : 0; ?>">
@@ -75,7 +75,7 @@
             <div class="form-group">
               <div class="col-sm-offset-7 col-sm-5">
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="?c=Subprograma" class="btn btn-default"> Cancelar</a>
+                <a href="?c=subprograma" class="btn btn-default"> Cancelar</a>
               </div>
             </div><!--/form-group--> 
           </form>

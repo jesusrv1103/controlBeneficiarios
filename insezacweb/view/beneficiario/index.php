@@ -37,8 +37,8 @@
                     <div class="btn-group">
                      <a data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-eye"></i>&nbsp;Ver<span class="caret"></span></a>
                      <ul role="menu" class="dropdown-menu">
-                      <li><a href="?c=Beneficiario">Beneficiarios con curp</a></li>
-                      <li><a href="?c=Beneficiario&a=RFC">Beneficiarios con RFC</a></li>
+                      <li><a href="?c=beneficiario">Beneficiarios con curp</a></li>
+                      <li><a href="?c=beneficiario&a=RFC">Beneficiarios con RFC</a></li>
                     </ul>
                   </div>
                   <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
@@ -50,6 +50,8 @@
                     </ul>
                   </div>
                   <div class="btn-group">
+                   
+
                     <button data-toggle="dropdown" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar<span class="caret"></span></button>
                     <ul role="menu" class="dropdown-menu">
                       <li><a data-toggle="modal" data-target="#modalImportar" href="#modalImportar">Con CURP</a></li>
@@ -107,11 +109,11 @@
                 <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
                 <td><?php echo $r->nombreMunicipio ?> </td>
                 <td class="center">
-                  <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+                  <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
                 </td>
                 <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                 <td class="center">
-                  <a class="btn btn-primary btn-sm" role="button" href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+                  <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
                 </td>
                  
                <?php } ?>
@@ -161,11 +163,11 @@
             <td><?php echo $r->localidad ?> </td>
 
             <td class="center">
-              <a class="btn btn-info btn-sm tooltips" role="button" href="?c=Beneficiariorfc&a=Detalles&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+              <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiariorfc&a=Detalles&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
             </td>
             <?php if($_SESSION['tipoUsuario']==1){?>
             <td class="center">
-              <a class="btn btn-primary btn-sm" role="button" href="?c=Beneficiariorfc&a=Crud&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC ?>"><i class="fa fa-edit"></i></a>
+              <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiariorfc&a=Crud&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC ?>"><i class="fa fa-edit"></i></a>
             </td>
             <td class="center">
              <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiarioRFC(<?php echo $r->idRegistro;?>);" href="#modalEliminarRFC"  data-toggle="modal" data-target="#modalEliminarRFC" role="button"><i class="fa fa-eraser"></i></a>
@@ -232,7 +234,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Beneficiario&a=Importar" onclick="deshabilitar();" id="btnImportar"  class="btn btn-primary">Importar datos</a>
+          <a href="?c=beneficiario&a=Importar" onclick="deshabilitar();" id="btnImportar"  class="btn btn-primary">Importar datos</a>
         </div>
       </div>
     </div><!--/modal-content-->
@@ -282,7 +284,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Beneficiariorfc&a=Importar" onclick="deshabilitar();" id="btnImportar2" class="btn btn-primary">Importar datos</a>
+          <a href="?c=beneficiariorfc&a=Importar" onclick="deshabilitar();" id="btnImportar2" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
 
@@ -316,7 +318,7 @@
       </div>
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-          <form action="?c=Beneficiario&a=Eliminar" enctype="multipart/form-data" method="post">
+          <form action="?c=beneficiario&a=Eliminar" enctype="multipart/form-data" method="post">
             <input hidden type="text" name="idRegistro" id="txtIdRegistro">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -345,7 +347,7 @@
       </div>
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-          <form action="?c=Beneficiariorfc&a=Eliminar" enctype="multipart/form-data" method="post">
+          <form action="?c=beneficiariorfc&a=Eliminar" enctype="multipart/form-data" method="post">
             <input  type="text" hidden name="idRegistro" id="txtIdRegistroRFC">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -360,7 +362,7 @@
 <div class="modal fade" id="modalBuscarCurp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default blue_border horizontal_border_1">
-     <form action="?c=Beneficiario&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate>
+     <form action="?c=beneficiario&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate>
       <div class="modal-body">
         <div class="row">
           <div class="block-web">
@@ -392,7 +394,7 @@
 <div class="modal fade" id="modalBuscarRFC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default blue_border horizontal_border_1">
-     <form action="?c=Beneficiariorfc&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate>
+     <form action="?c=beneficiariorfc&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate>
       <div class="modal-body">
         <div class="row">
           <div class="block-web">
@@ -437,7 +439,7 @@
  infoRegistroRFC = function (idBeneficiarioRFC){
   
    // var idBeneficiario=idBeneficiario;
-   $.post("index.php?c=Beneficiariorfc&a=Inforegistro", {idBeneficiarioRFC: idBeneficiarioRFC}, function(info) {
+   $.post("index.php?c=beneficiariorfc&a=Inforegistro", {idBeneficiarioRFC: idBeneficiarioRFC}, function(info) {
     $("#div-modal-content").html(info);
   });
  }

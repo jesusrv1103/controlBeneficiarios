@@ -1,7 +1,6 @@
 <?php
 class Municipio
 {
-	
 	private $pdo;
 	public $idMunicipio;
 	public $nombreMunicipio;

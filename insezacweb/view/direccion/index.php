@@ -5,7 +5,7 @@
   </div>
   <div class="pull-right">
     <ol class="breadcrumb">
-      <li><a href="?c=Inicio">Inicio</a></li>
+      <li><a href="?cnicio">Inicio</a></li>
       <li class="active">Dirección</a></li>
     </ol>
   </div>
@@ -25,12 +25,16 @@
                 <b>
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <div class="btn-group" style="margin-right: 10px;">
-                    <a class="btn btn-sm btn-success tooltips" href="?c=Direccion&a=Crud&nuevoRegistro=true" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nueva Direccion"> <i class="fa fa-plus"></i> Registrar </a>
+                    <a class="btn btn-sm btn-success tooltips" href="?c=direccion&a=Crud&nuevoRegistro=true" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nueva Direccion"> <i class="fa fa-plus"></i> Registrar </a>
                     <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar direcciones" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
                     <a href="assets/files/direcciones.xlsx" download="direcciones.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar archivo direcciones.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a>
                   </div>
                   <?php } ?>
                 </b>
+                
+                   <div class="row col-md-5 col-md-offset-7">
+          <a href="exportarExcel.php"  id="btnExportar"  class="btn btn-primary">Exportar datos</a>
+        </div>
               </div>
             </div>
           </div>
@@ -77,7 +81,7 @@
                 <td><?php echo $r->titular; ?></td>
                <?php if($_SESSION['tipoUsuario']==1){?>
                     <td class="center">
-                      <a href="index.php?c=Direccion&a=Crud&idDireccion=<?php echo $r->idDireccion ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
+                      <a href="index.php?c=direccion&a=Crud&idDireccion=<?php echo $r->idDireccion ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
                     </td>
                     <td class="center">
                       <a onclick="eliminarDireccion(<?php echo $r->idDireccion;?>);" class="btn btn-danger btn-sm" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
@@ -139,7 +143,7 @@
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=Direccion&a=Importar" onclick="deshabilitar();" id="btnImportar" class="btn btn-primary">Importar datos</a>
+          <a href="?c=direccion&a=Importar" onclick="deshabilitar();" id="btnImportar" class="btn btn-primary">Importar datos</a>
         </div>
       </div>
     </div><!--/modal-content-->
@@ -168,7 +172,7 @@
       </div>
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-          <form action="?c=Direccion&a=Eliminar" enctype="multipart/form-data" method="post">
+          <form action="?c=direccion&a=Eliminar" enctype="multipart/form-data" method="post">
             <input  type="hidden" name="idDireccion" id="txtIdDireccion">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
