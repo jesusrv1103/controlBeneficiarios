@@ -356,13 +356,30 @@ public function Apoyos(){
   require_once 'view/index.php';
 }
 
-public function ImportarApoyos(){
-  if (file_exists("./assets/files/catalogo_apoyos.xlsx")) {
+ public function Upload(){
+    if(!isset($_FILES['file']['name'])){
+      header('Location: ./?c=catalogos&a=Apoyos');
+    }
+    $archivo = $_FILES['file']['name'];
+    $tipo = $_FILES['file']['type'];
+    $destino = "./assets/files/".$archivo;
+    if(copy($_FILES['file']['tmp_name'], $destino)){
+      //echo "Archivo Cargado Con Éxito" . "<br><br>";
+      $this->ImportarApoyos($archivo);
+      //mandar llamar todas las funciones a importar
+    }
+    else{
+      $this->Apoyos();
+    }
+  }
+
+public function ImportarApoyos($archivo){
+  if (file_exists("./assets/files/".$archivo)) {
 
           //Agregamos la librería 
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
     //Variable con el nombre del archivo
-    $nombreArchivo = './assets/files/catalogo_apoyos.xlsx';
+    $nombreArchivo = './assets/files/'.$archivo;
     // Cargo la hoja de cálculo
     $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
     //Asigno la hoja de calculo activa
