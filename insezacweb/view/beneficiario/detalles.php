@@ -117,6 +117,22 @@
              </div>
            </td>
          </tr>
+          <tr>
+            <td>
+             <div class="col-md-12">
+               <label class="col-sm-6 lbldetalle">Fecha Nacimiento:</label>
+               <label class="col-sm-6 control-label"><?php echo $ben->fechaNacimiento; ?></label>
+             </div>
+           </td>
+         </tr>
+         <tr>
+            <td>
+             <div class="col-md-12">
+               <label class="col-sm-6 lbldetalle">Telefono:</label>
+               <label class="col-sm-6 control-label"><?php echo $ben->telefono; ?></label>
+             </div>
+           </td>
+         </tr>
          <tr>
           <td>
             <div class="col-md-12">
