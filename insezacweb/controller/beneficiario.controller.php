@@ -11,6 +11,7 @@ class BeneficiarioController{
   private $session;
   public $error;
   public $tipoBen;
+  private $arrayError;
   private $numRegistros=0;
   private $numActualizados=0;
 
@@ -29,6 +30,7 @@ class BeneficiarioController{
     $page="view/beneficiario/index.php";
     require_once 'view/index.php';
   }
+
 
   public function RFC(){
     $tipoBen="RFC";
@@ -159,13 +161,22 @@ class BeneficiarioController{
     }
   }
 
-  public function CrudRFC(){
-    $beneficiario = new Beneficiario();
 
-    $administracion=true;
-    $beneficiarios=true;
-    $page="view/beneficiario/beneficiarioRFC.php";
-    require_once 'view/index.php';
+  public function Upload(){
+    if(!isset($_FILES['file']['name'])){
+      header('Location: ./?c=beneficiario');
+    }
+    $archivo = $_FILES['file']['name'];
+    $tipo = $_FILES['file']['type'];
+    $destino = "./assets/files/".$archivo;
+    if(copy($_FILES['file']['tmp_name'], $destino)){
+      //echo "Archivo Cargado Con Éxito" . "<br><br>";
+      $this->Importar();
+      //mandar llamar todas las funciones a importar
+    }
+    else{
+      $this->Index();
+    }
   }
 
   public function Importar(){
@@ -180,7 +191,7 @@ class BeneficiarioController{
       $objPHPExcel->setActiveSheetIndex(0);
       //Obtengo el numero de filas del archivo
       $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-      $this->Beneficiarios($objPHPExcel,$numRows);
+      $this->LeerArchivo($objPHPExcel,$numRows);
       $mensaje="Se ha leído correctamente el archivo <strong>beneficiarios.xlsx</strong>.";
       if($this->numRegistros>0)
         $mensaje = $mensaje . "<br><i class='fa fa-check'></i> Se han registrado correctamente $this->numRegistros beneficiarios.";
@@ -189,7 +200,8 @@ class BeneficiarioController{
       $beneficiarios = true;
       $administracion=true;
       $tipoBen="CURP";
-      $page="view/beneficiario/index.php";
+      //$page="view/beneficiario/index.php";
+      $page="view/beneficiario/resumenImportar.php";
       require_once 'view/index.php';
     }
     //si por algo no cargo el archivo bak_
@@ -203,18 +215,72 @@ class BeneficiarioController{
     }
   }
 
-  public function Beneficiarios($objPHPExcel,$numRows){
+  public function LeerArchivo($objPHPExcel,$numRows){
     try{
+      unset($_SESSION['numRegErroneos']);
       $numRow=2;
-      do {
+      $arrayError=array();
+      $numRegErroneos=0;
+      do {  
 
-        //echo "Entra";
+        $numError=0;
         $ben = new Beneficiario;
+
+        //----------VALIDANDO LA CURP--------------------
+
         $ben->curp = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
+
+        if(!$this->validate_curp($ben->curp)){
+          $row_array['Curp']=$ben->curp;
+          $numError++;
+        }else{
+          $row_array['Curp']='0';
+        }
+
+       //------------VALIDANDO PRIMER APELLIDO--------------
+
         $ben->primerApellido = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
+
+        if($ben->primerApellido==""){
+          $row_array['Primer apellido']="Campo vacío";
+          $numError++;
+        }else{
+          $row_array['Primer apellido']='0';
+        }
+
+
+        //------------SEGUNDO APELLIDO NO VALIDADO ---------------
+
         $ben->segundoApellido = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
+
+        //---------------- VALIDANDO NOMBRE ------------------
+
         $ben->nombres = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
+
+        if($ben->nombres==""){
+          $row_array['Nombres']="Campo vacío";
+          $numError++;
+        }else{
+          $row_array['Nombres']='0';
+        }
+
+        //-------------------- VALIDANDO ID IDENTIFICACION ---------------
+
         $ben->idIdentificacion = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
+
+        if(!is_numeric($ben->idIdentificacion)){
+          $row_array['Id de identificacion']=$ben->idIdentificacion;
+          $numError++;
+        }else{
+          if($ben->idIdentificacion>7 || $ben->idIdentificacion<1){
+            $row_array['Id de identificacion']=$ben->idIdentificacion;
+            $numError++;
+          }else{
+            $row_array['Id de identificacion']='0';
+          }
+        }
+
+
         $ben->idTipoVialidad = $objPHPExcel->getActiveSheet()->getCell('F'.$numRow)->getCalculatedValue();
         $ben->nombreVialidad = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
         $ben->noExterior = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
@@ -253,9 +319,16 @@ class BeneficiarioController{
         $ben->fechaAlta=date("Y-m-d H:i:s");
         $ben->direccion=$_SESSION['direccion'];
         $ben->estado="Activo";
-        if (!$ben->curp == null) {
+
+        if (!$ben->curp == null){
+          if($numError>0){
+            $numRegErroneos+=1;
+            $row_array['fila']=$numRow;
+            $row_array['numeroErrores']=$numError;
+            array_push($arrayError, $row_array); 
+          }
           $verificaBen=$this->model->VerificaBeneficiario($ben->curp);
-          if($verificaBen==null){
+           if($verificaBen==null){
             //Datos de registro
             $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
             $ben->idMunicipio=$consult->idMunicipio;
@@ -271,18 +344,73 @@ class BeneficiarioController{
             $this->numActualizados=$this->numActualizados+1;
           }
         }
+
+
+
         $numRow+=1;
       } while(!$ben->curp == null);
-    }catch (Exception $e) {
-      $error=true;
-      $mensaje="Error al insertar datos del archivo";
-      $page="view/beneficiario/index.php";
-      $beneficiarios = true;
-      $administracion=true;
-      require_once 'view/index.php';
-    }
+
+        $_SESSION['numRegErroneos']=$numRegErroneos; 
+       
+      if($numRegErroneos>0){
+
+       $this->arrayError=$arrayError;
+
+     }
+     //echo  '<br>'.json_encode($arrayError, JSON_FORCE_OBJECT);
+  }catch (Exception $e) {
+    $error=true;
+    $mensaje="Error al insertar datos del archivo";
+    $page="view/beneficiario/index.php";
+    $beneficiarios = true;
+    $administracion=true;
+    require_once 'view/index.php';
   }
-  public function Eliminar(){
+}
+
+
+function validate_curp($valor) {     
+ if(strlen($valor)==18){         
+  $letras     = substr($valor, 0, 4);
+  $numeros    = substr($valor, 4, 6);         
+  $sexo       = substr($valor, 10, 1);
+  $mxState    = substr($valor, 11, 2); 
+  $letras2    = substr($valor, 13, 3); 
+  $homoclave  = substr($valor, 16, 2);
+  if(ctype_alpha($letras) && ctype_alpha($letras2) && ctype_digit($numeros) && ctype_digit($homoclave) && $this->is_mx_state($mxState) && $this->is_sexo_curp($sexo)){ 
+    return true; 
+  }         
+  return false;
+}else{
+ return false; 
+} 
+}
+
+
+function is_mx_state($state){     
+  $mxStates = [         
+    'AS','BS','CL','CS','DF','GT',         
+    'HG','MC','MS','NL','PL','QR',         
+    'SL','TC','TL','YN','NE','BC',         
+    'CC','CM','CH','DG','GR','JC',         
+    'MN','NT','OC','QT','SP','SR',         
+    'TS','VZ','ZS'    
+  ];     
+  if(in_array(strtoupper($state),$mxStates)){         
+    return true;     
+  }     
+  return false; 
+}
+
+function is_sexo_curp($sexo){     
+  $sexoCurp = ['H','M'];     
+  if(in_array(strtoupper($sexo),$sexoCurp)){         
+   return true;     
+ }     
+ return false; 
+}
+
+public function Eliminar(){
     $administracion=true; //variable cargada para activar la opcion administracion en el menu
     $beneficiarios=true; //variable cargada para activar la opcion programas en el menu
     $beneficiario= new Beneficiario();
