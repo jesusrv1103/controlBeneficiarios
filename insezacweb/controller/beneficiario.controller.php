@@ -31,6 +31,7 @@ class BeneficiarioController{
     require_once 'view/index.php';
   }
 
+
   public function RFC(){
     $tipoBen="RFC";
     $administracion = true;
@@ -160,13 +161,22 @@ class BeneficiarioController{
     }
   }
 
-  public function CrudRFC(){
-    $beneficiario = new Beneficiario();
 
-    $administracion=true;
-    $beneficiarios=true;
-    $page="view/beneficiario/beneficiarioRFC.php";
-    require_once 'view/index.php';
+  public function Upload(){
+    if(!isset($_FILES['file']['name'])){
+      header('Location: ./?c=beneficiario');
+    }
+    $archivo = $_FILES['file']['name'];
+    $tipo = $_FILES['file']['type'];
+    $destino = "./assets/files/".$archivo;
+    if(copy($_FILES['file']['tmp_name'], $destino)){
+      //echo "Archivo Cargado Con Éxito" . "<br><br>";
+      $this->Importar();
+      //mandar llamar todas las funciones a importar
+    }
+    else{
+      $this->Index();
+    }
   }
 
   public function Importar(){
@@ -317,7 +327,26 @@ class BeneficiarioController{
             $row_array['numeroErrores']=$numError;
             array_push($arrayError, $row_array); 
           }
+          $verificaBen=$this->model->VerificaBeneficiario($ben->curp);
+           if($verificaBen==null){
+            //Datos de registro
+            $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
+            $ben->idMunicipio=$consult->idMunicipio;
+            $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
+            $this->model->ImportarBeneficiario($ben);
+            $this->numRegistros=$this->numRegistros+1;
+          }else{
+            $obtenerIdBeneficiario=$this->model->ObtenerIdBeneficiario($ben->curp);
+            $idRegistro=$this->model->ObtenerIdRegistro($obtenerIdBeneficiario->idBeneficiario);
+            $ben->idRegistro=$idRegistro->idRegistro;
+            $this->model->RegistraActualizacion($ben);
+            $this->model->Actualizar($ben);
+            $this->numActualizados=$this->numActualizados+1;
+          }
         }
+
+
+
         $numRow+=1;
       } while(!$ben->curp == null);
 

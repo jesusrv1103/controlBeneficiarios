@@ -1,6 +1,6 @@
 <?php
 require_once 'model/programasocial.php';
-class ProgramaSocialController{
+class ProgramasocialController{
 	private $model;
 	public $error;
 	public function _CONSTRUCT(){

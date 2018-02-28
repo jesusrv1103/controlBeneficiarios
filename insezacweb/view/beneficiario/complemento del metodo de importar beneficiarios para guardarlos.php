@@ -13,5 +13,5 @@
             $ben->idRegistro=$idRegistro->idRegistro;
             $this->model->RegistraActualizacion($ben);
             $this->model->Actualizar($ben);
-            $this->numActualizados=$this->numActualizados+1;*/
-          //}
+            $this->numActualizados=$this->numActualizados+1;
+          }

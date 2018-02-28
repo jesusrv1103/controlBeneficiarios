@@ -106,7 +106,7 @@
 
           </div><!--/row-->
 
-          <h5 class="orange_bg"> <i class="fa fa-warning"></i> Registros duplicados (
+          <!--h5 class="orange_bg"> <i class="fa fa-warning"></i> Registros duplicados (
             <small>3</small>
           )</h5>
           <ul class="group_sortable1">

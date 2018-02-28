@@ -70,6 +70,13 @@ if (!isset($_SESSION['seguridad'])){
 .lblheader{
   color:#2196F3;
 }
+#input-sm {
+  height: 30px;
+  padding: 2px 5px;
+  font-size: 12px;
+  line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
+  border-radius: 3px;
+}
 </style>
 <body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE" onload="nobackbutton();">
   <div class="wrapper">
@@ -258,40 +265,56 @@ if (!isset($_SESSION['seguridad'])){
       <script type="text/javascript" src="assets/plugins/wizard/js/jquery.smartWizard.js"></script>
       <!-- Include jQuery Validator plugin -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
-
-
       <script src="assets/js/jquery.sparkline.js"></script>
       <script src="assets/js/sparkline-chart.js"></script>
       <script src="assets/js/graph.js"></script>
       <script src="assets/js/edit-graph.js"></script>
       <script src="assets/plugins/kalendar/kalendar.js" type="text/javascript"></script>
       <script src="assets/plugins/kalendar/edit-kalendar.js" type="text/javascript"></script>
-
       <script src="assets/plugins/sparkline/jquery.sparkline.js" type="text/javascript"></script>
       <script src="assets/plugins/sparkline/jquery.customSelect.min.js" ></script> 
       <script src="assets/plugins/sparkline/sparkline-chart.js"></script> 
       <script src="assets/plugins/sparkline/easy-pie-chart.js"></script>
       <script src="assets/plugins/morris/morris.min.js" type="text/javascript"></script> 
       <script src="assets/plugins/morris/raphael-min.js" type="text/javascript"></script>  
-      <script src="assets/plugins/morris/morris-script.js"></script> 
-
-
-
-
-
-      <script src="assets/plugins/demo-slider/demo-slider.js"></script>
+      <!--script src="assets/plugins/morris/morris-script.js"></script--> 
+      <!--script src="assets/plugins/demo-slider/demo-slider.js"></script-->
       <script src="assets/plugins/knob/jquery.knob.min.js"></script> 
-
-
-
-
       <script src="js/jPushMenu.js"></script> 
       <script src="js/side-chats.js"></script>
       <script src="js/jquery.slimscroll.min.js"></script>
       <script src="plugins/scroll/jquery.nanoscroller.js"></script>
-      <script>
-            //****Subir archivos automaticos*****
+      <script type="text/javascript">
+        //---------SCRIPT PARA CARGAR INPUT TYPE FILE---------------
+        $(function() {
+        // We can attach the `fileselect` event to all file inputs on the page
+        $(document).on('change', ':file', function() {
+          var input = $(this),
+          numFiles = input.get(0).files ? input.get(0).files.length : 1,
+          label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+          input.trigger('fileselect', [numFiles, label]);
+        });
 
+          // We can watch for our custom `fileselect` event like this
+          $(document).ready( function() {
+            $(':file').on('fileselect', function(event, numFiles, label) {
+
+              var input = $(this).parents('.input-group').find(':text'),
+              log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+              if( input.length ) {
+                input.val(log);
+              } else {
+                if( log ) alert(log);
+              }
+
+            });
+          });
+        });
+      </script>
+      <script>
+ //****Subir archivos automaticos*****
+/*
             $(document).on('ready', function() {
               'use strict';
               // Change this to the location of your server-side upload handler:
@@ -431,7 +454,10 @@ if (!isset($_SESSION['seguridad'])){
                 dataType: 'json'
               })
 
-            });
+            }); */
+          </script>
+          <script type="text/javascript">
+            //-----------SCRIPT BOTONES PARA CERRAR VENTANITAS------------------
 
             $('.minimize').click(function(e){
               var h = $(this).parents(".header");
@@ -468,11 +494,10 @@ if (!isset($_SESSION['seguridad'])){
               });
               e.preventDefault();
             });
-
-
-          </script>
-          <script>
-
+          //-----------TERMINA SCRIPT BOTONES PARA CERRAR VENTANITAS------------------
+        </script>
+        <script>
+            //------------------SCRIPT VALIDADORES--------------------
             function mayus(e) {
               e.value = e.value.toUpperCase();
             }
@@ -522,10 +547,11 @@ if (!isset($_SESSION['seguridad'])){
                 return false;
               }
             }
+            //--------------------TERMINA SCRIPT VALIDADORES---------------
           </script>
           <script>
-        //*******SELEC2********
-        $(document).on('ready', function()  {
+         //----------------------COMIENZA SCRIPT SELECT2------------------
+         $(document).on('ready', function()  {
 
           //Initialize Select2 Elements
           $('.select2').select2()
@@ -562,6 +588,7 @@ if (!isset($_SESSION['seguridad'])){
             showInputs: false
           })
         })
+        //------------------TERMINA SCRIPT SELECT2-----------------
       </script>
 
       <script type="text/javascript">
