@@ -169,7 +169,7 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="?c=beneficiario&a=UploadApoyos" method="post" enctype="multipart/form-data">
+			<form action="?c=catalogos&a=UploadApoyos" method="post" enctype="multipart/form-data">
 				<div class="modal-body">
 					<div class="row">
 						<div class="block-web">
