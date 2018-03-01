@@ -31,10 +31,7 @@
                   </div>
                   <?php } ?>
                 </b>
-                
-                   <div class="row col-md-5 col-md-offset-7">
-          <a href="exportarExcel.php"  id="btnExportar"  class="btn btn-primary">Exportar datos</a>
-        </div>
+ 
               </div>
             </div>
           </div>

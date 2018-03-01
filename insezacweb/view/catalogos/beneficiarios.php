@@ -308,43 +308,37 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="modal-body"> 
-				<div class="row">
-					<div class="block-web">
-						<div class="header">
-							<h3 class="content-header theme_color">&nbsp;Importar catálogo</h3>
-						</div>
-						<div class="porlets-content" style="margin-bottom: -65px;">
-							<p>Importa tu archivo excel con los datos de los catalogos de beneficiarios en caso de que haya algun cambio, si no tienes el archivo puedes descargarlo y agregar o eliminar los datos necesarios.</p>
-							<p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">catalogos_beneficiarios.xlsx</strong> para poder ser leído correctamente</p>	
-							<br>
-							<!-- The fileinput-button span is used to style the file input field as button -->
-							<span class="btn btn-success fileinput-button">
-								<i class="glyphicon glyphicon-plus"></i>
-								<span>Seleccionar archivo</span>
-								<!-- The file input field used as target for the file upload widget -->
-								<input id="fileupload" class="catalogos" type="file" name="files[]" multiple onchange="getFilename(this);">
-
-							</span>
-							<br>
-							<br>
-							<!-- The global progress bar -->
-							<div id="progress" class="progress">
-								<div class="progress-bar progress-bar-success"></div>
+			<form action="?c=catalogos&a=UploadBeneficiarios" method="post" enctype="multipart/form-data">
+				<div class="modal-body">
+					<div class="row">
+						<div class="block-web">
+							<div class="header">
+								<h3 class="content-header theme_color">&nbsp;Importar catálogos de beneficiarios</h3>
 							</div>
-							<!-- The container for the uploaded files -->
-							<div id="files" class="files"></div>
-						</div><!--/porlets-content--> 
-					</div><!--/block-web--> 
+							<div class="porlets-content" style="margin-bottom: -65px;">
+								<p>Selecciona tu archivo excel con los catáogos de beneficiarios para registrarlos en el sistema.</p>
+								<p><strong>Nota: </strong>El archivo debe conener la extención <strong class="theme_color">xlsx</strong> para poder ser leído correctamente.</p>
+								<br>
+								<div class="input-group">
+									<label class="input-group-btn">
+										<span class="btn btn-sm btn-success">
+											<i class="glyphicon glyphicon-plus"></i>
+											Seleccionar archivo<input  type="file" style="display: none;" id="inputArchivo" name="file" required>
+										</span>
+									</label>
+									<input type="text" class="form-control" id="input-sm" readonly>
+								</div>
+							</div><!--/porlets-content-->
+						</div><!--/block-web-->
+					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<div class="row col-md-5 col-md-offset-7">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-					<input type="hidden" id="fileImport">
-					<a href="?c=catalogos&a=Importar"  id="btnImportar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
+				<div class="modal-footer">
+					<div class="row col-md-5 col-md-offset-7">
+						<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+						<button type="submit" id="btnImportar" class="btn btn-sm btn-primary">Importar datos</button>
+					</div>
 				</div>
-			</div>
+			</form>
 		</div><!--/modal-content--> 
 	</div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
