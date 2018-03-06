@@ -18,26 +18,24 @@ class CatalogosController{
   require_once 'view/index.php';
 }
 
-public function Upload(){
-  $archivo = $_FILES['file']['name'];
-  $tipo = $_FILES['file']['type'];
-  $destino = "./assets/files/catalogo_beneficiarios.xlsx";
-  if(copy($_FILES['file']['tmp_name'], $destino)){
+ public function UploadBeneficiarios(){
+    if(!isset($_FILES['file']['name'])){
+      header('Location: ./?c=catalogos&a=Apoyos');
+    }
+    $archivo = $_FILES['file']['name'];
+    $tipo = $_FILES['file']['type'];
+    $destino = "./assets/files/".$archivo;
+    if(copy($_FILES['file']['tmp_name'], $destino)){
       //echo "Archivo Cargado Con Éxito" . "<br><br>";
-    $this->Importar();
+      $this->ImportarBeneficiarios($archivo);
       //mandar llamar todas las funciones a importar
+    }
+    else{
+      $this->Beneficiarios();
+    }
   }
-  else{
-   $error=true;
-   $mensaje="Error al importar los datos de identificacion oficial";
-   $page="view/catalogos/beneficiarios.php";
-   $beneficiarios2 = true;
-   $catalogos=true;
-   require_once 'view/index.php';
- }
-}
 
-public function Importar(){
+public function ImportarBeneficiarios(){
   if (file_exists("./assets/files/catalogo_beneficiarios.xlsx")) {
 
           //Agregamos la librería 
@@ -356,7 +354,7 @@ public function Apoyos(){
   require_once 'view/index.php';
 }
 
- public function Upload(){
+ public function UploadApoyos(){
     if(!isset($_FILES['file']['name'])){
       header('Location: ./?c=catalogos&a=Apoyos');
     }

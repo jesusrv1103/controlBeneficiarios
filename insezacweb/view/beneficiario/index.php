@@ -212,7 +212,7 @@
             </div>
             <div class="porlets-content" style="margin-bottom: -65px;">
               <p>Selecciona tu archivo excel con los datos de los beneficiarios para registrarlos.</p>
-              <p><strong>Nota: </strong>El archivo debe conener la extención <strong class="theme_color">xmls</strong> para poder ser leído correctamente.</p>
+              <p><strong>Nota: </strong>El archivo debe conener la extención <strong class="theme_color">.xlsx</strong> para poder ser leído correctamente.</p>
               <br>
               <div class="input-group">
                   <label class="input-group-btn">

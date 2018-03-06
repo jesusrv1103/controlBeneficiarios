@@ -169,7 +169,7 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="?c=beneficiario&a=UploadApoyos" method="post" enctype="multipart/form-data">
+			<form action="?c=catalogos&a=UploadApoyos" method="post" enctype="multipart/form-data">
 				<div class="modal-body">
 					<div class="row">
 						<div class="block-web">
@@ -178,7 +178,7 @@
 							</div>
 							<div class="porlets-content" style="margin-bottom: -65px;">
 								<p>Selecciona tu archivo excel con los catáogos de apoyos para registrarlos en el sistema.</p>
-								<p><strong>Nota: </strong>El archivo debe conener la extención <strong class="theme_color">xmls</strong> para poder ser leído correctamente.</p>
+								<p><strong>Nota: </strong>El archivo debe conener la extención <strong class="theme_color">xlsx</strong> para poder ser leído correctamente.</p>
 								<br>
 								<div class="input-group">
 									<label class="input-group-btn">
