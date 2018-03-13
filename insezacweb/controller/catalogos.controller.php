@@ -22,17 +22,21 @@ class CatalogosController{
     if(!isset($_FILES['file']['name'])){
       header('Location: ./?c=catalogos&a=Apoyos');
     }
-    $archivo = $_FILES['file']['name'];
-    $tipo = $_FILES['file']['type'];
-    $destino = "./assets/files/".$archivo;
-    if(copy($_FILES['file']['tmp_name'], $destino)){
+      $archivo=$_FILES['file'];
+      $nameArchivo = $archivo['name'];
+      echo $tmp = $archivo['tmp_name'];
+      $src = "./assets/files/".$nameArchivo;
+      move_uploaded_file($tmp, $src);
+
+
+   /*if(copy($_FILES['file']['tmp_name'], $destino)){
       //echo "Archivo Cargado Con Éxito" . "<br><br>";
       $this->ImportarBeneficiarios($archivo);
       //mandar llamar todas las funciones a importar
     }
     else{
       $this->Beneficiarios();
-    }
+    }*/
   }
 
 public function ImportarBeneficiarios(){

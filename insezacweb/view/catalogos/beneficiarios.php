@@ -67,7 +67,7 @@
 								<div class="col-md-12">
 									<table class="table table-striped">
 										<tbody>
-											<?php foreach($this->model->Listar('identificacionOficial') as $r): ?>
+											<?php foreach($this->model->Listar('identificacionoficial') as $r): ?>
 												<tr>
 													<td><?php echo $r->idIdentificacion; ?></td>
 													<td><?php echo $r->identificacion; ?></td>
@@ -93,7 +93,7 @@
 
 
 										<tbody>
-											<?php foreach($this->model->Listar('ingresoMensual') as $r): ?>
+											<?php foreach($this->model->Listar('ingresomensual') as $r): ?>
 												<tr>
 													<td><?php echo $r->idIngresoMensual; ?></td>
 													<td><?php echo $r->ingresoMensual; ?></td>
@@ -118,7 +118,7 @@
 								<div class="col-md-12">
 									<table class="table table-striped">
 										<tbody>
-											<?php foreach($this->model->Listar('seguridadSocial') as $r): ?>
+											<?php foreach($this->model->Listar('seguridadsocial') as $r): ?>
 												<tr>
 													<td><?php echo $r->idSeguridadSocial; ?></td>
 													<td><?php echo $r->seguridadSocial; ?></td>
@@ -142,7 +142,7 @@
 								<div class="col-md-12">
 									<table class="table table-striped">									
 										<tbody>
-											<?php foreach($this->model->Listar('grupoVulnerable') as $r): ?>
+											<?php foreach($this->model->Listar('grupovulnerable') as $r): ?>
 												<tr>
 													<td><?php echo $r->idGrupoVulnerable; ?></td>
 													<td><?php echo $r->grupoVulnerable; ?></td>
@@ -166,7 +166,7 @@
 								<div class="col-md-12">
 									<table class="table table-striped">									
 										<tbody>
-											<?php foreach($this->model->Listar('nivelEstudio') as $r): ?>
+											<?php foreach($this->model->Listar('nivelestudio') as $r): ?>
 												<tr>
 													<td><?php echo $r->idNivelEstudios; ?></td>
 													<td><?php echo $r->nivelEstudios; ?></td>
@@ -264,7 +264,7 @@
 								<div class="col-md-12">
 									<table class="table table-striped">
 										<tbody>
-											<?php foreach($this->model->Listar('tipoVialidad') as $r): ?>
+											<?php foreach($this->model->Listar('tipovialidad') as $r): ?>
 												<tr>
 													<td><?php echo $r->idTipoVialidad; ?></td>
 													<td><?php echo $r->tipoVialidad; ?></td>
