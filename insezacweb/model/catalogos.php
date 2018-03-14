@@ -46,8 +46,7 @@ class Catalogos
 	public function ImportarIdentificacionOficial(Catalogos $data){
 		try 
 		{
-			//$this->Limpiar('identificacionOficial');
-			$sql= $this->pdo->prepare("INSERT INTO identificacionOficial VALUES(?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO identificacionoficial VALUES(?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->idIdentificacion,
@@ -64,7 +63,7 @@ class Catalogos
 	public function ImportarTipoVialidad(Catalogos $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO tipoVialidad VALUES(?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO tipovialidad VALUES(?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->idTipoVialidad,
@@ -80,7 +79,7 @@ class Catalogos
 	public function ImportarEstadoCivil(Catalogos $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO estadoCivil VALUES(?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO estadocivil VALUES(?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->idEstadoCivil,
@@ -111,7 +110,7 @@ class Catalogos
 	public function ImportarIngresoMensual(Catalogos $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO ingresoMensual VALUES(?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO ingresomensual VALUES(?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->idIngresoMensual,
@@ -143,7 +142,7 @@ class Catalogos
 	public function ImportarNivelEstudios(Catalogos $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO nivelEstudio VALUES(?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO nivelestudio VALUES(?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->idNivelEstudios,
@@ -191,7 +190,7 @@ class Catalogos
 	public function ImportarGrupoVulnerable(Catalogos $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO grupoVulnerable VALUES(?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO grupovulnerable VALUES(?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->idGrupoVulnerable,
@@ -221,7 +220,7 @@ class Catalogos
 	public function ImportarTipoApoyo(Catalogos $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO tipoApoyo VALUES(?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO tipoapoyo VALUES(?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->idTipoApoyo,
@@ -251,7 +250,7 @@ class Catalogos
 	public function ImportarCaracteristicasApoyo(Catalogos $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO caracteristicasApoyo VALUES(?,?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO caracteristicasapoyo VALUES(?,?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->idCaracteristicasApoyo,
@@ -314,7 +313,7 @@ class Catalogos
 		{
 			//$result = array();
 
-			$stm = $this->pdo->prepare("SELECT * FROM caracteristicasApoyo, tipoApoyo WHERE tipoApoyo.idTipoApoyo=caracteristicasApoyo.idTipoApoyo;");
+			$stm = $this->pdo->prepare("SELECT * FROM caracteristicasapoyo, tipoapoyo WHERE tipoApoyo.idTipoApoyo=caracteristicasApoyo.idTipoApoyo;");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);

@@ -240,7 +240,7 @@
 								<div class="col-md-12">
 									<table class="table table-striped">
 										<tbody>
-											<?php foreach($this->model->Listar('estadoCivil') as $r): ?>
+											<?php foreach($this->model->Listar('estadocivil') as $r): ?>
 												<tr>
 													<td><?php echo $r->idEstadoCivil; ?></td>
 													<td><?php echo $r->estadoCivil; ?></td>

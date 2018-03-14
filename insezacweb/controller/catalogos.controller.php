@@ -20,14 +20,14 @@ class CatalogosController{
 
  public function UploadBeneficiarios(){
     if(!isset($_FILES['file']['name'])){
-      header('Location: ./?c=catalogos&a=Apoyos');
+      header('Location: ./?c=catalogos&a=Beneficiarios');
     }
       $archivo=$_FILES['file'];
       $nameArchivo = $archivo['name'];
-      echo $tmp = $archivo['tmp_name'];
+      $tmp = $archivo['tmp_name'];
       $src = "./assets/files/".$nameArchivo;
       move_uploaded_file($tmp, $src);
-
+      $this->ImportarBeneficiarios($archivo);
 
    /*if(copy($_FILES['file']['tmp_name'], $destino)){
       //echo "Archivo Cargado Con Éxito" . "<br><br>";
@@ -41,7 +41,6 @@ class CatalogosController{
 
 public function ImportarBeneficiarios(){
   if (file_exists("./assets/files/catalogo_beneficiarios.xlsx")) {
-
           //Agregamos la librería 
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
     //Variable con el nombre del archivo
@@ -53,7 +52,6 @@ public function ImportarBeneficiarios(){
     //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
     $this->model->Check(0);
-    $this->IdentificacionOficial($objPHPExcel,$numRows);
     $this->IdentificacionOficial($objPHPExcel,$numRows);
     $this->TipoVialidad($objPHPExcel,$numRows);
     $this->EstadoCivil($objPHPExcel,$numRows);
@@ -84,7 +82,7 @@ public function ImportarBeneficiarios(){
 
 public function IdentificacionOficial($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("identificacionOficial");
+  $this->model->Limpiar("identificacionoficial");
   $numRow=2;
 
   do {
@@ -112,7 +110,7 @@ public function IdentificacionOficial($objPHPExcel,$numRows){
 
 public function TipoVialidad($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("tipoVialidad");
+  $this->model->Limpiar("tipovialidad");
   $numRow=2;
 
   do {
@@ -138,7 +136,7 @@ public function TipoVialidad($objPHPExcel,$numRows){
 
 public function EstadoCivil($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("estadoCivil");
+  $this->model->Limpiar("estadocivil");
   $numRow=2;
 
   do {
@@ -190,7 +188,7 @@ public function Ocupacion($objPHPExcel,$numRows){
 
 public function IngresoMensual($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("ingresoMensual");
+  $this->model->Limpiar("ingresomensual");
   $numRow=2;
 
   do {
@@ -221,7 +219,6 @@ public function Vivienda($objPHPExcel,$numRows){
   $numRow=2;
 
   do {
-         //echo "Entra";
     $cat = new Catalogos();
     $cat->idVivienda = $objPHPExcel->getActiveSheet()->getCell('P'.$numRow)->getCalculatedValue();
     $cat->vivienda = $objPHPExcel->getActiveSheet()->getCell('Q'.$numRow)->getCalculatedValue();
@@ -244,11 +241,10 @@ public function Vivienda($objPHPExcel,$numRows){
 
 public function NivelEstudio($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("nivelEstudio");
+  $this->model->Limpiar("nivelestudio");
   $numRow=2;
 
   do {
-         //echo "Entra";
     $cat = new Catalogos();
     $cat->idNivelEstudios = $objPHPExcel->getActiveSheet()->getCell('S'.$numRow)->getCalculatedValue();
     $cat->nivelEstudios = $objPHPExcel->getActiveSheet()->getCell('T'.$numRow)->getCalculatedValue();
@@ -270,7 +266,7 @@ public function NivelEstudio($objPHPExcel,$numRows){
 
 public function SeguridadSocial($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("seguridadSocial");
+  $this->model->Limpiar("seguridadsocial");
   $numRow=2;
 
   do {
@@ -324,7 +320,7 @@ public function Discapacidad($objPHPExcel,$numRows){
 
 public function GrupoVulnerable($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("grupoVulnerable");
+  $this->model->Limpiar("grupovulnerable");
   $numRow=2;
 
   do {
