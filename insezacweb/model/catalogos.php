@@ -158,7 +158,7 @@ class Catalogos
 	public function ImportarSeguridadSocial(Catalogos $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO seguridadSocial VALUES(?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO seguridadsocial VALUES(?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->idSeguridadSocial,
