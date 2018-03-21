@@ -27,7 +27,7 @@
 										<a class="btn btn-sm btn-warning tooltips" href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal" data-original-title="Importar catálogo
 										para el registro de identficadores" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
 
-										<a class="btn btn-sm btn-primary tooltips" href="assets/files/catalogo_beneficiarios.xlsx" download="catalogo_beneficiarios.xlsx" data-original-title="Descargar catalogo_beneficiarios.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
+										<a class="btn btn-sm btn-primary tooltips" href="assets/files/catalogo_beneficiarios.csv" download="catalogo_beneficiarios.csv" data-original-title="Descargar catalogo_beneficiarios.csv" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a> 
 									</div>
 									<?php } ?>
 								</b>
@@ -317,7 +317,7 @@
 							</div>
 							<div class="porlets-content" style="margin-bottom: -65px;">
 								<p>Selecciona tu archivo excel con los catáogos de beneficiarios para registrarlos en el sistema.</p>
-								<p><strong>Nota: </strong>El archivo debe conener la extención <strong class="theme_color">xlsx</strong> para poder ser leído correctamente.</p>
+								<p><strong>Nota: </strong>El archivo debe conener la extención <strong class="theme_color">csv</strong> para poder ser leído correctamente.</p>
 								<br>
 								<div class="input-group">
 									<label class="input-group-btn">

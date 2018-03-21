@@ -23,20 +23,22 @@ class CatalogosController{
       header('Location: ./?c=catalogos&a=Beneficiarios');
     }
       $archivo=$_FILES['file'];
+      if($archivo['type']=="application/vnd.ms-excel"){
       $nameArchivo = $archivo['name'];
       $tmp = $archivo['tmp_name'];
+      echo $archivo['type'];
       $src = "./assets/files/".$nameArchivo;
-      move_uploaded_file($tmp, $src);
+      if(move_uploaded_file($tmp, $src)){
       $this->ImportarBeneficiarios($archivo);
-
-   /*if(copy($_FILES['file']['tmp_name'], $destino)){
-      //echo "Archivo Cargado Con Éxito" . "<br><br>";
-      $this->ImportarBeneficiarios($archivo);
-      //mandar llamar todas las funciones a importar
-    }
-    else{
-      $this->Beneficiarios();
-    }*/
+      }  
+      }else{
+        $error=true;
+        $mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.csv</strong>";
+        $page="view/catalogos/beneficiarios.php";
+    $beneficiarios2 = true;
+    $catalogos=true;
+    require_once 'view/index.php';
+      }
   }
 
 public function ImportarBeneficiarios(){
