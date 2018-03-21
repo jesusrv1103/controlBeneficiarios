@@ -18,7 +18,7 @@ class LoginController{
    $password=md5($password);
    $password=crc32($password);
    $password=crypt($password,"xtem");
-   $password=sha1($password);
+   echo $password=sha1($password);
    $consulta=$this->model->verificar($log);
    if($consulta!=null){
     if($consulta->password == $password){
