@@ -93,7 +93,7 @@
 
 
 										<tbody>
-											<?php foreach($this->model->Listar('tipoApoyo') as $r): ?>
+											<?php foreach($this->model->Listar('tipoapoyo') as $r): ?>
 												<tr>
 													<td><?php echo $r->idTipoApoyo; ?></td>
 													<td><?php echo $r->tipoApoyo; ?></td>

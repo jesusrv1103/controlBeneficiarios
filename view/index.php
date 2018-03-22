@@ -125,10 +125,6 @@ if (!isset($_SESSION['seguridad'])){
               <?php } ?>
               <a href="?c=Inicio"> <i class="fa fa-home"></i> Inicio </a>
             </li>
-            <!-- ESTADÍSTICAS -->
-            <li class="<?php if(isset($estadisticas)){ ?>left_nav_active <?php } ?> theme_border"> <a href="?c=estadisticas"> <i class="glyphicon glyphicon-stats"></i> Estadisticas</a>
-            </li>
-            <!-- /ESTADÍSTICAS -->
             <?php if(isset($administracion)){ ?>
             <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
               <ul class="opened" style="display:block">
@@ -204,11 +200,6 @@ if (!isset($_SESSION['seguridad'])){
                               <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b>
                             </a>
                           </li>
-                          <!--li class="disabled">
-                            <a href="?c=ProgramaSocial"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                              <?php if (isset($programasSociales)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas sociales</b>
-                            </a>
-                          </li><br><br-->
                         </li>
                       </ul>
                     </li><!-- /CATALOGOS -->
@@ -313,148 +304,6 @@ if (!isset($_SESSION['seguridad'])){
         });
       </script>
       <script>
- //****Subir archivos automaticos*****
-/*
-            $(document).on('ready', function() {
-              'use strict';
-              // Change this to the location of your server-side upload handler:
-              var url = 'assets/';
-              $('#fileupload').fileupload({
-                url: url,
-                dataType: 'json',
-                done: function (e, data) {
-                  $.each(data.result.files, function (index, file) {
-                    $('<p/>').text(file.name).appendTo('#files');
-                  });
-                },
-                progressall: function (e, data) {
-                  var progress = parseInt(data.loaded / data.total * 100, 10);
-                  $('#progress .progress-bar').css(
-                    'width',
-                    progress + '%'
-                    );
-                }
-              }).prop('disabled', !$.support.fileInput)
-              .parent().addClass($.support.fileInput ? undefined : 'disabled');
-            });
-
-            $(document).on('ready', function() {
-              'use strict';
-              // Change this to the location of your server-side upload handler:
-              var url = 'assets/';
-              $('#fileupload1').fileupload({
-                url: url,
-                dataType: 'json',
-                done: function (e, data) {
-                  $.each(data.result.files, function (index, file) {
-                    $('<p/>').text(file.name).appendTo('#files1');
-                  });
-                },
-                progressall: function (e, data) {
-                  var progress = parseInt(data.loaded / data.total * 100, 10);
-                  $('#progress .progress-bar').css(
-                    'width',
-                    progress + '%'
-                    );
-                }
-              }).prop('disabled', !$.support.fileInput)
-              .parent().addClass($.support.fileInput ? undefined : 'disabled');
-            });
-
-            //***Elimina archivos existentes para importar otros archivos*******
-
-            $('.catalogos').change(function(e) {
-              e.preventDefault();
-              $.ajax({
-                url: 'assets/process.php?file=catalogo_beneficiarios.xlsx',
-                type: 'post',
-                dataType: 'json'
-              })
-
-            });
-
-            $('.asentamientos').change(function(e) {
-              e.preventDefault();
-              $.ajax({
-                url: 'assets/process.php?file=asentamientos.xlsx',
-                type: 'post',
-                dataType: 'json'
-              })
-            });
-
-            $('.localidades').change(function(e) {
-              e.preventDefault();
-              $.ajax({
-                url: 'assets/process.php?file=localidades.xlsx',
-                type: 'post',
-                dataType: 'json'
-              })
-            });
-
-            $('.beneficiarios').change(function(e) {
-              e.preventDefault();
-              $.ajax({
-                url: 'assets/process.php?file=beneficiarios.xlsx',
-                type: 'post',
-                dataType: 'json'
-              })
-            });
-
-            $('.beneficiariosrfc').change(function(e) {
-              e.preventDefault();
-              $.ajax({
-                url: 'assets/process.php?file=beneficiariosrfc.xlsx',
-                type: 'post',
-                dataType: 'json'
-              })
-            });
-
-            $('.municipios').change(function(e) {
-              e.preventDefault();
-              $.ajax({
-                url: 'assets/process.php?file=municipios.xlsx',
-                type: 'post',
-                dataType: 'json'
-              })
-            });
-            $('.apoyos').change(function(e) {
-              e.preventDefault();
-              $.ajax({
-                url: 'assets/process.php?file=apoyos.xlsx',
-                type: 'post',
-                dataType: 'json'
-              })
-
-            });
-
-
-            $('.direcciones').change(function(e) {
-              e.preventDefault();
-              $.ajax({
-                url: 'assets/process.php?file=direcciones.xlsx',
-                type: 'post',
-                dataType: 'json'
-              })
-
-            });
-            $('.subprogramas').change(function(e) {
-              e.preventDefault();
-              $.ajax({
-                url: 'assets/process.php?file=subprogramas.xlsx',
-                type: 'post',
-                dataType: 'json'
-              })
-
-            });
-            $('.programas').change(function(e) {
-              e.preventDefault();
-              $.ajax({
-                url: 'assets/process.php?file=programas.xlsx',
-                type: 'post',
-                dataType: 'json'
-              })
-
-            }); */
           </script>
           <script type="text/javascript">
             //-----------SCRIPT BOTONES PARA CERRAR VENTANITAS------------------

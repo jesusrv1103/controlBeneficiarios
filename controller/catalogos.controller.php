@@ -18,28 +18,28 @@ class CatalogosController{
   require_once 'view/index.php';
 }
 
- public function UploadBeneficiarios(){
-    if(!isset($_FILES['file']['name'])){
-      header('Location: ./?c=catalogos&a=Beneficiarios');
-    }
-      $archivo=$_FILES['file'];
-      if($archivo['type']=="application/vnd.ms-excel"){
-      $nameArchivo = $archivo['name'];
-      $tmp = $archivo['tmp_name'];
-      echo $archivo['type'];
-      $src = "./assets/files/".$nameArchivo;
-      if(move_uploaded_file($tmp, $src)){
+public function UploadBeneficiarios(){
+  if(!isset($_FILES['file']['name'])){
+    header('Location: ./?c=catalogos&a=Beneficiarios');
+  }
+  $archivo=$_FILES['file'];
+  if($archivo['type']=="application/vnd.ms-excel"){
+    $nameArchivo = $archivo['name'];
+    $tmp = $archivo['tmp_name'];
+    $archivo['type'];
+    $src = "./assets/files/".$nameArchivo;
+    if(move_uploaded_file($tmp, $src)){
       $this->ImportarBeneficiarios($archivo);
-      }  
-      }else{
-        $error=true;
-        $mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.csv</strong>";
-        $page="view/catalogos/beneficiarios.php";
+    }  
+  }else{
+    $error=true;
+    $mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.csv</strong>";
+    $page="view/catalogos/beneficiarios.php";
     $beneficiarios2 = true;
     $catalogos=true;
     require_once 'view/index.php';
-      }
   }
+}
 
 public function ImportarBeneficiarios(){
   if (file_exists("./assets/files/catalogo_beneficiarios.xlsx")) {
@@ -356,27 +356,32 @@ public function Apoyos(){
   require_once 'view/index.php';
 }
 
- public function UploadApoyos(){
-    if(!isset($_FILES['file']['name'])){
-      header('Location: ./?c=catalogos&a=Apoyos');
-    }
-    $archivo = $_FILES['file']['name'];
-    $tipo = $_FILES['file']['type'];
-    $destino = "./assets/files/".$archivo;
-    if(copy($_FILES['file']['tmp_name'], $destino)){
-      //echo "Archivo Cargado Con Éxito" . "<br><br>";
-      $this->ImportarApoyos($archivo);
-      //mandar llamar todas las funciones a importar
-    }
-    else{
-      $this->Apoyos();
-    }
-  }
+public function UploadApoyos(){
+ if(!isset($_FILES['file']['name'])){
+  header('Location: ./?c=catalogos&a=Apoyos');
+}
+$archivo=$_FILES['file'];
+if($archivo['type']=="application/vnd.ms-excel"){
+  $nameArchivo = $archivo['name'];
+  $tmp = $archivo['tmp_name'];
+  $src = "./assets/files/".$nameArchivo;
+  if(move_uploaded_file($tmp, $src)){
+    $this->ImportarApoyos($archivo);
+  }  
+}else{
+  $error=true;
+  $mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.csv</strong>";
+  $page="view/catalogos/apoyos.php";
+  $apoyos2 = true;
+  $catalogos=true;
+  require_once 'view/index.php';
+}
+}
 
 public function ImportarApoyos($archivo){
-  if (file_exists("./assets/files/".$archivo)) {
-
-          //Agregamos la librería 
+  if (file_exists("./assets/files/".$archivo)) 
+  {
+    //Agregamos la librería 
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
     //Variable con el nombre del archivo
     $nombreArchivo = './assets/files/'.$archivo;
@@ -398,8 +403,8 @@ public function ImportarApoyos($archivo){
     $catalogos=true;
     require_once 'view/index.php';
   }
-          //si por algo no cargo el archivo bak_ 
-  else {
+  else 
+  {
     $error=true;
     $mensaje="El archivo <strong>catalogo_apoyos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
     $page="view/catalogos/apoyos.php";
@@ -500,7 +505,7 @@ public function CaracteristicasApoyo($objPHPExcel,$numRows){
     $cat = new Catalogos();
     $cat->idCaracteristicasApoyo = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
     $cat->caracteristicasApoyo = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
-     $cat->idTipoApoyo = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
+    $cat->idTipoApoyo = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
     if (!$cat->idCaracteristicasApoyo == null) {
 
       $this->model->ImportarCaracteristicasApoyo($cat);
