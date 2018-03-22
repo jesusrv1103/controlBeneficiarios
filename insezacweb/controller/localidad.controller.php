@@ -28,30 +28,34 @@ public function Crud(){
   require_once 'view/index.php';
 }
 
-public function Upload(){
-  $archivo = $_FILES['file']['name'];
-  $tipo = $_FILES['file']['type'];
-  $destino = "./assets/files/localidades.xlsx";
-  if(copy($_FILES['file']['tmp_name'], $destino)){
-      //echo "Archivo Cargado Con Éxito" . "<br><br>";
-    $this->Importar();
-      //mandar llamar todas las funciones a importar
+public function UploadLocalidades(){
+  if(!isset($_FILES['file']['name'])){
+    header('Location: ./?c=localidad&a=Index');
   }
-  else{
-   $mensaje="Error al cargar el archivo";
-   $page="view/localidad/index.php";
-   $localidades=true;
-   $catalogos=true;
-   require_once 'view/index.php';
- }
+  $archivo=$_FILES['file'];
+  if($archivo['type']=="application/vnd.ms-excel"){
+    $nameArchivo = $archivo['name'];
+    $tmp = $archivo['tmp_name'];
+    echo $archivo['type'];
+    $src = "./assets/files/".$nameArchivo;
+    if(move_uploaded_file($tmp, $src)){
+      $this->ImportarLocalidades($archivo);
+    }  
+  }else{
+    $error=true;
+    $mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.csv</strong>";
+    $page="view/localidad/localidad.php";
+    $localidades = true;
+    $catalogos=true;
+    require_once 'view/index.php';
+  }
 }
-
-public function Importar(){
-  if (file_exists("./assets/files/localidades.xlsx")) {
+public function ImportarLocalidades(){
+  if (file_exists("./assets/files/localidades.csv")) {
           //Agregamos la librería
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
           //Variable con el nombre del archivo
-    $nombreArchivo = './assets/files/localidades.xlsx';
+    $nombreArchivo = './assets/files/localidades.csv';
           // Cargo la hoja de cálculo
     $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
           //Asigno la hoja de calculo activa
@@ -59,7 +63,7 @@ public function Importar(){
           //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
     $this->Localidades($objPHPExcel,$numRows);
-    $mensaje="Se ha leído correctamente el archivo <strong>localidades.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de localidades.";
+    $mensaje="Se ha leído correctamente el archivo <strong>localidades.csv</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de localidades.";
     $page="view/localidad/index.php";
     $localidades=true;
     $catalogos=true;
@@ -68,7 +72,7 @@ public function Importar(){
         //si por algo no cargo el archivo bak_
   else {
     $error=true;
-    $mensaje="El archivo <strong>localidades.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+    $mensaje="El archivo <strong>localidades.csv</strong> no existe. Seleccione el archivo para poder importar los datos";
     $page="view/localidad/index.php";
     $localidades = true;
     $catalogos=true;
