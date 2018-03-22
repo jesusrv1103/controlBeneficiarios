@@ -59,7 +59,30 @@
            </tr>
          </thead>
          <tbody>
-          <?php foreach($this->model->Listar() as $r): ?>
+      <?php foreach($this->model->Listar() as $r): ?>
+            <tr style="color:#64DD17">
+              <td><?php echo $r->usuario; ?></td>
+            <td><?php echo $r->direccion; ?></td>
+            <td><?php 
+            switch ($r->tipoUsuario) {
+              case 1:
+              echo "Administrador";
+              break;
+              case 2:
+              echo "Secretario";
+              break;
+              case 3:
+              echo "Regular";
+              break;
+            }?></td>
+            <td class="center">
+              <a href="index.php?c=Usuario&a=Crud&idUsuario=<?php echo $r->idUsuario; ?>" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>
+            </td>
+            <td class="center">
+           </td>
+         </tr>
+       <?php endforeach; ?>
+                <?php foreach($this->model->ListarSuS() as $r): ?>
            <tr class="gradeA">
             <td><?php echo $r->usuario; ?></td>
             <td><?php echo $r->direccion; ?></td>

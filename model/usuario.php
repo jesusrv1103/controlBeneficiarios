@@ -23,8 +23,23 @@ class Usuario
 	{
 		try
 		{
-			//$result = array();
-			$stm = $this->pdo->prepare("SELECT * from usuarios");
+			$usuario = $_SESSION['usuario'];
+			$stm = $this->pdo->prepare("SELECT * from usuarios WHERE usuario = '$usuario'");
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+	public function ListarSuS()
+	{
+		try
+		{
+			$usuario = $_SESSION['usuario'];
+			$stm = $this->pdo->prepare("SELECT * from usuarios WHERE usuario != '$usuario'");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);

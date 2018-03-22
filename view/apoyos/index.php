@@ -42,32 +42,32 @@
                  </div> 
 
 
-                  <div class="btn-group">
-                    <a data-toggle="dropdown" class="btn btn-sm btn-success dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar<span class="caret"></span></a>
-                    <ul role="menu" class="dropdown-menu" >
-                      <li><a href="?c=apoyos&a=Crud">Apoyo CURP</a></li>
-                      <li><a  data-toggle="modal" data-target="#modalProceso" href="#modalProceso">Apoyo RFC</a></li>
-                    </ul>
-                  </div>
+                 <div class="btn-group">
+                  <a data-toggle="dropdown" class="btn btn-sm btn-success dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar<span class="caret"></span></a>
+                  <ul role="menu" class="dropdown-menu" >
+                    <li><a href="?c=apoyos&a=Crud">Apoyo CURP</a></li>
+                    <li><a  data-toggle="modal" data-target="#modalProceso" href="#modalProceso">Apoyo RFC</a></li>
+                  </ul>
+                </div>
 
-                  <div class="btn-group">
-                    <button data-toggle="dropdown" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar<span class="caret"></span></button>
-                    <ul role="menu" class="dropdown-menu">
-                      <li><a data-toggle="modal" data-target="#modalImportar" href="#modalImportar">Con CURP</a></li>
-                      <li><a data-toggle="modal" data-target="#modalProceso" href="#modalProceso">Con RFC</a></li>
-                    </ul>
-                  </div>
-              
-                 
-               </div>
-               <?php } ?>
-             </b>
-           </div>
-         </div>    
-       </div>
-     </div>
-     <?php if(isset($mensaje)){ if(!isset($error)){?>
-     <div class="row" style="margin-bottom: -20px; margin-top: 20px">
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar<span class="caret"></span></button>
+                  <ul role="menu" class="dropdown-menu">
+                    <li><a data-toggle="modal" data-target="#modalImportar" href="#modalImportar">Con CURP</a></li>
+                    <li><a data-toggle="modal" data-target="#modalProceso" href="#modalProceso">Con RFC</a></li>
+                  </ul>
+                </div>
+                
+                
+              </div>
+              <?php } ?>
+            </b>
+          </div>
+        </div>    
+      </div>
+    </div>
+    <?php if(isset($mensaje)){ if(!isset($error)){?>
+    <div class="row" style="margin-bottom: -20px; margin-top: 20px">
       <div class="col-md-12">
         <div class="alert alert-success fade in">
           <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
@@ -100,9 +100,11 @@
              <th>Caracteristica</th>
              <th>Origen</th> 
              <th>Importe</th>
-             <?php if($_SESSION['tipoUsuario']==1){?>
+             <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
              <td><center><b>Editar</b></center></td>
+             <?php if($_SESSION['tipoUsuario']==1){?>
              <td><center><b>Borrar</b></center></td>
+             <?php } ?>
              <?php } ?>
            </tr>
          </thead>
@@ -263,6 +265,6 @@
     }); 
   }
   deshabilitar = function (){
-  $('#btnImportar').attr("disabled", true);
-}
+    $('#btnImportar').attr("disabled", true);
+  }
 </script>
