@@ -60,7 +60,7 @@
          </thead>
          <tbody>
       <?php foreach($this->model->Listar() as $r): ?>
-            <tr style="color:#64DD17">
+            <tr style="color:#5cb85c; font-weight:bold">
               <td><?php echo $r->usuario; ?></td>
             <td><?php echo $r->direccion; ?></td>
             <td><?php 

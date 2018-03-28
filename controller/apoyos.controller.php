@@ -26,6 +26,99 @@ class ApoyosController{
   $page="view/apoyos/apoyos.php";
   require_once 'view/index.php';
 }
+
+public function Upload(){
+    if(!isset($_FILES['file']['name'])){
+      header('Location: ./?c=apoyos');
+    }
+    $archivo=$_FILES['file'];
+    if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
+      if($archivo['name']=="apoyos.xlsx"){
+        $nameArchivo = $archivo['name'];
+        $tmp = $archivo['tmp_name'];
+        $archivo['type'];
+        $src = "./assets/files/".$nameArchivo;
+        if(move_uploaded_file($tmp, $src)){
+          $this->Importar();
+        }  
+      }else{
+        $this->error=true;
+        $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>apoyos.xlsx</strong>";
+        $this->Index();
+      }
+    }else{
+      $this->error=true;
+      $this->mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
+      $this->Index();
+    }
+  }
+
+public function Importar(){
+    if (file_exists("./assets/files/apoyos.xlsx")) {
+      //Agregamos la librería
+      require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
+      //Variable con el nombre del archivo
+      $nombreArchivo = './assets/files/apoyos.xlsx';
+      // Cargo la hoja de cálculo
+      $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
+      //Asigno la hoja de calculo activa
+      $objPHPExcel->setActiveSheetIndex(0);
+      //Obtengo el numero de filas del archivo
+      $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
+      $this->LeerArchivo($objPHPExcel,$numRows);
+      $this->mensaje="Se ha leído correctamente el archivo <strong>apoyos.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de apoyos.";
+      $page="view/apoyos/index.php";
+      $apoyos = true;
+      $catalogos=true;
+      require_once 'view/index.php';
+    }
+    //si por algo no cargo el archivo bak_
+    else {
+      $this->error=true;
+      $this->mensaje="El archivo <strong>apoyos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+      $page="view/apoyos/index.php";
+      $apoyos = true;
+      $catalogos=true;
+      require_once 'view/index.php';
+    }
+  }
+
+public function LeerArchivo($objPHPExcel,$numRows){
+ try{
+  $this->model->Limpiar("apoyos");
+  $numRow=2;
+  do {
+    $apoyos = new Apoyos();
+    $curp = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
+    $apoyos->idOrigen = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
+    $apoyos->idSubprograma = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
+    $apoyos->idCaracteristica = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
+    $apoyos->importeApoyo = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
+    $apoyos->numerosApoyo = $objPHPExcel->getActiveSheet()->getCell('F'.$numRow)->getCalculatedValue();
+    $apoyos->fechaApoyo = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
+    $apoyos->idPeriodicidad = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
+    $apoyos->clavePresupuestal = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
+    if (!$curp == null) {
+      $apoyos->usuario=$_SESSION['usuario'];
+      $apoyos->fechaAlta=date("Y-m-d H:i:s");
+      $apoyos->direccion=$_SESSION['direccion'];
+      $apoyos->estado="Activo";
+      $consult = $this->model->ObtenerIdBen($curp);
+      $apoyos->idBeneficiario=$consult->idBeneficiario;
+      //echo $apoyos->idBeneficiario;
+       $apoyos->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyos);
+      $this->model->ImportarApoyo($apoyos);
+    }
+    $numRow+=1;
+  } while (!$curp == null);
+} catch (Exception $e) {
+ $mensaje="error al importar los datos de los apoyos";
+ $page="view/apoyos/index.php";
+ $administracion=true;
+ $apoyos=true;
+ require_once 'view/index.php';
+}
+}
 public function Eliminar(){
   $this->model->Eliminar($_REQUEST['idApoyo']);
   $administracion = true;
@@ -65,73 +158,8 @@ $apoyos = true;
 $page="view/apoyos/index.php";
 require_once 'view/index.php';
 }
-public function Importar(){
-  if (file_exists("./assets/files/apoyos.xlsx")) {
-          //Agregamos la librería 
-    require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
-          //Variable con el nombre del archivo
-    $nombreArchivo = './assets/files/apoyos.xlsx';
-          // Cargo la hoja de cálculo
-    $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
-          //Asigno la hoja de calculo activa
-    $objPHPExcel->setActiveSheetIndex(0);
-          //Obtengo el numero de filas del archivo
-    $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-    $this->Apoyos($objPHPExcel,$numRows);
-    $mensaje="Se ha leído correctamente el archivo <strong>apoyos.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de Apoyos.";
-    $page="view/apoyos/index.php";
-    $administracion=true;
-    $apoyos=true;
-    require_once 'view/index.php';
-  }
-        //si por algo no cargo el archivo bak_ 
-  else {
-    $error=true;
-    $mensaje="El archivo <strong>apoyos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
-    $page="view/apoyos/index.php";
-    $administracion = true;
-    $apoyos=true;
-    require_once 'view/index.php';
-  }
-}
-public function Apoyos($objPHPExcel,$numRows){
- try{
-  $this->model->Limpiar("apoyos");
-  $numRow=2;
-  do {
-    $apoyos = new Apoyos();
-    $curp = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
-    $apoyos->idOrigen = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
-    $apoyos->idSubprograma = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
-    $apoyos->idCaracteristica = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
-    $apoyos->importeApoyo = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
-    $apoyos->numerosApoyo = $objPHPExcel->getActiveSheet()->getCell('F'.$numRow)->getCalculatedValue();
-    $apoyos->fechaApoyo = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
-    $apoyos->idPeriodicidad = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
-    $apoyos->idProgramaSocial = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
-    $apoyos->clavePresupuestal = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
-    if (!$curp == null) {
-      $apoyos->usuario=$_SESSION['usuario'];
-      $apoyos->fechaAlta=date("Y-m-d H:i:s");
-      $apoyos->direccion=$_SESSION['direccion'];
-      $apoyos->estado="Activo";
-      $consult = $this->model->ObtenerIdBen($curp);
-      //echo $consult;
-      $apoyos->idBeneficiario=$consult->idBeneficiario;
-      //echo $apoyos->idBeneficiario;
-       $apoyos->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyos);
-      $this->model->ImportarApoyo($apoyos);
-    }
-    $numRow+=1;
-  } while (!$curp == null);
-} catch (Exception $e) {
- $mensaje="error al importar los datos de los apoyos";
- $page="view/apoyos/index.php";
- $administracion=true;
- $apoyos=true;
- require_once 'view/index.php';
-}
-}
+
+
 public function ListarSubprogramas(){
   header('Content-Type: application/json');
   $idPrograma=$_REQUEST['idPrograma'];
