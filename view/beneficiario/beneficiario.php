@@ -632,9 +632,13 @@
 							}
 						</script>
 						<script type="text/javascript">
+						$(document).ready(function(){
+							alert('entra');
+						});
 							window.onload=function(){
 							}
 							listarLocalidades = function (){
+								
 								var idMunicipio = $('#selectMunicipios').val();
 								datos = {"idMunicipio":idMunicipio};
 								$.ajax({

@@ -57,12 +57,12 @@ public function Upload(){
     $this->Index();
   }
 }
-public function ImportarLocalidades(){
-  if (file_exists("./assets/files/localidades.csv")) {
+public function Importar(){
+  if (file_exists("./assets/files/localidades.xlsx")) {
           //Agregamos la librería
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
           //Variable con el nombre del archivo
-    $nombreArchivo = './assets/files/localidades.csv';
+    $nombreArchivo = './assets/files/localidades.xlsx';
           // Cargo la hoja de cálculo
     $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
           //Asigno la hoja de calculo activa

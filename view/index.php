@@ -303,8 +303,7 @@ if (!isset($_SESSION['seguridad'])){
           });
         });
       </script>
-      <script>
-          </script>
+     
           <script type="text/javascript">
             //-----------SCRIPT BOTONES PARA CERRAR VENTANITAS------------------
 
@@ -511,7 +510,4 @@ if (!isset($_SESSION['seguridad'])){
       });
 
     </script>
-    
-
-
     </html>
