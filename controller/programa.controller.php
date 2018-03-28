@@ -3,7 +3,8 @@ require_once 'model/programa.php';
 
 class ProgramaController{
   private $model;
-  public $error;
+  public  $error;
+  private $mensaje;
 
   //Constructor
   public function __CONSTRUCT(){
@@ -25,10 +26,10 @@ public function Guardar(){
   $programa->programa = $_REQUEST['programa'];
   if($programa->idPrograma > 0){
     $this->model->Actualizar($programa);
-    $mensaje="El nombre de programa se ha actualizado correctamente";
+    $this->mensaje="El nombre de programa se ha actualizado correctamente";
   } else {
     $this->model->Registrar($programa);
-      $mensaje="Se ha registrado correctamente el programa";
+      $this->mensaje="Se ha registrado correctamente el programa";
   } 
     $administracion=true; //variable cargada para activar la opcion administracion en el menu
     $programas=true; //variable cargada para activar la opcion programas en el menu
@@ -42,6 +43,32 @@ public function Guardar(){
     $this->model->Eliminar($_REQUEST['idPrograma']);
     header ('Location: index.php?c=Programa&a=Index');
   }
+
+  public function Upload(){
+  if(!isset($_FILES['file']['name'])){
+    header('Location: ./?c=programa');
+  }
+  $archivo=$_FILES['file'];
+  if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
+    if($archivo['name']=="programas.xlsx"){
+      $nameArchivo = $archivo['name'];
+      $tmp = $archivo['tmp_name'];
+      $archivo['type'];
+      $src = "./assets/files/".$nameArchivo;
+      if(move_uploaded_file($tmp, $src)){
+        $this->Importar();
+      }  
+    }else{
+      $this->error=true;
+      $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>programas.xlsx</strong>";
+      $this->Index();
+    }
+  }else{
+    $this->error=true;
+    $this->mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
+    $this->Index();
+  }
+}
 
   public function Importar(){
   if (file_exists("./assets/files/programas.xlsx")) {
@@ -57,24 +84,24 @@ public function Guardar(){
     //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
     $this->model->Check(0);
-    $this->Programas($objPHPExcel,$numRows);
+    $this->LeerArchivo($objPHPExcel,$numRows);
     $this->model->Check(1);
   //  $this->model->Check(1);
-    $mensaje="Se ha leído correctamente el archivo <strong>programas.xlsx</strong>.<br><i class='fa fa-check'></i> Se han registrado correctamente los programas.";
+    $this->mensaje="Se ha leído correctamente el archivo <strong>programas.xlsx</strong>.<br><i class='fa fa-check'></i> Se han registrado correctamente los programas.";
     $page="view/programa/index.php";
     $catalogos=true;
     require_once 'view/index.php';
   }
           //si por algo no cargo el archivo bak_ 
   else {
-    $error=true;
-    $mensaje="El archivo <strong>programas.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+    $this->error=true;
+    $this->mensaje="El archivo <strong>programas.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
     $page="view/programa/programa.php";
     $catalogos=true;
     require_once 'view/index.php';
   }
 }
-public function Programas($objPHPExcel,$numRows){
+public function LeerArchivo($objPHPExcel,$numRows){
  try{
   $this->model->Limpiar("programa");
   $numRow=3;
@@ -93,8 +120,8 @@ public function Programas($objPHPExcel,$numRows){
   } while ( !$prog->idPrograma == null);
 
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de Programas.";
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de Programas.";
  $page="view/programa/programa.php";
  //$beneficiarios2 = true;
  $catalogos=true;

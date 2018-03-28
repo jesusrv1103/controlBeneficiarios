@@ -5,6 +5,7 @@ class DireccionController{
 
   private $model;
   public $error;
+  private $mensaje;
 
   //Constructor
   public function __CONSTRUCT(){
@@ -31,6 +32,31 @@ class DireccionController{
   $page="view/direccion/direccion.php";
   require_once 'view/index.php';
 }
+public function Upload(){
+  if(!isset($_FILES['file']['name'])){
+    header('Location: ./?c=direccion');
+  }
+  $archivo=$_FILES['file'];
+  if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
+    if($archivo['name']=="direcciones.xlsx"){
+      $nameArchivo = $archivo['name'];
+      $tmp = $archivo['tmp_name'];
+      $archivo['type'];
+      $src = "./assets/files/".$nameArchivo;
+      if(move_uploaded_file($tmp, $src)){
+        $this->Importar();
+      }  
+    }else{
+      $this->error=true;
+      $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>direcciones.xlsx</strong>";
+      $this->Index();
+    }
+  }else{
+    $this->error=true;
+    $this->mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
+    $this->Index();
+  }
+}
 public function Importar(){
   if (file_exists("./assets/files/direcciones.xlsx")) {
 
@@ -44,8 +70,8 @@ public function Importar(){
     $objPHPExcel->setActiveSheetIndex(0);
         //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-    $this->Direcciones($objPHPExcel,$numRows);
-    $mensaje="Se ha leído correctamente el archivo <strong>direcciones.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de direcciones.";
+    $this->LeerArchivo($objPHPExcel,$numRows);
+    $this->mensaje="Se ha leído correctamente el archivo <strong>direcciones.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de direcciones.";
     $page="view/direccion/index.php";
     $direcciones = true;
     $administracion=true;
@@ -53,15 +79,15 @@ public function Importar(){
   }
         //si por algo no cargo el archivo bak_
   else {
-    $error=true;
-    $mensaje="El archivo <strong>direcciones.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+    $this->error=true;
+    $this->mensaje="El archivo <strong>direcciones.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
     $page="view/direccion/index.php";
     $direcciones = true;
     $administracion=true;
     require_once 'view/index.php';
   }
 }
-public function Direcciones($objPHPExcel,$numRows){
+public function LeerArchivo($objPHPExcel,$numRows){
   try{
     $this->model->Limpiar("direccion");
     $numRow=2;
@@ -81,7 +107,7 @@ public function Direcciones($objPHPExcel,$numRows){
    } while (!$cat->direccion == null);
 
  }catch (Exception $e) {
-  $mensaje="error";
+  $this->mensaje="error";
   $page="view/direccion/index.php";
   $direcciones = true;
   $administracion=true;
@@ -93,7 +119,7 @@ public function Eliminar(){
    $this->model->Eliminar($_POST['idDireccion']);
    $administracion=true;
    $direcciones=true;
-   $mensaje="La dirección se ha dado correctamente de baja";
+   $this->mensaje="La dirección se ha dado correctamente de baja";
    $page="view/direccion/index.php";
    require_once 'view/index.php';
  }
@@ -107,22 +133,22 @@ public function Guardar(){
   $direccion->estado = "ACTIVO";
   if($direccion->idDireccion > 0){
     $this->model->Actualizar($direccion);
-    $mensaje="Se han actualizado correctamente los datos de la dirección <strong>$direccion->direccion</strong>";
+    $this->mensaje="Se han actualizado correctamente los datos de la dirección <strong>$direccion->direccion</strong>";
   } else {
     $consulta=$this->model->VerificaDireccion($direccion->direccion);
     if ($consulta==null) {
-       $this->model->Registrar($direccion);
-    $mensaje="Se ha registrado correctamente los datos de la dirección <strong>$direccion->direccion</strong>";
-    }else{
-      $error=true;
-        $mensaje="La dirección <b>$direccion->direccion</b> ya existe, ingrese otro nombre de dirección";
-        $page="view/direccion/direccion.php";
-        require_once "view/index.php";
-    }
+     $this->model->Registrar($direccion);
+     $this->mensaje="Se ha registrado correctamente los datos de la dirección <strong>$direccion->direccion</strong>";
+   }else{
+    $this->error=true;
+    $this->mensaje="La dirección <b>$direccion->direccion</b> ya existe, ingrese otro nombre de dirección";
+    $page="view/direccion/direccion.php";
+    require_once "view/index.php";
   }
-  $direcciones = true;
-  $administracion=true;
-  $page="view/direccion/index.php";
-  require_once 'view/index.php';
+}
+$direcciones = true;
+$administracion=true;
+$page="view/direccion/index.php";
+require_once 'view/index.php';
 }
 }

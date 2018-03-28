@@ -4,6 +4,9 @@ require_once 'model/catalogos.php';
 
 class CatalogosController{
 
+  public $error;
+  public $mensaje;
+
   public function __CONSTRUCT()
   {
    $this->model = new Catalogos();
@@ -23,32 +26,34 @@ public function UploadBeneficiarios(){
     header('Location: ./?c=catalogos&a=Beneficiarios');
   }
   $archivo=$_FILES['file'];
-  if($archivo['type']=="application/vnd.ms-excel"){
-    $nameArchivo = $archivo['name'];
-    $tmp = $archivo['tmp_name'];
-    $archivo['type'];
-    $src = "./assets/files/".$nameArchivo;
-    if(move_uploaded_file($tmp, $src)){
-      $this->ImportarBeneficiarios($archivo);
-    }  
+  if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
+    if($archivo['name']=="catalogo_beneficiarios.xlsx"){
+      $nameArchivo = $archivo['name'];
+      $tmp = $archivo['tmp_name'];
+      $archivo['type'];
+      $src = "./assets/files/".$nameArchivo;
+      if(move_uploaded_file($tmp, $src)){
+        $this->ImportarBeneficiarios();
+      }  
+    }else{
+      $this->error=true;
+      $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>catalogo_beneficiarios.xlsx</strong>";
+      $this->Beneficiarios();
+    }
   }else{
-    $error=true;
-    $mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.csv</strong>";
-    $page="view/catalogos/beneficiarios.php";
-    $beneficiarios2 = true;
-    $catalogos=true;
-    require_once 'view/index.php';
+    $this->error=true;
+    $this->mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
+    $this->Beneficiarios();
   }
 }
 
 public function ImportarBeneficiarios(){
-  if (file_exists("./assets/files/catalogo_beneficiarios.xlsx")) {
+  $rutaArchivo="./assets/files/catalogo_beneficiarios.xlsx";
+  if (file_exists($rutaArchivo)) {
           //Agregamos la librería 
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
-    //Variable con el nombre del archivo
-    $nombreArchivo = './assets/files/catalogo_beneficiarios.xlsx';
     // Cargo la hoja de cálculo
-    $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
+    $objPHPExcel = PHPExcel_IOFactory::load($rutaArchivo);
     //Asigno la hoja de calculo activa
     $objPHPExcel->setActiveSheetIndex(0);
     //Obtengo el numero de filas del archivo
@@ -65,20 +70,14 @@ public function ImportarBeneficiarios(){
     $this->Discapacidad($objPHPExcel,$numRows);
     $this->GrupoVulnerable($objPHPExcel,$numRows);
     $this->model->Check(1);
-    $mensaje="Se ha leído correctamente el archivo <strong>catalogo_beneficiarios.xlsx</strong>.<br><i class='fa fa-check'></i> Se han registrado correctamente los identificadores del catálogo.";
-    $page="view/catalogos/beneficiarios.php";
-    $beneficiarios2 = true;
-    $catalogos=true;
-    require_once 'view/index.php';
+    $this->mensaje="Se ha leído correctamente el archivo <strong> catalogo_beneficiarios.xlsx</strong>.<br><i class='fa fa-check'></i> Se han registrado correctamente los identificadores del catálogo.";
+    $this->Beneficiarios();
   }
           //si por algo no cargo el archivo bak_ 
   else {
-    $error=true;
-    $mensaje="El archivo <strong>catalogo_beneficiarios.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
-    $page="view/catalogos/beneficiarios.php";
-    $beneficiarios2 = true;
-    $catalogos=true;
-    require_once 'view/index.php';
+    $this->error=true;
+    $this->mensaje="El archivo <strong>catalogo_beneficiarios.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+    $this->Beneficiarios();
   }
 }
 
@@ -86,7 +85,6 @@ public function IdentificacionOficial($objPHPExcel,$numRows){
  try{
   $this->model->Limpiar("identificacionoficial");
   $numRow=2;
-
   do {
          //echo "Entra";
     $cat = new Catalogos();
@@ -101,12 +99,9 @@ public function IdentificacionOficial($objPHPExcel,$numRows){
   } while ( !$cat->idIdentificacion == null);
 
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de identificacion oficial.";
- $page="view/catalogos/beneficiarios.php";
- $beneficiarios2 = true;
- $catalogos=true;
- require_once 'view/index.php';
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de identificacion oficial.";
+ $this->Beneficiarios();
 }
 }
 
@@ -116,7 +111,7 @@ public function TipoVialidad($objPHPExcel,$numRows){
   $numRow=2;
 
   do {
-         //echo "Entra";
+    //echo "Entra";
     $cat = new Catalogos();
     $cat->idTipoVialidad = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
     $cat->tipoVialidad = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
@@ -127,12 +122,9 @@ public function TipoVialidad($objPHPExcel,$numRows){
     $numRow+=1;
   } while ( !$cat->idTipoVialidad == null);
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de tipo de vialidad.";
- $page="view/catalogos/beneficiarios.php";
- $beneficiarios2 = true;
- $catalogos=true;
- require_once 'view/index.php';
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de <strong>tipo de vialidad</strong>";
+ $this->Beneficiarios();
 }
 }
 
@@ -140,7 +132,6 @@ public function EstadoCivil($objPHPExcel,$numRows){
  try{
   $this->model->Limpiar("estadocivil");
   $numRow=2;
-
   do {
          //echo "Entra";
     $cat = new Catalogos();
@@ -154,12 +145,9 @@ public function EstadoCivil($objPHPExcel,$numRows){
     $numRow+=1;
   } while ( !$cat->idEstadoCivil == null);
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de estado civil.";
- $page="view/catalogos/beneficiarios.php";
- $beneficiarios2 = true;
- $catalogos=true;
- require_once 'view/index.php';
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de estado civil.";
+ $this->Beneficiarios();
 }
 }
 
@@ -168,7 +156,6 @@ public function Ocupacion($objPHPExcel,$numRows){
   $this->model->Limpiar("ocupacion");
   $numRow=2;
   do {
-         //echo "Entra";
     $cat = new Catalogos();
     $cat->idOcupacion = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
     $cat->ocupacion = $objPHPExcel->getActiveSheet()->getCell('K'.$numRow)->getCalculatedValue();
@@ -179,12 +166,9 @@ public function Ocupacion($objPHPExcel,$numRows){
     $numRow+=1;
   } while ( !$cat->idOcupacion == null);
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de ocupación.";
- $page="view/catalogos/beneficiarios.php";
- $beneficiarios2 = true;
- $catalogos=true;
- require_once 'view/index.php';
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de ocupación.";
+ $this->Beneficiarios();
 }
 }
 
@@ -192,9 +176,7 @@ public function IngresoMensual($objPHPExcel,$numRows){
  try{
   $this->model->Limpiar("ingresomensual");
   $numRow=2;
-
   do {
-         //echo "Entra";
     $cat = new Catalogos();
     $cat->idIngresoMensual = $objPHPExcel->getActiveSheet()->getCell('M'.$numRow)->getCalculatedValue();
     $cat->ingresoMensual = $objPHPExcel->getActiveSheet()->getCell('N'.$numRow)->getCalculatedValue();
@@ -206,12 +188,9 @@ public function IngresoMensual($objPHPExcel,$numRows){
     $numRow+=1;
   } while ( !$cat->idIngresoMensual == null);
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de ingreso mensual.";
- $page="view/catalogos/beneficiarios.php";
- $beneficiarios2 = true;
- $catalogos=true;
- require_once 'view/index.php';
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de ingreso mensual.";
+ $this->Beneficiarios();
 }
 }
 
@@ -232,12 +211,9 @@ public function Vivienda($objPHPExcel,$numRows){
     $numRow+=1;
   } while ( !$cat->idVivienda == null);
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de vivienda.";
- $page="view/catalogos/beneficiarios.php";
- $beneficiarios2 = true;
- $catalogos=true;
- require_once 'view/index.php';
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de vivienda.";
+ $this->Beneficiarios();
 }
 }
 
@@ -251,18 +227,14 @@ public function NivelEstudio($objPHPExcel,$numRows){
     $cat->idNivelEstudios = $objPHPExcel->getActiveSheet()->getCell('S'.$numRow)->getCalculatedValue();
     $cat->nivelEstudios = $objPHPExcel->getActiveSheet()->getCell('T'.$numRow)->getCalculatedValue();
     if (!$cat->idNivelEstudios == null) {
-
       $this->model->ImportarNivelEstudios($cat);
     }
     $numRow+=1;
   } while ( !$cat->idNivelEstudios == null);
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de nivel de estudio.";
- $page="view/catalogos/beneficiarios.php";
- $beneficiarios2 = true;
- $catalogos=true;
- require_once 'view/index.php';
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de nivel de estudio.";
+ $this->Beneficiarios();
 }
 }
 
@@ -270,26 +242,19 @@ public function SeguridadSocial($objPHPExcel,$numRows){
  try{
   $this->model->Limpiar("seguridadsocial");
   $numRow=2;
-
   do {
-         //echo "Entra";
     $cat = new Catalogos();
     $cat->idSeguridadSocial = $objPHPExcel->getActiveSheet()->getCell('V'.$numRow)->getCalculatedValue();
     $cat->seguridadSocial = $objPHPExcel->getActiveSheet()->getCell('W'.$numRow)->getCalculatedValue();
     if (!$cat->idSeguridadSocial == null) {
-
       $this->model->ImportarSeguridadSocial($cat);
-
     }
     $numRow+=1;
   } while ( !$cat->idSeguridadSocial == null);
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de seguridad social.";
- $page="view/catalogos/beneficiarios.php";
- $beneficiarios2 = true;
- $catalogos=true;
- require_once 'view/index.php';
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de seguridad social.";
+ $this->Beneficiarios();
 }
 }
 
@@ -299,24 +264,18 @@ public function Discapacidad($objPHPExcel,$numRows){
   $numRow=2;
 
   do {
-         //echo "Entra";
     $cat = new Catalogos();
     $cat->idDiscapacidad = $objPHPExcel->getActiveSheet()->getCell('Y'.$numRow)->getCalculatedValue();
     $cat->discapacidad = $objPHPExcel->getActiveSheet()->getCell('Z'.$numRow)->getCalculatedValue();
     if (!$cat->idDiscapacidad == null) {
-
       $this->model->ImportarDiscapacidad($cat);
-
     }
     $numRow+=1;
   } while ( !$cat->idDiscapacidad == null);
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de discapacidad.";
- $page="view/catalogos/beneficiarios.php";
- $beneficiarios2 = true;
- $catalogos=true;
- require_once 'view/index.php';
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de discapacidad.";
+ $this->Beneficiarios();
 }
 }
 
@@ -324,26 +283,19 @@ public function GrupoVulnerable($objPHPExcel,$numRows){
  try{
   $this->model->Limpiar("grupovulnerable");
   $numRow=2;
-
   do {
-         //echo "Entra";
     $cat = new Catalogos();
     $cat->idGrupoVulnerable = $objPHPExcel->getActiveSheet()->getCell('AB'.$numRow)->getCalculatedValue();
     $cat->grupoVulnerable = $objPHPExcel->getActiveSheet()->getCell('AC'.$numRow)->getCalculatedValue();
     if (!$cat->idGrupoVulnerable == null) {
-
       $this->model->ImportarGrupoVulnerable($cat);
-
     }
     $numRow+=1;
   } while ( !$cat->idGrupoVulnerable == null);
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de grupo vulnerable.";
- $page="view/catalogos/beneficiarios.php";
- $beneficiarios2 = true;
- $catalogos=true;
- require_once 'view/index.php';
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de grupo vulnerable.";
+ $this->Beneficiarios();
 }
 }
 
@@ -357,36 +309,39 @@ public function Apoyos(){
 }
 
 public function UploadApoyos(){
- if(!isset($_FILES['file']['name'])){
-  header('Location: ./?c=catalogos&a=Apoyos');
-}
-$archivo=$_FILES['file'];
-if($archivo['type']=="application/vnd.ms-excel"){
-  $nameArchivo = $archivo['name'];
-  $tmp = $archivo['tmp_name'];
-  $src = "./assets/files/".$nameArchivo;
-  if(move_uploaded_file($tmp, $src)){
-    $this->ImportarApoyos($archivo);
-  }  
-}else{
-  $error=true;
-  $mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.csv</strong>";
-  $page="view/catalogos/apoyos.php";
-  $apoyos2 = true;
-  $catalogos=true;
-  require_once 'view/index.php';
+  if(!isset($_FILES['file']['name'])){
+    header('Location: ./?c=catalogos&a=Apoyos');
+  }
+  $archivo=$_FILES['file'];
+  if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+  {
+    if($archivo['name']=="catalogo_apoyos.xlsx")
+    {      
+      $nameArchivo = $archivo['name'];
+      $tmp = $archivo['tmp_name'];
+      $src = "./assets/files/".$nameArchivo;
+      if(move_uploaded_file($tmp, $src))
+        $this->ImportarApoyos();
+    }else{
+     $this->error=true;
+     $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>catalogo_apoyos.xlsx</strong>";
+     $this->Apoyos();
+   }
+ }else{
+  $this->error=true;
+  $this->mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
+  $this->Apoyos();
 }
 }
 
-public function ImportarApoyos($archivo){
-  if (file_exists("./assets/files/".$archivo)) 
+public function ImportarApoyos(){
+  if (file_exists("./assets/files/catalogo_apoyos.xlsx")) 
   {
     //Agregamos la librería 
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
-    //Variable con el nombre del archivo
-    $nombreArchivo = './assets/files/'.$archivo;
     // Cargo la hoja de cálculo
-    $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
+    $src="./assets/files/catalogo_apoyos.xlsx";
+    $objPHPExcel = PHPExcel_IOFactory::load($src);
     //Asigno la hoja de calculo activa
     $objPHPExcel->setActiveSheetIndex(0);
     //Obtengo el numero de filas del archivo
@@ -397,20 +352,14 @@ public function ImportarApoyos($archivo){
     $this->Periodicidad($objPHPExcel,$numRows);
     $this->CaracteristicasApoyo($objPHPExcel,$numRows);
     $this->model->Check(1);
-    $mensaje="Se ha leído correctamente el archivo <strong>catalogo_apoyos.xlsx</strong>.<br><i class='fa fa-check'></i> Se han registrado correctamente los identificadores del catálogo.";
-    $page="view/catalogos/apoyos.php";
-    $apoyos2 = true;
-    $catalogos=true;
-    require_once 'view/index.php';
+    $this->mensaje="Se ha leído correctamente el archivo <strong>catalogo_apoyos.xlsx</strong>.<br><i class='fa fa-check'></i> Se han registrado correctamente los identificadores del catálogo.";
+    $this->Apoyos();
   }
   else 
   {
-    $error=true;
-    $mensaje="El archivo <strong>catalogo_apoyos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
-    $page="view/catalogos/apoyos.php";
-    $catalogos=true;
-    $apoyos2 = true;
-    require_once 'view/index.php';
+    $this->error=true;
+    $this->mensaje="El archivo <strong>catalogo_apoyos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+    $this->Apoyos();
   }
 }
 
@@ -418,36 +367,27 @@ public function Origen($objPHPExcel,$numRows){
  try{
   $this->model->Limpiar("origen");
   $numRow=3;
-
   do {
-         //echo "Entra";
     $cat = new Catalogos();
     $cat->idOrigen = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
     $cat->origen = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
     if (!$cat->idOrigen == null) {
-
       $this->model->ImportarOrigen($cat);
-
     }
     $numRow+=1;
   } while ( !$cat->idOrigen == null);
-
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de Origen.";
- $page="view/catalogos/apoyos.php";
- $apoyos2 = true;
- $catalogos=true;
- require_once 'view/index.php';
+  die($e->getMessage());
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de <strong>Origen</strong>.";
+ $this->Apoyos();
 }
 }
 public function TipoApoyo($objPHPExcel,$numRows){
  try{
   $this->model->Limpiar("tipoApoyo");
   $numRow=3;
-
   do {
-         //echo "Entra";
     $cat = new Catalogos();
     $cat->idTipoApoyo = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
     $cat->tipoApoyo = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
@@ -460,67 +400,50 @@ public function TipoApoyo($objPHPExcel,$numRows){
   } while ( !$cat->idTipoApoyo == null);
 
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de Origen.";
- $page="view/catalogos/apoyos.php";
- $apoyos2 = true;
- $catalogos=true;
- require_once 'view/index.php';
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de <strong>'Tipo de apoyo'</strong>.";
+ $this->Apoyos();
 }
 }
 public function Periodicidad($objPHPExcel,$numRows){
  try{
   $this->model->Limpiar("periodicidad");
   $numRow=3;
-
   do {
-         //echo "Entra";
     $cat = new Catalogos();
     $cat->idPeriodicidad = $objPHPExcel->getActiveSheet()->getCell('L'.$numRow)->getCalculatedValue();
     $cat->periodicidad = $objPHPExcel->getActiveSheet()->getCell('K'.$numRow)->getCalculatedValue();
     if (!$cat->idPeriodicidad == null) {
-
       $this->model->ImportarPeriodicidad($cat);
-
     }
     $numRow+=1;
   } while ( !$cat->idPeriodicidad == null);
 
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de Periodicidad.";
- $page="view/catalogos/apoyos.php";
- $apoyos2 = true;
- $catalogos=true;
- require_once 'view/index.php';
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de <strong>'Periodicidad'</strong>.";
+ $this->Apoyos();
 }
 }
 public function CaracteristicasApoyo($objPHPExcel,$numRows){
  try{
   $this->model->Limpiar("caracteristicasApoyo");
   $numRow=3;
-
   do {
-         //echo "Entra";
     $cat = new Catalogos();
     $cat->idCaracteristicasApoyo = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
     $cat->caracteristicasApoyo = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
     $cat->idTipoApoyo = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
     if (!$cat->idCaracteristicasApoyo == null) {
-
       $this->model->ImportarCaracteristicasApoyo($cat);
-
     }
     $numRow+=1;
   } while ( !$cat->idCaracteristicasApoyo == null);
 
 } catch (Exception $e) {
- $error=true;
- $mensaje="Error al importar los datos de Caracteristicas de Apoyos.";
- $page="view/catalogos/apoyos.php";
- $apoyos2 = true;
- $catalogos=true;
- require_once 'view/index.php';
+ $this->error=true;
+ $this->mensaje="Error al importar los datos de <strong>'Caracteristicas de Apoyos'</strong>.";
+ $this->Apoyos();
 }
 }
 }

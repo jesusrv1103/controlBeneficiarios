@@ -50,6 +50,31 @@
                   </ul>
                 </div>
 
+<<<<<<< HEAD
+                  <div class="btn-group">
+                    <button data-toggle="dropdown" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a data-toggle="modal" data-target="#modalImportar" href="#modalImportar">Con CURP</a></li>
+                      <li><a data-toggle="modal" data-target="#modalProceso" href="#modalProceso">Con RFC</a></li>
+                    </ul>
+                  </div>
+              
+                 
+               </div>
+               <?php } ?>
+             </b>
+           </div>
+         </div>    
+       </div>
+     </div>
+     <?php if(isset($this->mensaje)){ if(!isset($this->error)){?>
+      <br> <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-success fade in">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
+          </div>
+=======
                 <div class="btn-group">
                   <button data-toggle="dropdown" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar<span class="caret"></span></button>
                   <ul role="menu" class="dropdown-menu">
@@ -72,19 +97,19 @@
         <div class="alert alert-success fade in">
           <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
           <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
+>>>>>>> aa1e92227500d2ac7cb282dfbc6ef48da645ce27
+        </div>
+      </div> 
+      <?php } if(isset($this->error)){ ?>
+      <br> <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-danger">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
+          </div>
         </div>
       </div>
-    </div> 
-    <?php } if(isset($error)){ ?>
-    <div class="row" style="margin-bottom: -20px; margin-top: 20px">
-      <div class="col-md-12">
-        <div class="alert alert-danger">
-          <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-          <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
-        </div>
-      </div>
-    </div>
-    <?php } }?>
+      <?php } }?>
     <div class="porlets-content">
       <div class="table-responsive">
         <table class="display table table-bordered table-striped" id="dynamic-table">
@@ -160,41 +185,38 @@
 <div class="modal fade" id="modalImportar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-body"> 
+      <form action="?c=apoyos&a=Upload" method="post" enctype="multipart/form-data">
+      <div class="modal-body">
         <div class="row">
           <div class="block-web">
             <div class="header">
-              <h3 class="content-header theme_color">&nbsp;Importar Apoyos</h3>
+              <h3 class="content-header theme_color">&nbsp;Importar apoyos</h3>
             </div>
             <div class="porlets-content" style="margin-bottom: -65px;">
-              <p>Importa tu archivo excel con los datos de los Apoyos para registrarlos.</p>
-              <p><strong>Nota: </strong>El archivo debe conener el nombre de <strong class="theme_color">apoyos.xlsx</strong> para poder ser leído correctamente.</p> 
+              <p>Selecciona tu archivo excel con los datos de los beneficiarios para registrarlos.</p>
+              <p><strong>Nota: </strong>El archivo debe conener la extención <strong class="theme_color">.xlsx</strong> para poder ser leído correctamente.</p>
               <br>
-              <span class="btn btn-success fileinput-button">
-                <i class="glyphicon glyphicon-plus"></i>
-                <span>Seleccionar archivo</span>
-                <!-- The file input field used as target for the file upload widget -->
-                <input id="fileupload" type="file" name="files[]" multiple class="apoyos">
-              </span>
-              <br>
-              <br>
-              <!-- The global progress bar -->
-              <div id="progress" class="progress">
-                <div class="progress-bar progress-bar-success"></div>
-              </div>
-              <!-- The container for the uploaded files -->
-              <div id="files" class="files"></div>
-            </div><!--/porlets-content--> 
-          </div><!--/block-web--> 
+              <div class="input-group">
+                  <label class="input-group-btn">
+                    <span class="btn btn-sm btn-success">
+                      <i class="glyphicon glyphicon-plus"></i>
+                      Seleccionar archivo<input  type="file" style="display: none;" id="inputArchivo" name="file" required>
+                    </span>
+                  </label>
+                  <input type="text" class="form-control" id="input-sm" readonly>
+                </div>
+            </div><!--/porlets-content-->
+          </div><!--/block-web-->
         </div>
       </div>
       <div class="modal-footer">
         <div class="row col-md-5 col-md-offset-7">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=apoyos&a=Importar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
+          <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+          <button type="submit" id="btnImportar" class="btn btn-sm btn-primary">Importar datos</button>
         </div>
       </div>
-    </div><!--/modal-content--> 
+    </form>
+    </div><!--/modal-content-->
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
 

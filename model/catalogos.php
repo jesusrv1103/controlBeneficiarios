@@ -34,293 +34,178 @@ class Catalogos
 
 	public function __CONSTRUCT()
 	{
-		try
-		{
-			$this->pdo = Database::StartUp();     
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
+		$this->pdo = Database::StartUp();     
 	}
-	public function ImportarIdentificacionOficial(Catalogos $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO identificacionoficial VALUES(?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idIdentificacion,
-					$data->identificacion
-					)
-				);
 
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+	public function ImportarIdentificacionOficial(Catalogos $data){
+		$sql= $this->pdo->prepare("INSERT INTO identificacionoficial VALUES(?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idIdentificacion,
+				$data->identificacion
+			)
+		);	
 	}
 
 	public function ImportarTipoVialidad(Catalogos $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO tipovialidad VALUES(?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idTipoVialidad,
-					$data->tipoVialidad
-					)
-				);
-
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$sql= $this->pdo->prepare("INSERT INTO tipovialidad VALUES(?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idTipoVialidad,
+				$data->tipoVialidad
+			)
+		);
 	}
+
 	public function ImportarEstadoCivil(Catalogos $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO estadocivil VALUES(?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idEstadoCivil,
-					$data->estadoCivil
-					)
-				);
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$sql= $this->pdo->prepare("INSERT INTO estadocivil VALUES(?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idEstadoCivil,
+				$data->estadoCivil
+			)
+		);
 	}
+
 	public function ImportarOcupacion(Catalogos $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO ocupacion VALUES(?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idOcupacion,
-					$data->ocupacion
-					)
-				);
-
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$sql= $this->pdo->prepare("INSERT INTO ocupacion VALUES(?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idOcupacion,
+				$data->ocupacion
+			)
+		);
 	}
+
 	public function ImportarIngresoMensual(Catalogos $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO ingresomensual VALUES(?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idIngresoMensual,
-					$data->ingresoMensual
-					)
-				);
-
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$sql= $this->pdo->prepare("INSERT INTO ingresomensual VALUES(?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idIngresoMensual,
+				$data->ingresoMensual
+			)
+		);
 	}
+
 	public function ImportarVivienda(Catalogos $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO vivienda VALUES(?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idVivienda,
-					$data->vivienda
-					)
-				);
-
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$sql= $this->pdo->prepare("INSERT INTO vivienda VALUES(?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idVivienda,
+				$data->vivienda
+			)
+		);
 	}
+
 	public function ImportarNivelEstudios(Catalogos $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO nivelestudio VALUES(?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idNivelEstudios,
-					$data->nivelEstudios
-					)
-				);
-
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$sql= $this->pdo->prepare("INSERT INTO nivelestudio VALUES(?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idNivelEstudios,
+				$data->nivelEstudios
+			)
+		);
 	}
+
 	public function ImportarSeguridadSocial(Catalogos $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO seguridadsocial VALUES(?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idSeguridadSocial,
-					$data->seguridadSocial
-					)
-				);
-
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$sql= $this->pdo->prepare("INSERT INTO seguridadsocial VALUES(?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idSeguridadSocial,
+				$data->seguridadSocial
+			)
+		);
 	}
+
 	public function ImportarDiscapacidad(Catalogos $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO discapacidad VALUES(?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idDiscapacidad,
-					$data->discapacidad
-					)
-				);
+		$sql= $this->pdo->prepare("INSERT INTO discapacidad VALUES(?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idDiscapacidad,
+				$data->discapacidad
+			)
+		);
+	}
 
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
-	}
 	public function ImportarGrupoVulnerable(Catalogos $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO grupovulnerable VALUES(?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idGrupoVulnerable,
-					$data->grupoVulnerable
-					)
-				);
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$sql= $this->pdo->prepare("INSERT INTO grupovulnerable VALUES(?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idGrupoVulnerable,
+				$data->grupoVulnerable
+			)
+		);
 	}
+
 	public function ImportarOrigen(Catalogos $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO origen VALUES(?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idOrigen,
-					$data->origen
-					)
-				);
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		
+		$sql= $this->pdo->prepare("INSERT INTO origen VALUES(?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idOrigen,
+				$data->origen
+			)
+		);
 	}
+
 	public function ImportarTipoApoyo(Catalogos $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO tipoapoyo VALUES(?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idTipoApoyo,
-					$data->tipoApoyo
-					)
-				);
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$sql= $this->pdo->prepare("INSERT INTO tipoapoyo VALUES(?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idTipoApoyo,
+				$data->tipoApoyo
+			)
+		);
 	}
+
 	public function ImportarPeriodicidad(Catalogos $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO periodicidad VALUES(?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idPeriodicidad,
-					$data->periodicidad
-					)
-				);
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$sql= $this->pdo->prepare("INSERT INTO periodicidad VALUES(?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idPeriodicidad,
+				$data->periodicidad
+			)
+		);
 	}
 	public function ImportarCaracteristicasApoyo(Catalogos $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO caracteristicasapoyo VALUES(?,?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idCaracteristicasApoyo,
-					$data->caracteristicasApoyo,
-					$data->idTipoApoyo
-					)
-				);
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$sql= $this->pdo->prepare("INSERT INTO caracteristicasapoyo VALUES(?,?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idCaracteristicasApoyo,
+				$data->caracteristicasApoyo,
+				$data->idTipoApoyo
+			)
+		);
 	}
+
 	public function Limpiar($nomTabla)
 	{
-		try 
-		{
-			
-			$stm = $this->pdo->prepare("DELETE FROM $nomTabla");			          
-			$stm->execute();
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$stm = $this->pdo->prepare("DELETE FROM $nomTabla");			          
+		$stm->execute();
 	}
+
 	public function Check($valor)
 	{
-		try 
-		{
-			if ($valor==0) {
-				$stm=$this->pdo->prepare("SET GLOBAL FOREIGN_KEY_CHECKS=0");
+		if ($valor==0) {
+			$stm=$this->pdo->prepare("SET GLOBAL FOREIGN_KEY_CHECKS=0");
 			$stm->execute();
-			}else{
+		}else{
 			$stm=$this->pdo->prepare("SET GLOBAL FOREIGN_KEY_CHECKS=1");
 			$stm->execute();
-		}
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		}	
 	}
+
 	public function Listar($nomTabla)
 	{
-		try
-		{
-			//$result = array();
-
-			$stm = $this->pdo->prepare("SELECT * FROM $nomTabla");
-			$stm->execute();
-
-			return $stm->fetchAll(PDO::FETCH_OBJ);
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
+		$stm = $this->pdo->prepare("SELECT * FROM $nomTabla");
+		$stm->execute();
+		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
+	
 	public function ListarCaracteristicasApoyo()
 	{
-		try
-		{
-			//$result = array();
-
-			$stm = $this->pdo->prepare("SELECT * FROM caracteristicasapoyo, tipoapoyo WHERE tipoApoyo.idTipoApoyo=caracteristicasApoyo.idTipoApoyo;");
-			$stm->execute();
-
-			return $stm->fetchAll(PDO::FETCH_OBJ);
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
+		$stm = $this->pdo->prepare("SELECT * FROM caracteristicasapoyo, tipoapoyo WHERE tipoApoyo.idTipoApoyo=caracteristicasApoyo.idTipoApoyo;");
+		$stm->execute();
+		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
 }
