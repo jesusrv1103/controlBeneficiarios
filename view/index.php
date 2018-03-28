@@ -30,8 +30,6 @@ if (!isset($_SESSION['seguridad'])){
   <link rel="stylesheet" href="assets/plugins/file-uploader/css/blueimp-gallery.min.css">
   <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload.css">
   <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload-ui.css">
-  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datepicker/css/datepicker.css" />
-  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-timepicker/compiled/timepicker.css" />
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css" />
   <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.css">
 
@@ -78,7 +76,7 @@ if (!isset($_SESSION['seguridad'])){
   border-radius: 3px;
 }
 </style>
-<body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE" onload="nobackbutton();">
+<body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE">
   <div class="wrapper">
     <!--\\\\\\\ wrapper Start \\\\\\-->
     <div class="header_bar">
@@ -231,11 +229,9 @@ if (!isset($_SESSION['seguridad'])){
       <script src="assets/plugins/checkbox/zepto.js"></script>
       <script src="assets/plugins/checkbox/icheck.js"></script>
       <script src="assets/js/icheck-init.js"></script>
-      <script type="text/javascript" src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-      <script type="text/javascript" src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
       <script type="text/javascript" src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
       <script type="text/javascript" src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
-      <script type="text/javascript" src="assets/js/form-components.js"></script>
+      <!--script type="text/javascript" src="assets/js/form-components.js"></script-->
       <script type="text/javascript"  src="assets/plugins/input-mask/jquery.inputmask.min.js"></script>
       <script type="text/javascript"  src="assets/plugins/input-mask/demo-mask.js"></script>
       <script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
@@ -265,7 +261,6 @@ if (!isset($_SESSION['seguridad'])){
       <script src="assets/plugins/sparkline/jquery.sparkline.js" type="text/javascript"></script>
       <script src="assets/plugins/sparkline/jquery.customSelect.min.js" ></script> 
       <script src="assets/plugins/sparkline/sparkline-chart.js"></script> 
-      <script src="assets/plugins/sparkline/easy-pie-chart.js"></script>
       <script src="assets/plugins/morris/morris.min.js" type="text/javascript"></script> 
       <script src="assets/plugins/morris/raphael-min.js" type="text/javascript"></script>  
       <!--script src="assets/plugins/morris/morris-script.js"></script--> 
@@ -405,43 +400,13 @@ if (!isset($_SESSION['seguridad'])){
           //Initialize Select2 Elements
           $('.select2').select2()
 
-          //Money Euro
-          $('[data-mask]').inputmask()
-
-          //Date range picker
-          $('#reservation').daterangepicker()
-
-          //iCheck for checkbox and radio inputs
-          $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-            checkboxClass: 'icheckbox_minimal-blue',
-            radioClass   : 'iradio_minimal-blue'
-          })
-          //Red color scheme for iCheck
-          $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-            checkboxClass: 'icheckbox_minimal-red',
-            radioClass   : 'iradio_minimal-red'
-          })
-          //Flat red color scheme for iCheck
-          $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-            checkboxClass: 'icheckbox_flat-green',
-            radioClass   : 'iradio_flat-green'
-          })
-
-          //Colorpicker
-          $('.my-colorpicker1').colorpicker()
-          //color picker with addon
-          $('.my-colorpicker2').colorpicker()
-
-          //Timepicker
-          $('.timepicker').timepicker({
-            showInputs: false
-          })
         })
         //------------------TERMINA SCRIPT SELECT2-----------------
       </script>
 
       <script type="text/javascript">
         $(document).ready(function(){
+          alert('entra');
         // Toolbar extra buttons
         var btnFinish = $('<button></button>').text('Finish')
         .addClass('btn btn-info')

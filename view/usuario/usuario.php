@@ -92,7 +92,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">Tipo usuario<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
-              <select class="form-control" name="tipoUsuario" id="tipoUsuario" required>
+              <select class="form-control" name="tipoUsuario" id="tipoUsuario" required onchange="tipoUsuario();">
                <?php if($usuario->idUsuario == null){ ?>
                <option value="">
                 Seleccione el tipo de usuario
@@ -149,4 +149,9 @@
       $("#password_show").attr("type", "text");
     });
   });
+
+tipoUsuario(){
+alert('entra');
+}
+
 </script>

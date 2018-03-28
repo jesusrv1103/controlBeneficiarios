@@ -573,7 +573,7 @@
 
 																		<div class="form-group">
 																			<div class="col-sm-offset-7 col-sm-5">
-																				<button onclick="nobackbutton()" type="submit" class="btn btn-primary">Guardar</button>
+																				<button type="submit" class="btn btn-primary">Guardar</button>
 																				<a href="?c=Beneficiario" class="btn btn-default"> Cancelar</a>
 																			</div>
 																		</div><!--/form-group-->
@@ -635,6 +635,7 @@
 							window.onload=function(){
 							}
 							listarLocalidades = function (){
+								alert('entra');
 								var idMunicipio = $('#selectMunicipios').val();
 								datos = {"idMunicipio":idMunicipio};
 								$.ajax({
