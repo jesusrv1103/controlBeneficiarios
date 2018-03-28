@@ -154,6 +154,6 @@
   eliminarUsuario = function(idUsuario){
     $('#txtIdUsuario').val(idUsuario);
     //$('#txtUsuario').val(usuario);  
-
   };
+  
 </script>

@@ -45,7 +45,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">Usuario<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
-              <input name="usuario" type="text" class="form-control" required value="<?php echo $usuario->idUsuario != null ? $usuario->usuario : "";  ?>" placeholder="Ingrese el nombre de usuario" <?php if($usuario->idUsuario != null){ ?>  <?php } ?> autofocus <?php if($usuario->idUsuario != null && !isset($nuevoRegistro)){ ?> readonly <?php } ?>/>
+              <input name="usuario" id="usuario" type="text" class="form-control" required value="<?php echo $usuario->idUsuario != null ? $usuario->usuario : "";  ?>" placeholder="Ingrese el nombre de usuario" <?php if($usuario->idUsuario != null){ ?>  <?php } ?> autofocus <?php if($usuario->idUsuario != null && !isset($nuevoRegistro)){ ?> readonly <?php } ?>/>
             </div>
           </div><!--/form-group-->
           <?php if($usuario->idUsuario==null || isset($cambiarPass)){?>
@@ -55,7 +55,7 @@
               <input type="password" id="password" name="password" class="form-control" required placeholder="Password" />
             </div>
             <div class="col-sm-3">
-              <input type="password" class="form-control" required parsley-equalto="#password" placeholder="Confirme la contraseña" />
+              <input type="password" id="password2" class="form-control" required parsley-equalto="#password" placeholder="Confirme la contraseña" />
             </div>
           </div><!--/form-group-->
           <?php }elseif($usuario->idUsuario!=null || !isset($cambiarPass)){ ?>
@@ -70,7 +70,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">Dirección<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
-              <select class="form-control select2" style="width: 100%;" name="direccion" required>
+              <select class="form-control select2" style="width: 100%;" name="direccion" id="direccion">
                 <?php if($usuario->idUsuario==null){ ?>
                 <option value="">
                   Seleccione la dirección a la que pertenece el usuario
@@ -92,7 +92,8 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">Tipo usuario<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
-              <select class="form-control" name="tipoUsuario" id="tipoUsuario" required onchange="tipoUsuario();">
+
+              <select class="form-control" name="tipoUsuario" id="tipoUsuario" onclick="muestradireccion()" required>
                <?php if($usuario->idUsuario == null){ ?>
                <option value="">
                 Seleccione el tipo de usuario
@@ -150,8 +151,9 @@
     });
   });
 
-tipoUsuario(){
-alert('entra');
+direccion = function(){
+var tipoUsuario = $('#tipoUsuario').val()
+alert(tipoUsuario);
 }
 
 </script>
