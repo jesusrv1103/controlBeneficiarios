@@ -5,6 +5,8 @@ require_once 'model/asentamiento.php';
 class AsentamientoController{
 
 	private $model;
+	private $error;
+	private $mensaje;
 
 	public function __CONSTRUCT(){
 		$this->model = new Asentamiento();
@@ -18,20 +20,28 @@ class AsentamientoController{
 	}
 
 	public function Upload(){
-		$archivo = $_FILES['file']['name'];
-		$tipo = $_FILES['file']['type'];
-		$destino = "./assets/files/asentamientos.xlsx";
-		if(copy($_FILES['file']['tmp_name'], $destino)){
-			//echo "Archivo Cargado Con Éxito" . "<br><br>";
-			$this->Importar();
-			//mandar llamar todas las funciones a importar
+		if(!isset($_FILES['file']['name'])){
+			header('Location: ./?c=localidad');
 		}
-		else{
-			$mensaje="Error al cargar el archivo";
-			$page="view/asentamiento/index.php";
-			$asentamientos = true;
-			$catalogos=true;
-			require_once 'view/index.php';
+		$archivo=$_FILES['file'];
+		if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
+			if($archivo['name']=="asentamientos.xlsx"){
+				$nameArchivo = $archivo['name'];
+				$tmp = $archivo['tmp_name'];
+				$archivo['type'];
+				$src = "./assets/files/".$nameArchivo;
+				if(move_uploaded_file($tmp, $src)){
+					$this->Importar();
+				}  
+			}else{
+				$this->error=true;
+				$this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>asentamientos.xlsx</strong>";
+				$this->Index();
+			}
+		}else{
+			$this->error=true;
+			$this->mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
+			$this->Index();
 		}
 	}
 
@@ -61,8 +71,8 @@ class AsentamientoController{
 			$objPHPExcel->setActiveSheetIndex(0);
 			//Obtengo el numero de filas del archivo
 			$numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-			$this->Asentamientos($objPHPExcel,$numRows);
-			$mensaje="Se ha leído correctamente el archivo <strong>asentamientos.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de asentamientos.";
+			$this->LeerArchivo($objPHPExcel,$numRows);
+			$this->mensaje="Se ha leído correctamente el archivo <strong>asentamientos.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de asentamientos.";
 			$page="view/asentamiento/index.php";
 			$asentamientos = true;
 			$catalogos=true;
@@ -70,8 +80,8 @@ class AsentamientoController{
 		}
 		//si por algo no cargo el archivo bak_
 		else {
-			$error=true;
-			$mensaje="El archivo <strong>asentamientos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+			$this->error=true;
+			$this->mensaje="El archivo <strong>asentamientos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
 			$page="view/asentamiento/index.php";
 			$asentamientos = true;
 			$catalogos=true;
@@ -79,7 +89,7 @@ class AsentamientoController{
 		}
 	}
 
-	public function Asentamientos($objPHPExcel,$numRows){
+	public function LeerArchivo($objPHPExcel,$numRows){
 		try{
 			$this->model->Limpiar("asentamientos");
 			$numRow=2;
@@ -98,7 +108,7 @@ class AsentamientoController{
 			} while (!$cat->idAsentamientos == null);
 
 		}catch (Exception $e) {
-			$mensaje="error";
+			$this->mensaje="error";
 			$page="view/asentamiento/index.php";
 			$asentamientos = true;
 			$catalogos=true;
@@ -110,7 +120,7 @@ class AsentamientoController{
 			$this->model->Eliminar($_POST['idAsentamientos']);
 			$catalogos=true;
 			$asentamientos=true;
-			$mensaje="success";
+			$this->mensaje="success";
 			$page="view/asentamiento/index.php";
 			require_once 'view/index.php';
 		}
@@ -128,17 +138,17 @@ class AsentamientoController{
 			$asentamientos = true;
 			$catalogos=true;
 			$nuevoRegistro=true;
-			$mensaje="La clave de asentamiento <b>$asentamiento->idAsentamientos</b> ya existe. Pongase en contacto con el administrador de la Unidad de Planeación para que le proporcione correctamente una nueva clave de asentamiento.";
+			$this->mensaje="La clave de asentamiento <b>$asentamiento->idAsentamientos</b> ya existe. Pongase en contacto con el administrador de la Unidad de Planeación para que le proporcione correctamente una nueva clave de asentamiento.";
 			$page="view/asentamiento/asentamiento.php";
 			require_once "view/index.php";
 		}
 		else{
 			if(!isset($_REQUEST['nuevoRegistro'])){
 				$this->model->Actualizar($asentamiento);
-				$mensaje="Se han actualizado correctamente los datos del asentamiento";
+				$this->mensaje="Se han actualizado correctamente los datos del asentamiento";
 			}else{
 				$this->model->Registrar($asentamiento);
-				$mensaje="Se ha registrado correctamente el asentamiento";
+				$this->mensaje="Se ha registrado correctamente el asentamiento";
 			}
 			$asentamientos = true;
 			$catalogos=true;
@@ -146,6 +156,4 @@ class AsentamientoController{
 			require_once 'view/index.php';
 		}
 	}
-
-
 }

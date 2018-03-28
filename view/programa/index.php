@@ -35,25 +35,25 @@
             </div>    
           </div>
         </div>
-        <?php if(isset($mensaje)){ if(!isset($error)){?>
-        <div class="row" style="margin-bottom: -20px; margin-top: 20px">
-          <div class="col-md-12">
-            <div class="alert alert-success fade in">
-              <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-              <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
-            </div>
-          </div>
-        </div> 
-        <?php } if(isset($error)){ ?>
-        <div class="row" style="margin-bottom: -20px; margin-top: 20px">
-          <div class="col-md-12">
-            <div class="alert alert-danger">
-              <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-              <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
-            </div>
+         <?php if(isset($this->mensaje)){ if(!isset($this->error)){?>
+      <br> <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-success fade in">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
           </div>
         </div>
-        <?php } }?>
+      </div> 
+      <?php } if(isset($this->error)){ ?>
+      <br> <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-danger">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
+          </div>
+        </div>
+      </div>
+      <?php } }?>
         <div class="porlets-content">
           <div class="table-responsive">
             <table  class="display table table-bordered table-striped" id="dynamic-table">
@@ -100,49 +100,46 @@
 <div class="modal fade" id="modalImportar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-body"> 
-        <div class="row">
-          <div class="block-web">
-            <div class="header">
-              <h3 class="content-header theme_color">&nbsp;Importar programas</h3>
-            </div>
-            <div class="porlets-content" style="margin-bottom: -65px;">
-              <p>Importa tu archivo excel con los datos de los programas en caso de que haya algun cambio, si no tienes el archivo puedes descargarlo y agregar o eliminar los datos necesarios.</p>
-              <p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">programas.xlsx</strong> para poder ser leído correctamente.</p>  
-              <br>
-              <span class="btn btn-success fileinput-button">
-                <i class="glyphicon glyphicon-plus"></i>
-                <span>Seleccionar archivo</span>
-                <!-- The file input field used as target for the file upload widget -->
-                <input id="fileupload" type="file" name="files[]" multiple class="programas">
-              </span>
-              <br>
-              <br>
-              <!-- The global progress bar -->
-              <div id="progress" class="progress">
-                <div class="progress-bar progress-bar-success"></div>
+      <form action="?c=programa&a=Upload" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="row">
+            <div class="block-web">
+              <div class="header">
+                <h3 class="content-header theme_color">&nbsp;Importar catálogos de programas</h3>
               </div>
-              <!-- The container for the uploaded files -->
-              <div id="files" class="files"></div>
-            </div><!--/porlets-content--> 
-          </div><!--/block-web--> 
+              <div class="porlets-content" style="margin-bottom: -65px;">
+                <p>Selecciona tu archivo excel con los catáogos de programas para registrarlos en el sistema.</p>
+                <p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">programas.xlsx</strong> para poder ser leído correctamente.</p> 
+                <br>
+                <div class="input-group">
+                  <label class="input-group-btn">
+                    <span class="btn btn-sm btn-success">
+                      <i class="glyphicon glyphicon-plus"></i>
+                      Seleccionar archivo<input  type="file" style="display: none;" id="inputArchivo" name="file" required>
+                    </span>
+                  </label>
+                  <input type="text" class="form-control" id="input-sm" readonly>
+                </div>
+              </div><!--/porlets-content-->
+            </div><!--/block-web-->
+          </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <div class="row col-md-5 col-md-offset-7">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=programa&a=Importar" id="btnImportar" onclick="deshabilitar();" class="btn btn-primary">Importar datos</a>
+        <div class="modal-footer">
+          <div class="row col-md-5 col-md-offset-7">
+            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="submit" id="btnImportar" class="btn btn-sm btn-primary">Importar datos</button>
+          </div>
         </div>
-      </div>
+      </form>
     </div><!--/modal-content--> 
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
 
 <div class="modal fade" div-modal-content id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width: 50%;">
-      <div class="modal-content" id="div-modal-content">
-      </div><!--/modal-content--> 
-    </div><!--/modal-dialog--> 
+  <div class="modal-dialog" style="width: 50%;">
+    <div class="modal-content" id="div-modal-content">
+    </div><!--/modal-content--> 
+  </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
 
 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -210,7 +207,7 @@ actualizarPrograma = function (idPrograma){
 eliminarPrograma = function(idPrograma){
   $('#txtIdPrograma').val(idPrograma);  
 };
- deshabilitar = function (){
+deshabilitar = function (){
   $('#btnImportar').attr("disabled", true);
 }
 </script>

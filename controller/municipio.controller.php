@@ -5,29 +5,55 @@ class MunicipioController{
 
   private $model;
   public $error;
-  //Constructor
+  private $mensaje;
+
   public function __CONSTRUCT(){
     $this->model = new Municipio();
   }
-  //Index 
+
   public function Index(){
     $catalogos=true; //variable cargada para activar la opcion administracion en el menu
     $municipios=true; //variable cargada para activar la opcion municipios en el menu
    $page="view/municipio/index.php"; //Vista principal donde se enlistan los municipios
    require_once 'view/index.php';
  } 
-public function Crud(){
- $municipio = new Municipio();
+ public function Crud(){
+   $municipio = new Municipio();
 
- if(isset($_REQUEST['idMunicipio'])){
-  $municipio = $this->model->Obtener($_REQUEST['idMunicipio']);
- // echo $this->model->idMunicipio;
-  
+   if(isset($_REQUEST['idMunicipio'])){
+    $municipio = $this->model->Obtener($_REQUEST['idMunicipio']);
+    
+  }
+  $catalogos=true;
+  $municipios=true;
+  $page="view/municipio/municipio.php";
+  require_once 'view/index.php';
 }
-$catalogos=true;
-$municipios=true;
-$page="view/municipio/municipio.php";
-require_once 'view/index.php';
+
+public function Upload(){
+  if(!isset($_FILES['file']['name'])){
+    header('Location: ./?c=municipio');
+  }
+  $archivo=$_FILES['file'];
+  if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
+    if($archivo['name']=="municipios.xlsx"){
+      $nameArchivo = $archivo['name'];
+      $tmp = $archivo['tmp_name'];
+      $archivo['type'];
+      $src = "./assets/files/".$nameArchivo;
+      if(move_uploaded_file($tmp, $src)){
+        $this->Importar();
+      }  
+    }else{
+      $this->error=true;
+      $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>municipios.xlsx</strong>";
+      $this->Index();
+    }
+  }else{
+    $this->error=true;
+    $this->mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
+    $this->Index();
+  }
 }
 
 public function Importar(){
@@ -42,17 +68,15 @@ public function Importar(){
     $objPHPExcel->setActiveSheetIndex(0);
         //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-    $this->Municipios($objPHPExcel,$numRows);
-    $mensaje="Se ha leído correctamente el archivo <strong>municipios.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de municipios.";
+    $this->LeerArchivo($objPHPExcel,$numRows);
+    $this->mensaje="Se ha leído correctamente el archivo <strong>municipios.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de municipios.";
     $page="view/municipio/index.php";
     $municipios = true;
     $catalogos=true;
     require_once 'view/index.php';
-  }
-        //si por algo no cargo el archivo bak_ 
-  else {
-    $error=true;
-    $mensaje="El archivo <strong>municipios.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+  }  else {
+    $this->error=true;
+    $this->mensaje="El archivo <strong>municipios.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
     $page="view/municipio/municipio.php";
     $municipios = true;
     $catalogos=true;
@@ -60,12 +84,11 @@ public function Importar(){
   }
 }
 
-public function Municipios($objPHPExcel,$numRows){
+public function LeerArchivo($objPHPExcel,$numRows){
   try{
     $this->model->Limpiar("municipio");
     $numRow=2;
     do {
-            //echo "Entra";
       $muni = new Municipio();
       $muni->claveMunicipio= $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
       $muni->nombreMunicipio = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
@@ -77,8 +100,8 @@ public function Municipios($objPHPExcel,$numRows){
     } while (!$muni->claveMunicipio == null);
 
   }catch (Exception $e) {
-    $error=true;
-    $mensaje="Error al importar los datos de Municipios";
+    $this->error=true;
+    $this->mensaje="Error al importar los datos de Municipios";
     $page="view/municipio/municipio.php";
     $municipios = true;
     $catalogos=true;
@@ -94,7 +117,7 @@ public function Eliminar(){
   $this->model->Eliminar($municipio);
   $catalogos=true;
   $municipios=true;
-  $mensaje="Eliminacion exitosa";
+  $this->mensaje="Eliminacion exitosa";
   $page="view/municipio/index.php";
   require_once 'view/index.php';
   
@@ -108,10 +131,10 @@ public function Guardar(){
 
   if($municipio->idMunicipio > 0){
     $this->model->Actualizar($municipio);
-    $mensaje="Se han actualizado correctamente los datos de el Municipio";
+    $this->mensaje="Se han actualizado correctamente los datos de el Municipio";
   } else {
     $this->model->Registrar($municipio);
-    $mensaje="Se ha registrado correctamente los datos de el Municipio";
+    $this->mensaje="Se ha registrado correctamente los datos de el Municipio";
   } 
   $municipios = true;
   $catalogos=true; 

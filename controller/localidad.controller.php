@@ -3,6 +3,10 @@ require_once 'model/localidad.php';
 
 class LocalidadController{
 
+  private $model;
+  private $mensaje;
+  private $error;
+
  public function __CONSTRUCT(){
   $this->model = new Localidad();
 }
@@ -29,21 +33,29 @@ public function Crud(){
 }
 
 public function Upload(){
-  $archivo = $_FILES['file']['name'];
-  $tipo = $_FILES['file']['type'];
-  $destino = "./assets/files/localidades.xlsx";
-  if(copy($_FILES['file']['tmp_name'], $destino)){
-      //echo "Archivo Cargado Con Éxito" . "<br><br>";
-    $this->Importar();
-      //mandar llamar todas las funciones a importar
+  if(!isset($_FILES['file']['name'])){
+    header('Location: ./?c=localidad');
   }
-  else{
-   $mensaje="Error al cargar el archivo";
-   $page="view/localidad/index.php";
-   $localidades=true;
-   $catalogos=true;
-   require_once 'view/index.php';
- }
+  $archivo=$_FILES['file'];
+  if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
+    if($archivo['name']=="localidades.xlsx"){
+      $nameArchivo = $archivo['name'];
+      $tmp = $archivo['tmp_name'];
+      $archivo['type'];
+      $src = "./assets/files/".$nameArchivo;
+      if(move_uploaded_file($tmp, $src)){
+        $this->Importar();
+      }  
+    }else{
+      $this->error=true;
+      $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>localidades.xlsx</strong>";
+      $this->Index();
+    }
+  }else{
+    $this->error=true;
+    $this->mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
+    $this->Index();
+  }
 }
 
 public function Importar(){
@@ -58,8 +70,8 @@ public function Importar(){
     $objPHPExcel->setActiveSheetIndex(0);
           //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-    $this->Localidades($objPHPExcel,$numRows);
-    $mensaje="Se ha leído correctamente el archivo <strong>localidades.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de localidades.";
+    $this->LeerArchivo($objPHPExcel,$numRows);
+    $this->mensaje="Se ha leído correctamente el archivo <strong>localidades.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de localidades.";
     $page="view/localidad/index.php";
     $localidades=true;
     $catalogos=true;
@@ -67,8 +79,8 @@ public function Importar(){
   }
         //si por algo no cargo el archivo bak_
   else {
-    $error=true;
-    $mensaje="El archivo <strong>localidades.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+    $this->error=true;
+    $this->mensaje="El archivo <strong>localidades.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
     $page="view/localidad/index.php";
     $localidades = true;
     $catalogos=true;
@@ -76,7 +88,7 @@ public function Importar(){
   }
 }
 
-public function Localidades($objPHPExcel,$numRows){
+public function LeerArchivo($objPHPExcel,$numRows){
  try{
   $this->model->Limpiar("localidades");
   $numRow=2;
@@ -92,7 +104,7 @@ public function Localidades($objPHPExcel,$numRows){
     $numRow+=1;
   } while ( !$cat->idLocalidad == null);
 } catch (Exception $e) {
- $mensaje="error";
+ $this->mensaje="error";
  $page="view/localidad/index.php";
  $localidades=true;
  $catalogos=true;
@@ -104,7 +116,7 @@ public function Eliminar(){
   $localidades = true;
   $catalogos=true;
   $page="view/localidad/index.php";
-  $mensaje="Se ha eliminado correctamente la localidad";
+  $this->mensaje="Se ha eliminado correctamente la localidad";
   require_once 'view/index.php';
 }
 public function Guardar(){
@@ -116,20 +128,20 @@ public function Guardar(){
   $localidad->ambito = $_REQUEST['ambito'];
   if($verificaLocalidad!=null && isset($_REQUEST['nuevoRegistro'])){
 
-    $error=true;
+    $this->error=true;
     $localidad = true;
     $catalogos=true;
     $nuevoRegistro=true;
-    $mensaje="La clave de la localidad <b>$localidad->idLocalidad</b> ya existe. Pongase en contacto con el administrador de la Unidad de Planeación para que le proporcione correctamente una nueva clave de localidad.";
+    $this->mensaje="La clave de la localidad <b>$localidad->idLocalidad</b> ya existe. Pongase en contacto con el administrador de la Unidad de Planeación para que le proporcione correctamente una nueva clave de localidad.";
     $page="view/localidad/localidad.php";
     require_once "view/index.php";
   }else{
     if(!isset($_REQUEST['nuevoRegistro'])){
       $this->model->Actualizar($localidad);
-      $mensaje="Se han actualizado correctamente la localidad";
+      $this->mensaje="Se han actualizado correctamente la localidad";
     }else{
       $this->model->Registrar($localidad);
-      $mensaje="Se ha registrado correctamente la localidad";
+      $this->mensaje="Se ha registrado correctamente la localidad";
     }
   }
   $localidades = true;
