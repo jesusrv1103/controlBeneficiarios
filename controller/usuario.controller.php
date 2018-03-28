@@ -41,7 +41,7 @@ class UsuarioController{
 			$password=sha1($password);
 			$usuario->password=$password;
 		}
-		echo $usuario->password;
+		//echo $usuario->password;
 		if($usuario->idUsuario > 0 && isset($_REQUEST['password'])){
 			//Actualiza el usuario cambiando password
 			$this->model->Actualizar($usuario);
