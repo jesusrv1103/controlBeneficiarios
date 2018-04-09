@@ -73,8 +73,10 @@
                   <th>Subprograma</th>
                   <th>Programa</th>
                   <th>Techo presupuestal</th>
-                  <?php if($_SESSION['tipoUsuario']!=2){?>
+                  <?php if($_SESSION['tipoUsuario']!=2 || $_SESSION['tipoUsuario']!=3){?>
                   <td><center><b>Ver</b></center></td>
+                  <?php } ?>
+                  <?php if($_SESSION['tipoUsuario']==1){?>
                   <td><center><b>Editar</b></center></td>
                   <td><center><b>Borrar</b></center></td>
                   <?php } ?>
@@ -106,8 +108,10 @@
               <th>Subprograma</th>
               <th>Programa</th>
               <th>Techo presupuestal</th>
-              <?php if($_SESSION['tipoUsuario']==1){?>
+              <?php if($_SESSION['tipoUsuario']!=2 || $_SESSION['tipoUsuario']!=3){?>
                 <td><center><b>Ver</b></center></td>
+                <?php } ?>
+                <?php if($_SESSION['tipoUsuario']==1){?>
                 <td><center><b>Editar</b></center></td>
                 <td><center><b>Borrar</b></center></td>
               <?php } ?>
