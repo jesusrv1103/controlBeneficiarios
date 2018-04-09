@@ -97,7 +97,7 @@
                <td><center><b>Ver</b></center></td>
                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                <td><center><b>Editar</b></center></td>
-               <?php if($_SESSION['tipoUsuario']==1){?>
+               <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                <td><center><b>Borrar</b></center></td>
                <?php } ?>
                <?php } ?>
@@ -117,14 +117,14 @@
                 <td class="center">
                   <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
                 </td>
-<td class="center">
-             <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-           </td>
-                <?php } ?>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-          <tfoot>
+                <td class="center">
+                 <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+               </td>
+               <?php } ?>
+             </tr>
+           <?php endforeach; ?>
+         </tbody>
+         <tfoot>
            <tr>
             <td><center><b>Info</b></center></td>
             <th>CURP</th>
@@ -133,7 +133,7 @@
             <td><center><b>Ver</b></center></td>
             <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
             <td><center><b>Editar</b></center></td>
-            <?php if($_SESSION['tipoUsuario']==1){?>
+           <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
             <td><center><b>Borrar</b></center></td>
             <?php } ?>
             <?php } ?>
@@ -153,7 +153,7 @@
            <td><center><b>Ver</b></center></td>
            <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
            <td><center><b>Editar</b></center></td>
-           <?php if($_SESSION['tipoUsuario']==1){?>
+           <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
            <td><center><b>Borrar</b></center></td>
            <?php } ?>
            <?php } ?>
@@ -192,7 +192,7 @@
         <td><center><b>Ver</b></center></td>
         <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
         <th><center><b>Editar</b></center></th>
-        <?php if($_SESSION['tipoUsuario']==1){?>
+        <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
         <td><center><b>Borrar</b></center></td>
         <?php } ?>
         <?php } ?>
