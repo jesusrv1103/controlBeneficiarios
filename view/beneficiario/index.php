@@ -50,7 +50,7 @@
                     </ul>
                   </div>
                   <div class="btn-group">
-                   
+
 
                     <button data-toggle="dropdown" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar<span class="caret"></span></button>
                     <ul role="menu" class="dropdown-menu">
@@ -58,7 +58,7 @@
                       <li><a data-toggle="modal" data-target="#modalImportarRFC" href="#modalImportarRFC">Con RFC</a></li>
                     </ul>
                   </div>
-                   <?php } ?>
+                  <?php } ?>
                 </div>
               </b>
             </div>
@@ -97,7 +97,9 @@
                <td><center><b>Ver</b></center></td>
                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                <td><center><b>Editar</b></center></td>
-               
+               <?php if($_SESSION['tipoUsuario']==1){?>
+               <td><center><b>Borrar</b></center></td>
+               <?php } ?>
                <?php } ?>
              </tr>
            </thead>
@@ -115,22 +117,26 @@
                 <td class="center">
                   <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
                 </td>
-                 
-               <?php } ?>
-             </tr>
-           <?php endforeach; ?>
-         </tbody>
-         <tfoot>
+<td class="center">
+             <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+           </td>
+                <?php } ?>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+          <tfoot>
            <tr>
             <td><center><b>Info</b></center></td>
             <th>CURP</th>
             <th>Nombre de beneficiario</th>
             <th>Municipio</th>
             <td><center><b>Ver</b></center></td>
-           <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-               <td><center><b>Editar</b></center></td>
-               
-               <?php } ?>
+            <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+            <td><center><b>Editar</b></center></td>
+            <?php if($_SESSION['tipoUsuario']==1){?>
+            <td><center><b>Borrar</b></center></td>
+            <?php } ?>
+            <?php } ?>
           </tr>
         </tfoot>
       </table>
@@ -146,11 +152,11 @@
            <th>Localidad</th>
            <td><center><b>Ver</b></center></td>
            <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-               <td><center><b>Editar</b></center></td>
-               <?php if($_SESSION['tipoUsuario']==1){?>
-               <td><center><b>Borrar</b></center></td>
-               <?php } ?>
-               <?php } ?>
+           <td><center><b>Editar</b></center></td>
+           <?php if($_SESSION['tipoUsuario']==1){?>
+           <td><center><b>Borrar</b></center></td>
+           <?php } ?>
+           <?php } ?>
          </tr>
        </thead>
        <tbody>
@@ -204,17 +210,17 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <form action="?c=beneficiario&a=Upload" method="post" enctype="multipart/form-data">
-      <div class="modal-body">
-        <div class="row">
-          <div class="block-web">
-            <div class="header">
-              <h3 class="content-header theme_color">&nbsp;Importar beneficiarios con CURP</h3>
-            </div>
-            <div class="porlets-content" style="margin-bottom: -65px;">
-              <p>Selecciona tu archivo excel con los datos de los beneficiarios para registrarlos.</p>
-              <p><strong>Nota: </strong>El archivo debe conener la extención <strong class="theme_color">.xlsx</strong> para poder ser leído correctamente.</p>
-              <br>
-              <div class="input-group">
+        <div class="modal-body">
+          <div class="row">
+            <div class="block-web">
+              <div class="header">
+                <h3 class="content-header theme_color">&nbsp;Importar beneficiarios con CURP</h3>
+              </div>
+              <div class="porlets-content" style="margin-bottom: -65px;">
+                <p>Selecciona tu archivo excel con los datos de los beneficiarios para registrarlos.</p>
+                <p><strong>Nota: </strong>El archivo debe conener la extención <strong class="theme_color">.xlsx</strong> para poder ser leído correctamente.</p>
+                <br>
+                <div class="input-group">
                   <label class="input-group-btn">
                     <span class="btn btn-sm btn-success">
                       <i class="glyphicon glyphicon-plus"></i>
@@ -223,17 +229,17 @@
                   </label>
                   <input type="text" class="form-control" id="input-sm" readonly>
                 </div>
-            </div><!--/porlets-content-->
-          </div><!--/block-web-->
+              </div><!--/porlets-content-->
+            </div><!--/block-web-->
+          </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <div class="row col-md-5 col-md-offset-7">
-          <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
-          <button type="submit" id="btnImportar" class="btn btn-sm btn-primary">Importar datos</button>
+        <div class="modal-footer">
+          <div class="row col-md-5 col-md-offset-7">
+            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="submit" id="btnImportar" class="btn btn-sm btn-primary">Importar datos</button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
     </div><!--/modal-content-->
   </div><!--/modal-dialog-->
 </div><!--/modal-fade-->
@@ -258,7 +264,7 @@
               <p>Importa tu archivo excel con los datos de los beneficiarios para registrarlos.</p>
               <p><strong>Nota: </strong>El archivo debe contener el nombre de <strong class="theme_color">beneficiariosrfc.xlsx</strong> para poder ser leído correctamente.</p>
               <br>
-             <span class="btn btn-success fileinput-button">
+              <span class="btn btn-success fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
                 <span>Seleccionar archivo</span>
                 <!-- The file input field used as target for the file upload widget -->
@@ -434,7 +440,7 @@
  }
 
  infoRegistroRFC = function (idBeneficiarioRFC){
-  
+
    // var idBeneficiario=idBeneficiario;
    $.post("index.php?c=beneficiariorfc&a=Inforegistro", {idBeneficiarioRFC: idBeneficiarioRFC}, function(info) {
     $("#div-modal-content").html(info);
@@ -443,10 +449,10 @@
  buscarBeneficiarioCurp = function (){
 
  }
-  deshabilitar = function (){
+ deshabilitar = function (){
   $('#btnImportar').attr("disabled", true);
 }
- deshabilitar2 = function (){
+deshabilitar2 = function (){
   $('#btnImportar2').attr("disabled", true);
 }
 </script>
