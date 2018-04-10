@@ -4,8 +4,7 @@
   }
 </style>
 <script type="text/javascript">
-  /*var stateObj = { foo: "index.php" };
-  history.pushState(stateObj, "page 2", "beneficiarios");*/
+
 </script>
 <div class="pull-left breadcrumb_admin clear_both">
  <div class="pull-left page_title theme_color">
@@ -37,8 +36,10 @@
                     <div class="btn-group">
                      <a data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-eye"></i>&nbsp;Ver<span class="caret"></span></a>
                      <ul role="menu" class="dropdown-menu">
-                      <li><a href="?c=beneficiario">Beneficiarios con curp</a></li>
-                      <li><a href="?c=beneficiario&a=RFC">Beneficiarios con RFC</a></li>
+                      <li><a href="?c=beneficiario">Beneficiarios con curp 2017</a></li>
+                      <li><a href="?c=beneficiario">Beneficiarios con curp 2018</a></li>
+                      <li><a href="?c=beneficiario&a=RFC">Beneficiarios con RFC 2017</a></li>
+                      <li><a href="?c=beneficiario&a=RFC">Beneficiarios con RFC 2018</a></li>
                     </ul>
                   </div>
                   <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
@@ -53,9 +54,9 @@
 
 
                     <button data-toggle="dropdown" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar<span class="caret"></span></button>
-                    <ul role="menu" class="dropdown-menu">
-                      <li><a data-toggle="modal" data-target="#modalImportar" href="#modalImportar">Con CURP</a></li>
-                      <li><a data-toggle="modal" data-target="#modalImportarRFC" href="#modalImportarRFC">Con RFC</a></li>
+                    <ul role="menu" class="dropdown-menu pull-right">
+                      <li><a data-toggle="modal" data-target="#modalImportar" href="#modalImportar">Beneficiarios con curp</a></li>
+                      <li><a data-toggle="modal" data-target="#modalImportarRFC" href="#modalImportarRFC">Beneficiarios con rfc</a></li>
                     </ul>
                   </div>
                   <?php } ?>
@@ -454,5 +455,5 @@
 }
 deshabilitar2 = function (){
   $('#btnImportar2').attr("disabled", true);
-}
+} 
 </script>

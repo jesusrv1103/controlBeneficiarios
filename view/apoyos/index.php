@@ -44,7 +44,7 @@
 
                  <div class="btn-group">
                   <a data-toggle="dropdown" class="btn btn-sm btn-success dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar<span class="caret"></span></a>
-                  <ul role="menu" class="dropdown-menu" >
+                  <ul role="menu" class="dropdown-menu">
                     <li><a href="?c=apoyos&a=Crud">Apoyo CURP</a></li>
                     <li><a  data-toggle="modal" data-target="#modalProceso" href="#modalProceso">Apoyo RFC</a></li>
                   </ul>
@@ -53,7 +53,7 @@
                 
                 <div class="btn-group">
                   <button data-toggle="dropdown" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar<span class="caret"></span></button>
-                  <ul role="menu" class="dropdown-menu">
+                  <ul role="menu" class="dropdown-menu  pull-right">
                     <li><a data-toggle="modal" data-target="#modalImportar" href="#modalImportar">Con CURP</a></li>
                     <li><a data-toggle="modal" data-target="#modalProceso" href="#modalProceso">Con RFC</a></li>
                   </ul>

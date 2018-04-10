@@ -18,21 +18,19 @@ class LoginController{
    $password=md5($password);
    $password=crc32($password);
    $password=crypt($password,"xtem");
-   echo $password=sha1($password);
+   $password=sha1($password);
    $consulta=$this->model->verificar($log);
    if($consulta!=null){
     if($consulta->password == $password){
 
       $this->login($usuario, $password, $consulta->tipoUsuario, $consulta->direccion);
-      header ('Location: index.php?c=Inicio');
+      echo 'ok';
     }else{
-      $error="  La contraseña es incorrrecta";
-      require_once 'view/login.php';
+      echo "  La contraseña es incorrrecta";
     }
   }else{
-   $error="  El usuario es incorrecto";
-   require_once 'view/login.php';
- }
+    echo "  El usuario es incorrecto";
+  }
 }
 
 public function login($usuario,$password,$tipo,$direccion)

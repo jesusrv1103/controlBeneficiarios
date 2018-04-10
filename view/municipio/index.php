@@ -25,7 +25,7 @@
                 <b>
                   <?php if($_SESSION['tipoUsuario']==1){?>
                   <div class="btn-group" style="margin-right: 10px;">
-                      <a class="btn btn-sm btn-success tooltips" href="?c=municipio&a=Crud&nuevoRegistro=true" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nuevo Municipio"> <i class="fa fa-plus"></i> Registrar </a>
+                    <a class="btn btn-sm btn-success tooltips" href="?c=municipio&a=Crud&nuevoRegistro=true" style="margin-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Registrar nuevo Municipio"> <i class="fa fa-plus"></i> Registrar </a>
                     <a class="btn btn-sm  tooltips btn-warning"  href="#modalImportar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalImportar" data-original-title="Importar Municipios" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
                     <a href="assets/files/municipios.xlsx" download="municipios.xlsx" class="btn btn-sm btn-primary tooltips" data-original-title="Descargar archivo municipios.xlsx" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""> <i class="fa  fa-download"></i>&nbsp;Descargar</a>
                   </div>
@@ -36,24 +36,24 @@
           </div>
         </div>
         <?php if(isset($this->mensaje)){ if(!isset($this->error)){?>
-      <br> <div class="row">
-        <div class="col-md-12">
-          <div class="alert alert-success fade in">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
+        <br> <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-success fade in">
+              <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+              <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
+            </div>
+          </div>
+        </div> 
+        <?php } if(isset($this->error)){ ?>
+        <br> <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-danger">
+              <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+              <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
+            </div>
           </div>
         </div>
-      </div> 
-      <?php } if(isset($this->error)){ ?>
-      <br> <div class="row">
-        <div class="col-md-12">
-          <div class="alert alert-danger">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
-          </div>
-        </div>
-      </div>
-      <?php } }?>
+        <?php } }?>
         <div class="porlets-content">
           <div class="table-responsive">
             <table  class="display table table-bordered table-striped" id="dynamic-table">
@@ -76,73 +76,74 @@
                     <a href="index.php?c=municipio&a=Crud&idMunicipio=<?php echo $r->idMunicipio ?>" class="btn btn-primary btn-sm" role="button"><i class="fa fa-edit"></i></a>
 
                   </td>
-                 <td class="center">
-                  <a onclick="eliminarMunicipio(<?php echo $r->idMunicipio;?>);" class="btn btn-danger btn-sm" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-                </td>
+                  <td class="center">
+                    <a onclick="eliminarMunicipio(<?php echo $r->idMunicipio;?>);" class="btn btn-danger btn-sm" href="#modalEliminar" style="margin-right: 10px;"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+                  </td>
+                  <?php } ?>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>Nombre del programa</th>
+
+                <?php if($_SESSION['tipoUsuario']==1){?>
+                <td><center><b>Editar</b></center></td>
+                <td><center><b>Borrar</b></center></td>
                 <?php } ?>
               </tr>
-            <?php endforeach; ?>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th>Nombre del programa</th>
-
-              <?php if($_SESSION['tipoUsuario']==1){?>
-              <td><center><b>Editar</b></center></td>
-              <td><center><b>Borrar</b></center></td>
-              <?php } ?>
-            </tr>
-          </tfoot>
-        </table>
-      </div><!--/table-responsive-->
-    </div><!--/porlets-content-->
-  </div><!--/block-web-->
-</div><!--/col-md-12-->
+            </tfoot>
+          </table>
+        </div><!--/table-responsive-->
+      </div><!--/porlets-content-->
+    </div><!--/block-web-->
+  </div><!--/col-md-12-->
 </div><!--/row-->
 </div>
 <div class="modal fade" id="modalImportar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
    <div class="modal-content">
-      <form action="?c=municipio&a=Upload" method="post" enctype="multipart/form-data">
-        <div class="modal-body">
-          <div class="row">
-            <div class="block-web">
-              <div class="header">
-                <h3 class="content-header theme_color">&nbsp;Importar catálogos de municipios</h3>
+    <form action="?c=municipio&a=Upload" method="post" enctype="multipart/form-data" id="form-importar">
+      <div class="modal-body">
+        <div class="row">
+          <div class="block-web">
+            <div class="header">
+              <h3 class="content-header theme_color">&nbsp;Importar catálogos de municipios</h3>
+            </div>
+            <div class="porlets-content" style="margin-bottom: -65px;">
+              <p>Selecciona tu archivo excel con los catáogos de municipios para registrarlos en el sistema.</p>
+              <p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">municipios.xlsx</strong> para poder ser leído correctamente.</p> 
+              <br>
+              <div class="input-group">
+                <label class="input-group-btn">
+                  <span class="btn btn-sm btn-success">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    Seleccionar archivo<input  type="file" style="display: none;" id="inputArchivo" name="file" required>
+                  </span>
+                </label>
+                <input type="text" class="form-control" id="input-sm" readonly>
               </div>
-              <div class="porlets-content" style="margin-bottom: -65px;">
-                <p>Selecciona tu archivo excel con los catáogos de municipios para registrarlos en el sistema.</p>
-                <p><strong>Nota: </strong>Al importar el archivo actualizado debe tener el nombre de <strong class="theme_color">municipios.xlsx</strong> para poder ser leído correctamente.</p> 
-                <br>
-                <div class="input-group">
-                  <label class="input-group-btn">
-                    <span class="btn btn-sm btn-success">
-                      <i class="glyphicon glyphicon-plus"></i>
-                      Seleccionar archivo<input  type="file" style="display: none;" id="inputArchivo" name="file" required>
-                    </span>
-                  </label>
-                  <input type="text" class="form-control" id="input-sm" readonly>
-                </div>
-              </div><!--/porlets-content-->
-            </div><!--/block-web-->
-          </div>
+            </div><!--/porlets-content-->
+          </div><!--/block-web-->
         </div>
-        <div class="modal-footer">
-          <div class="row col-md-5 col-md-offset-7">
-            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
-            <button type="submit" id="btnImportar" class="btn btn-sm btn-primary">Importar datos</button>
-          </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row col-md-5 col-md-offset-7">
+          <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+          <button type="submit" onclick="mensajeEspera()" id="btnImportar" class="btn btn-sm btn-primary">Importar datos</button>
         </div>
-      </form>
-    </div><!--/modal-content--> 
-  </div><!--/modal-dialog-->
+      </div>
+      <div id="div-espera">Espere un momento porfavor ...</div>
+    </form>
+  </div><!--/modal-content--> 
+</div><!--/modal-dialog-->
 </div><!--/modal-fade-->
 
 <div class="modal fade" div-modal-content id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width: 50%;">
-      <div class="modal-content" id="div-modal-content">
-      </div><!--/modal-content-->
-    </div><!--/modal-dialog-->
+  <div class="modal-dialog" style="width: 50%;">
+    <div class="modal-content" id="div-modal-content">
+    </div><!--/modal-content-->
+  </div><!--/modal-dialog-->
 </div><!--/modal-fade-->
 
 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -173,35 +174,17 @@
   </div><!--/modal-dialog-->
 </div><!--/modal-fade-->
 <script>
-/* ----Funcion para buscar en una tabla------
-
-  function myFunction() {
-  // Declare variables
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}*/
-
-
+   window.onload = function(){
+     $('#div-espera').hide();
+   } 
+ $('#form-importar').submit(function(){
+    alert('entra');
+ });
   eliminarMunicipio = function(idMunicipio){
-   
     $('#txtIdMunicipio').val(idMunicipio);
   };
-   deshabilitar = function (){
-  $('#btnImportar').attr("disabled", true);
-}
+  deshabilitar = function (){
+    $('#btnImportar').attr("disabled", true);
+  }
+
 </script>

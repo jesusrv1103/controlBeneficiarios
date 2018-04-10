@@ -43,12 +43,8 @@ body{
   
       <div class="login_content">
         <div class="panel-heading border login_heading">INICIAR SESIÓN</div>	
-        <?php if(isset($error)){ ?>
-          <div class="alert alert-danger">
-            <i class="fa fa-warning"></i><?php echo $error;?>
-          </div>
-          <?php } ?>
-        <form role="form" action="index.php?c=Login&a=Acceder" class="form-horizontal" method="post">
+        <div id="div-error"></div>
+        <form role="form" action="index.php?c=Login&a=Acceder" class="form-horizontal" method="post" id="form-login">
           <div class="form-group">
             <div class="col-sm-10">
               <input type="text" placeholder="Usuario" name="usuario" id="inputEmail3" class="form-control">
@@ -73,4 +69,23 @@ body{
   <script src="assets/js/common-script.js"></script>
   <script src="assets/js/jquery.slimscroll.min.js"></script>
 </body>
+<script type="text/javascript">
+   $('#form-login').submit(function() {
+      $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        success: function(respuesta) {
+          console.log(respuesta);
+          if(respuesta == "ok"){
+             location.href = "?c=inicio";
+          }else{
+            $('#div-error').html('<div class="alert alert-danger"><i class="fa fa-warning"></i>'+respuesta+'</div>');
+         }
+       }
+     })      
+      return false;
+    }); 
+</script>
+   
 </html>

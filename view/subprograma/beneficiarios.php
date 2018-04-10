@@ -18,20 +18,13 @@
       <div class="block-web">
         <div class="header">
           <div class="row" style="margin-top: 15px; margin-bottom: 12px;">
-            <div class="col-sm-6" style="margin-right: 100px;">
+            <div class="col-sm-12" style="margin-right: 100px;">
               <div class="actions"> </div>
               <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;<?php echo $subprograma; ?></h2>
             </div>
-            <div class="col-sm-2" style="margin-top: -5px; margin-right: -100px;">
-              <div class="minimal-blue single-row">
-                <div class="checkbox ">
-
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="btn-group pull-right">
-                  <div class="minimal single-row">
+            <div class="col-md-4">
+              <div class="btn-group pull-right">
+                <div class="minimal single-row">
 
                 </div>
               </div>
@@ -91,7 +84,7 @@
               <th>Primer apellido</th>
               <th>Segundo apellido</th>
               <?php if($_SESSION['tipoUsuario']!=2){?>
-                <td><center><b>Ver</b></center></td>
+              <td><center><b>Ver</b></center></td>
               <?php } ?>
             </tr>
           </tfoot>

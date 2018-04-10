@@ -2,7 +2,7 @@
 require_once 'model/database.php';
 session_start();
 if (!isset($_REQUEST['c']) && isset($_SESSION['seguridad'])){
-    header("Location: index.php?c=Inicio"); 
+    header("Location: index.php?c=inicio"); 
 }
 $controller = 'login';
 // Todo esta lógica hara el papel de un FrontController
