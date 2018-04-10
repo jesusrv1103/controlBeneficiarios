@@ -133,7 +133,7 @@
             <td><center><b>Ver</b></center></td>
             <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
             <td><center><b>Editar</b></center></td>
-           <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+            <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
             <td><center><b>Borrar</b></center></td>
             <?php } ?>
             <?php } ?>

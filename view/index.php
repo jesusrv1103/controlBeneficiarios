@@ -99,7 +99,7 @@ if (!isset($_SESSION['seguridad'])){
           <div class="top_right_bar">
             <div style="margin-top: -33%;">
               <span class="user_adminname">Hola <?php echo $_SESSION['usuario']; ?></span>
-              <span class="user_adminname"><a href="?c=Login&a=logout"><i class="fa fa-power-off"></i> Salir</span></a>
+              <span class="user_adminname"><a href="?c=login&a=logout"><i class="fa fa-power-off"></i> Salir</span></a>
             </div>
           </div>
         </div>
@@ -121,7 +121,7 @@ if (!isset($_SESSION['seguridad'])){
             <?php } else { ?>
             <li class="theme_border">
               <?php } ?>
-              <a href="?c=Inicio"> <i class="fa fa-home"></i> Inicio </a>
+              <a href="?c=inicio"> <i class="fa fa-home"></i> Inicio </a>
             </li>
             <?php if(isset($administracion)){ ?>
             <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
@@ -131,13 +131,13 @@ if (!isset($_SESSION['seguridad'])){
                   <ul>
                     <?php }  ?>
                     <li>
-                      <a href="?c=Beneficiario"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                      <a href="?c=beneficiario"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                         <?php if (isset($beneficiarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>
                       </a>
                     </li>
                     <br><br>
                     <li>
-                      <a href="?c=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                      <a href="?c=apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                         <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
                       </a>
                     </li><br><br>
@@ -145,7 +145,7 @@ if (!isset($_SESSION['seguridad'])){
                     <?php if($_SESSION['tipoUsuario']==1){?>
 
                     <li>
-                      <a href="?c=Direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                      <a href="?c=direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                         <?php if (isset($direcciones)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
                       </a>
                     </li><br><br>
@@ -153,14 +153,14 @@ if (!isset($_SESSION['seguridad'])){
                     
                     <?php if($_SESSION['tipoUsuario']==3 || $_SESSION['tipoUsuario']==1){?>
                     <li>
-                      <a href="?c=Subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                      <a href="?c=subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                         <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
                       </a>
                     </li><br><br>
                     <?php } ?>
                     <?php if($_SESSION['tipoUsuario']==1){?>
                     <li>
-                      <a href="?c=Usuario"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                      <a href="?c=usuario"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                         <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
                       </a>
                     </li><br><br>
@@ -176,31 +176,31 @@ if (!isset($_SESSION['seguridad'])){
                       <ul>
                         <?php }  ?>
                         <li>
-                          <a href="?c=Catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                          <a href="?c=catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                             <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>                 </a>
                           </li><br><br>
                           <li>
-                            <a href="?c=Catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                            <a href="?c=catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                               <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
                             </a>
                           </li><br><br>
                           <li>
-                            <a href="?c=Localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                            <a href="?c=localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                               <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
                             </a>
                           </li><br><br>
                           <li>
-                            <a href="?c=Asentamiento"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                            <a href="?c=asentamiento"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                               <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Asentamientos</b>
                             </a>
                           </li><br><br>
                           <li>
-                            <a href="?c=Municipio"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                            <a href="?c=municipio"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                               <?php if (isset($municipios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Municipios</b>
                             </a>
                           </li><br><br>
                           <li>
-                            <a href="?c=Programa"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                            <a href="?c=programa"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                               <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b>
                             </a>
                           </li>
