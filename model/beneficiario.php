@@ -533,13 +533,45 @@ class Beneficiario
 		}
 	}
 
-	public function Listar1()
+public function Listar1($periodo)
 	{
 		try
 		{
-			//$result = array();
+			$fechaInicio=$periodo.'-01-01';
+			$fechaFin=$periodo.'-12-31';
+			$stm = $this->pdo->prepare("SELECT * FROM beneficiarios b, registro r, municipio m WHERE b.idRegistro= r.idRegistro AND b.idMunicipio=m.idMunicipio AND r.estado='Activo' AND DATE(r.fechaAlta) BETWEEN ? AND ?");
+			$stm->execute(array($fechaInicio, $fechaFin));
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function Listar2($periodo)
+	{
+		try
+		{
+			$fechaInicio=$periodo.'-01-01';
+			$fechaFin=$periodo.'-12-31';
+			$stm = $this->pdo->prepare("SELECT * FROM beneficiarios b, registro r, municipio m, actualizacion a WHERE b.idRegistro= r.idRegistro AND b.idMunicipio=m.idMunicipio AND r.idRegistro=a.idRegistro AND r.estado='Activo' AND DATE(a.fechaActualizacion) BETWEEN ? AND ?");
+			$stm->execute(array($fechaInicio, $fechaFin));
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function ListarTodos()
+	{
+		try
+		{
 			$stm = $this->pdo->prepare("SELECT 	* FROM beneficiarios b, registro r, municipio m WHERE b.idRegistro= r.idRegistro AND b.idMunicipio=m.idMunicipio AND r.estado='Activo'");
-			$stm->execute();
+			$stm->execute(array());
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		}
@@ -549,23 +581,8 @@ class Beneficiario
 		}
 	}
 
-	public function Listar2()
-	{
-		try
-		{
-			//$result = array();
 
-			$stm = $this->pdo->prepare("SELECT * FROM beneficiarios, registro, municipio WHERE registro.idRegistro=beneficiarios.idRegistro and registro.estado='Activo'");
-			$stm->execute();
-
-			return $stm->fetchAll(PDO::FETCH_OBJ);
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
-	}
-
+	
 //Funciones para registrar los detalles de cada registro de beneficiarios.
 
 	public function RegistraDatosRegistro(Beneficiario $data){
