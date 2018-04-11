@@ -7,7 +7,7 @@ class Localidad
 	public $municipio;
 	public $localidad;
 	public $ambito;
-
+	public $estado;
 	public function __CONSTRUCT()
 	{
 		try
@@ -23,13 +23,14 @@ class Localidad
 		try 
 		{
 			//$this->Limpiar('identificacionOficial');
-			$sql= $this->pdo->prepare("INSERT INTO localidades VALUES(?,?,?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO localidades VALUES(?,?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->idLocalidad,
 					$data->municipio,
 					$data->localidad,
-					$data->ambito
+					$data->ambito,
+					$data->estado
 
 					)
 				);
@@ -38,15 +39,15 @@ class Localidad
 		{
 			die($e->getMessage());
 		}
-	
-}
+
+	}
 	public function Listar()
 	{
 		try
 		{
 			//$result = array();
 
-			$stm = $this->pdo->prepare("SELECT * FROM localidades");
+			$stm = $this->pdo->prepare("SELECT * FROM localidades WHERE estado='Activo';");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -84,14 +85,22 @@ class Localidad
 			die($e->getMessage());
 		}
 	}
-	public function Eliminar($id)
+	public function Eliminar(Localidad $data)
 	{
 		try 
 		{
-			$stm = $this->pdo
-			->prepare("DELETE FROM localidades WHERE idLocalidad = ?");			          
+			$sql = "UPDATE localidades SET 
+			estado = ?
+			WHERE idLocalidad = ?";
 
-			$stm->execute(array($id));
+			$this->pdo->prepare($sql)
+			->execute(
+				array(
+					$data->estado,
+					$data->idLocalidad
+					
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -102,7 +111,7 @@ class Localidad
 		try 
 		{
 			$sql = "UPDATE localidades SET 
-			idLocalidad = ?, municipio = ?, localidad= ?, ambito = ? WHERE idLocalidad = ?";
+			idLocalidad = ?, municipio = ?, localidad= ?, ambito = ?, estado = ? WHERE idLocalidad = ?";
 
 			$this->pdo->prepare($sql)
 			->execute(
@@ -111,10 +120,11 @@ class Localidad
 					$data->municipio,
 					$data->localidad,
 					$data->ambito,
+					$data->estado,
 					$data->idLocalidad
 					
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -126,7 +136,7 @@ class Localidad
 		try 
 		{
 			$sql = "INSERT INTO localidades
-			VALUES (?,?,?,?)";
+			VALUES (?,?,?,?,?)";
 
 			$this->pdo->prepare($sql)
 			->execute(
@@ -135,8 +145,9 @@ class Localidad
 					$data->municipio,
 					$data->localidad,
 					$data->ambito,
-				)
-			);
+					$data->estado
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -151,7 +162,7 @@ class Localidad
 			$sql= $this->pdo->prepare("SELECT * FROM localidades WHERE idLocalidad=?");
 			$resultado=$sql->execute(
 				array($idLocalidad)
-			);
+				);
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e)
 		{
