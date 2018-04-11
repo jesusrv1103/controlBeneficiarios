@@ -267,7 +267,7 @@
 															<option value="<?php echo $beneficiario->idMunicipio?>">
 																<?php echo $beneficiario->nombreMunicipio; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('municipio') as $r):
+															<?php } foreach($this->model2->ListarMunicipio('municipio') as $r):
 															if($r->nombreMunicipio!=$beneficiario->nombreMunicipio){ ?>
 															?>
 															<option value="<?php echo $r->idMunicipio; ?>">

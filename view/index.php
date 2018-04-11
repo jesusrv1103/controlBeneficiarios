@@ -158,30 +158,28 @@ if (!isset($_SESSION['seguridad'])){
           </li>
 
 
-
+ <?php if($_SESSION['tipoUsuario']==1){?>
           <?php if(isset($administracion)){ ?>
           <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i>  Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
             <ul class="opened" style="display:block">
               <?php  }else{ ?>
+             
               <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
                 <ul>
-                  <?php }  ?>
-                  <?php if($_SESSION['tipoUsuario']==1){?>
+                  <?php }  ?> 
                   <li>
                     <a href="?c=direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                       <?php if (isset($direcciones)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
                     </a>
                   </li><br><br>
-                  <?php } ?>
-                  <?php if($_SESSION['tipoUsuario']==1){?>
                   <li>
                     <a href="?c=usuario"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                       <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
                     </a>
                   </li><br><br>
-                  <?php } ?>
                 </ul>
               </li>
+                 <?php } ?>
 
               <?php if($_SESSION['tipoUsuario']==3 || $_SESSION['tipoUsuario']==1){?>
               <?php if(isset($catalogos)){ ?> <!-- CATALOGOS -->

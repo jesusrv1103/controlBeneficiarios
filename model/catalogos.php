@@ -201,7 +201,24 @@ class Catalogos
 		$stm->execute();
 		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
-	
+	public function ListarMunicipio()
+	{
+		try
+		{
+			//$result = array();
+		    // SELECT p.idMunicipio, p.Municipio, sum(techoPresupuestal) as suma   FROM Municipio p , subMunicipio s where p.idMunicipio =  s.idMunicipio group by p.idMunicipio
+
+			$stm = $this->pdo->prepare("SELECT * from municipio WHERE estado='Activo';");
+			
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
 	public function ListarCaracteristicasApoyo()
 	{
 		$stm = $this->pdo->prepare("SELECT * FROM caracteristicasapoyo, tipoapoyo WHERE tipoApoyo.idTipoApoyo=caracteristicasApoyo.idTipoApoyo;");

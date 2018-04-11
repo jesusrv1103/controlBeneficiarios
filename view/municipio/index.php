@@ -174,15 +174,15 @@
   </div><!--/modal-dialog-->
 </div><!--/modal-fade-->
 <script>
-   window.onload = function(){
+  /* window.onload = function(){
      $('#div-espera').hide();
    } 
  $('#form-importar').submit(function(){
     alert('entra');
- });
+ });*/
   eliminarMunicipio = function(idMunicipio){
     $('#txtIdMunicipio').val(idMunicipio);
-  };
+  }
   deshabilitar = function (){
     $('#btnImportar').attr("disabled", true);
   }
