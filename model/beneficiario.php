@@ -708,7 +708,7 @@ public function Listar1($periodo)
 	{
 		try
 		{
-			$stm = $this->pdo->prepare("SELECT * FROM localidades WHERE municipio=?");
+			$stm = $this->pdo->prepare("SELECT * FROM localidades WHERE municipio=? AND estado='Activo';");
 			$stm->execute(array($municipio));
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);

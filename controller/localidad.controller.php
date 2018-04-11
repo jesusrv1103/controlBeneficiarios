@@ -97,6 +97,7 @@ public function LeerArchivo($objPHPExcel,$numRows){
     $cat->municipio = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
     $cat->localidad = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
     $cat->ambito = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
+    $cat->estado='Activo';
     if (!$cat->idLocalidad == null) {
       $this->model->ImportarLocalidad($cat);
     }
@@ -111,11 +112,15 @@ public function LeerArchivo($objPHPExcel,$numRows){
 }
 }
 public function Eliminar(){
-  $this->model->Eliminar($_REQUEST['idLocalidad']);
+
+  $localidad= new Localidad;
+  $localidad->idLocalidad=$_REQUEST['idLocalidad'];
+  $localidad->estado='Inactivo';
+  $this->model->Eliminar($localidad);
   $localidades = true;
   $catalogos=true;
-  $page="view/localidad/index.php";
   $this->mensaje="Se ha eliminado correctamente la localidad";
+  $page="view/localidad/index.php";
   require_once 'view/index.php';
 }
 public function Guardar(){
@@ -125,6 +130,7 @@ public function Guardar(){
   $localidad->municipio = $_REQUEST['municipio'];
   $localidad->localidad = $_REQUEST['localidad'];
   $localidad->ambito = $_REQUEST['ambito'];
+  $localidad->estado = "Activo";
   if($verificaLocalidad!=null && isset($_REQUEST['nuevoRegistro'])){
 
     $this->error=true;
