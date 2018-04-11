@@ -13,6 +13,14 @@ class BeneficiariorfcController{
     $this->model2 = new Catalogos();
   }
 
+    public function Index(){
+    $beneficiarios = true;
+    $beneficiario_rfc=true;
+    $page="view/beneficiario_rfc/index.php";
+    require_once 'view/index.php';
+  }
+
+
 //Metodo Guardar  si trae un id actualiza, no registra
   public function Guardar(){
     $beneficiario= new Beneficiariorfc();

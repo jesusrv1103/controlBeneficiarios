@@ -23,23 +23,17 @@ class BeneficiarioController{
   }
 
   public function Index(){
-    $tipoBen="CURP";
-    $administracion = true;
-    $inicio = false;
+    if(!isset($_REQUEST['periodo'])){
+      $periodo='Ver todos';
+    }else{
+      $periodo=$_REQUEST['periodo'];
+    }
     $beneficiarios = true;
-    $page="view/beneficiario/index.php";
+    $beneficiario_curp=true;
+    $page="view/beneficiario_curp/index.php";
     require_once 'view/index.php';
   }
 
-
-  public function RFC(){
-    $tipoBen="RFC";
-    $administracion = true;
-    $inicio = false;
-    $beneficiarios = true;
-    $page="view/beneficiario/index.php";
-    require_once 'view/index.php';
-  }
 
   //Metodo Guardar  si trae un id actualiza, no registra
   public function Guardar(){
@@ -120,10 +114,9 @@ class BeneficiarioController{
       $ben = $this->model->Listar($idBeneficiario);
       $infoApoyo = $this->model->ObtenerInfoApoyo($idBeneficiario);
     }
-    $administracion = true;
-    $inicio = false;
+    $beneficiario_curp=true;
     $beneficiarios = false;
-    $page="view/beneficiario/detalles.php";
+    $page="view/beneficiario_curp/detalles.php";
     require_once 'view/index.php';
 
   }
@@ -134,29 +127,27 @@ class BeneficiarioController{
       $beneficiario->curp=$_REQUEST['curp'];
       $verificaBen=$this->model->VerificaBeneficiario($beneficiario->curp);
       if($verificaBen==null){
-        $administracion=true;
         $beneficiarios=true;
-        $page="view/beneficiario/beneficiario.php";
+        $beneficiario_curp=true;
+        $page="view/beneficiario_curp/beneficiario.php";
         require_once 'view/index.php';
       }else{
-        echo $beneficiario->idBeneficiario;
+        $beneficiario->idBeneficiario;
         $warning=true;
-        $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos y la información de registro sean correctos y esten actualizados si no es así, porfavor, <a href='?c=Beneficiario&a=Crud&idBeneficiario=".$verificaBen->idBeneficiario."'>actualice la información</a>.";
-        $administracion = true;
-        $inicio = false;
+        $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos y la información de registro sean correctos y esten actualizados si no es así, porfavor, <a href='?c=Beneficiario&a=Crud&idBeneficiario=".$verificaBen->idBeneficiario."'>actualice la información</a>.";      
         $beneficiarios = false;
+        $beneficiario_curp=true;
         $ben = $this->model->Listar($verificaBen->idBeneficiario);
         $infoApoyo = $this->model->ObtenerInfoApoyo($verificaBen->idBeneficiario);
-        $page="view/beneficiario/detalles.php";
+        $page="view/beneficiario_curp/detalles.php";
         require_once 'view/index.php';
       }
     }if(isset($_REQUEST['idBeneficiario'])){
-
-      $administracion=true;
       $beneficiarios=true;
+      $beneficiario_curp=true;
       $beneficiario = $this->model->Listar($_REQUEST['idBeneficiario']);
       $infoApoyo = $this->model->ObtenerInfoApoyo($_REQUEST['idBeneficiario']);
-      $page="view/beneficiario/beneficiario.php";
+      $page="view/beneficiario_curp/beneficiario.php";
       require_once 'view/index.php';
     }
   }
@@ -198,10 +189,10 @@ class BeneficiarioController{
       if($this->numActualizados>0)
         $mensaje = $mensaje . "<br><i class='fa fa-check'></i> Se han actualizado $this->numActualizados registros.";
       $beneficiarios = true;
-      $administracion=true;
+
       $tipoBen="CURP";
-      //$page="view/beneficiario/index.php";
-      $page="view/beneficiario/resumenImportar.php";
+      //$page="view/beneficiario_curp/index.php";
+      $page="view/beneficiario_curp/resumenImportar.php";
       require_once 'view/index.php';
     }
     //si por algo no cargo el archivo bak_
@@ -210,7 +201,7 @@ class BeneficiarioController{
       $mensaje="El archivo <strong>beneficiarios.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
       $page="view/beneficiarios/index.php";
       $beneficiarios = true;
-      $administracion=true;
+
       require_once 'view/index.php';
     }
   }
@@ -328,7 +319,7 @@ class BeneficiarioController{
             array_push($arrayError, $row_array); 
           }
           $verificaBen=$this->model->VerificaBeneficiario($ben->curp);
-           if($verificaBen==null){
+          if($verificaBen==null){
             //Datos de registro
             $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
             $ben->idMunicipio=$consult->idMunicipio;
@@ -350,20 +341,19 @@ class BeneficiarioController{
         $numRow+=1;
       } while(!$ben->curp == null);
 
-        $_SESSION['numRegErroneos']=$numRegErroneos; 
-       
+      $_SESSION['numRegErroneos']=$numRegErroneos; 
+
       if($numRegErroneos>0){
 
        $this->arrayError=$arrayError;
 
      }
      //echo  '<br>'.json_encode($arrayError, JSON_FORCE_OBJECT);
-  }catch (Exception $e) {
+   }catch (Exception $e) {
     $error=true;
     $mensaje="Error al insertar datos del archivo";
-    $page="view/beneficiario/index.php";
+    $page="view/beneficiario_curp/index.php";
     $beneficiarios = true;
-    $administracion=true;
     require_once 'view/index.php';
   }
 }
@@ -410,8 +400,7 @@ function is_sexo_curp($sexo){
  return false; 
 }
 
-public function Eliminar(){
-    $administracion=true; //variable cargada para activar la opcion administracion en el menu
+public function Eliminar(){ //variable cargada para activar la opcion administracion en el menu
     $beneficiarios=true; //variable cargada para activar la opcion programas en el menu
     $beneficiario= new Beneficiario();
     $beneficiario->idRegistro = $_REQUEST['idRegistro'];
@@ -421,14 +410,40 @@ public function Eliminar(){
   }
 
   public function Detalles(){
-    $administracion=true;
+    $beneficiario_curp=true;
     $beneficiarios=true;
     $ben = new Beneficiario();
     $ben = $this->model->Listar($_REQUEST['idBeneficiario']);
     $infoApoyo = $this->model->ObtenerInfoApoyo($_REQUEST['idBeneficiario']);
-    $page="view/beneficiario/detalles.php";
+    $page="view/beneficiario_curp/detalles.php";
     require_once 'view/index.php';
   }
+
+    public function Consultas(){
+    $periodo=$_REQUEST['periodo'];
+    foreach ($this->model->Listar1($periodo) as $r):
+      echo '
+      <tr class="grade">
+      <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro('; echo $r->idBeneficiario; echo ')" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+      <td>'. $r->curp .'</td>
+      <td>'. $r->nombres." ".$r->primerApellido." ".$r->segundoApellido .'</td>
+      <td>'. $r->nombreMunicipio .'</td>
+      <td class="center">
+      <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario='. $r->idBeneficiario .'" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+      </td>';
+      if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){
+        echo 
+        '<td class="center">
+        <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario='. $r->idBeneficiario .'"><i class="fa fa-edit"></i></a>
+        </td>
+        <td class="center">
+        <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario('; echo $r->idRegistro; echo ')" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+        </td>';
+      } 
+      echo '</tr>';
+    endforeach; 
+}
+  
 
   public function Inforegistro(){
     $idBeneficiario = $_POST['idBeneficiario'];

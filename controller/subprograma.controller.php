@@ -10,8 +10,7 @@ class SubprogramaController{
     $this->model = new Subprograma();
   }
   public function Index(){
-   $administracion = true;
-   $inicio = false;
+   $catalogos = true;
    $subprogramas=true;
    $page="view/subprograma/index.php";
    require_once 'view/index.php';
@@ -21,7 +20,7 @@ class SubprogramaController{
    if(isset($_REQUEST['idSubprograma'])){
     $subprograma = $this->model->Obtener($_REQUEST['idSubprograma']);
   }
-  $administracion=true;
+  $catalogos=true;
   $subprogramas=true;
   $page= "view/subprograma/subprograma.php";
   require_once 'view/index.php';
@@ -43,14 +42,14 @@ public function Guardar(){
     $this->mensaje="Se ha registrado correctamente subprograma";
   }
   $tabla=true;
-    $administracion=true; //variable cargada para activar la opcion administracion en el menu
+    $catalogos=true; //variable cargada para activar la opcion catalogos en el menu
     $subprogramas=true; //variable cargada para activar la opcion programas en el menu
     $page="view/subprograma/index.php";
     require_once 'view/index.php';
   }
   public function Eliminar(){
    $this->model->Eliminar($_REQUEST['idSubprograma']);
-   $administracion = true;
+   $catalogos = true;
    $subprograma = true;
    $tabla=true;
    $page="view/subprograma/index.php";
@@ -102,7 +101,7 @@ public function Upload(){
     $this->model->Check(1);
     $this->mensaje="Se ha leído correctamente el archivo <strong>subprogramas.xlsx</strong>.<br><i class='fa fa-check'></i> Se han registrado correctamente los subprogramas.";
     $page="view/subprograma/index.php";
-    $administracion=true;
+    $catalogos=true;
     require_once 'view/index.php';
   }
           //si por algo no cargo el archivo bak_
@@ -110,7 +109,7 @@ public function Upload(){
     $this->error=true;
     $this->mensaje="El archivo <strong>subprogramas.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
     $page="view/subprograma/index.php";
-    $administracion=true;
+    $catalogos=true;
     require_once 'view/index.php';
   }
 }
@@ -137,7 +136,7 @@ public function LeerArchivo($objPHPExcel,$numRows){
  $this->error=true;
  $this->mensaje="Error al importar los datos de Subprogramas.";
  $page="view/subprograma/index.php";
- $administracion=true;
+ $catalogos=true;
  require_once 'view/index.php';
 }
 }
@@ -184,7 +183,7 @@ endforeach;
 }
 
 public function VerTabla(){
-  $administracion=true;
+  $catalogos=true;
   $subprogramas=true;
   $tabla=true;
   $page="view/subprograma/index.php";
@@ -247,7 +246,7 @@ public function infoSubprograma(){
 public function Beneficiarios(){
   $subprograma=$_REQUEST['subprograma'];
   $idSubprograma=$_REQUEST['idSubprograma'];
-  $administracion=true;
+  $catalogos=true;
   $subprogramas=true;
   $page="view/subprograma/beneficiarios.php";
   require_once "view/index.php";

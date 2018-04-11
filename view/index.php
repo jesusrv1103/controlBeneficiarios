@@ -12,271 +12,297 @@ if (!isset($_SESSION['seguridad'])){
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
-    <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/admin.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
-    <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
-    <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
-    <!--link href="assets/css/select2.css" rel="stylesheet"-->
-    <link href="assets/plugins/bootstrap-editable/bootstrap-editable.css" rel="stylesheet">
-    <link href="assets/plugins/dropzone/dropzone.css" rel="stylesheet">
-    <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
-    <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
-    <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
-    <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
-    <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/plugins/file-uploader/css/blueimp-gallery.min.css">
-    <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload.css">
-    <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload-ui.css">
-    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css" />
-    <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.css">
+  <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/admin.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
+  <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
+  <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
+  <!--link href="assets/css/select2.css" rel="stylesheet"-->
+  <link href="assets/plugins/bootstrap-editable/bootstrap-editable.css" rel="stylesheet">
+  <link href="assets/plugins/dropzone/dropzone.css" rel="stylesheet">
+  <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
+  <link href="assets/plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
+  <link href="assets/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
+  <link href="assets/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
+  <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/plugins/file-uploader/css/blueimp-gallery.min.css">
+  <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload.css">
+  <link rel="stylesheet" href="assets/plugins/file-uploader/css/jquery.fileupload-ui.css">
+  <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css" />
+  <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.css">
 
-    <!--Estilos Para radio buton y switch -->
-    <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/checkbox/icheck.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/checkbox/minimal/blue.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/checkbox/minimal/green.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/checkbox/minimal/grey.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/checkbox/minimal/orange.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/checkbox/minimal/pink.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/checkbox/minimal/purple.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
+  <!--Estilos Para radio buton y switch -->
+  <link href="assets/plugins/toggle-switch/toggles.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/checkbox/icheck.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/checkbox/minimal/blue.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/checkbox/minimal/green.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/checkbox/minimal/grey.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/checkbox/minimal/orange.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/checkbox/minimal/pink.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/checkbox/minimal/purple.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css" rel="stylesheet">
 
-    <!--Wizard  -->
-    <link href="assets/plugins/wizard/css/smart_wizard.css" rel="stylesheet" type="text/css" />
-    <!-- Optional SmartWizard theme -->
-    <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
-    <!-- Optional SmartWizard theme -->
-    <link href="assets/plugins/wizard/css/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/wizard/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
+  <!--Wizard  -->
+  <link href="assets/plugins/wizard/css/smart_wizard.css" rel="stylesheet" type="text/css" />
+  <!-- Optional SmartWizard theme -->
+  <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
+  <!-- Optional SmartWizard theme -->
+  <link href="assets/plugins/wizard/css/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/wizard/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/wizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
 
-    <!--Estadisticas -->
-    <link href="assets/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-    <link href="assets/plugins/kalendar/kalendar.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/plugins/scroll/nanoscroller.css">
-    <link href="assets/plugins/morris/morris.css" rel="stylesheet" />
+  <!--Estadisticas -->
+  <link href="assets/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <link href="assets/plugins/kalendar/kalendar.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/plugins/scroll/nanoscroller.css">
+  <link href="assets/plugins/morris/morris.css" rel="stylesheet" />
 
-  </head>
-  <style type="text/css">
-    .disabled {
-      pointer-events:none; /*This makes it not clickable*/
-      opacity:0.6;         /*This grays it out to look disabled*/
-    }
-    .lblheader{
-      color:#2196F3;
-    }
-    #input-sm {
-      height: 30px;
-      padding: 2px 5px;
-      font-size: 12px;
-      line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
-      border-radius: 3px;
-    }
-  </style>
-  <body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE">
-    <div class="wrapper">
-      <!--\\\\\\\ wrapper Start \\\\\\-->
-      <div class="header_bar">
-        <!--\\\\\\\ header Start \\\\\\-->
-        <div class="brand">
-          <!--\\\\\\\ brand Start \\\\\\-->
-          <!--div class="logo" style="display:block"><h2 style="margin-top: -5px;"><span class="theme_color">INSEZAC</span></h2></div-->
-          <div style="display:block"><img width="100%" style=" margin-top:-15px" src="assets/images/sezac.png"></div>
+</head>
+<style type="text/css">
+.disabled {
+  pointer-events:none; /*This makes it not clickable*/
+  opacity:0.6;         /*This grays it out to look disabled*/
+}
+.lblheader{
+  color:#2196F3;
+}
+#input-sm {
+  height: 30px;
+  padding: 2px 5px;
+  font-size: 12px;
+  line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
+  border-radius: 3px;
+}
+</style>
+<body class="light_theme  fixed_header left_nav_fixed" style="background-color: #EEEEEE">
+  <div class="wrapper">
+    <!--\\\\\\\ wrapper Start \\\\\\-->
+    <div class="header_bar">
+      <!--\\\\\\\ header Start \\\\\\-->
+      <div class="brand">
+        <!--\\\\\\\ brand Start \\\\\\-->
+        <!--div class="logo" style="display:block"><h2 style="margin-top: -5px;"><span class="theme_color">INSEZAC</span></h2></div-->
+        <div style="display:block"><img width="100%" style=" margin-top:-15px" src="assets/images/sezac.png"></div>
 
-          <div class="small_logo" style="display:none"><img src="images/s-logo.png" width="50" height="47" alt="s-logo" /> <img src="images/r-logo.png" width="122" height="20" alt="r-logo" /></div>
+        <div class="small_logo" style="display:none"><img src="images/s-logo.png" width="50" height="47" alt="s-logo" /> <img src="images/r-logo.png" width="122" height="20" alt="r-logo" /></div>
 
+      </div>
+      <!--\\\\\\\ brand end \\\\\\-->
+      <div class="header_top_bar">
+        <!--\\\\\\\ header top bar start \\\\\\-->
+        <a href="javascript:void(0);" class="menutoggle"> <i class="fa fa-bars"></i> </a>
+        <div class="top_left_bar">
+          <h1>INSEZAC</h1>
         </div>
-        <!--\\\\\\\ brand end \\\\\\-->
-        <div class="header_top_bar">
-          <!--\\\\\\\ header top bar start \\\\\\-->
-          <a href="javascript:void(0);" class="menutoggle"> <i class="fa fa-bars"></i> </a>
-          <div class="top_left_bar">
-            <h1>INSEZAC</h1>
-          </div>
-          <div class="top_right_bar">
-            <div style="margin-top: -33%;">
-              <span class="user_adminname">Hola <?php echo $_SESSION['usuario']; ?></span>
+        <div class="top_right_bar">
+          <div style="margin-top: -33%;">
+            <div style="font-size:1.2em;"><i class="fa fa-user" aria-hidden="true"></i><span class="user_adminname">Hola  <?php echo $_SESSION['usuario']; ?></span>
               <span class="user_adminname"><a href="?c=login&a=logout"><i class="fa fa-power-off"></i> Salir</span></a>
             </div>
           </div>
         </div>
-        <!--\\\\\\\ header top bar end \\\\\\-->
       </div>
-      <!--\\\\\\\ header end \\\\\\-->
-      <div class="inner">
-        <!--\\\\\\\ inner start \\\\\\-->
-        <div class="left_nav">
-          <!--\\\\\\\left_nav start \\\\\\-->
-          <br>
-          <div class="left_nav_slidebar">
-            <ul>
+      <!--\\\\\\\ header top bar end \\\\\\-->
+    </div>
+    <!--\\\\\\\ header end \\\\\\-->
+    <div class="inner">
+      <!--\\\\\\\ inner start \\\\\\-->
+      <div class="left_nav">
+        <!--\\\\\\\left_nav start \\\\\\-->
+        <br>
+        <div class="left_nav_slidebar">
+          <ul>
             <!--li class="theme_border">
             <a href="?c=Inicio&a=Wizard"> <i class="fa fa-home"></i>Wizard</a>
           </li-->
-          <?php if (isset($inicio)){ ?>
-          <li class="left_nav_active theme_border">
-            <?php } else { ?>
-            <li class="theme_border">
-              <?php } ?>
-              <a href="?c=inicio"> <i class="fa fa-home"></i> Inicio </a>
-            </li>
-            <?php if(isset($administracion)){ ?>
-            <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
-              <ul class="opened" style="display:block">
-                <?php  }else{ ?>
-                <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
-                  <ul>
-                    <?php }  ?>
-                    <li>
-                      <a href="?c=beneficiario"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                        <?php if (isset($beneficiarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>
-                      </a>
-                    </li>
-                    <br><br>
-                    <li>
-                      <a href="?c=apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                        <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
-                      </a>
-                    </li><br><br>
 
-                    <?php if($_SESSION['tipoUsuario']==1){?>
+          <li  <?php if (isset($inicio)){ ?> class="left_nav_active theme_border"  <?php } else { ?> class="theme_border"  <?php } ?>>
+            <a href="?c=inicio"> <i class="fa fa-home"></i> Inicio </a>
+          </li>
 
-                    <li>
-                      <a href="?c=direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                        <?php if (isset($direcciones)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
-                      </a>
-                    </li><br><br>
-                    <?php } ?>
-                    
-                    <?php if($_SESSION['tipoUsuario']==3 || $_SESSION['tipoUsuario']==1){?>
-                    <li>
-                      <a href="?c=subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                        <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
-                      </a>
-                    </li><br><br>
-                    <?php } ?>
-                    <?php if($_SESSION['tipoUsuario']==1){?>
-                    <li>
-                      <a href="?c=usuario"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                        <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
-                      </a>
-                    </li><br><br>
-                    <?php } ?>
 
-                  </ul>
-                </li>
-                <?php if(isset($catalogos)){ ?> <!-- CATALOGOS -->
-                <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-list"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
-                  <ul class="opened" style="display:block">
-                    <?php  }else{ ?>
-                    <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-list"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
-                      <ul>
-                        <?php }  ?>
+          <!--Menu de beneficiarios-->
+          <li  class="theme_border <?php if(isset($beneficiarios)){ ?> left_nav_active <?php } ?>"><a href="javascript:void(0);"><i class="fa fa-users"></i> Beneficiarios <span class="plus"><i class="fa fa-plus"></i></span></a>
+            <ul <?php if(isset($beneficiarios)){ ?> class="opened" style="display:block" <?php } ?>>
+              <li>
+                <a href="?c=beneficiario"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                  <?php if (isset($beneficiario_curp)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>CURP</b>
+                </a>
+              </li>
+              <br><br>
+              <li>
+                <a href="?c=beneficiariorfc"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                  <?php if (isset($beneficiario_rfc)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>RFC</b>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!--Menu de apoyos-->
+          <li  class="theme_border <?php if(isset($apoyos)){ ?> left_nav_active <?php } ?>"><a href="javascript:void(0);"><i class="fa fa-heart"></i> Apoyos <span class="plus"><i class="fa fa-plus"></i></span></a>
+            <ul <?php if(isset($apoyos)){ ?> class="opened" style="display:block" <?php } ?>>
+              <li>
+                <a href="?c=apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                  <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>CURP</b>
+                </a>
+              </li>
+              <br><br>
+              <li>
+                <a href="?c=apoyosrfc"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                  <?php if (isset($apoyosrfc)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>RFC</b>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
+
+          <?php if(isset($administracion)){ ?>
+          <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i>  Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
+            <ul class="opened" style="display:block">
+              <?php  }else{ ?>
+              <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
+                <ul>
+                  <?php }  ?>
+                  <?php if($_SESSION['tipoUsuario']==1){?>
+                  <li>
+                    <a href="?c=direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                      <?php if (isset($direcciones)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
+                    </a>
+                  </li><br><br>
+                  <?php } ?>
+                  <?php if($_SESSION['tipoUsuario']==1){?>
+                  <li>
+                    <a href="?c=usuario"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                      <?php if (isset($usuarios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Usuarios</b>
+                    </a>
+                  </li><br><br>
+                  <?php } ?>
+                </ul>
+              </li>
+
+              <?php if($_SESSION['tipoUsuario']==3 || $_SESSION['tipoUsuario']==1){?>
+              <?php if(isset($catalogos)){ ?> <!-- CATALOGOS -->
+              <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-list"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+                <ul class="opened" style="display:block">
+                  <?php }else{ ?>
+                  <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-list"></i> Catálogos <span class="plus"><i class="fa fa-plus"></i></span></a>
+                    <ul>
+                      <?php }  ?>
+                      <li>
+                        <a href="?c=catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                          <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>                 </a>
+                        </li><br><br>
                         <li>
-                          <a href="?c=catalogos&a=Beneficiarios"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                            <?php if (isset($beneficiarios2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Beneficiarios</b>                 </a>
-                          </li><br><br>
-                          <li>
-                            <a href="?c=catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                              <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
-                            </a>
-                          </li><br><br>
-                          <li>
-                            <a href="?c=localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                              <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
-                            </a>
-                          </li><br><br>
-                          <li>
-                            <a href="?c=asentamiento"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                              <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Asentamientos</b>
-                            </a>
-                          </li><br><br>
-                          <li>
-                            <a href="?c=municipio"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                              <?php if (isset($municipios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Municipios</b>
-                            </a>
-                          </li><br><br>
-                          <li>
-                            <a href="?c=programa"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                              <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b>
-                            </a>
-                          </li>
+                          <a href="?c=catalogos&a=Apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                            <?php if (isset($apoyos2)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Apoyos</b>
+                          </a>
+                        </li><br><br>
+                        <li>
+                          <a href="?c=localidad"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                            <?php if (isset($localidades)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Localidades</b>
+                          </a>
+                        </li><br><br>
+                        <li>
+                          <a href="?c=asentamiento"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                            <?php if (isset($asentamientos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Asentamientos</b>
+                          </a>
+                        </li><br><br>
+                        <li>
+                          <a href="?c=municipio"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                            <?php if (isset($municipios)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Municipios</b>
+                          </a>
+                        </li><br><br>
+                        <li>
+                          <a href="?c=programa"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                            <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b>
+                          </a>
                         </li>
-                      </ul>
-                    </li><!-- /CATALOGOS -->
-
-
-                  </li>
-                </div>
+                        
+                        <li>
+                          <a href="?c=subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
+                            <?php if (isset($subprogramas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Subprogramas</b>
+                          </a>
+                        </li><br><br>
+                        
+                      </li>
+                    </ul>
+                  </li><!-- /CATALOGOS -->
+                  <?php } ?>
+                </li>
               </div>
             </div>
-            <!--\\\\\\\left_nav end \\\\\\-->
-            <div class="contentpanel">
-              <!--\\\\\\\ contentpanel start\\\\\\-->
-
-              <?php include($page); ?>
-
-            </div>
-            <!--\\\\\\\ content panel end \\\\\\-->
           </div>
-          <!--\\\\\\\ inner end\\\\\\-->
-        </div>
-        <!--\\\\\\\ wrapper end\\\\\\-->
-      </body>
+          <!--\\\\\\\left_nav end \\\\\\-->
+          <div class="contentpanel">
+            <!--\\\\\\\ contentpanel start\\\\\\-->
 
-      <script src="assets/js/jquery-2.1.0.js"></script>
-      <script src="assets/js/bootstrap.min.js"></script>
-      <script src="assets/js/common-script.js"></script>
-      <script src="assets/js/jquery.slimscroll.min.js"></script>
-      <script type="text/javascript"  src="assets/plugins/toggle-switch/toggles.min.js"></script>
-      <script src="assets/plugins/checkbox/zepto.js"></script>
-      <script src="assets/plugins/checkbox/icheck.js"></script>
-      <script src="assets/js/icheck-init.js"></script>
-      <script type="text/javascript" src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
-      <script type="text/javascript" src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
-      <!--script type="text/javascript" src="assets/js/form-components.js"></script-->
-      <script type="text/javascript"  src="assets/plugins/input-mask/jquery.inputmask.min.js"></script>
-      <script type="text/javascript"  src="assets/plugins/input-mask/demo-mask.js"></script>
-      <script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
-      <script type="text/javascript"  src="assets/plugins/dropzone/dropzone.min.js"></script>
-      <script type="text/javascript" src="assets/plugins/ckeditor/ckeditor.js"></script>
-      <script src="assets/js/jPushMenu.js"></script>
-      <script src="assets/plugins/validation/parsley.min.js"></script>
-      <script src="assets/plugins/data-tables/jquery.dataTables.js"></script>
-      <script src="assets/plugins/data-tables/DT_bootstrap.js"></script>
-      <script src="assets/plugins/data-tables/dynamic_table_init.js"></script>
-      <script src="assets/plugins/edit-table/edit-table.js"></script>
-      <script src="assets/plugins/file-uploader/js/vendor/jquery.ui.widget.js"></script>
-      <script src="assets/plugins/file-uploader/js/jquery.iframe-transport.js"></script>
-      <script src="assets/plugins/file-uploader/js/jquery.fileupload.js"></script>
-      <script src="assets/plugins/validation/parsley.min.js"></script>
-      <script src="assets/plugins/select2/dist/js/select2.full.min.js"></script>
-      <!-- Include SmartWizard JavaScript source -->
-      <script type="text/javascript" src="assets/plugins/wizard/js/jquery.smartWizard.js"></script>
-      <!-- Include jQuery Validator plugin -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
-      <script src="assets/js/jquery.sparkline.js"></script>
-      <script src="assets/js/sparkline-chart.js"></script>
-      <script src="assets/js/graph.js"></script>
-      <script src="assets/js/edit-graph.js"></script>
-      <script src="assets/plugins/kalendar/kalendar.js" type="text/javascript"></script>
-      <script src="assets/plugins/kalendar/edit-kalendar.js" type="text/javascript"></script>
-      <script src="assets/plugins/sparkline/jquery.sparkline.js" type="text/javascript"></script>
-      <script src="assets/plugins/sparkline/jquery.customSelect.min.js" ></script> 
-      <script src="assets/plugins/sparkline/sparkline-chart.js"></script> 
-      <script src="assets/plugins/morris/morris.min.js" type="text/javascript"></script> 
-      <script src="assets/plugins/morris/raphael-min.js" type="text/javascript"></script>  
-      <!--script src="assets/plugins/morris/morris-script.js"></script--> 
-      <!--script src="assets/plugins/demo-slider/demo-slider.js"></script-->
-      <script src="assets/plugins/knob/jquery.knob.min.js"></script> 
-      <script src="js/jPushMenu.js"></script> 
-      <script src="js/side-chats.js"></script>
-      <script src="js/jquery.slimscroll.min.js"></script>
-      <script src="plugins/scroll/jquery.nanoscroller.js"></script>
-      <script type="text/javascript">
+            <?php include($page); ?>
+
+          </div>
+          <!--\\\\\\\ content panel end \\\\\\-->
+        </div>
+        <!--\\\\\\\ inner end\\\\\\-->
+      </div>
+      <!--\\\\\\\ wrapper end\\\\\\-->
+    </body>
+
+    <script src="assets/js/jquery-2.1.0.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/common-script.js"></script>
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript"  src="assets/plugins/toggle-switch/toggles.min.js"></script>
+    <script src="assets/plugins/checkbox/zepto.js"></script>
+    <script src="assets/plugins/checkbox/icheck.js"></script>
+    <script src="assets/js/icheck-init.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+    <!--script type="text/javascript" src="assets/js/form-components.js"></script-->
+    <script type="text/javascript"  src="assets/plugins/input-mask/jquery.inputmask.min.js"></script>
+    <script type="text/javascript"  src="assets/plugins/input-mask/demo-mask.js"></script>
+    <script type="text/javascript"  src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+    <script type="text/javascript"  src="assets/plugins/dropzone/dropzone.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/ckeditor/ckeditor.js"></script>
+    <script src="assets/js/jPushMenu.js"></script>
+    <script src="assets/plugins/validation/parsley.min.js"></script>
+    <script src="assets/plugins/data-tables/jquery.dataTables.js"></script>
+    <script src="assets/plugins/data-tables/DT_bootstrap.js"></script>
+    <script src="assets/plugins/data-tables/dynamic_table_init.js"></script>
+    <script src="assets/plugins/edit-table/edit-table.js"></script>
+    <script src="assets/plugins/file-uploader/js/vendor/jquery.ui.widget.js"></script>
+    <script src="assets/plugins/file-uploader/js/jquery.iframe-transport.js"></script>
+    <script src="assets/plugins/file-uploader/js/jquery.fileupload.js"></script>
+    <script src="assets/plugins/validation/parsley.min.js"></script>
+    <script src="assets/plugins/select2/dist/js/select2.full.min.js"></script>
+    <!-- Include SmartWizard JavaScript source -->
+    <script type="text/javascript" src="assets/plugins/wizard/js/jquery.smartWizard.js"></script>
+    <!-- Include jQuery Validator plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+    <script src="assets/js/jquery.sparkline.js"></script>
+    <script src="assets/js/sparkline-chart.js"></script>
+    <script src="assets/js/graph.js"></script>
+    <script src="assets/js/edit-graph.js"></script>
+    <script src="assets/plugins/kalendar/kalendar.js" type="text/javascript"></script>
+    <script src="assets/plugins/kalendar/edit-kalendar.js" type="text/javascript"></script>
+    <script src="assets/plugins/sparkline/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="assets/plugins/sparkline/jquery.customSelect.min.js" ></script> 
+    <script src="assets/plugins/sparkline/sparkline-chart.js"></script> 
+    <script src="assets/plugins/morris/morris.min.js" type="text/javascript"></script> 
+    <script src="assets/plugins/morris/raphael-min.js" type="text/javascript"></script>  
+    <!--script src="assets/plugins/morris/morris-script.js"></script--> 
+    <!--script src="assets/plugins/demo-slider/demo-slider.js"></script-->
+    <script src="assets/plugins/knob/jquery.knob.min.js"></script> 
+    <script src="js/jPushMenu.js"></script> 
+    <script src="js/side-chats.js"></script>
+    <script src="js/jquery.slimscroll.min.js"></script>
+    <script src="plugins/scroll/jquery.nanoscroller.js"></script>
+
+
+
+
+    <script type="text/javascript">
         //---------SCRIPT PARA CARGAR INPUT TYPE FILE---------------
         $(function() {
         // We can attach the `fileselect` event to all file inputs on the page

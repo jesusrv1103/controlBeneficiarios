@@ -632,26 +632,17 @@
 							}
 						</script>
 						<script type="text/javascript">
-						$(document).ready(function(){
-							alert('entra');
-						});
 							window.onload=function(){
 							}
 							listarLocalidades = function (){
-<<<<<<< HEAD
-								
-=======
-								alert('entra');
->>>>>>> bf1c0e99459175e896723209ab07cbe09fe39701
 								var idMunicipio = $('#selectMunicipios').val();
 								datos = {"idMunicipio":idMunicipio};
 								$.ajax({
-									url: "index.php?c=Beneficiario&a=ListarLocalidades",
+									url: "index.php?c=beneficiario&a=ListarLocalidades",
 									type: "POST",
 									data: datos
 								}).done(function(respuesta){
 									if (respuesta[0].estado === "ok") {
-
 										var selector = document.getElementById("selectLocalidades");
 										selector.options[0] = new Option("Seleccione la localidad a la que pertenece el beneficiario","");
 										var selector2 = document.getElementById("selectAsentamientos");
