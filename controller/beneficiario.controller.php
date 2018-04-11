@@ -192,17 +192,27 @@ class BeneficiarioController{
       //Obtengo el numero de filas del archivo
       $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
       $this->LeerArchivo($objPHPExcel,$numRows);
-      $mensaje="Se ha leído correctamente el archivo <strong>beneficiarios.xlsx</strong>.";
-      if($this->numRegistros>0)
-        $mensaje = $mensaje . "<br><i class='fa fa-check'></i> Se han registrado correctamente $this->numRegistros beneficiarios.";
-      if($this->numActualizados>0)
-        $mensaje = $mensaje . "<br><i class='fa fa-check'></i> Se han actualizado $this->numActualizados registros.";
-      $beneficiarios = true;
+      $mensaje="Se ha leído correctamente el archivo <strong>beneficiarios.xlsx</strong>. Se ha importado correctamente los datos de los beneficiarios.";
+
+      if($_SESSION['numRegErroneos']>0){
+        $beneficiarios = true;
       $administracion=true;
       $tipoBen="CURP";
       //$page="view/beneficiario/index.php";
       $page="view/beneficiario/resumenImportar.php";
       require_once 'view/index.php';
+    }else{
+       $beneficiarios = true;
+      $administracion=true;
+      $tipoBen="CURP";
+      $page="view/beneficiario/index.php";
+      require_once 'view/index.php';
+    }
+     /* if($this->numRegistros>0)
+        $mensaje = $mensaje . "<br><i class='fa fa-check'></i> Se han registrado correctamente $this->numRegistros beneficiarios.";
+      if($this->numActualizados>0)
+        $mensaje = $mensaje . "<br><i class='fa fa-check'></i> Se han actualizado $this->numActualizados registros.";*/
+     
     }
     //si por algo no cargo el archivo bak_
     else {
@@ -279,93 +289,516 @@ class BeneficiarioController{
             $row_array['Id de identificacion']='0';
           }
         }
-
+        //-------------------- VALIDANDO ID TIPO VIALIDAD ---------------
 
         $ben->idTipoVialidad = $objPHPExcel->getActiveSheet()->getCell('F'.$numRow)->getCalculatedValue();
-        $ben->nombreVialidad = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
-        $ben->noExterior = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
-        $ben->noInterior = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
-        $ben->idAsentamientos = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
-        $ben->idLocalidad = $objPHPExcel->getActiveSheet()->getCell('K'.$numRow)->getCalculatedValue();
-        $ben->entreVialidades = $objPHPExcel->getActiveSheet()->getCell('L'.$numRow)->getCalculatedValue();
-        $ben->descripcionUbicacion = $objPHPExcel->getActiveSheet()->getCell('M'.$numRow)->getCalculatedValue();
-        $ben->estudioSocioeconomico = $objPHPExcel->getActiveSheet()->getCell('N'.$numRow)->getCalculatedValue();
-        $ben->idEstadoCivil = $objPHPExcel->getActiveSheet()->getCell('O'.$numRow)->getCalculatedValue();
-        $ben->jefeFamilia = $objPHPExcel->getActiveSheet()->getCell('P'.$numRow)->getCalculatedValue();
-        $ben->idOcupacion = $objPHPExcel->getActiveSheet()->getCell('Q'.$numRow)->getCalculatedValue();
-        $ben->idIngresoMensual = $objPHPExcel->getActiveSheet()->getCell('R'.$numRow)->getCalculatedValue();
-        $ben->integrantesFamilia = $objPHPExcel->getActiveSheet()->getCell('S'.$numRow)->getCalculatedValue();
-        $ben->dependientesEconomicos = $objPHPExcel->getActiveSheet()->getCell('T'.$numRow)->getCalculatedValue();
-        $ben->idVivienda =$objPHPExcel->getActiveSheet()->getCell('U'.$numRow)->getCalculatedValue();
-        $ben->noHabitantes = $objPHPExcel->getActiveSheet()->getCell('V'.$numRow)->getCalculatedValue();
-        $ben->viviendaElectricidad = $objPHPExcel->getActiveSheet()->getCell('W'.$numRow)->getCalculatedValue();
-        $ben->viviendaAgua = $objPHPExcel->getActiveSheet()->getCell('X'.$numRow)->getCalculatedValue();
-        $ben->viviendaDrenaje = $objPHPExcel->getActiveSheet()->getCell('Y'.$numRow)->getCalculatedValue();
-        $ben->viviendaGas = $objPHPExcel->getActiveSheet()->getCell('Z'.$numRow)->getCalculatedValue();
-        $ben->viviendaTelefono = $objPHPExcel->getActiveSheet()->getCell('AA'.$numRow)->getCalculatedValue();
-        $ben->viviendaInternet = $objPHPExcel->getActiveSheet()->getCell('AB'.$numRow)->getCalculatedValue();
-        $ben->idNivelEstudios = $objPHPExcel->getActiveSheet()->getCell('AC'.$numRow)->getCalculatedValue();
-        $ben->idSeguridadSocial = $objPHPExcel->getActiveSheet()->getCell('AD'.$numRow)->getCalculatedValue();
-        $ben->idDiscapacidad = $objPHPExcel->getActiveSheet()->getCell('AE'.$numRow)->getCalculatedValue();
-        $ben->idGrupoVulnerable = $objPHPExcel->getActiveSheet()->getCell('AF'.$numRow)->getCalculatedValue();
-        $ben->beneficiarioColectivo = $objPHPExcel->getActiveSheet()->getCell('AG'.$numRow)->getCalculatedValue();
-        $ben->email = $objPHPExcel->getActiveSheet()->getCell('AH'.$numRow)->getCalculatedValue();
-        $ben->fechaNacimiento = $objPHPExcel->getActiveSheet()->getCell('AI'.$numRow)->getCalculatedValue();
-        $ben->genero = $objPHPExcel->getActiveSheet()->getCell('AJ'.$numRow)->getCalculatedValue();
-        $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();
-        $ben->telefono = $objPHPExcel->getActiveSheet()->getCell('AL'.$numRow)->getCalculatedValue();
-        $claveMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
-        $ben->usuario=$_SESSION['usuario'];
-        $ben->fechaAlta=date("Y-m-d H:i:s");
-        $ben->direccion=$_SESSION['direccion'];
-        $ben->estado="Activo";
-
-        if (!$ben->curp == null){
-          if($numError>0){
-            $numRegErroneos+=1;
-            $row_array['fila']=$numRow;
-            $row_array['numeroErrores']=$numError;
-            array_push($arrayError, $row_array); 
-          }
-          $verificaBen=$this->model->VerificaBeneficiario($ben->curp);
-           if($verificaBen==null){
-            //Datos de registro
-            $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
-            $ben->idMunicipio=$consult->idMunicipio;
-            $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
-            $this->model->ImportarBeneficiario($ben);
-            $this->numRegistros=$this->numRegistros+1;
+        if(!is_numeric($ben->idTipoVialidad)){
+          $row_array['Id tipo vialidad']=$ben->idTipoVialidad;
+          $numError++;
+        }else{
+          if($ben->idTipoVialidad>22 || $ben->idTipoVialidad<1){
+            $row_array['Id tipo vialidad']=$ben->idTipoVialidad;
+            $numError++;
           }else{
-            $obtenerIdBeneficiario=$this->model->ObtenerIdBeneficiario($ben->curp);
-            $idRegistro=$this->model->ObtenerIdRegistro($obtenerIdBeneficiario->idBeneficiario);
-            $ben->idRegistro=$idRegistro->idRegistro;
-            $this->model->RegistraActualizacion($ben);
-            $this->model->Actualizar($ben);
-            $this->numActualizados=$this->numActualizados+1;
+            $row_array['Id tipo vialidad']='0';
           }
         }
+         //-------------------- VALIDANDO NOMBRE VIALIDAD ---------------
+
+        $ben->nombreVialidad = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
+        if($ben->nombreVialidad==""){
+          $row_array['Nombre vialidad']="Campo vacío";
+          $numError++;
+        }else{
+          $row_array['Nombre vialidad']='0';
+        }
+   //-------------------- VALIDANDO No EXTERIOR ---------------
+
+        $ben->noExterior = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
+        if(!is_numeric($ben->noExterior)){
+          $row_array['No Exterior']=$ben->noExterior;
+          $numError++;
+        }else{ 
+         if($ben->noExterior==""){
+          $row_array['No Exterior']="Campo vacío";
+          $numError++;
+        }else{
+          $row_array['No Exterior']='0';
+        }
+      }
+          //-------------------- No INTERIOR NO VALIDADO ---------------
+      $ben->noInterior = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
+
+          //-------------------- VALIDANDO ID ASENTAMIENTOS ---------------
+
+      $ben->idAsentamientos = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->idAsentamientos)){
+        $row_array['Id Asentamientos']=$ben->idAsentamientos;
+        $numError++;
+      }else{
+        if($ben->idAsentamientos==""){
+          $row_array['Id Asentamientos']="Campo vacío";
+          $numError++;
+        }
+      }
+          //-------------------- VALIDANDO ID LOCALIDADES ---------------
+
+      $ben->idLocalidad = $objPHPExcel->getActiveSheet()->getCell('K'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->idLocalidad)){
+        $row_array['Id Localidad']=$ben->idLocalidad;
+        $numError++;
+      }else{
+        if($ben->idLocalidad==""){
+          $row_array['Id Localidad']="Campo vacío";
+          $numError++;
+        }
+      }
+        //-------------------- VALIDANDO ENTRE VIALIDADES ---------------
+
+      $ben->entreVialidades = $objPHPExcel->getActiveSheet()->getCell('L'.$numRow)->getCalculatedValue();
+
+      if($ben->entreVialidades==""){
+        $row_array['Entre vialidades']="Campo vacío";
+        $numError++;
+      }else{
+        $row_array['Entre vialidades']='0';
+      }
+         //-------------------- VALIDANDO DESCRIPCION DE UBICACION ---------------
+
+      $ben->descripcionUbicacion = $objPHPExcel->getActiveSheet()->getCell('M'.$numRow)->getCalculatedValue();
+
+      if($ben->descripcionUbicacion==""){
+        $row_array['Descripción de ubicación']="Campo vacío";
+        $numError++;
+      }else{
+        $row_array['Descripción de ubicación']='0';
+      }
+         //-------------------- VALIDANDO ESTUDIO SOCIOECONOMICO ---------------
+
+      $ben->estudioSocioeconomico = $objPHPExcel->getActiveSheet()->getCell('N'.$numRow)->getCalculatedValue();
+
+      if($ben->estudioSocioeconomico==""){
+        $row_array['Estudio Socioeconomico']="Campo vacío";
+        $numError++;
+      }else{
+        $row_array['Estudio Socioeconomico']='0';
+      }
+            //-------------------- VALIDANDO ID ESTADO CIVIL ---------------
+
+      $ben->idEstadoCivil = $objPHPExcel->getActiveSheet()->getCell('O'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->idEstadoCivil)){
+        $row_array['Id Estado civil']=$ben->idEstadoCivil;
+        $numError++;
+      }else{
+        if($ben->idEstadoCivil>5 || $ben->idEstadoCivil<1){
+          $row_array['Id Estado civil']=$ben->idEstadoCivil;
+          $numError++;
+        }else{
+          $row_array['Id Estado civil']='0';
+        }
+      }
+         //-------------------- VALIDANDO JEFE DE FAMILIA ---------------
+
+      $ben->jefeFamilia = $objPHPExcel->getActiveSheet()->getCell('P'.$numRow)->getCalculatedValue();
+
+      if($ben->jefeFamilia==""){
+        $row_array['Jefe de familia']="Campo vacío";
+        $numError++;
+      }else{
+        $row_array['Jefe de familia']='0';
+      }
+            //-------------------- VALIDANDO ID OCUPACION ---------------
+
+      $ben->idOcupacion = $objPHPExcel->getActiveSheet()->getCell('Q'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->idOcupacion)){
+        $row_array['Id Ocupación']=$ben->idOcupacion;
+        $numError++;
+      }else{
+        if($ben->idOcupacion>11 || $ben->idOcupacion<1){
+          $row_array['Id Ocupación']=$ben->idOcupacion;
+          $numError++;
+        }else{
+          $row_array['Id Ocupación']='0';
+        }
+      }
+        //-------------------- VALIDANDO ID INGRESO MENSUAL ---------------
+
+      $ben->idIngresoMensual = $objPHPExcel->getActiveSheet()->getCell('R'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->idIngresoMensual)){
+        $row_array['Id Ingreso mensual']=$ben->idIngresoMensual;
+        $numError++;
+      }else{
+        if($ben->idIngresoMensual>7 || $ben->idIngresoMensual<1){
+          $row_array['Id Ingreso mensual']=$ben->idIngresoMensual;
+          $numError++;
+        }else{
+          $row_array['Id Ingreso mensual']='0';
+        }
+      }
+        //-------------------- VALIDANDO INTEGRANTES DE FAMILIA ---------------
+
+      $ben->integrantesFamilia = $objPHPExcel->getActiveSheet()->getCell('S'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->integrantesFamilia)){
+        $row_array['Integrantes de familia']=$ben->integrantesFamilia;
+        $numError++;
+      }else{
+        if($ben->integrantesFamilia==""){
+          $row_array['Integrantes de familia']="Campo vacío";
+          $numError++;
+        }else{
+          $row_array['Integrantes de familia']='0';
+        }
+      }
+         //-------------------- VALIDANDO DEPENDIENTES ECONOMICOS ---------------
+
+      $ben->dependientesEconomicos = $objPHPExcel->getActiveSheet()->getCell('T'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->dependientesEconomicos)){
+        $row_array['Dependientes Economicos']=$ben->dependientesEconomicos;
+        $numError++;
+      }else{
+        if($ben->dependientesEconomicos==""){
+          $row_array['Dependientes Economicos']="Campo vacío";
+          $numError++;
+        }else{
+          $row_array['Dependientes Economicos']='0';
+        }
+      }
+        //-------------------- VALIDANDO ID VIVIENDA ---------------
+
+      $ben->idVivienda =$objPHPExcel->getActiveSheet()->getCell('U'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->idVivienda)){
+        $row_array['Id vivienda']=$ben->idVivienda;
+        $numError++;
+      }else{
+        if($ben->idVivienda>3 || $ben->idVivienda<1){
+          $row_array['Id vivienda']=$ben->idVivienda;
+          $numError++;
+        }else{
+          $row_array['Id vivienda']='0';
+        }
+      }
+        //-------------------- VALIDANDO NUMERO DE HABITANTES ---------------
+
+      $ben->noHabitantes = $objPHPExcel->getActiveSheet()->getCell('V'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->noHabitantes)){
+        $row_array['Numero de habitantes']=$ben->noHabitantes;
+        $numError++;
+      }else{
+        if($ben->noHabitantes==""){
+          $row_array['Numero de habitantes']="Campo vacío";
+          $numError++;
+        }else{
+          $row_array['Numero de habitantes']='0';
+        }
+      }
+         //-------------------- VALIDANDO VIVIENDA ELECTRICIDAD ---------------
+
+      $ben->viviendaElectricidad = $objPHPExcel->getActiveSheet()->getCell('W'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->viviendaElectricidad)){
+        $row_array['Vivienda Electricidad']=$ben->viviendaElectricidad;
+        $numError++;
+      }else{
+        if($ben->viviendaElectricidad>2 || $ben->idVivienda<1){
+          $row_array['Vivienda Electricidad']=$ben->viviendaElectricidad;
+          $numError++;
+        }else{
+          $row_array['Vivienda Electricidad']='0';
+        }
+      }
+        //-------------------- VALIDANDO VIVIENDA AGUA ---------------
+
+      $ben->viviendaAgua = $objPHPExcel->getActiveSheet()->getCell('X'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->viviendaAgua)){
+        $row_array['Vivienda Agua']=$ben->viviendaAgua;
+        $numError++;
+      }else{
+        if($ben->viviendaAgua>2 || $ben->viviendaAgua<1){
+          $row_array['Vivienda Agua']=$ben->viviendaAgua;
+          $numError++;
+        }else{
+          $row_array['Vivienda Agua']='0';
+        }
+      }
+         //-------------------- VALIDANDO VIVIENDA DRENAJE ---------------
+
+      $ben->viviendaDrenaje = $objPHPExcel->getActiveSheet()->getCell('Y'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->viviendaDrenaje)){
+        $row_array['Vivienda Drenaje']=$ben->viviendaDrenaje;
+        $numError++;
+      }else{
+        if($ben->viviendaDrenaje>2 || $ben->viviendaDrenaje<1){
+          $row_array['Vivienda Drenaje']=$ben->viviendaDrenaje;
+          $numError++;
+        }else{
+          $row_array['Vivienda Drenaje']='0';
+        }
+      }
+         //-------------------- VALIDANDO VIVIENDA GAS ---------------
+
+      $ben->viviendaGas = $objPHPExcel->getActiveSheet()->getCell('Z'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->viviendaGas)){
+        $row_array['Vivienda Gas']=$ben->viviendaGas;
+        $numError++;
+      }else{
+        if($ben->viviendaGas>2 || $ben->viviendaGas<1){
+          $row_array['Vivienda Gas']=$ben->viviendaGas;
+          $numError++;
+        }else{
+          $row_array['Vivienda Gas']='0';
+        }
+      }
+         //-------------------- VALIDANDO VIVIENDA GAS ---------------
+
+      $ben->viviendaTelefono = $objPHPExcel->getActiveSheet()->getCell('AA'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->viviendaTelefono)){
+        $row_array['Vivienda Telefono']=$ben->viviendaTelefono;
+        $numError++;
+      }else{
+        if($ben->viviendaTelefono>2 || $ben->viviendaTelefono<1){
+          $row_array['Vivienda Telefono']=$ben->viviendaTelefono;
+          $numError++;
+        }else{
+          $row_array['Vivienda Telefono']='0';
+        }
+      }
+        //-------------------- VALIDANDO VIVIENDA INTERNET ---------------
+
+      $ben->viviendaInternet = $objPHPExcel->getActiveSheet()->getCell('AB'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->viviendaInternet)){
+        $row_array['Vivienda Internet']=$ben->viviendaInternet;
+        $numError++;
+      }else{
+        if($ben->viviendaInternet>2 || $ben->viviendaInternet<1){
+          $row_array['Vivienda Internet']=$ben->viviendaInternet;
+          $numError++;
+        }else{
+          $row_array['Vivienda Internet']='0';
+        }
+      }
+         //-------------------- VALIDANDO NIVEL DE ESTUDIOS ---------------
+
+      $ben->idNivelEstudios = $objPHPExcel->getActiveSheet()->getCell('AC'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->idNivelEstudios)){
+        $row_array['Id Nivel de estudios']=$ben->idNivelEstudios;
+        $numError++;
+      }else{
+        if($ben->idNivelEstudios>7 || $ben->idNivelEstudios<1){
+          $row_array['Id Nivel de estudios']=$ben->idNivelEstudios;
+          $numError++;
+        }else{
+          $row_array['Id Nivel de estudios']='0';
+        }
+      }
+        //-------------------- VALIDANDO ID SEGURIDAD SOCIAL ---------------
+
+      $ben->idSeguridadSocial = $objPHPExcel->getActiveSheet()->getCell('AD'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->idSeguridadSocial)){
+        $row_array['Id Seguridad Social']=$ben->idSeguridadSocial;
+        $numError++;
+      }else{
+        if($ben->idSeguridadSocial>6 || $ben->idSeguridadSocial<1){
+          $row_array['Id Seguridad Social']=$ben->idSeguridadSocial;
+          $numError++;
+        }else{
+          $row_array['Id Seguridad Social']='0';
+        }
+      }
+        //-------------------- VALIDANDO ID SEGURIDAD SOCIAL ---------------
+
+      $ben->idDiscapacidad = $objPHPExcel->getActiveSheet()->getCell('AE'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->idDiscapacidad)){
+        $row_array['Id Discapacidad']=$ben->idDiscapacidad;
+        $numError++;
+      }else{
+        if($ben->idDiscapacidad>8 || $ben->idDiscapacidad<1){
+          $row_array['Id Discapacidad']=$ben->idDiscapacidad;
+          $numError++;
+        }else{
+          $row_array['Id Discapacidad']='0';
+        }
+      }
+         //-------------------- VALIDANDO ID GRUPO VULNERABLE ---------------
+
+      $ben->idGrupoVulnerable = $objPHPExcel->getActiveSheet()->getCell('AF'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->idGrupoVulnerable)){
+        $row_array['Id Grupo Vulnerable']=$ben->idGrupoVulnerable;
+        $numError++;
+      }else{
+        if($ben->idGrupoVulnerable>6 || $ben->idGrupoVulnerable<1){
+          $row_array['Id Grupo Vulnerable']=$ben->idGrupoVulnerable;
+          $numError++;
+        }else{
+          $row_array['Id Grupo Vulnerable']='0';
+        }
+      }
+        //-------------------- VALIDANDO BENEFICIARIO COLECTIVO ---------------
+
+      $ben->beneficiarioColectivo = $objPHPExcel->getActiveSheet()->getCell('AG'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->beneficiarioColectivo)){
+        $row_array['Beneficiario colectivo']=$ben->beneficiarioColectivo;
+        $numError++;
+      }else{
+        if($ben->beneficiarioColectivo>2 || $ben->beneficiarioColectivo<1){
+          $row_array['Beneficiario colectivo']=$ben->beneficiarioColectivo;
+          $numError++;
+        }else{
+          $row_array['Beneficiario colectivo']='0';
+        }
+      }
+         //-------------------- VALIDANDO EMAIL ---------------
+
+      $ben->email = $objPHPExcel->getActiveSheet()->getCell('AH'.$numRow)->getCalculatedValue();
+
+      if($ben->email==""){
+        $row_array['Email']="Campo vacío";
+        $numError++;
+      }else{
+        $row_array['Email']='0';
+      }
+        //-------------------- VALIDANDO FECHA ---------------
+
+      $ben->fechaNacimiento = $objPHPExcel->getActiveSheet()->getCell('AI'.$numRow)->getCalculatedValue();
+
+      if($ben->fechaNacimiento==""){
+        $row_array['Fecha de nacimiento']="Campo vacío";
+        $numError++;
+      }else{
+        $row_array['Fecha de nacimiento']='0';
+      }
+
+         //-------------------- VALIDANDO GENERO ---------------
+
+      $ben->genero = $objPHPExcel->getActiveSheet()->getCell('AJ'.$numRow)->getCalculatedValue();
+
+      if($ben->genero==""){
+        $row_array['Genero']="Campo vacío";
+        $numError++;
+      }else{
+        $row_array['Genero']='0';
+      }
+         //-------------------- VALIDANDO PERFIL SOCIODEMOGRAFICO ---------------
+
+      $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();
+
+      if($ben->perfilSociodemografico==""){
+        $row_array['Perfil Sociodemografico']="Campo vacío";
+        $numError++;
+      }else{
+        $row_array['Perfil Sociodemografico']='0';
+      }
+        //-------------------- VALIDANDO PERFIL SOCIODEMOGRAFICO ---------------
+
+      $ben->perfilSociodemografico = $objPHPExcel->getActiveSheet()->getCell('AK'.$numRow)->getCalculatedValue();
+
+      if($ben->perfilSociodemografico==""){
+        $row_array['Perfil Sociodemografico']="Campo vacío";
+        $numError++;
+      }else{
+        $row_array['Perfil Sociodemografico']='0';
+      }
+        //-------------------- VALIDANDO TELEFONO ---------------
+
+      $ben->telefono = $objPHPExcel->getActiveSheet()->getCell('AL'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($ben->telefono)){
+        $row_array['Telefono']=$ben->telefono;
+        $numError++;
+      }else{
+        if($ben->telefono==""){
+          $row_array['Telefono']="Campo vacío";
+          $numError++;
+        }else{
+          $row_array['Telefono']='0';
+        }
+      }
+        //-------------------- VALIDANDO CLAVE MUNICIPIO ---------------
+
+      $claveMunicipio = $objPHPExcel->getActiveSheet()->getCell('AM'.$numRow)->getCalculatedValue();
+
+      if(!is_numeric($claveMunicipio)){
+        $row_array['Clave municipio']=$claveMunicipio;
+        $numError++;
+      }else{
+        if($claveMunicipio==""){
+          $row_array['Clave municipio']="Campo vacío";
+          $numError++;
+        }else{
+          $row_array['Clave municipio']='0';
+        }
+      }
+
+      $ben->usuario=$_SESSION['usuario'];
+      $ben->fechaAlta=date("Y-m-d H:i:s");
+      $ben->direccion=$_SESSION['direccion'];
+      $ben->estado="Activo";
+
+      if (!$ben->curp == null){
+        if($numError>0){
+          $numRegErroneos+=1;
+          $row_array['fila']=$numRow;
+          $row_array['numeroErrores']=$numError;
+          array_push($arrayError, $row_array); 
+        }
+        $verificaBen=$this->model->VerificaBeneficiario($ben->curp);
+        if($verificaBen==null){
+            //Datos de registro
+          $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
+          $ben->idMunicipio=$consult->idMunicipio;
+          $ben->idRegistro=$this->model->RegistraDatosRegistro($ben);
+          $this->model->ImportarBeneficiario($ben);
+          $this->numRegistros=$this->numRegistros+1;
+        }else{
+          $obtenerIdBeneficiario=$this->model->ObtenerIdBeneficiario($ben->curp);
+          $idRegistro=$this->model->ObtenerIdRegistro($obtenerIdBeneficiario->idBeneficiario);
+          $ben->idRegistro=$idRegistro->idRegistro;
+          $this->model->RegistraActualizacion($ben);
+          $this->model->Actualizar($ben);
+          $this->numActualizados=$this->numActualizados+1;
+        }
+      }
 
 
 
-        $numRow+=1;
-      } while(!$ben->curp == null);
+      $numRow+=1;
+    } while(!$ben->curp == null);
 
-        $_SESSION['numRegErroneos']=$numRegErroneos; 
-       
-      if($numRegErroneos>0){
+    $_SESSION['numRegErroneos']=$numRegErroneos; 
 
-       $this->arrayError=$arrayError;
+    if($numRegErroneos>0){
 
-     }
+     $this->arrayError=$arrayError;
+
+   }
+  
      //echo  '<br>'.json_encode($arrayError, JSON_FORCE_OBJECT);
-  }catch (Exception $e) {
-    $error=true;
-    $mensaje="Error al insertar datos del archivo";
-    $page="view/beneficiario/index.php";
-    $beneficiarios = true;
-    $administracion=true;
-    require_once 'view/index.php';
-  }
+ }catch (Exception $e) {
+  $error=true;
+  $mensaje="Error al insertar datos del archivo";
+  $page="view/beneficiario/index.php";
+  $beneficiarios = true;
+  $administracion=true;
+  require_once 'view/index.php';
+}
 }
 
 
@@ -389,12 +822,12 @@ function validate_curp($valor) {
 
 function is_mx_state($state){     
   $mxStates = [         
-    'AS','BS','CL','CS','DF','GT',         
-    'HG','MC','MS','NL','PL','QR',         
-    'SL','TC','TL','YN','NE','BC',         
-    'CC','CM','CH','DG','GR','JC',         
-    'MN','NT','OC','QT','SP','SR',         
-    'TS','VZ','ZS'    
+  'AS','BS','CL','CS','DF','GT',         
+  'HG','MC','MS','NL','PL','QR',         
+  'SL','TC','TL','YN','NE','BC',         
+  'CC','CM','CH','DG','GR','JC',         
+  'MN','NT','OC','QT','SP','SR',         
+  'TS','VZ','ZS'    
   ];     
   if(in_array(strtoupper($state),$mxStates)){         
     return true;     
@@ -437,151 +870,151 @@ public function Eliminar(){
 
     echo   '
     <div class="modal-body">
-    <div class="row">
-    <div class="block-web">
-    <div class="header">
-    <div class="row" style="margin-bottom: 12px;">
-    <div class="col-sm-12">
-    <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Información general de registro</h2>
-    </div>
-    </div>
-    </div>
-    <div class="porlets-content" style="margin-bottom: -65px;">
-    <table class="table table-striped">
-    <tbody>
-    <tr>
-    <td>
-    <div class="col-md-12">
-    <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Beneficiario</b></label>
-    </div>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detalle"><b>Curp:</b></label>
-    <label class="col-sm-7 control-label">'.$infoRegistro->curp.'</label>
-    </div>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detalle"><b>Primer apellido:</b></label>
-    <label class="col-sm-7 control-label">'.$infoRegistro->primerApellido.'</label>
-    </div>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detalle"><b>Segundo apellido:</b></label>
-    <label class="col-sm-7 control-label">'.$infoRegistro->segundoApellido.'</label>
-    </div>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detalle"><b>Nombre(s):</b></label>
-    <label class="col-sm-7 control-label">'.$infoRegistro->nombres.'</label>
-    </div>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <div class="col-md-12">
-    <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de registro</b></label>
-    </div>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
-    <label class="col-sm-6">'.$infoRegistro->usuario.'</label><br>
-    </div>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detalle"><strong>Dirección:</strong></label>
-    <label class="col-sm-6">'.$infoRegistro->direccion.'</label><br>
-    </div>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detalle"><strong>Fecha y hora de registro:</strong></label>
-    <label class="col-sm-6">'.$infoRegistro->fechaAlta.'</label><br>
-    </div>
-    <div class="col-md-12">
-    <label class="col-sm-4 lbl-detallet"><strong>Estado de registro:</strong></label>
-    <label class="col-sm-6" style="color:#64DD17"><b>'.$infoRegistro->estado.'</b></label><br>
-    </div>
-    </td>
-    </tr>';
-    if($infoActualizacion!=null) {
-      echo '
-      <tr>
-      <td>
-      <div class="col-md-12">
-      <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de actualización</b></label>
-      </div>
-      </td>
-      </tr>
-      <tr><td><br>';
-      $i=1;
-      foreach ($infoActualizacion as $r):
-        echo '
-        <div class="col-md-6">
-        <label class="col-md-12" lbl-detalle style="color:#607D8B;">'.$i.'° actualización</label>
-        <label class="col-sm-5 lbl-detallet"><strong>Fecha y hora:</strong></label>
-        <label class="col-sm-7">'.$r->fechaActualizacion.'</label><br>
-        <label class="col-sm-5 lbl-detallet"><strong>Usuario:</strong></label>
-        <label class="col-sm-7">'.$r->usuario.'</label><br>
+      <div class="row">
+        <div class="block-web">
+          <div class="header">
+            <div class="row" style="margin-bottom: 12px;">
+              <div class="col-sm-12">
+                <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Información general de registro</h2>
+              </div>
+            </div>
+          </div>
+          <div class="porlets-content" style="margin-bottom: -65px;">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="col-md-12">
+                      <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Beneficiario</b></label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detalle"><b>Curp:</b></label>
+                      <label class="col-sm-7 control-label">'.$infoRegistro->curp.'</label>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detalle"><b>Primer apellido:</b></label>
+                      <label class="col-sm-7 control-label">'.$infoRegistro->primerApellido.'</label>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detalle"><b>Segundo apellido:</b></label>
+                      <label class="col-sm-7 control-label">'.$infoRegistro->segundoApellido.'</label>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detalle"><b>Nombre(s):</b></label>
+                      <label class="col-sm-7 control-label">'.$infoRegistro->nombres.'</label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="col-md-12">
+                      <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de registro</b></label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
+                      <label class="col-sm-6">'.$infoRegistro->usuario.'</label><br>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detalle"><strong>Dirección:</strong></label>
+                      <label class="col-sm-6">'.$infoRegistro->direccion.'</label><br>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detalle"><strong>Fecha y hora de registro:</strong></label>
+                      <label class="col-sm-6">'.$infoRegistro->fechaAlta.'</label><br>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="col-sm-4 lbl-detallet"><strong>Estado de registro:</strong></label>
+                      <label class="col-sm-6" style="color:#64DD17"><b>'.$infoRegistro->estado.'</b></label><br>
+                    </div>
+                  </td>
+                </tr>';
+                if($infoActualizacion!=null) {
+                  echo '
+                  <tr>
+                    <td>
+                      <div class="col-md-12">
+                        <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de actualización</b></label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr><td><br>';
+                    $i=1;
+                    foreach ($infoActualizacion as $r):
+                      echo '
+                    <div class="col-md-6">
+                      <label class="col-md-12" lbl-detalle style="color:#607D8B;">'.$i.'° actualización</label>
+                      <label class="col-sm-5 lbl-detallet"><strong>Fecha y hora:</strong></label>
+                      <label class="col-sm-7">'.$r->fechaActualizacion.'</label><br>
+                      <label class="col-sm-5 lbl-detallet"><strong>Usuario:</strong></label>
+                      <label class="col-sm-7">'.$r->usuario.'</label><br>
+                    </div>
+                    ';
+                    if($i%2==0){
+                      echo "<hr>";
+                    }$i++;
+                    endforeach;
+                    echo '</td></tr>';
+                  }
+                  echo '
+                </tbody>
+              </table>
+            </div><!--/porlets-content-->
+          </div><!--/block-web-->
         </div>
-        ';
-        if($i%2==0){
-          echo "<hr>";
-        }$i++;
-      endforeach;
-      echo '</td></tr>';
+      </div>
+      <div class="modal-footer">
+        <div class="row col-md-6 col-md-offset-6">
+          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+          <a href="?c=Beneficiario&a=Detalles&idBeneficiario='.$idBeneficiario.'" class="btn btn-info btn-sm">Ver detalles de beneficiario</a>
+        </div>
+      </div>';
     }
-    echo '
-    </tbody>
-    </table>
-    </div><!--/porlets-content-->
-    </div><!--/block-web-->
-    </div>
-    </div>
-    <div class="modal-footer">
-    <div class="row col-md-6 col-md-offset-6">
-    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
-    <a href="?c=Beneficiario&a=Detalles&idBeneficiario='.$idBeneficiario.'" class="btn btn-info btn-sm">Ver detalles de beneficiario</a>
-    </div>
-    </div>';
-  }
 
-  public function ListarLocalidades(){
-    header('Content-Type: application/json');
-    $idMunicipio=$_REQUEST['idMunicipio'];
-    $obMunicipio=$this->model->ObtenerMunicipio($idMunicipio);
+    public function ListarLocalidades(){
+      header('Content-Type: application/json');
+      $idMunicipio=$_REQUEST['idMunicipio'];
+      $obMunicipio=$this->model->ObtenerMunicipio($idMunicipio);
 
-    if($obMunicipio!=null){
+      if($obMunicipio!=null){
 
-      $municipio=$obMunicipio->nombreMunicipio;
-      $datos = array();
-      $row_array['estado']='ok';
-      array_push($datos, $row_array);
+        $municipio=$obMunicipio->nombreMunicipio;
+        $datos = array();
+        $row_array['estado']='ok';
+        array_push($datos, $row_array);
 
-      foreach ($this->model->ListarLocalidades($municipio) as $localidad):
-        $row_array['idLocalidad']  = $localidad->idLocalidad;
+        foreach ($this->model->ListarLocalidades($municipio) as $localidad):
+          $row_array['idLocalidad']  = $localidad->idLocalidad;
         $row_array['localidad']  = $localidad->localidad;
         array_push($datos, $row_array);
-      endforeach;
+        endforeach;
+      }
+      echo json_encode($datos, JSON_FORCE_OBJECT);
     }
-    echo json_encode($datos, JSON_FORCE_OBJECT);
-  }
 
-  public function ListarAsentamientos(){
-    header('Content-Type: application/json');
-    $idLocalidad=$_REQUEST['idLocalidad'];
-    $obLocalidad=$this->model->ObtenerLocalidad($idLocalidad);
-    if($obLocalidad!=null){
-      $localidad=$obLocalidad->localidad;
-      $datos = array();
-      $row_array['estado']='ok';
-      array_push($datos, $row_array);
-      foreach ($this->model->ListarAsentamientos($localidad) as $asentamiento):
-        $row_array['idAsentamientos']  = $asentamiento->idAsentamientos;
+    public function ListarAsentamientos(){
+      header('Content-Type: application/json');
+      $idLocalidad=$_REQUEST['idLocalidad'];
+      $obLocalidad=$this->model->ObtenerLocalidad($idLocalidad);
+      if($obLocalidad!=null){
+        $localidad=$obLocalidad->localidad;
+        $datos = array();
+        $row_array['estado']='ok';
+        array_push($datos, $row_array);
+        foreach ($this->model->ListarAsentamientos($localidad) as $asentamiento):
+          $row_array['idAsentamientos']  = $asentamiento->idAsentamientos;
         $row_array['nombreAsentamiento']  = $asentamiento->nombreAsentamiento;
         array_push($datos, $row_array);
-      endforeach;
+        endforeach;
+      }
+      echo json_encode($datos, JSON_FORCE_OBJECT);
     }
-    echo json_encode($datos, JSON_FORCE_OBJECT);
-  }
 
-}
+  }
