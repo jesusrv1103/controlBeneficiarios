@@ -11,8 +11,6 @@
 }
 </style>
 
-
-
 <div class="pull-left breadcrumb_admin clear_both">
 	<div class="pull-left page_title theme_color">
 		<h1>Beneficiarios</h1>
@@ -349,7 +347,7 @@
 														</div>
 														<div class="radio">
 															<label>
-																<input type="radio" name="estudioSocioeconomico" value="0" <?php if($beneficiario->estudioSocioeconomico=="0" || $beneficiario->idBeneficiario==null ){ ?> checked <?php } ?>>No
+																<input type="radio" name="estudioSocioeconomico" value="2" <?php if($beneficiario->estudioSocioeconomico=="2" || $beneficiario->idBeneficiario==null || $beneficiario->estudioSocioeconomico="NA" ){ ?> checked <?php } ?>>No
 															</label>
 														</div>
 													</div>
@@ -357,11 +355,11 @@
 													<label class="col-sm-1 control-label">Jefe de familia<strog class="theme_color"></strog></label>
 													<div class="col-sm-1">
 														<div class="radio">
-															<input type="radio" name="jefeFamilia"   value="1" <?php if($beneficiario->jefeFamilia=="1"){ ?> checked <?php } ?>>Si
+															<input type="radio" name="jefeFamilia"   value="1" <?php if($beneficiario->jefeFamilia=="1" ){ ?> checked <?php } ?>>Si
 														</div>
 														<div class="radio">
 															<label>
-																<input type="radio" name="jefeFamilia" value="0" <?php if($beneficiario->jefeFamilia=="0" || $beneficiario->idBeneficiario==null ){ ?> checked <?php } ?>>No
+																<input type="radio" name="jefeFamilia" value="2" <?php if($beneficiario->jefeFamilia=="2" || $beneficiario->idBeneficiario==null || $beneficiario->estudioSocioeconomico="NA"){ ?> checked <?php } ?>>No
 															</label>
 														</div>
 													</div>
@@ -373,7 +371,7 @@
 														</div>
 														<div class="radio">
 															<label>
-																<input type="radio" name="beneficiarioColectivo" value="0" <?php if($beneficiario->beneficiarioColectivo=="0" || $beneficiario->beneficiarioColectivo==null ){ ?> checked <?php } ?>>No
+																<input type="radio" name="beneficiarioColectivo" value="2" <?php if($beneficiario->beneficiarioColectivo=="2" || $beneficiario->beneficiarioColectivo==null || $beneficiario->estudioSocioeconomico="NA" ){ ?> checked <?php } ?>>No
 															</label>
 														</div>
 													</div>
@@ -664,12 +662,12 @@
 									data: datos
 								}).done(function(respuesta){
 									if (respuesta[0].estado === "ok") {
-										console.log(JSON.stringify(respuesta));
 										var selector = document.getElementById("selectAsentamientos");
-										selector.options[0] = new Option("Seleccione el asentamiento al que petenece el beneficiario","");
+										selector.options[0] = new Option("Seleccione el asentamiento al que petenece el beneficiario",1);
+										selector.options[1] = new Option("Ninguno",1);
 										for (var i in respuesta) {
 											var j=parseInt(i)+1;
-											selector.options[j] = new Option(respuesta[i].nombreAsentamiento,respuesta[i].idAsentamientos);
+											selector.options[++j] = new Option(respuesta[i].nombreAsentamiento,respuesta[i].idAsentamientos);
 										}
 
 									}
