@@ -117,7 +117,6 @@ class BeneficiarioController{
     $beneficiarios = false;
     $page="view/beneficiario_curp/detalles.php";
     require_once 'view/index.php';
-
   }
 
   public function Crud(){
