@@ -73,7 +73,7 @@ class Beneficiariorfc
 				b.actividad,
 				b.cobertura
 				FROM 
-				tipoVialidad tV, 
+				tipovialidad tV, 
 				asentamientos a, 
 				localidades l, 
 				beneficiariorfc  b
@@ -107,7 +107,7 @@ class Beneficiariorfc
 				b.actividad,
 				b.cobertura
 				FROM  
-				beneficiarioRFC");
+				beneficiariorfc");
 			
 			$stm->execute();
 
@@ -523,7 +523,11 @@ public function ActualizarExc($data)
 	{
 		try
 		{
+<<<<<<< HEAD
 			$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiariorfc,origen,registroApoyo,subprograma,programa,periodicidad,tipoApoyo,caracteristicasApoyo WHERE apoyos.idBeneficiario=beneficiarioRFC.idBeneficiarioRFC AND apoyos.idRegistroApoyo=registroApoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasApoyo.idTipoApoyo=tipoApoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasApoyo.idCaracteristicasApoyo AND beneficiarioRFC.idBeneficiarioRFC=1 ORDER BY apoyos.idApoyo;");
+=======
+			$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiariorfc,origen,registroApoyo,subprograma,programa,periodicidad,tipoApoyo,caracteristicasApoyo WHERE apoyos.idBeneficiario=beneficiariorfc.idBeneficiarioRFC AND apoyos.idRegistroApoyo=registroApoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasApoyo.idTipoApoyo=tipoApoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasApoyo.idCaracteristicasApoyo AND beneficiariorfc.idBeneficiariorfc=1 ORDER BY apoyos.idApoyo;");
+>>>>>>> eee7a4f51e8f92d26302f28d34c3712351c39f75
 			
 			$stm->execute(array($idBeneficiario));
 
