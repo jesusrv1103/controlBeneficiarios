@@ -91,7 +91,7 @@ class Usuario
 			die($e->getMessage());
 		}
 	}
-	public function EliminarInDB($usuario)
+	/*public function EliminarInDB($usuario)
 	{
 		try
 		{
@@ -106,7 +106,7 @@ class Usuario
 		{
 			die($e->getMessage());
 		}
-	}
+	}*/
 	public function Actualizar(Usuario $data)
 	{
 		try
@@ -157,7 +157,7 @@ class Usuario
 			require_once "view/index.php";
 		}
 	}
-	public function ActualizarInDB(Usuario $data,$password)
+	/*public function ActualizarInDB(Usuario $data,$password)
 	{
 		try
 		{
@@ -168,7 +168,7 @@ class Usuario
 		{
 			die($e->getMessage());
 		}
-	}
+	}*/
 	public function Registrar(Usuario $data)
 	{
 		try
@@ -191,7 +191,7 @@ class Usuario
 			die($e->getMessage());
 		}
 	}
-	public function RegistrarInDB(Usuario $data)
+	/*public function RegistrarInDB(Usuario $data)
 	{
 		try
 		{
@@ -208,7 +208,7 @@ class Usuario
 		{
 			die($e->getMessage());
 		}
-	}
+	}*/
 
 	public function ObtenerUsuario($idUsuario)
 	{

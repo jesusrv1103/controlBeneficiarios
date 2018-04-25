@@ -45,7 +45,7 @@ class UsuarioController{
 		if($usuario->idUsuario > 0 && isset($_REQUEST['password'])){
 			//Actualiza el usuario cambiando password
 			$this->model->Actualizar($usuario);
-			$this->model->ActualizarInDB($usuario,$password);
+			//$this->model->ActualizarInDB($usuario,$password);
 			$mensaje="Los datos del usuario <b>$usuario->usuario</b> se han actualizado correctamente";
 		}elseif(!isset($_REQUEST['password'])){
 			//Actualizar usuario sin cambiar password
@@ -56,7 +56,7 @@ class UsuarioController{
 			$consulta=$this->model->VerificaUsuario($usuario->usuario);
 			if($consulta==null){
 				$this->model->Registrar($usuario);
-				$this->model->RegistrarInDB($usuario);
+				//$this->model->RegistrarInDB($usuario);
 				$mensaje="El usuario <b>$usuario->usuario</b> se ha registrado correctamente";
 			}else{
 				$error=true;
@@ -78,7 +78,7 @@ class UsuarioController{
 		if(isset($_REQUEST['acceso'])){
 			$consultausuario=$this->model->ObtenerUsuario($idUsuario);
 			$this->model->Eliminar($idUsuario);
-			$this->model->EliminarInDB($consultausuario->usuario);
+			//$this->model->EliminarInDB($consultausuario->usuario);
 		    $administracion=true; //variable cargada para activar la opcion administracion en el menu
 			$usuarios=true; //variable cargada para activar la opcion usuarios en el menu
 			$page="view/usuario/index.php";
