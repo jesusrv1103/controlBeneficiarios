@@ -6,7 +6,7 @@ class Database
 		try
 		{
 			if (!isset($_SESSION['seguridad']) || $_SESSION['tipoUsuario']==1) {
-				$pdo = new PDO('mysql:host=localhost;dbname=insezac;charset=utf8', 'root', '1234');
+				$pdo = new PDO('mysql:host=localhost;dbname=insezac;charset=utf8', 'root', '');
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				return $pdo;
 			}else{

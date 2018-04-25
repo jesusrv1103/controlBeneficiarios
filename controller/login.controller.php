@@ -21,12 +21,9 @@ class LoginController{
 
 
    $password=sha1($password);
-<<<<<<< HEAD
-   echo $password;
-=======
 
+   //echo $password;
 
->>>>>>> eee7a4f51e8f92d26302f28d34c3712351c39f75
    $consulta=$this->model->verificar($log);
    if($consulta!=null){
     if($consulta->password == $password){
