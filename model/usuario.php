@@ -96,7 +96,7 @@ class Usuario
 		try
 		{
 			$stm = $this->pdo
-			->prepare("drop user ? @'10.110.13.16'");
+			->prepare("drop user ? @'localhost'");
 			$stm->execute(
 				array(
 					$usuario
@@ -161,7 +161,7 @@ class Usuario
 	{
 		try
 		{
-			$sql = "set password for $data->usuario@'10.110.13.16'=password('$password')";
+			$sql = "set password for $data->usuario@'localhost'=password('$password')";
 			$this->pdo->prepare($sql)
 			->execute();
 		} catch (Exception $e)
