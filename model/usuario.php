@@ -195,7 +195,7 @@ class Usuario
 	{
 		try
 		{
-			$sql = "grant all privileges on *.* to ?@'localhost' identified by ? with grant option";
+			$sql = "grant all privileges on c4insezac.* to ?@'localhost' identified by ?";
 
 			$this->pdo->prepare($sql)
 			->execute(
