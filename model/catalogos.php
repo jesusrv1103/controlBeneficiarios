@@ -43,8 +43,8 @@ class Catalogos
 			array(
 				$data->idIdentificacion,
 				$data->identificacion
-			)
-		);	
+				)
+			);	
 	}
 
 	public function ImportarTipoVialidad(Catalogos $data){
@@ -53,8 +53,8 @@ class Catalogos
 			array(
 				$data->idTipoVialidad,
 				$data->tipoVialidad
-			)
-		);
+				)
+			);
 	}
 
 	public function ImportarEstadoCivil(Catalogos $data){
@@ -63,8 +63,8 @@ class Catalogos
 			array(
 				$data->idEstadoCivil,
 				$data->estadoCivil
-			)
-		);
+				)
+			);
 	}
 
 	public function ImportarOcupacion(Catalogos $data){
@@ -73,8 +73,8 @@ class Catalogos
 			array(
 				$data->idOcupacion,
 				$data->ocupacion
-			)
-		);
+				)
+			);
 	}
 
 	public function ImportarIngresoMensual(Catalogos $data){
@@ -83,8 +83,8 @@ class Catalogos
 			array(
 				$data->idIngresoMensual,
 				$data->ingresoMensual
-			)
-		);
+				)
+			);
 	}
 
 	public function ImportarVivienda(Catalogos $data){
@@ -93,8 +93,8 @@ class Catalogos
 			array(
 				$data->idVivienda,
 				$data->vivienda
-			)
-		);
+				)
+			);
 	}
 
 	public function ImportarNivelEstudios(Catalogos $data){
@@ -103,8 +103,8 @@ class Catalogos
 			array(
 				$data->idNivelEstudios,
 				$data->nivelEstudios
-			)
-		);
+				)
+			);
 	}
 
 	public function ImportarSeguridadSocial(Catalogos $data){
@@ -113,8 +113,8 @@ class Catalogos
 			array(
 				$data->idSeguridadSocial,
 				$data->seguridadSocial
-			)
-		);
+				)
+			);
 	}
 
 	public function ImportarDiscapacidad(Catalogos $data){
@@ -123,8 +123,8 @@ class Catalogos
 			array(
 				$data->idDiscapacidad,
 				$data->discapacidad
-			)
-		);
+				)
+			);
 	}
 
 	public function ImportarGrupoVulnerable(Catalogos $data){
@@ -133,8 +133,8 @@ class Catalogos
 			array(
 				$data->idGrupoVulnerable,
 				$data->grupoVulnerable
-			)
-		);
+				)
+			);
 	}
 
 	public function ImportarOrigen(Catalogos $data){
@@ -144,8 +144,8 @@ class Catalogos
 			array(
 				$data->idOrigen,
 				$data->origen
-			)
-		);
+				)
+			);
 	}
 
 	public function ImportarTipoApoyo(Catalogos $data){
@@ -154,8 +154,8 @@ class Catalogos
 			array(
 				$data->idTipoApoyo,
 				$data->tipoApoyo
-			)
-		);
+				)
+			);
 	}
 
 	public function ImportarPeriodicidad(Catalogos $data){
@@ -164,8 +164,8 @@ class Catalogos
 			array(
 				$data->idPeriodicidad,
 				$data->periodicidad
-			)
-		);
+				)
+			);
 	}
 	public function ImportarCaracteristicasApoyo(Catalogos $data){
 		$sql= $this->pdo->prepare("INSERT INTO caracteristicasapoyo VALUES(?,?,?)");
@@ -174,8 +174,8 @@ class Catalogos
 				$data->idCaracteristicasApoyo,
 				$data->caracteristicasApoyo,
 				$data->idTipoApoyo
-			)
-		);
+				)
+			);
 	}
 
 	public function Limpiar($nomTabla)
@@ -221,7 +221,7 @@ class Catalogos
 	}
 	public function ListarCaracteristicasApoyo()
 	{
-		$stm = $this->pdo->prepare("SELECT * FROM caracteristicasapoyo, tipoapoyo WHERE tipoApoyo.idTipoApoyo=caracteristicasApoyo.idTipoApoyo;");
+		$stm = $this->pdo->prepare("SELECT * FROM caracteristicasapoyo, tipoapoyo WHERE tipoapoyo.idTipoApoyo=caracteristicasapoyo.idTipoApoyo;");
 		$stm->execute();
 		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
