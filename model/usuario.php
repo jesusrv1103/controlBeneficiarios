@@ -96,7 +96,7 @@ class Usuario
 		try
 		{
 			$stm = $this->pdo
-			->prepare("drop user ? @'localhost'");
+			->prepare("drop user ? @'10.110.13.16'");
 			$stm->execute(
 				array(
 					$usuario
@@ -161,7 +161,7 @@ class Usuario
 	{
 		try
 		{
-			$sql = "set password for $data->usuario@'localhost'=password('$password')";
+			$sql = "set password for $data->usuario@'10.110.13.16'=password('$password')";
 			$this->pdo->prepare($sql)
 			->execute();
 		} catch (Exception $e)
@@ -195,7 +195,7 @@ class Usuario
 	{
 		try
 		{
-			$sql = "grant all privileges on *.* to ?@'localhost' identified by ? with grant option";
+			$sql = "grant all privileges on *.* to ?@'10.110.13.16' identified by ? with grant option";
 
 			$this->pdo->prepare($sql)
 			->execute(
