@@ -158,12 +158,12 @@ if (!isset($_SESSION['seguridad'])){
           </li>
 
 
- <?php if($_SESSION['tipoUsuario']==1){?>
+          <?php if($_SESSION['tipoUsuario']==1){?>
           <?php if(isset($administracion)){ ?>
           <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i>  Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
             <ul class="opened" style="display:block">
               <?php  }else{ ?>
-             
+              
               <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
                 <ul>
                   <?php }  ?> 
@@ -179,7 +179,7 @@ if (!isset($_SESSION['seguridad'])){
                   </li><br><br>
                 </ul>
               </li>
-                 <?php } ?>
+              <?php } ?>
 
               <?php if($_SESSION['tipoUsuario']==3 || $_SESSION['tipoUsuario']==1){?>
               <?php if(isset($catalogos)){ ?> <!-- CATALOGOS -->
