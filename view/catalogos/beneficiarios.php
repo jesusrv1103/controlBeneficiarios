@@ -38,272 +38,272 @@
 			</div><!--/header-->
 			<?php if(isset($this->mensaje)){ if(!isset($this->error)){?>
 			<br> <div class="row">
-				<div class="col-md-12">
-					<div class="alert alert-success fade in">
-						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-						<i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
-					</div>
-				</div>
-			</div> 
-			<?php } if(isset($this->error)){ ?>
-			<br> <div class="row">
-				<div class="col-md-12">
-					<div class="alert alert-danger">
-						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-						<i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
-					</div>
+			<div class="col-md-12">
+				<div class="alert alert-success fade in">
+					<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+					<i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
 				</div>
 			</div>
-			<?php } }?>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="block-web">
-						<div class="header">
-							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header lblheader">Identificación oficial</h3>
+		</div> 
+		<?php } if(isset($this->error)){ ?>
+		<br> <div class="row">
+		<div class="col-md-12">
+			<div class="alert alert-danger">
+				<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+				<i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
+			</div>
+		</div>
+	</div>
+	<?php } }?>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="block-web">
+				<div class="header">
+					<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+					<h3 class="content-header lblheader">Identificación oficial</h3>
+				</div>
+				<div class="porlets-content">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<table class="table table-striped">
+								<tbody>
+									<?php foreach($this->model->Listar('identificacionoficial') as $r): ?>
+										<tr>
+											<td><?php echo $r->idIdentificacion; ?></td>
+											<td><?php echo $r->identificacion; ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
 						</div>
-						<div class="porlets-content">
-							<div class="panel-body">
-								<div class="col-md-12">
-									<table class="table table-striped">
-										<tbody>
-											<?php foreach($this->model->Listar('identificacionoficial') as $r): ?>
-												<tr>
-													<td><?php echo $r->idIdentificacion; ?></td>
-													<td><?php echo $r->identificacion; ?></td>
-												</tr>
-											<?php endforeach; ?>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div><!--/porlets-content-->
-					</div><!--/block-web-->
-				</div><!--/col-md-6-->
-				<div class="col-md-6">
-					<div class="block-web">
-						<div class="header">
-							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header lblheader">Ingreso mensual</h3>
-						</div>
-						<div class="porlets-content">
-							<div class="panel-body">
-								<div class="col-md-12">
-									<table class="table table-striped">
+					</div>
+				</div><!--/porlets-content-->
+			</div><!--/block-web-->
+		</div><!--/col-md-6-->
+		<div class="col-md-6">
+			<div class="block-web">
+				<div class="header">
+					<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+					<h3 class="content-header lblheader">Ingreso mensual</h3>
+				</div>
+				<div class="porlets-content">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<table class="table table-striped">
 
 
-										<tbody>
-											<?php foreach($this->model->Listar('ingresomensual') as $r): ?>
-												<tr>
-													<td><?php echo $r->idIngresoMensual; ?></td>
-													<td><?php echo $r->ingresoMensual; ?></td>
-												</tr>
-											<?php endforeach; ?>
-										</tbody>
+								<tbody>
+									<?php foreach($this->model->Listar('ingresomensual') as $r): ?>
+										<tr>
+											<td><?php echo $r->idIngresoMensual; ?></td>
+											<td><?php echo $r->ingresoMensual; ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
 
-									</table>
-								</div>
-							</div>
-						</div><!--/porlets-content-->
-					</div><!--/block-web-->
-				</div><!--/col-md-6-->
-				<div class="col-md-6">
-					<div class="block-web">
-						<div class="header">
-							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header lblheader">Tipo de seguridad social</h3>
+							</table>
 						</div>
-						<div class="porlets-content">
-							<div class="panel-body">
-								<div class="col-md-12">
-									<table class="table table-striped">
-										<tbody>
-											<?php foreach($this->model->Listar('seguridadsocial') as $r): ?>
-												<tr>
-													<td><?php echo $r->idSeguridadSocial; ?></td>
-													<td><?php echo $r->seguridadSocial; ?></td>
-												</tr>
-											<?php endforeach; ?>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div><!--/porlets-content-->
-					</div><!--/block-web-->
-				</div><!--/col-md-6-->
-				<div class="col-md-6">
-					<div class="block-web">
-						<div class="header">
-							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header lblheader">Grupo vulnerable</h3>
+					</div>
+				</div><!--/porlets-content-->
+			</div><!--/block-web-->
+		</div><!--/col-md-6-->
+		<div class="col-md-6">
+			<div class="block-web">
+				<div class="header">
+					<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+					<h3 class="content-header lblheader">Tipo de seguridad social</h3>
+				</div>
+				<div class="porlets-content">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<table class="table table-striped">
+								<tbody>
+									<?php foreach($this->model->Listar('seguridadsocial') as $r): ?>
+										<tr>
+											<td><?php echo $r->idSeguridadSocial; ?></td>
+											<td><?php echo $r->seguridadSocial; ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
 						</div>
-						<div class="porlets-content">
-							<div class="panel-body">
-								<div class="col-md-12">
-									<table class="table table-striped">									
-										<tbody>
-											<?php foreach($this->model->Listar('grupovulnerable') as $r): ?>
-												<tr>
-													<td><?php echo $r->idGrupoVulnerable; ?></td>
-													<td><?php echo $r->grupoVulnerable; ?></td>
-												</tr>
-											<?php endforeach; ?>
-										</tbody>													
-									</table>
-								</div>
-							</div>
-						</div><!--/porlets-content-->
-					</div><!--/block-web-->
-				</div><!--/col-md-6-->
-				<div class="col-md-6">
-					<div class="block-web">
-						<div class="header">
-							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header lblheader">Nivel de estudios</h3>
+					</div>
+				</div><!--/porlets-content-->
+			</div><!--/block-web-->
+		</div><!--/col-md-6-->
+		<div class="col-md-6">
+			<div class="block-web">
+				<div class="header">
+					<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+					<h3 class="content-header lblheader">Grupo vulnerable</h3>
+				</div>
+				<div class="porlets-content">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<table class="table table-striped">									
+								<tbody>
+									<?php foreach($this->model->Listar('grupovulnerable') as $r): ?>
+										<tr>
+											<td><?php echo $r->idGrupoVulnerable; ?></td>
+											<td><?php echo $r->grupoVulnerable; ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>													
+							</table>
 						</div>
-						<div class="porlets-content">
-							<div class="panel-body">
-								<div class="col-md-12">
-									<table class="table table-striped">									
-										<tbody>
-											<?php foreach($this->model->Listar('nivelestudio') as $r): ?>
-												<tr>
-													<td><?php echo $r->idNivelEstudios; ?></td>
-													<td><?php echo $r->nivelEstudios; ?></td>
-												</tr>
-											<?php endforeach; ?>
-										</tbody>													
-									</table>
-								</div>
-							</div>
-						</div><!--/porlets-content-->
-					</div><!--/block-web-->
-				</div><!--/col-md-6-->
-				<div class="col-md-6">
-					<div class="block-web">
-						<div class="header">
-							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header lblheader">Discapacidad</h3>
+					</div>
+				</div><!--/porlets-content-->
+			</div><!--/block-web-->
+		</div><!--/col-md-6-->
+		<div class="col-md-6">
+			<div class="block-web">
+				<div class="header">
+					<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+					<h3 class="content-header lblheader">Nivel de estudios</h3>
+				</div>
+				<div class="porlets-content">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<table class="table table-striped">									
+								<tbody>
+									<?php foreach($this->model->Listar('nivelestudio') as $r): ?>
+										<tr>
+											<td><?php echo $r->idNivelEstudios; ?></td>
+											<td><?php echo $r->nivelEstudios; ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>													
+							</table>
 						</div>
-						<div class="porlets-content">
-							<div class="panel-body">
-								<div class="col-md-12">
-									<table class="table table-striped">
-										<tbody>
-											<?php foreach($this->model->Listar('discapacidad') as $r): ?>
-												<tr>
-													<td><?php echo $r->idDiscapacidad; ?></td>
-													<td><?php echo $r->discapacidad; ?></td>
-												</tr>
-											<?php endforeach; ?>
-										</tbody>
+					</div>
+				</div><!--/porlets-content-->
+			</div><!--/block-web-->
+		</div><!--/col-md-6-->
+		<div class="col-md-6">
+			<div class="block-web">
+				<div class="header">
+					<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+					<h3 class="content-header lblheader">Discapacidad</h3>
+				</div>
+				<div class="porlets-content">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<table class="table table-striped">
+								<tbody>
+									<?php foreach($this->model->Listar('discapacidad') as $r): ?>
+										<tr>
+											<td><?php echo $r->idDiscapacidad; ?></td>
+											<td><?php echo $r->discapacidad; ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
 
-									</table>
-								</div>
-							</div>
-						</div><!--/porlets-content-->
-					</div><!--/block-web-->
-				</div><!--/col-md-6-->
-				<div class="col-md-6">
-					<div class="block-web">
-						<div class="header">
-							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header lblheader">Vivienda</h3>
+							</table>
 						</div>
-						<div class="porlets-content">
-							<div class="panel-body">
-								<div class="col-md-12">
-									<table class="table table-striped">
-										<tbody>
-											<?php foreach($this->model->Listar('vivienda') as $r): ?>
-												<tr>
-													<td><?php echo $r->idVivienda; ?></td>
-													<td><?php echo $r->vivienda; ?></td>
-												</tr>
-											<?php endforeach; ?>
-										</tbody>
+					</div>
+				</div><!--/porlets-content-->
+			</div><!--/block-web-->
+		</div><!--/col-md-6-->
+		<div class="col-md-6">
+			<div class="block-web">
+				<div class="header">
+					<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+					<h3 class="content-header lblheader">Vivienda</h3>
+				</div>
+				<div class="porlets-content">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<table class="table table-striped">
+								<tbody>
+									<?php foreach($this->model->Listar('vivienda') as $r): ?>
+										<tr>
+											<td><?php echo $r->idVivienda; ?></td>
+											<td><?php echo $r->vivienda; ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
 
-									</table>
-								</div>
-							</div>
-						</div><!--/porlets-content-->
-					</div><!--/block-web-->
-				</div><!--/col-md-6-->
-				<div class="col-md-6">
-					<div class="block-web">
-						<div class="header">
-							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header lblheader">Estado civil</h3>
+							</table>
 						</div>
-						<div class="porlets-content">
-							<div class="panel-body">
-								<div class="col-md-12">
-									<table class="table table-striped">
-										<tbody>
-											<?php foreach($this->model->Listar('estadocivil') as $r): ?>
-												<tr>
-													<td><?php echo $r->idEstadoCivil; ?></td>
-													<td><?php echo $r->estadoCivil; ?></td>
-												</tr>
-											<?php endforeach; ?>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div><!--/porlets-content-->
-					</div><!--/block-web-->
-				</div><!--/col-md-6-->
-				<div class="col-md-6">
-					<div class="block-web">
-						<div class="header">
-							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header lblheader">Tipo Vialidad</h3>
+					</div>
+				</div><!--/porlets-content-->
+			</div><!--/block-web-->
+		</div><!--/col-md-6-->
+		<div class="col-md-6">
+			<div class="block-web">
+				<div class="header">
+					<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+					<h3 class="content-header lblheader">Estado civil</h3>
+				</div>
+				<div class="porlets-content">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<table class="table table-striped">
+								<tbody>
+									<?php foreach($this->model->Listar('estadocivil') as $r): ?>
+										<tr>
+											<td><?php echo $r->idEstadoCivil; ?></td>
+											<td><?php echo $r->estadoCivil; ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
 						</div>
-						<div class="porlets-content">
-							<div class="panel-body">
-								<div class="col-md-12">
-									<table class="table table-striped">
-										<tbody>
-											<?php foreach($this->model->Listar('tipovialidad') as $r): ?>
-												<tr>
-													<td><?php echo $r->idTipoVialidad; ?></td>
-													<td><?php echo $r->tipoVialidad; ?></td>
-												</tr>
-											<?php endforeach; ?>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div><!--/porlets-content-->
-					</div><!--/block-web-->
-				</div><!--/col-md-6-->
-				<div class="col-md-6">
-					<div class="block-web">
-						<div class="header">
-							<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-							<h3 class="content-header lblheader">Ocupación</h3>
+					</div>
+				</div><!--/porlets-content-->
+			</div><!--/block-web-->
+		</div><!--/col-md-6-->
+		<div class="col-md-6">
+			<div class="block-web">
+				<div class="header">
+					<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+					<h3 class="content-header lblheader">Tipo Vialidad</h3>
+				</div>
+				<div class="porlets-content">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<table class="table table-striped">
+								<tbody>
+									<?php foreach($this->model->Listar('tipovialidad') as $r): ?>
+										<tr>
+											<td><?php echo $r->idTipoVialidad; ?></td>
+											<td><?php echo $r->tipoVialidad; ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
 						</div>
-						<div class="porlets-content">
-							<div class="panel-body">
-								<div class="col-md-12">
-									<table class="table table-striped">
-										<tbody>
-											<?php foreach($this->model->Listar('ocupacion') as $r): ?>
-												<tr>
-													<td><?php echo $r->idOcupacion; ?></td>
-													<td><?php echo $r->ocupacion; ?></td>
-												</tr>
-											<?php endforeach; ?>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div><!--/porlets-content-->
-					</div><!--/block-web-->
-				</div><!--/col-md-6-->
-			</div><!--/row-->	
-		</div><!--/block-web--> 
-	</div><!--/row-col-md-12--> 
+					</div>
+				</div><!--/porlets-content-->
+			</div><!--/block-web-->
+		</div><!--/col-md-6-->
+		<div class="col-md-6">
+			<div class="block-web">
+				<div class="header">
+					<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+					<h3 class="content-header lblheader">Ocupación</h3>
+				</div>
+				<div class="porlets-content">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<table class="table table-striped">
+								<tbody>
+									<?php foreach($this->model->Listar('ocupacion') as $r): ?>
+										<tr>
+											<td><?php echo $r->idOcupacion; ?></td>
+											<td><?php echo $r->ocupacion; ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div><!--/porlets-content-->
+			</div><!--/block-web-->
+		</div><!--/col-md-6-->
+	</div><!--/row-->	
+</div><!--/block-web--> 
+</div><!--/row-col-md-12--> 
 </div><!--/container clear_both padding_fix-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -349,7 +349,7 @@
 		alert(fn);
 		$("#fileImport").val(fn);
 	}
-	 deshabilitar = function (){
-  $('#btnImportar').attr("disabled", true);
-}
+	deshabilitar = function (){
+		$('#btnImportar').attr("disabled", true);
+	}
 </script>

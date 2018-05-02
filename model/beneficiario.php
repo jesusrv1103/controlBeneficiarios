@@ -123,16 +123,16 @@ class Beneficiario
 				b.email,
 				b.fechaNacimiento,
 				b.genero
-				FROM identificacionOficial idOf,
-				tipoVialidad tV, estadoCivil eC,
+				FROM identificacionoficial idOf,
+				tipovialidad tV, estadocivil eC,
 				ocupacion o, vivienda v,
-				nivelEstudio nE,
-				seguridadSocial sS,
+				nivelestudio nE,
+				seguridadsocial sS,
 				discapacidad d,
-				grupoVulnerable gV,
+				grupovulnerable gV,
 				asentamientos a,
 				localidades l,
-				ingresoMensual iM,
+				ingresomensual iM,
 				beneficiarios  b,
 				municipio m
 				where  b.idIdentificacion = idOf.idIdentificacion AND
@@ -170,17 +170,17 @@ class Beneficiario
 				b.primerApellido,
 				b.segundoApellido,
 				b.nombres,
-				idOf.identificacion as nomTipoI
-				FROM identificacionOficial idOf,
-				tipoVialidad tV, estadoCivil eC,
+				idOf.idIdentificacion as nomTipoI
+				FROM identificacionoficial idOf,
+				tipovialidad tV, estadocivil eC,
 				ocupacion o, vivienda v,
-				nivelEstudio nE,
-				seguridadSocial sS,
+				nivelestudio nE,
+				seguridadsocial sS,
 				discapacidad d,
-				grupoVulnerable gV,
+				grupovulnerable gV,
 				asentamientos a,
 				localidades l,
-				ingresoMensual iM,
+				ingresomensual iM,
 				beneficiarios  b
 				where  b.idIdentificacion = idOf.idIdentificacion AND
 				b.idTipoVialidad = tV.idTipoVialidad AND
@@ -693,7 +693,7 @@ public function Listar1($periodo)
 	{
 		try
 		{
-			$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiarios,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyos.idBeneficiario=beneficiarios.idBeneficiario AND apoyos.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasApoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND beneficiarios.idBeneficiario=? ORDER BY apoyos.idApoyo;");
+			$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiarios,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyos.idBeneficiario=beneficiarios.idBeneficiario AND apoyos.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND beneficiarios.idBeneficiario=? ORDER BY apoyos.idApoyo;");
 
 			$stm->execute(array($idBeneficiario));
 
