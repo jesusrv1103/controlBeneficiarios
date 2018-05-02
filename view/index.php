@@ -217,7 +217,7 @@ if (!isset($_SESSION['seguridad'])){
                           <a href="?c=programa"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
                             <?php if (isset($programas)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Programas</b>
                           </a>
-                        </li>
+                        </li><br><br>
                         
                         <li>
                           <a href="?c=subprograma"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
