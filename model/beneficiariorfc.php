@@ -422,7 +422,7 @@ public function ActualizarExc($data)
 	{
 		try 
 		{
-			$sql= $this->pdo->prepare("SELECT registro.idRegistro from registro, beneficiariorfc where registro.idRegistro=beneficiarioRFC.idRegistro and idBeneficiarioRFC=$idBeneficiarioRFC");
+			$sql= $this->pdo->prepare("SELECT registro.idRegistro from registro, beneficiariorfc where registro.idRegistro=beneficiariorfc.idRegistro and idBeneficiarioRFC=$idBeneficiarioRFC");
 			$resultado=$sql->execute();
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
@@ -466,7 +466,7 @@ public function ActualizarExc($data)
 	{
 		try 
 		{
-			$sql= $this->pdo->prepare("SELECT * FROM registro, beneficiariorfc WHERE beneficiarioRFC.idRegistro=registro.idRegistro AND beneficiarioRFC.idBeneficiarioRFC=?;");
+			$sql= $this->pdo->prepare("SELECT * FROM registro, beneficiariorfc WHERE beneficiariorfc.idRegistro=registro.idRegistro AND beneficiarioRFC.idBeneficiarioRFC=?;");
 			$resultado=$sql->execute(array($idBeneficiarioRFC));
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
