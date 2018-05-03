@@ -25,7 +25,7 @@
           <div class="row" style="margin-top: 15px; margin-bottom: 12px;">
             <div class="col-sm-7">
               <div class="actions"> </div>
-              <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Libro de apoyos a beneficiarios con CURP</h2>
+              <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Libro de apoyos a beneficiarios con RFC</h2>
             </div>
             <div class="col-md-5">
               <div class="btn-group pull-right">
@@ -33,7 +33,7 @@
                  <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                  <div class="btn-group" style="margin-right: 10px;">
                    <div class="btn-group">
-                    <a href="?c=apoyos&a=Crud" data-toggle="dropdown" class="btn btn-sm btn-success" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar</a>
+                    <a href="?c=apoyosrfc&a=Crud" class="btn btn-sm btn-success" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar</a>
                   </div>
                   <div class="btn-group">
                     <a  data-toggle="modal" data-target="#modalImportar" href="#modalImportar" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
@@ -71,7 +71,7 @@
            <thead>
              <tr>
                <td><center><b>Info</b></center></td>
-               <th>CURP</th>
+               <th>RFC</th>
                <th>Fecha</th> 
                <th width="22%">Programa</th>
                <th>Subprograma</th>
@@ -103,7 +103,7 @@
                 <td>$<?php echo $r->importeApoyo; ?></td>
                 <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                 <td class="center">
-                  <a class="btn btn-primary btn-sm" role="button" href="?c=apoyos&a=Crud&idApoyo=<?php echo $r->idApoyo ?>"><i class="fa fa-edit"></i></a>
+                  <a class="btn btn-primary btn-sm" role="button" href="?c=apoyosrfc&a=Crud&idApoyo=<?php echo $r->idApoyo ?>"><i class="fa fa-edit"></i></a>
                 </td>
                 <?php if($_SESSION['tipoUsuario']==1){?>
                 <td class="center">
@@ -117,7 +117,7 @@
          <tfoot>
           <tr>
            <td><center><b>Info</b></center></td>
-           <th>CURP</th>
+           <th>RFC</th>
            <th>Fecha</th>
            <th>Programa</h> 
              <th>Subprograma</th>
@@ -142,12 +142,12 @@
 <div class="modal fade" id="modalImportar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="?c=apoyos&a=Upload" method="post" enctype="multipart/form-data">
+      <form action="?c=apoyosrfc&a=Upload" method="post" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="row">
             <div class="block-web">
               <div class="header">
-                <h3 class="content-header theme_color">&nbsp;Importar apoyos</h3>
+                <h3 class="content-header theme_color">&nbsp;Importar apoyos RFC</h3>
               </div>
               <div class="porlets-content" style="margin-bottom: -65px;">
                 <p>Selecciona tu archivo excel con los datos de los beneficiarios para registrarlos.</p>
@@ -219,7 +219,7 @@
       </div>
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-          <form action="?c=apoyos&a=Eliminar" enctype="multipart/form-data" method="post">
+          <form action="?c=apoyosrfc&a=Eliminar" enctype="multipart/form-data" method="post">
             <input  type="hidden" name="idApoyo" id="txtIdApoyo">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -235,7 +235,7 @@
   }
   infoApoyo = function (idApoyo){
     var idApoyo=idApoyo;
-    $.post("index.php?c=apoyos&a=InfoApoyo", {idApoyo: idApoyo}, function(info) {
+    $.post("index.php?c=apoyosrfc&a=InfoApoyo", {idApoyo: idApoyo}, function(info) {
       $("#div-modal-content").html(info);
     }); 
   }

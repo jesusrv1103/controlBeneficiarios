@@ -1,5 +1,4 @@
 <?php
-require_once 'model/database.php';
 class Apoyos
 {
 	private $pdo; //int 
@@ -22,8 +21,6 @@ class Apoyos
 	public $idRegistroApoyo;
 	public $idBeneficiario;
 	public $clavePresupuestal;
-	public $tipo;
-
 
 	public function __CONSTRUCT()
 	{
@@ -42,7 +39,7 @@ class Apoyos
 	{
 		try
 		{
-			$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiarios,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyos.idBeneficiario=beneficiarios.idBeneficiario AND apoyos.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyos.tipo='curp'");
+			$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiarios,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyos.idBeneficiario=beneficiarios.idBeneficiario AND apoyos.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyos.tipo='rfc'");
 			
 			$stm->execute(array());
 
@@ -148,7 +145,7 @@ class Apoyos
 					$data->idProgramaSocial,
 					$data->idRegistroApoyo,
 					null,
-					'curp'
+					'rfc'
 				)
 			);
 		} catch (Exception $e) 
@@ -171,7 +168,7 @@ class Apoyos
 	public function ImportarApoyo(Apoyos $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
 					null,
@@ -185,8 +182,7 @@ class Apoyos
 					$data->idPeriodicidad,
 					$data->idProgramaSocial,
 					$data->idRegistroApoyo,
-					$data->clavePresupuestal,
-					'curp'
+					$data->clavePresupuestal
 				)
 			);
 		} catch (Exception $e) 
