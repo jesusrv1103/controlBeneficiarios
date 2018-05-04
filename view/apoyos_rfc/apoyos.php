@@ -7,8 +7,8 @@
   </div>
   <div class="pull-right">
     <ol class="breadcrumb">
-      <li><a href="?c=Inicio">Inicio</a></li>
-      <li><a href="?c=Apoyo">Apoyos</a></li>
+      <li><a href="?c=inicio">Inicio</a></li>
+      <li><a href="?c=apoyosrfc">Apoyos</a></li>
       <li class="active"><?php echo $apoyo->idApoyo != null ? 'Actualizar apoyo' : 'Registrar apoyo'; ?></li>
     </ol>
   </div>
@@ -21,7 +21,7 @@
           <div class="row" style="margin-top: 15px; margin-bottom: 12px;">
             <div class="col-sm-8">
               <div class="actions"> </div>
-              <h2 class="content-header theme_color" style="margin-top: -5px;"><?php echo $apoyo->idApoyo != null ? '&nbsp; Actualizar apoyo' : '&nbsp; Registrar apoyo'; ?></h2>
+              <h2 class="content-header theme_color" style="margin-top: -5px;"><?php echo $apoyo->idApoyo != null ? '&nbsp; Actualizar apoyo RFC' : '&nbsp; Registrar apoyo RFC'; ?></h2>
             </div>
             <div class="col-md-4">
               <div class="btn-group pull-right">
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="porlets-content">
-          <form action="?c=Apoyos&a=Guardar" method="POST" class="form-horizontal row-border" parsley-validate novalidate>
+          <form action="?c=apoyosrfc&a=Guardar" method="POST" class="form-horizontal row-border" parsley-validate novalidate>
             <input type="hidden" name="idApoyo" value="<?php echo $apoyo->idApoyo != null ? $apoyo->idApoyo : 0; ?>">
             <div class="form-group">
               <label class="col-sm-3 control-label">Beneficiario<strog class="theme_color">*</strog></label>
@@ -40,17 +40,17 @@
                 <select name="idBeneficiario" class="form-control select2" required style="width: 100%">
                   <?php if($apoyo->idApoyo==null){ ?>
                   <option value="">
-                    Seleccione la curp del beneficiario
+                    Seleccione el rfc del beneficiario
                   </option>
                   <?php } if($apoyo->idApoyo!=null){ ?>
                   <option value="<?php echo $apoyo->idBeneficiario?>">
-                    <?php echo $apoyo->curp; ?>
+                    <?php echo $apoyo->rfc; ?>
                   </option>
                   <?php } foreach($this->model->ListarSelects('beneficiarios') as $r):
-                  if($r->curp!=$apoyo->curp){ ?>
+                  if($r->rfc!=$apoyo->rfc){ ?>
                   ?>
                   <option value="<?php echo $r->idBeneficiario; ?>">
-                    <?php echo $r->curp; ?>
+                    <?php echo $r->rfc; ?>
                   </option>
                   <?php } endforeach; ?>
                 </select>

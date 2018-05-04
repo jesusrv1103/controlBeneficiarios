@@ -33,7 +33,7 @@
                  <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                  <div class="btn-group" style="margin-right: 10px;">
                    <div class="btn-group">
-                    <a href="?c=apoyos&a=Crud" data-toggle="dropdown" class="btn btn-sm btn-success" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar</a>
+                    <a href="?c=apoyos&a=Crud" class="btn btn-sm btn-success" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar</a>
                   </div>
                   <div class="btn-group">
                     <a  data-toggle="modal" data-target="#modalImportar" href="#modalImportar" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
@@ -147,7 +147,7 @@
           <div class="row">
             <div class="block-web">
               <div class="header">
-                <h3 class="content-header theme_color">&nbsp;Importar apoyos</h3>
+                <h3 class="content-header theme_color">&nbsp;Importar apoyos CURP</h3>
               </div>
               <div class="porlets-content" style="margin-bottom: -65px;">
                 <p>Selecciona tu archivo excel con los datos de los beneficiarios para registrarlos.</p>

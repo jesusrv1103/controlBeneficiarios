@@ -145,13 +145,13 @@ if (!isset($_SESSION['seguridad'])){
             <ul <?php if(isset($apoyos)){ ?> class="opened" style="display:block" <?php } ?>>
               <li>
                 <a href="?c=apoyos"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                  <?php if (isset($apoyos)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>CURP</b>
+                  <?php if (isset($apoyos_curp)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>CURP</b>
                 </a>
               </li>
               <br><br>
               <li>
                 <a href="?c=apoyosrfc"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                  <?php if (isset($apoyosrfc)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>RFC</b>
+                  <?php if (isset($apoyos_rfc)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>RFC</b>
                 </a>
               </li>
             </ul>
@@ -163,7 +163,7 @@ if (!isset($_SESSION['seguridad'])){
           <li class="left_nav_active theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i>  Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
             <ul class="opened" style="display:block">
               <?php  }else{ ?>
-              
+
               <li class="theme_border"> <a href="javascript:void(0);"> <i class="fa fa-briefcase"></i> Administración <span class="plus"><i class="fa fa-plus"></i></span></a>
                 <ul>
                   <?php }  ?> 

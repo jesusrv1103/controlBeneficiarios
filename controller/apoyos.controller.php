@@ -10,6 +10,8 @@ class ApoyosController{
     $this->model = new Apoyos();
   }
   public function Index(){
+
+  $apoyos_curp=true;
    $apoyos = true;
    $page="view/apoyos_curp/index.php";
    require_once 'view/index.php';
@@ -20,6 +22,7 @@ class ApoyosController{
     $_REQUEST['idApoyo'];
     $apoyo = $this->model->Obtener($_REQUEST['idApoyo']);
   }
+  $apoyos_curp=true;
   $apoyos = true;
   $page="view/apoyos_curp/apoyos.php";
   require_once 'view/index.php';
@@ -67,10 +70,12 @@ public function Importar(){
     $this->mensaje="Se ha leído correctamente el archivo <strong>apoyos.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de apoyos.";
     if($_SESSION['numRegErroneos']>0){
       $page="view/apoyos_curp/resumenImportar.php";
+      $apoyos_curp=true;
       $apoyos = true;
       $catalogos=true;
       require_once 'view/index.php';
     }else{
+     $apoyos_curp=true;
      $apoyos = true;
      $catalogos=true;
      $tipoBen="CURP";
@@ -84,6 +89,7 @@ public function Importar(){
   $this->error=true;
   $this->mensaje="El archivo <strong>apoyos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
   $page="view/apoyos_curp/index.php";
+  $apoyos_curp=true;
   $apoyos = true;
   $catalogos=true;
   require_once 'view/index.php';
@@ -281,6 +287,7 @@ function is_sexo_curp($sexo){
 public function Eliminar(){
   $this->model->Eliminar($_REQUEST['idApoyo']);
   
+  $apoyos_curp=true;
   $apoyos = true;
   $page="view/apoyos_curp/index.php";
   $mensaje="Se ha eliminado correctamente el apoyo";
@@ -313,6 +320,7 @@ public function Guardar(){
   $mensaje="Se han registrado correctamente los datos del Apoyo";
 } 
 
+$apoyos_curp=true;
 $apoyos = true;
 $page="view/apoyos_curp/index.php";
 require_once 'view/index.php';
