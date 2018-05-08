@@ -127,7 +127,7 @@
                 <option value="<?php echo $apoyo->idCaracteristicasApoyo?>">
                   <?php echo $apoyo->caracteristicasApoyo; ?>
                 </option>
-                <?php } foreach($this->model->ListarSelects('caracteristicasApoyo') as $r):
+                <?php } foreach($this->model->ListarSelects('caracteristicasapoyo') as $r):
                 if($r->caracteristicasApoyo!=$apoyo->caracteristicasApoyo){ ?>
                 ?>
                 <option value="<?php echo $r->idCaracteristicasApoyo; ?>">
@@ -186,9 +186,11 @@
   </div><!--/col-md-12-->
 </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
+
 <script type="text/javascript">
   listarSubprogramas = function (){
     var idPrograma = $('#selectProgramas').val();
+    alert(idPrograma);
     datos = {"idPrograma":idPrograma};
     $.ajax({
       url: "index.php?c=Apoyos&a=ListarSubprogramas",

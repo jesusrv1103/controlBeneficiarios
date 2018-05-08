@@ -46,7 +46,7 @@
                   <option value="<?php echo $apoyo->idBeneficiario?>">
                     <?php echo $apoyo->rfc; ?>
                   </option>
-                  <?php } foreach($this->model->ListarSelects('beneficiarios') as $r):
+                  <?php } foreach($this->model->ListarSelects('beneficiariorfc') as $r):
                   if($r->rfc!=$apoyo->rfc){ ?>
                   ?>
                   <option value="<?php echo $r->idBeneficiario; ?>">
@@ -127,7 +127,7 @@
                 <option value="<?php echo $apoyo->idCaracteristicasApoyo?>">
                   <?php echo $apoyo->caracteristicasApoyo; ?>
                 </option>
-                <?php } foreach($this->model->ListarSelects('caracteristicasApoyo') as $r):
+                <?php } foreach($this->model->ListarSelects('caracteristicasapoyo') as $r):
                 if($r->caracteristicasApoyo!=$apoyo->caracteristicasApoyo){ ?>
                 ?>
                 <option value="<?php echo $r->idCaracteristicasApoyo; ?>">
@@ -186,6 +186,8 @@
   </div><!--/col-md-12-->
 </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
   listarSubprogramas = function (){
     var idPrograma = $('#selectProgramas').val();
