@@ -47,7 +47,7 @@ class Localidad
 		{
 			//$result = array();
 
-			$stm = $this->pdo->prepare("SELECT * FROM localidades WHERE estado='Activo';");
+			$stm = $this->pdo->prepare("SELECT * FROM localidades WHERE estado='Activo'");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
