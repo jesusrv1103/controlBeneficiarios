@@ -76,7 +76,6 @@ class Municipio
 		nombreMunicipio = ?,
 		claveMunicipio = ?
 		WHERE idMunicipio = ?";
-
 		$this->pdo->prepare($sql)
 		->execute(
 			array(
@@ -92,7 +91,6 @@ class Municipio
 	{
 		$sql = "INSERT INTO municipio(nombreMunicipio,estado,claveMunicipio) 
 		VALUES (?,?,?)";
-
 		$this->pdo->prepare($sql)
 		->execute(
 			array(

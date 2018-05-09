@@ -18,7 +18,7 @@ class MunicipioController{
     $municipios=true;
     $page="view/municipio/index.php"; 
     require_once 'view/index.php';
-  } 
+  }
 
   public function Crud()
   {
