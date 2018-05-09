@@ -133,7 +133,6 @@
           <button type="submit" onclick="mensajeEspera()" id="btnImportar" class="btn btn-sm btn-primary">Importar datos</button>
         </div>
       </div>
-      <div id="div-espera">Espere un momento porfavor ...</div>
     </form>
   </div><!--/modal-content--> 
 </div><!--/modal-dialog-->

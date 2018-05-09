@@ -256,7 +256,6 @@ class Apoyos
 
 	public function ListarSubprogramas($idPrograma)
 	{
-		echo $idPrograma;
 		try
 		{
 			$stm = $this->pdo->prepare("SELECT * FROM subprograma WHERE idPrograma=?");
