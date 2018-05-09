@@ -422,7 +422,7 @@ public function ActualizarExc($data)
 	{
 		try 
 		{
-			$sql= $this->pdo->prepare("SELECT registro.idRegistro from registro, beneficiariorfc where registro.idRegistro=beneficiarioRFC.idRegistro and idBeneficiarioRFC=$idBeneficiarioRFC");
+			$sql= $this->pdo->prepare("SELECT registro.idRegistro from registro, beneficiariorfc where registro.idRegistro=beneficiariorfc.idRegistro and idBeneficiarioRFC=$idBeneficiarioRFC");
 			$resultado=$sql->execute();
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
@@ -466,7 +466,7 @@ public function ActualizarExc($data)
 	{
 		try 
 		{
-			$sql= $this->pdo->prepare("SELECT * FROM registro, beneficiariorfc WHERE beneficiarioRFC.idRegistro=registro.idRegistro AND beneficiarioRFC.idBeneficiarioRFC=?;");
+			$sql= $this->pdo->prepare("SELECT * FROM registro, beneficiariorfc WHERE beneficiariorfc.idRegistro=registro.idRegistro AND beneficiariorfc.idBeneficiarioRFC=?;");
 			$resultado=$sql->execute(array($idBeneficiarioRFC));
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
@@ -524,7 +524,7 @@ public function ActualizarExc($data)
 		try
 		{
 
-			$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiariorfc,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyos.idBeneficiario=beneficiariorfc.idBeneficiarioRFC AND apoyos.idRegistroApoyo=registroApoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND beneficiariorfc.idBeneficiariorfc=1 ORDER BY apoyos.idApoyo;");
+			$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiariorfc,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyos.idBeneficiario=beneficiariorfc.idBeneficiarioRFC AND apoyos.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND beneficiariorfc.idBeneficiariorfc=1 ORDER BY apoyos.idApoyo;");
 
 			
 			$stm->execute(array($idBeneficiario));
@@ -540,33 +540,3 @@ public function ActualizarExc($data)
 	
 }
 
-/*
-
-
-mysql> describe beneficiarioRFC;
-+----------------------+--------------+------+-----+---------+----------------+
-| Field                | Type         | Null | Key | Default | Extra          |
-+----------------------+--------------+------+-----+---------+----------------+
-| idbeneficiarioRFC    | int(11)      | NO   | PRI | NULL    | auto_increment |
-| RFC                  | varchar(13)  | YES  |     | NULL    |                |
-| curp                 | varchar(18)  | YES  |     | NULL    |                |
-| primerApellido       | varchar(20)  | YES  |     | NULL    |                |
-| segundoApellido      | varchar(25)  | YES  |     | NULL    |                |
-| nombres              | varchar(25)  | YES  |     | NULL    |                |
-| fechaAltaSat         | date         | YES  |     | NULL    |                |
-| sexo                 | tinyint(1)   | YES  |     | NULL    |                |
-| idAsentamientos      | varchar(45)  | YES  | MUL | NULL    |                |
-| idLocalidad          | varchar(10)  | YES  | MUL | NULL    |                |
-| idTipoVialidad       | int(11)      | YES  | MUL | NULL    |                |
-| nombreVialidad       | varchar(65)  | YES  |     | NULL    |                |
-| numeroExterior       | varchar(8)   | YES  |     | NULL    |                |
-| numeroInterior       | varchar(8)   | YES  |     | NULL    |                |
-| entreVialidades      | varchar(100) | YES  |     | NULL    |                |
-| descripcionUbicacion | text         | YES  |     | NULL    |                |
-| actividad            | varchar(45)  | YES  |     | NULL    |                |
-| cobertura            | int(11)      | YES  |     | NULL    |                |
-| idRegistro           | int(11)      | YES  | MUL | NULL    |                |
-+----------------------+--------------+------+-----+---------+----------------+
-
-
-*/

@@ -119,7 +119,7 @@
 															<option value="<?php echo $beneficiario->idIdentificacion?>">
 																<?php echo $beneficiario->nomTipoI; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('identificacionOficial') as $r):
+															<?php } foreach($this->model2->Listar('identificacionoficial') as $r):
 															if($r->identificacion!=$beneficiario->nomTipoI){ ?>
 															<option value="<?php echo $r->idIdentificacion; ?>">
 																<?php echo $r->identificacion; ?>
@@ -142,7 +142,7 @@
 															<option value="<?php echo $beneficiario->idNivelEstudios?>">
 																<?php echo $beneficiario->nivelEstudios; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('nivelEstudio') as $r):
+															<?php } foreach($this->model2->Listar('nivelestudio') as $r):
 															if($r->nivelEstudios!=$beneficiario->nivelEstudios){ ?>
 															<option value="<?php echo $r->idNivelEstudios; ?>">
 																<?php echo $r->nivelEstudios; ?>
@@ -165,7 +165,7 @@
 															<option value="<?php echo $beneficiario->idSeguridadSocial?>">
 																<?php echo $beneficiario->seguridadSocial; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('seguridadSocial') as $r):
+															<?php } foreach($this->model2->Listar('seguridadsocial') as $r):
 															if($r->seguridadSocial!=$beneficiario->seguridadSocial){ ?>
 															?>
 															<option value="<?php echo $r->idSeguridadSocial; ?>">
@@ -218,7 +218,7 @@
 															<option value="<?php echo $beneficiario->idTipoVialidad?>">
 																<?php echo $beneficiario->tipoVialidad; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('tipoVialidad') as $r):
+															<?php } foreach($this->model2->Listar('tipovialidad') as $r):
 															if($r->tipoVialidad!=$beneficiario->tipoVialidad){ ?>
 															?>
 															<option value="<?php echo $r->idTipoVialidad; ?>">
@@ -390,7 +390,7 @@
 															<option value="<?php echo $beneficiario->idEstadoCivil?>">
 																<?php echo $beneficiario->estadoCivil; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('estadoCivil') as $r):
+															<?php } foreach($this->model2->Listar('estadocivil') as $r):
 															if($r->estadoCivil!=$beneficiario->estadoCivil){ ?>
 															?>
 															<option value="<?php echo $r->idEstadoCivil; ?>">
@@ -438,7 +438,7 @@
 															<option value="<?php echo $beneficiario->idIngresoMensual?>">
 																<?php echo $beneficiario->ingresoMensual; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('ingresoMensual') as $r):
+															<?php } foreach($this->model2->Listar('ingresomensual') as $r):
 															if($r->ingresoMensual!=$beneficiario->ingresoMensual){ ?>
 															?>
 															<option value="<?php echo $r->idIngresoMensual; ?>">
@@ -478,7 +478,7 @@
 															<option value="<?php echo $beneficiario->idGrupoVulnerable?>">
 																<?php echo $beneficiario->grupoVulnerable; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('grupoVulnerable') as $r):
+															<?php } foreach($this->model2->Listar('grupovulnerable') as $r):
 															if($r->grupoVulnerable!=$beneficiario->grupoVulnerable){ ?>
 															?>
 															<option value="<?php echo $r->idGrupoVulnerable; ?>">

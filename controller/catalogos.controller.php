@@ -58,7 +58,7 @@ public function ImportarBeneficiarios(){
     $objPHPExcel->setActiveSheetIndex(0);
     //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-    $this->model->Check(0);
+   // $this->model->Check(0);
     $this->IdentificacionOficial($objPHPExcel,$numRows);
     $this->TipoVialidad($objPHPExcel,$numRows);
     $this->EstadoCivil($objPHPExcel,$numRows);
@@ -69,7 +69,7 @@ public function ImportarBeneficiarios(){
     $this->SeguridadSocial($objPHPExcel,$numRows);
     $this->Discapacidad($objPHPExcel,$numRows);
     $this->GrupoVulnerable($objPHPExcel,$numRows);
-    $this->model->Check(1);
+   // $this->model->Check(1);
     $this->mensaje="Se ha leído correctamente el archivo <strong> catalogo_beneficiarios.xlsx</strong>.<br><i class='fa fa-check'></i> Se han registrado correctamente los identificadores del catálogo.";
     $this->Beneficiarios();
   }
@@ -346,12 +346,12 @@ public function ImportarApoyos(){
     $objPHPExcel->setActiveSheetIndex(0);
     //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-    $this->model->Check(0);
+    //$this->model->Check(0);
     $this->Origen($objPHPExcel,$numRows);
     $this->TipoApoyo($objPHPExcel,$numRows);
     $this->Periodicidad($objPHPExcel,$numRows);
     $this->CaracteristicasApoyo($objPHPExcel,$numRows);
-    $this->model->Check(1);
+    //$this->model->Check(1);
     $this->mensaje="Se ha leído correctamente el archivo <strong>catalogo_apoyos.xlsx</strong>.<br><i class='fa fa-check'></i> Se han registrado correctamente los identificadores del catálogo.";
     $this->Apoyos();
   }
@@ -385,7 +385,7 @@ public function Origen($objPHPExcel,$numRows){
 }
 public function TipoApoyo($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("tipoApoyo");
+  $this->model->Limpiar("tipoapoyo");
   $numRow=3;
   do {
     $cat = new Catalogos();
@@ -427,7 +427,7 @@ public function Periodicidad($objPHPExcel,$numRows){
 }
 public function CaracteristicasApoyo($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("caracteristicasApoyo");
+  $this->model->Limpiar("caracteristicasapoyo");
   $numRow=3;
   do {
     $cat = new Catalogos();

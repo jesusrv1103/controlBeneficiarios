@@ -159,7 +159,7 @@
 															<option value="<?php echo $beneficiario->idTipoVialidad?>"> 
 																<?php echo $beneficiario->tipoVialidad; ?>
 															</option>
-															<?php } foreach($this->model2->Listar('tipoVialidad') as $r): 
+															<?php } foreach($this->model2->Listar('tipovialidad') as $r): 
 															if($r->tipoVialidad!=$beneficiario->tipoVialidad){ ?>
 															?>
 															<option value="<?php echo $r->idTipoVialidad; ?>"> 

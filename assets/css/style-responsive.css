@@ -1,62 +1,62 @@
 @media (min-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */
-#main-content {
-	left: 0px;
-	position: absolute;
-	transition: all 0.3s ease-in-out 0s;
+	#main-content {
+		left: 0px;
+		position: absolute;
+		transition: all 0.3s ease-in-out 0s;
+	}
+	.login-container .middle-login {
+		margin-left: -162px;
+		width: 320px;
+	}
 }
-.login-container .middle-login {
-    margin-left: -162px;
-    width: 320px;
-}
-}
- @media (min-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
-#main-content {
-	left: 0px;
-}
-.login-container .middle-login {
-    margin-left: -162px;
-    width: 320px;
-}
+@media (min-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+	#main-content {
+		left: 0px;
+	}
+	.login-container .middle-login {
+		margin-left: -162px;
+		width: 320px;
+	}
 }
 @media (min-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
-#main-content {
-	left: 0px;
-}
-.login-container .middle-login {
-    width: 430px;
-}
+	#main-content {
+		left: 0px;
+	}
+	.login-container .middle-login {
+		width: 430px;
+	}
 }
 @media (min-width:768px) {
-#main-content {
-	left: 209px;
+	#main-content {
+		left: 209px;
+	}
+	.login-container .middle-login {
+		width: 430px;
+	}
 }
-.login-container .middle-login {
-    width: 430px;
-}
-}
- @media (min-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */
-#main-content {
-	left: 209px;
-}
-.login-container .middle-login {
-    width: 430px;
-}
+@media (min-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */
+	#main-content {
+		left: 209px;
+	}
+	.login-container .middle-login {
+		width: 430px;
+	}
 }
 @media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */
-#main-content {
-	left: 209px;
-}
-.login-container .middle-login {
-    width: 430px;
-}
+	#main-content {
+		left: 209px;
+	}
+	.login-container .middle-login {
+		width: 430px;
+	}
 }
 @media (min-width:1281px) { /* hi-res laptops and desktops */
-#main-content {
-	left: 209px;
-}
-.login-container .middle-login {
-    width: 430px;
-}
+	#main-content {
+		left: 209px;
+	}
+	.login-container .middle-login {
+		width: 430px;
+	}
 }
 input[type="radio"], input[type="checkbox"] {
 	cursor: pointer;
@@ -313,72 +313,72 @@ label {
 
 
 .dataTables_paginate.paging_bootstrap.pagination li {
-    border: 1px solid #DDDDDD;
-    border-radius: 3px;
-    float: left;
-    margin: 0 1px;
+	border: 1px solid #DDDDDD;
+	border-radius: 3px;
+	float: left;
+	margin: 0 1px;
 	list-style:none;
 }
 .dataTables_paginate.paging_bootstrap.pagination li.disabled a {
-    color: #C7C7C7;
+	color: #C7C7C7;
 }
 .dataTables_paginate.paging_bootstrap.pagination li a {
-    color: #797979;
-    display: inline-block;
-    padding: 5px 10px;
+	color: #797979;
+	display: inline-block;
+	padding: 5px 10px;
 }
 .dataTables_paginate.paging_bootstrap.pagination li:hover a, .dataTables_paginate.paging_bootstrap.pagination li.active a {
-    background: none repeat scroll 0 0 #EEEEEE;
-    border-radius: 3px;
-    color: #797979;
+	background: none repeat scroll 0 0 #EEEEEE;
+	border-radius: 3px;
+	color: #797979;
 }
 .dataTables_paginate.paging_bootstrap.pagination {
-    float: right;
-    margin-top: 5px;
+	float: right;
+	margin-top: 5px;
 }
 
 
 
 .help-block {
-    font-size: 13px;
+	font-size: 13px;
 }
 .add-on {
-    float: right;
-    margin-top: -37px;
+	float: right;
+	margin-top: -37px;
 }
 .add-on .btn {
-    padding: 9px;
+	padding: 9px;
 }
 .daterangepicker .ranges .range_inputs > div:nth-child(2) {
-    margin-bottom: 10px;
-    padding-left: 0;
+	margin-bottom: 10px;
+	padding-left: 0;
 }
 .daterangepicker .ranges label {
-    padding-bottom: 0;
-    padding-top: 8px;
+	padding-bottom: 0;
+	padding-top: 8px;
 }
 .daterangepicker td.active, .daterangepicker td.active:hover, .datepicker td.active:hover, .datepicker td.active:hover:hover, .datepicker td.active:active, .datepicker td.active:hover:active, .datepicker td.active.active, .datepicker td.active.active:hover, .datepicker td.active.disabled, .datepicker td.active.disabled:hover, .datepicker td.active[disabled], .datepicker td.active[disabled]:hover, .datepicker td span.active:hover, .datepicker td span.active:active, .datepicker td span.active.active, .datepicker td span.active.disabled, .datepicker td span.active[disabled] {
-    background: none repeat scroll 0 0 #41CAC0;
+	background: none repeat scroll 0 0 #41CAC0;
 }
 .daterangepicker .calendar th, .daterangepicker .calendar td {
-    font-family: 'Open Sans',sans-serif;
-    font-weight: 300;
-    text-align: center;
-    white-space: nowrap;
+	font-family: 'Open Sans',sans-serif;
+	font-weight: 300;
+	text-align: center;
+	white-space: nowrap;
 }
 .daterangepicker td.active, .daterangepicker td.active:hover, .datepicker td.active, .datepicker td.active:hover, .datepicker td span.active {
-    text-shadow: none;
+	text-shadow: none;
 }
 .datepicker th.switch {
-    width: 125px;
+	width: 125px;
 }
 .datepicker td span {
-    height: 40px;
-    line-height: 40px;
+	height: 40px;
+	line-height: 40px;
 }
 .bootstrap-timepicker table td input {
-    border: 1px solid #CCCCCC;
-    border-radius: 3px;
+	border: 1px solid #CCCCCC;
+	border-radius: 3px;
 }
 
 .show-left-bar{

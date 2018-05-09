@@ -150,7 +150,6 @@ class BeneficiarioController{
     }
   }
 
-
   public function Upload(){
     if(!isset($_FILES['file']['name'])){
       header('Location: ./?c=beneficiario');
@@ -266,6 +265,13 @@ class BeneficiarioController{
         //-------------------- VALIDANDO ID IDENTIFICACION ---------------
 
         $ben->idIdentificacion = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
+
+         if($ben->idIdentificacion==""){
+          $row_array['id de identificacion']="Campo vacío";
+          $numError++;
+        }else{
+          $row_array['id de identificacion']='0';
+        }
 
         if(!is_numeric($ben->idIdentificacion)){
           $row_array['Id de identificacion']=$ben->idIdentificacion;
