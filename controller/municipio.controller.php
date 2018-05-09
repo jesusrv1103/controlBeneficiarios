@@ -21,8 +21,7 @@ class MunicipioController{
    $municipio = new Municipio();
 
    if(isset($_REQUEST['idMunicipio'])){
-    $municipio = $this->model->Obtener($_REQUEST['idMunicipio']);
-    
+    $municipio = $this->model->Obtener($_REQUEST['idMunicipio']); 
   }
   $catalogos=true;
   $municipios=true;

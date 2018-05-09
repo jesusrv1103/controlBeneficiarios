@@ -38,7 +38,7 @@ class Municipio
 			die($e->getMessage());
 		}
 	}
-public function ImportarMunicipio(Municipio $data){
+	public function ImportarMunicipio(Municipio $data){
 		try 
 		{
 			$sql= $this->pdo->prepare("INSERT INTO municipio VALUES(?,?,?,?)");
@@ -100,8 +100,8 @@ public function ImportarMunicipio(Municipio $data){
 					$data->estado,
 					$data->idMunicipio
 					
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -124,8 +124,8 @@ public function ImportarMunicipio(Municipio $data){
 					$data->nombreMunicipio, 
 					$data->claveMunicipio,
 					$data->idMunicipio
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -145,8 +145,8 @@ public function ImportarMunicipio(Municipio $data){
 					$data->nombreMunicipio,
 					$data->estado,
 					$data->claveMunicipio
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
