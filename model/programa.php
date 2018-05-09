@@ -8,148 +8,85 @@ class Programa
 
 	public function __CONSTRUCT()
 	{
-		try
-		{
-			$this->pdo = Database::StartUp();     
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
+		$this->pdo = Database::StartUp();     
 	}
 
-	//Metdodo para listar
 	public function Listar()
 	{
-		try
-		{
-			//$result = array();
-		    // SELECT p.idPrograma, p.programa, sum(techoPresupuestal) as suma   FROM programa p , subprograma s where p.idPrograma =  s.idPrograma group by p.idPrograma
-
-			$stm = $this->pdo->prepare("SELECT * from programa");
-			
+		try {
+			$stm = $this->pdo->prepare("SELECT * from programa");	
 			$stm->execute();
-
-			return $stm->fetchAll(PDO::FETCH_OBJ);
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
+			return $stm->fetchAll(PDO::FETCH_OBJ);	
+		} catch (Exception $e) {
+			echo 'No se ha podido establer conexión con la base de datos';
 		}
 	}
-public function ImportarPrograma(Programa $data){
-		try 
-		{
-			$sql= $this->pdo->prepare("INSERT INTO programa VALUES(?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idPrograma,
-					$data->programa
-					)
-				);
 
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+	public function ImportarPrograma(Programa $data)
+	{
+		$sql= $this->pdo->prepare("INSERT INTO programa VALUES(?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idPrograma,
+				$data->programa
+			)
+		);
 	}
+
 	public function Limpiar($nomTabla)
 	{
-		try 
-		{
-			
-			$stm = $this->pdo->prepare("DELETE FROM $nomTabla");			          
-			$stm->execute();
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$stm = $this->pdo->prepare("DELETE FROM $nomTabla");			          
+		$stm->execute();
 	}
+
 	public function Obtener($id)
 	{
-		try 
-		{
-			$stm = $this->pdo
-			->prepare("SELECT * FROM programa WHERE idPrograma = ?");
-
-
-			$stm->execute(array($id));
-			return $stm->fetch(PDO::FETCH_OBJ);
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$stm = $this->pdo
+		->prepare("SELECT * FROM programa WHERE idPrograma = ?");
+		$stm->execute(array($id));
+		return $stm->fetch(PDO::FETCH_OBJ);
 	}
-	// select * from programa WHERE programa like '%TRA%';
 	
 	public function Eliminar($id)
 	{
-		try 
-		{
-			$stm = $this->pdo
-			->prepare("DELETE FROM programa WHERE idPrograma = ?");			          
-
-			$stm->execute(array($id));
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$stm = $this->pdo
+		->prepare("DELETE FROM programa WHERE idPrograma = ?");			          
+		$stm->execute(array($id));
 	}
 
-	//Metodo para actualizar
 	public function Actualizar($data)
 	{
-		try 
-		{
-			$sql = "UPDATE programa SET 
-			programa = ?
-			WHERE idPrograma = ?";
-
-			$this->pdo->prepare($sql)
-			->execute(
-				array(
-					$data->programa, 
-					$data->idPrograma
-				)
-			);
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$sql = "UPDATE programa SET programa = ?
+		WHERE idPrograma = ?";
+		$this->pdo->prepare($sql)
+		->execute(
+			array(
+				$data->programa, 
+				$data->idPrograma
+			)
+		);
 	}
-	//Metdod para registrar
+
 	public function Registrar(Programa $data)
 	{
-		try 
-		{
-			$sql = "INSERT INTO programa (programa) 
-			VALUES (?)";
+		$sql = "INSERT INTO programa (programa) VALUES (?)";
 
-			$this->pdo->prepare($sql)
-			->execute(
-				array(
-					$data->programa
-				)
-			);
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
+		$this->pdo->prepare($sql)
+		->execute(
+			array(
+				$data->programa
+			)
+		);
 	}
+
 	public function Check($valor)
 	{
-		try 
-		{
-			if ($valor==0) {
-				$stm=$this->pdo->prepare("SET GLOBAL FOREIGN_KEY_CHECKS=0");
+		if ($valor==0) {
+			$stm=$this->pdo->prepare("SET GLOBAL FOREIGN_KEY_CHECKS=0");
 			$stm->execute();
-			}else{
+		}else{
 			$stm=$this->pdo->prepare("SET GLOBAL FOREIGN_KEY_CHECKS=1");
 			$stm->execute();
-		}
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
 		}
 	}
 }

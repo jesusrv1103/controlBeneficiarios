@@ -1,5 +1,4 @@
 <?php
-require_once 'model/database.php';
 class Asentamiento
 {
 	private $pdo;
@@ -11,151 +10,98 @@ class Asentamiento
 
 	public function __CONSTRUCT()
 	{
-		try
-		{
-			$this->pdo = Database::StartUp();
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
+		$this->pdo = Database::StartUp();
 	}
+
 	public function Listar()
 	{
-		try
-		{
-			//$result = array();
-
-			$stm = $this->pdo->prepare("SELECT * FROM asentamientos");
-			$stm->execute();
-
-			return $stm->fetchAll(PDO::FETCH_OBJ);
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
+		$stm = $this->pdo->prepare("SELECT * FROM asentamientos");
+		$stm->execute();
+		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
-	public function ImportarAsentamientos(Asentamiento $data){
-		try
-		{
 
-		//$this->Limpiar("asentamientos");
-			$sql= $this->pdo->prepare("INSERT INTO asentamientos VALUES (?,?,?,?,?)");
-			$resultado=$sql->execute(
-				array(
-					$data->idAsentamientos,
-					$data->municipio,
-					$data->localidad,
-					$data->nombreAsentamiento,
-					$data->tipoAsentamiento
-					)
-				);
-		} catch (Exception $e)
-		{
-			die($e->getMessage());
-		}
-	}
-		public function Limpiar($nomTabla)
+	public function ImportarAsentamientos(Asentamiento $data)
 	{
-		try
-		{
-			$stm = $this->pdo
-			->prepare("DELETE FROM $nomTabla");
-
-			$stm->execute();
-		} catch (Exception $e)
-		{
-			die($e->getMessage());
-		}
+		$sql= $this->pdo->prepare("INSERT INTO asentamientos VALUES (?,?,?,?,?)");
+		$resultado=$sql->execute(
+			array(
+				$data->idAsentamientos,
+				$data->municipio,
+				$data->localidad,
+				$data->nombreAsentamiento,
+				$data->tipoAsentamiento
+			)
+		);
 	}
+
+	public function Limpiar($nomTabla)
+	{
+		$stm = $this->pdo
+		->prepare("DELETE FROM $nomTabla");
+
+		$stm->execute();
+	}
+
 	public function Obtener($id)
 	{
-		try
-		{
-			$stm = $this->pdo
-			->prepare("SELECT * FROM asentamientos WHERE idAsentamientos = ?");
+		$stm = $this->pdo
+		->prepare("SELECT * FROM asentamientos WHERE idAsentamientos = ?");
 
 
-			$stm->execute(array($id));
-			return $stm->fetch(PDO::FETCH_OBJ);
-		} catch (Exception $e)
-		{
-			die($e->getMessage());
-		}
+		$stm->execute(array($id));
+		return $stm->fetch(PDO::FETCH_OBJ);
 	}
+
 	public function Eliminar($id)
 	{
-		try
-		{
-			$stm = $this->pdo
-			->prepare("DELETE FROM asentamientos WHERE idAsentamientos = ?");
+		$stm = $this->pdo
+		->prepare("DELETE FROM asentamientos WHERE idAsentamientos = ?");
 
-			$stm->execute(array($id));
-		} catch (Exception $e)
-		{
-			die($e->getMessage());
-		}
+		$stm->execute(array($id));
 	}
+
 	public function Actualizar(Asentamiento $data)
 	{
-		try
-		{
-			$sql = "UPDATE asentamientos SET
-			municipio = ?, localidad= ?, nombreAsentamiento =?, tipoAsentamiento = ?
-			WHERE idAsentamientos = ?";
+		$sql = "UPDATE asentamientos SET
+		municipio = ?, localidad= ?, nombreAsentamiento =?, tipoAsentamiento = ?
+		WHERE idAsentamientos = ?";
 
-			$this->pdo->prepare($sql)
-			->execute(
-				array(
-					$data->municipio,
-					$data->localidad,
-					$data->nombreAsentamiento,
-					$data->tipoAsentamiento,
-					$data->idAsentamientos
-				)
-			);
-		} catch (Exception $e)
-		{
-			die($e->getMessage());
-		}
+		$this->pdo->prepare($sql)
+		->execute(
+			array(
+				$data->municipio,
+				$data->localidad,
+				$data->nombreAsentamiento,
+				$data->tipoAsentamiento,
+				$data->idAsentamientos
+			)
+		);
 	}
-	//Metdod para registrar
+
 	public function Registrar(Asentamiento $data)
 	{
-		try
-		{
-			$sql = "INSERT INTO asentamientos
-			VALUES (?,?,?,?,?)";
+		$sql = "INSERT INTO asentamientos
+		VALUES (?,?,?,?,?)";
 
-			$this->pdo->prepare($sql)
-			->execute(
-				array(
-					$data->idAsentamientos,
-					$data->municipio,
-					$data->localidad,
-					$data->nombreAsentamiento,
-					$data->tipoAsentamiento,
+		$this->pdo->prepare($sql)
+		->execute(
+			array(
+				$data->idAsentamientos,
+				$data->municipio,
+				$data->localidad,
+				$data->nombreAsentamiento,
+				$data->tipoAsentamiento,
 
-				)
-			);
-		} catch (Exception $e)
-		{
-			die($e->getMessage());
-		}
+			)
+		);
 	}
+	
 	public function VerificaAsentamiento($idAsentamientos)
 	{
-		try
-		{
-			$sql= $this->pdo->prepare("SELECT * FROM asentamientos WHERE idAsentamientos=?");
-			$resultado=$sql->execute(
-				array($idAsentamientos)
-			);
-			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
-		} catch (Exception $e)
-		{
-			die($e->getMessage());
-		}
+		$sql= $this->pdo->prepare("SELECT * FROM asentamientos WHERE idAsentamientos=?");
+		$resultado=$sql->execute(
+			array($idAsentamientos)
+		);
+		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 	}
 }

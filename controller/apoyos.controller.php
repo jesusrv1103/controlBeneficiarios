@@ -236,7 +236,7 @@ public function LeerArchivo($objPHPExcel,$numRows){
 
  }
 } catch (Exception $e) {
- $mensaje="error al importar los datos de los apoyos";
+ $this->mensaje="error al importar los datos de los apoyos";
  $page="view/apoyos_curp/index.php";
  $administracion=true;
  $apoyos=true;
@@ -290,7 +290,7 @@ public function Eliminar(){
   $apoyos_curp=true;
   $apoyos = true;
   $page="view/apoyos_curp/index.php";
-  $mensaje="Se ha eliminado correctamente el apoyo";
+  $this->mensaje="Se ha eliminado correctamente el apoyo";
   require_once 'view/index.php';
 }
 public function Guardar(){
@@ -313,11 +313,11 @@ public function Guardar(){
    $apoyo->idRegistroApoyo=$idRegistro->idRegistroApoyo;
    $this->model->Actualizar($apoyo);
    $this->model->RegistraActualizacion($apoyo);
-   $mensaje="Se han actualizado correctamente los datos del Apoyo";
+   $this->mensaje="Se han actualizado correctamente los datos del Apoyo";
  }else{
   $apoyo->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyo);
   $this->model->Registrar($apoyo);
-  $mensaje="Se han registrado correctamente los datos del Apoyo";
+  $this->mensaje="Se han registrado correctamente los datos del Apoyo";
 } 
 
 $apoyos_curp=true;
@@ -328,9 +328,9 @@ require_once 'view/index.php';
 
 
 public function ListarSubprogramas(){
-  header('Content-Type: application/json');
+  try {
+    header('Content-Type: application/json');
   $idPrograma=$_REQUEST['idPrograma'];
-  echo $idPrograma;
   $datos = array();
   $row_array['estado']='ok';
   array_push($datos, $row_array);
@@ -342,6 +342,9 @@ public function ListarSubprogramas(){
   endforeach;
 
   echo json_encode($datos, JSON_FORCE_OBJECT);
+  } catch (Exception $e) {
+    die($e->getMessage());
+  }
 }
 
 public function InfoApoyo(){
