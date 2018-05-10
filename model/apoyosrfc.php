@@ -75,7 +75,7 @@ class Apoyosrfc
 		try 
 		{
 			$stm = $this->pdo
-			->prepare("SELECT * FROM apoyos, beneficiariorfc, origen, tipoapoyo, caracteristicasapoyo, periodicidad, subprograma WHERE apoyos.idOrigen=origen.idOrigen AND apoyos.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idSubprograma=subprograma.idSubprograma AND apoyos.idBeneficiario=beneficiariorfc.idBeneficiarioRFC AND idApoyo = ?");
+			->prepare("SELECT * FROM apoyosrfc, beneficiariorfc, origen, tipoapoyo, caracteristicasapoyo, periodicidad, subprograma WHERE apoyosrfc.idOrigen=origen.idOrigen AND apoyosrfc.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyosrfc.idPeriodicidad=periodicidad.idPeriodicidad AND apoyosrfc.idSubprograma=subprograma.idSubprograma AND apoyosrfc.idBeneficiario=beneficiariorfc.idBeneficiarioRFC AND idApoyo = ?");
 			$stm->execute(array($id));
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) 
@@ -90,7 +90,7 @@ class Apoyosrfc
 		try 
 		{
 			$stm = $this->pdo
-			->prepare("DELETE FROM apoyos WHERE idApoyo = ?");			          
+			->prepare("DELETE FROM apoyosrfc WHERE idApoyo = ?");			          
 
 			$stm->execute(array($id));
 		} catch (Exception $e) 
@@ -104,7 +104,7 @@ class Apoyosrfc
 	{
 		try 
 		{
-			$sql = "UPDATE apoyos SET idBeneficiario = ?, idOrigen = ?, idSubprograma = ?, idCaracteristica = ?, importeApoyo = ?, fechaApoyo = ?, idPeriodicidad = ? WHERE idApoyo = ?";
+			$sql = "UPDATE apoyosrfc SET idBeneficiario = ?, idOrigen = ?, idSubprograma = ?, idCaracteristica = ?, importeApoyo = ?, fechaApoyo = ?, idPeriodicidad = ? WHERE idApoyo = ?";
 
 			$this->pdo->prepare($sql)
 			->execute(
@@ -129,10 +129,10 @@ class Apoyosrfc
 	{
 		try 
 		{
-			$sql = "INSERT INTO apoyos
+			$sql = "INSERT INTO apoyosrfc
 			VALUES (?,?,?,?,?,
 			?,?,?,?,?,
-			?,?,?)";
+			?,?)";
 
 			$this->pdo->prepare($sql)
 			->execute(
@@ -148,8 +148,7 @@ class Apoyosrfc
 					$data->idPeriodicidad, 
 					$data->idProgramaSocial,
 					$data->idRegistroApoyo,
-					null,
-					'rfc'
+					null
 					)
 				);
 		} catch (Exception $e) 
@@ -198,7 +197,7 @@ class Apoyosrfc
 	{
 		try 
 		{
-			$sql= $this->pdo->prepare("SELECT * FROM apoyos,beneficiariorfc,origen,registroapoyo,subprograma,programa,periodicidad,tipoApoyo,caracteristicasapoyo WHERE apoyos.idBeneficiario=beneficiariorfc.idBeneficiario AND apoyos.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoApoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyos.idApoyo=?;");
+			$sql= $this->pdo->prepare("SELECT * FROM apoyosrfc,beneficiariorfc,origen,registroapoyo,subprograma,programa,periodicidad,tipoApoyo,caracteristicasapoyo WHERE apoyosrfc.idBeneficiario=beneficiariorfc.idBeneficiarioRFC AND apoyosrfc.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyosrfc.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyosrfc.idPeriodicidad=periodicidad.idPeriodicidad AND apoyosrfc.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoApoyo.idTipoApoyo AND apoyosrfc.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyosrfc.idApoyo=?;");
 			$resultado=$sql->execute(array($idApoyo));
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
@@ -210,7 +209,7 @@ class Apoyosrfc
 	{
 		try 
 		{
-			$sql= $this->pdo->prepare("SELECT registroapoyo.idRegistroApoyo from registroApoyo, apoyos where registroapoyo.idRegistroApoyo=apoyos.idRegistroApoyo and idApoyo=$idApoyo");
+			$sql= $this->pdo->prepare("SELECT registroapoyo.idRegistroApoyo from registroapoyo, apoyosrfc where registroapoyo.idRegistroApoyo=apoyosrfc.idRegistroApoyo and idApoyo=$idApoyo");
 			$resultado=$sql->execute();
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
@@ -222,7 +221,7 @@ class Apoyosrfc
 	public function RegistraActualizacion(Apoyosrfc $data){
 		try 
 		{
-			$sql = "INSERT INTO actualizacionApoyo VALUES (?,?,?,?,?)";
+			$sql = "INSERT INTO actualizacionapoyo VALUES (?,?,?,?,?)";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
@@ -243,7 +242,7 @@ class Apoyosrfc
 	{
 		try
 		{
-			$stm = $this->pdo->prepare("SELECT * FROM actualizacionApoyo WHERE idRegistroApoyo=?");
+			$stm = $this->pdo->prepare("SELECT * FROM actualizacionapoyo WHERE idRegistroApoyo=?");
 			$stm->execute(array($idRegistro));
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);

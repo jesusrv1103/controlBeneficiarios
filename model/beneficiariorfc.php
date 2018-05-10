@@ -45,7 +45,7 @@ class Beneficiariorfc
 
 	public function Listar($id)
 	{
-		echo $id;
+		
 
 		try
 		{

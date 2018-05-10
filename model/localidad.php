@@ -23,25 +23,19 @@ class Localidad
 				$data->localidad,
 				$data->ambito,
 				$data->estado
-			)
-		);
+				)
+			);
 	}
 
 	public function Listar()
 	{
-<<<<<<< HEAD
-		try
-		{
-			//$result = array();
+	//$result = array();
 
 			$stm = $this->pdo->prepare("SELECT * FROM localidades WHERE estado='Activo'");
 			$stm->execute();
-=======
->>>>>>> 79f9007fb07ca4a19d72585d2297e46ff16cfa99
 
-		$stm = $this->pdo->prepare("SELECT * FROM localidades WHERE estado='Activo';");
-		$stm->execute();
-		return $stm->fetchAll(PDO::FETCH_OBJ);
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+
 	}
 
 	public function Limpiar($nomTabla)
@@ -72,8 +66,8 @@ class Localidad
 				$data->estado,
 				$data->idLocalidad
 
-			)
-		);
+				)
+			);
 	}
 
 	public function Actualizar(Localidad $data)
@@ -91,8 +85,8 @@ class Localidad
 				$data->estado,
 				$data->idLocalidad
 
-			)
-		);
+				)
+			);
 	}
 	//Metdod para registrar la localidad
 	public function Registrar(Localidad $data)
@@ -108,17 +102,17 @@ class Localidad
 				$data->localidad,
 				$data->ambito,
 				$data->estado
-			)
-		);
+				)
+			);
 	}
 
 	public function VerificaLocalidad($idLocalidad)
 	{
-		
+
 		$sql= $this->pdo->prepare("SELECT * FROM localidades WHERE idLocalidad=?");
 		$resultado=$sql->execute(
 			array($idLocalidad)
-		);
+			);
 		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 	}
 }

@@ -300,23 +300,23 @@ public function Guardar(){
 
 
   if($apoyo->idApoyo>0){
-    echo "hola1";
+
     $idRegistro=$this->model->ObtenerIdRegistro($apoyo->idApoyo);
     $apoyo->idRegistroApoyo=$idRegistro->idRegistroApoyo;
     $this->model->Actualizar($apoyo);
     $this->model->RegistraActualizacion($apoyo);
     $mensaje="Se han actualizado correctamente los datos del Apoyo";
   }else{
-  echo "hola1";
-   // $apoyo->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyo);
-    $this->model->Registrar($apoyo);
-    $mensaje="Se han registrado correctamente los datos del Apoyo";
-  
-  } 
+    
+   $apoyo->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyo);
+   $this->model->Registrar($apoyo);
+   $mensaje="Se han registrado correctamente los datos del Apoyo";
+   
+ } 
 
-  $apoyos = true;
-  $page="view/apoyos_rfc/index.php";
-  require_once 'view/index.php';
+ $apoyos = true;
+ $page="view/apoyos_rfc/index.php";
+ require_once 'view/index.php';
 }
 
 

@@ -1,8 +1,8 @@
 
 <style type="text/css">
-.lblinfo{
-  color:#2196F3;
-}
+  .lblinfo{
+    color:#2196F3;
+  }
 
 </style>
 <div class="pull-left breadcrumb_admin clear_both">
@@ -47,95 +47,95 @@
       </div>
       <?php if(isset($this->mensaje)){ if(!isset($this->error)){?>
       <br> <div class="row">
-        <div class="col-md-12">
-          <div class="alert alert-success fade in">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
-          </div>
-          
+      <div class="col-md-12">
+        <div class="alert alert-success fade in">
+          <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+          <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
         </div>
-      </div> 
-      <?php } if(isset($this->error)){ ?>
-      <br> <div class="row">
-        <div class="col-md-12">
-          <div class="alert alert-danger">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
-          </div>
-        </div>
+        
       </div>
-      <?php } }?>
-      <div class="porlets-content">
-        <div class="table-responsive">
-          <table class="display table table-bordered table-striped" id="dynamic-table">
-           <thead>
-             <tr>
-               <td><center><b>Info</b></center></td>
-               <th>RFC</th>
-               <th>Fecha</th> 
-               <th width="22%">Programa</th>
-               <th>Subprograma</th>
-               <!--th>Prog social</th-->
-               <th>Tipo</th>
-               <th>Caracteristica</th>
-               <th>Origen</th> 
-               <th>Importe</th>
-               <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-               <td><center><b>Editar</b></center></td>
-               <?php if($_SESSION['tipoUsuario']==1){?>
-               <td><center><b>Borrar</b></center></td>
-               <?php } ?>
-               <?php } ?>
-             </tr>
-           </thead>
-           <tbody>
-            <?php foreach($this->model->Listar() as $r): ?>
-              <tr class="grade">
-                <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoApoyo(<?php echo $r->idApoyo; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
-                <td><?php echo $r->RFC ?> </td>
-                <td><?php echo $r->fechaApoyo ?> </td>
-                <td><?php echo $r->programa; ?> </td>
-                <td><?php echo $r->subprograma; ?> </td>
-                <!--td><?php echo "r->programaSocial;" ?></td-->
-                <td><?php echo $r->tipoApoyo; ?> </td>
-                <td><?php echo $r->caracteristicasApoyo; ?> </td>
-                <td><?php echo $r->origen; ?> </td>
-                <td>$<?php echo $r->importeApoyo; ?></td>
-                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-                <td class="center">
-                  <a class="btn btn-primary btn-sm" role="button" href="?c=apoyosrfc&a=Crud&idApoyo=<?php echo $r->idApoyo ?>"><i class="fa fa-edit"></i></a>
-                </td>
-                <?php if($_SESSION['tipoUsuario']==1){?>
-                <td class="center">
-                 <a class="btn btn-danger btn-sm" onclick="eliminarApoyo(<?php echo $r->idApoyo;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-               </td>
-               <?php } ?>
-               <?php } ?>
-             </tr>
-           <?php endforeach; ?>
-         </tbody>
-         <tfoot>
-          <tr>
+    </div> 
+    <?php } if(isset($this->error)){ ?>
+    <br> <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-danger">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
+      </div>
+    </div>
+  </div>
+  <?php } }?>
+  <div class="porlets-content">
+    <div class="table-responsive">
+      <table class="display table table-bordered table-striped" id="dynamic-table">
+       <thead>
+         <tr>
            <td><center><b>Info</b></center></td>
            <th>RFC</th>
-           <th>Fecha</th>
-           <th>Programa</h> 
-             <th>Subprograma</th>
-             <!--th>Prog social</th-->
-             <th>Tipo</th>
-             <th>Caracteristica</th>
-             <th>Origen</th> 
-             <th>Importe</th>
-             <?php if($_SESSION['tipoUsuario']==1){?>
-             <td><center><b>Editar</b></center></td>
-             <td><center><b>Borrar</b></center></td>
-             <?php } ?>
-           </tr>
-         </tfoot>
-       </table>
-     </div><!--/table-responsive-->
-   </div><!--/porlets-content-->
- </div><!--/block-web-->
+           <th>Fecha</th> 
+           <th width="22%">Programa</th>
+           <th>Subprograma</th>
+           <!--th>Prog social</th-->
+           <th>Tipo</th>
+           <th>Caracteristica</th>
+           <th>Origen</th> 
+           <th>Importe</th>
+           <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+           <td><center><b>Editar</b></center></td>
+           <?php if($_SESSION['tipoUsuario']==1){?>
+           <td><center><b>Borrar</b></center></td>
+           <?php } ?>
+           <?php } ?>
+         </tr>
+       </thead>
+       <tbody>
+        <?php foreach($this->model->Listar() as $r): ?>
+          <tr class="grade">
+            <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoApoyo(<?php echo $r->idApoyo; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+            <td><?php echo $r->RFC ?> </td>
+            <td><?php echo $r->fechaApoyo ?> </td>
+            <td><?php echo $r->programa; ?> </td>
+            <td><?php echo $r->subprograma; ?> </td>
+            <!--td><?php echo "r->programaSocial;" ?></td-->
+            <td><?php echo $r->tipoApoyo; ?> </td>
+            <td><?php echo $r->caracteristicasApoyo; ?> </td>
+            <td><?php echo $r->origen; ?> </td>
+            <td>$<?php echo $r->importeApoyo; ?></td>
+            <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+            <td class="center">
+              <a class="btn btn-primary btn-sm" role="button" href="?c=apoyosrfc&a=Crud&idApoyo=<?php echo $r->idApoyo ?>"><i class="fa fa-edit"></i></a>
+            </td>
+            <?php if($_SESSION['tipoUsuario']==1){?>
+            <td class="center">
+             <a class="btn btn-danger btn-sm" onclick="eliminarApoyo(<?php echo $r->idApoyo;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+           </td>
+           <?php } ?>
+           <?php } ?>
+         </tr>
+       <?php endforeach; ?>
+     </tbody>
+     <tfoot>
+      <tr>
+       <td><center><b>Info</b></center></td>
+       <th>RFC</th>
+       <th>Fecha</th>
+       <th>Programa</h> 
+         <th>Subprograma</th>
+         <!--th>Prog social</th-->
+         <th>Tipo</th>
+         <th>Caracteristica</th>
+         <th>Origen</th> 
+         <th>Importe</th>
+         <?php if($_SESSION['tipoUsuario']==1){?>
+         <td><center><b>Editar</b></center></td>
+         <td><center><b>Borrar</b></center></td>
+         <?php } ?>
+       </tr>
+     </tfoot>
+   </table>
+ </div><!--/table-responsive-->
+</div><!--/porlets-content-->
+</div><!--/block-web-->
 </div><!--/col-md-12-->
 </div><!--/row-->
 </div>

@@ -1,12 +1,12 @@
 <style type="text/css">
-.lbldetalle{
-	color:#2196F3;
-}
-.h3titulo{
-	margin-left: 30px;
-	color:#2196F3;
-	margin-top: 30px;
-}
+	.lbldetalle{
+		color:#2196F3;
+	}
+	.h3titulo{
+		margin-left: 30px;
+		color:#2196F3;
+		margin-top: 30px;
+	}
 </style>
 <div class="pull-left breadcrumb_admin clear_both">
 	<div class="pull-left page_title theme_color">
@@ -225,6 +225,9 @@
 															<option value=""> 
 																Seleccione la localidad a la que pertenece el beneficiario
 															</option> 
+															<option value="1">
+																Ninguno
+															</option>
 															<?php } if($beneficiario->idBeneficiario!=null){ ?>
 															<option value="<?php echo $beneficiario->idLocalidad ?>"> 
 																<?php echo  $beneficiario->localidad ?>
@@ -239,8 +242,11 @@
 													<div class="col-sm-6">
 														<select name="idAsentamientos" class="form-control select2" id="selectAsentamientos" style="width: 100%">		
 															<?php if($beneficiario->idBeneficiario==null){  ?>
-															<option value=""> 
+															<option value="1"> 
 																Seleccione el asentamiento a la que pertenece el beneficiario
+															</option> 
+															<option value="1"> 
+																Ninguno
 															</option> 
 															<?php } if($beneficiario->idBeneficiario!=null){ ?>
 															<option value="<?php echo $beneficiario->idAsentamientos ?>"> 
