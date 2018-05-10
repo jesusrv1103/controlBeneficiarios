@@ -276,6 +276,23 @@ public function Eliminar(){
     $this->model->Eliminar($beneficiario);
     header ('Location: index.php?c=Beneficiario&a=RFC');
   }
+   public function Upload(){
+    if(!isset($_FILES['file']['name'])){
+      header('Location: ./?c=beneficiariorfc');
+    }
+    $archivo = $_FILES['file']['name'];
+    $tipo = $_FILES['file']['type'];
+    $destino = "./assets/files/".$archivo;
+    if(copy($_FILES['file']['tmp_name'], $destino)){
+      //echo "Archivo Cargado Con Éxito" . "<br><br>";
+      $this->Importar();
+      //mandar llamar todas las funciones a importar
+    }
+    else{
+      $this->Index();
+    }
+  }
+
   public function Importar(){
     if (file_exists("./assets/files/beneficiariosrfc.xlsx")) {
   //Agregamos la librería
@@ -288,7 +305,7 @@ public function Eliminar(){
       $objPHPExcel->setActiveSheetIndex(0);
         //Obtengo el numero de filas del archivo
       $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-      $this->BeneficiariosRFC($objPHPExcel,$numRows);
+      $this->LeerArchivo($objPHPExcel,$numRows);
       $mensaje="Se ha leído correctamente el archivo <strong>beneficiariosrfc.xlsx</strong>.<br><i class='fa fa-check'></i> Se han insertado correctamente los datos de beneficiarios.";
       $beneficiarios = true;
       $beneficiario_rfc=true;
@@ -306,7 +323,7 @@ public function Eliminar(){
       require_once 'view/index.php';
     }
   }
-  public function BeneficiariosRFC($objPHPExcel,$numRows){
+  public function LeerArchivo($objPHPExcel,$numRows){
     try{
       $numRow=2;
       do {
