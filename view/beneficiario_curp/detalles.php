@@ -10,10 +10,6 @@
 }
 </style>
 
-<script type="text/javascript">
- window.history.forward();
-</script>
-
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
     <h1>Beneficiarios</h1>
@@ -34,7 +30,7 @@
       <div class="row" style="margin-top: 15px; margin-bottom: 12px;">
         <div class="col-sm-7">
           <div class="actions"> </div>
-          <h2 class="content-header theme_color" style="margin-top: -10px;"><?php echo $beneficiario->nombres." ".$ben->primerApellido." ".$ben->segundoApellido; ?></h2>
+          <h2 class="content-header theme_color" style="margin-top: -10px;"><?php echo $ben->nombres." ".$ben->primerApellido." ".$ben->segundoApellido; ?></h2>
         </div>
         <div class="col-md-5">
           <div class="btn-group pull-right" style="margin-right: 10px;">
@@ -54,12 +50,12 @@
     </div>
   </div>
 
-  <?php if(isset($mensaje)){ if(!isset($warning)){?>
+  <?php if(isset($this->mensaje)){ if(!isset($warning)){?>
   <div class="row" style="margin-bottom: -20px; margin-top: 20px">
     <div class="col-md-12">
       <div class="alert alert-success fade in">
         <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-        <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
+        <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
       </div>
     </div>
   </div> 
@@ -68,7 +64,7 @@
     <div class="col-md-12">
       <div class="alert alert-warning fade in">
         <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-        <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
+        <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
       </div>
     </div>
   </div>
@@ -538,7 +534,7 @@
 <div class="modal fade" id="modalBuscarCurp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default blue_border horizontal_border_1">
-     <form action="?c=Beneficiario&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate>
+     <form action="?c=Beneficiario&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate id="form-curp">
       <div class="modal-body"> 
         <div class="row">
           <div class="block-web">
@@ -572,12 +568,65 @@
     </div><!--/modal-content--> 
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
+
+<div class="modal fade" id="mActivarBeneficiario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="block-web">
+            <div class="header">
+              <h3 class="content-header h3subtitulo">&nbsp;Activar Beneficiario</h3>
+            </div>
+            <div class="porlets-content" style="margin-bottom: -50px;">
+              <h4>El beneficiario que esta ingresando ya ha sido dado de alta en el sistema anteriormente y ha sido eliminado. ¿Desea volverlo a activar?</h4>
+            </div><!--/porlets-content-->
+          </div><!--/block-web-->
+        </div>
+      </div>
+      <div class="modal-footer" style="margin-top: -10px;">
+        <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
+          <form action="?c=beneficiario&a=ActivarBeneficiario" enctype="multipart/form-data" method="post">
+            <input type="hidden" name="curp" id="txtCurpActivar">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-info">Activar</button>
+          </form>
+        </div>
+      </div>
+    </div><!--/modal-content-->
+  </div><!--/modal-dialog-->
+</div><!--/modal-fade-->
+
+<script src="assets/js/jquery-2.1.0.js"></script>
+
 <script>
   infoRegistro = function (idBeneficiario){
     var idBeneficiario=idBeneficiario;
     $.post("index.php?c=beneficiario&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
       $("#div-modal-content").html(info);
     }); 
+  }
+
+   $(document).ready(function(){
+
+    $('#form-curp').submit(function() {
+      VerificarBeneficiario();
+      return false;
+    });
+  });
+
+  var curp="";
+  VerificarBeneficiario = function(){
+    curp=$("#curp").val();
+    $.post("index.php?c=beneficiario&a=VerificarBeneficiario", {curp: curp}, function(respuesta) {
+      if(respuesta=="Inactivo"){
+        $('#txtCurpActivar').val(curp);
+        $('#modalBuscarCurp').modal('toggle');
+        $('#mActivarBeneficiario').modal('toggle');
+      }else {
+        location.href="?c=beneficiario&a=Crud&curp="+curp;
+      }
+    });
   }
 </script>
 

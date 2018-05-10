@@ -130,7 +130,7 @@ class AsentamientoController{
 		try {
 			if (isset($_POST['idAsentamientos'])){
 				$this->model->Eliminar($_POST['idAsentamientos']);
-				$this->mensaje="Se ha eliminado correctamente el el asentamiento";
+				$this->mensaje="Se ha eliminado correctamente el asentamiento";
 				$this->Index();
 			}
 		} catch (Exception $e) {

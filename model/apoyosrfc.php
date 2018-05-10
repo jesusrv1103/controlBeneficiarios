@@ -20,6 +20,7 @@ class Apoyosrfc
 	public $estado;
 	public $idRegistroApoyo;
 	public $idBeneficiario;
+	public $idBeneficiarioRFC;
 	public $clavePresupuestal;
 
 	public function __CONSTRUCT()
@@ -39,7 +40,7 @@ class Apoyosrfc
 	{
 		try
 		{
-			$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiariorfc,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyos.idBeneficiario=beneficiariorfc.idBeneficiarioRFC AND apoyos.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyos.tipo='rfc'");
+			$stm = $this->pdo->prepare("SELECT * FROM apoyosrfc,beneficiariorfc,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyosrfc.idBeneficiario=beneficiariorfc.idBeneficiarioRFC AND apoyosrfc.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyosrfc.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyosrfc.idPeriodicidad=periodicidad.idPeriodicidad AND apoyosrfc.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyosrfc.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo");
 			
 			$stm->execute(array());
 
@@ -99,7 +100,7 @@ class Apoyosrfc
 	}
 	
 		//Metodo para actualizar
-	public function Actualizar(Apoyos $data)
+	public function Actualizar(Apoyosrfc $data)
 	{
 		try 
 		{
@@ -168,10 +169,10 @@ class Apoyosrfc
 			die($e->getMessage());
 		}
 	}
-	public function ImportarApoyo(Apoyos $data){
+	public function ImportarApoyoRFC(Apoyosrfc $data){
 		try 
 		{
-			$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+			$sql= $this->pdo->prepare("INSERT INTO apoyosrfc VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
 					null,
@@ -218,7 +219,7 @@ class Apoyosrfc
 		}
 	}
 
-	public function RegistraActualizacion(Apoyos $data){
+	public function RegistraActualizacion(Apoyosrfc $data){
 		try 
 		{
 			$sql = "INSERT INTO actualizacionApoyo VALUES (?,?,?,?,?)";
@@ -267,7 +268,7 @@ class Apoyosrfc
 			die($e->getMessage());
 		}
 	}
-	public function RegistraDatosRegistro(Apoyos $data){
+	public function RegistraDatosRegistro(Apoyosrfc $data){
 
 		try 
 		{

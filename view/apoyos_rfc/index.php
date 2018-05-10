@@ -92,7 +92,7 @@
             <?php foreach($this->model->Listar() as $r): ?>
               <tr class="grade">
                 <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoApoyo(<?php echo $r->idApoyo; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
-                <td><?php echo $r->curp ?> </td>
+                <td><?php echo $r->RFC ?> </td>
                 <td><?php echo $r->fechaApoyo ?> </td>
                 <td><?php echo $r->programa; ?> </td>
                 <td><?php echo $r->subprograma; ?> </td>

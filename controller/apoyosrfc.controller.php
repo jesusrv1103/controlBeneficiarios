@@ -29,11 +29,11 @@ class ApoyosrfcController{
 
 public function Upload(){
   if(!isset($_FILES['file']['name'])){
-    header('Location: ./?c=apoyos');
+    header('Location: ./?c=apoyosrfc');
   }
   $archivo=$_FILES['file'];
   if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
-    if($archivo['name']=="apoyos.xlsx"){
+    if($archivo['name']=="apoyosrfc.xlsx"){
       $nameArchivo = $archivo['name'];
       $tmp = $archivo['tmp_name'];
       $archivo['type'];
@@ -43,7 +43,7 @@ public function Upload(){
       }  
     }else{
       $this->error=true;
-      $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>apoyos.xlsx</strong>";
+      $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>apoyosrfc.xlsx</strong>";
       $this->Index();
     }
   }else{
@@ -53,12 +53,13 @@ public function Upload(){
   }
 }
 
+
 public function Importar(){
-  if (file_exists("./assets/files/apoyos.xlsx")) {
+  if (file_exists("./assets/files/beneficiarios.xlsx")) {
       //Agregamos la librería
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
       //Variable con el nombre del archivo
-    $nombreArchivo = './assets/files/apoyos.xlsx';
+    $nombreArchivo = './assets/files/apoyosrfc.xlsx';
       // Cargo la hoja de cálculo
     $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
       //Asigno la hoja de calculo activa
@@ -66,51 +67,46 @@ public function Importar(){
       //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
     $this->LeerArchivo($objPHPExcel,$numRows);
-    $this->mensaje="Se ha leído correctamente el archivo <strong>apoyos.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de apoyos.";
     if($_SESSION['numRegErroneos']>0){
-      $page="view/apoyos_rfc/resumenImportar.php";
       $apoyos = true;
-      $catalogos=true;
+      $apoyos_rfc=true;
+      $page="view/apoyos_rfc/index.php";
       require_once 'view/index.php';
     }else{
-     $apoyos = true;
-     $catalogos=true;
-     $tipoBen="CURP";
-     $page="view/apoyos_rfc/index.php";
-     require_once 'view/index.php';
-   }
+      $this->mensaje="Se han importado correctamente los datos del archivo <strong>apoyosrfc.xlsx</strong>";
+      $this->Index();
+    }
 
- }
-    //si por algo no cargo el archivo bak_
- else {
-  $this->error=true;
-  $this->mensaje="El archivo <strong>apoyos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
-  $page="view/apoyos_rfc/index.php";
-  $apoyos = true;
-  $catalogos=true;
-  require_once 'view/index.php';
-}
+  }
+  else {
+    $this->error=true;
+    $this->mensaje="El archivo <strong>apoyosrfc.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+    $page="view/apoyos_rfc/index.php";
+    $apoyos = true;
+    $apoyos_rfc=true;
+    require_once 'view/index.php';
+  }
 }
 
 public function LeerArchivo($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("apoyos");
+  //$this->model->Limpiar("apoyos");
   unset($_SESSION['numRegErroneos']);
   $numRow=2;
   $arrayError=array();
   $numRegErroneos=0;
   do {
     $numError=0;
-    $apoyos = new Apoyos();
+    $apoyos = new Apoyosrfc();
 
-    //----------VALIDANDO LA CURP--------------------
-    $curp = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
-    if(!$this->validate_curp($curp)){
-      $row_array['Curp']=$curp;
-      $numError++;
-    }else{
-      $row_array['Curp']='0';
-    }
+    //----------VALIDANDO RFC--------------------
+    $rfc = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
+   // if(!$this->validate_curp($rfc)){
+    //  $row_array['RFC']=$rfc;
+     // $numError++;
+    //}else{
+     // $row_array['RFC']='0';
+    //}
     //----------VALIDANDO LA Id ORIGEN--------------------
     $apoyos->idOrigen = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
     if(!is_numeric($apoyos->idOrigen)){
@@ -210,20 +206,18 @@ public function LeerArchivo($objPHPExcel,$numRows){
         $row_array['Clave Presupuestal']='0';
       }
     }
-
-    if (!$curp == null) {
+    if (!$rfc == null) {
       $apoyos->usuario=$_SESSION['usuario'];
       $apoyos->fechaAlta=date("Y-m-d H:i:s");
       $apoyos->direccion=$_SESSION['direccion'];
       $apoyos->estado="Activo";
-      $consult = $this->model->ObtenerIdBen($curp);
-      $apoyos->idBeneficiario=$consult->idBeneficiario;
-      //echo $apoyos->idBeneficiario;
+      $consult = $this->model->ObtenerIdBen($rfc);
+      $apoyos->idBeneficiario=$consult->idBeneficiarioRFC;
       $apoyos->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyos);
-      $this->model->ImportarApoyo($apoyos);
+      $this->model->ImportarApoyoRFC($apoyos);
     }
     $numRow+=1;
-  } while (!$curp == null);
+  } while (!$rfc == null);
   $_SESSION['numRegErroneos']=$numRegErroneos; 
 
   if($numRegErroneos>0){

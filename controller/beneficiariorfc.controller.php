@@ -276,6 +276,23 @@ public function Eliminar(){
     $this->model->Eliminar($beneficiario);
     header ('Location: index.php?c=Beneficiario&a=RFC');
   }
+   public function Upload(){
+    if(!isset($_FILES['file']['name'])){
+      header('Location: ./?c=beneficiariorfc');
+    }
+    $archivo = $_FILES['file']['name'];
+    $tipo = $_FILES['file']['type'];
+    $destino = "./assets/files/".$archivo;
+    if(copy($_FILES['file']['tmp_name'], $destino)){
+      //echo "Archivo Cargado Con Éxito" . "<br><br>";
+      $this->Importar();
+      //mandar llamar todas las funciones a importar
+    }
+    else{
+      $this->Index();
+    }
+  }
+
   public function Importar(){
     if (file_exists("./assets/files/beneficiariosrfc.xlsx")) {
   //Agregamos la librería
@@ -288,7 +305,7 @@ public function Eliminar(){
       $objPHPExcel->setActiveSheetIndex(0);
         //Obtengo el numero de filas del archivo
       $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-      $this->BeneficiariosRFC($objPHPExcel,$numRows);
+      $this->LeerArchivo($objPHPExcel,$numRows);
       $mensaje="Se ha leído correctamente el archivo <strong>beneficiariosrfc.xlsx</strong>.<br><i class='fa fa-check'></i> Se han insertado correctamente los datos de beneficiarios.";
       $beneficiarios = true;
       $beneficiario_rfc=true;
@@ -298,6 +315,8 @@ public function Eliminar(){
     }
         //si por algo no cargo el archivo bak_
     else {
+
+      
       $error=true;
       $mensaje="El archivo <strong>beneficiariosrfc.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
       $beneficiarios = true;
@@ -306,7 +325,7 @@ public function Eliminar(){
       require_once 'view/index.php';
     }
   }
-  public function BeneficiariosRFC($objPHPExcel,$numRows){
+  public function LeerArchivo($objPHPExcel,$numRows){
     try{
       $numRow=2;
       do {
@@ -331,27 +350,16 @@ public function Eliminar(){
        $benrfc->actividad = $objPHPExcel->getActiveSheet()->getCell('P'.$numRow)->getCalculatedValue();
        $benrfc->cobertura = $objPHPExcel->getActiveSheet()->getCell('Q'.$numRow)->getCalculatedValue();
        if (!$benrfc->RFC == null) {
-         //$consult = $this->model->VerificaBeneficiarioRFC($benrfc->RFC);
-       // if (!$consult == null) {
-         //$this->model->ActualizarExc($benrfc);
        //Datos de registro
          $benrfc->usuario=$_SESSION['usuario'];
          $benrfc->fechaAlta=date("Y-m-d H:i:s");
          $benrfc->direccion=$_SESSION['direccion'];
          $benrfc->estado="Activo";
-      //$consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
-      //$benrfc->idMunicipio=$consult->idMunicipio;
-      //echo $benrfc->curp;
-       //}else{
-      //echo $benrfc->idRegistro;
          $benrfc->idRegistro=$this->model->RegistraDatosRegistro($benrfc);
          $this->model->ImportarBeneficiarioRFC($benrfc);
-      //echo "ya importo";
        }
        $numRow+=1;
-//echo $numRow;
      } while(!$benrfc->RFC == null);
-  //echo "SALIO";
    }catch (Exception $e) {
     $error=true;
     $mensaje="Error al insertar datos del archivo";

@@ -98,7 +98,7 @@ class ApoyosController{
 
 public function LeerArchivo($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("apoyos");
+  //$this->model->Limpiar("apoyos");
   unset($_SESSION['numRegErroneos']);
   $numRow=2;
   $arrayError=array();
