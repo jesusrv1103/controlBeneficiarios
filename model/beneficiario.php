@@ -517,22 +517,27 @@ class Beneficiario
 		}
 	}
 
-	public function VerificaBeneficiario($curp)
+	//Metodo para actualizar
+	public function Activar($idRegistro)
 	{
-		try
-		{
-			$sql= $this->pdo->prepare("SELECT * FROM beneficiarios WHERE curp=?");
-			$resultado=$sql->execute(
-				array($curp)
-			);
-			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
-		} catch (Exception $e)
-		{
-			die($e->getMessage());
-		}
+		$sql = "UPDATE registro SET	estado = 'Activo' WHERE idRegistro = ?";
+
+		$this->pdo->prepare($sql)
+		->execute(
+			array($idRegistro)
+		);
 	}
 
-public function Listar1($periodo)
+	public function VerificaBeneficiario($curp)
+	{
+		$sql= $this->pdo->prepare("SELECT * FROM beneficiarios, registro WHERE curp=? AND beneficiarios.idRegistro=registro.idRegistro");
+		$resultado=$sql->execute(
+			array($curp)
+		);
+		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+	}
+
+	public function Listar1($periodo)
 	{
 		try
 		{
@@ -717,7 +722,7 @@ public function Listar1($periodo)
 			die($e->getMessage());
 		}
 	}
-		public function ListarAsentamientos($localidad)
+	public function ListarAsentamientos($localidad)
 	{
 		try
 		{
