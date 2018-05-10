@@ -613,23 +613,6 @@
 
 
 						<script type="text/javascript">
-
-							function curp2date() {
-								var miCurp =document.getElementById('curp').value;
-								var m = miCurp.match( /^\w{4}(\w{2})(\w{2})(\w{2})/
-									);
-
-
-								var anyo = parseInt(m[1],10)+1900;
-								if( anyo < 1950 ) anyo += 100;
-								var mes = parseInt(m[2], 10)-1;
-								var dia = parseInt(m[3], 10);
-
-								var fech = new Date( anyo, mes, dia );
-								document.getElementById("fechaNacimiento").value = fech;
-							}
-						</script>
-						<script type="text/javascript">
 							window.onload=function(){
 							}
 							listarLocalidades = function (){

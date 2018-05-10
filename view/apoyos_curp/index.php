@@ -178,21 +178,10 @@
 </div><!--/modal-fade--> 
 
 
-<div class="modal fade" id="modalProceso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content panel default red_border horizontal_border_1">
-      <div class="modal-body"> 
-        <div class="row">
-          <div class="block-web">
-            <div class="header">
-              <h3 class="content-header theme_color">&nbsp;Información</h3>
-            </div>
-            <div class="porlets-content" style="margin-bottom: -50px;">
-              <h4>Funcion en Proceso</h4>
-            </div><!--/porlets-content--> 
-          </div><!--/block-web--> 
-        </div>
-      </div> 
+    <div class="modal-content">
+      <div id="divInfo">
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
@@ -236,7 +225,7 @@
   infoApoyo = function (idApoyo){
     var idApoyo=idApoyo;
     $.post("index.php?c=apoyos&a=InfoApoyo", {idApoyo: idApoyo}, function(info) {
-      $("#div-modal-content").html(info);
+      $("#divInfo").html(info);
     }); 
   }
   deshabilitar = function (){

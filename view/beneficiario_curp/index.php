@@ -55,21 +55,21 @@
           </div>
         </div>
       </div>
-      <?php if(isset($mensaje)){ if(!isset($error)){?>
+      <?php if(isset($this->mensaje)){ if(!isset($this->error)){?>
       <div class="row" style="margin-bottom: -20px; margin-top: 20px">
         <div class="col-md-12">
           <div class="alert alert-success fade in">
             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
+            <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
           </div>
         </div>
       </div>
-      <?php } if(isset($error)){ ?>
+      <?php } if(isset($this->error)){ ?>
       <div class="row" style="margin-bottom: -20px; margin-top: 20px">
         <div class="col-md-12">
           <div class="alert alert-danger">
             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
+            <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
           </div>
         </div>
       </div>
@@ -127,215 +127,215 @@
         </tfoot>
       </table>
       <?php } if($periodo=='Beneficiarios 2017'){ ?>
-          <table class="display table table-bordered table-striped" id="dynamic-table">
-           <thead>
-             <tr>
-               <td><center><b>Info</b></center></td>
-               <th>CURP</th>
-               <th>Nombre de beneficiario</th>
-               <th>Municipio</th>
-               <td><center><b>Ver</b></center></td>
-               <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-               <td><center><b>Editar</b></center></td>
-               <td><center><b>Borrar</b></center></td>
-               <?php } ?>
-             </tr>
-           </thead>
-           <tbody>
-            <?php foreach($this->model->Listar1('2017') as $r): ?>
-              <tr class="grade">
-                <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
-                <td><?php echo $r->curp ?> </td>
-                <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
-                <td><?php echo $r->nombreMunicipio ?> </td>
-                <td class="center">
-                  <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
-                </td>
-                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-                <td class="center">
-                  <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
-                </td>
-                <td class="center">
-                  <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro; ?>)" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-                </td>
-                <?php } ?>
-              </tr>
-            <?php endforeach; ?>
-             <?php foreach($this->model->Listar2('2017') as $r): ?>
-              <tr class="grade">
-                <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
-                <td><?php echo $r->curp ?> </td>
-                <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
-                <td><?php echo $r->nombreMunicipio ?> </td>
-                <td class="center">
-                  <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
-                </td>
-                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-                <td class="center">
-                  <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
-                </td>
-                <td class="center">
-                  <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro; ?>)" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-                </td>
-                <?php } ?>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-          <tfoot>
-           <tr>
-            <td><center><b>Info</b></center></td>
-            <th>CURP</th>
-            <th>Nombre de beneficiario</th>
-            <th>Municipio</th>
-            <td><center><b>Ver</b></center></td>
+      <table class="display table table-bordered table-striped" id="dynamic-table">
+       <thead>
+         <tr>
+           <td><center><b>Info</b></center></td>
+           <th>CURP</th>
+           <th>Nombre de beneficiario</th>
+           <th>Municipio</th>
+           <td><center><b>Ver</b></center></td>
+           <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+           <td><center><b>Editar</b></center></td>
+           <td><center><b>Borrar</b></center></td>
+           <?php } ?>
+         </tr>
+       </thead>
+       <tbody>
+        <?php foreach($this->model->Listar1('2017') as $r): ?>
+          <tr class="grade">
+            <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+            <td><?php echo $r->curp ?> </td>
+            <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+            <td><?php echo $r->nombreMunicipio ?> </td>
+            <td class="center">
+              <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+            </td>
             <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-            <td><center><b>Editar</b></center></td>
-            <td><center><b>Borrar</b></center></td>
+            <td class="center">
+              <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+            </td>
+            <td class="center">
+              <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro; ?>)" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+            </td>
             <?php } ?>
           </tr>
-        </tfoot>
-      </table>
-      <?php } if($periodo=='Beneficiarios 2018'){ ?>
-          <table class="display table table-bordered table-striped" id="dynamic-table">
-           <thead>
-             <tr>
-               <td><center><b>Info</b></center></td>
-               <th>CURP</th>
-               <th>Nombre de beneficiario</th>
-               <th>Municipio</th>
-               <td><center><b>Ver</b></center></td>
-               <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-               <td><center><b>Editar</b></center></td>
-               <td><center><b>Borrar</b></center></td>
-               <?php } ?>
-             </tr>
-           </thead>
-           <tbody>
-            <?php foreach($this->model->Listar1('2018') as $r): ?>
-              <tr class="grade">
-                <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
-                <td><?php echo $r->curp ?> </td>
-                <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
-                <td><?php echo $r->nombreMunicipio ?> </td>
-                <td class="center">
-                  <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
-                </td>
-                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-                <td class="center">
-                  <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
-                </td>
-                <td class="center">
-                  <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro; ?>)" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-                </td>
-                <?php } ?>
-              </tr>
-            <?php endforeach; ?>
-              <?php foreach($this->model->Listar2('2018') as $r): ?>
-              <tr class="grade">
-                <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
-                <td><?php echo $r->curp ?> </td>
-                <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
-                <td><?php echo $r->nombreMunicipio ?> </td>
-                <td class="center">
-                  <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
-                </td>
-                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-                <td class="center">
-                  <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
-                </td>
-                <td class="center">
-                  <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro; ?>)" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-                </td>
-                <?php } ?>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-          <tfoot>
-           <tr>
-            <td><center><b>Info</b></center></td>
-            <th>CURP</th>
-            <th>Nombre de beneficiario</th>
-            <th>Municipio</th>
-            <td><center><b>Ver</b></center></td>
+        <?php endforeach; ?>
+        <?php foreach($this->model->Listar2('2017') as $r): ?>
+          <tr class="grade">
+            <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+            <td><?php echo $r->curp ?> </td>
+            <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+            <td><?php echo $r->nombreMunicipio ?> </td>
+            <td class="center">
+              <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+            </td>
             <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-            <td><center><b>Editar</b></center></td>
-            <td><center><b>Borrar</b></center></td>
+            <td class="center">
+              <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+            </td>
+            <td class="center">
+              <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro; ?>)" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+            </td>
             <?php } ?>
           </tr>
-        </tfoot>
-      </table>
-      <?php } if($periodo=='Beneficiarios 2019'){ ?>
-          <table class="display table table-bordered table-striped" id="dynamic-table">
-           <thead>
-             <tr>
-               <td><center><b>Info</b></center></td>
-               <th>CURP</th>
-               <th>Nombre de beneficiario</th>
-               <th>Municipio</th>
-               <td><center><b>Ver</b></center></td>
-               <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-               <td><center><b>Editar</b></center></td>
-               <td><center><b>Borrar</b></center></td>
-               <?php } ?>
-             </tr>
-           </thead>
-           <tbody>
-            <?php foreach($this->model->Listar1('2019') as $r): ?>
-              <tr class="grade">
-                <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
-                <td><?php echo $r->curp ?> </td>
-                <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
-                <td><?php echo $r->nombreMunicipio ?> </td>
-                <td class="center">
-                  <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
-                </td>
-                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-                <td class="center">
-                  <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
-                </td>
-                <td class="center">
-                  <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro; ?>)" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-                </td>
-                <?php } ?>
-              </tr>
-            <?php endforeach; ?>
-             <?php foreach($this->model->Listar2('2019') as $r): ?>
-              <tr class="grade">
-                <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
-                <td><?php echo $r->curp ?> </td>
-                <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
-                <td><?php echo $r->nombreMunicipio ?> </td>
-                <td class="center">
-                  <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
-                </td>
-                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-                <td class="center">
-                  <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
-                </td>
-                <td class="center">
-                  <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro; ?>)" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-                </td>
-                <?php } ?>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-          <tfoot>
-           <tr>
-            <td><center><b>Info</b></center></td>
-            <th>CURP</th>
-            <th>Nombre de beneficiario</th>
-            <th>Municipio</th>
-            <td><center><b>Ver</b></center></td>
-            <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-            <td><center><b>Editar</b></center></td>
-            <td><center><b>Borrar</b></center></td>
-            <?php } ?>
-          </tr>
-        </tfoot>
-      </table>
+        <?php endforeach; ?>
+      </tbody>
+      <tfoot>
+       <tr>
+        <td><center><b>Info</b></center></td>
+        <th>CURP</th>
+        <th>Nombre de beneficiario</th>
+        <th>Municipio</th>
+        <td><center><b>Ver</b></center></td>
+        <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+        <td><center><b>Editar</b></center></td>
+        <td><center><b>Borrar</b></center></td>
+        <?php } ?>
+      </tr>
+    </tfoot>
+  </table>
+  <?php } if($periodo=='Beneficiarios 2018'){ ?>
+  <table class="display table table-bordered table-striped" id="dynamic-table">
+   <thead>
+     <tr>
+       <td><center><b>Info</b></center></td>
+       <th>CURP</th>
+       <th>Nombre de beneficiario</th>
+       <th>Municipio</th>
+       <td><center><b>Ver</b></center></td>
+       <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+       <td><center><b>Editar</b></center></td>
+       <td><center><b>Borrar</b></center></td>
+       <?php } ?>
+     </tr>
+   </thead>
+   <tbody>
+    <?php foreach($this->model->Listar1('2018') as $r): ?>
+      <tr class="grade">
+        <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+        <td><?php echo $r->curp ?> </td>
+        <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+        <td><?php echo $r->nombreMunicipio ?> </td>
+        <td class="center">
+          <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+        </td>
+        <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+        <td class="center">
+          <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+        </td>
+        <td class="center">
+          <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro; ?>)" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+        </td>
+        <?php } ?>
+      </tr>
+    <?php endforeach; ?>
+    <?php foreach($this->model->Listar2('2018') as $r): ?>
+      <tr class="grade">
+        <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+        <td><?php echo $r->curp ?> </td>
+        <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+        <td><?php echo $r->nombreMunicipio ?> </td>
+        <td class="center">
+          <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+        </td>
+        <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+        <td class="center">
+          <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+        </td>
+        <td class="center">
+          <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro; ?>)" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+        </td>
+        <?php } ?>
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
+  <tfoot>
+   <tr>
+    <td><center><b>Info</b></center></td>
+    <th>CURP</th>
+    <th>Nombre de beneficiario</th>
+    <th>Municipio</th>
+    <td><center><b>Ver</b></center></td>
+    <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+    <td><center><b>Editar</b></center></td>
+    <td><center><b>Borrar</b></center></td>
+    <?php } ?>
+  </tr>
+</tfoot>
+</table>
+<?php } if($periodo=='Beneficiarios 2019'){ ?>
+<table class="display table table-bordered table-striped" id="dynamic-table">
+ <thead>
+   <tr>
+     <td><center><b>Info</b></center></td>
+     <th>CURP</th>
+     <th>Nombre de beneficiario</th>
+     <th>Municipio</th>
+     <td><center><b>Ver</b></center></td>
+     <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+     <td><center><b>Editar</b></center></td>
+     <td><center><b>Borrar</b></center></td>
+     <?php } ?>
+   </tr>
+ </thead>
+ <tbody>
+  <?php foreach($this->model->Listar1('2019') as $r): ?>
+    <tr class="grade">
+      <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+      <td><?php echo $r->curp ?> </td>
+      <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+      <td><?php echo $r->nombreMunicipio ?> </td>
+      <td class="center">
+        <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+      </td>
+      <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+      <td class="center">
+        <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+      </td>
+      <td class="center">
+        <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro; ?>)" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+      </td>
       <?php } ?>
-    </div><!--/table-responsive-->
-  </div><!--/porlets-content-->
+    </tr>
+  <?php endforeach; ?>
+  <?php foreach($this->model->Listar2('2019') as $r): ?>
+    <tr class="grade">
+      <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistro(<?php echo $r->idBeneficiario; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+      <td><?php echo $r->curp ?> </td>
+      <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+      <td><?php echo $r->nombreMunicipio ?> </td>
+      <td class="center">
+        <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+      </td>
+      <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+      <td class="center">
+        <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
+      </td>
+      <td class="center">
+        <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro; ?>)" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+      </td>
+      <?php } ?>
+    </tr>
+  <?php endforeach; ?>
+</tbody>
+<tfoot>
+ <tr>
+  <td><center><b>Info</b></center></td>
+  <th>CURP</th>
+  <th>Nombre de beneficiario</th>
+  <th>Municipio</th>
+  <td><center><b>Ver</b></center></td>
+  <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+  <td><center><b>Editar</b></center></td>
+  <td><center><b>Borrar</b></center></td>
+  <?php } ?>
+</tr>
+</tfoot>
+</table>
+<?php } ?>
+</div><!--/table-responsive-->
+</div><!--/porlets-content-->
 </div><!--/block-web-->
 </div><!--/col-md-12-->
 </div><!--/row-->
@@ -385,14 +385,6 @@
   </div><!--/modal-dialog-->
 </div><!--/modal-fade-->
 
-<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="width: 60%;">
-    <div class="modal-content" id="div-modal-content">
-      <!--*********En esta sección se incluye el modal de informacion de registro y apoyo**********-->
-    </div><!--/modal-content-->
-  </div><!--/modal-dialog-->
-</div><!--/modal-fade-->
-
 
 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -413,7 +405,7 @@
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
           <form action="?c=beneficiario&a=Eliminar" enctype="multipart/form-data" method="post">
             <input hidden type="text" name="idRegistro" id="txtIdRegistro">
-            <button type="button" class="btn btn-default" data-dismiss="modal$beneficiario_curp=true;">Cancelar</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
           </form>
         </div>
@@ -425,7 +417,7 @@
 <div class="modal fade" id="modalBuscarCurp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default blue_border horizontal_border_1">
-     <form action="?c=beneficiario&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate>
+     <form action="?c=beneficiario&a=Crud" id="form-curp" enctype="multipart/form-data" method="post" parsley-validate novalidate-->
       <div class="modal-body">
         <div class="row">
           <div class="block-web">
@@ -435,7 +427,7 @@
             <div class="porlets-content" style="margin-bottom: -50px;">
               <div class="form-group">
                 <div class="col-sm-10">
-                  <input name="curp"  maxlength="18" id="curp" type="text" required parsley-regexp="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required parsley-rangelength="[18,18]"  onkeyup="mayus(this);" onchange="curp2date();" class="form-control" required placeholder="Ingrese la curp del beneficiario">
+                  <input name="curp"  maxlength="18" id="curp" type="text" required parsley-regexp="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required parsley-rangelength="[18,18]"  onkeyup="mayus(this);" class="form-control" required placeholder="Ingrese la curp del beneficiario">
                 </div>
               </div><!--/form-group-->
             </div><!--/porlets-content-->
@@ -453,42 +445,60 @@
 </div><!--/modal-dialog-->
 </div><!--/modal-fade-->
 
-
-<div class="modal fade" id="modalBuscarRFC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="mActivarBeneficiario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content panel default blue_border horizontal_border_1">
-     <form action="?c=beneficiariorfc&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate>
+    <div class="modal-content panel default horizontal_border_1">
       <div class="modal-body">
         <div class="row">
           <div class="block-web">
             <div class="header">
-              <h3 class="content-header h3subtitulo">&nbsp;Beneficiario por RFC</h3>
+              <h3 class="content-header h3subtitulo">&nbsp;Activar Beneficiario</h3>
             </div>
             <div class="porlets-content" style="margin-bottom: -50px;">
-              <div class="form-group">
-                <div class="col-sm-10">
-                  <input name="RFC"  maxlength="13" id="RFC" type="text" required parsley-regexp="([A-Z,Ñ,&]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\d]{3})"   required parsley-rangelength="[12,13]"  onkeyup="mayus(this);" class="form-control" required placeholder="Ingrese el RFC del beneficiario">
-                </div>
-              </div><!--/form-group-->
+              <h4>El beneficiario que esta ingresando ya ha sido dado de alta en el sistema anteriormente y ha sido eliminado. ¿Desea volverlo a activar?</h4>
             </div><!--/porlets-content-->
           </div><!--/block-web-->
         </div>
       </div>
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-          <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-sm btn-primary">Aceptar</button>
+          <form action="?c=beneficiario&a=ActivarBeneficiario" enctype="multipart/form-data" method="post">
+            <input type="hidden" name="curp" id="txtCurpActivar">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-info">Activar</button>
+          </form>
         </div>
       </div>
-    </form>
-  </div><!--/modal-content-->
-</div><!--/modal-dialog-->
+    </div><!--/modal-content-->
+  </div><!--/modal-dialog-->
 </div><!--/modal-fade-->
-<script>
 
-  window.onload=function(){
-    
+<script src="assets/js/jquery-2.1.0.js"></script>
+<script type="text/javascript">
+
+
+
+  $(document).ready(function(){
+
+    $('#form-curp').submit(function() {
+      VerificarBeneficiario();
+      return false;
+    });
+  });
+
+  var curp="";
+  VerificarBeneficiario = function(){
+    curp=$("#curp").val();
+    $.post("index.php?c=beneficiario&a=VerificarBeneficiario", {curp: curp}, function(respuesta) {
+      if(respuesta=="Inactivo"){
+        $('#txtCurpActivar').val(curp);
+        $('#mActivarBeneficiario').modal('toggle');
+      }else {
+        location.href="?c=beneficiario&a=Crud&curp="+curp;
+      }
+    });
   }
+
   consultas=function(){
     periodo='2018';
     $.post("index.php?c=beneficiario&a=Consultas", {periodo: periodo}, function(mensaje) {

@@ -3,6 +3,32 @@ include_once './model/database.php';
 if (!isset($_SESSION['seguridad'])){
   header("Location: index.php");
 }
+
+//Comprobamos si esta definida la sesión 'tiempo'.
+if(isset($_SESSION['tiempo'])) {
+    //Tiempo en segundos para dar vida a la sesión.
+    $inactivo = 900;// 60 segundos * 10 = 600 segundos == 10 minutos en este caso.
+
+    //Calculamos tiempo de vida inactivo.
+    $vida_session = time() - $_SESSION['tiempo'];
+
+    //Compraración para redirigir página, si la vida de sesión sea mayor a el tiempo insertado en inactivo.
+    if($vida_session > $inactivo)
+    {
+      //Removemos sesión.
+      session_unset();
+      //Destruimos sesión.
+      session_destroy(); 
+      echo  "<script type='text/javascript'> alert('Sesión cerrada por inactividad'); </script>";
+      echo  "<script type='text/javascript'> window.location='./'; </script>";
+      exit();
+     } else {  // si no ha caducado la sesion, actualizamos
+      $_SESSION['tiempo'] = time();
+    }
+  } else {
+    //Activamos sesion tiempo.
+    $_SESSION['tiempo'] = time();
+  }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
