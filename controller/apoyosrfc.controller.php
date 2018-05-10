@@ -226,7 +226,7 @@ public function LeerArchivo($objPHPExcel,$numRows){
 
  }
 } catch (Exception $e) {
- $mensaje="error al importar los datos de los apoyos";
+ $this->mensaje="error al importar los datos de los apoyos";
  $page="view/apoyos_rfc/index.php";
  $administracion=true;
  $apoyos=true;
@@ -279,7 +279,7 @@ public function Eliminar(){
   
   $apoyos = true;
   $page="view/apoyos_rfc/index.php";
-  $mensaje="Se ha eliminado correctamente el apoyo";
+  $this->mensaje="Se ha eliminado correctamente el apoyo";
   require_once 'view/index.php';
 }
 public function Guardar(){
@@ -305,16 +305,17 @@ public function Guardar(){
     $apoyo->idRegistroApoyo=$idRegistro->idRegistroApoyo;
     $this->model->Actualizar($apoyo);
     $this->model->RegistraActualizacion($apoyo);
-    $mensaje="Se han actualizado correctamente los datos del Apoyo";
+    $this->mensaje="Se han actualizado correctamente los datos del apoyo";
   }else{
-    
+
    $apoyo->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyo);
    $this->model->Registrar($apoyo);
-   $mensaje="Se han registrado correctamente los datos del Apoyo";
-   
+   $this->mensaje="Se han registrado correctamente los datos del apoyo";
+
  } 
 
  $apoyos = true;
+ $apoyos_rfc=true;
  $page="view/apoyos_rfc/index.php";
  require_once 'view/index.php';
 }
@@ -337,6 +338,7 @@ public function ListarSubprogramas(){
 }
 
 public function InfoApoyo(){
+  
   $idApoyo = $_POST['idApoyo'];
   $infoApoyo=$this->model->ObtenerInfoApoyo($idApoyo);
   $infoActualizacion=$this->model->ListarActualizacion($infoApoyo->idRegistroApoyo);
@@ -364,8 +366,8 @@ public function InfoApoyo(){
               <tr>
                 <td>
                   <div class="col-md-12">
-                    <label class="col-sm-4 lbl-detalle"><b>Curp:</b></label>
-                    <label class="col-sm-7 control-label">'.$infoApoyo->curp.'</label>
+                    <label class="col-sm-4 lbl-detalle"><b>RFC:</b></label>
+                    <label class="col-sm-7 control-label">'.$infoApoyo->RFC.'</label>
                   </div>
                   <div class="col-md-12">
                     <label class="col-sm-4 lbl-detalle"><b>Primer apellido:</b></label>
@@ -479,7 +481,7 @@ public function InfoApoyo(){
     <div class="modal-footer">
       <div class="row col-md-6 col-md-offset-6">
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
-        <a href="?c=Beneficiario&a=Detalles&idBeneficiario='.$infoApoyo->idBeneficiario.'" class="btn btn-info btn-sm">Ver detalles de beneficiario</a>
+        <a href="?c=Beneficiariorfc&a=Detalles&idBeneficiarioRFC='.$infoApoyo->idBeneficiario.'" class="btn btn-info btn-sm">Ver detalles de beneficiario</a>
       </div>
     </div>';
   }
