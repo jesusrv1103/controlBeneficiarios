@@ -128,8 +128,8 @@ class Beneficiariorfc
 			(RFC,curp,primerApellido,segundoApellido,nombres,
 			fechaAltaSat,sexo,idAsentamientos,idLocalidad,idTipoVialidad,
 			nombreVialidad,numeroExterior,numeroInterior,entreVialidades,descripcionUbicacion,
-	        actividad,cobertura,idRegistro) values 
-		   (?,?,?,?,?,
+			actividad,cobertura,idRegistro) values 
+			(?,?,?,?,?,
 			?,?,?,?,?,
 			?,?,?,?,?,
 			?,?,?)";
@@ -155,7 +155,7 @@ class Beneficiariorfc
 					$data->cobertura,
 					$data->idRegistro
 					)
-			);
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -196,7 +196,7 @@ class Beneficiariorfc
 			$stm->execute(array(
 				$data->estado,
 				$data->idRegistro
-			));
+				));
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -252,65 +252,8 @@ class Beneficiariorfc
 					$data->idRegistro,
 					$data->idBeneficiarioRFC
 
-				)
-			);
-			
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
-	}
-
-public function ActualizarExc($data)
-	{
-		try 
-		{
-			$sql = "UPDATE beneficiariorfc SET 
-			RFC =?,
-			curp = ?,
-			primerApellido = ?,
-			segundoApellido = ?,
-			nombres = ?,
-			fechaAltaSat =?,
-			sexo =?,
-			idAsentamientos =?,
-			idLocalidad = ?,
-			idTipoVialidad =?,
-			nombreVialidad =?,
-			numeroExterior = ?,
-			numeroInterior = ?,
-			entreVialidades = ?,
-			descripcionUbicacion = ?,
-			actividad = ?,
-			cobertura = ?,
-			idRegistro = ?
-			WHERE RFC = ?";
-
-			$this->pdo->prepare($sql)
-			->execute(
-				array(
-					$data->RFC,
-					$data->curp,
-					$data->primerApellido,
-					$data->segundoApellido,
-					$data->nombres,
-					$data->fechaAltaSat,
-					$data->sexo,
-					$data->idAsentamientos,
-					$data->idLocalidad,
-					$data->idTipoVialidad,
-					$data->nombreVialidad,
-					$data->numeroExterior,
-					$data->numeroInterior,
-					$data->entreVialidades,
-					$data->descripcionUbicacion,
-					$data->actividad,
-					$data->cobertura,
-					$data->idRegistro,
-					$data->idBeneficiarioRFC
-
-				)
-			);
+					)
+				);
 			
 		} catch (Exception $e) 
 		{
@@ -347,8 +290,8 @@ public function ActualizarExc($data)
 					$data->actividad,
 					$data->cobertura,
 					$data->idRegistro
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -408,8 +351,8 @@ public function ActualizarExc($data)
 					$data->direccion,
 					$data->fechaAlta,
 					$data->estado
-				)
-			);
+					)
+				);
 			return $this->pdo->lastInsertId();
 		} catch (Exception $e) 
 		{
@@ -453,8 +396,8 @@ public function ActualizarExc($data)
 					$data->direccion,
 					$data->fechaAlta,
 					$data->idRegistro
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -510,7 +453,7 @@ public function ActualizarExc($data)
 			$sql= $this->pdo->prepare("SELECT * FROM beneficiariorfc WHERE RFC=?");
 			$resultado=$sql->execute(
 				array($RFC)
-			);
+				);
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
 		{

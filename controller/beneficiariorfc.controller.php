@@ -315,6 +315,8 @@ public function Eliminar(){
     }
         //si por algo no cargo el archivo bak_
     else {
+
+      
       $error=true;
       $mensaje="El archivo <strong>beneficiariosrfc.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
       $beneficiarios = true;
@@ -348,27 +350,16 @@ public function Eliminar(){
        $benrfc->actividad = $objPHPExcel->getActiveSheet()->getCell('P'.$numRow)->getCalculatedValue();
        $benrfc->cobertura = $objPHPExcel->getActiveSheet()->getCell('Q'.$numRow)->getCalculatedValue();
        if (!$benrfc->RFC == null) {
-         //$consult = $this->model->VerificaBeneficiarioRFC($benrfc->RFC);
-       // if (!$consult == null) {
-         //$this->model->ActualizarExc($benrfc);
        //Datos de registro
          $benrfc->usuario=$_SESSION['usuario'];
          $benrfc->fechaAlta=date("Y-m-d H:i:s");
          $benrfc->direccion=$_SESSION['direccion'];
          $benrfc->estado="Activo";
-      //$consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
-      //$benrfc->idMunicipio=$consult->idMunicipio;
-      //echo $benrfc->curp;
-       //}else{
-      //echo $benrfc->idRegistro;
          $benrfc->idRegistro=$this->model->RegistraDatosRegistro($benrfc);
          $this->model->ImportarBeneficiarioRFC($benrfc);
-      //echo "ya importo";
        }
        $numRow+=1;
-//echo $numRow;
      } while(!$benrfc->RFC == null);
-  //echo "SALIO";
    }catch (Exception $e) {
     $error=true;
     $mensaje="Error al insertar datos del archivo";

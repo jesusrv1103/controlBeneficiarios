@@ -7,7 +7,7 @@ class ApoyosrfcController{
   private $session;
   public $error;
   public function __CONSTRUCT(){
-    $this->model = new Apoyos();
+    $this->model = new Apoyosrfc();
   }
   public function Index(){
    $apoyos = true;
@@ -16,7 +16,7 @@ class ApoyosrfcController{
    require_once 'view/index.php';
  }
  public function Crud(){
-  $apoyo = new Apoyos();
+  $apoyo = new Apoyosrfc();
   if(isset($_REQUEST['idApoyo'])){
     $_REQUEST['idApoyo'];
     $apoyo = $this->model->Obtener($_REQUEST['idApoyo']);
@@ -29,11 +29,11 @@ class ApoyosrfcController{
 
 public function Upload(){
   if(!isset($_FILES['file']['name'])){
-    header('Location: ./?c=apoyos');
+    header('Location: ./?c=apoyosrfc');
   }
   $archivo=$_FILES['file'];
   if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
-    if($archivo['name']=="apoyos.xlsx"){
+    if($archivo['name']=="apoyosrfc.xlsx"){
       $nameArchivo = $archivo['name'];
       $tmp = $archivo['tmp_name'];
       $archivo['type'];
@@ -43,7 +43,7 @@ public function Upload(){
       }  
     }else{
       $this->error=true;
-      $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>apoyos.xlsx</strong>";
+      $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>apoyosrfc.xlsx</strong>";
       $this->Index();
     }
   }else{
@@ -53,12 +53,13 @@ public function Upload(){
   }
 }
 
+
 public function Importar(){
-  if (file_exists("./assets/files/apoyos.xlsx")) {
+  if (file_exists("./assets/files/beneficiarios.xlsx")) {
       //Agregamos la librería
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
       //Variable con el nombre del archivo
-    $nombreArchivo = './assets/files/apoyos.xlsx';
+    $nombreArchivo = './assets/files/apoyosrfc.xlsx';
       // Cargo la hoja de cálculo
     $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
       //Asigno la hoja de calculo activa
@@ -66,51 +67,46 @@ public function Importar(){
       //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
     $this->LeerArchivo($objPHPExcel,$numRows);
-    $this->mensaje="Se ha leído correctamente el archivo <strong>apoyos.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de apoyos.";
     if($_SESSION['numRegErroneos']>0){
-      $page="view/apoyos_rfc/resumenImportar.php";
       $apoyos = true;
-      $catalogos=true;
+      $apoyos_rfc=true;
+      $page="view/apoyos_rfc/index.php";
       require_once 'view/index.php';
     }else{
-     $apoyos = true;
-     $catalogos=true;
-     $tipoBen="CURP";
-     $page="view/apoyos_rfc/index.php";
-     require_once 'view/index.php';
-   }
+      $this->mensaje="Se han importado correctamente los datos del archivo <strong>apoyosrfc.xlsx</strong>";
+      $this->Index();
+    }
 
- }
-    //si por algo no cargo el archivo bak_
- else {
-  $this->error=true;
-  $this->mensaje="El archivo <strong>apoyos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
-  $page="view/apoyos_rfc/index.php";
-  $apoyos = true;
-  $catalogos=true;
-  require_once 'view/index.php';
-}
+  }
+  else {
+    $this->error=true;
+    $this->mensaje="El archivo <strong>apoyosrfc.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+    $page="view/apoyos_rfc/index.php";
+    $apoyos = true;
+    $apoyos_rfc=true;
+    require_once 'view/index.php';
+  }
 }
 
 public function LeerArchivo($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("apoyos");
+  //$this->model->Limpiar("apoyos");
   unset($_SESSION['numRegErroneos']);
   $numRow=2;
   $arrayError=array();
   $numRegErroneos=0;
   do {
     $numError=0;
-    $apoyos = new Apoyos();
+    $apoyos = new Apoyosrfc();
 
-    //----------VALIDANDO LA CURP--------------------
-    $curp = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
-    if(!$this->validate_curp($curp)){
-      $row_array['Curp']=$curp;
-      $numError++;
-    }else{
-      $row_array['Curp']='0';
-    }
+    //----------VALIDANDO RFC--------------------
+    $rfc = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
+   // if(!$this->validate_curp($rfc)){
+    //  $row_array['RFC']=$rfc;
+     // $numError++;
+    //}else{
+     // $row_array['RFC']='0';
+    //}
     //----------VALIDANDO LA Id ORIGEN--------------------
     $apoyos->idOrigen = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
     if(!is_numeric($apoyos->idOrigen)){
@@ -210,20 +206,18 @@ public function LeerArchivo($objPHPExcel,$numRows){
         $row_array['Clave Presupuestal']='0';
       }
     }
-
-    if (!$curp == null) {
+    if (!$rfc == null) {
       $apoyos->usuario=$_SESSION['usuario'];
       $apoyos->fechaAlta=date("Y-m-d H:i:s");
       $apoyos->direccion=$_SESSION['direccion'];
       $apoyos->estado="Activo";
-      $consult = $this->model->ObtenerIdBen($curp);
-      $apoyos->idBeneficiario=$consult->idBeneficiario;
-      //echo $apoyos->idBeneficiario;
+      $consult = $this->model->ObtenerIdBen($rfc);
+      $apoyos->idBeneficiario=$consult->idBeneficiarioRFC;
       $apoyos->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyos);
-      $this->model->ImportarApoyo($apoyos);
+      $this->model->ImportarApoyoRFC($apoyos);
     }
     $numRow+=1;
-  } while (!$curp == null);
+  } while (!$rfc == null);
   $_SESSION['numRegErroneos']=$numRegErroneos; 
 
   if($numRegErroneos>0){
@@ -260,12 +254,12 @@ function validate_curp($valor) {
 
 function is_mx_state($state){     
   $mxStates = [         
-    'AS','BS','CL','CS','DF','GT',         
-    'HG','MC','MS','NL','PL','QR',         
-    'SL','TC','TL','YN','NE','BC',         
-    'CC','CM','CH','DG','GR','JC',         
-    'MN','NT','OC','QT','SP','SR',         
-    'TS','VZ','ZS'    
+  'AS','BS','CL','CS','DF','GT',         
+  'HG','MC','MS','NL','PL','QR',         
+  'SL','TC','TL','YN','NE','BC',         
+  'CC','CM','CH','DG','GR','JC',         
+  'MN','NT','OC','QT','SP','SR',         
+  'TS','VZ','ZS'    
   ];     
   if(in_array(strtoupper($state),$mxStates)){         
     return true;     
@@ -289,7 +283,7 @@ public function Eliminar(){
   require_once 'view/index.php';
 }
 public function Guardar(){
-  $apoyo= new Apoyos();
+  $apoyo= new Apoyosrfc();
   $apoyo->idApoyo = $_REQUEST['idApoyo'];
   $apoyo->idBeneficiario = $_REQUEST['idBeneficiario'];
   $apoyo->idOrigen = $_REQUEST['idOrigen'];
@@ -330,8 +324,8 @@ public function ListarSubprogramas(){
 
   foreach ($this->model->ListarSubprogramas($idPrograma) as $subprograma): 
     $row_array['idSubprograma']  = $subprograma->idSubprograma;
-    $row_array['subprograma']  = $subprograma->subprograma;
-    array_push($datos, $row_array);
+  $row_array['subprograma']  = $subprograma->subprograma;
+  array_push($datos, $row_array);
   endforeach;
 
   echo json_encode($datos, JSON_FORCE_OBJECT);
@@ -343,146 +337,146 @@ public function InfoApoyo(){
   $infoActualizacion=$this->model->ListarActualizacion($infoApoyo->idRegistroApoyo);
   echo   '  
   <div class="modal-body"> 
-  <div class="row">
-  <div class="block-web">
-  <div class="header">
-  <div class="row" style="margin-bottom: 12px;">
-  <div class="col-sm-12">
-  <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Información de apoyo y registro</h2>
-  </div> 
-  </div>
-  </div>        
-  <div class="porlets-content" style="margin-bottom: -65px;">
-  <table class="table table-striped">
-  <tbody>
-  <tr>
-  <td>
-  <div class="col-md-12">   
-  <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Información del beneficiario</b></label>
-  </div>
-  </td>
-  </tr>
-  <tr>
-  <td>
-  <div class="col-md-12">
-  <label class="col-sm-4 lbl-detalle"><b>Curp:</b></label>
-  <label class="col-sm-7 control-label">'.$infoApoyo->curp.'</label>
-  </div>
-  <div class="col-md-12">
-  <label class="col-sm-4 lbl-detalle"><b>Primer apellido:</b></label>
-  <label class="col-sm-7 control-label">'.$infoApoyo->primerApellido.'</label>
-  <label class="col-sm-4 lbl-detalle"><b>Segundo apellido:</b></label>
-  <label class="col-sm-7 control-label">'.$infoApoyo->segundoApellido.'</label>
-  <label class="col-sm-4 lbl-detalle"><b>Nombre(s):</b></label>
-  <label class="col-sm-7 control-label">'.$infoApoyo->nombres.'</label>
-  </div>
-  </td>
-  </tr>
-  <tr>
-  <td>
-  <div class="col-md-12">   
-  <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de apoyo</b></label>
-  </div>
-  </td>
-  </tr>
-  <tr><td>
-  <div class="col-md-12">
-  <label class="col-sm-4 lbl-detalle"><b>Dirección que lo apoya:</b></label>
-  <label class="col-sm-7 control-label">'.$infoApoyo->direccion.'</label>
-  </div>
-  <div class="col-md-12">
-  <label class="col-sm-4 lbl-detalle"><b>Tipo de apoyo:</b></label>
-  <label class="col-sm-7 control-label">'.$infoApoyo->tipoApoyo.'</label>
-  </div>
-  <div class="col-md-12">
-  <label class="col-sm-4 lbl-detalle"><b>Origen:</b></label>
-  <label class="col-sm-7 control-label">'.$infoApoyo->origen.'</label>
-  </div>
-  <div class="col-md-12">
-  <label class="col-sm-4 lbl-detalle"><b>Programa:</b></label>
-  <label class="col-sm-7 control-label">'.$infoApoyo->programa.'</label>
-  </div>
-  <div class="col-md-12">
-  <label class="col-sm-4 lbl-detalle"><b>Subprograma:</b></label>
-  <label class="col-sm-7 control-label">'.$infoApoyo->subprograma.'</label>
-  </div>
-  <div class="col-md-12">
-  <label class="col-sm-4 lbl-detalle"><b>Periodicidad:</b></label>
-  <label class="col-sm-7 control-label">'.$infoApoyo->periodicidad.'</label>
-  </div>
-  <div class="col-md-12">
-  <label class="col-sm-4 lbl-detalle"><b>Programa social:</b></label>
-  <label class="col-sm-7 control-label" style="color:red"><strong>P E N D I E N T E</strong></label>
-  </div>
-  <div class="col-md-12">
-  <label class="col-sm-4 lbl-detalle"><b>Importe:</b></label>
-  <label class="col-sm-7 control-label">$ '.$infoApoyo->importeApoyo.'.00</label>
-  </div>
-  </td></tr>
-  <tr>
-  <td>
-  <div class="col-md-12">   
-  <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de registro</b></label>
-  </div>
-  </td>
-  </tr>
-  <tr>
-  <td>
-  <div class="col-md-12">
-  <label class="col-sm-4 lbl-detalle"><strong>Fecha de registro:</strong></label>
-  <label class="col-sm-7">'.$infoApoyo->fechaAlta.'</label><br>
-  </div>
-  <div class="col-md-12">
-  <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
-  <label class="col-sm-6">'.$infoApoyo->usuario.'</label><br>
-  </div>
-  <div class="col-md-12">
-  <label class="col-sm-4 lbl-detallet"><strong>Estado de registro:</strong></label>
-  <label class="col-sm-6" style="color:#64DD17"><b>'.$infoApoyo->estado.'</b></label><br>
-  </div>
-  </td>
-  </tr>';
-  if($infoActualizacion!=null) {
-    echo '
-    <tr>
-    <td>
-    <div class="col-md-12">   
-    <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de actualización</b></label>
-    </div>
-    </td>
-    </tr>
-    <tr><td>';
-    $i=1;
-    foreach ($infoActualizacion as $r):
-      echo '
-      <div class="col-md-6">
-      <label class="col-md-12" lbl-detalle style="color:#607D8B;">'.$i.'° actualización</label>
-      <label class="col-sm-5 lbl-detallet"><strong>Fecha y hora:</strong></label>
-      <label class="col-sm-7">'.$r->fechaActualizacion.'</label><br>
+    <div class="row">
+      <div class="block-web">
+        <div class="header">
+          <div class="row" style="margin-bottom: 12px;">
+            <div class="col-sm-12">
+              <h2 class="content-header theme_color" style="margin-top: -5px;">&nbsp;&nbsp;Información de apoyo y registro</h2>
+            </div> 
+          </div>
+        </div>        
+        <div class="porlets-content" style="margin-bottom: -65px;">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <td>
+                  <div class="col-md-12">   
+                    <label class="col-sm-6 lblinfo" style="margin-top: 5px;"><b>Información del beneficiario</b></label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="col-md-12">
+                    <label class="col-sm-4 lbl-detalle"><b>Curp:</b></label>
+                    <label class="col-sm-7 control-label">'.$infoApoyo->curp.'</label>
+                  </div>
+                  <div class="col-md-12">
+                    <label class="col-sm-4 lbl-detalle"><b>Primer apellido:</b></label>
+                    <label class="col-sm-7 control-label">'.$infoApoyo->primerApellido.'</label>
+                    <label class="col-sm-4 lbl-detalle"><b>Segundo apellido:</b></label>
+                    <label class="col-sm-7 control-label">'.$infoApoyo->segundoApellido.'</label>
+                    <label class="col-sm-4 lbl-detalle"><b>Nombre(s):</b></label>
+                    <label class="col-sm-7 control-label">'.$infoApoyo->nombres.'</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="col-md-12">   
+                    <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de apoyo</b></label>
+                  </div>
+                </td>
+              </tr>
+              <tr><td>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Dirección que lo apoya:</b></label>
+                  <label class="col-sm-7 control-label">'.$infoApoyo->direccion.'</label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Tipo de apoyo:</b></label>
+                  <label class="col-sm-7 control-label">'.$infoApoyo->tipoApoyo.'</label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Origen:</b></label>
+                  <label class="col-sm-7 control-label">'.$infoApoyo->origen.'</label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Programa:</b></label>
+                  <label class="col-sm-7 control-label">'.$infoApoyo->programa.'</label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Subprograma:</b></label>
+                  <label class="col-sm-7 control-label">'.$infoApoyo->subprograma.'</label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Periodicidad:</b></label>
+                  <label class="col-sm-7 control-label">'.$infoApoyo->periodicidad.'</label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Programa social:</b></label>
+                  <label class="col-sm-7 control-label" style="color:red"><strong>P E N D I E N T E</strong></label>
+                </div>
+                <div class="col-md-12">
+                  <label class="col-sm-4 lbl-detalle"><b>Importe:</b></label>
+                  <label class="col-sm-7 control-label">$ '.$infoApoyo->importeApoyo.'.00</label>
+                </div>
+              </td></tr>
+              <tr>
+                <td>
+                  <div class="col-md-12">   
+                    <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de registro</b></label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="col-md-12">
+                    <label class="col-sm-4 lbl-detalle"><strong>Fecha de registro:</strong></label>
+                    <label class="col-sm-7">'.$infoApoyo->fechaAlta.'</label><br>
+                  </div>
+                  <div class="col-md-12">
+                    <label class="col-sm-4 lbl-detalle"><strong>Usuario que registró:</strong></label>
+                    <label class="col-sm-6">'.$infoApoyo->usuario.'</label><br>
+                  </div>
+                  <div class="col-md-12">
+                    <label class="col-sm-4 lbl-detallet"><strong>Estado de registro:</strong></label>
+                    <label class="col-sm-6" style="color:#64DD17"><b>'.$infoApoyo->estado.'</b></label><br>
+                  </div>
+                </td>
+              </tr>';
+              if($infoActualizacion!=null) {
+                echo '
+                <tr>
+                  <td>
+                    <div class="col-md-12">   
+                      <label class="col-sm-5 lblinfo" style="margin-top: 5px;"><b>Información de actualización</b></label>
+                    </div>
+                  </td>
+                </tr>
+                <tr><td>';
+                  $i=1;
+                  foreach ($infoActualizacion as $r):
+                    echo '
+                  <div class="col-md-6">
+                    <label class="col-md-12" lbl-detalle style="color:#607D8B;">'.$i.'° actualización</label>
+                    <label class="col-sm-5 lbl-detallet"><strong>Fecha y hora:</strong></label>
+                    <label class="col-sm-7">'.$r->fechaActualizacion.'</label><br>
 
-      <label class="col-sm-5 lbl-detalle"><strong>Usuario:</strong></label>
-      <label class="col-sm-7">'.$r->usuario.'</label><br>
+                    <label class="col-sm-5 lbl-detalle"><strong>Usuario:</strong></label>
+                    <label class="col-sm-7">'.$r->usuario.'</label><br>
+                  </div>
+                  '; 
+                  if($i%2==0){
+                    echo "<hr>";
+                  }$i++;
+                  endforeach;
+                  echo '</td></tr>';
+                }
+                echo '
+              </tbody>
+            </table>
+          </div><!--/porlets-content--> 
+        </div><!--/block-web--> 
       </div>
-      '; 
-      if($i%2==0){
-        echo "<hr>";
-      }$i++;
-    endforeach;
-    echo '</td></tr>';
+    </div>
+    <div class="modal-footer">
+      <div class="row col-md-6 col-md-offset-6">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+        <a href="?c=Beneficiario&a=Detalles&idBeneficiario='.$infoApoyo->idBeneficiario.'" class="btn btn-info btn-sm">Ver detalles de beneficiario</a>
+      </div>
+    </div>';
   }
-  echo '
-  </tbody>
-  </table>
-  </div><!--/porlets-content--> 
-  </div><!--/block-web--> 
-  </div>
-  </div>
-  <div class="modal-footer">
-  <div class="row col-md-6 col-md-offset-6">
-  <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
-  <a href="?c=Beneficiario&a=Detalles&idBeneficiario='.$infoApoyo->idBeneficiario.'" class="btn btn-info btn-sm">Ver detalles de beneficiario</a>
-  </div>
-  </div>';
-}
 }
 
