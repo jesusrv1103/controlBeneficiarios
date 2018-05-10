@@ -44,13 +44,13 @@
                   </option>
                   <?php } if($apoyo->idApoyo!=null){ ?>
                   <option value="<?php echo $apoyo->idBeneficiario?>">
-                    <?php echo $apoyo->rfc; ?>
+                    <?php echo $apoyo->RFC; ?>
                   </option>
                   <?php } foreach($this->model->ListarSelects('beneficiariorfc') as $r):
-                  if($r->rfc!=$apoyo->rfc){ ?>
+                  if($r->RFC!=$apoyo->RFC){ ?>
                   ?>
-                  <option value="<?php echo $r->idBeneficiario; ?>">
-                    <?php echo $r->rfc; ?>
+                  <option value="<?php echo $r->idBeneficiarioRFC; ?>">
+                    <?php echo $r->RFC; ?>
                   </option>
                   <?php } endforeach; ?>
                 </select>

@@ -1,5 +1,5 @@
 <?php
-class Apoyos
+class Apoyosrfc
 {
 	private $pdo; //int 
 	public $idApoyo;
@@ -53,6 +53,7 @@ class Apoyos
 		//Metdodo para listar
 	public function ListarSelects($nomTabla)
 	{
+
 		try
 		{
 			//$result = array();
@@ -73,7 +74,7 @@ class Apoyos
 		try 
 		{
 			$stm = $this->pdo
-			->prepare("SELECT * FROM apoyos, beneficiariorfc, origen, tipoapoyo, caracteristicasapoyo, periodicidad, subprograma WHERE apoyos.idOrigen=origen.idOrigen AND apoyos.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idSubprograma=subprograma.idSubprograma AND apoyos.idBeneficiario=beneficiariorfc.idBeneficiario AND idApoyo = ?");
+			->prepare("SELECT * FROM apoyos, beneficiariorfc, origen, tipoapoyo, caracteristicasapoyo, periodicidad, subprograma WHERE apoyos.idOrigen=origen.idOrigen AND apoyos.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idSubprograma=subprograma.idSubprograma AND apoyos.idBeneficiario=beneficiariorfc.idBeneficiarioRFC AND idApoyo = ?");
 			$stm->execute(array($id));
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) 
@@ -115,20 +116,22 @@ class Apoyos
 					$data->fechaApoyo, 
 					$data->idPeriodicidad,
 					$data->idApoyo
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
 		}
 	}
 		//Metdod para registrar
-	public function Registrar(Apoyos $data)
+	public function Registrar(Apoyosrfc $data)
 	{
 		try 
 		{
 			$sql = "INSERT INTO apoyos
-			VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			VALUES (?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?)";
 
 			$this->pdo->prepare($sql)
 			->execute(
@@ -146,8 +149,8 @@ class Apoyos
 					$data->idRegistroApoyo,
 					null,
 					'rfc'
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -183,8 +186,8 @@ class Apoyos
 					$data->idProgramaSocial,
 					$data->idRegistroApoyo,
 					$data->clavePresupuestal
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -227,8 +230,8 @@ class Apoyos
 					$data->direccion,
 					$data->fechaAlta,
 					$data->idRegistroApoyo
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -278,8 +281,8 @@ class Apoyos
 					$data->direccion,
 					$data->fechaAlta,
 					$data->estado
-				)
-			);
+					)
+				);
 			return $this->pdo->lastInsertId();
 		} catch (Exception $e) 
 		{
@@ -291,7 +294,7 @@ class Apoyos
 		try
 		{
 			$stm = $this->pdo
-			->prepare("SELECT * FROM beneficiariorfc WHERE rfc = ?");
+			->prepare("SELECT * FROM beneficiariorfc WHERE RFC = ?");
 
 
 			$stm->execute(array($rfc));
