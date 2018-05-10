@@ -7,7 +7,8 @@ class BeneficiariorfcController{
   private $model;
   private $model2;
   private $session;
-  public $error;
+  private $error;
+  private $mensaje;
 
   public function __CONSTRUCT(){
     $this->model = new Beneficiariorfc();
@@ -46,6 +47,7 @@ public function Guardar(){
  }
  $beneficiario->idAsentamientos =$_REQUEST['idAsentamientos'];
  $beneficiario->idLocalidad = $_REQUEST['idLocalidad'];
+ $beneficiario->idMunicipio = $_REQUEST['idMunicipio'];
  $beneficiario->idTipoVialidad = $_REQUEST['idTipoVialidad'];
  $beneficiario->nombreVialidad = $_REQUEST['nombreVialidad'];
  $beneficiario->numeroExterior = $_REQUEST['noExterior'];
@@ -70,13 +72,13 @@ public function Guardar(){
   $this->model->RegistraActualizacion($beneficiario);
   $this->model->Actualizar($beneficiario);
 
-  $mensaje="Los datos del beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha actualizado correctamente";
+  $this->mensaje="Los datos del beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha actualizado correctamente";
 
 }else{
 
   $beneficiario->idRegistro=$this->model->RegistraDatosRegistro($beneficiario);
   $this->model->Registrar($beneficiario);
-  $mensaje="El beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha registrado correctamente";
+  $this->mensaje="El beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha registrado correctamente";
 }
 $this->Index();
 }
@@ -194,7 +196,6 @@ public function Inforegistro(){
 }
 
 public function Crud(){
-
   $beneficiario = new Beneficiariorfc();
   if(isset($_REQUEST['RFC'])){
 
@@ -209,7 +210,7 @@ public function Crud(){
       require_once 'view/index.php';
     }else{
       $warning=true;
-      $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos y la información de registro sean correctos y esten actualizados si no es así, porfavor, <a href='?c=Beneficiariorfc&a=Crud&idBeneficiarioRFC=".$beneficiario->idBeneficiarioRFC."'>actualice la información</a>.";
+      $this->mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos y la información de registro sean correctos y esten actualizados si no es así, porfavor, <a href='?c=beneficiariorfc&a=Crud&idBeneficiarioRFC=".$beneficiario->idBeneficiarioRFC."'>actualice la información</a>.";
       $administracion = true;
       $inicio = false;
       $beneficiarios = false;
@@ -223,24 +224,9 @@ public function Crud(){
     $beneficiario_rfc=true;
     $beneficiarios=true;
     $beneficiario = $this->model->Listar($_REQUEST['idBeneficiarioRFC']);
-
     $infoApoyo = $this->model->ObtenerInfoApoyo($_REQUEST['idBeneficiarioRFC']);
-
     $page="view/beneficiario_rfc/beneficiario.php";
     require_once 'view/index.php';
-
-  }else{
-    $warning=true;
-    $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos y la información de registro sean correctos y esten actualizados si no es así, porfavor, <a href='?c=Beneficiariorfc&a=Crud&idBeneficiarioRFC=".$verificaBen->idBeneficiarioRFC."'>actualice la información</a>.";
-    $administracion = true;
-    $inicio = false;
-    $beneficiarios = false;
-    $ben = $this->model->Listar($verificaBen->idBeneficiarioRFC);
-      //echo "hola".$VerificaBeneficiario->idbeneficiarioRFC;
-    $infoApoyo = $this->model->ObtenerInfoApoyo($verificaBen->idBeneficiarioRFC);
-    $page="view/beneficiario_rfc/detalles.php";
-    require_once 'view/index.php';
-
   }
 }
 
@@ -255,18 +241,6 @@ public function Detalles(){
   require_once 'view/index.php';
 }
 
-
-public function RFC(){
-  $tipoBen="RFC";
-  $administracion = true;
-  $inicio = false;
-  $beneficiarios = true;
-  $page="view/beneficiario_rfc/index.php";
-  require_once 'view/index.php';
-}
-
-
-
 public function Eliminar(){
     $beneficiario_rfc=true; //variable cargada para activar la opcion administracion en el menu
     $beneficiarios=true; //variable cargada para activar la opcion programas en el menu
@@ -274,9 +248,11 @@ public function Eliminar(){
     $beneficiario->idRegistro = $_REQUEST['idRegistro'];
     $beneficiario->estado='Inactivo';
     $this->model->Eliminar($beneficiario);
-    header ('Location: index.php?c=Beneficiario&a=RFC');
+    $this->mensaje="Se ha eliminado correctamente el beneficiario";
+    $this->Index();
   }
-   public function Upload(){
+
+  public function Upload(){
     if(!isset($_FILES['file']['name'])){
       header('Location: ./?c=beneficiariorfc');
     }
@@ -284,9 +260,7 @@ public function Eliminar(){
     $tipo = $_FILES['file']['type'];
     $destino = "./assets/files/".$archivo;
     if(copy($_FILES['file']['tmp_name'], $destino)){
-      //echo "Archivo Cargado Con Éxito" . "<br><br>";
       $this->Importar();
-      //mandar llamar todas las funciones a importar
     }
     else{
       $this->Index();
@@ -306,23 +280,13 @@ public function Eliminar(){
         //Obtengo el numero de filas del archivo
       $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
       $this->LeerArchivo($objPHPExcel,$numRows);
-      $mensaje="Se ha leído correctamente el archivo <strong>beneficiariosrfc.xlsx</strong>.<br><i class='fa fa-check'></i> Se han insertado correctamente los datos de beneficiarios.";
-      $beneficiarios = true;
-      $beneficiario_rfc=true;
-      $tipoBen="RFC";
-      $page="view/beneficiario_rfc/index.php";
-      require_once 'view/index.php';
+      $this->mensaje="Se ha leído correctamente el archivo <strong>beneficiariosrfc.xlsx</strong>.<br><i class='fa fa-check'></i> Se han insertado correctamente los datos de beneficiarios.";
+      $this->Index();
     }
-        //si por algo no cargo el archivo bak_
     else {
-
-      
-      $error=true;
-      $mensaje="El archivo <strong>beneficiariosrfc.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
-      $beneficiarios = true;
-      $beneficiario_rfc=true;
-      $page="view/beneficiario_rfc/index.php";
-      require_once 'view/index.php';
+      $this->error=true;
+      $this->mensaje="El archivo <strong>beneficiariosrfc.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+      $this->Index();
     }
   }
   public function LeerArchivo($objPHPExcel,$numRows){
@@ -361,31 +325,28 @@ public function Eliminar(){
        $numRow+=1;
      } while(!$benrfc->RFC == null);
    }catch (Exception $e) {
-    $error=true;
-    $mensaje="Error al insertar datos del archivo";
-    $beneficiarios = true;
-    $beneficiario_rfc=true;
-    $page="view/beneficiario_rfc/index.php";
-    require_once 'view/index.php';
+    $this->error=true;
+    $this->mensaje="Error al insertar datos del archivo";
+    $this->Index();
   }
 }
 
-  public function ListarAsentamientos(){
-    header('Content-Type: application/json');
-    $idLocalidad=$_REQUEST['idLocalidad'];
-    $obLocalidad=$this->model->ObtenerLocalidad($idLocalidad);
-    if($obLocalidad!=null){
-      $localidad=$obLocalidad->localidad;
-      $datos = array();
-      $row_array['estado']='ok';
+public function ListarAsentamientos(){
+  header('Content-Type: application/json');
+  $idLocalidad=$_REQUEST['idLocalidad'];
+  $obLocalidad=$this->model->ObtenerLocalidad($idLocalidad);
+  if($obLocalidad!=null){
+    $localidad=$obLocalidad->localidad;
+    $datos = array();
+    $row_array['estado']='ok';
+    array_push($datos, $row_array);
+    foreach ($this->model->ListarAsentamientos($localidad) as $asentamiento):
+      $row_array['idAsentamientos']  = $asentamiento->idAsentamientos;
+      $row_array['nombreAsentamiento']  = $asentamiento->nombreAsentamiento;
       array_push($datos, $row_array);
-      foreach ($this->model->ListarAsentamientos($localidad) as $asentamiento):
-        $row_array['idAsentamientos']  = $asentamiento->idAsentamientos;
-        $row_array['nombreAsentamiento']  = $asentamiento->nombreAsentamiento;
-        array_push($datos, $row_array);
-      endforeach;
-    }
-    echo json_encode($datos, JSON_FORCE_OBJECT);
+    endforeach;
   }
+  echo json_encode($datos, JSON_FORCE_OBJECT);
+}
 
 }

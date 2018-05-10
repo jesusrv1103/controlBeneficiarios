@@ -55,21 +55,21 @@
           </div>
         </div>
       </div>
-      <?php if(isset($mensaje)){ if(!isset($error)){?>
+      <?php if(isset($this->mensaje)){ if(!isset($this->error)){?>
       <div class="row" style="margin-bottom: -20px; margin-top: 20px">
         <div class="col-md-12">
           <div class="alert alert-success fade in">
             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
+            <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
           </div>
         </div>
       </div>
-      <?php } if(isset($error)){ ?>
+      <?php } if(isset($this->error)){ ?>
       <div class="row" style="margin-bottom: -20px; margin-top: 20px">
         <div class="col-md-12">
           <div class="alert alert-danger">
             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
+            <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
           </div>
         </div>
       </div>

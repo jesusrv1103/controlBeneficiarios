@@ -26,6 +26,7 @@ class Beneficiariorfc
 	public $actividad;
 	public $cobertura;
 	public $idRegistro;
+	public $idMunicipio;
 
 
 
@@ -70,16 +71,20 @@ class Beneficiariorfc
 				b.entreVialidades,
 				b.descripcionUbicacion,
 				b.actividad,
-				b.cobertura
+				b.cobertura,
+				b.idMunicipio,
+				m.nombreMunicipio
 				FROM 
 				tipovialidad tV, 
 				asentamientos a, 
 				localidades l, 
-				beneficiariorfc  b
+				beneficiariorfc b,
+				municipio m
 				where   
 				b.idTipoVialidad = tV.idTipoVialidad AND 	
 				b.idAsentamientos = a.idAsentamientos AND 
 				b.idLocalidad = l.idLocalidad AND
+				b.idMunicipio = m.idMunicipio AND
 				b.idBeneficiarioRFC = ?");
 
 			$stm->execute(array($id));
@@ -128,11 +133,11 @@ class Beneficiariorfc
 			(RFC,curp,primerApellido,segundoApellido,nombres,
 			fechaAltaSat,sexo,idAsentamientos,idLocalidad,idTipoVialidad,
 			nombreVialidad,numeroExterior,numeroInterior,entreVialidades,descripcionUbicacion,
-			actividad,cobertura,idRegistro) values 
+			actividad,cobertura,idRegistro,idMunicipio) values 
 			(?,?,?,?,?,
 			?,?,?,?,?,
 			?,?,?,?,?,
-			?,?,?)";
+			?,?,?,?)";
 			$this->pdo->prepare($sql)
 			->execute(
 				array(
@@ -153,7 +158,8 @@ class Beneficiariorfc
 					$data->descripcionUbicacion,
 					$data->actividad,
 					$data->cobertura,
-					$data->idRegistro
+					$data->idRegistro,
+					$data->idMunicipio
 				)
 			);
 		} catch (Exception $e) 
@@ -226,7 +232,8 @@ class Beneficiariorfc
 			descripcionUbicacion = ?,
 			actividad = ?,
 			cobertura = ?,
-			idRegistro = ?
+			idRegistro = ?,
+			idMunicipio = ?
 			WHERE idBeneficiarioRFC = ?";
 
 			$this->pdo->prepare($sql)
@@ -250,6 +257,7 @@ class Beneficiariorfc
 					$data->actividad,
 					$data->cobertura,
 					$data->idRegistro,
+					$data->idMunicipio,
 					$data->idBeneficiarioRFC
 
 				)
@@ -265,11 +273,11 @@ class Beneficiariorfc
 		{
 			$sql =$this->pdo->prepare("INSERT INTO beneficiariorfc
 				(RFC,curp,primerApellido,segundoApellido,nombres,fechaAltaSat,sexo,idAsentamientos,idLocalidad,idTipoVialidad,
-				nombreVialidad,numeroExterior,numeroInterior,entreVialidades,descripcionUbicacion,actividad,cobertura,idRegistro) values 
+				nombreVialidad,numeroExterior,numeroInterior,entreVialidades,descripcionUbicacion,actividad,cobertura,idRegistro, idMunicipio) values 
 				(?,?,?,?,?,
 				?,?,?,?,?,
 				?,?,?,?,?,
-				?,?,?)");
+				?,?,?,?)");
 			$resultado=$sql->execute(
 				array(
 					$data->RFC,
@@ -289,7 +297,8 @@ class Beneficiariorfc
 					$data->descripcionUbicacion,
 					$data->actividad,
 					$data->cobertura,
-					$data->idRegistro
+					$data->idRegistro,
+					$data->idMunicipio
 				)
 			);
 		} catch (Exception $e) 
