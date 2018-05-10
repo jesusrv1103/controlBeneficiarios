@@ -22,7 +22,7 @@
 			<li><a href="?c=Beneficiario">Beneficiarios</a></li>
 			<li class="active"><?php echo $beneficiario->idBeneficiario != null ? "Actualizar beneficiario" : "Registrar beneficiario"; ?></li>
 		</ol>
-</div>
+	</div>
 </div>
 <div class="container clear_both padding_fix">
 	<div class="row">
@@ -65,7 +65,8 @@
 												<div class="form-group">
 													<label class="col-sm-3 control-label">CURP<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
-														<input name="curp"  maxlength="18" id="curp" type="text" required parsley-regexp="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required parsley-rangelength="[18,18]"  onkeypress="mayus(this);" onblur="curp2date();" autofocus class="form-control" value="<?php echo $beneficiario->curp;?>" readonly placeholder="Ingrese la curp del beneficiario"/>
+														<input name="curp"  maxlength="18" id="curp" type="text" required parsley-regexp="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)" parsley-rangelength="[18,18]" onkeypress="mayus(this);" onblur="curp2date();" autofocus class="form-control" value="<?php echo $beneficiario->curp;?>" placeholder="Ingrese la curp del beneficiario"/>
+														<div class="help-block with-errors"></div>
 													</div>
 												</div><!--/form-group-->
 
@@ -640,7 +641,7 @@
 								var idLocalidad = $('#selectLocalidades').val();
 								datos = {"idLocalidad":idLocalidad};
 								$.ajax({
-									url: "index.php?c=Beneficiario&a=ListarAsentamientos",
+									url: "index.php?c=beneficiariorfc&a=ListarAsentamientos",
 									type: "POST",
 									data: datos
 								}).done(function(respuesta){
