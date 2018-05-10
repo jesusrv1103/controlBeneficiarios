@@ -11,94 +11,94 @@ class ApoyosController{
   }
   public function Index(){
 
-  $apoyos_curp=true;
-   $apoyos = true;
-   $page="view/apoyos_curp/index.php";
-   require_once 'view/index.php';
- }
- public function Crud(){
-  $apoyo = new Apoyos();
-  if(isset($_REQUEST['idApoyo'])){
-    $_REQUEST['idApoyo'];
-    $apoyo = $this->model->Obtener($_REQUEST['idApoyo']);
+    $apoyos_curp=true;
+    $apoyos = true;
+    $page="view/apoyos_curp/index.php";
+    require_once 'view/index.php';
   }
-  $apoyos_curp=true;
-  $apoyos = true;
-  $page="view/apoyos_curp/apoyos.php";
-  require_once 'view/index.php';
-}
+  public function Crud(){
+    $apoyo = new Apoyos();
+    if(isset($_REQUEST['idApoyo'])){
+      $_REQUEST['idApoyo'];
+      $apoyo = $this->model->Obtener($_REQUEST['idApoyo']);
+    }
+    $apoyos_curp=true;
+    $apoyos = true;
+    $page="view/apoyos_curp/apoyos.php";
+    require_once 'view/index.php';
+  }
 
-public function Upload(){
-  if(!isset($_FILES['file']['name'])){
-    header('Location: ./?c=apoyos');
-  }
-  $archivo=$_FILES['file'];
-  if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
-    if($archivo['name']=="apoyos.xlsx"){
-      $nameArchivo = $archivo['name'];
-      $tmp = $archivo['tmp_name'];
-      $archivo['type'];
-      $src = "./assets/files/".$nameArchivo;
-      if(move_uploaded_file($tmp, $src)){
-        $this->Importar();
-      }  
+  public function Upload(){
+    if(!isset($_FILES['file']['name'])){
+      header('Location: ./?c=apoyos');
+    }
+    $archivo=$_FILES['file'];
+    if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
+      if($archivo['name']=="apoyos.xlsx"){
+        $nameArchivo = $archivo['name'];
+        $tmp = $archivo['tmp_name'];
+        $archivo['type'];
+        $src = "./assets/files/".$nameArchivo;
+        if(move_uploaded_file($tmp, $src)){
+          $this->Importar();
+        }  
+      }else{
+        $this->error=true;
+        $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>apoyos.xlsx</strong>";
+        $this->Index();
+      }
     }else{
       $this->error=true;
-      $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>apoyos.xlsx</strong>";
+      $this->mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
       $this->Index();
     }
-  }else{
-    $this->error=true;
-    $this->mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
-    $this->Index();
   }
-}
 
-public function Importar(){
-  if (file_exists("./assets/files/apoyos.xlsx")) {
+  public function Importar(){
+    if (file_exists("./assets/files/apoyos.xlsx")) {
       //Agregamos la librería
-    require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
+      require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
       //Variable con el nombre del archivo
-    $nombreArchivo = './assets/files/apoyos.xlsx';
+      $nombreArchivo = './assets/files/apoyos.xlsx';
       // Cargo la hoja de cálculo
-    $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
+      $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
       //Asigno la hoja de calculo activa
-    $objPHPExcel->setActiveSheetIndex(0);
+      $objPHPExcel->setActiveSheetIndex(0);
       //Obtengo el numero de filas del archivo
-    $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-    $this->LeerArchivo($objPHPExcel,$numRows);
-    $this->mensaje="Se ha leído correctamente el archivo <strong>apoyos.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de apoyos.";
-    if($_SESSION['numRegErroneos']>0){
-      $page="view/apoyos_curp/resumenImportar.php";
-      $apoyos_curp=true;
-      $apoyos = true;
-      $catalogos=true;
-      require_once 'view/index.php';
-    }else{
-     $apoyos_curp=true;
-     $apoyos = true;
-     $catalogos=true;
-     $tipoBen="CURP";
-     $page="view/apoyos_curp/index.php";
-     require_once 'view/index.php';
-   }
+      $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
+      $this->LeerArchivo($objPHPExcel,$numRows);
+      $this->mensaje="Se ha leído correctamente el archivo <strong>apoyos.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de apoyos.";
+      if($_SESSION['numRegErroneos']>0){
+        $page="view/apoyos_curp/resumenImportar.php";
+        $apoyos_curp=true;
+        $apoyos = true;
+        $catalogos=true;
+        require_once 'view/index.php';
+      }else{
+       $apoyos_curp=true;
+       $apoyos = true;
+       $catalogos=true;
+       $tipoBen="CURP";
+       $page="view/apoyos_curp/index.php";
+       require_once 'view/index.php';
+     }
 
- }
+   }
     //si por algo no cargo el archivo bak_
- else {
-  $this->error=true;
-  $this->mensaje="El archivo <strong>apoyos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
-  $page="view/apoyos_curp/index.php";
-  $apoyos_curp=true;
-  $apoyos = true;
-  $catalogos=true;
-  require_once 'view/index.php';
-}
+   else {
+    $this->error=true;
+    $this->mensaje="El archivo <strong>apoyos.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
+    $page="view/apoyos_curp/index.php";
+    $apoyos_curp=true;
+    $apoyos = true;
+    $catalogos=true;
+    require_once 'view/index.php';
+  }
 }
 
 public function LeerArchivo($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("apoyos");
+  //$this->model->Limpiar("apoyos");
   unset($_SESSION['numRegErroneos']);
   $numRow=2;
   $arrayError=array();
@@ -236,7 +236,7 @@ public function LeerArchivo($objPHPExcel,$numRows){
 
  }
 } catch (Exception $e) {
- $mensaje="error al importar los datos de los apoyos";
+ $this->mensaje="error al importar los datos de los apoyos";
  $page="view/apoyos_curp/index.php";
  $administracion=true;
  $apoyos=true;
@@ -290,7 +290,7 @@ public function Eliminar(){
   $apoyos_curp=true;
   $apoyos = true;
   $page="view/apoyos_curp/index.php";
-  $mensaje="Se ha eliminado correctamente el apoyo";
+  $this->mensaje="Se ha eliminado correctamente el apoyo";
   require_once 'view/index.php';
 }
 public function Guardar(){
@@ -313,11 +313,11 @@ public function Guardar(){
    $apoyo->idRegistroApoyo=$idRegistro->idRegistroApoyo;
    $this->model->Actualizar($apoyo);
    $this->model->RegistraActualizacion($apoyo);
-   $mensaje="Se han actualizado correctamente los datos del Apoyo";
+   $this->mensaje="Se han actualizado correctamente los datos del Apoyo";
  }else{
   $apoyo->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyo);
   $this->model->Registrar($apoyo);
-  $mensaje="Se han registrado correctamente los datos del Apoyo";
+  $this->mensaje="Se han registrado correctamente los datos del Apoyo";
 } 
 
 $apoyos_curp=true;
@@ -328,7 +328,8 @@ require_once 'view/index.php';
 
 
 public function ListarSubprogramas(){
-  header('Content-Type: application/json');
+  try {
+    header('Content-Type: application/json');
   $idPrograma=$_REQUEST['idPrograma'];
   $datos = array();
   $row_array['estado']='ok';
@@ -341,6 +342,9 @@ public function ListarSubprogramas(){
   endforeach;
 
   echo json_encode($datos, JSON_FORCE_OBJECT);
+  } catch (Exception $e) {
+    die($e->getMessage());
+  }
 }
 
 public function InfoApoyo(){

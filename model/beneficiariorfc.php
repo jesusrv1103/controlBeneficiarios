@@ -1,5 +1,4 @@
 <?php
-require_once 'model/database.php';
 class Beneficiariorfc
 {
 	public $usuario;
@@ -46,7 +45,7 @@ class Beneficiariorfc
 
 	public function Listar($id)
 	{
-		echo $id;
+		
 
 		try
 		{
@@ -129,8 +128,8 @@ class Beneficiariorfc
 			(RFC,curp,primerApellido,segundoApellido,nombres,
 			fechaAltaSat,sexo,idAsentamientos,idLocalidad,idTipoVialidad,
 			nombreVialidad,numeroExterior,numeroInterior,entreVialidades,descripcionUbicacion,
-	        actividad,cobertura,idRegistro) values 
-		   (?,?,?,?,?,
+			actividad,cobertura,idRegistro) values 
+			(?,?,?,?,?,
 			?,?,?,?,?,
 			?,?,?,?,?,
 			?,?,?)";
@@ -155,7 +154,7 @@ class Beneficiariorfc
 					$data->actividad,
 					$data->cobertura,
 					$data->idRegistro
-					)
+				)
 			);
 		} catch (Exception $e) 
 		{
@@ -229,63 +228,6 @@ class Beneficiariorfc
 			cobertura = ?,
 			idRegistro = ?
 			WHERE idBeneficiarioRFC = ?";
-
-			$this->pdo->prepare($sql)
-			->execute(
-				array(
-					$data->RFC,
-					$data->curp,
-					$data->primerApellido,
-					$data->segundoApellido,
-					$data->nombres,
-					$data->fechaAltaSat,
-					$data->sexo,
-					$data->idAsentamientos,
-					$data->idLocalidad,
-					$data->idTipoVialidad,
-					$data->nombreVialidad,
-					$data->numeroExterior,
-					$data->numeroInterior,
-					$data->entreVialidades,
-					$data->descripcionUbicacion,
-					$data->actividad,
-					$data->cobertura,
-					$data->idRegistro,
-					$data->idBeneficiarioRFC
-
-				)
-			);
-			
-		} catch (Exception $e) 
-		{
-			die($e->getMessage());
-		}
-	}
-
-public function ActualizarExc($data)
-	{
-		try 
-		{
-			$sql = "UPDATE beneficiariorfc SET 
-			RFC =?,
-			curp = ?,
-			primerApellido = ?,
-			segundoApellido = ?,
-			nombres = ?,
-			fechaAltaSat =?,
-			sexo =?,
-			idAsentamientos =?,
-			idLocalidad = ?,
-			idTipoVialidad =?,
-			nombreVialidad =?,
-			numeroExterior = ?,
-			numeroInterior = ?,
-			entreVialidades = ?,
-			descripcionUbicacion = ?,
-			actividad = ?,
-			cobertura = ?,
-			idRegistro = ?
-			WHERE RFC = ?";
 
 			$this->pdo->prepare($sql)
 			->execute(
@@ -430,6 +372,22 @@ public function ActualizarExc($data)
 			die($e->getMessage());
 		}
 	}
+
+	public function ListarAsentamientos($localidad)
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("SELECT * FROM asentamientos WHERE localidad=?");
+			$stm->execute(array($localidad));
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
 	public function ObtenerIdMunicipio($claveMunicipio)
 	{
 		try 

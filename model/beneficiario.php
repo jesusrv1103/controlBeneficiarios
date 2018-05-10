@@ -1,5 +1,4 @@
 <?php
-require_once 'model/database.php';
 class Beneficiario
 {
 	public $usuario;
@@ -518,22 +517,27 @@ class Beneficiario
 		}
 	}
 
-	public function VerificaBeneficiario($curp)
+	//Metodo para actualizar
+	public function Activar($idRegistro)
 	{
-		try
-		{
-			$sql= $this->pdo->prepare("SELECT * FROM beneficiarios WHERE curp=?");
-			$resultado=$sql->execute(
-				array($curp)
-			);
-			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
-		} catch (Exception $e)
-		{
-			die($e->getMessage());
-		}
+		$sql = "UPDATE registro SET	estado = 'Activo' WHERE idRegistro = ?";
+
+		$this->pdo->prepare($sql)
+		->execute(
+			array($idRegistro)
+		);
 	}
 
-public function Listar1($periodo)
+	public function VerificaBeneficiario($curp)
+	{
+		$sql= $this->pdo->prepare("SELECT * FROM beneficiarios, registro WHERE curp=? AND beneficiarios.idRegistro=registro.idRegistro");
+		$resultado=$sql->execute(
+			array($curp)
+		);
+		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+	}
+
+	public function Listar1($periodo)
 	{
 		try
 		{
@@ -718,7 +722,7 @@ public function Listar1($periodo)
 			die($e->getMessage());
 		}
 	}
-		public function ListarAsentamientos($localidad)
+	public function ListarAsentamientos($localidad)
 	{
 		try
 		{
@@ -764,49 +768,4 @@ public function Listar1($periodo)
 	}
 }
 
-/*
-+------------------------+--------------+------+-----+---------+----------------+
-| Field                  | Type         | Null | Key | Default | Extra          |
-+------------------------+--------------+------+-----+---------+----------------+
-| idBeneficiario         | int(11)      | NO   | PRI | NULL    | auto_increment |
-| curp                   | varchar(18)  | YES  |     | NULL    |                |
-| primerApellido         | varchar(20)  | YES  |     | NULL    |                |
-| segundoApellido        | varchar(25)  | YES  |     | NULL    |                |
-| nombres                | varchar(25)  | YES  |     | NULL    |                |
-| email                  | varchar(128) | YES  |     | NULL    |                |
-| idIdentificacion       | int(11)      | YES  | MUL | NULL    |                |
-| idTipoVialidad         | int(11)      | YES  | MUL | NULL    |                |
-| nombreVialidad         | varchar(65)  | YES  |     | NULL    |                |
-| noExterior             | varchar(8)   | YES  |     | NULL    |                |
-| noInterior             | varchar(8)   | YES  |     | NULL    |                |
-| idAsentamientos        | varchar(45)  | YES  | MUL | NULL    |                |
-| idLocalidad            | varchar(10)  | YES  | MUL | NULL    |                |
-| entreVialidades        | varchar(100) | YES  |     | NULL    |                |
-| descripcionUbicacion   | text         | YES  |     | NULL    |                |
-| estudioSocioeconomico  | tinyint(1)   | YES  |     | NULL    |                |
-| idEstadoCivil          | int(11)      | YES  | MUL | NULL    |                |
-| jefeFamilia            | varchar(2)   | YES  |     | NULL    |                |
-| idOcupacion            | int(11)      | YES  | MUL | NULL    |                |
-| idIngresoMensual       | int(11)      | YES  | MUL | NULL    |                |
-| integrantesFamilia     | varchar(2)   | YES  |     | NULL    |                |
-| dependientesEconomicos | varchar(2)   | YES  |     | NULL    |                |
-| idVivienda             | int(11)      | YES  | MUL | NULL    |                |
-| noHabitantes           | varchar(2)   | YES  |     | NULL    |                |
-| viviendaElectricidad   | tinyint(1)   | YES  |     | NULL    |                |
-| viviendaAgua           | tinyint(1)   | YES  |     | NULL    |                |
-| viviendaDrenaje        | tinyint(1)   | YES  |     | NULL    |                |
-| viviendaGas            | tinyint(1)   | YES  |     | NULL    |                |
-| viviendaTelefono       | tinyint(1)   | YES  |     | NULL    |                |
-| viviendaInternet       | tinyint(1)   | YES  |     | NULL    |                |
-| idNivelEstudios        | int(11)      | YES  | MUL | NULL    |                |
-| idSeguridadSocial      | int(11)      | YES  | MUL | NULL    |                |
-| idDiscapacidad         | int(11)      | YES  | MUL | NULL    |                |
-| idGrupoVulnerable      | int(11)      | YES  | MUL | NULL    |                |
-| beneficiarioColectivo  | tinyint(1)   | YES  |     | NULL    |                |
-| idRegistro             | int(11)      | YES  | MUL | NULL    |                |
-| fechaNacimiento        | date         | YES  |     | NULL    |                |
-| genero                 | tinyint(1)   | YES  |     | NULL    |                |
-| perfilSociodemografico | tinyint(3)   | YES  |     | NULL    |                |
-| telefono               | char(11)     | YES  |     | NULL    |                |
-| idMunicipio            | tinyint(3)   | NO   | MUL | NULL    |                |
-*/
+

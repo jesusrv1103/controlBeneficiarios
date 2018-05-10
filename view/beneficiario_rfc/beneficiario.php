@@ -225,6 +225,9 @@
 															<option value=""> 
 																Seleccione la localidad a la que pertenece el beneficiario
 															</option> 
+															<option value="1">
+																Ninguno
+															</option>
 															<?php } if($beneficiario->idBeneficiario!=null){ ?>
 															<option value="<?php echo $beneficiario->idLocalidad ?>"> 
 																<?php echo  $beneficiario->localidad ?>
@@ -239,8 +242,11 @@
 													<div class="col-sm-6">
 														<select name="idAsentamientos" class="form-control select2" id="selectAsentamientos" style="width: 100%">		
 															<?php if($beneficiario->idBeneficiario==null){  ?>
-															<option value=""> 
+															<option value="1"> 
 																Seleccione el asentamiento a la que pertenece el beneficiario
+															</option> 
+															<option value="1"> 
+																Ninguno
 															</option> 
 															<?php } if($beneficiario->idBeneficiario!=null){ ?>
 															<option value="<?php echo $beneficiario->idAsentamientos ?>"> 
@@ -297,12 +303,11 @@
 		var idMunicipio = $('#selectMunicipios').val();
 		datos = {"idMunicipio":idMunicipio};
 		$.ajax({
-			url: "index.php?c=Beneficiario&a=ListarLocalidades",
+			url: "index.php?c=beneficiario&a=ListarLocalidades",
 			type: "POST",
 			data: datos
 		}).done(function(respuesta){
 			if (respuesta[0].estado === "ok") {
-				//console.log(JSON.stringify(respuesta));
 				var selector = document.getElementById("selectLocalidades");
 				selector.options[0] = new Option("Seleccione la localidad a la que pertenece el beneficiario","");
 				var selector2 = document.getElementById("selectAsentamientos");
@@ -311,7 +316,7 @@
 					var j=parseInt(i)+1;
 					selector.options[j] = new Option(respuesta[i].localidad,respuesta[i].idLocalidad);
 				}
-				//$(".respuesta").html("Localidades:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
+
 			}
 		});
 	}
@@ -324,14 +329,14 @@
 			data: datos
 		}).done(function(respuesta){
 			if (respuesta[0].estado === "ok") {
-				console.log(JSON.stringify(respuesta));
 				var selector = document.getElementById("selectAsentamientos");
-				selector.options[0] = new Option("Seleccione el asentamiento al que petenece el beneficiario","");
+				selector.options[0] = new Option("Seleccione el asentamiento al que petenece el beneficiario",1);
+				selector.options[1] = new Option("Ninguno",1);
 				for (var i in respuesta) {
 					var j=parseInt(i)+1;
-					selector.options[j] = new Option(respuesta[i].nombreAsentamiento,respuesta[i].idAsentamientos);
+					selector.options[++j] = new Option(respuesta[i].nombreAsentamiento,respuesta[i].idAsentamientos);
 				}
-				//$(".respuesta2").html("Asentamientos:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
+
 			}
 		});
 	}

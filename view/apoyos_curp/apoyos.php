@@ -127,7 +127,7 @@
                 <option value="<?php echo $apoyo->idCaracteristicasApoyo?>">
                   <?php echo $apoyo->caracteristicasApoyo; ?>
                 </option>
-                <?php } foreach($this->model->ListarSelects('caracteristicasApoyo') as $r):
+                <?php } foreach($this->model->ListarSelects('caracteristicasapoyo') as $r):
                 if($r->caracteristicasApoyo!=$apoyo->caracteristicasApoyo){ ?>
                 ?>
                 <option value="<?php echo $r->idCaracteristicasApoyo; ?>">
@@ -177,7 +177,7 @@
           <div class="form-group">
             <div class="col-sm-offset-7 col-sm-5">
               <button type="submit" class="btn btn-primary">Guardar</button>
-              <a href="?c=Programa" class="btn btn-default"> Cancelar</a>
+              <a href="?c=Apoyos" class="btn btn-default"> Cancelar</a>
             </div>
           </div><!--/form-group-->
         </form>
@@ -186,23 +186,28 @@
   </div><!--/col-md-12-->
 </div><!--/row-->
 </div><!--/container clear_both padding_fix-->
+
 <script type="text/javascript">
   listarSubprogramas = function (){
     var idPrograma = $('#selectProgramas').val();
+    //alert(idPrograma);
     datos = {"idPrograma":idPrograma};
     $.ajax({
       url: "index.php?c=Apoyos&a=ListarSubprogramas",
       type: "POST",
       data: datos
     }).done(function(respuesta){
-      if (respuesta[0].estado === "ok") {
-        console.log(JSON.stringify(respuesta));
-        var selector = document.getElementById("selectSubprogramas");
-        selector.options[0] = new Option("Seleccione el subprograma al que petenece el beneficiario","");
-        for (var i in respuesta) {
-          var j=parseInt(i)+1;
-          selector.options[j] = new Option(respuesta[i].subprograma,respuesta[i].idSubprograma);
-        }
+        //console.log(JSON.stringify(respuesta));
+
+        if (respuesta[0].estado === "ok") {
+          var selector = document.getElementById("selectSubprogramas");
+          selector.options[0] = new Option("Seleccione el subprograma al que petenece el beneficiario","");
+          
+          var j=0;
+          for (var i in respuesta) {
+            var j=parseInt(i)+1;
+            selector.options[j] = new Option(respuesta[i].subprograma,respuesta[i].idSubprograma);
+          }
         //$(".respuesta2").html("Asentamientos:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
       }
     });

@@ -24,8 +24,9 @@
             <div class="col-sm-2" style="margin-top: -5px; margin-right: -100px;">
               <div class="minimal-blue single-row">
                 <div class="checkbox ">
-                  <a id="verTabla" href="?c=subprograma">
+                  <a id="verTabla" href="?c=subprograma"> 
                     <label>Ocultar tabla</label>
+                  </a>
                   </div>
                 </div>
               </div>
@@ -238,21 +239,21 @@
             </div>
           </div>
         </div>
-        <?php if(isset($mensaje)){ if(!isset($error)){?>
+        <?php if(isset($this->mensaje)){ if(!isset($this->error)){?>
         <div class="row" style="margin-bottom: -5px; margin-top: 10px">
           <div class="col-md-12">
             <div class="alert alert-success fade in">
               <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-              <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
+              <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
             </div>
           </div>
         </div>
-        <?php } if(isset($error)){ ?>
+        <?php } if(isset($this->error)){ ?>
         <div class="row" style="margin-bottom: -5px; margin-top: 10px">
           <div class="col-md-12">
             <div class="alert alert-danger">
               <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-              <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
+              <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
             </div>
           </div>
         </div>
