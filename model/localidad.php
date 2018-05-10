@@ -29,6 +29,15 @@ class Localidad
 
 	public function Listar()
 	{
+<<<<<<< HEAD
+		try
+		{
+			//$result = array();
+
+			$stm = $this->pdo->prepare("SELECT * FROM localidades WHERE estado='Activo'");
+			$stm->execute();
+=======
+>>>>>>> 79f9007fb07ca4a19d72585d2297e46ff16cfa99
 
 		$stm = $this->pdo->prepare("SELECT * FROM localidades WHERE estado='Activo';");
 		$stm->execute();
