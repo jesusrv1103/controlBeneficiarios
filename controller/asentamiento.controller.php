@@ -59,6 +59,8 @@ class AsentamientoController{
 			}
 			if(isset($_REQUEST['idAsentamientos'])){
 				$asentamiento = $this->model->Obtener($_REQUEST['idAsentamientos']);
+				$this->error=true;
+				$this->mensaje="Ha ocurrido un error al intentar obtener los datos del asentamiento";
 			}
 			$catalogos=true;
 			$asentamientos=true;
@@ -150,10 +152,11 @@ class AsentamientoController{
 			$asentamiento->nombreAsentamiento = $_REQUEST['nombreAsentamiento'];
 			$asentamiento->tipoAsentamiento = $_REQUEST['tipoAsentamiento'];
 			if($verificaAsentamiento!=null && isset($_REQUEST['nuevoRegistro'])){
-				$error=true;
+
 				$asentamientos = true;
 				$catalogos=true;
 				$nuevoRegistro=true;
+				$this->error=true;
 				$this->mensaje="La clave de asentamiento <b>$asentamiento->idAsentamientos</b> ya existe. Pongase en contacto con el administrador de la Unidad de Planeación para que le proporcione correctamente una nueva clave de asentamiento.";
 				$page="view/asentamiento/asentamiento.php";
 				require_once "view/index.php";

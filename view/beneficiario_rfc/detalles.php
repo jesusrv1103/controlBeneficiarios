@@ -1,12 +1,12 @@
  <style type="text/css">
- .lbldetalle{
-  color:#424242;
-  font-weight: bold;
-}
-.h3subtitulo{
-  color:#2196F3;
-  font-weight: bold;
-}
+   .lbldetalle{
+    color:#424242;
+    font-weight: bold;
+  }
+  .h3subtitulo{
+    color:#2196F3;
+    font-weight: bold;
+  }
 </style>
 
 <div class="pull-left breadcrumb_admin clear_both">
@@ -44,6 +44,7 @@
 
               <a href="?c=Beneficiariorfc&a=Crud&idBeneficiarioRFC=<?php echo $ben->idBeneficiarioRFC;?>" class="btn btn-sm tooltips btn-primary dropdown-toggle" style="margin-right: 10px;" data-original-title="Editar beneficiario" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-edit"></i></i>&nbsp;Editar</a>
             </div>
+            
           </b>
         </b>
       </div>
@@ -300,12 +301,12 @@
       if ($i%2==0){
         echo "<hr>";
       }$i++;
-    endforeach; }else{
-      echo "<h3>No se han registrado apoyos a este beneficiario<h3>";
-    }
-    ?>
-  </div>
-</div><!--/porlets-content-->
+      endforeach; }else{
+        echo "<h3>No se han registrado apoyos a este beneficiario<h3>";
+      }
+      ?>
+    </div>
+  </div><!--/porlets-content-->
 </div><!--/block-web-->
 </div><!--/col-md-12-->
 </div><!--/row-->
@@ -352,7 +353,7 @@
 <script>
   infoRegistro = function (idBeneficiario){
     var idBeneficiario=idBeneficiario;
-    $.post("index.php?c=beneficiario&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
+    $.post("index.php?c=beneficiariorfc&a=Inforegistro", {idBeneficiarioRFC: idBeneficiario}, function(info) {
       $("#div-modal-content").html(info);
     }); 
   }

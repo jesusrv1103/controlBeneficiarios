@@ -1,7 +1,7 @@
 <style type="text/css">
-.lblinfo{
-  color:#2196F3;
-}
+  .lblinfo{
+    color:#2196F3;
+  }
 </style>
 <script type="text/javascript">
 
@@ -35,10 +35,10 @@
                     <div class="btn-group">
                      <a data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-eye"></i>&nbsp;<?php echo $periodo;?><span class="caret"></span></a>
                      <ul role="menu" class="dropdown-menu pull-right">
-                      <li><a href="?c=beneficiario&periodo=Beneficiarios 2017">Beneficiarios 2017</a></li>
-                      <li><a href="?c=beneficiario&periodo=Beneficiarios 2018">Beneficiarios 2018</a></li>
-                      <li><a href="?c=beneficiario&periodo=Beneficiarios 2019">Beneficiarios 2019</a></li>
-                      <li><a href="?c=beneficiario">Todos los beneficiarios</a></li>
+                      <li><a href="?c=beneficiariorfc&periodo=Beneficiarios 2017">Beneficiarios 2017</a></li>
+                      <li><a href="?c=beneficiariorfc&periodo=Beneficiarios 2018">Beneficiarios 2018</a></li>
+                      <li><a href="?c=beneficiariorfc&periodo=Beneficiarios 2019">Beneficiarios 2019</a></li>
+                      <li><a href="?c=beneficiariorfc">Todos los beneficiarios</a></li>
                     </ul>
                   </div>
                   <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
@@ -76,6 +76,7 @@
       <?php } }?>
       <div class="porlets-content">
         <div class="table-responsive">
+          <?php if ($periodo=='Ver todos'){ ?>
           <table class="display table table-bordered table-striped" id="dynamic-table">
            <thead>
              <tr>
@@ -129,8 +130,182 @@
           </tr>
         </tfoot>
       </table>
-    </div><!--/table-responsive-->
-  </div><!--/porlets-content-->
+
+
+
+      <?php } if($periodo=='Beneficiarios 2017'){ ?>
+      <table class="display table table-bordered table-striped" id="dynamic-table">
+       <thead>
+         <tr>
+           <td><center><b>Info</b></center></td>
+           <th>RFC</th>
+           <th>CURP</th>
+           <th>Nombre</th>
+           <th>Localidad</th>
+           <td><center><b>Ver</b></center></td>
+           <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+           <td><center><b>Editar</b></center></td>
+           <td><center><b>Borrar</b></center></td>
+           <?php } ?>
+         </tr>
+       </thead>
+       <tbody>
+        <?php foreach($this->model->Listar1() as $r): ?>
+          <tr class="grade">
+            <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistroRFC(<?php echo $r->idBeneficiarioRFC; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+            <td><?php echo $r->RFC ?> </td>
+            <td><?php echo $r->curp ?> </td>
+            <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+            <td><?php echo $r->localidad ?> </td>
+
+            <td class="center">
+              <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiariorfc&a=Detalles&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+            </td>
+            <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+            <td class="center">
+              <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiariorfc&a=Crud&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC ?>"><i class="fa fa-edit"></i></a>
+            </td>
+            <td class="center">
+             <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiarioRFC(<?php echo $r->idRegistro;?>);" href="#modalEliminarRFC"  data-toggle="modal" data-target="#modalEliminarRFC" role="button"><i class="fa fa-eraser"></i></a>
+           </td>
+           <?php } ?>
+         </tr>
+       <?php endforeach; ?>
+     </tbody>
+     <tfoot>
+       <tr>
+        <td><center><b>Info</b></center></td>
+        <th>RFC</th>
+        <th>CURP</th>
+        <th>Nombre de beneficiario</th>
+        <th>Localidad</th>
+        <td><center><b>Ver</b></center></td>
+        <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+        <th><center><b>Editar</b></center></th>       
+        <td><center><b>Borrar</b></center></td>
+        <?php } ?>
+      </tr>
+    </tfoot>
+  </table>
+
+
+
+
+
+  <?php } if($periodo=='Beneficiarios 2018'){ ?>
+  <table class="display table table-bordered table-striped" id="dynamic-table">
+   <thead>
+     <tr>
+       <td><center><b>Info</b></center></td>
+       <th>RFC</th>
+       <th>CURP</th>
+       <th>Nombre</th>
+       <th>Localidad</th>
+       <td><center><b>Ver</b></center></td>
+       <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+       <td><center><b>Editar</b></center></td>
+       <td><center><b>Borrar</b></center></td>
+       <?php } ?>
+     </tr>
+   </thead>
+   <tbody>
+    <?php foreach($this->model->Listar1() as $r): ?>
+      <tr class="grade">
+        <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistroRFC(<?php echo $r->idBeneficiarioRFC; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+        <td><?php echo $r->RFC ?> </td>
+        <td><?php echo $r->curp ?> </td>
+        <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+        <td><?php echo $r->localidad ?> </td>
+
+        <td class="center">
+          <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiariorfc&a=Detalles&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+        </td>
+        <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+        <td class="center">
+          <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiariorfc&a=Crud&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC ?>"><i class="fa fa-edit"></i></a>
+        </td>
+        <td class="center">
+         <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiarioRFC(<?php echo $r->idRegistro;?>);" href="#modalEliminarRFC"  data-toggle="modal" data-target="#modalEliminarRFC" role="button"><i class="fa fa-eraser"></i></a>
+       </td>
+       <?php } ?>
+     </tr>
+   <?php endforeach; ?>
+ </tbody>
+ <tfoot>
+   <tr>
+    <td><center><b>Info</b></center></td>
+    <th>RFC</th>
+    <th>CURP</th>
+    <th>Nombre de beneficiario</th>
+    <th>Localidad</th>
+    <td><center><b>Ver</b></center></td>
+    <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+    <th><center><b>Editar</b></center></th>       
+    <td><center><b>Borrar</b></center></td>
+    <?php } ?>
+  </tr>
+</tfoot>
+</table>
+
+
+
+<?php } if($periodo=='Beneficiarios 2019'){ ?>
+<table class="display table table-bordered table-striped" id="dynamic-table">
+ <thead>
+   <tr>
+     <td><center><b>Info</b></center></td>
+     <th>RFC</th>
+     <th>CURP</th>
+     <th>Nombre</th>
+     <th>Localidad</th>
+     <td><center><b>Ver</b></center></td>
+     <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+     <td><center><b>Editar</b></center></td>
+     <td><center><b>Borrar</b></center></td>
+     <?php } ?>
+   </tr>
+ </thead>
+ <tbody>
+  <?php foreach($this->model->Listar1() as $r): ?>
+    <tr class="grade">
+      <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoRegistroRFC(<?php echo $r->idBeneficiarioRFC; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+      <td><?php echo $r->RFC ?> </td>
+      <td><?php echo $r->curp ?> </td>
+      <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
+      <td><?php echo $r->localidad ?> </td>
+
+      <td class="center">
+        <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiariorfc&a=Detalles&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+      </td>
+      <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+      <td class="center">
+        <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiariorfc&a=Crud&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC ?>"><i class="fa fa-edit"></i></a>
+      </td>
+      <td class="center">
+       <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiarioRFC(<?php echo $r->idRegistro;?>);" href="#modalEliminarRFC"  data-toggle="modal" data-target="#modalEliminarRFC" role="button"><i class="fa fa-eraser"></i></a>
+     </td>
+     <?php } ?>
+   </tr>
+ <?php endforeach; ?>
+</tbody>
+<tfoot>
+ <tr>
+  <td><center><b>Info</b></center></td>
+  <th>RFC</th>
+  <th>CURP</th>
+  <th>Nombre de beneficiario</th>
+  <th>Localidad</th>
+  <td><center><b>Ver</b></center></td>
+  <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+  <th><center><b>Editar</b></center></th>       
+  <td><center><b>Borrar</b></center></td>
+  <?php } ?>
+</tr>
+</tfoot>
+</table>
+<?php } ?>
+</div><!--/table-responsive-->
+</div><!--/porlets-content-->
 </div><!--/block-web-->
 </div><!--/col-md-12-->
 </div><!--/row-->
@@ -293,7 +468,15 @@
   });
  }
 
- infoRegistroRFC = function (idBeneficiarioRFC){
+ consultas=function(){
+  periodo='2018';
+  $.post("index.php?c=beneficiariorfc&a=Consultas", {periodo: periodo}, function(mensaje) {
+    console.log(mensaje);
+    $("#div_tabla").html(mensaje);
+  });
+}
+
+infoRegistroRFC = function (idBeneficiarioRFC){
 
    // var idBeneficiario=idBeneficiario;
    $.post("index.php?c=beneficiariorfc&a=Inforegistro", {idBeneficiarioRFC: idBeneficiarioRFC}, function(info) {

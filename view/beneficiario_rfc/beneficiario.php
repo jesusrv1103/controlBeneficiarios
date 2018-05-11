@@ -1,12 +1,12 @@
 <style type="text/css">
-.lbldetalle{
-	color:#2196F3;
-}
-.h3titulo{
-	margin-left: 30px;
-	color:#2196F3;
-	margin-top: 30px;
-}
+	.lbldetalle{
+		color:#2196F3;
+	}
+	.h3titulo{
+		margin-left: 30px;
+		color:#2196F3;
+		margin-top: 30px;
+	}
 </style>
 <div class="pull-left breadcrumb_admin clear_both">
 	<div class="pull-left page_title theme_color">
@@ -237,12 +237,13 @@
 														<div class="help-block with-errors"></div>
 													</div>
 												</div><!--/form-group-->
+
 												<div class="form-group" id="idAsentamientos">
 													<label class="col-sm-3 control-label">Asentamiento</label>
 													<div class="col-sm-6">
 														<select name="idAsentamientos" class="form-control select2" id="selectAsentamientos" style="width: 100%">		
 															<?php if($beneficiario->idBeneficiarioRFC==null){  ?>
-															<option value="1"> 
+															<option value="1" selected> 
 																Seleccione el asentamiento a la que pertenece el beneficiario
 															</option> 
 															<option value="1"> 
@@ -257,6 +258,9 @@
 														<div class="help-block with-errors"></div>
 													</div>
 												</div>	
+
+
+
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Entre que vialidades<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">

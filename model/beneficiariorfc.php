@@ -160,8 +160,8 @@ class Beneficiariorfc
 					$data->cobertura,
 					$data->idRegistro,
 					$data->idMunicipio
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -202,7 +202,7 @@ class Beneficiariorfc
 			$stm->execute(array(
 				$data->estado,
 				$data->idRegistro
-			));
+				));
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -260,8 +260,8 @@ class Beneficiariorfc
 					$data->idMunicipio,
 					$data->idBeneficiarioRFC
 
-				)
-			);
+					)
+				);
 			
 		} catch (Exception $e) 
 		{
@@ -299,8 +299,8 @@ class Beneficiariorfc
 					$data->cobertura,
 					$data->idRegistro,
 					$data->idMunicipio
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -311,13 +311,27 @@ class Beneficiariorfc
 	{
 		try
 		{
-			//$result = array();
-			$stm = $this->pdo->prepare("SELECT 				
-				*
-				FROM beneficiariorfc b, registro r, localidades l
-				WHERE r.idRegistro= b.idRegistro  AND r.estado='Activo'
-				AND b.idLocalidad=l.idLocalidad");
-			$stm->execute();
+		
+
+			$stm = $this->pdo->prepare("SELECT * FROM beneficiariorfc b, registro r, localidades l WHERE b.idRegistro= r.idRegistro AND b.idLocalidad=l.idLocalidad AND r.estado='Activo'");
+			$stm->execute(array($fechaInicio, $fechaFin));
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+		
+	}
+
+
+	public function ListarTodos()
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("SELECT * FROM beneficiariorfc b, registro r, localidades l WHERE b.idRegistro= r.idRegistro AND b.idLocalidad=l.idLocalidad AND r.estado='Activo'");
+			$stm->execute(array());
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		}
@@ -326,6 +340,7 @@ class Beneficiariorfc
 			die($e->getMessage());
 		}
 	}
+
 	
 	public function Listar2()
 	{
@@ -333,7 +348,7 @@ class Beneficiariorfc
 		{
 			//$result = array();
 
-			$stm = $this->pdo->prepare("SELECT * FROM beneficiarios, registro, municipio WHERE registro.idRegistro=beneficiarios.idRegistro and registro.estado='Activo'");
+			$stm = $this->pdo->prepare("SELECT * FROM beneficiariorfc, registro, municipio WHERE registro.idRegistro=beneficiarios.idRegistro and registro.estado='Activo'");
 			$stm->execute();
 
 			return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -360,8 +375,8 @@ class Beneficiariorfc
 					$data->direccion,
 					$data->fechaAlta,
 					$data->estado
-				)
-			);
+					)
+				);
 			return $this->pdo->lastInsertId();
 		} catch (Exception $e) 
 		{
@@ -421,8 +436,8 @@ class Beneficiariorfc
 					$data->direccion,
 					$data->fechaAlta,
 					$data->idRegistro
-				)
-			);
+					)
+				);
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -478,7 +493,7 @@ class Beneficiariorfc
 			$sql= $this->pdo->prepare("SELECT * FROM beneficiariorfc WHERE RFC=?");
 			$resultado=$sql->execute(
 				array($RFC)
-			);
+				);
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 
 		{
