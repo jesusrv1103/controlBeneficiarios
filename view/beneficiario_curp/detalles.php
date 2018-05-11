@@ -1,6 +1,6 @@
 
- <style type="text/css">
- .lbldetalle{
+<style type="text/css">
+.lbldetalle{
   color:#424242;
   font-weight: bold;
 }
@@ -36,7 +36,7 @@
           <div class="btn-group pull-right" style="margin-right: 10px;">
             <b> 
              <div class="btn-group">
-              <a  href="#modalInfo"  data-target="#modalInfo" data-toggle="modal" onclick="infoRegistro(<?php echo $ben->idBeneficiario; ?>)" class="btn btn-sm tooltips btn-default" style="margin-right: 10px;" data-original-title="Ver información de registro y actualizacione" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-info-circle"  role="button"></i></i>&nbsp;Ver info</a>
+              <a  href="#modalInfo"  data-target="#modalInfo" data-toggle="modal" onclick="infoRegistro(<?php echo $ben->idBeneficiario; ?>)" class="btn btn-sm tooltips btn-default" style="margin-right: 10px;" data-original-title="Ver información de registro y actualizaciones" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-info-circle"  role="button"></i></i>&nbsp;Ver info</a>
             </div>
             <div class="btn-group">
               <a class="btn btn-sm tooltips btn-success dropdown-toggle"  data-toggle="modal" data-target="#modalBuscarCurp" href="#modalBuscarCurp" style="margin-right: 10px;" data-original-title="Nuevo beneficiario con curp" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-plus"></i></i>&nbsp;Registrar</a>
@@ -113,55 +113,55 @@
              </div>
            </td>
          </tr>
-          <tr>
-            <td>
-             <div class="col-md-12">
-               <label class="col-sm-6 lbldetalle">Fecha Nacimiento:</label>
-               <label class="col-sm-6 control-label"><?php echo $ben->fechaNacimiento; ?></label>
-             </div>
-           </td>
-         </tr>
-         <tr>
-            <td>
-             <div class="col-md-12">
-               <label class="col-sm-6 lbldetalle">Telefono:</label>
-               <label class="col-sm-6 control-label"><?php echo $ben->telefono; ?></label>
-             </div>
-           </td>
-         </tr>
          <tr>
           <td>
-            <div class="col-md-12">
-             <label class="col-sm-6 lbldetalle">Sexo:</label>
-             <label class="col-sm-6 control-label"><?php if($ben->genero==1) echo "MASCULINO"; else echo "FEMENINO"; ?></label>
+           <div class="col-md-12">
+             <label class="col-sm-6 lbldetalle">Fecha Nacimiento:</label>
+             <label class="col-sm-6 control-label"><?php echo $ben->fechaNacimiento; ?></label>
            </div>
          </td>
        </tr>
        <tr>
         <td>
          <div class="col-md-12">
-           <label class="col-sm-6 lbldetalle">Identificación oficial:</label>
-           <label class="col-sm-6 control-label"><?php echo $ben->nomTipoI; ?></label>
+           <label class="col-sm-6 lbldetalle">Telefono:</label>
+           <label class="col-sm-6 control-label"><?php echo $ben->telefono; ?></label>
          </div>
        </td>
      </tr>
      <tr>
       <td>
-       <div class="col-md-12">
-         <label class="col-sm-6 lbldetalle">Nivel de estudio:</label>
-         <label class="col-sm-6 control-label"><?php echo $ben->nivelEstudios; ?></label>
+        <div class="col-md-12">
+         <label class="col-sm-6 lbldetalle">Sexo:</label>
+         <label class="col-sm-6 control-label"><?php if($ben->genero==1) echo "MASCULINO"; else echo "FEMENINO"; ?></label>
        </div>
      </td>
    </tr>
    <tr>
     <td>
      <div class="col-md-12">
-       <label class="col-sm-6 lbldetalle">Seguridad social:</label>
-       <label class="col-sm-6 control-label"><?php echo $ben->seguridadSocial; ?></label>
+       <label class="col-sm-6 lbldetalle">Identificación oficial:</label>
+       <label class="col-sm-6 control-label"><?php echo $ben->nomTipoI; ?></label>
      </div>
    </td>
  </tr>
  <tr>
+  <td>
+   <div class="col-md-12">
+     <label class="col-sm-6 lbldetalle">Nivel de estudio:</label>
+     <label class="col-sm-6 control-label"><?php echo $ben->nivelEstudios; ?></label>
+   </div>
+ </td>
+</tr>
+<tr>
+  <td>
+   <div class="col-md-12">
+     <label class="col-sm-6 lbldetalle">Seguridad social:</label>
+     <label class="col-sm-6 control-label"><?php echo $ben->seguridadSocial; ?></label>
+   </div>
+ </td>
+</tr>
+<tr>
   <td>
    <div class="col-md-12">
      <label class="col-sm-6 lbldetalle">Discapacidad:</label>
@@ -607,7 +607,7 @@
     }); 
   }
 
-   $(document).ready(function(){
+  $(document).ready(function(){
 
     $('#form-curp').submit(function() {
       VerificarBeneficiario();

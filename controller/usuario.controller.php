@@ -31,8 +31,11 @@ class UsuarioController{
 		$usuario= new Usuario();
 		$usuario->usuario = $_REQUEST['usuario'];
 		$usuario->idUsuario = $_REQUEST['idUsuario'];
-		$usuario->direccion = $_REQUEST['direccion'];
 		$usuario->tipoUsuario = $_REQUEST['tipoUsuario'];
+		if($usuario->tipoUsuario==2)
+			$usuario->direccion='SECRETARIO';
+		else
+			$usuario->direccion= $_REQUEST['direccion'];
 		if(isset($_REQUEST['password'])){
 			$password =$_REQUEST['password'];
 			$password=md5($password);

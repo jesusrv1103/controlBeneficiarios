@@ -193,6 +193,36 @@ public function Inforegistro(){
   </div>';
 }
 
+public function VerificarBeneficiario()
+{
+  $rfc=$_REQUEST['rfc'];
+  $verificacion=$this->model->VerificaBeneficiarioRFC($rfc);
+  if($verificacion!=null){
+    if($verificacion->estado=="Activo")
+      echo "Activo";
+    else
+      echo "Inactivo";
+  }else{
+    echo 'null';
+  }
+}
+
+public function ActivarBeneficiario()
+{
+  $rfc=$_REQUEST['rfc'];
+  $verificaBen=$this->model->VerificaBeneficiarioRFC($rfc);
+  $idRegistro = $verificaBen->idRegistro;
+  $this->model->Activar($idRegistro);
+  $beneficiario = new Beneficiario();
+  $this->mensaje="Se ha activado correctamente el beneficiario, porfavor compruebe que la información que nosotros tenemos este actualizada, si no es así, ayudenos a <a href='?c=Beneficiario&a=Crud&idBeneficiario=".$verificaBen->idBeneficiarioRFC."'>actualizar la información</a>.";     
+  $beneficiarios = false;
+  $beneficiario_rfc=true;
+  $ben = $this->model->Listar($verificaBen->idBeneficiarioRFC);
+  $infoApoyo = $this->model->ObtenerInfoApoyo($verificaBen->idBeneficiarioRFC);
+  $page="view/beneficiario_rfc/detalles.php";
+  require_once 'view/index.php';
+}
+
 public function Crud(){
 
   $beneficiario = new Beneficiariorfc();
@@ -244,7 +274,6 @@ public function Crud(){
   }
 }
 
-
 public function Detalles(){
   $beneficiario_rfc=true;
   $beneficiarios=true;
@@ -255,18 +284,6 @@ public function Detalles(){
   require_once 'view/index.php';
 }
 
-
-public function RFC(){
-  $tipoBen="RFC";
-  $administracion = true;
-  $inicio = false;
-  $beneficiarios = true;
-  $page="view/beneficiario_rfc/index.php";
-  require_once 'view/index.php';
-}
-
-
-
 public function Eliminar(){
     $beneficiario_rfc=true; //variable cargada para activar la opcion administracion en el menu
     $beneficiarios=true; //variable cargada para activar la opcion programas en el menu
@@ -274,8 +291,10 @@ public function Eliminar(){
     $beneficiario->idRegistro = $_REQUEST['idRegistro'];
     $beneficiario->estado='Inactivo';
     $this->model->Eliminar($beneficiario);
-    header ('Location: index.php?c=Beneficiario&a=RFC');
+    $this->mensaje="Se ha eliminado correctamente el usuario";
+    $this->Index();
   }
+
   public function Importar(){
     if (file_exists("./assets/files/beneficiariosrfc.xlsx")) {
   //Agregamos la librería
@@ -306,6 +325,7 @@ public function Eliminar(){
       require_once 'view/index.php';
     }
   }
+
   public function BeneficiariosRFC($objPHPExcel,$numRows){
     try{
       $numRow=2;

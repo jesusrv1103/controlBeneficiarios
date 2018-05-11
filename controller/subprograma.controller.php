@@ -134,7 +134,7 @@ public function LeerArchivo($objPHPExcel,$numRows){
 
 } catch (Exception $e) {
  $this->error=true;
- $this->mensaje="Error al importar los datos de Subprogramas.";
+ $this->mensaje="Error al importar los datos de subprogramas, esto puede deberse a que no se han asignado programas.";
  $page="view/subprograma/index.php";
  $catalogos=true;
  require_once 'view/index.php';

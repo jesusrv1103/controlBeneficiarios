@@ -58,11 +58,9 @@ class BeneficiarioController{
     $idRegistro = $verificaBen->idRegistro;
     $this->model->Activar($idRegistro);
     $beneficiario = new Beneficiario();
-    $warning=true;
-    $this->mensaje="Se ha activado correctamente el beneficiario, porfavor compruebe que la información que nosotros tenemos este actualizada, si no es así, ayudenos a <a href='?c=Beneficiario&a=Crud&idBeneficiario=".$verificaBen->idBeneficiario."'>actualizar la información</a>.";     
+    $this->mensaje="Se ha activado correctamente el beneficiario, porfavor compruebe que la información que nosotros tenemos este actualizada, si no es así, ayudenos a <a href='?c=beneficiario&a=Crud&idBeneficiario=".$verificaBen->idBeneficiario."'>actualizar la información</a>.";     
     $beneficiarios = false;
-    $beneficiario_curp=true;
-    $verificaBen->idBeneficiario;
+    $beneficiario_rfc=true;
     $ben = $this->model->Listar($verificaBen->idBeneficiario);
     $infoApoyo = $this->model->ObtenerInfoApoyo($verificaBen->idBeneficiario);
     $page="view/beneficiario_curp/detalles.php";

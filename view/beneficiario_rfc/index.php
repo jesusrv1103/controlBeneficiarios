@@ -198,36 +198,6 @@
   </div><!--/modal-dialog-->
 </div><!--/modal-fade-->
 
-
-<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content panel default red_border horizontal_border_1">
-      <div class="modal-body">
-        <div class="row">
-          <div class="block-web">
-            <div class="header">
-              <h3 class="content-header theme_color">&nbsp;Eliminar Beneficiario</h3>
-            </div>
-            <div class="porlets-content" style="margin-bottom: -50px;">
-              <h4>¿Esta segúro que desea eliminar el Beneficiario?</h4>
-            </div><!--/porlets-content-->
-          </div><!--/block-web-->
-        </div>
-      </div>
-      <div class="modal-footer" style="margin-top: -10px;">
-        <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-          <form action="?c=beneficiario&a=Eliminar" enctype="multipart/form-data" method="post">
-            <input hidden type="text" name="idRegistro" id="txtIdRegistro">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-danger">Eliminar</button>
-          </form>
-        </div>
-      </div>
-    </div><!--/modal-content-->
-  </div><!--/modal-dialog-->
-</div><!--/modal-fade-->
-
-
 <div class="modal fade" id="modalEliminarRFC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default red_border horizontal_border_1">
@@ -259,7 +229,7 @@
 <div class="modal fade" id="modalBuscarRFC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default blue_border horizontal_border_1">
-     <form action="?c=beneficiariorfc&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate>
+     <form action="?c=beneficiariorfc&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate id="form-rfc">
       <div class="modal-body">
         <div class="row">
           <div class="block-web">
@@ -286,7 +256,67 @@
   </div><!--/modal-content-->
 </div><!--/modal-dialog-->
 </div><!--/modal-fade-->
-<script>
+
+<div class="modal fade" id="mActivarBeneficiario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content panel default horizontal_border_1">
+      <div class="modal-body">
+        <div class="row">
+          <div class="block-web">
+            <div class="header">
+              <h3 class="content-header h3subtitulo">&nbsp;Activar Beneficiario</h3>
+            </div>
+            <div class="porlets-content" style="margin-bottom: -50px;">
+              <h4>El beneficiario que esta ingresando ya ha sido dado de alta en el sistema anteriormente y ha sido eliminado. ¿Desea volverlo a activar?</h4>
+            </div><!--/porlets-content-->
+          </div><!--/block-web-->
+        </div>
+      </div>
+      <div class="modal-footer" style="margin-top: -10px;">
+        <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
+          <form action="?c=beneficiariorfc&a=ActivarBeneficiario" enctype="multipart/form-data" method="post">
+            <input name="rfc" id="txtRfcActivar">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-info">Activar</button>
+          </form>
+        </div>
+      </div>
+    </div><!--/modal-content-->
+  </div><!--/modal-dialog-->
+</div><!--/modal-fade-->
+
+<script src="assets/js/jquery-2.1.0.js"></script>
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+    $('#form-rfc').submit(function() {
+      VerificarBeneficiario();
+      return false;
+    });
+
+  });
+
+  var rfc="";
+  VerificarBeneficiario = function(){
+    rfc=$("#RFC").val();
+    $.post("index.php?c=beneficiariorfc&a=VerificarBeneficiario", {rfc: rfc}, function(respuesta) {
+      console.log(respuesta);
+      if(respuesta=="Inactivo"){
+        $('#txtRfcActivar').val(rfc);
+        $('#mActivarBeneficiario').modal('toggle');
+      }else {
+        location.href="?c=beneficiariorfc&a=Crud&RFC="+rfc;
+      }
+    });
+  }
+
+
+
+
+
+
+
   eliminarBeneficiario = function(idRegistro){
     $('#txtIdRegistro').val(idRegistro);
   };
@@ -317,4 +347,5 @@
 deshabilitar2 = function (){
   $('#btnImportar2').attr("disabled", true);
 } 
+
 </script>

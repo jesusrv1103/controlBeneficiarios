@@ -50,7 +50,6 @@ class Beneficiario
 	public $telefono;
 	public $idMunicipio;
 
-
 	public function __CONSTRUCT()
 	{
 		try
