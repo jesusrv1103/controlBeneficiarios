@@ -101,7 +101,9 @@ public function LeerArchivo($objPHPExcel,$numRows){
       if (!$cat->direccion == null) {
        //$this->model->Check(0);
        $this->model->ImportarDirecciones($cat);
-       //$this->model->Check(1);
+
+      // $this->model->Check(1);
+
      }
      $numRow+=1;
    } while (!$cat->direccion == null);

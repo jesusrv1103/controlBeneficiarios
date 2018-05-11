@@ -26,6 +26,7 @@ class Beneficiariorfc
 	public $actividad;
 	public $cobertura;
 	public $idRegistro;
+	public $idMunicipio;
 
 
 
@@ -72,7 +73,7 @@ class Beneficiariorfc
 			b.idTipoVialidad = tV.idTipoVialidad AND 	
 			b.idAsentamientos = a.idAsentamientos AND 
 			b.idLocalidad = l.idLocalidad AND
-			b.idMunicipio=m.idMunicipio AND
+			b.idMunicipio = m.idMunicipio AND
 			b.idBeneficiarioRFC = ?");
 
 		$stm->execute(array($id));
@@ -102,15 +103,16 @@ class Beneficiariorfc
 
 	public function Registrar(Beneficiariorfc $data)
 	{
+
 		$sql = "INSERT INTO beneficiariorfc
 		(RFC,curp,primerApellido,segundoApellido,nombres,
 		fechaAltaSat,sexo,idAsentamientos,idLocalidad,idTipoVialidad,
 		nombreVialidad,numeroExterior,numeroInterior,entreVialidades,descripcionUbicacion,
-		actividad,cobertura,idRegistro) values 
+		actividad,cobertura,idRegistro,idMunicipio) values 
 		(?,?,?,?,?,
 		?,?,?,?,?,
 		?,?,?,?,?,
-		?,?,?)";
+		?,?,?,?)";
 		$this->pdo->prepare($sql)
 		->execute(
 			array(
@@ -131,12 +133,11 @@ class Beneficiariorfc
 				$data->descripcionUbicacion,
 				$data->actividad,
 				$data->cobertura,
-				$data->idRegistro
+				$data->idRegistro,
+				$data->idMunicipio
 			)
 		);
 	}
-
-	
 
 	public function Obtener($idBeneficiario)
 	{
@@ -165,6 +166,7 @@ class Beneficiariorfc
 	//Metodo para actualizar
 	public function Actualizar($data)
 	{
+
 		$sql = "UPDATE beneficiariorfc SET 
 		RFC =?,
 		curp = ?,
@@ -183,7 +185,8 @@ class Beneficiariorfc
 		descripcionUbicacion = ?,
 		actividad = ?,
 		cobertura = ?,
-		idRegistro = ?
+		idRegistro = ?,
+		idMunicipio = ?
 		WHERE idBeneficiarioRFC = ?";
 
 		$this->pdo->prepare($sql)
@@ -207,37 +210,23 @@ class Beneficiariorfc
 				$data->actividad,
 				$data->cobertura,
 				$data->idRegistro,
+				$data->idMunicipio,
 				$data->idBeneficiarioRFC
+
 			)
 		);
 	}
-
-	public function ActualizarExc($data)
-	{
-		$sql = "UPDATE beneficiariorfc SET 
-		RFC =?,
-		curp = ?,
-		primerApellido = ?,
-		segundoApellido = ?,
-		nombres = ?,
-		fechaAltaSat =?,
-		sexo =?,
-		idAsentamientos =?,
-		idLocalidad = ?,
-		idTipoVialidad =?,
-		nombreVialidad =?,
-		numeroExterior = ?,
-		numeroInterior = ?,
-		entreVialidades = ?,
-		descripcionUbicacion = ?,
-		actividad = ?,
-		cobertura = ?,
-		idRegistro = ?
-		WHERE RFC = ?";
-
-		$this->pdo->prepare($sql)
-		->execute(
+	
+	public function ImportarBeneficiarioRFC(Beneficiariorfc $data){
+		try{
+		$sql =$this->pdo->prepare("INSERT INTO beneficiariorfc values 
+			(?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?)");
+		$resultado=$sql->execute(
 			array(
+				null,
 				$data->RFC,
 				$data->curp,
 				$data->primerApellido,
@@ -256,43 +245,13 @@ class Beneficiariorfc
 				$data->actividad,
 				$data->cobertura,
 				$data->idRegistro,
-				$data->idBeneficiarioRFC
+				$data->idMunicipio,
 
 			)
 		);
-	}
-
-	public function ImportarBeneficiarioRFC(Beneficiariorfc $data)
-	{
-		$sql =$this->pdo->prepare("INSERT INTO beneficiariorfc
-			(RFC,curp,primerApellido,segundoApellido,nombres,fechaAltaSat,sexo,idAsentamientos,idLocalidad,idTipoVialidad,
-			nombreVialidad,numeroExterior,numeroInterior,entreVialidades,descripcionUbicacion,actividad,cobertura,idRegistro) values 
-			(?,?,?,?,?,
-			?,?,?,?,?,
-			?,?,?,?,?,
-			?,?,?)");
-		$resultado=$sql->execute(
-			array(
-				$data->RFC,
-				$data->curp,
-				$data->primerApellido,
-				$data->segundoApellido,
-				$data->nombres,
-				$data->fechaAltaSat,
-				$data->sexo,
-				$data->idAsentamientos,
-				$data->idLocalidad,
-				$data->idTipoVialidad,
-				$data->nombreVialidad,
-				$data->numeroExterior,
-				$data->numeroInterior,
-				$data->entreVialidades,
-				$data->descripcionUbicacion,
-				$data->actividad,
-				$data->cobertura,
-				$data->idRegistro
-			)
-		);
+			}catch (Exception $e) {
+			echo "ObtenerIdRegistro";
+		}
 	}
 
 	public function Listar1()
@@ -302,7 +261,7 @@ class Beneficiariorfc
 
 		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
-	
+
 	public function Listar2()
 	{
 		$stm = $this->pdo->prepare("SELECT * FROM beneficiarios, registro, municipio WHERE registro.idRegistro=beneficiarios.idRegistro and registro.estado='Activo'");
@@ -333,10 +292,25 @@ class Beneficiariorfc
 		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 	}
 
+	public function ListarAsentamientos($localidad)
+	{
+		try
+		{
+			$stm = $this->pdo->prepare("SELECT * FROM asentamientos WHERE localidad=?");
+			$stm->execute(array($localidad));
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
 	public function ObtenerIdMunicipio($claveMunicipio)
 	{
-		$sql= $this->pdo->prepare("SELECT idMunicipio from municipio where claveMunicipio=$claveMunicipio");
-		$resultado=$sql->execute();
+		$sql= $this->pdo->prepare("SELECT * from municipio where claveMunicipio=?");
+		$resultado=$sql->execute(array($claveMunicipio));
 		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 	}
 
@@ -356,9 +330,10 @@ class Beneficiariorfc
 
 	public function ObtenerInfoRegistro($idBeneficiarioRFC)
 	{
-		$sql= $this->pdo->prepare("SELECT * FROM registro, beneficiariorfc WHERE beneficiariorfc.idRegistro=registro.idRegistro AND beneficiariorfc.idBeneficiarioRFC=?;");
-		$resultado=$sql->execute(array($idBeneficiarioRFC));
-		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+			$sql= $this->pdo->prepare("SELECT * FROM registro, beneficiariorfc WHERE beneficiariorfc.idRegistro=registro.idRegistro AND beneficiariorfc.idBeneficiarioRFC=?;");
+			$resultado=$sql->execute(array($idBeneficiarioRFC));
+			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+	
 	}
 
 	public function ListarActualizacion($idRegistro)

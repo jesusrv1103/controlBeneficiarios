@@ -234,7 +234,7 @@
           <td>
            <div class="col-md-12">
              <label class="col-sm-6 lbldetalle">Localidad:</label>
-             <label class="col-sm-6 control-label"><?php echo $ben->nombreLocalidad; ?></label>
+             <label class="col-sm-6 control-label"><?php echo $ben->localidad; ?></label>
            </div>
          </td>
        </tr>

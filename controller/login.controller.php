@@ -17,11 +17,13 @@ class LoginController{
    $password = $_REQUEST['password'];
    $password=md5($password);
    $password=crc32($password);
+
+
    $password=crypt($password,"xtem");
 
 
    $password=sha1($password);
-
+// echo $password;
 
    $consulta=$this->model->verificar($log);
    if($consulta!=null){

@@ -7,7 +7,8 @@ class BeneficiariorfcController{
   private $model;
   private $model2;
   private $session;
-  public $error;
+  private $error;
+  private $mensaje;
 
   public function __CONSTRUCT(){
     $this->model = new Beneficiariorfc();
@@ -46,6 +47,7 @@ public function Guardar(){
  }
  $beneficiario->idAsentamientos =$_REQUEST['idAsentamientos'];
  $beneficiario->idLocalidad = $_REQUEST['idLocalidad'];
+ $beneficiario->idMunicipio = $_REQUEST['idMunicipio'];
  $beneficiario->idTipoVialidad = $_REQUEST['idTipoVialidad'];
  $beneficiario->nombreVialidad = $_REQUEST['nombreVialidad'];
  $beneficiario->numeroExterior = $_REQUEST['noExterior'];
@@ -70,13 +72,13 @@ public function Guardar(){
   $this->model->RegistraActualizacion($beneficiario);
   $this->model->Actualizar($beneficiario);
 
-  $mensaje="Los datos del beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha actualizado correctamente";
+  $this->mensaje="Los datos del beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha actualizado correctamente";
 
 }else{
 
   $beneficiario->idRegistro=$this->model->RegistraDatosRegistro($beneficiario);
   $this->model->Registrar($beneficiario);
-  $mensaje="El beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha registrado correctamente";
+  $this->mensaje="El beneficiario <b>".$beneficiario->nombres." ".$beneficiario->primerApellido." ".$beneficiario->segundoApellido."</b> se ha registrado correctamente";
 }
 $this->Index();
 }
@@ -224,7 +226,6 @@ public function ActivarBeneficiario()
 }
 
 public function Crud(){
-
   $beneficiario = new Beneficiariorfc();
   if(isset($_REQUEST['RFC'])){
 
@@ -239,7 +240,7 @@ public function Crud(){
       require_once 'view/index.php';
     }else{
       $warning=true;
-      $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos y la información de registro sean correctos y esten actualizados si no es así, porfavor, <a href='?c=Beneficiariorfc&a=Crud&idBeneficiarioRFC=".$beneficiario->idBeneficiarioRFC."'>actualice la información</a>.";
+      $this->mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos y la información de registro sean correctos y esten actualizados si no es así, porfavor, <a href='?c=beneficiariorfc&a=Crud&idBeneficiarioRFC=".$beneficiario->idBeneficiarioRFC."'>actualice la información</a>.";
       $administracion = true;
       $inicio = false;
       $beneficiarios = false;
@@ -253,24 +254,9 @@ public function Crud(){
     $beneficiario_rfc=true;
     $beneficiarios=true;
     $beneficiario = $this->model->Listar($_REQUEST['idBeneficiarioRFC']);
-
     $infoApoyo = $this->model->ObtenerInfoApoyo($_REQUEST['idBeneficiarioRFC']);
-
     $page="view/beneficiario_rfc/beneficiario.php";
     require_once 'view/index.php';
-
-  }else{
-    $warning=true;
-    $mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos y la información de registro sean correctos y esten actualizados si no es así, porfavor, <a href='?c=Beneficiariorfc&a=Crud&idBeneficiarioRFC=".$verificaBen->idBeneficiarioRFC."'>actualice la información</a>.";
-    $administracion = true;
-    $inicio = false;
-    $beneficiarios = false;
-    $ben = $this->model->Listar($verificaBen->idBeneficiarioRFC);
-      //echo "hola".$VerificaBeneficiario->idbeneficiarioRFC;
-    $infoApoyo = $this->model->ObtenerInfoApoyo($verificaBen->idBeneficiarioRFC);
-    $page="view/beneficiario_rfc/detalles.php";
-    require_once 'view/index.php';
-
   }
 }
 
@@ -291,95 +277,99 @@ public function Eliminar(){
     $beneficiario->idRegistro = $_REQUEST['idRegistro'];
     $beneficiario->estado='Inactivo';
     $this->model->Eliminar($beneficiario);
-    $this->mensaje="Se ha eliminado correctamente el usuario";
+    $this->mensaje="Se ha eliminado correctamente el beneficiario";
     $this->Index();
   }
 
-  public function Importar(){
-    if (file_exists("./assets/files/beneficiariosrfc.xlsx")) {
-  //Agregamos la librería
-      require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
-        //Variable con el nombre del archivo
-      $nombreArchivo = './assets/files/beneficiariosrfc.xlsx';
-        // Cargo la hoja de cálculo
-      $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
-        //Asigno la hoja de calculo activa
-      $objPHPExcel->setActiveSheetIndex(0);
-        //Obtengo el numero de filas del archivo
-      $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-      $this->BeneficiariosRFC($objPHPExcel,$numRows);
-      $mensaje="Se ha leído correctamente el archivo <strong>beneficiariosrfc.xlsx</strong>.<br><i class='fa fa-check'></i> Se han insertado correctamente los datos de beneficiarios.";
-      $beneficiarios = true;
-      $beneficiario_rfc=true;
-      $tipoBen="RFC";
-      $page="view/beneficiario_rfc/index.php";
-      require_once 'view/index.php';
+  public function Upload(){
+    if(!isset($_FILES['file']['name'])){
+      header('Location: ./?c=beneficiariorfc');
     }
-        //si por algo no cargo el archivo bak_
-    else {
-      $error=true;
-      $mensaje="El archivo <strong>beneficiariosrfc.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
-      $beneficiarios = true;
-      $beneficiario_rfc=true;
-      $page="view/beneficiario_rfc/index.php";
-      require_once 'view/index.php';
+    $archivo=$_FILES['file'];
+    if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
+      $nameArchivo = $archivo['name'];
+      $tmp = $archivo['tmp_name'];
+      $src = "./assets/files/".$nameArchivo;
+      if(move_uploaded_file($tmp, $src)){
+        $this->Importar($src);
+
+        if (is_file($src)) {
+          //chmod($src,0777);
+          unlink($src);
+        }  
+      }else{
+        $this->error=true;
+        $this->mensaje=$this->mensaje."El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
+        $this->Index();
+      }
     }
   }
 
-  public function BeneficiariosRFC($objPHPExcel,$numRows){
-    try{
-      $numRow=2;
-      do {
+  public function Importar($src){
+   require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
+   $nombreArchivo = $src;
+   $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
+   $objPHPExcel->setActiveSheetIndex(0);
+   $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
+   $this->LeerArchivo($objPHPExcel,$numRows);
+   $this->mensaje="Se ha leído correctamente el archivo <strong>beneficiariosrfc.xlsx</strong>.<br><i class='fa fa-check'></i> Se han insertado correctamente los datos de beneficiarios.";
+   $this->Index();
 
-            //echo "Entra";
-       $benrfc = new Beneficiariorfc;
-       $benrfc->RFC = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
-       $benrfc->curp = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
-       $benrfc->primerApellido = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
-       $benrfc->segundoApellido = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
-       $benrfc->nombres = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
-       $benrfc->fechaAltaSat = $objPHPExcel->getActiveSheet()->getCell('F'.$numRow)->getCalculatedValue();
-       $benrfc->sexo = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
-       $benrfc->idAsentamientos = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
-       $benrfc->idLocalidad = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
-       $benrfc->idTipoVialidad = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
-       $benrfc->nombreVialidad = $objPHPExcel->getActiveSheet()->getCell('K'.$numRow)->getCalculatedValue();
-       $benrfc->numeroExterior = $objPHPExcel->getActiveSheet()->getCell('L'.$numRow)->getCalculatedValue();
-       $benrfc->numeroInterior = $objPHPExcel->getActiveSheet()->getCell('M'.$numRow)->getCalculatedValue();
-       $benrfc->entreVialidades = $objPHPExcel->getActiveSheet()->getCell('N'.$numRow)->getCalculatedValue();
-       $benrfc->descripcionUbicacion = $objPHPExcel->getActiveSheet()->getCell('O'.$numRow)->getCalculatedValue();
-       $benrfc->actividad = $objPHPExcel->getActiveSheet()->getCell('P'.$numRow)->getCalculatedValue();
-       $benrfc->cobertura = $objPHPExcel->getActiveSheet()->getCell('Q'.$numRow)->getCalculatedValue();
-       if (!$benrfc->RFC == null) {
-         //$consult = $this->model->VerificaBeneficiarioRFC($benrfc->RFC);
-       // if (!$consult == null) {
-         //$this->model->ActualizarExc($benrfc);
-       //Datos de registro
-         $benrfc->usuario=$_SESSION['usuario'];
-         $benrfc->fechaAlta=date("Y-m-d H:i:s");
-         $benrfc->direccion=$_SESSION['direccion'];
-         $benrfc->estado="Activo";
-      //$consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
-      //$benrfc->idMunicipio=$consult->idMunicipio;
-      //echo $benrfc->curp;
-       //}else{
-      //echo $benrfc->idRegistro;
-         $benrfc->idRegistro=$this->model->RegistraDatosRegistro($benrfc);
-         $this->model->ImportarBeneficiarioRFC($benrfc);
-      //echo "ya importo";
-       }
-       $numRow+=1;
-//echo $numRow;
-     } while(!$benrfc->RFC == null);
-  //echo "SALIO";
-   }catch (Exception $e) {
-    $error=true;
-    $mensaje="Error al insertar datos del archivo";
-    $beneficiarios = true;
-    $beneficiario_rfc=true;
-    $page="view/beneficiario_rfc/index.php";
-    require_once 'view/index.php';
+ }
+
+ public function LeerArchivo($objPHPExcel,$numRows){
+  $numRow=2;
+  do {
+   $benrfc = new Beneficiariorfc;
+   $benrfc->RFC = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
+   $benrfc->curp = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
+   $benrfc->primerApellido = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
+   $benrfc->segundoApellido = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
+   $benrfc->nombres = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
+   $benrfc->fechaAltaSat = $objPHPExcel->getActiveSheet()->getCell('F'.$numRow)->getCalculatedValue();
+   $claveMunicipio = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
+   $benrfc->sexo = $objPHPExcel->getActiveSheet()->getCell('G'.$numRow)->getCalculatedValue();
+   $benrfc->idAsentamientos = $objPHPExcel->getActiveSheet()->getCell('I'.$numRow)->getCalculatedValue();
+   $benrfc->idLocalidad = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
+   $benrfc->idTipoVialidad = $objPHPExcel->getActiveSheet()->getCell('K'.$numRow)->getCalculatedValue();
+   $benrfc->nombreVialidad = $objPHPExcel->getActiveSheet()->getCell('L'.$numRow)->getCalculatedValue();
+   $benrfc->numeroExterior = $objPHPExcel->getActiveSheet()->getCell('M'.$numRow)->getCalculatedValue();
+   $benrfc->numeroInterior = $objPHPExcel->getActiveSheet()->getCell('N'.$numRow)->getCalculatedValue();
+   $benrfc->entreVialidades = $objPHPExcel->getActiveSheet()->getCell('O'.$numRow)->getCalculatedValue();
+   $benrfc->descripcionUbicacion = $objPHPExcel->getActiveSheet()->getCell('P'.$numRow)->getCalculatedValue();
+   $benrfc->actividad = $objPHPExcel->getActiveSheet()->getCell('Q'.$numRow)->getCalculatedValue();
+   $benrfc->cobertura = $objPHPExcel->getActiveSheet()->getCell('R'.$numRow)->getCalculatedValue();
+   if (!$benrfc->RFC == null) {
+     $consult = $this->model->ObtenerIdMunicipio($claveMunicipio);
+     $benrfc->idMunicipio=$consult->idMunicipio;
+     $benrfc->usuario=$_SESSION['usuario'];
+     $benrfc->fechaAlta=date("Y-m-d H:i:s");
+     $benrfc->direccion=$_SESSION['direccion'];
+     $benrfc->estado="Activo";
+     $benrfc->idRegistro=$this->model->RegistraDatosRegistro($benrfc);
+     $this->model->ImportarBeneficiarioRFC($benrfc);
+   }
+   $numRow+=1;
+ } while(!$benrfc->RFC == null);
+
+}
+
+public function ListarAsentamientos(){
+  header('Content-Type: application/json');
+  $idLocalidad=$_REQUEST['idLocalidad'];
+  $obLocalidad=$this->model->ObtenerLocalidad($idLocalidad);
+  if($obLocalidad!=null){
+    $localidad=$obLocalidad->localidad;
+    $datos = array();
+    $row_array['estado']='ok';
+    array_push($datos, $row_array);
+    foreach ($this->model->ListarAsentamientos($localidad) as $asentamiento):
+      $row_array['idAsentamientos']  = $asentamiento->idAsentamientos;
+      $row_array['nombreAsentamiento']  = $asentamiento->nombreAsentamiento;
+      array_push($datos, $row_array);
+    endforeach;
   }
+  echo json_encode($datos, JSON_FORCE_OBJECT);
 }
 
 }

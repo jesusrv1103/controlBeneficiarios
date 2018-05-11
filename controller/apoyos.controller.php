@@ -98,7 +98,7 @@ class ApoyosController{
 
 public function LeerArchivo($objPHPExcel,$numRows){
  try{
-  $this->model->Limpiar("apoyos");
+  //$this->model->Limpiar("apoyos");
   unset($_SESSION['numRegErroneos']);
   $numRow=2;
   $arrayError=array();
@@ -314,6 +314,7 @@ public function Guardar(){
    $this->model->Actualizar($apoyo);
    $this->model->RegistraActualizacion($apoyo);
    $this->mensaje="Se han actualizado correctamente los datos del Apoyo";
+   
  }else{
   $apoyo->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyo);
   $this->model->Registrar($apoyo);

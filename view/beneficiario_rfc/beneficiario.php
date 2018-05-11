@@ -72,7 +72,7 @@
 													<label class="control-label col-md-3">Fecha de alta en SAT<strog class="theme_color">*</strog></label>
 													<div class="col-md-6 col-xs-11">
 														<div class="input-group"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-															<input name="fechaAltaSat" type="date" class="form-control" size="30" required="">
+															<input name="fechaAltaSat" type="date" class="form-control" size="30" required="" value="<?php echo $beneficiario->fechaAltaSat;?>">
 
 														</div>
 														<div class="help-block with-errors"></div>
@@ -198,11 +198,11 @@
 													<label class="col-sm-3 control-label">Municipio<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
 														<select name="idMunicipio" class="form-control select2" required style="width: 100%;" id="selectMunicipios" onchange="listarLocalidades()">
-															<?php if($beneficiario->idBeneficiario==null){ ?>   
+															<?php if($beneficiario->idBeneficiarioRFC==null){ ?>   
 															<option value=""> 
 																Seleccione el municipio al que pertenece el beneficiario
 															</option>
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>   
+															<?php } if($beneficiario->idBeneficiarioRFC!=null){ ?>   
 															<option value="<?php echo $beneficiario->idMunicipio?>"> 
 																<?php echo $beneficiario->nombreMunicipio; ?>
 															</option>
@@ -221,11 +221,14 @@
 												<div class="form-group">
 													<label class="col-sm-3 control-label">Localidad<strog class="theme_color">*</strog></label>
 													<div class="col-sm-6">
-														<select name="idLocalidad" class="form-control select2" required id="selectLocalidades" onchange="listarAsentamientos()" style="width: 100%">		<?php if($beneficiario->idBeneficiario==null){  ?>
+														<select name="idLocalidad" class="form-control select2" required id="selectLocalidades" onchange="listarAsentamientos()" style="width: 100%">		<?php if($beneficiario->idBeneficiarioRFC==null){  ?>
 															<option value=""> 
 																Seleccione la localidad a la que pertenece el beneficiario
 															</option> 
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="1">
+																Ninguno
+															</option>
+															<?php } if($beneficiario->idBeneficiarioRFC!=null){ ?>
 															<option value="<?php echo $beneficiario->idLocalidad ?>"> 
 																<?php echo  $beneficiario->localidad ?>
 															</option>
@@ -238,11 +241,14 @@
 													<label class="col-sm-3 control-label">Asentamiento</label>
 													<div class="col-sm-6">
 														<select name="idAsentamientos" class="form-control select2" id="selectAsentamientos" style="width: 100%">		
-															<?php if($beneficiario->idBeneficiario==null){  ?>
-															<option value=""> 
+															<?php if($beneficiario->idBeneficiarioRFC==null){  ?>
+															<option value="1"> 
 																Seleccione el asentamiento a la que pertenece el beneficiario
 															</option> 
-															<?php } if($beneficiario->idBeneficiario!=null){ ?>
+															<option value="1"> 
+																Ninguno
+															</option> 
+															<?php } if($beneficiario->idBeneficiarioRFC!=null){ ?>
 															<option value="<?php echo $beneficiario->idAsentamientos ?>"> 
 																<?php echo  $beneficiario->nombreAsentamiento ?>
 															</option>
@@ -270,7 +276,7 @@
 												<div class="form-group">
 													<div class="col-sm-offset-7 col-sm-5">
 														<button type="submit" class="btn btn-primary">Guardar</button>
-														<a href="?c=Beneficiario" class="btn btn-default"> Cancelar</a>
+														<a href="?c=Beneficiariorfc" class="btn btn-default"> Cancelar</a>
 													</div>
 												</div><!--/form-group-->												
 
@@ -297,12 +303,11 @@
 		var idMunicipio = $('#selectMunicipios').val();
 		datos = {"idMunicipio":idMunicipio};
 		$.ajax({
-			url: "index.php?c=Beneficiario&a=ListarLocalidades",
+			url: "index.php?c=beneficiario&a=ListarLocalidades",
 			type: "POST",
 			data: datos
 		}).done(function(respuesta){
 			if (respuesta[0].estado === "ok") {
-				//console.log(JSON.stringify(respuesta));
 				var selector = document.getElementById("selectLocalidades");
 				selector.options[0] = new Option("Seleccione la localidad a la que pertenece el beneficiario","");
 				var selector2 = document.getElementById("selectAsentamientos");
@@ -311,7 +316,7 @@
 					var j=parseInt(i)+1;
 					selector.options[j] = new Option(respuesta[i].localidad,respuesta[i].idLocalidad);
 				}
-				//$(".respuesta").html("Localidades:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
+
 			}
 		});
 	}
@@ -324,14 +329,14 @@
 			data: datos
 		}).done(function(respuesta){
 			if (respuesta[0].estado === "ok") {
-				console.log(JSON.stringify(respuesta));
 				var selector = document.getElementById("selectAsentamientos");
-				selector.options[0] = new Option("Seleccione el asentamiento al que petenece el beneficiario","");
+				selector.options[0] = new Option("Seleccione el asentamiento al que petenece el beneficiario",1);
+				selector.options[1] = new Option("Ninguno",1);
 				for (var i in respuesta) {
 					var j=parseInt(i)+1;
-					selector.options[j] = new Option(respuesta[i].nombreAsentamiento,respuesta[i].idAsentamientos);
+					selector.options[++j] = new Option(respuesta[i].nombreAsentamiento,respuesta[i].idAsentamientos);
 				}
-				//$(".respuesta2").html("Asentamientos:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
+
 			}
 		});
 	}

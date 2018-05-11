@@ -35,10 +35,10 @@
                     <div class="btn-group">
                      <a data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle" style="margin-right: 10px;" type="button"> <i class="fa fa-eye"></i>&nbsp;<?php echo $periodo;?><span class="caret"></span></a>
                      <ul role="menu" class="dropdown-menu pull-right">
-                      <li><a href="?c=beneficiario&periodo=Beneficiarios 2017">Beneficiarios 2017</a></li>
-                      <li><a href="?c=beneficiario&periodo=Beneficiarios 2018">Beneficiarios 2018</a></li>
-                      <li><a href="?c=beneficiario&periodo=Beneficiarios 2019">Beneficiarios 2019</a></li>
-                      <li><a href="?c=beneficiario">Todos los beneficiarios</a></li>
+                      <li><a href="?c=beneficiariorfc&periodo=Beneficiarios 2017">Beneficiarios 2017</a></li>
+                      <li><a href="?c=beneficiariorfc&periodo=Beneficiarios 2018">Beneficiarios 2018</a></li>
+                      <li><a href="?c=beneficiariorfc&periodo=Beneficiarios 2019">Beneficiarios 2019</a></li>
+                      <li><a href="?c=beneficiariorfc">Todos los beneficiarios</a></li>
                     </ul>
                   </div>
                   <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
@@ -55,21 +55,21 @@
           </div>
         </div>
       </div>
-      <?php if(isset($mensaje)){ if(!isset($error)){?>
+      <?php if(isset($this->mensaje)){ if(!isset($this->error)){?>
       <div class="row" style="margin-bottom: -20px; margin-top: 20px">
         <div class="col-md-12">
           <div class="alert alert-success fade in">
             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
+            <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
           </div>
         </div>
       </div>
-      <?php } if(isset($error)){ ?>
+      <?php } if(isset($this->error)){ ?>
       <div class="row" style="margin-bottom: -20px; margin-top: 20px">
         <div class="col-md-12">
           <div class="alert alert-danger">
             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
+            <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
           </div>
         </div>
       </div>
@@ -87,9 +87,7 @@
                <td><center><b>Ver</b></center></td>
                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                <td><center><b>Editar</b></center></td>
-               <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                <td><center><b>Borrar</b></center></td>
-               <?php } ?>
                <?php } ?>
              </tr>
            </thead>
@@ -105,7 +103,7 @@
                 <td class="center">
                   <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiariorfc&a=Detalles&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
                 </td>
-                <?php if($_SESSION['tipoUsuario']==1){?>
+                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                 <td class="center">
                   <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiariorfc&a=Crud&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC ?>"><i class="fa fa-edit"></i></a>
                 </td>
@@ -149,43 +147,37 @@
 <div class="modal fade" id="modalImportarRFC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-body">
-        <div class="row">
-          <div class="block-web">
-            <div class="header">
-              <h3 class="content-header theme_color">&nbsp;Importar beneficiarios con RFC</h3>
-            </div>
-            <div class="porlets-content" style="margin-bottom: -65px;">
-              <p>Importa tu archivo excel con los datos de los beneficiarios para registrarlos.</p>
-              <p><strong>Nota: </strong>El archivo debe contener el nombre de <strong class="theme_color">beneficiariosrfc.xlsx</strong> para poder ser leído correctamente.</p>
-              <br>
-              <span class="btn btn-success fileinput-button">
-                <i class="glyphicon glyphicon-plus"></i>
-                <span>Seleccionar archivo</span>
-                <!-- The file input field used as target for the file upload widget -->
-
-                <input id="fileupload1" type="file" name="files[]" multiple class="beneficiariosrfc">
-
-              </span>
-              <br>
-              <br>
-              <!-- The global progress bar -->
-              <div id="progress" class="progress">
-                <div class="progress-bar progress-bar-success"></div>
+      <form action="?c=beneficiariorfc&a=Upload" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="row">
+            <div class="block-web">
+              <div class="header">
+                <h3 class="content-header theme_color">&nbsp;Importar beneficiarios con RFC</h3>
               </div>
-              <!-- The container for the uploaded files -->
-              <div id="files1" class="files"></div>
-            </div><!--/porlets-content-->
-          </div><!--/block-web-->
+              <div class="porlets-content" style="margin-bottom: -65px;">
+                <p>Selecciona tu archivo excel con los datos de los beneficiarios para registrarlos.</p>
+                <p><strong>Nota: </strong>El archivo debe conener la extención <strong class="theme_color">.xlsx</strong> para poder ser leído correctamente.</p>
+                <br>
+                <div class="input-group">
+                  <label class="input-group-btn">
+                    <span class="btn btn-sm btn-success">
+                      <i class="glyphicon glyphicon-plus"></i>
+                      Seleccionar archivo<input  type="file" style="display: none;" id="inputArchivo" name="file" required>
+                    </span>
+                  </label>
+                  <input type="text" class="form-control" id="input-sm" readonly>
+                </div>
+              </div><!--/porlets-content-->
+            </div><!--/block-web-->
+          </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <div class="row col-md-5 col-md-offset-7">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <a href="?c=beneficiariorfc&a=Importar" onclick="deshabilitar();" id="btnImportar2" class="btn btn-primary">Importar datos</a>
+        <div class="modal-footer">
+          <div class="row col-md-5 col-md-offset-7">
+            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="submit" id="btnImportar" class="btn btn-sm btn-primary">Importar datos</button>
+          </div>
         </div>
-      </div>
-
+      </form>
     </div><!--/modal-content-->
   </div><!--/modal-dialog-->
 </div><!--/modal-fade-->
@@ -275,7 +267,7 @@
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
           <form action="?c=beneficiariorfc&a=ActivarBeneficiario" enctype="multipart/form-data" method="post">
-            <input name="rfc" id="txtRfcActivar">
+            <input hidden name="rfc" id="txtRfcActivar">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-info">Activar</button>
           </form>
@@ -310,12 +302,6 @@
       }
     });
   }
-
-
-
-
-
-
 
   eliminarBeneficiario = function(idRegistro){
     $('#txtIdRegistro').val(idRegistro);

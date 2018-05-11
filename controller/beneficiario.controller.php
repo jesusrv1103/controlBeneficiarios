@@ -105,6 +105,7 @@ class BeneficiarioController{
     $beneficiario->idLocalidad = $_REQUEST['idLocalidad'];
     $beneficiario->entreVialidades = $_REQUEST['entreVialidades'];
     $beneficiario->descripcionUbicacion = $_REQUEST['descripcionUbicacion'];
+
     //estado social
     $beneficiario->estudioSocioeconomico=$_REQUEST['estudioSocioeconomico'];
     $beneficiario->idEstadoCivil=$_REQUEST['idEstadoCivil'];
@@ -114,6 +115,7 @@ class BeneficiarioController{
     $beneficiario->integrantesFamilia=$_REQUEST['integrantesFamilia'];
     $beneficiario->dependientesEconomicos=$_REQUEST['dependientesEconomicos'];
     $beneficiario->idGrupoVulnerable=$_REQUEST['idGrupoVulnerable'];
+
     //Vivienda
     $beneficiario->idVivienda=$_REQUEST['idVivienda'];
     $beneficiario->noHabitantes=$_REQUEST['noHabitantes'];
@@ -187,21 +189,26 @@ class BeneficiarioController{
     if(!isset($_FILES['file']['name'])){
       header('Location: ./?c=beneficiario');
     }
-    $archivo = $_FILES['file']['name'];
-    $tipo = $_FILES['file']['type'];
-    $destino = "./assets/files/".$archivo;
-    if(copy($_FILES['file']['tmp_name'], $destino)){
-      //echo "Archivo Cargado Con Éxito" . "<br><br>";
-      $this->Importar();
-      //mandar llamar todas las funciones a importar
-    }
-    else{
-      $this->Index();
+    $archivo=$_FILES['file'];
+    if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
+      $nameArchivo = $archivo['name'];
+      $tmp = $archivo['tmp_name'];
+      $src = "./assets/files/".$nameArchivo;
+      if(move_uploaded_file($tmp, $src)){
+        $this->Importar();
+        if (is_file($src)) {
+          //chmod($src,0777);
+          unlink($src);
+        }  
+      }else{
+        $this->error=true;
+        $this->mensaje=$this->mensaje."El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
+        $this->Index();
+      }
     }
   }
 
   public function Importar(){
-    if (file_exists("./assets/files/beneficiarios.xlsx")) {
       //Agregamos la librería
       require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
       //Variable con el nombre del archivo
@@ -222,20 +229,6 @@ class BeneficiarioController{
         $this->mensaje="Se han importado correctamente los datos del archivo <strong>beneficiarios.xlsx</strong>";
         $this->Index();
       }
-     /* if($this->numRegistros>0)
-        $this->mensaje = $this->mensaje . "<br><i class='fa fa-check'></i> Se han registrado correctamente $this->numRegistros beneficiarios.";
-      if($this->numActualizados>0)
-      $this->mensaje = $this->mensaje . "<br><i class='fa fa-check'></i> Se han actualizado $this->numActualizados registros.";*/
-      
-    }
-    else {
-      $this->error=true;
-      $this->mensaje="El archivo <strong>beneficiarios.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
-      $page="view/beneficiarios/index.php";
-      $beneficiarios = true;
-      $beneficiario_curp=true;
-      require_once 'view/index.php';
-    }
   }
 
   public function LeerArchivo($objPHPExcel,$numRows){

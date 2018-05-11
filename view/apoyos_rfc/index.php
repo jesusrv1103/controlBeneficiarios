@@ -1,8 +1,8 @@
 
 <style type="text/css">
-.lblinfo{
-  color:#2196F3;
-}
+  .lblinfo{
+    color:#2196F3;
+  }
 
 </style>
 <div class="pull-left breadcrumb_admin clear_both">
@@ -47,95 +47,95 @@
       </div>
       <?php if(isset($this->mensaje)){ if(!isset($this->error)){?>
       <br> <div class="row">
-        <div class="col-md-12">
-          <div class="alert alert-success fade in">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
-          </div>
-          
+      <div class="col-md-12">
+        <div class="alert alert-success fade in">
+          <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+          <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
         </div>
-      </div> 
-      <?php } if(isset($this->error)){ ?>
-      <br> <div class="row">
-        <div class="col-md-12">
-          <div class="alert alert-danger">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
-          </div>
-        </div>
+
       </div>
-      <?php } }?>
-      <div class="porlets-content">
-        <div class="table-responsive">
-          <table class="display table table-bordered table-striped" id="dynamic-table">
-           <thead>
-             <tr>
-               <td><center><b>Info</b></center></td>
-               <th>RFC</th>
-               <th>Fecha</th> 
-               <th width="22%">Programa</th>
-               <th>Subprograma</th>
-               <!--th>Prog social</th-->
-               <th>Tipo</th>
-               <th>Caracteristica</th>
-               <th>Origen</th> 
-               <th>Importe</th>
-               <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-               <td><center><b>Editar</b></center></td>
-               <?php if($_SESSION['tipoUsuario']==1){?>
-               <td><center><b>Borrar</b></center></td>
-               <?php } ?>
-               <?php } ?>
-             </tr>
-           </thead>
-           <tbody>
-            <?php foreach($this->model->Listar() as $r): ?>
-              <tr class="grade">
-                <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoApoyo(<?php echo $r->idApoyo; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
-                <td><?php echo $r->curp ?> </td>
-                <td><?php echo $r->fechaApoyo ?> </td>
-                <td><?php echo $r->programa; ?> </td>
-                <td><?php echo $r->subprograma; ?> </td>
-                <!--td><?php echo "r->programaSocial;" ?></td-->
-                <td><?php echo $r->tipoApoyo; ?> </td>
-                <td><?php echo $r->caracteristicasApoyo; ?> </td>
-                <td><?php echo $r->origen; ?> </td>
-                <td>$<?php echo $r->importeApoyo; ?></td>
-                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
-                <td class="center">
-                  <a class="btn btn-primary btn-sm" role="button" href="?c=apoyosrfc&a=Crud&idApoyo=<?php echo $r->idApoyo ?>"><i class="fa fa-edit"></i></a>
-                </td>
-                <?php if($_SESSION['tipoUsuario']==1){?>
-                <td class="center">
-                 <a class="btn btn-danger btn-sm" onclick="eliminarApoyo(<?php echo $r->idApoyo;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
-               </td>
-               <?php } ?>
-               <?php } ?>
-             </tr>
-           <?php endforeach; ?>
-         </tbody>
-         <tfoot>
-          <tr>
+    </div> 
+    <?php } if(isset($this->error)){ ?>
+    <br> <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-danger">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
+      </div>
+    </div>
+  </div>
+  <?php } }?>
+  <div class="porlets-content">
+    <div class="table-responsive">
+      <table class="display table table-bordered table-striped" id="dynamic-table">
+       <thead>
+         <tr>
            <td><center><b>Info</b></center></td>
            <th>RFC</th>
-           <th>Fecha</th>
-           <th>Programa</h> 
-             <th>Subprograma</th>
-             <!--th>Prog social</th-->
-             <th>Tipo</th>
-             <th>Caracteristica</th>
-             <th>Origen</th> 
-             <th>Importe</th>
-             <?php if($_SESSION['tipoUsuario']==1){?>
-             <td><center><b>Editar</b></center></td>
-             <td><center><b>Borrar</b></center></td>
-             <?php } ?>
-           </tr>
-         </tfoot>
-       </table>
-     </div><!--/table-responsive-->
-   </div><!--/porlets-content-->
- </div><!--/block-web-->
+           <th>Fecha</th> 
+           <th width="22%">Programa</th>
+           <th>Subprograma</th>
+           <!--th>Prog social</th-->
+           <th>Tipo</th>
+           <th>Caracteristica</th>
+           <th>Origen</th> 
+           <th>Importe</th>
+           <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+           <td><center><b>Editar</b></center></td>
+           <?php if($_SESSION['tipoUsuario']==1){?>
+           <td><center><b>Borrar</b></center></td>
+           <?php } ?>
+           <?php } ?>
+         </tr>
+       </thead>
+       <tbody>
+        <?php foreach($this->model->Listar() as $r): ?>
+          <tr class="grade">
+            <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoApoyo(<?php echo $r->idApoyo; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+            <td><?php echo $r->RFC ?> </td>
+            <td><?php echo $r->fechaApoyo ?> </td>
+            <td><?php echo $r->programa; ?> </td>
+            <td><?php echo $r->subprograma; ?> </td>
+            <!--td><?php echo "r->programaSocial;" ?></td-->
+            <td><?php echo $r->tipoApoyo; ?> </td>
+            <td><?php echo $r->caracteristicasApoyo; ?> </td>
+            <td><?php echo $r->origen; ?> </td>
+            <td>$<?php echo $r->importeApoyo; ?></td>
+            <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
+            <td class="center">
+              <a class="btn btn-primary btn-sm" role="button" href="?c=apoyosrfc&a=Crud&idApoyo=<?php echo $r->idApoyo ?>"><i class="fa fa-edit"></i></a>
+            </td>
+            <?php if($_SESSION['tipoUsuario']==1){?>
+            <td class="center">
+              <a class="btn btn-danger btn-sm" onclick="eliminarApoyo(<?php echo $r->idApoyo;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+            </td>
+            <?php } ?>
+            <?php } ?>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+      <tfoot>
+        <tr>
+         <td><center><b>Info</b></center></td>
+         <th>RFC</th>
+         <th>Fecha</th>
+         <th>Programa</h> 
+           <th>Subprograma</th>
+           <!--th>Prog social</th-->
+           <th>Tipo</th>
+           <th>Caracteristica</th>
+           <th>Origen</th> 
+           <th>Importe</th>
+           <?php if($_SESSION['tipoUsuario']==1){?>
+           <td><center><b>Editar</b></center></td>
+           <td><center><b>Borrar</b></center></td>
+           <?php } ?>
+         </tr>
+       </tfoot>
+     </table>
+   </div><!--/table-responsive-->
+ </div><!--/porlets-content-->
+</div><!--/block-web-->
 </div><!--/col-md-12-->
 </div><!--/row-->
 </div>
@@ -178,68 +178,58 @@
 </div><!--/modal-fade--> 
 
 
-<div class="modal fade" id="modalProceso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content panel default red_border horizontal_border_1">
-      <div class="modal-body"> 
-        <div class="row">
-          <div class="block-web">
-            <div class="header">
-              <h3 class="content-header theme_color">&nbsp;Información</h3>
-            </div>
-            <div class="porlets-content" style="margin-bottom: -50px;">
-              <h4>Funcion en Proceso</h4>
-            </div><!--/porlets-content--> 
-          </div><!--/block-web--> 
+    <div class="modal-content">
+      <div id="divInfo">
+        <div class="modal-footer" style="margin-top: -10px;">
+          <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+          </div>
         </div>
-      </div> 
-      <div class="modal-footer" style="margin-top: -10px;">
-        <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
-        </div>
-      </div>
-    </div><!--/modal-content--> 
-  </div><!--/modal-dialog--> 
-</div><!--/modal-fade-->
+      </div><!--/modal-content--> 
+    </div><!--/modal-dialog--> 
+  </div><!--/modal-fade-->
 
-<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content panel default red_border horizontal_border_1">
-      <div class="modal-body"> 
-        <div class="row">
-          <div class="block-web">
-            <div class="header">
-              <h3 class="content-header theme_color">&nbsp;Eliminar Apoyo</h3>
-            </div>
-            <div class="porlets-content" style="margin-bottom: -50px;">
-              <h4>¿Esta segúro que desea eliminar el Apoyo?</h4>
-            </div><!--/porlets-content--> 
-          </div><!--/block-web--> 
+
+  <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content panel default red_border horizontal_border_1">
+        <div class="modal-body"> 
+          <div class="row">
+            <div class="block-web">
+              <div class="header">
+                <h3 class="content-header theme_color">&nbsp;Eliminar Apoyo</h3>
+              </div>
+              <div class="porlets-content" style="margin-bottom: -50px;">
+                <h4>¿Esta segúro que desea eliminar el Apoyo?</h4>
+              </div><!--/porlets-content--> 
+            </div><!--/block-web--> 
+          </div>
         </div>
-      </div>
-      <div class="modal-footer" style="margin-top: -10px;">
-        <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-          <form action="?c=apoyosrfc&a=Eliminar" enctype="multipart/form-data" method="post">
-            <input  type="hidden" name="idApoyo" id="txtIdApoyo">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-danger">Eliminar</button>
-          </form>
+        <div class="modal-footer" style="margin-top: -10px;">
+          <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
+            <form action="?c=apoyosrfc&a=Eliminar" enctype="multipart/form-data" method="post">
+              <input  type="hidden" name="idApoyo" id="txtIdApoyo">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+          </div>
         </div>
-      </div>
-    </div><!--/modal-content--> 
-  </div><!--/modal-dialog--> 
-</div><!--/modal-fade--> 
-<script>
-  eliminarApoyo = function(idApoyo){
-    $('#txtIdApoyo').val(idApoyo);  
-  }
-  infoApoyo = function (idApoyo){
-    var idApoyo=idApoyo;
-    $.post("index.php?c=apoyosrfc&a=InfoApoyo", {idApoyo: idApoyo}, function(info) {
-      $("#div-modal-content").html(info);
-    }); 
-  }
-  deshabilitar = function (){
-    $('#btnImportar').attr("disabled", true);
-  }
-</script>
+      </div><!--/modal-content--> 
+    </div><!--/modal-dialog--> 
+  </div><!--/modal-fade--> 
+  <script>
+    eliminarApoyo = function(idApoyo){
+      $('#txtIdApoyo').val(idApoyo);  
+    }
+    infoApoyo = function (idApoyo){
+      var idApoyo=idApoyo;
+      $.post("index.php?c=apoyosrfc&a=InfoApoyo", {idApoyo: idApoyo}, function(info) {
+        $("#divInfo").html(info);
+      }); 
+    }
+    deshabilitar = function (){
+      $('#btnImportar').attr("disabled", true);
+    }
+  </script>

@@ -5,7 +5,7 @@ class ProgramaController{
   private $model;
   public  $error;
   private $mensaje;
-
+  
   
   public function __CONSTRUCT(){
     $this->model = new Programa();
