@@ -210,7 +210,7 @@ class Apoyos
 	{
 		try 
 		{
-			$sql= $this->pdo->prepare("SELECT registroapoyo.idRegistroApoyo from registroApoyo, apoyos where registroapoyo.idRegistroApoyo=apoyos.idRegistroApoyo and idApoyo=$idApoyo");
+			$sql= $this->pdo->prepare("SELECT registroapoyo.idRegistroApoyo from registroapoyo, apoyos where registroapoyo.idRegistroApoyo=apoyos.idRegistroApoyo and idApoyo=$idApoyo");
 			$resultado=$sql->execute();
 			return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 		} catch (Exception $e) 

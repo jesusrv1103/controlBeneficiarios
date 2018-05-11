@@ -314,6 +314,7 @@ public function Guardar(){
    $this->model->Actualizar($apoyo);
    $this->model->RegistraActualizacion($apoyo);
    $this->mensaje="Se han actualizado correctamente los datos del Apoyo";
+   
  }else{
   $apoyo->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyo);
   $this->model->Registrar($apoyo);
