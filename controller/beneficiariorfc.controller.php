@@ -18,14 +18,18 @@ class BeneficiariorfcController{
   public function Index(){
    if(!isset($_REQUEST['periodo'])){
     $periodo='Ver todos';
+    echo "entre aqui";
   }else{
     $periodo=$_REQUEST['periodo'];
+    echo "entre ";
   }
   $beneficiarios = true;
   $beneficiario_rfc=true;
   $page="view/beneficiario_rfc/index.php";
   require_once 'view/index.php';
 }
+
+
 
 
 public function Consultas(){

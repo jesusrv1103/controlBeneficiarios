@@ -256,26 +256,38 @@ class Beneficiariorfc
 
 	public function Listar1($periodo)
 	{
-		echo $periodo;
-		echo "LIstar1";
-		$fechaInicio=$periodo.'2017-01-01';
-		$fechaFin=$periodo.'2017-12-31';
-		$stm = $this->pdo->prepare("SELECT * FROM beneficiariorfc b, registro r, localidades l WHERE r.idRegistro= b.idRegistro  AND r.estado='Activo' AND b.idLocalidad=l.idLocalidad AND DATE(a.fechaActualizacion) BETWEEN ? AND ?");
+		echo $periodo."hola1";
+		$fechaInicio=$periodo.'-01-01';
+		$fechaFin=$periodo.'-12-31';
+		$stm = $this->pdo->prepare("SELECT * FROM beneficiariorfc b, registro r, localidades l WHERE r.idRegistro= b.idRegistro  AND r.estado='Activo' AND b.idLocalidad=l.idLocalidad AND DATE(r.fechaAlta) BETWEEN ? AND ?");
 		$stm->execute(array($fechaInicio, $fechaFin));
 		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
+
+
+
+
 
 	public function Listar2($periodo)
 	{
-		echo $periodo;
-		echo "listar2";
+		echo $periodo."hola2";
+		try
+		{
+			$fechaInicio=$periodo.'-01-01';
+			$fechaFin=$periodo.'-12-31';
+			$stm = $this->pdo->prepare("SELECT * FROM beneficiariorfc b, registro r, localidades l , actualizacion a  WHERE r.idRegistro= b.idRegistro  AND r.estado='Activo' AND r.idRegistro=a.idRegistro AND b.idLocalidad=l.idLocalidad AND DATE(a.fechaActualizacion) BETWEEN ? AND ?");
+			$stm->execute(array($fechaInicio, $fechaFin));
 
-		$fechaInicio=$periodo.'2018-01-01';
-		$fechaFin=$periodo.'2018-12-31';
-		$stm = $this->pdo->prepare("SELECT * FROM beneficiariorfc b, registro r, localidades l WHERE r.idRegistro= b.idRegistro  AND r.estado='Activo' AND b.idLocalidad=l.idLocalidad AND DATE(a.fechaActualizacion) BETWEEN ? AND ?");
-		$stm->execute(array($fechaInicio, $fechaFin));
-		return $stm->fetchAll(PDO::FETCH_OBJ);
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+
 	}
+
 
 	
 
