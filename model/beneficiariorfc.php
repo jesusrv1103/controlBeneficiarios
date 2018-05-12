@@ -295,7 +295,13 @@ class Beneficiariorfc
 		$resultado=$sql->execute();
 		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 	}
-
+public function ObtenerIdBeneficiarioRFC($RFC)
+	{
+		$stm = $this->pdo
+		->prepare("SELECT * FROM beneficiariorfc WHERE RFC = ?");
+		$stm->execute(array($RFC));
+		return $stm->fetch(PDO::FETCH_OBJ);
+	}
 	public function ListarAsentamientos($localidad)
 	{
 		$stm = $this->pdo->prepare("SELECT * FROM asentamientos WHERE localidad=?");

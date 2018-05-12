@@ -47,7 +47,7 @@ public function Upload(){
       $tmp = $archivo['tmp_name'];
       $src = "./assets/files/".$nameArchivo;
       if(move_uploaded_file($tmp, $src)){
-        $this->Importar();
+        $this->Importar($src);
         if (is_file($src)) {
           //chmod($src,0777);
           unlink($src);
@@ -66,13 +66,13 @@ public function Upload(){
 }
 
 
-public function Importar(){
+public function Importar($src){
   try {
         //Agregamos la librería
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
       //Variable con el nombre del archivo
-    $nombreArchivo = './assets/files/apoyosrfc.xlsx';
-      // Cargo la hoja de cálculo
+    $nombreArchivo = $src;
+      // Cargo la hojca de cálculo
     $objPHPExcel = PHPExcel_IOFactory::load($nombreArchivo);
       //Asigno la hoja de calculo activa
     $objPHPExcel->setActiveSheetIndex(0);
