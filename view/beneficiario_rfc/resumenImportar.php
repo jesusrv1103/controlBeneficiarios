@@ -47,7 +47,7 @@
             <small><?php echo $_SESSION['numRegErroneos']; ?></small>
           )</h5>
 
-          <div class="row" style="margin-bottom: -40px;">
+          <div class="row" >
 
             <?php $idColl=0; foreach ($this->arrayError as $posicion) { $idColl++; ?>
 
@@ -106,58 +106,45 @@
 
           </div><!--/row-->
 
-          <!--h5 class="orange_bg"> <i class="fa fa-warning"></i> Registros duplicados (
-            <small>3</small>
+
+          <?php if($_SESSION['numActualizados']>0){ ?>
+          <h5 class="orange_bg"> <i class="fa fa-warning"></i>  Registros actualizados (
+            <small><?php echo $_SESSION['numActualizados']; ?></small>
           )</h5>
+
+           <?php foreach ($this->arrayActualizados as $posicion) : ?>
+
+
           <ul class="group_sortable1">
             <li>
               <span class=""><i class="fa fa-warning" style="color:#FF9800"></i></span>
-              <p><strong>AAAA830602MZSRVL02</strong>
-                - ALMA LETICIA ARANDA DE AVILA .
+              <p><strong><?php echo $posicion['RFC']; ?></strong>
+                - <?php echo $posicion['Nombres'] . $posicion['Primer apellido'] . $posicion['Segundo apellido']; ?> .
               </p>
             </li>
           </ul>
-          <ul class="group_sortable1">
-            <li>
-              <span class=""><i class="fa fa-warning" style="color:#FF9800"></i></span>
-              <p><strong>AAAA830602MZSRVL02</strong>
-                - ALMA LETICIA ARANDA DE AVILA .
-              </p>
-            </li>
-          </ul>
-          <ul class="group_sortable1">
-            <li>
-              <span class=""><i class="fa fa-warning" style="color:#FF9800"></i></span>
-              <p><strong>AAAA830602MZSRVL02</strong>
-                - ALMA LETICIA ARANDA DE AVILA .
-              </p>
-            </li>
-          </ul>
+          <?php endforeach;  } ?>
+          <?php if($_SESSION['numRegistrados']>0){ ?>
+
+
           <h5 class="green_bg"> <i class="fa fa-warning"></i> Registros completos (
-            <small>2</small>
+            <small><?php echo $_SESSION['numRegistrados']; ?></small>
           )</h5>
+          <?php foreach ($this->arrayRegistrados as $posicion) : ?>
           <ul class="group_sortable1">
             <li>
               <span class=""><i class="fa fa-check" style="color:#00C853"></i></span>
-              <p><strong>AAAA830602MZSRVL02</strong>
-                - ALMA LETICIA ARANDA DE AVILA .[
-                <a class="font-xs" href="javascript:void(0);">Ver detalles</a>]
+              <p><strong><?php echo $posicion['RFC']; ?></strong>
+                - <?php echo $posicion['Nombres'] . $posicion['Primer apellido'] . $posicion['Segundo apellido']; ?> .
               </p>
             </li>
           </ul>
-          <ul class="group_sortable1">
-            <li>
-              <span class=""><i class="fa fa-check" style="color:#00C853"></i></span>
-              <p><strong>AAAA830602MZSRVL02</strong>
-                - ALMA LETICIA ARANDA DE AVILA .[
-                <a class="font-xs" href="javascript:void(0);">Ver detalles</a>]
-              </p>
-            </li>
-          </ul>
-
-
-
+          <?php endforeach;  } ?>
         </div><!--todo_body-->
+
+
+        <!-- REGISTROS BIEN -->
+
       </div><!--col-12-->
     </div><!--/row-->
 
