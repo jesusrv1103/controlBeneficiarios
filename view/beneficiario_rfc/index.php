@@ -6,6 +6,7 @@
 <script type="text/javascript">
 
 </script>
+
 <div class="pull-left breadcrumb_admin clear_both">
  <div class="pull-left page_title theme_color">
    <h1>Administración</h1>
@@ -567,7 +568,7 @@ deshabilitar2 = function (){
 
 consultas=function(){
   periodo='2018';
-  $.post("index.php?c=beneficiario&a=Consultas", {periodo: periodo}, function(mensaje) {
+  $.post("index.php?c=beneficiariorfc&a=Consultas", {periodo: periodo}, function(mensaje) {
     console.log(mensaje);
     $("#div_tabla").html(mensaje);
   });
