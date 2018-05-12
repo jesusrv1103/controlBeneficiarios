@@ -19,7 +19,6 @@ class Apoyosrfc
 	public $fechaAlta;
 	public $estado;
 	public $idRegistroApoyo;
-	public $idBeneficiario;
 	public $idBeneficiarioRFC;
 	public $clavePresupuestal;
 
@@ -31,7 +30,7 @@ class Apoyosrfc
 	//Metdodo para listar
 	public function Listar()
 	{
-		$stm = $this->pdo->prepare("SELECT * FROM apoyosrfc,beneficiariorfc,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyosrfc.idBeneficiario=beneficiariorfc.idBeneficiarioRFC AND apoyosrfc.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyosrfc.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyosrfc.idPeriodicidad=periodicidad.idPeriodicidad AND apoyosrfc.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyosrfc.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo");
+		$stm = $this->pdo->prepare("SELECT * FROM apoyosrfc,beneficiariorfc,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyosrfc.idBeneficiarioRFC=beneficiariorfc.idBeneficiarioRFC AND apoyosrfc.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyosrfc.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyosrfc.idPeriodicidad=periodicidad.idPeriodicidad AND apoyosrfc.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyosrfc.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo");
 
 		$stm->execute(array());
 
@@ -50,7 +49,7 @@ class Apoyosrfc
 	public function Obtener($id)
 	{
 		$stm = $this->pdo
-		->prepare("SELECT * FROM apoyosrfc, beneficiariorfc, origen, tipoapoyo, caracteristicasapoyo, periodicidad, subprograma WHERE apoyosrfc.idOrigen=origen.idOrigen AND apoyosrfc.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyosrfc.idPeriodicidad=periodicidad.idPeriodicidad AND apoyosrfc.idSubprograma=subprograma.idSubprograma AND apoyosrfc.idBeneficiario=beneficiariorfc.idBeneficiarioRFC AND idApoyo = ?");
+		->prepare("SELECT * FROM apoyosrfc, beneficiariorfc, origen, tipoapoyo, caracteristicasapoyo, periodicidad, subprograma WHERE apoyosrfc.idOrigen=origen.idOrigen AND apoyosrfc.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyosrfc.idPeriodicidad=periodicidad.idPeriodicidad AND apoyosrfc.idSubprograma=subprograma.idSubprograma AND apoyosrfc.idBeneficiarioRFC=beneficiariorfc.idBeneficiarioRFC AND idApoyo = ?");
 		$stm->execute(array($id));
 		return $stm->fetch(PDO::FETCH_OBJ);
 	}
@@ -65,12 +64,12 @@ class Apoyosrfc
 	
 	public function Actualizar(Apoyosrfc $data)
 	{
-		$sql = "UPDATE apoyosrfc SET idBeneficiario = ?, idOrigen = ?, idSubprograma = ?, idCaracteristica = ?, importeApoyo = ?, fechaApoyo = ?, idPeriodicidad = ? WHERE idApoyo = ?";
+		$sql = "UPDATE apoyosrfc SET idBeneficiarioRFC = ?, idOrigen = ?, idSubprograma = ?, idCaracteristica = ?, importeApoyo = ?, fechaApoyo = ?, idPeriodicidad = ? WHERE idApoyo = ?";
 
 		$this->pdo->prepare($sql)
 		->execute(
 			array(
-				$data->idBeneficiario,
+				$data->idBeneficiarioRFC,
 				$data->idOrigen, 
 				$data->idSubprograma, 
 				$data->idCaracteristica, 
@@ -93,7 +92,7 @@ class Apoyosrfc
 		->execute(
 			array(
 				null,
-				$data->idBeneficiario,
+				$data->idBeneficiarioRFC,
 				$data->idOrigen, 
 				$data->idSubprograma,  
 				$data->idCaracteristica, 
@@ -119,7 +118,7 @@ class Apoyosrfc
 		$resultado=$sql->execute(
 			array(
 				null,
-				$data->idBeneficiario,
+				$data->idBeneficiarioRFC,
 				$data->idOrigen,  
 				$data->idSubprograma, 
 				$data->idCaracteristica, 
@@ -136,7 +135,7 @@ class Apoyosrfc
 
 	public function ObtenerInfoApoyo($idApoyo)
 	{
-		$sql= $this->pdo->prepare("SELECT * FROM apoyosrfc,beneficiariorfc,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyosrfc.idBeneficiario=beneficiariorfc.idBeneficiarioRFC AND apoyosrfc.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyosrfc.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyosrfc.idPeriodicidad=periodicidad.idPeriodicidad AND apoyosrfc.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyosrfc.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyosrfc.idApoyo=?;");
+		$sql= $this->pdo->prepare("SELECT * FROM apoyosrfc,beneficiariorfc,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyosrfc.idBeneficiarioRFC=beneficiariorfc.idBeneficiarioRFC AND apoyosrfc.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyosrfc.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyosrfc.idPeriodicidad=periodicidad.idPeriodicidad AND apoyosrfc.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyosrfc.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyosrfc.idApoyo=?;");
 		$resultado=$sql->execute(array($idApoyo));
 		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 	}
