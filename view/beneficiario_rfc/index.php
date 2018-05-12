@@ -88,7 +88,7 @@
                <th>RFC</th>
                <th>CURP</th>
                <th>Nombre de beneficiario</th>
-               <th>Localidad</th>
+               <th>Municipio</th>
                <td><center><b>Ver</b></center></td>
                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                <td><center><b>Editar</b></center></td>
@@ -104,7 +104,7 @@
                <td><?php echo $r->RFC ?> </td>
                <td><?php echo $r->curp ?> </td>
                <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
-               <td><?php echo $r->localidad ?> </td>
+               <td><?php echo $r->nombreMunicipio ?> </td>
 
                <td class="center">
                 <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiariorfc&a=Detalles&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
@@ -127,7 +127,7 @@
           <th>RFC</th>
           <th>CURP</th>
           <th>Nombre de beneficiario</th>
-          <th>Localidad</th>
+          <th>Municipio</th>
           <td><center><b>Ver</b></center></td>
           <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
           <td><center><b>Editar</b></center></td>

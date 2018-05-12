@@ -1,13 +1,13 @@
 
 <style type="text/css">
-.lbldetalle{
-  color:#424242;
-  font-weight: bold;
-}
-.h3subtitulo{
-  color:#2196F3;
-  font-weight: bold;
-}
+  .lbldetalle{
+    color:#424242;
+    font-weight: bold;
+  }
+  .h3subtitulo{
+    color:#2196F3;
+    font-weight: bold;
+  }
 </style>
 
 <script type="text/javascript">
@@ -21,8 +21,8 @@
   </div>
   <div class="pull-right">
     <ol class="breadcrumb">
-      <li><a href="?c=Inicio">Inicio</a></li>
-      <li><a href="?c=beneficiario">Beneficiarios</a></li>
+      <li><a href="?c=inicio">Inicio</a></li>
+      <li><a href="?c=beneficiariorfc">Beneficiarios</a></li>
       <li class="active">Detalles de beneficiario</li>
     </ol>
   </div>
@@ -32,19 +32,28 @@
     <div class="block-web">
       <div class="header">
         <div class="row" style="margin-top: 15px; margin-bottom: 12px;">
-          <div class="col-sm-12">
+          <div class="col-sm-7">
             <div class="actions"> </div>
             <h2 class="content-header theme_color" style="margin-top: -10px;">Resumen de importación</h2>
           </div>
-        </div>
-      </div>
+          <div class="col-md-5">
+            <div class="btn-group pull-right" style="margin-right: 10px;">
+              <b> 
+               <div class="btn-group">
+               <a href="?c=beneficiariorfc"><i class="fa fa-mail-reply"></i> Volver</a>
+               </div>
+             </b>
+           </div>
+         </div>
+       </div>
+     </div>
 
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="todo_body ">
-           <?php if($_SESSION['numRegErroneos']>0){ ?>
-           <h5 class="red_bg"> <i class="fa fa-warning"></i>  Error en el registro (
-            <small><?php echo $_SESSION['numRegErroneos']; ?></small>
+     <div class="row">
+      <div class="col-sm-12">
+        <div class="todo_body ">
+         <?php if($_SESSION['numRegErroneos']>0){ ?>
+         <h5 class="red_bg"> <i class="fa fa-warning"></i>  Error en el registro (
+          <small><?php echo $_SESSION['numRegErroneos']; ?></small>
           )</h5>
 
           <div class="row" >
@@ -110,89 +119,89 @@
           <?php if($_SESSION['numActualizados']>0){ ?>
           <h5 class="orange_bg"> <i class="fa fa-warning"></i>  Registros actualizados (
             <small><?php echo $_SESSION['numActualizados']; ?></small>
-          )</h5>
+            )</h5>
 
-           <?php foreach ($this->arrayActualizados as $posicion) : ?>
-
-
-          <ul class="group_sortable1">
-            <li>
-              <span class=""><i class="fa fa-warning" style="color:#FF9800"></i></span>
-              <p><strong><?php echo $posicion['RFC']; ?></strong>
-                - <?php echo $posicion['Nombres'] . $posicion['Primer apellido'] . $posicion['Segundo apellido']; ?> .
-              </p>
-            </li>
-          </ul>
-          <?php endforeach;  } ?>
-          <?php if($_SESSION['numRegistrados']>0){ ?>
+            <?php foreach ($this->arrayActualizados as $posicion) : ?>
 
 
-          <h5 class="green_bg"> <i class="fa fa-warning"></i> Registros completos (
-            <small><?php echo $_SESSION['numRegistrados']; ?></small>
-          )</h5>
-          <?php foreach ($this->arrayRegistrados as $posicion) : ?>
-          <ul class="group_sortable1">
-            <li>
-              <span class=""><i class="fa fa-check" style="color:#00C853"></i></span>
-              <p><strong><?php echo $posicion['RFC']; ?></strong>
-                - <?php echo $posicion['Nombres'] . $posicion['Primer apellido'] . $posicion['Segundo apellido']; ?> .
-              </p>
-            </li>
-          </ul>
-          <?php endforeach;  } ?>
-        </div><!--todo_body-->
+              <ul class="group_sortable1">
+                <li>
+                  <span class=""><i class="fa fa-warning" style="color:#FF9800"></i></span>
+                  <p><strong><?php echo $posicion['RFC']; ?></strong>
+                    - <?php echo $posicion['Nombres'] . $posicion['Primer apellido'] . $posicion['Segundo apellido']; ?> .
+                  </p>
+                </li>
+              </ul>
+            <?php endforeach;  } ?>
+            <?php if($_SESSION['numRegistrados']>0){ ?>
 
 
-        <!-- REGISTROS BIEN -->
+            <h5 class="green_bg"> <i class="fa fa-warning"></i> Registros completos (
+              <small><?php echo $_SESSION['numRegistrados']; ?></small>
+              )</h5>
+              <?php foreach ($this->arrayRegistrados as $posicion) : ?>
+                <ul class="group_sortable1">
+                  <li>
+                    <span class=""><i class="fa fa-check" style="color:#00C853"></i></span>
+                    <p><strong><?php echo $posicion['RFC']; ?></strong>
+                      - <?php echo $posicion['Nombres'] . $posicion['Primer apellido'] . $posicion['Segundo apellido']; ?> .
+                    </p>
+                  </li>
+                </ul>
+              <?php endforeach;  } ?>
+            </div><!--todo_body-->
 
-      </div><!--col-12-->
-    </div><!--/row-->
 
-  </div><!--/block-web-->
-</div><!--/row-col-md-12-->
-</div><!--/container clear_both padding_fix-->
-<div class="modal fade" id="modalBuscarCurp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content panel default blue_border horizontal_border_1">
-      <form action="?c=Beneficiario&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate>
-        <div class="modal-body">
-          <div class="row">
-            <div class="block-web">
-              <div class="header">
-                <h3 class="content-header h3subtitulo">&nbsp;Beneficiario por CURP</h3>
-              </div>
-              <div class="porlets-content" style="margin-bottom: -50px;">
-                <div class="form-group">
-                  <div class="col-sm-10">
-                    <input name="curp"  maxlength="18" id="curp" type="text" required parsley-regexp="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required parsley-rangelength="[18,18]"  onkeyup="mayus(this);" class="form-control" required placeholder="Ingrese la curp del beneficiario" autofocus>
-                  </div>
-                </div><!--/form-group-->
-              </div><!--/porlets-content-->
-            </div><!--/block-web-->
+            <!-- REGISTROS BIEN -->
+
+          </div><!--col-12-->
+        </div><!--/row-->
+
+      </div><!--/block-web-->
+    </div><!--/row-col-md-12-->
+  </div><!--/container clear_both padding_fix-->
+  <div class="modal fade" id="modalBuscarCurp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content panel default blue_border horizontal_border_1">
+        <form action="?c=Beneficiario&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate>
+          <div class="modal-body">
+            <div class="row">
+              <div class="block-web">
+                <div class="header">
+                  <h3 class="content-header h3subtitulo">&nbsp;Beneficiario por CURP</h3>
+                </div>
+                <div class="porlets-content" style="margin-bottom: -50px;">
+                  <div class="form-group">
+                    <div class="col-sm-10">
+                      <input name="curp"  maxlength="18" id="curp" type="text" required parsley-regexp="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required parsley-rangelength="[18,18]"  onkeyup="mayus(this);" class="form-control" required placeholder="Ingrese la curp del beneficiario" autofocus>
+                    </div>
+                  </div><!--/form-group-->
+                </div><!--/porlets-content-->
+              </div><!--/block-web-->
+            </div>
           </div>
-        </div>
-        <div class="modal-footer" style="margin-top: -10px;">
-          <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-sm btn-primary">Aceptar</button>
+          <div class="modal-footer" style="margin-top: -10px;">
+            <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
+              <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-sm btn-primary">Aceptar</button>
+            </div>
           </div>
-        </div>
-      </form>
-    </div><!--/modal-content-->
-  </div><!--/modal-dialog-->
-</div><!--/modal-fade-->
-<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="width: 60%;">
-    <div class="modal-content" id="div-modal-content">
-      <!--************************En esta sección se incluye el modal de informacion de registro y apoyo***************************-->
-    </div><!--/modal-content-->
-  </div><!--/modal-dialog-->
-</div><!--/modal-fade-->
-<script>
-  infoRegistro = function (idBeneficiario){
-    var idBeneficiario=idBeneficiario;
-    $.post("index.php?c=beneficiario&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
-      $("#div-modal-content").html(info);
-    });
-  }
-</script>
+        </form>
+      </div><!--/modal-content-->
+    </div><!--/modal-dialog-->
+  </div><!--/modal-fade-->
+  <div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 60%;">
+      <div class="modal-content" id="div-modal-content">
+        <!--************************En esta sección se incluye el modal de informacion de registro y apoyo***************************-->
+      </div><!--/modal-content-->
+    </div><!--/modal-dialog-->
+  </div><!--/modal-fade-->
+  <script>
+    infoRegistro = function (idBeneficiario){
+      var idBeneficiario=idBeneficiario;
+      $.post("index.php?c=beneficiario&a=Inforegistro", {idBeneficiario: idBeneficiario}, function(info) {
+        $("#div-modal-content").html(info);
+      });
+    }
+  </script>

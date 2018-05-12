@@ -91,10 +91,8 @@ public function Importar($src){
       $page="view/apoyos_curp/resumenImportar.php";
       require_once 'view/index.php';
     }else{
-      $page="view/apoyos_curp/resumenImportar.php";
-      require_once 'view/index.php';
       $this->mensaje="Se han importado correctamente los datos del archivo <strong>apoyos.xlsx</strong>";
-     // $this->Index();
+      $this->Index();
     }
   } catch (Exception $e) {
     $this->error=true;
@@ -233,17 +231,7 @@ public function LeerArchivo($objPHPExcel,$numRows){
     }
     //----------VALIDANDO CLAVE PRESUPUESTAL--------------------
     $apoyos->clavePresupuestal = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
-    if($apoyos->clavePresupuestal==""){
-      $row_array['Clave Presupuestal']="Campo vacío";
-      $numError++;
-    }else{
-      if(!is_numeric($apoyos->clavePresupuestal)){
-        $row_array['Clave Presupuestal']=$apoyos->clavePresupuestal;
-        $numError++;
-      }else{
-        $row_array['Clave Presupuestal']='0';
-      }
-    }
+    
     $apoyos->usuario=$_SESSION['usuario'];
     $apoyos->fechaAlta=date("Y-m-d H:i:s");
     $apoyos->direccion=$_SESSION['direccion'];
@@ -254,17 +242,18 @@ public function LeerArchivo($objPHPExcel,$numRows){
       $row_array['fila']=$numRow;
       $row_array['numeroErrores']=$numError;
       array_push($arrayError, $row_array); 
-    }
-    $consult = $this->model->ObtenerIdBen($curp);
-    $apoyos->idBeneficiario=$consult->idBeneficiario;
-    $apoyos->idRegistro=$this->model->RegistraDatosRegistro($apoyos);
-    $this->model->ImportarApoyo($apoyos);
-    $this->numRegistros=$this->numRegistros+1;
-    $row_array['Curp']=$curp;
-    array_push($arrayRegistrados, $row_array);
-  }
+    }else{
+     $consult = $this->model->ObtenerIdBen($curp);
+     $apoyos->idBeneficiario=$consult->idBeneficiario;
+     $apoyos->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyos);
+     $this->model->ImportarApoyo($apoyos);
+     $this->numRegistros=$this->numRegistros+1;
+     $row_array['Curp']=$curp;
+     array_push($arrayRegistrados, $row_array);
+   }
+ }
 
-  $numRow+=1;
+ $numRow+=1;
 } while (!$curp == null);
 $_SESSION['numRegErroneos']=$numRegErroneos; 
 $_SESSION['numRegistrados']=$this->numRegistros;
@@ -275,10 +264,10 @@ if($this->numRegistros>0)
   $this->arrayRegistrados=$arrayRegistrados;
 
 } catch (Exception $e) {
-  /*$this->error=true;
+  $this->error=true;
   $this->mensaje="Error al insertar datos del archivo";
-  $this->Index();*/
-  echo $e->getmessage();
+  $this->Index();
+  //echo $e->getmessage();
 }
 }
 

@@ -82,7 +82,7 @@ class Apoyos
 	public function Registrar(Apoyos $data)
 	{
 		$sql = "INSERT INTO apoyos
-		VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		$this->pdo->prepare($sql)
 		->execute(
@@ -110,7 +110,7 @@ class Apoyos
 	}
 
 	public function ImportarApoyo(Apoyos $data){
-		$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		$sql= $this->pdo->prepare("INSERT INTO apoyos VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
 		$resultado=$sql->execute(
 			array(
 				null,
