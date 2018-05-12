@@ -19,7 +19,7 @@ if(isset($_SESSION['tiempo'])) {
       session_unset();
       //Destruimos sesión.
       session_destroy(); 
-      echo  "<script type='text/javascript'> alert('Sesión cerrada por inactividad'); </script>";
+      echo  "<script type='text/javascript'> alert('Sesion cerrada por inactividad'); </script>";
       echo  "<script type='text/javascript'> window.location='./'; </script>";
       exit();
      } else {  // si no ha caducado la sesion, actualizamos
