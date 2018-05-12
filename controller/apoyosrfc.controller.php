@@ -7,6 +7,9 @@ class ApoyosrfcController{
   private $session;
   public $error;
   public $mensaje;
+  private $arrayError;
+  private $arrayRegistrados;
+  private $numRegistros=0;
 
   public function __CONSTRUCT(){
     $this->model = new Apoyosrfc();
@@ -82,7 +85,7 @@ public function Importar($src){
     if($_SESSION['numRegErroneos']>0){
       $apoyos = true;
       $apoyos_rfc=true;
-      $page="view/apoyos_rfc/index.php";
+      $page="view/apoyos_rfc/resumenImportar.php";
       require_once 'view/index.php';
     }else{
       $this->mensaje="Se han importado correctamente los datos del archivo <strong>apoyosrfc.xlsx</strong>";
@@ -97,10 +100,11 @@ public function Importar($src){
 
 public function LeerArchivo($objPHPExcel,$numRows){
  try{
-  //$this->model->Limpiar("apoyos");
   unset($_SESSION['numRegErroneos']);
   $numRow=2;
   $arrayError=array();
+  $arrayActualizados=array();
+  $arrayRegistrados=array();
   $numRegErroneos=0;
   do {
     $numError=0;
@@ -108,59 +112,72 @@ public function LeerArchivo($objPHPExcel,$numRows){
 
     //----------VALIDANDO RFC--------------------
     $rfc = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
-   // if(!$this->validate_curp($rfc)){
-    //  $row_array['RFC']=$rfc;
-     // $numError++;
-    //}else{
-     // $row_array['RFC']='0';
-    //}
+   if($rfc!=""){
+        if(!$this->valida_rfc($rfc)){
+          $row_array['RFC']=$rfc;
+          $numError++;
+        }else{
+          $row_array['RFC']='0';
+        }
+      }
     //----------VALIDANDO LA Id ORIGEN--------------------
     $apoyos->idOrigen = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
-    if(!is_numeric($apoyos->idOrigen)){
-      $row_array['Id Origen']=$apoyos->idOrigen;
+    if($apoyos->idOrigen==""){
+      $row_array['Id Origen']="Campo vacío";
       $numError++;
     }else{
-      if($apoyos->idOrigen>4 || $apoyos->idOrigen<1){
+      if(!is_numeric($apoyos->idOrigen)){
         $row_array['Id Origen']=$apoyos->idOrigen;
         $numError++;
       }else{
-        $row_array['Id Origen']='0';
+        if($apoyos->idOrigen>"4" || $apoyos->idOrigen<"1"){
+          $row_array['Id Origen']=$apoyos->idOrigen;
+          $numError++;
+        }else{
+          $row_array['Id Origen']='0';
+        }
       }
     }
     //----------VALIDANDO Id SUBPROGRAMA--------------------
     $apoyos->idSubprograma = $objPHPExcel->getActiveSheet()->getCell('C'.$numRow)->getCalculatedValue();
-    if(!is_numeric($apoyos->idSubprograma)){
-      $row_array['Id Subprograma']=$apoyos->idSubprograma;
+
+    if($apoyos->idSubprograma==""){
+      $row_array['Id Subprograma']="Campo vacío";
       $numError++;
     }else{
-      if($apoyos->idSubprograma==""){
-        $row_array['Id Subprograma']="Campo vacío";
+      if(!is_numeric($apoyos->idSubprograma)){
+        $row_array['Id Subprograma']=$apoyos->idSubprograma;
         $numError++;
-      }else{
+      }else{ 
         $row_array['Id idSubprograma']='0';
       }
     }
     //----------VALIDANDO Id CARACTERISTICA--------------------
     $apoyos->idCaracteristica = $objPHPExcel->getActiveSheet()->getCell('D'.$numRow)->getCalculatedValue();
-    if(!is_numeric($apoyos->idCaracteristica)){
-      $row_array['Id Caracteristica']=$apoyos->idCaracteristica;
+    if($apoyos->idCaracteristica==""){
+      $row_array['Id Caracteristica']="Campo vacío";
       $numError++;
     }else{
-      if($apoyos->idCaracteristica>54 || $apoyos->idCaracteristica<1){
+      if(!is_numeric($apoyos->idCaracteristica)){
         $row_array['Id Caracteristica']=$apoyos->idCaracteristica;
         $numError++;
       }else{
-        $row_array['Id Caracteristica']='0';
+        if($apoyos->idCaracteristica>"54" || $apoyos->idCaracteristica<"1"){
+          $row_array['Id Caracteristica']=$apoyos->idCaracteristica;
+          $numError++;
+        }else{
+          $row_array['Id Caracteristica']='0';
+        }
       }
     }
     //----------VALIDANDO IMPORTE APOYO--------------------
     $apoyos->importeApoyo = $objPHPExcel->getActiveSheet()->getCell('E'.$numRow)->getCalculatedValue();
-    if(!is_numeric($apoyos->importeApoyo)){
-      $row_array['Importe Apoyo']=$apoyos->importeApoyo;
+    if($apoyos->importeApoyo==""){
+      $row_array['Importe Apoyo']="Campo vacío";
       $numError++;
     }else{
-      if($apoyos->importeApoyo==""){
-        $row_array['Importe Apoyo']="Campo vacío";
+      if(!is_numeric($apoyos->importeApoyo)){
+        $row_array['Importe Apoyo']=$apoyos->importeApoyo;
         $numError++;
       }else{
         $row_array['Importe Apoyo']='0';
@@ -168,14 +185,14 @@ public function LeerArchivo($objPHPExcel,$numRows){
     }
     //----------VALIDANDO NUMEROS APOYO--------------------
     $apoyos->numerosApoyo = $objPHPExcel->getActiveSheet()->getCell('F'.$numRow)->getCalculatedValue();
-    if(!is_numeric($apoyos->numerosApoyo)){
-      $row_array['Numeros Apoyo']=$apoyos->numerosApoyo;
+    if($apoyos->numerosApoyo==""){
+      $row_array['Numeros Apoyo']="Campo vacío";
       $numError++;
     }else{
-      if($apoyos->numerosApoyo==""){
-        $row_array['Numeros Apoyo']="Campo vacío";
+      if(!is_numeric($apoyos->numerosApoyo)){
+        $row_array['Numeros Apoyo']=$apoyos->numerosApoyo;
         $numError++;
-      }else{
+      }else{     
         $row_array['Numeros Apoyo']='0';
       }
     }
@@ -189,52 +206,60 @@ public function LeerArchivo($objPHPExcel,$numRows){
     }
     //----------VALIDANDO ID PERIODICIDAD--------------------
     $apoyos->idPeriodicidad = $objPHPExcel->getActiveSheet()->getCell('H'.$numRow)->getCalculatedValue();
-    if(!is_numeric($apoyos->idPeriodicidad)){
-      $row_array['Id Periodicidad']=$apoyos->idPeriodicidad;
+    if($apoyos->idPeriodicidad==""){
+      $row_array['Id Periodicidad']="Campo vacío";
       $numError++;
     }else{
-      if($apoyos->idPeriodicidad>7 || $apoyos->idPeriodicidad<1){
+      if(!is_numeric($apoyos->idPeriodicidad)){
         $row_array['Id Periodicidad']=$apoyos->idPeriodicidad;
         $numError++;
       }else{
-        $row_array['Id Periodicidad']='0';
+        if($apoyos->idPeriodicidad>"7" || $apoyos->idPeriodicidad<"1"){
+          $row_array['Id Periodicidad']=$apoyos->idPeriodicidad;
+          $numError++;
+        }else{
+          $row_array['Id Periodicidad']='0';
+        }
       }
     }
     //----------VALIDANDO CLAVE PRESUPUESTAL--------------------
     $apoyos->clavePresupuestal = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
-    if(!is_numeric($apoyos->clavePresupuestal)){
-      $row_array['Clave Presupuestal']=$apoyos->clavePresupuestal;
-      $numError++;
-    }else{
-      if($apoyos->clavePresupuestal==""){
-        $row_array['Clave Presupuestal']="Campo vacío";
-        $numError++;
-      }else{
-        $row_array['Clave Presupuestal']='0';
-      }
-    }
-    if (!$rfc == null) {
+
       $apoyos->usuario=$_SESSION['usuario'];
       $apoyos->fechaAlta=date("Y-m-d H:i:s");
       $apoyos->direccion=$_SESSION['direccion'];
       $apoyos->estado="Activo";
-      $consult = $this->model->ObtenerIdBen($rfc);
-      $apoyos->idBeneficiario=$consult->idBeneficiarioRFC;
-      $apoyos->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyos);
-      $this->model->ImportarApoyoRFC($apoyos);
-    }
+
+    if (!$rfc == null) {
+     if($numError>0){
+      $numRegErroneos+=1;
+      $row_array['fila']=$numRow;
+      $row_array['numeroErrores']=$numError;
+      array_push($arrayError, $row_array); 
+    }else{
+     $consult = $this->model->ObtenerIdBen($rfc);
+     $apoyos->idBeneficiarioRFC=$consult->idBeneficiarioRFC;
+     $apoyos->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyos);
+     $this->model->ImportarApoyoRFC($apoyos);
+     $this->numRegistros=$this->numRegistros+1;
+     $row_array['RFC']=$rfc;
+     array_push($arrayRegistrados, $row_array);
+   }
+ }
+
     $numRow+=1;
   } while (!$rfc == null);
-  $_SESSION['numRegErroneos']=$numRegErroneos; 
+$_SESSION['numRegErroneos']=$numRegErroneos; 
+$_SESSION['numRegistrados']=$this->numRegistros;
 
-  if($numRegErroneos>0){
+if($numRegErroneos>0)
+ $this->arrayError=$arrayError;
+if($this->numRegistros>0)
+  $this->arrayRegistrados=$arrayRegistrados;
 
-   $this->arrayError=$arrayError;
-
- }
 } catch (Exception $e) {
   $this->error=true;
-  $this->mensaje="Ha ocurrido un error al leer el archivo";
+  $this->mensaje="Error al insertar datos del archivo";
   $this->Index();
 }
 }
@@ -327,7 +352,48 @@ public function Guardar(){
 }
 }
 
-
+public function valida_rfc($valor){
+       $valor = str_replace("-", "", $valor); 
+       $cuartoValor = substr($valor, 3, 1);
+       //RFC sin homoclave
+       if(strlen($valor)==10){
+           $letras = substr($valor, 0, 4); 
+           $numeros = substr($valor, 4, 6);
+           if (ctype_alpha($letras) && ctype_digit($numeros)) { 
+               return true;
+           }
+           return false;            
+       }
+       // Sólo la homoclave
+       else if (strlen($valor) == 3) {
+           $homoclave = $valor;
+           if(ctype_alnum($homoclave)){
+               return true;
+           }
+           return false;
+       }
+       //RFC Persona Moral.
+       else if (ctype_digit($cuartoValor) && strlen($valor) == 12) { 
+           $letras = substr($valor, 0, 3); 
+           $numeros = substr($valor, 3, 6); 
+           $homoclave = substr($valor, 9, 3); 
+           if (ctype_alpha($letras) && ctype_digit($numeros) && ctype_alnum($homoclave)) { 
+               return true; 
+           } 
+           return false;
+       //RFC Persona Física. 
+       } else if (ctype_alpha($cuartoValor) && strlen($valor) == 13) { 
+           $letras = substr($valor, 0, 4); 
+           $numeros = substr($valor, 4, 6);
+           $homoclave = substr($valor, 10, 3); 
+           if (ctype_alpha($letras) && ctype_digit($numeros) && ctype_alnum($homoclave)) { 
+               return true; 
+           }
+           return false; 
+       }else { 
+           return false; 
+       }  
+}//fin validaRFC
 public function ListarSubprogramas(){
   header('Content-Type: application/json');
   $idPrograma=$_REQUEST['idPrograma'];
