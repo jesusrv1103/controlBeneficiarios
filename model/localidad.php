@@ -85,6 +85,7 @@ class Localidad
 				)
 			);
 	}
+	
 	//Metdod para registrar la localidad
 	public function Registrar(Localidad $data)
 	{

@@ -6,57 +6,69 @@ class ApoyosrfcController{
   private $model;
   private $session;
   public $error;
+  public $mensaje;
+
   public function __CONSTRUCT(){
     $this->model = new Apoyosrfc();
   }
+
   public function Index(){
    $apoyos = true;
    $apoyos_rfc = true;
    $page="view/apoyos_rfc/index.php";
    require_once 'view/index.php';
  }
+
  public function Crud(){
-  $apoyo = new Apoyosrfc();
-  if(isset($_REQUEST['idApoyo'])){
-    $_REQUEST['idApoyo'];
-    $apoyo = $this->model->Obtener($_REQUEST['idApoyo']);
+  try {
+    $apoyo = new Apoyosrfc();
+    if(isset($_REQUEST['idApoyo'])){
+      $_REQUEST['idApoyo'];
+      $apoyo = $this->model->Obtener($_REQUEST['idApoyo']);
+    }
+    $apoyos = true;
+    $apoyos_rfc = true;
+    $page="view/apoyos_rfc/apoyos.php";
+    require_once 'view/index.php';
+  } catch (Exception $e) {
+    $this->error=true;
+    $this->mensaje="Ha ocurrido un error al intentar obtener los datos del apoyo";
   }
-  $apoyos = true;
-  $apoyos_rfc = true;
-  $page="view/apoyos_rfc/apoyos.php";
-  require_once 'view/index.php';
 }
 
 public function Upload(){
-  if(!isset($_FILES['file']['name'])){
-    header('Location: ./?c=apoyosrfc');
-  }
-  $archivo=$_FILES['file'];
-  if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
-    if($archivo['name']=="apoyosrfc.xlsx"){
+  try {
+    if(!isset($_FILES['file']['name'])){
+      header('Location: ./?c=apoyosrfc');
+    }
+    $archivo=$_FILES['file'];
+    if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
       $nameArchivo = $archivo['name'];
       $tmp = $archivo['tmp_name'];
-      $archivo['type'];
       $src = "./assets/files/".$nameArchivo;
       if(move_uploaded_file($tmp, $src)){
         $this->Importar();
-      }  
-    }else{
-      $this->error=true;
-      $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>apoyosrfc.xlsx</strong>";
-      $this->Index();
+        if (is_file($src)) {
+          //chmod($src,0777);
+          unlink($src);
+        }  
+      }else{
+        $this->error=true;
+        $this->mensaje=$this->mensaje."El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
+        $this->Index();
+      }
     }
-  }else{
-    $this->error=true;
-    $this->mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
-    $this->Index();
-  }
+  } catch (Exception $e) {
+   $this->error=true;
+   $this->mensaje="Ocurrio un error al subir el archivo";
+   $this->Index();
+ }
 }
 
 
 public function Importar(){
-  if (file_exists("./assets/files/beneficiarios.xlsx")) {
-      //Agregamos la librería
+  try {
+        //Agregamos la librería
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
       //Variable con el nombre del archivo
     $nombreArchivo = './assets/files/apoyosrfc.xlsx';
@@ -76,15 +88,10 @@ public function Importar(){
       $this->mensaje="Se han importado correctamente los datos del archivo <strong>apoyosrfc.xlsx</strong>";
       $this->Index();
     }
-
-  }
-  else {
+  } catch (Exception $e) {
     $this->error=true;
-    $this->mensaje="El archivo <strong>apoyosrfc.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
-    $page="view/apoyos_rfc/index.php";
-    $apoyos = true;
-    $apoyos_rfc=true;
-    require_once 'view/index.php';
+    $this->mensaje="Ocurrio un error al importar el archivo";
+    $this->Index();
   }
 }
 
@@ -226,11 +233,9 @@ public function LeerArchivo($objPHPExcel,$numRows){
 
  }
 } catch (Exception $e) {
- $this->mensaje="error al importar los datos de los apoyos";
- $page="view/apoyos_rfc/index.php";
- $administracion=true;
- $apoyos=true;
- require_once 'view/index.php';
+  $this->error=true;
+  $this->mensaje="Ha ocurrido un error al leer el archivo";
+  $this->Index();
 }
 }
 
@@ -274,50 +279,52 @@ function is_sexo_curp($sexo){
  }     
  return false; 
 }
+
 public function Eliminar(){
-  $this->model->Eliminar($_REQUEST['idApoyo']);
-  
-  $apoyos = true;
-  $page="view/apoyos_rfc/index.php";
-  $this->mensaje="Se ha eliminado correctamente el apoyo";
-  require_once 'view/index.php';
+  try {
+   $this->model->Eliminar($_REQUEST['idApoyo']);
+   $this->mensaje="Se ha eliminado correctamente el apoyo";
+   $this->Index();
+ } catch (Exception $e) {
+  $this->error=true;
+  $this->mensaje="Ha ocurrido un error al intentar eliminar el apoyo";
+  $this->Index();
 }
+}
+
 public function Guardar(){
-  $apoyo= new Apoyosrfc();
-  $apoyo->idApoyo = $_REQUEST['idApoyo'];
-  $apoyo->idBeneficiario = $_REQUEST['idBeneficiario'];
-  $apoyo->idOrigen = $_REQUEST['idOrigen'];
-  $apoyo->idSubprograma = $_REQUEST['idSubprograma'];
-  $apoyo->idCaracteristica = $_REQUEST['idCaracteristica'];
-  $apoyo->importeApoyo = $_REQUEST['importeApoyo'];
-  $apoyo->numeroApoyo = 2;
-  $apoyo->fechaApoyo = $_REQUEST['fechaApoyo'];
-  $apoyo->idPeriodicidad = $_REQUEST['idPeriodicidad'];
-  $apoyo->usuario=$_SESSION['usuario'];
-  $apoyo->direccion=$_SESSION['direccion'];
-  $apoyo->fechaAlta=date("Y-m-d H:i:s");
-  $apoyo->estado="ACTIVO";
-
-
-  if($apoyo->idApoyo>0){
-
-    $idRegistro=$this->model->ObtenerIdRegistro($apoyo->idApoyo);
-    $apoyo->idRegistroApoyo=$idRegistro->idRegistroApoyo;
-    $this->model->Actualizar($apoyo);
-    $this->model->RegistraActualizacion($apoyo);
-    $this->mensaje="Se han actualizado correctamente los datos del apoyo";
-  }else{
-
-   $apoyo->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyo);
-   $this->model->Registrar($apoyo);
-   $this->mensaje="Se han registrado correctamente los datos del apoyo";
-
- } 
-
- $apoyos = true;
- $apoyos_rfc=true;
- $page="view/apoyos_rfc/index.php";
- require_once 'view/index.php';
+  try {
+    $apoyo= new Apoyosrfc();
+    $apoyo->idApoyo = $_REQUEST['idApoyo'];
+    $apoyo->idBeneficiario = $_REQUEST['idBeneficiario'];
+    $apoyo->idOrigen = $_REQUEST['idOrigen'];
+    $apoyo->idSubprograma = $_REQUEST['idSubprograma'];
+    $apoyo->idCaracteristica = $_REQUEST['idCaracteristica'];
+    $apoyo->importeApoyo = $_REQUEST['importeApoyo'];
+    $apoyo->numeroApoyo = 2;
+    $apoyo->fechaApoyo = $_REQUEST['fechaApoyo'];
+    $apoyo->idPeriodicidad = $_REQUEST['idPeriodicidad'];
+    $apoyo->usuario=$_SESSION['usuario'];
+    $apoyo->direccion=$_SESSION['direccion'];
+    $apoyo->fechaAlta=date("Y-m-d H:i:s");
+    $apoyo->estado="ACTIVO";
+    if($apoyo->idApoyo>0){
+      $idRegistro=$this->model->ObtenerIdRegistro($apoyo->idApoyo);
+      $apoyo->idRegistroApoyo=$idRegistro->idRegistroApoyo;
+      $this->model->Actualizar($apoyo);
+      $this->model->RegistraActualizacion($apoyo);
+      $this->mensaje="Se han actualizado correctamente los datos del apoyo";
+    }else{
+     $apoyo->idRegistroApoyo=$this->model->RegistraDatosRegistro($apoyo);
+     $this->model->Registrar($apoyo);
+     $this->mensaje="Se han registrado correctamente los datos del apoyo";
+   } 
+   $this->Index();
+ } catch (Exception $e) {
+  $this->error=true;
+  $this->mensaje="Ha ocurrido un error al intentar guardar el apoyo";
+  $this->Index();
+}
 }
 
 
@@ -338,7 +345,7 @@ public function ListarSubprogramas(){
 }
 
 public function InfoApoyo(){
-  
+
   $idApoyo = $_POST['idApoyo'];
   $infoApoyo=$this->model->ObtenerInfoApoyo($idApoyo);
   $infoActualizacion=$this->model->ListarActualizacion($infoApoyo->idRegistroApoyo);

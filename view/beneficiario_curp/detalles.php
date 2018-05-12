@@ -38,12 +38,14 @@
              <div class="btn-group">
               <a  href="#modalInfo"  data-target="#modalInfo" data-toggle="modal" onclick="infoRegistro(<?php echo $ben->idBeneficiario; ?>)" class="btn btn-sm tooltips btn-default" style="margin-right: 10px;" data-original-title="Ver información de registro y actualizaciones" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-info-circle"  role="button"></i></i>&nbsp;Ver info</a>
             </div>
+            <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
             <div class="btn-group">
               <a class="btn btn-sm tooltips btn-success dropdown-toggle"  data-toggle="modal" data-target="#modalBuscarCurp" href="#modalBuscarCurp" style="margin-right: 10px;" data-original-title="Nuevo beneficiario con curp" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-plus"></i></i>&nbsp;Registrar</a>
             </div>
             <div class="btn-group">
               <a href="?c=Beneficiario&a=Crud&idBeneficiario=<?php echo $ben->idBeneficiario;?>" class="btn btn-sm tooltips btn-primary dropdown-toggle" style="margin-right: 10px;" data-original-title="Editar beneficiario" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-edit"></i></i>&nbsp;Editar</a>
             </div>
+            <?php } ?>
           </b>
         </div>
       </div>    

@@ -32,12 +32,11 @@
         <div class="porlets-content">
           <form action="?c=Localidad&a=Guardar<?php if(isset($nuevoRegistro)){ echo "&nuevoRegistro=true"; } ?>" method="POST" class="form-horizontal row-border"  parsley-validate novalidate>
 
-            <?php if(isset($error)){ ?>
+            <?php if(isset($this->error)){ ?>
               <div class="form-group">
                 <div class="col-sm-6 col-sm-offset-3">
                   <div class="alert alert-danger">
-                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                    <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
+                    <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
                   </div>
                 </div>
               </div><!--/form-group-->
@@ -45,11 +44,10 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Clave de localidad<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-               <input autofocus name="idLocalidad" id="idLocalidad" parsley-type="number" class="form-control" required value="<?php echo $localidad->idLocalidad != null ? $localidad->idLocalidad  : "";  ?>" placeholder="Ingrese la clave de la localidad" <?php if($localidad->idLocalidad != null){ ?> readonly <?php } ?>/>
+               <input autofocus name="idLocalidad" id="idLocalidad" parsley-type="number" class="form-control" required value="<?php echo $localidad->idLocalidad != null ? $localidad->idLocalidad  : "";  ?>" placeholder="Ingrese la clave de la localidad" <?php if($localidad->idLocalidad != null && !isset($nuevoRegistro)){ ?> readonly <?php } ?>/>
              </div>
            </div><!--/form-group-->
            <div class="form-group">
-
            <label class="col-sm-3 control-label">Municipio<strog class="theme_color">*</strog></label>
            <div class="col-sm-6">
             <input name="municipio" type="text" class="form-control" required value="<?php echo $localidad->idLocalidad != null ? $localidad->municipio : "";  ?>" placeholder="Ingrese el nombre del municipio"/>

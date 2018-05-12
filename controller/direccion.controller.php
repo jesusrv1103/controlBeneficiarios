@@ -7,59 +7,69 @@ class DireccionController{
   public $error;
   private $mensaje;
 
-  //Constructor
   public function __CONSTRUCT(){
     $this->model = new Direccion();
   }
-  //Index
+
   public function Index(){
     $administracion=true;
     $direcciones=true;
-   $page="view/direccion/index.php"; //Vista principal donde se enlistan los programas
-   require_once 'view/index.php';
- }
- public function Crud(){
-   $direccion = new Direccion();
-   if(isset($_REQUEST['nuevoRegistro'])){
-    $nuevoRegistro=true;
+    $page="view/direccion/index.php"; 
+    require_once 'view/index.php';
   }
-  if(isset($_REQUEST['idDireccion'])){
-    $direccion = $this->model->Obtener($_REQUEST['idDireccion']);
- // echo $_REQUEST['idDireccion'];
-  }
-  $administracion=true;
-  $direcciones=true;
-  $page="view/direccion/direccion.php";
-  require_once 'view/index.php';
-}
-public function Upload(){
-  if(!isset($_FILES['file']['name'])){
-    header('Location: ./?c=direccion');
-  }
-  $archivo=$_FILES['file'];
-  if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
-    if($archivo['name']=="direcciones.xlsx"){
-      $nameArchivo = $archivo['name'];
-      $tmp = $archivo['tmp_name'];
-      $archivo['type'];
-      $src = "./assets/files/".$nameArchivo;
-      if(move_uploaded_file($tmp, $src)){
-        $this->Importar();
-      }  
-    }else{
-      $this->error=true;
-      $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>direcciones.xlsx</strong>";
-      $this->Index();
-    }
-  }else{
-    $this->error=true;
-    $this->mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
-    $this->Index();
-  }
-}
-public function Importar(){
-  if (file_exists("./assets/files/direcciones.xlsx")) {
 
+  public function Crud(){
+    try {
+      $direccion = new Direccion();
+      if(isset($_REQUEST['nuevoRegistro'])){
+        $nuevoRegistro=true;
+      }
+      if(isset($_REQUEST['idDireccion'])){
+        $direccion = $this->model->Obtener($_REQUEST['idDireccion']);
+      }
+      $administracion=true;
+      $direcciones=true;
+      $page="view/direccion/direccion.php";
+      require_once 'view/index.php';
+    } catch (Exception $e) {
+
+    }
+  }
+
+  public function Upload(){
+    try {
+      if(!isset($_FILES['file']['name'])){
+        header('Location: ./?c=direccion');
+      }
+      $archivo=$_FILES['file'];
+      if($archivo['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
+        if($archivo['name']=="direcciones.xlsx"){
+          $nameArchivo = $archivo['name'];
+          $tmp = $archivo['tmp_name'];
+          $archivo['type'];
+          $src = "./assets/files/".$nameArchivo;
+          if(move_uploaded_file($tmp, $src)){
+            $this->Importar();
+          }  
+        }else{
+          $this->error=true;
+          $this->mensaje="El nombre del archivo es invalido, porfavor verifique que el nombre del archivo sea <strong>direcciones.xlsx</strong>";
+          $this->Index();
+        }
+      }else{
+        $this->error=true;
+        $this->mensaje="El tipo de archivo es invalido, porfavor verifique que el archivo sea <strong>.xlsx</strong>";
+        $this->Index();
+      }
+    } catch (Exception $e) {
+     $this->error=true;
+     $this->mensaje="Se ha producido un error al intentar subir el archivo";
+     $this->Index();
+   }
+ }
+
+ public function Importar(){
+  if (file_exists("./assets/files/direcciones.xlsx")) {
           //Agregamos la librería
     require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
         //Variable con el nombre del archivo
@@ -72,21 +82,14 @@ public function Importar(){
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
     $this->LeerArchivo($objPHPExcel,$numRows);
     $this->mensaje="Se ha leído correctamente el archivo <strong>direcciones.xlsx</strong>.<br><i class='fa fa-check'></i> Se han importado correctamente los datos de direcciones.";
-    $page="view/direccion/index.php";
-    $direcciones = true;
-    $administracion=true;
-    require_once 'view/index.php';
-  }
-        //si por algo no cargo el archivo bak_
-  else {
+    $this->Index();
+  } else {
     $this->error=true;
     $this->mensaje="El archivo <strong>direcciones.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
-    $page="view/direccion/index.php";
-    $direcciones = true;
-    $administracion=true;
-    require_once 'view/index.php';
+    $this->Index();
   }
 }
+
 public function LeerArchivo($objPHPExcel,$numRows){
   try{
     $this->model->Limpiar("direccion");
@@ -101,56 +104,58 @@ public function LeerArchivo($objPHPExcel,$numRows){
       if (!$cat->direccion == null) {
        //$this->model->Check(0);
        $this->model->ImportarDirecciones($cat);
-
       // $this->model->Check(1);
-
      }
      $numRow+=1;
    } while (!$cat->direccion == null);
 
  }catch (Exception $e) {
-  $this->mensaje="error";
-  $page="view/direccion/index.php";
-  $direcciones = true;
-  $administracion=true;
-  require_once 'view/index.php';
+  $this->error=true;
+  $this->mensaje="Ha ocurrido un error al leer el archivo";
+  $this->Index();
 }
 }
+
 public function Eliminar(){
-  if (isset($_POST['idDireccion'])){
-   $this->model->Eliminar($_POST['idDireccion']);
-   $administracion=true;
-   $direcciones=true;
-   $this->mensaje="La dirección se ha dado correctamente de baja";
-   $page="view/direccion/index.php";
-   require_once 'view/index.php';
- }
-}
-public function Guardar(){
-  $direccion= new Direccion();
-  $direccion->idDireccion = $_REQUEST['idDireccion'];
-  $direccion->direccion = $_REQUEST['direccion'];
-  $direccion->descripcion = $_REQUEST['descripcion'];
-  $direccion->titular = $_REQUEST['titular'];
-  $direccion->estado = "ACTIVO";
-  if($direccion->idDireccion > 0){
-    $this->model->Actualizar($direccion);
-    $this->mensaje="Se han actualizado correctamente los datos de la dirección <strong>$direccion->direccion</strong>";
-  } else {
-    $consulta=$this->model->VerificaDireccion($direccion->direccion);
-    if ($consulta==null) {
-     $this->model->Registrar($direccion);
-     $this->mensaje="Se ha registrado correctamente los datos de la dirección <strong>$direccion->direccion</strong>";
-   }else{
+  try {
+    $this->model->Eliminar($_POST['idDireccion']);
+    $this->mensaje="La dirección se ha dado correctamente de baja";
+    $this->Index();
+  } catch (Exception $e) {
     $this->error=true;
-    $this->mensaje="La dirección <b>$direccion->direccion</b> ya existe, ingrese otro nombre de dirección";
-    $page="view/direccion/direccion.php";
-    require_once "view/index.php";
+    $this->mensaje="Ha ocurrido un error al intentar eliminar la dirección";
+    $this->Index();
   }
 }
-$direcciones = true;
-$administracion=true;
-$page="view/direccion/index.php";
-require_once 'view/index.php';
+
+public function Guardar(){
+  try {
+    $direccion= new Direccion();
+    $direccion->idDireccion = $_REQUEST['idDireccion'];
+    $direccion->direccion = $_REQUEST['direccion'];
+    $direccion->descripcion = $_REQUEST['descripcion'];
+    $direccion->titular = $_REQUEST['titular'];
+    $direccion->estado = "ACTIVO";
+    if($direccion->idDireccion > 0){
+      $this->model->Actualizar($direccion);
+      $this->mensaje="Se han actualizado correctamente los datos de la dirección <strong>$direccion->direccion</strong>";
+    } else {
+      $consulta=$this->model->VerificaDireccion($direccion->direccion);
+      if ($consulta==null) {
+       $this->model->Registrar($direccion);
+       $this->mensaje="Se ha registrado correctamente los datos de la dirección <strong>$direccion->direccion</strong>";
+     }else{
+      $this->error=true;
+      $this->mensaje="La dirección <b>$direccion->direccion</b> ya existe, ingrese otro nombre de dirección";
+      $page="view/direccion/direccion.php";
+      require_once "view/index.php";
+    }
+  }
+  $this->Index();
+} catch (Exception $e) {
+ $this->error=true;
+ $this->mensaje="Ha ocurrido un error al intentar guardar la dirección";
+ $this->Index();
+}
 }
 }

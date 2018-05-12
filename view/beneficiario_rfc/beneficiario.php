@@ -15,8 +15,8 @@
 	</div>
 	<div class="pull-right">
 		<ol class="breadcrumb">
-			<li><a href="?c=Inicio">Inicio</a></li>
-			<li><a href="?c=Beneficiario">Beneficiario con RFC</a></li>
+			<li><a href="?c=inicio">Inicio</a></li>
+			<li><a href="?c=beneficiariorfc">Beneficiario con RFC</a></li>
 			<li class="active"><?php echo $beneficiario->idBeneficiarioRFC != null ? "Actualizar beneficiario" : "Registrar beneficiario con RFC"; ?></li>
 		</ol>
 	</div>

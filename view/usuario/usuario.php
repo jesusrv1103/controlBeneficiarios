@@ -32,12 +32,11 @@
       <div class="porlets-content">
         <form action="?c=Usuario&a=Guardar" method="post" class="form-horizontal row-border" parsley-validate novalidate>
           <input hidden name="idUsuario"  value="<?php echo $usuario->idUsuario != null ? $usuario->idUsuario : 0;  ?>"/>
-          <?php if(isset($error)){ ?>
+          <?php if(isset($this->error)){ ?>
           <div class="form-group">
             <div class="col-sm-6 col-sm-offset-3">
               <div class="alert alert-danger">
-                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
+                <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
               </div>
             </div>
           </div><!--/form-group-->

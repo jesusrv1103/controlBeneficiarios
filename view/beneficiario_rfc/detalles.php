@@ -17,7 +17,7 @@
   <div class="pull-right">
     <ol class="breadcrumb">
       <li><a href="?c=Inicio">Inicio</a></li>
-      <li><a href="?c=beneficiario">Beneficiarios</a></li>
+      <li><a href="?c=beneficiariorfc">Beneficiarios</a></li>
       <li class="active">Detalles de beneficiario</li>
     </ol>
   </div>
@@ -37,13 +37,14 @@
              <div class="btn-group">
               <a  href="#modalInfo"  data-target="#modalInfo" data-toggle="modal" onclick="infoRegistro(<?php echo $ben->idBeneficiarioRFC; ?>)" class="btn btn-sm tooltips btn-default" style="margin-right: 10px;" data-original-title="Ver información de registro y actualizaciones" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-info-circle"  role="button"></i></i>&nbsp;Ver info</a>
             </div>
+            <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
             <div class="btn-group">
               <a class="btn btn-sm tooltips btn-success dropdown-toggle"  data-toggle="modal" data-target="#modalBuscarRFC" href="#modalBuscarRFC" style="margin-right: 10px;" data-original-title="Nuevo beneficiario con RFC" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-plus"></i></i>&nbsp;Registrar</a>
             </div>
             <div class="btn-group">
-
               <a href="?c=Beneficiariorfc&a=Crud&idBeneficiarioRFC=<?php echo $ben->idBeneficiarioRFC;?>" class="btn btn-sm tooltips btn-primary dropdown-toggle" style="margin-right: 10px;" data-original-title="Editar beneficiario" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-edit"></i></i>&nbsp;Editar</a>
             </div>
+            <?php } ?>
             
           </b>
         </b>
@@ -340,7 +341,7 @@
 <div class="modal fade" id="modalBuscarRFC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content panel default blue_border horizontal_border_1">
-     <form action="?c=Beneficiariorfc&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate>
+     <form action="?c=beneficiariorfc&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate id="form-rfc">
       <div class="modal-body"> 
         <div class="row">
           <div class="block-web">
@@ -374,7 +375,61 @@
     </div><!--/modal-content--> 
   </div><!--/modal-dialog--> 
 </div><!--/modal-fade--> 
-<script>
+
+<div class="modal fade" id="mActivarBeneficiario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content panel default horizontal_border_1">
+      <div class="modal-body">
+        <div class="row">
+          <div class="block-web">
+            <div class="header">
+              <h3 class="content-header h3subtitulo">&nbsp;Activar Beneficiario</h3>
+            </div>
+            <div class="porlets-content" style="margin-bottom: -50px;">
+              <h4>El beneficiario que esta ingresando ya ha sido dado de alta en el sistema anteriormente y ha sido eliminado. ¿Desea volverlo a activar?</h4>
+            </div><!--/porlets-content-->
+          </div><!--/block-web-->
+        </div>
+      </div>
+      <div class="modal-footer" style="margin-top: -10px;">
+        <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
+          <form action="?c=beneficiariorfc&a=ActivarBeneficiario" enctype="multipart/form-data" method="post">
+            <input hidden name="rfc" id="txtRfcActivar">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-info">Activar</button>
+          </form>
+        </div>
+      </div>
+    </div><!--/modal-content-->
+  </div><!--/modal-dialog-->
+</div><!--/modal-fade-->
+
+<script src="assets/js/jquery-2.1.0.js"></script>
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+    $('#form-rfc').submit(function() {
+      VerificarBeneficiario();
+      return false;
+    });
+
+  });
+
+  var rfc="";
+  VerificarBeneficiario = function(){
+    rfc=$("#RFC").val();
+    $.post("index.php?c=beneficiariorfc&a=VerificarBeneficiario", {rfc: rfc}, function(respuesta) {
+      console.log(respuesta);
+      if(respuesta=="Inactivo"){
+        $('#txtRfcActivar').val(rfc);
+        $('#mActivarBeneficiario').modal('toggle');
+      }else {
+        location.href="?c=beneficiariorfc&a=Crud&RFC="+rfc;
+      }
+    });
+  }
+
   infoRegistro = function (idBeneficiario){
     var idBeneficiario=idBeneficiario;
     $.post("index.php?c=beneficiariorfc&a=Inforegistro", {idBeneficiarioRFC: idBeneficiario}, function(info) {

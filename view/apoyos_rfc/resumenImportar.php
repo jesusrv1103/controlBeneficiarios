@@ -10,10 +10,6 @@
 }
 </style>
 
-<script type="text/javascript">
-  window.history.forward();
-</script>
-
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
     <h1>Apoyos</h1>
@@ -22,7 +18,7 @@
   <div class="pull-right">
     <ol class="breadcrumb">
       <li><a href="?c=Inicio">Inicio</a></li>
-      <li><a href="?c=apoyos">Apoyos</a></li>
+      <li><a href="?c=apoyosrfc">Apoyos</a></li>
       <li class="active">Detalles de apoyo</li>
     </ol>
   </div>

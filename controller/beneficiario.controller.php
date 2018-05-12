@@ -172,7 +172,6 @@ class BeneficiarioController{
           $page="view/beneficiario_curp/beneficiario.php";
           require_once 'view/index.php';
         }else{
-          $beneficiario->idBeneficiario;
           $warning=true;
           $this->mensaje="El beneficiario ya esta registrado, <b>verifíque</b> que sus datos y la información de registro sean correctos y esten actualizados si no es así, porfavor, <a href='?c=Beneficiario&a=Crud&idBeneficiario=".$verificaBen->idBeneficiario."'>actualice la información</a>.";      
           $beneficiarios = false;

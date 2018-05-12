@@ -27,21 +27,21 @@
          </div>
        </div>
      </div>
-     <?php if(isset($mensaje) && !isset($error)){?>
+     <?php if(isset($this->mensaje) && !isset($this->error)){?>
      <div class="row">
       <div class="col-md-12">
         <div class="alert alert-success fade in">
           <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-          <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
+          <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
         </div>
       </div>
     </div> 
-    <?php } if(isset($mensaje) && isset($error)){ ?>
+    <?php } if(isset($this->mensaje) && isset($this->error)){ ?>
     <div class="row">
       <div class="col-md-12">
         <div class="fa fa-warning">
           <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-          <i class="fa fa-times"></i>&nbsp;<?php echo $mensaje; ?>
+          <i class="fa fa-times"></i>&nbsp;<?php echo $this->mensaje; ?>
         </div>
       </div>
     </div>

@@ -48,7 +48,7 @@
                   <option value="<?php echo $apoyo->idBeneficiario?>">
                     <?php echo $apoyo->RFC; ?>
                   </option>
-                  <?php } foreach($this->model->ListarSelects('beneficiariorfc') as $r):
+                  <?php } foreach($this->model->ListarBeneficiarios() as $r):
                   if($r->RFC!=$apoyo->RFC){ ?>
                   ?>
                   <option value="<?php echo $r->idBeneficiarioRFC; ?>">

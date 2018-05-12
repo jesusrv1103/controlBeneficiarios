@@ -27,15 +27,13 @@ class Beneficiariorfc
 	public $cobertura;
 	public $idRegistro;
 	public $idMunicipio;
-
-
+	private $mensaje;
+	private $error;
 
 	public function __CONSTRUCT()
 	{
 		$this->pdo = Database::StartUp();     
 	}
-
-
 
 	public function Listar($id)
 	{
@@ -99,7 +97,6 @@ class Beneficiariorfc
 
 		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
-
 
 	public function Registrar(Beneficiariorfc $data)
 	{
@@ -218,45 +215,40 @@ class Beneficiariorfc
 	}
 	
 	public function ImportarBeneficiarioRFC(Beneficiariorfc $data){
-		try{
-			$sql =$this->pdo->prepare("INSERT INTO beneficiariorfc values 
-				(?,?,?,?,?,
-				?,?,?,?,?,
-				?,?,?,?,?,
-				?,?,?,?,?)");
-			$resultado=$sql->execute(
-				array(
-					null,
-					$data->RFC,
-					$data->curp,
-					$data->primerApellido,
-					$data->segundoApellido,
-					$data->nombres,
-					$data->fechaAltaSat,
-					$data->sexo,
-					$data->idAsentamientos,
-					$data->idLocalidad,
-					$data->idTipoVialidad,
-					$data->nombreVialidad,
-					$data->numeroExterior,
-					$data->numeroInterior,
-					$data->entreVialidades,
-					$data->descripcionUbicacion,
-					$data->actividad,
-					$data->cobertura,
-					$data->idRegistro,
-					$data->idMunicipio,
+		$sql =$this->pdo->prepare("INSERT INTO beneficiariorfc values 
+			(?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?,
+			?,?,?,?,?)");
+		$resultado=$sql->execute(
+			array(
+				null,
+				$data->RFC,
+				$data->curp,
+				$data->primerApellido,
+				$data->segundoApellido,
+				$data->nombres,
+				$data->fechaAltaSat,
+				$data->sexo,
+				$data->idAsentamientos,
+				$data->idLocalidad,
+				$data->idTipoVialidad,
+				$data->nombreVialidad,
+				$data->numeroExterior,
+				$data->numeroInterior,
+				$data->entreVialidades,
+				$data->descripcionUbicacion,
+				$data->actividad,
+				$data->cobertura,
+				$data->idRegistro,
+				$data->idMunicipio,
 
-					)
-				);
-		}catch (Exception $e) {
-			echo "ObtenerIdRegistro";
-		}
+				)
+			);
 	}
 
 	public function Listar1($periodo)
 	{
-		echo $periodo."hola1";
 		$fechaInicio=$periodo.'-01-01';
 		$fechaFin=$periodo.'-12-31';
 		$stm = $this->pdo->prepare("SELECT * FROM beneficiariorfc b, registro r, localidades l WHERE r.idRegistro= b.idRegistro  AND r.estado='Activo' AND b.idLocalidad=l.idLocalidad AND DATE(r.fechaAlta) BETWEEN ? AND ?");
@@ -264,38 +256,19 @@ class Beneficiariorfc
 		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
 
-
-
-
-
 	public function Listar2($periodo)
 	{
-		echo $periodo."hola2";
-		try
-		{
-			$fechaInicio=$periodo.'-01-01';
-			$fechaFin=$periodo.'-12-31';
-			$stm = $this->pdo->prepare("SELECT * FROM beneficiariorfc b, registro r, localidades l , actualizacion a  WHERE r.idRegistro= b.idRegistro  AND r.estado='Activo' AND r.idRegistro=a.idRegistro AND b.idLocalidad=l.idLocalidad AND DATE(a.fechaActualizacion) BETWEEN ? AND ?");
-			$stm->execute(array($fechaInicio, $fechaFin));
+		$fechaInicio=$periodo.'-01-01';
+		$fechaFin=$periodo.'-12-31';
+		$stm = $this->pdo->prepare("SELECT * FROM beneficiariorfc b, registro r, localidades l , actualizacion a  WHERE r.idRegistro= b.idRegistro  AND r.estado='Activo' AND r.idRegistro=a.idRegistro AND b.idLocalidad=l.idLocalidad AND DATE(a.fechaActualizacion) BETWEEN ? AND ?");
+		$stm->execute(array($fechaInicio, $fechaFin));
 
-			return $stm->fetchAll(PDO::FETCH_OBJ);
-		}
-
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
-
+		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
-
-
-	
-
-
 
 	public function ListarTodos()
 	{
-		$stm = $this->pdo->prepare("SELECT * FROM beneficiarios, registro, municipio WHERE registro.idRegistro=beneficiarios.idRegistro and registro.estado='Activo'");
+		$stm = $this->pdo->prepare("SELECT * FROM beneficiariorfc brfc, registro r, municipio m, localidades l WHERE r.idRegistro=brfc.idRegistro and r.estado='Activo' AND brfc.idLocalidad=l.idLocalidad");
 		$stm->execute();
 		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
@@ -325,17 +298,10 @@ class Beneficiariorfc
 
 	public function ListarAsentamientos($localidad)
 	{
-		try
-		{
-			$stm = $this->pdo->prepare("SELECT * FROM asentamientos WHERE localidad=?");
-			$stm->execute(array($localidad));
+		$stm = $this->pdo->prepare("SELECT * FROM asentamientos WHERE localidad=?");
+		$stm->execute(array($localidad));
 
-			return $stm->fetchAll(PDO::FETCH_OBJ);
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
+		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
 
 	public function ObtenerIdMunicipio($claveMunicipio)
@@ -403,7 +369,7 @@ class Beneficiariorfc
 
 	public function ObtenerInfoApoyo($idBeneficiario)
 	{
-		$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiariorfc,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyos.idBeneficiario=beneficiariorfc.idBeneficiarioRFC AND apoyos.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND beneficiariorfc.idBeneficiariorfc=1 ORDER BY apoyos.idApoyo;");
+		$stm = $this->pdo->prepare("SELECT * FROM apoyosrfc,beneficiariorfc,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyosrfc.idBeneficiario=beneficiariorfc.idBeneficiarioRFC AND apoyosrfc.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyosrfc.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyosrfc.idPeriodicidad=periodicidad.idPeriodicidad AND apoyosrfc.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyosrfc.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND beneficiariorfc.idBeneficiarioRFC=? ORDER BY apoyosrfc.idApoyo;");
 		$stm->execute(array($idBeneficiario));
 		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}	

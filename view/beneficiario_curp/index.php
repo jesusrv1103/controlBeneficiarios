@@ -1,7 +1,7 @@
 <style type="text/css">
-.lblinfo{
-  color:#2196F3;
-}
+  .lblinfo{
+    color:#2196F3;
+  }
 </style>
 <script type="text/javascript">
 
@@ -87,6 +87,7 @@
                <td><center><b>Ver</b></center></td>
                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                <td><center><b>Editar</b></center></td>
+               <?php } if($_SESSION['tipoUsuario']==1){?>
                <td><center><b>Borrar</b></center></td>
                <?php } ?>
              </tr>
@@ -105,6 +106,7 @@
                 <td class="center">
                   <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiario&a=Crud&idBeneficiario=<?php echo $r->idBeneficiario ?>"><i class="fa fa-edit"></i></a>
                 </td>
+                <?php } if($_SESSION['tipoUsuario']==1){?>
                 <td class="center">
                   <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiario(<?php echo $r->idRegistro; ?>)" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
                 </td>
@@ -121,6 +123,7 @@
             <td><center><b>Ver</b></center></td>
             <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
             <td><center><b>Editar</b></center></td>
+            <?php } if($_SESSION['tipoUsuario']==1){?>
             <td><center><b>Borrar</b></center></td>
             <?php } ?>
           </tr>

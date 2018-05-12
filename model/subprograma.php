@@ -110,6 +110,7 @@ class Subprograma
 		$stm->execute(array($idSubprograma));
 		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
+	
 	public function Check($valor)
 	{
 		if ($valor==0) {

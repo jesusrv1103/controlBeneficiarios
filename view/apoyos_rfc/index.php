@@ -12,7 +12,7 @@
  </div>
  <div class="pull-right">
    <ol class="breadcrumb">
-     <li><a href="?c=Inicio">Inicio</a></li>
+     <li><a href="?c=inicio">Inicio</a></li>
      <li class="active">Apoyos</a></li>
    </ol>
  </div>
@@ -82,9 +82,7 @@
            <th>Importe</th>
            <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
            <td><center><b>Editar</b></center></td>
-           <?php if($_SESSION['tipoUsuario']==1){?>
            <td><center><b>Borrar</b></center></td>
-           <?php } ?>
            <?php } ?>
          </tr>
        </thead>
@@ -105,11 +103,9 @@
             <td class="center">
               <a class="btn btn-primary btn-sm" role="button" href="?c=apoyosrfc&a=Crud&idApoyo=<?php echo $r->idApoyo ?>"><i class="fa fa-edit"></i></a>
             </td>
-            <?php if($_SESSION['tipoUsuario']==1){?>
             <td class="center">
               <a class="btn btn-danger btn-sm" onclick="eliminarApoyo(<?php echo $r->idApoyo;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
             </td>
-            <?php } ?>
             <?php } ?>
           </tr>
         <?php endforeach; ?>
@@ -126,7 +122,7 @@
            <th>Caracteristica</th>
            <th>Origen</th> 
            <th>Importe</th>
-           <?php if($_SESSION['tipoUsuario']==1){?>
+           <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
            <td><center><b>Editar</b></center></td>
            <td><center><b>Borrar</b></center></td>
            <?php } ?>
@@ -190,46 +186,48 @@
       </div><!--/modal-content--> 
     </div><!--/modal-dialog--> 
   </div><!--/modal-fade-->
+</div>
 
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content panel default red_border horizontal_border_1">
+      <div class="modal-body"> 
+        <div class="row">
+          <div class="block-web">
+            <div class="header">
+              <h3 class="content-header theme_color">&nbsp;Eliminar apoyo</h3>
+            </div>
+            <div class="porlets-content" style="margin-bottom: -50px;">
+              <h4>¿Esta segúro que desea eliminar el apoyo?</h4>
+            </div><!--/porlets-content--> 
+          </div><!--/block-web--> 
+        </div>
+      </div>
+      <div class="modal-footer" style="margin-top: -10px;">
+        <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
+          <form action="?c=apoyosrfc&a=Eliminar" enctype="multipart/form-data" method="post">
+            <input  type="hidden" name="idApoyo" id="txtIdApoyo">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+          </form>
+        </div>
+      </div>
+    </div><!--/modal-content--> 
+  </div><!--/modal-dialog--> 
+</div><!--/modal-fade--> 
 
-  <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content panel default red_border horizontal_border_1">
-        <div class="modal-body"> 
-          <div class="row">
-            <div class="block-web">
-              <div class="header">
-                <h3 class="content-header theme_color">&nbsp;Eliminar Apoyo</h3>
-              </div>
-              <div class="porlets-content" style="margin-bottom: -50px;">
-                <h4>¿Esta segúro que desea eliminar el Apoyo?</h4>
-              </div><!--/porlets-content--> 
-            </div><!--/block-web--> 
-          </div>
-        </div>
-        <div class="modal-footer" style="margin-top: -10px;">
-          <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
-            <form action="?c=apoyosrfc&a=Eliminar" enctype="multipart/form-data" method="post">
-              <input  type="hidden" name="idApoyo" id="txtIdApoyo">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-danger">Eliminar</button>
-            </form>
-          </div>
-        </div>
-      </div><!--/modal-content--> 
-    </div><!--/modal-dialog--> 
-  </div><!--/modal-fade--> 
-  <script>
-    eliminarApoyo = function(idApoyo){
-      $('#txtIdApoyo').val(idApoyo);  
-    }
-    infoApoyo = function (idApoyo){
-      var idApoyo=idApoyo;
-      $.post("index.php?c=apoyosrfc&a=InfoApoyo", {idApoyo: idApoyo}, function(info) {
-        $("#divInfo").html(info);
-      }); 
-    }
-    deshabilitar = function (){
-      $('#btnImportar').attr("disabled", true);
-    }
-  </script>
+<script>
+  eliminarApoyo = function(idApoyo){
+    $('#txtIdApoyo').val(idApoyo);  
+  }
+
+  infoApoyo = function (idApoyo){
+    var idApoyo=idApoyo;
+    $.post("index.php?c=apoyosrfc&a=InfoApoyo", {idApoyo: idApoyo}, function(info) {
+      $("#divInfo").html(info);
+    }); 
+  }
+  deshabilitar = function (){
+    $('#btnImportar').attr("disabled", true);
+  }
+</script>

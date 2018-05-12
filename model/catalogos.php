@@ -166,6 +166,7 @@ class Catalogos
 				)
 			);
 	}
+
 	public function ImportarCaracteristicasApoyo(Catalogos $data){
 		$sql= $this->pdo->prepare("INSERT INTO caracteristicasapoyo VALUES(?,?,?)");
 		$resultado=$sql->execute(
@@ -200,24 +201,16 @@ class Catalogos
 		$stm->execute();
 		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
+	
 	public function ListarMunicipio()
 	{
-		try
-		{
-			//$result = array();
-		    // SELECT p.idMunicipio, p.Municipio, sum(techoPresupuestal) as suma   FROM Municipio p , subMunicipio s where p.idMunicipio =  s.idMunicipio group by p.idMunicipio
+		$stm = $this->pdo->prepare("SELECT * from municipio WHERE estado='Activo';");
 
-			$stm = $this->pdo->prepare("SELECT * from municipio WHERE estado='Activo';");
-			
-			$stm->execute();
+		$stm->execute();
 
-			return $stm->fetchAll(PDO::FETCH_OBJ);
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
+		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
+
 	public function ListarCaracteristicasApoyo()
 	{
 		$stm = $this->pdo->prepare("SELECT * FROM caracteristicasapoyo, tipoapoyo WHERE tipoapoyo.idTipoApoyo=caracteristicasapoyo.idTipoApoyo;");

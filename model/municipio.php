@@ -9,14 +9,7 @@ class Municipio
 
 	public function __CONSTRUCT()
 	{
-		try
-		{
-			$this->pdo = Database::StartUp();     
-		}
-		catch(Exception $e)
-		{
-			die($e->getMessage());
-		}
+		$this->pdo = Database::StartUp();     
 	}
 
 	public function Listar()
@@ -35,8 +28,8 @@ class Municipio
 				$data->nombreMunicipio,
 				$data->claveMunicipio,
 				$data->estado
-			)
-		);
+				)
+			);
 	}
 
 	public function Limpiar($nomTabla)
@@ -65,8 +58,8 @@ class Municipio
 				$data->estado,
 				$data->idMunicipio
 
-			)
-		);
+				)
+			);
 	}
 
 	//Metodo para actualizar
@@ -82,8 +75,8 @@ class Municipio
 				$data->nombreMunicipio, 
 				$data->claveMunicipio,
 				$data->idMunicipio
-			)
-		);
+				)
+			);
 	}
 
 	//Metdod para registrar
@@ -97,7 +90,7 @@ class Municipio
 				$data->nombreMunicipio,
 				$data->estado,
 				$data->claveMunicipio
-			)
-		);
+				)
+			);
 	}
 }

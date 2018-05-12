@@ -13,13 +13,9 @@ class Programa
 
 	public function Listar()
 	{
-		try {
-			$stm = $this->pdo->prepare("SELECT * from programa");	
-			$stm->execute();
-			return $stm->fetchAll(PDO::FETCH_OBJ);	
-		} catch (Exception $e) {
-			echo 'No se ha podido establer conexión con la base de datos';
-		}
+		$stm = $this->pdo->prepare("SELECT * from programa");	
+		$stm->execute();
+		return $stm->fetchAll(PDO::FETCH_OBJ);	
 	}
 
 	public function ImportarPrograma(Programa $data)
@@ -29,8 +25,8 @@ class Programa
 			array(
 				$data->idPrograma,
 				$data->programa
-			)
-		);
+				)
+			);
 	}
 
 	public function Limpiar($nomTabla)
@@ -63,8 +59,8 @@ class Programa
 			array(
 				$data->programa, 
 				$data->idPrograma
-			)
-		);
+				)
+			);
 	}
 
 	public function Registrar(Programa $data)
@@ -75,8 +71,8 @@ class Programa
 		->execute(
 			array(
 				$data->programa
-			)
-		);
+				)
+			);
 	}
 
 	public function Check($valor)

@@ -92,6 +92,7 @@
                <td><center><b>Ver</b></center></td>
                <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                <td><center><b>Editar</b></center></td>
+               <?php } if($_SESSION['tipoUsuario']==1){?>
                <td><center><b>Borrar</b></center></td>
                <?php } ?>
              </tr>
@@ -112,6 +113,7 @@
               <td class="center">
                 <a class="btn btn-primary btn-sm" role="button" href="?c=beneficiariorfc&a=Crud&idBeneficiarioRFC=<?php echo $r->idBeneficiarioRFC ?>"><i class="fa fa-edit"></i></a>
               </td>
+              <?php } if($_SESSION['tipoUsuario']==1){?>
               <td class="center">
                <a class="btn btn-danger btn-sm" onclick="eliminarBeneficiarioRFC(<?php echo $r->idRegistro;?>);" href="#modalEliminarRFC"  data-toggle="modal" data-target="#modalEliminarRFC" role="button"><i class="fa fa-eraser"></i></a>
              </td>
@@ -129,6 +131,7 @@
           <td><center><b>Ver</b></center></td>
           <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
           <td><center><b>Editar</b></center></td>
+          <?php } if($_SESSION['tipoUsuario']==1){?>
           <td><center><b>Borrar</b></center></td>
           <?php } ?>
         </tr>
@@ -450,7 +453,7 @@
   </div><!--/modal-dialog-->
 </div><!--/modal-fade-->
 
-<div class="modal fade" id="modalBuscarRFC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalBuscarRFC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="form-rfc">
   <div class="modal-dialog">
     <div class="modal-content panel default blue_border horizontal_border_1">
      <form action="?c=beneficiariorfc&a=Crud" enctype="multipart/form-data" method="post" parsley-validate novalidate id="form-rfc">

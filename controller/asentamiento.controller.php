@@ -152,7 +152,6 @@ class AsentamientoController{
 			$asentamiento->nombreAsentamiento = $_REQUEST['nombreAsentamiento'];
 			$asentamiento->tipoAsentamiento = $_REQUEST['tipoAsentamiento'];
 			if($verificaAsentamiento!=null && isset($_REQUEST['nuevoRegistro'])){
-
 				$asentamientos = true;
 				$catalogos=true;
 				$nuevoRegistro=true;

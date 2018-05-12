@@ -10,10 +10,6 @@
 }
 </style>
 
-<script type="text/javascript">
-  window.history.forward();
-</script>
-
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
     <h1>Apoyos</h1>

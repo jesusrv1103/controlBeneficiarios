@@ -46,7 +46,7 @@
                   <option value="<?php echo $apoyo->idBeneficiario?>">
                     <?php echo $apoyo->curp; ?>
                   </option>
-                  <?php } foreach($this->model->ListarSelects('beneficiarios') as $r):
+                  <?php } foreach($this->model->ListarBeneficiarios() as $r):
                   if($r->curp!=$apoyo->curp){ ?>
                   ?>
                   <option value="<?php echo $r->idBeneficiario; ?>">
