@@ -14,7 +14,6 @@ class Localidad
 	}
 
 	public function ImportarLocalidad(Localidad $data){
-		
 		$sql= $this->pdo->prepare("INSERT INTO localidades VALUES(?,?,?,?,?)");
 		$resultado=$sql->execute(
 			array(
@@ -29,12 +28,10 @@ class Localidad
 
 	public function Listar()
 	{
-	//$result = array();
+		$stm = $this->pdo->prepare("SELECT * FROM localidades WHERE estado='Activo'");
+		$stm->execute();
 
-			$stm = $this->pdo->prepare("SELECT * FROM localidades WHERE estado='Activo'");
-			$stm->execute();
-
-			return $stm->fetchAll(PDO::FETCH_OBJ);
+		return $stm->fetchAll(PDO::FETCH_OBJ);
 
 	}
 

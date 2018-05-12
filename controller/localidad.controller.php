@@ -65,7 +65,8 @@ class LocalidadController{
   }
   
   public function Importar(){
-    if (file_exists("./assets/files/localidades.xlsx")) {
+    try {
+      if (file_exists("./assets/files/localidades.xlsx")) {
           //Agregamos la librería
       require 'assets/plugins/PHPExcel/Classes/PHPExcel/IOFactory.php';
           //Variable con el nombre del archivo
@@ -87,6 +88,11 @@ class LocalidadController{
       $this->error=true;
       $this->mensaje="El archivo <strong>localidades.xlsx</strong> no existe. Seleccione el archivo para poder importar los datos";
       $this->Index();
+    }
+    } catch (Exception $e) {
+       $this->error=true;
+    $this->mensaje="Ha ocurrido un error al importar el archivo";
+    $this->Index();
     }
   }
 

@@ -23,7 +23,7 @@ class LoginController{
 
 
    $password=sha1($password);
-echo $password;
+$password;
 
    $consulta=$this->model->verificar($log);
    if($consulta!=null){
