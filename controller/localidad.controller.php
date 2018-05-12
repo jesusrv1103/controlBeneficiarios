@@ -145,7 +145,7 @@ public function Guardar(){
     }else{
       if(!isset($_REQUEST['nuevoRegistro'])){
         $this->model->Actualizar($localidad);
-        $this->mensaje="Se han actualizado correctamente la localidad";
+        $this->mensaje="Se ha actualizado correctamente la localidad";
       }else{
         $this->model->Registrar($localidad);
         $this->mensaje="Se ha registrado correctamente la localidad";

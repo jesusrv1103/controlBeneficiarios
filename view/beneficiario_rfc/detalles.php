@@ -52,21 +52,21 @@
   </div>
 </div>
 
-<?php if(isset($mensaje)){ if(!isset($warning)){?>
+<?php if(isset($this->mensaje)){ if(!isset($this->warning)){?>
 <div class="row" style="margin-bottom: -20px; margin-top: 20px">
   <div class="col-md-12">
     <div class="alert alert-success fade in">
       <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-      <i class="fa fa-check"></i>&nbsp;<?php echo $mensaje; ?>
+      <i class="fa fa-check"></i>&nbsp;<?php echo $this->mensaje; ?>
     </div>
   </div>
 </div> 
-<?php } if(isset($warning)){ ?>
+<?php } if(isset($this->warning)){ ?>
 <div class="row" style="margin-bottom: -20px; margin-top: 20px">
   <div class="col-md-12">
     <div class="alert alert-warning fade in">
       <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-      <i class="fa fa-warning"></i>&nbsp;<?php echo $mensaje; ?>
+      <i class="fa fa-warning"></i>&nbsp;<?php echo $this->mensaje; ?>
     </div>
   </div>
 </div>
@@ -223,6 +223,30 @@
              </div>
            </td>
          </tr>
+         <tr>
+          <td>
+           <div class="col-md-12">
+             <label class="col-sm-6 lbldetalle">Municipio:</label>
+             <label class="col-sm-6 control-label"><?php echo $ben->nombreMunicipio; ?></label>
+           </div>
+         </td>
+       </tr>
+       <tr>
+          <td>
+           <div class="col-md-12">
+             <label class="col-sm-6 lbldetalle">Localidad:</label>
+             <label class="col-sm-6 control-label"><?php echo $ben->localidad; ?></label>
+           </div>
+         </td>
+       </tr>
+       <tr>
+          <td>
+           <div class="col-md-12">
+             <label class="col-sm-6 lbldetalle">Asentamiento:</label>
+             <label class="col-sm-6 control-label"><?php echo $ben->nombreAsentamiento; ?></label>
+           </div>
+         </td>
+       </tr>
          <tr>
           <td>
            <div class="col-md-12">

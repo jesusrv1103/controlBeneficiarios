@@ -137,30 +137,30 @@ public function Crud(){
  }
  echo '
  <form action="?c=Programa&a=Guardar';if($_REQUEST['idPrograma']!=null){ echo '&idPrograma='.$_REQUEST['idPrograma']; } echo'" method="post" class="form-horizontal row-border">
-   <div class="modal-body"> 
-     <div class="row">
-       <div class="block-web">
-         <div class="header">
-           <h3 class="content-header theme_color">&nbsp;'; echo $programa->idPrograma !=null ? "Actualizar programa" : "Registrar Programa"; echo '</h3>
-         </div>
-         <div class="porlets-content" style="margin-top: 70px;">
-           <input hidden name="idPrograma"  value="'; echo $programa->idPrograma != null ? $programa->idPrograma : 0; echo '"/>
-           <div class="form-group">
-             <label class="col-sm-3 control-label">Nombre</label>
-             <div class="col-sm-7">
-               <input name="programa" type="text" class="form-control" required value="'; echo $programa->idPrograma != null ? $programa->programa : ""; echo '" autofocus/>
-             </div>
-           </div><!--/form-group-->
-         </div><!--/porlets-content-->
-       </div><!--/block-web--> 
-     </div>
-   </div>
-   <div class="modal-footer">
-     <div class="row col-md-5 col-md-offset-7">
-       <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-       <button type="submit" class="btn btn-primary">Guardar</button>
-     </div>
-   </div>
+ <div class="modal-body"> 
+ <div class="row">
+ <div class="block-web">
+ <div class="header">
+ <h3 class="content-header theme_color">&nbsp;'; echo $programa->idPrograma !=null ? "Actualizar programa" : "Registrar Programa"; echo '</h3>
+ </div>
+ <div class="porlets-content" style="margin-top: 70px;">
+ <input hidden name="idPrograma"  value="'; echo $programa->idPrograma != null ? $programa->idPrograma : 0; echo '"/>
+ <div class="form-group">
+ <label class="col-sm-3 control-label">Nombre</label>
+ <div class="col-sm-7">
+ <input name="programa" type="text" class="form-control" required value="'; echo $programa->idPrograma != null ? $programa->programa : ""; echo '" autofocus/>
+ </div>
+ </div><!--/form-group-->
+ </div><!--/porlets-content-->
+ </div><!--/block-web--> 
+ </div>
+ </div>
+ <div class="modal-footer">
+ <div class="row col-md-5 col-md-offset-7">
+ <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+ <button type="submit" class="btn btn-primary">Guardar</button>
+ </div>
+ </div>
  </form>
  ';
 }
