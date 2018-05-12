@@ -1,13 +1,13 @@
 
 <style type="text/css">
-.lbldetalle{
-  color:#424242;
-  font-weight: bold;
-}
-.h3subtitulo{
-  color:#2196F3;
-  font-weight: bold;
-}
+  .lbldetalle{
+    color:#424242;
+    font-weight: bold;
+  }
+  .h3subtitulo{
+    color:#2196F3;
+    font-weight: bold;
+  }
 </style>
 
 <script type="text/javascript">
@@ -30,97 +30,106 @@
 <div class="container clear_both padding_fix">
   <div class="row col-md-12">
     <div class="block-web">
-      <div class="header">
-        <div class="row" style="margin-top: 15px; margin-bottom: 12px;">
-          <div class="col-sm-12">
-            <div class="actions"> </div>
-            <h2 class="content-header theme_color" style="margin-top: -10px;">Resumen de importación</h2>
-          </div>
+     <div class="header">
+      <div class="row" style="margin-top: 15px; margin-bottom: 12px;">
+        <div class="col-sm-7">
+          <div class="actions"> </div>
+          <h2 class="content-header theme_color" style="margin-top: -10px;">Resumen de importación</h2>
         </div>
-      </div>
+        <div class="col-md-5">
+          <div class="btn-group pull-right" style="margin-right: 10px;">
+            <b> 
+             <div class="btn-group">
+             <a href="?c=apoyos"><i class="fa fa-mail-reply"></i> Volver</a>
+             </div>
+           </b>
+         </div>
+       </div>
+     </div>
+   </div>
 
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="todo_body ">
-           <?php if($_SESSION['numRegErroneos']>0){ ?>
-           <h5 class="red_bg"> <i class="fa fa-warning"></i>  Error en el registro (
-            <small><?php echo $_SESSION['numRegErroneos']; ?></small>
-          )</h5>
+   <div class="row">
+    <div class="col-sm-12">
+      <div class="todo_body ">
+       <?php if($_SESSION['numRegErroneos']>0){ ?>
+       <h5 class="red_bg"> <i class="fa fa-warning"></i>  Error en el registro (
+        <small><?php echo $_SESSION['numRegErroneos']; ?></small>
+        )</h5>
 
-          <div class="row" >
+        <div class="row" >
 
-            <?php $idColl=0; foreach ($this->arrayError as $posicion) { $idColl++; ?>
+          <?php $idColl=0; foreach ($this->arrayError as $posicion) { $idColl++; ?>
 
-            <div class="col-md-6">
-             <div class="panel-group accordion accordion-semi" id="accordion3">
+          <div class="col-md-6">
+           <div class="panel-group accordion accordion-semi" id="accordion3">
 
-               <section class="panel default red_border vertical_border h1">
-                <div class="panel-heading">
+             <section class="panel default red_border vertical_border h1">
+              <div class="panel-heading">
 
 
 
-                  <div class="task-header red_task"><a class="collapsed" data-toggle="collapse" data-parent="#accordion3" href="#<?php echo $idColl;?>"> <i class="fa fa-angle-right"></i> LINEA <?php echo $posicion['fila']; ?> DE ARCHIVO<span><i class="fa fa-times-circle"></i><?php echo $posicion['numeroErrores']; echo $posicion['numeroErrores']==1 ? " error": " errores"; ?></span> </a></div>
+                <div class="task-header red_task"><a class="collapsed" data-toggle="collapse" data-parent="#accordion3" href="#<?php echo $idColl;?>"> <i class="fa fa-angle-right"></i> LINEA <?php echo $posicion['fila']; ?> DE ARCHIVO<span><i class="fa fa-times-circle"></i><?php echo $posicion['numeroErrores']; echo $posicion['numeroErrores']==1 ? " error": " errores"; ?></span> </a></div>
 
-                </div>
+              </div>
 
-                <div style="height: 0px;" id="<?php echo $idColl;?>" class="panel-collapse collapse">
+              <div style="height: 0px;" id="<?php echo $idColl;?>" class="panel-collapse collapse">
 
-                  <div class="row task_inner inner_padding" style="margin-left: 20px; margin-right: 15px;">
-                    <div class="col-sm-9">
-                     <?php foreach ($posicion as $propiedad=>$valor){
+                <div class="row task_inner inner_padding" style="margin-left: 20px; margin-right: 15px;">
+                  <div class="col-sm-9">
+                   <?php foreach ($posicion as $propiedad=>$valor){
 
-                       if($propiedad!="fila"){ if($propiedad!="numeroErrores"){ if($valor!='0'){ ?>
-                       <p style="color:black"><i class="fa fa-times" style="color:red"></i> <?php echo $propiedad; ?></p>
-                       <?php } } } } ?>
-                     </div>
-                     <div class="col-sm-3">
-                      <?php foreach ($posicion as $propiedad=>$valor){ 
-                        if($propiedad!="fila"){ if($propiedad!="numeroErrores"){ if($valor!='0'){ ?>
-                        <p class="pull-right" style="color:black"> <?php echo $valor; ?> </p>
-                        <?php } } } } ?>
-                      </div>
+                     if($propiedad!="fila"){ if($propiedad!="numeroErrores"){ if($valor!='0'){ ?>
+                     <p style="color:black"><i class="fa fa-times" style="color:red"></i> <?php echo $propiedad; ?></p>
+                     <?php } } } } ?>
+                   </div>
+                   <div class="col-sm-3">
+                    <?php foreach ($posicion as $propiedad=>$valor){ 
+                      if($propiedad!="fila"){ if($propiedad!="numeroErrores"){ if($valor!='0'){ ?>
+                      <p class="pull-right" style="color:black"> <?php echo $valor; ?> </p>
+                      <?php } } } } ?>
                     </div>
+                  </div>
 
-                    <?php $porcentaje = $posicion['numeroErrores']/40*100; ?>
+                  <?php $porcentaje = $posicion['numeroErrores']/40*100; ?>
 
-                    <div class="task-footer" style="margin-left: 30px;">
-                      <label class="pull-left">
-                        <div class="progress">
-                          <div style="width:<?php echo $porcentaje; ?>%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60" role="progressbar" class="progress-bar progress-bar-danger"></div>
-                        </div>
-                      </label>
-                      <span class="label btn-danger"><?php echo $porcentaje; ?>% de error</span>
-                      <div class="pull-right">
-                        <ul class="footer-icons-group">
-                          <li><a href="#"><i class="fa fa-pencil"></i></a></li>
-                          <!--li><a href="#"><i class="fa fa-trash-o"></i></a></li-->
-                        </ul>
+                  <div class="task-footer" style="margin-left: 30px;">
+                    <label class="pull-left">
+                      <div class="progress">
+                        <div style="width:<?php echo $porcentaje; ?>%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60" role="progressbar" class="progress-bar progress-bar-danger"></div>
                       </div>
+                    </label>
+                    <span class="label btn-danger"><?php echo $porcentaje; ?>% de error</span>
+                    <div class="pull-right">
+                      <ul class="footer-icons-group">
+                        <li><a href="#"><i class="fa fa-pencil"></i></a></li>
+                        <!--li><a href="#"><i class="fa fa-trash-o"></i></a></li-->
+                      </ul>
                     </div>
-                  </div><!--/panel-collapse collapse-->
-                </section>
-              </div><!--/panel-group accordion accordion-semi-->
-            </div><!--/col-md6-->
+                  </div>
+                </div><!--/panel-collapse collapse-->
+              </section>
+            </div><!--/panel-group accordion accordion-semi-->
+          </div><!--/col-md6-->
 
-            <?php } } ?>
+          <?php } } ?>
 
-          </div><!--/row-->
-
-
-          <?php if($_SESSION['numRegistrados']>0){ ?>
+        </div><!--/row-->
 
 
-          <h5 class="green_bg"> <i class="fa fa-warning"></i> Registros completos (
-            <small><?php echo $_SESSION['numRegistrados']; ?></small>
+        <?php if($_SESSION['numRegistrados']>0){ ?>
+
+
+        <h5 class="green_bg"> <i class="fa fa-warning"></i> Registros completos (
+          <small><?php echo $_SESSION['numRegistrados']; ?></small>
           )</h5>
           <?php foreach ($this->arrayRegistrados as $posicion) : ?>
-          <ul class="group_sortable1">
-            <li>
-              <span class=""><i class="fa fa-check" style="color:#00C853"></i></span>
-              <p><strong><?php echo $posicion['Curp']; ?></strong>
-              </p>
-            </li>
-          </ul>
+            <ul class="group_sortable1">
+              <li>
+                <span class=""><i class="fa fa-check" style="color:#00C853"></i></span>
+                <p><strong><?php echo $posicion['Curp']; ?></strong>
+                </p>
+              </li>
+            </ul>
           <?php endforeach;  } ?>
         </div><!--todo_body-->
 
