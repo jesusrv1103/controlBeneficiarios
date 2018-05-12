@@ -22,8 +22,7 @@ class Apoyos
 	public $idRegistroApoyo;
 	public $idBeneficiario;
 	public $clavePresupuestal;
-	public $tipo;
-
+	
 	public function __CONSTRUCT()
 	{
 		$this->pdo = Database::StartUp();
@@ -31,7 +30,7 @@ class Apoyos
 
 	public function Listar()
 	{
-		$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiarios,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyos.idBeneficiario=beneficiarios.idBeneficiario AND apoyos.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyos.tipo='curp'");
+		$stm = $this->pdo->prepare("SELECT * FROM apoyos,beneficiarios,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyos.idBeneficiario=beneficiarios.idBeneficiario AND apoyos.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyos.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyos.idPeriodicidad=periodicidad.idPeriodicidad AND apoyos.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyos.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo");
 
 		$stm->execute(array());
 
@@ -99,8 +98,7 @@ class Apoyos
 				$data->idPeriodicidad, 
 				$data->idProgramaSocial,
 				$data->idRegistroApoyo,
-				null,
-				'curp'
+				null
 				)
 			);
 	}
@@ -126,8 +124,7 @@ class Apoyos
 				$data->idPeriodicidad,
 				$data->idProgramaSocial,
 				$data->idRegistroApoyo,
-				$data->clavePresupuestal,
-				'curp'
+				$data->clavePresupuestal
 				)
 			);
 	}
@@ -207,5 +204,14 @@ class Apoyos
 		$stm->execute(array());
 		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
+	public function VerificApoyos($curp)
+	{
+		$sql= $this->pdo->prepare("SELECT * FROM apoyos, registro WHERE curp=? AND apoyos.idRegistro=registro.idRegistro");
+		$resultado=$sql->execute(
+			array($curp)
+		);
+		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+	}
+
 	
 }

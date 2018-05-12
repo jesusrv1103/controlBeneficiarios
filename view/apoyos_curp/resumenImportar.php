@@ -10,16 +10,20 @@
 }
 </style>
 
+<script type="text/javascript">
+  window.history.forward();
+</script>
+
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
     <h1>Apoyos</h1>
-    <h2 class="">Detalles de apoyo</h2>
+    <h2 class="">Detalles de apoyos</h2>
   </div>
   <div class="pull-right">
     <ol class="breadcrumb">
       <li><a href="?c=Inicio">Inicio</a></li>
       <li><a href="?c=apoyos">Apoyos</a></li>
-      <li class="active">Detalles de apoyo</li>
+      <li class="active">Detalles de apoyos</li>
     </ol>
   </div>
 </div>
@@ -43,7 +47,7 @@
             <small><?php echo $_SESSION['numRegErroneos']; ?></small>
           )</h5>
 
-          <div class="row" style="margin-bottom: -40px;">
+          <div class="row" >
 
             <?php $idColl=0; foreach ($this->arrayError as $posicion) { $idColl++; ?>
 
@@ -103,7 +107,25 @@
           </div><!--/row-->
 
 
-<!-- REGISTROS BIEN -->
+          <?php if($_SESSION['numRegistrados']>0){ ?>
+
+
+          <h5 class="green_bg"> <i class="fa fa-warning"></i> Registros completos (
+            <small><?php echo $_SESSION['numRegistrados']; ?></small>
+          )</h5>
+          <?php foreach ($this->arrayRegistrados as $posicion) : ?>
+          <ul class="group_sortable1">
+            <li>
+              <span class=""><i class="fa fa-check" style="color:#00C853"></i></span>
+              <p><strong><?php echo $posicion['Curp']; ?></strong>
+              </p>
+            </li>
+          </ul>
+          <?php endforeach;  } ?>
+        </div><!--todo_body-->
+
+
+        <!-- REGISTROS BIEN -->
 
       </div><!--col-12-->
     </div><!--/row-->
@@ -119,12 +141,12 @@
           <div class="row">
             <div class="block-web">
               <div class="header">
-                <h3 class="content-header h3subtitulo">&nbsp;apoyo por CURP</h3>
+                <h3 class="content-header h3subtitulo">&nbsp;apoyos por CURP</h3>
               </div>
               <div class="porlets-content" style="margin-bottom: -50px;">
                 <div class="form-group">
                   <div class="col-sm-10">
-                    <input name="curp"  maxlength="18" id="curp" type="text" required parsley-regexp="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required parsley-rangelength="[18,18]"  onkeyup="mayus(this);" class="form-control" required placeholder="Ingrese la curp del apoyo" autofocus>
+                    <input name="curp"  maxlength="18" id="curp" type="text" required parsley-regexp="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"   required parsley-rangelength="[18,18]"  onkeyup="mayus(this);" class="form-control" required placeholder="Ingrese la curp del apoyos" autofocus>
                   </div>
                 </div><!--/form-group-->
               </div><!--/porlets-content-->
