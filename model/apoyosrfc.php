@@ -36,7 +36,7 @@ class Apoyosrfc
 
 		return $stm->fetchAll(PDO::FETCH_OBJ);
 	}
-		
+
 	//Metdodo para listar
 	public function ListarSelects($nomTabla)
 	{
@@ -208,6 +208,15 @@ class Apoyosrfc
 		$stm = $this->pdo->prepare("SELECT * FROM beneficiariorfc brfc, registro r WHERE r.idRegistro=brfc.idRegistro and r.estado='Activo'");
 		$stm->execute();
 		return $stm->fetchAll(PDO::FETCH_OBJ);
+	}
+
+	public function VerificaRFC($RFC)
+	{
+		$sql= $this->pdo->prepare("SELECT * FROM beneficiariorfc WHERE RFC=?");
+		$resultado=$sql->execute(
+			array($RFC)
+			);
+		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 	}
 
 }

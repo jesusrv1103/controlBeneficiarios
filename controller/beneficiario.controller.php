@@ -238,7 +238,7 @@ class BeneficiarioController{
       //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
     $this->LeerArchivo($objPHPExcel,$numRows);
-    if($_SESSION['numRegErroneos']>0){
+    if($_SESSION['numRegErroneos']>0 || $_SESSION['numActualizados']>0){
       $beneficiarios = true;
       $beneficiario_curp=true;
       $page="view/beneficiario_curp/resumenImportar.php";

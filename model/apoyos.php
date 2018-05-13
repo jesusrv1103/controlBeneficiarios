@@ -209,9 +209,16 @@ class Apoyos
 		$sql= $this->pdo->prepare("SELECT * FROM apoyos, registro WHERE curp=? AND apoyos.idRegistro=registro.idRegistro");
 		$resultado=$sql->execute(
 			array($curp)
-		);
+			);
 		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 	}
 
-	
+	public function VerificaCurp($curp)
+	{
+		$sql= $this->pdo->prepare("SELECT * FROM beneficiarios WHERE curp=?");
+		$resultado=$sql->execute(
+			array($curp)
+			);
+		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
+	}
 }

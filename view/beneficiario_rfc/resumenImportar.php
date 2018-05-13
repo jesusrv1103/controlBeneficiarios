@@ -40,7 +40,7 @@
             <div class="btn-group pull-right" style="margin-right: 10px;">
               <b> 
                <div class="btn-group">
-               <a href="?c=beneficiariorfc"><i class="fa fa-mail-reply"></i> Volver</a>
+                 <a href="?c=beneficiariorfc"><i class="fa fa-mail-reply"></i> Terminar</a>
                </div>
              </b>
            </div>
@@ -52,7 +52,7 @@
       <div class="col-sm-12">
         <div class="todo_body ">
          <?php if($_SESSION['numRegErroneos']>0){ ?>
-         <h5 class="red_bg"> <i class="fa fa-warning"></i>  Error en el registro (
+         <h5 class="red_bg"><i class="fa fa-warning"></i>  Error en el registro (
           <small><?php echo $_SESSION['numRegErroneos']; ?></small>
           )</h5>
 
@@ -99,25 +99,17 @@
                         </div>
                       </label>
                       <span class="label btn-danger"><?php echo $porcentaje; ?>% de error</span>
-                      <div class="pull-right">
-                        <ul class="footer-icons-group">
-                          <li><a href="#"><i class="fa fa-pencil"></i></a></li>
-                          <!--li><a href="#"><i class="fa fa-trash-o"></i></a></li-->
-                        </ul>
-                      </div>
                     </div>
                   </div><!--/panel-collapse collapse-->
                 </section>
               </div><!--/panel-group accordion accordion-semi-->
             </div><!--/col-md6-->
-
-            <?php } } ?>
-
+            <?php } ?>
           </div><!--/row-->
-
+          <?php } ?>
 
           <?php if($_SESSION['numActualizados']>0){ ?>
-          <h5 class="orange_bg"> <i class="fa fa-warning"></i>  Registros actualizados (
+          <h5 class="orange_bg"> Registros actualizados (
             <small><?php echo $_SESSION['numActualizados']; ?></small>
             )</h5>
 
@@ -126,7 +118,7 @@
 
               <ul class="group_sortable1">
                 <li>
-                  <span class=""><i class="fa fa-warning" style="color:#FF9800"></i></span>
+                  <span class=""><i class="fa fa-check" style="color:#FF9800"></i></span>
                   <p><strong><?php echo $posicion['RFC']; ?></strong>
                     - <?php echo $posicion['Nombres'] . $posicion['Primer apellido'] . $posicion['Segundo apellido']; ?> .
                   </p>
@@ -136,7 +128,7 @@
             <?php if($_SESSION['numRegistrados']>0){ ?>
 
 
-            <h5 class="green_bg"> <i class="fa fa-warning"></i> Registros completos (
+            <h5 class="green_bg"> Registros completos (
               <small><?php echo $_SESSION['numRegistrados']; ?></small>
               )</h5>
               <?php foreach ($this->arrayRegistrados as $posicion) : ?>

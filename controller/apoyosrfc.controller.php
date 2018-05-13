@@ -111,15 +111,23 @@ public function LeerArchivo($objPHPExcel,$numRows){
     $apoyos = new Apoyosrfc();
 
     //----------VALIDANDO RFC--------------------
+
     $rfc = $objPHPExcel->getActiveSheet()->getCell('A'.$numRow)->getCalculatedValue();
-   if($rfc!=""){
-        if(!$this->valida_rfc($rfc)){
-          $row_array['RFC']=$rfc;
-          $numError++;
-        }else{
+    if($rfc!=""){
+      if(!$this->valida_rfc($rfc)){
+        $row_array['RFC']=$rfc;
+        $numError++;
+      }else{
+        $verificacion=$this->model->VerificaRFC($rfc);
+        if($verificacion!=null)
           $row_array['RFC']='0';
+        else{
+          $row_array['RFC']="No existe";
+          $numError++;
         }
       }
+    }
+
     //----------VALIDANDO LA Id ORIGEN--------------------
     $apoyos->idOrigen = $objPHPExcel->getActiveSheet()->getCell('B'.$numRow)->getCalculatedValue();
     if($apoyos->idOrigen==""){
@@ -225,10 +233,10 @@ public function LeerArchivo($objPHPExcel,$numRows){
     //----------VALIDANDO CLAVE PRESUPUESTAL--------------------
     $apoyos->clavePresupuestal = $objPHPExcel->getActiveSheet()->getCell('J'.$numRow)->getCalculatedValue();
 
-      $apoyos->usuario=$_SESSION['usuario'];
-      $apoyos->fechaAlta=date("Y-m-d H:i:s");
-      $apoyos->direccion=$_SESSION['direccion'];
-      $apoyos->estado="Activo";
+    $apoyos->usuario=$_SESSION['usuario'];
+    $apoyos->fechaAlta=date("Y-m-d H:i:s");
+    $apoyos->direccion=$_SESSION['direccion'];
+    $apoyos->estado="Activo";
 
     if (!$rfc == null) {
      if($numError>0){
@@ -247,8 +255,8 @@ public function LeerArchivo($objPHPExcel,$numRows){
    }
  }
 
-    $numRow+=1;
-  } while (!$rfc == null);
+ $numRow+=1;
+} while (!$rfc == null);
 $_SESSION['numRegErroneos']=$numRegErroneos; 
 $_SESSION['numRegistrados']=$this->numRegistros;
 
@@ -353,46 +361,46 @@ public function Guardar(){
 }
 
 public function valida_rfc($valor){
-       $valor = str_replace("-", "", $valor); 
-       $cuartoValor = substr($valor, 3, 1);
+ $valor = str_replace("-", "", $valor); 
+ $cuartoValor = substr($valor, 3, 1);
        //RFC sin homoclave
-       if(strlen($valor)==10){
-           $letras = substr($valor, 0, 4); 
-           $numeros = substr($valor, 4, 6);
-           if (ctype_alpha($letras) && ctype_digit($numeros)) { 
-               return true;
-           }
-           return false;            
-       }
+ if(strlen($valor)==10){
+   $letras = substr($valor, 0, 4); 
+   $numeros = substr($valor, 4, 6);
+   if (ctype_alpha($letras) && ctype_digit($numeros)) { 
+     return true;
+   }
+   return false;            
+ }
        // Sólo la homoclave
-       else if (strlen($valor) == 3) {
-           $homoclave = $valor;
-           if(ctype_alnum($homoclave)){
-               return true;
-           }
-           return false;
-       }
+ else if (strlen($valor) == 3) {
+   $homoclave = $valor;
+   if(ctype_alnum($homoclave)){
+     return true;
+   }
+   return false;
+ }
        //RFC Persona Moral.
-       else if (ctype_digit($cuartoValor) && strlen($valor) == 12) { 
-           $letras = substr($valor, 0, 3); 
-           $numeros = substr($valor, 3, 6); 
-           $homoclave = substr($valor, 9, 3); 
-           if (ctype_alpha($letras) && ctype_digit($numeros) && ctype_alnum($homoclave)) { 
-               return true; 
-           } 
-           return false;
+ else if (ctype_digit($cuartoValor) && strlen($valor) == 12) { 
+   $letras = substr($valor, 0, 3); 
+   $numeros = substr($valor, 3, 6); 
+   $homoclave = substr($valor, 9, 3); 
+   if (ctype_alpha($letras) && ctype_digit($numeros) && ctype_alnum($homoclave)) { 
+     return true; 
+   } 
+   return false;
        //RFC Persona Física. 
-       } else if (ctype_alpha($cuartoValor) && strlen($valor) == 13) { 
-           $letras = substr($valor, 0, 4); 
-           $numeros = substr($valor, 4, 6);
-           $homoclave = substr($valor, 10, 3); 
-           if (ctype_alpha($letras) && ctype_digit($numeros) && ctype_alnum($homoclave)) { 
-               return true; 
-           }
-           return false; 
-       }else { 
-           return false; 
-       }  
+ } else if (ctype_alpha($cuartoValor) && strlen($valor) == 13) { 
+   $letras = substr($valor, 0, 4); 
+   $numeros = substr($valor, 4, 6);
+   $homoclave = substr($valor, 10, 3); 
+   if (ctype_alpha($letras) && ctype_digit($numeros) && ctype_alnum($homoclave)) { 
+     return true; 
+   }
+   return false; 
+ }else { 
+   return false; 
+ }  
 }//fin validaRFC
 public function ListarSubprogramas(){
   header('Content-Type: application/json');

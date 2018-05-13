@@ -285,9 +285,10 @@ public function Inforegistro(){
         require_once 'view/index.php';
       }
     } catch (Exception $e) {
-      $this->error=true;
-      $this->mensaje="Ha ocurrido un error al intentar obtener la información del beneficiario";
-      $this->Index();
+      //$this->error=true;
+      //$this->mensaje="Ha ocurrido un error al intentar obtener la información del beneficiario";
+      //$this->Index();
+      echo $e->getMessage();
     }
   }
 
@@ -367,7 +368,7 @@ public function Inforegistro(){
       //Obtengo el numero de filas del archivo
     $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
     $this->LeerArchivo($objPHPExcel,$numRows);
-    if($_SESSION['numRegErroneos']>0){
+    if($_SESSION['numRegErroneos']>0 || $_SESSION['numActualizados']){
       $beneficiarios = true;
       $beneficiario_rfc=true;
       $page="view/beneficiario_rfc/resumenImportar.php";

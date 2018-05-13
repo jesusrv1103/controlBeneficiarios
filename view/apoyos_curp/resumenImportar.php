@@ -10,10 +10,6 @@
   }
 </style>
 
-<script type="text/javascript">
-  window.history.forward();
-</script>
-
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
     <h1>Apoyos</h1>
@@ -40,7 +36,7 @@
           <div class="btn-group pull-right" style="margin-right: 10px;">
             <b> 
              <div class="btn-group">
-             <a href="?c=apoyos"><i class="fa fa-mail-reply"></i> Volver</a>
+               <a href="?c=apoyos"><i class="fa fa-mail-reply"></i> Terminar</a>
              </div>
            </b>
          </div>
@@ -56,7 +52,7 @@
         <small><?php echo $_SESSION['numRegErroneos']; ?></small>
         )</h5>
 
-        <div class="row" >
+        <div class="row">
 
           <?php $idColl=0; foreach ($this->arrayError as $posicion) { $idColl++; ?>
 
@@ -66,10 +62,7 @@
              <section class="panel default red_border vertical_border h1">
               <div class="panel-heading">
 
-
-
                 <div class="task-header red_task"><a class="collapsed" data-toggle="collapse" data-parent="#accordion3" href="#<?php echo $idColl;?>"> <i class="fa fa-angle-right"></i> LINEA <?php echo $posicion['fila']; ?> DE ARCHIVO<span><i class="fa fa-times-circle"></i><?php echo $posicion['numeroErrores']; echo $posicion['numeroErrores']==1 ? " error": " errores"; ?></span> </a></div>
-
               </div>
 
               <div style="height: 0px;" id="<?php echo $idColl;?>" class="panel-collapse collapse">
@@ -99,27 +92,16 @@
                       </div>
                     </label>
                     <span class="label btn-danger"><?php echo $porcentaje; ?>% de error</span>
-                    <div class="pull-right">
-                      <ul class="footer-icons-group">
-                        <li><a href="#"><i class="fa fa-pencil"></i></a></li>
-                        <!--li><a href="#"><i class="fa fa-trash-o"></i></a></li-->
-                      </ul>
-                    </div>
                   </div>
                 </div><!--/panel-collapse collapse-->
               </section>
             </div><!--/panel-group accordion accordion-semi-->
           </div><!--/col-md6-->
-
-          <?php } } ?>
-
+          <?php } ?>
         </div><!--/row-->
+        <?php } if($_SESSION['numRegistrados']>0){ ?>
 
-
-        <?php if($_SESSION['numRegistrados']>0){ ?>
-
-
-        <h5 class="green_bg"> <i class="fa fa-warning"></i> Registros completos (
+        <h5 class="green_bg"> Registros completos (
           <small><?php echo $_SESSION['numRegistrados']; ?></small>
           )</h5>
           <?php foreach ($this->arrayRegistrados as $posicion) : ?>
