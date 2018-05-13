@@ -285,9 +285,9 @@ public function Inforegistro(){
         require_once 'view/index.php';
       }
     } catch (Exception $e) {
-      //$this->error=true;
-      //$this->mensaje="Ha ocurrido un error al intentar obtener la información del beneficiario";
-      //$this->Index();
+      $this->error=true;
+      $this->mensaje="Ha ocurrido un error al intentar obtener la información del beneficiario";
+      $this->Index();
       echo $e->getMessage();
     }
   }
@@ -684,6 +684,7 @@ function is_sexo_curp($sexo){
  }     
  return false; 
 }
+
 public function ListarAsentamientos(){
   header('Content-Type: application/json');
   $idLocalidad=$_REQUEST['idLocalidad'];
