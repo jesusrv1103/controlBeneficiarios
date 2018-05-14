@@ -25,9 +25,9 @@ class ApoyosrfcController{
  public function Crud(){
   try {
     $apoyo = new Apoyosrfc();
-    if(isset($_REQUEST['idApoyo'])){
-      $_REQUEST['idApoyo'];
-      $apoyo = $this->model->Obtener($_REQUEST['idApoyo']);
+    if(isset($_REQUEST['idApoyoRFC'])){
+      $_REQUEST['idApoyoRFC'];
+      $apoyo = $this->model->Obtener($_REQUEST['idApoyoRFC']);
     }
     $apoyos = true;
     $apoyos_rfc = true;
@@ -315,7 +315,7 @@ function is_sexo_curp($sexo){
 
 public function Eliminar(){
   try {
-   $this->model->Eliminar($_REQUEST['idApoyo']);
+   $this->model->Eliminar($_REQUEST['idApoyoRFC']);
    $this->mensaje="Se ha eliminado correctamente el apoyo";
    $this->Index();
  } catch (Exception $e) {
@@ -328,8 +328,8 @@ public function Eliminar(){
 public function Guardar(){
   try {
     $apoyo= new Apoyosrfc();
-    $apoyo->idApoyo = $_REQUEST['idApoyo'];
-    $apoyo->idBeneficiario = $_REQUEST['idBeneficiario'];
+    $apoyo->idApoyoRFC = $_REQUEST['idApoyoRFC'];
+    $apoyo->idBeneficiarioRFC = $_REQUEST['idBeneficiarioRFC'];
     $apoyo->idOrigen = $_REQUEST['idOrigen'];
     $apoyo->idSubprograma = $_REQUEST['idSubprograma'];
     $apoyo->idCaracteristica = $_REQUEST['idCaracteristica'];
@@ -341,8 +341,8 @@ public function Guardar(){
     $apoyo->direccion=$_SESSION['direccion'];
     $apoyo->fechaAlta=date("Y-m-d H:i:s");
     $apoyo->estado="ACTIVO";
-    if($apoyo->idApoyo>0){
-      $idRegistro=$this->model->ObtenerIdRegistro($apoyo->idApoyo);
+    if($apoyo->idApoyoRFC>0){
+      $idRegistro=$this->model->ObtenerIdRegistro($apoyo->idApoyoRFC);
       $apoyo->idRegistroApoyo=$idRegistro->idRegistroApoyo;
       $this->model->Actualizar($apoyo);
       $this->model->RegistraActualizacion($apoyo);
@@ -420,8 +420,8 @@ public function ListarSubprogramas(){
 
 public function InfoApoyo(){
 
-  $idApoyo = $_POST['idApoyo'];
-  $infoApoyo=$this->model->ObtenerInfoApoyo($idApoyo);
+  $idApoyoRFC = $_POST['idApoyoRFC'];
+  $infoApoyo=$this->model->ObtenerInfoApoyo($idApoyoRFC);
   $infoActualizacion=$this->model->ListarActualizacion($infoApoyo->idRegistroApoyo);
   echo   '  
   <div class="modal-body"> 
@@ -562,7 +562,7 @@ public function InfoApoyo(){
     <div class="modal-footer">
       <div class="row col-md-6 col-md-offset-6">
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
-        <a href="?c=Beneficiariorfc&a=Detalles&idBeneficiarioRFC='.$infoApoyo->idBeneficiario.'" class="btn btn-info btn-sm">Ver detalles de beneficiario</a>
+        <a href="?c=Beneficiariorfc&a=Detalles&idBeneficiarioRFC='.$infoApoyo->idBeneficiarioRFC.'" class="btn btn-info btn-sm">Ver detalles de beneficiario</a>
       </div>
     </div>';
   }

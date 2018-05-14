@@ -9,7 +9,7 @@
     <ol class="breadcrumb">
       <li><a href="?c=inicio">Inicio</a></li>
       <li><a href="?c=apoyosrfc">Apoyos</a></li>
-      <li class="active"><?php echo $apoyo->idApoyo != null ? 'Actualizar apoyo' : 'Registrar apoyo'; ?></li>
+      <li class="active"><?php echo $apoyo->idApoyoRFC != null ? 'Actualizar apoyo' : 'Registrar apoyo'; ?></li>
     </ol>
   </div>
 </div>
@@ -21,7 +21,7 @@
           <div class="row" style="margin-top: 15px; margin-bottom: 12px;">
             <div class="col-sm-8">
               <div class="actions"> </div>
-              <h2 class="content-header theme_color" style="margin-top: -5px;"><?php echo $apoyo->idApoyo != null ? '&nbsp; Actualizar apoyo RFC' : '&nbsp; Registrar apoyo RFC'; ?></h2>
+              <h2 class="content-header theme_color" style="margin-top: -5px;"><?php echo $apoyo->idApoyoRFC != null ? '&nbsp; Actualizar apoyo RFC' : '&nbsp; Registrar apoyo RFC'; ?></h2>
             </div>
             <div class="col-md-4">
               <div class="btn-group pull-right">
@@ -35,17 +35,17 @@
         
         <div class="porlets-content">
           <form action="?c=apoyosrfc&a=Guardar" method="POST" class="form-horizontal row-border" parsley-validate novalidate>
-            <input type="hidden" name="idApoyo" value="<?php echo $apoyo->idApoyo != null ? $apoyo->idApoyo : 0; ?>">
+            <input type="hidden" name="idApoyoRFC" value="<?php echo $apoyo->idApoyoRFC != null ? $apoyo->idApoyoRFC : 0; ?>">
             <div class="form-group">
               <label class="col-sm-3 control-label">Beneficiario<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-                <select name="idBeneficiario" class="form-control select2" required style="width: 100%">
-                  <?php if($apoyo->idApoyo==null){ ?>
+                <select name="idBeneficiarioRFC" class="form-control select2" required style="width: 100%">
+                  <?php if($apoyo->idApoyoRFC==null){ ?>
                   <option value="">
                     Seleccione el rfc del beneficiario
                   </option>
-                  <?php } if($apoyo->idApoyo!=null){ ?>
-                  <option value="<?php echo $apoyo->idBeneficiario?>">
+                  <?php } if($apoyo->idApoyoRFC!=null){ ?>
+                  <option value="<?php echo $apoyo->idBeneficiarioRFC?>">
                     <?php echo $apoyo->RFC; ?>
                   </option>
                   <?php } foreach($this->model->ListarBeneficiarios() as $r):
@@ -65,11 +65,11 @@
               <label class="col-sm-3 control-label">Origen<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
                 <select name="idOrigen" class="form-control" required>
-                  <?php if($apoyo->idApoyo==null){ ?>
+                  <?php if($apoyo->idApoyoRFC==null){ ?>
                   <option value="">
                     Seleccione el origen del apoyo
                   </option>
-                  <?php } if($apoyo->idApoyo!=null){ ?>
+                  <?php } if($apoyo->idApoyoRFC!=null){ ?>
                   <option value="<?php echo $apoyo->idOrigen?>">
                     <?php echo $apoyo->origen; ?>
                   </option>
@@ -87,11 +87,11 @@
               <label class="col-sm-3 control-label">Programa<strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
                 <select name="idPrograma" class="form-control select2" id="selectProgramas" onchange="listarSubprogramas()" required style="width: 100%">
-                  <?php if($apoyo->idApoyo==null){ ?>
+                  <?php if($apoyo->idApoyoRFC==null){ ?>
                   <option value="">
                     Seleccione la subprograma a la que pertenece el beneficiario
                   </option>
-                  <?php } if($apoyo->idApoyo!=null){ ?>
+                  <?php } if($apoyo->idApoyoRFC!=null){ ?>
                   <option value="<?php echo $apoyo->idPrograma?>">
                     <?php echo $apoyo->programa; ?>
                   </option>
@@ -107,11 +107,11 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">Subprograma<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
-              <select name="idSubprograma" class="form-control select2" required id="selectSubprogramas" style="width: 100%">   <?php if($apoyo->idApoyo==null){  ?>
+              <select name="idSubprograma" class="form-control select2" required id="selectSubprogramas" style="width: 100%">   <?php if($apoyo->idApoyoRFC==null){  ?>
                 <option value="">
                   Seleccione el subprograma a la que pertenece el beneficiario
                 </option>
-                <?php } if($apoyo->idApoyo!=null){ ?>
+                <?php } if($apoyo->idApoyoRFC!=null){ ?>
                 <option value="<?php echo $apoyo->idSubprograma ?>">
                   <?php echo  $apoyo->subprograma ?>
                 </option>
@@ -124,11 +124,11 @@
             <label class="col-sm-3 control-label">Caracteristica de apoyo<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
               <select name="idCaracteristica" class="form-control select2" required style="width: 100%">
-                <?php if($apoyo->idApoyo==null){ ?>
+                <?php if($apoyo->idApoyoRFC==null){ ?>
                 <option value="">
                   Seleccione caracteristica del apoyo
                 </option>
-                <?php } if($apoyo->idApoyo!=null){ ?>
+                <?php } if($apoyo->idApoyoRFC!=null){ ?>
                 <option value="<?php echo $apoyo->idCaracteristicasApoyo?>">
                   <?php echo $apoyo->caracteristicasApoyo; ?>
                 </option>
@@ -146,11 +146,11 @@
             <label class="col-sm-3 control-label">Periodicidad<strog class="theme_color">*</strog></label>
             <div class="col-sm-6">
               <select name="idPeriodicidad" class="form-control" required>
-                <?php if($apoyo->idApoyo==null){ ?>
+                <?php if($apoyo->idApoyoRFC==null){ ?>
                 <option value="">
                   Seleccione la periodicidad del apoyo
                 </option>
-                <?php } if($apoyo->idApoyo!=null){ ?>
+                <?php } if($apoyo->idApoyoRFC!=null){ ?>
                 <option value="<?php echo $apoyo->idPeriodicidad?>">
                   <?php echo $apoyo->periodicidad; ?>
                 </option>
@@ -168,13 +168,13 @@
             <label class="col-sm-3 control-label">Fecha de apoyo<strog class="theme_color">*</strog></label>
             <div class="col-sm-2">
               <div class="input-group"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                <input name="fechaApoyo" type="date" value="<?php echo $apoyo->idApoyo!=null ? $apoyo->fechaApoyo : "" ?>" class="form-control" required>
+                <input name="fechaApoyo" type="date" value="<?php echo $apoyo->idApoyoRFC!=null ? $apoyo->fechaApoyo : "" ?>" class="form-control" required>
               </div>
             </div>
             <label class="col-sm-2 control-label">Importe de apoyo<strog class="theme_color">*</strog></label>
             <div class="col-sm-2">
               <div class="input-group"> <span class="input-group-addon">$</span>
-                <input value="<?php echo $apoyo->idApoyo != null ? $apoyo->importeApoyo : ""; ?>" style="text-align:right;" onkeypress="return soloNumeros(event);" class="form-control" name="importeApoyo" placeholder="0" type="text" required>
+                <input value="<?php echo $apoyo->idApoyoRFC != null ? $apoyo->importeApoyo : ""; ?>" style="text-align:right;" onkeypress="return soloNumeros(event);" class="form-control" name="importeApoyo" placeholder="0" type="text" required>
                 <span class="input-group-addon">.00</span>
               </div>
             </div>

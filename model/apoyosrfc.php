@@ -2,7 +2,7 @@
 class Apoyosrfc
 {
 	private $pdo; //int 
-	public $idApoyo;
+	public $idApoyoRFC;
 	public $curp;
 	public $idOrigen; //int
 	public $programa;
@@ -49,7 +49,7 @@ class Apoyosrfc
 	public function Obtener($id)
 	{
 		$stm = $this->pdo
-		->prepare("SELECT * FROM apoyosrfc, beneficiariorfc, origen, tipoapoyo, caracteristicasapoyo, periodicidad, subprograma WHERE apoyosrfc.idOrigen=origen.idOrigen AND apoyosrfc.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyosrfc.idPeriodicidad=periodicidad.idPeriodicidad AND apoyosrfc.idSubprograma=subprograma.idSubprograma AND apoyosrfc.idBeneficiarioRFC=beneficiariorfc.idBeneficiarioRFC AND idApoyo = ?");
+		->prepare("SELECT * FROM apoyosrfc, beneficiariorfc, origen, tipoapoyo, caracteristicasapoyo, periodicidad, subprograma WHERE apoyosrfc.idOrigen=origen.idOrigen AND apoyosrfc.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyosrfc.idPeriodicidad=periodicidad.idPeriodicidad AND apoyosrfc.idSubprograma=subprograma.idSubprograma AND apoyosrfc.idBeneficiarioRFC=beneficiariorfc.idBeneficiarioRFC AND idApoyoRFC = ?");
 		$stm->execute(array($id));
 		return $stm->fetch(PDO::FETCH_OBJ);
 	}
@@ -57,14 +57,14 @@ class Apoyosrfc
 	public function Eliminar($id)
 	{
 		$stm = $this->pdo
-		->prepare("DELETE FROM apoyosrfc WHERE idApoyo = ?");			          
+		->prepare("DELETE FROM apoyosrfc WHERE idApoyoRFC = ?");			          
 
 		$stm->execute(array($id));
 	}
 	
 	public function Actualizar(Apoyosrfc $data)
 	{
-		$sql = "UPDATE apoyosrfc SET idBeneficiarioRFC = ?, idOrigen = ?, idSubprograma = ?, idCaracteristica = ?, importeApoyo = ?, fechaApoyo = ?, idPeriodicidad = ? WHERE idApoyo = ?";
+		$sql = "UPDATE apoyosrfc SET idBeneficiarioRFC = ?, idOrigen = ?, idSubprograma = ?, idCaracteristica = ?, importeApoyo = ?, fechaApoyo = ?, idPeriodicidad = ? WHERE idApoyoRFC = ?";
 
 		$this->pdo->prepare($sql)
 		->execute(
@@ -76,7 +76,7 @@ class Apoyosrfc
 				$data->importeApoyo, 
 				$data->fechaApoyo, 
 				$data->idPeriodicidad,
-				$data->idApoyo
+				$data->idApoyoRFC
 				)
 			);
 	}
@@ -135,14 +135,14 @@ class Apoyosrfc
 
 	public function ObtenerInfoApoyo($idApoyo)
 	{
-		$sql= $this->pdo->prepare("SELECT * FROM apoyosrfc,beneficiariorfc,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyosrfc.idBeneficiarioRFC=beneficiariorfc.idBeneficiarioRFC AND apoyosrfc.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyosrfc.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyosrfc.idPeriodicidad=periodicidad.idPeriodicidad AND apoyosrfc.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyosrfc.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyosrfc.idApoyo=?;");
+		$sql= $this->pdo->prepare("SELECT * FROM apoyosrfc,beneficiariorfc,origen,registroapoyo,subprograma,programa,periodicidad,tipoapoyo,caracteristicasapoyo WHERE apoyosrfc.idBeneficiarioRFC=beneficiariorfc.idBeneficiarioRFC AND apoyosrfc.idRegistroApoyo=registroapoyo.idRegistroApoyo AND apoyosrfc.idSubprograma=subprograma.idSubprograma AND subprograma.idPrograma=programa.idPrograma AND apoyosrfc.idPeriodicidad=periodicidad.idPeriodicidad AND apoyosrfc.idOrigen=origen.idOrigen AND caracteristicasapoyo.idTipoApoyo=tipoapoyo.idTipoApoyo AND apoyosrfc.idCaracteristica=caracteristicasapoyo.idCaracteristicasApoyo AND apoyosrfc.idApoyoRFC=?;");
 		$resultado=$sql->execute(array($idApoyo));
 		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 	}
 
 	public function ObtenerIdRegistro($idApoyo)
 	{
-		$sql= $this->pdo->prepare("SELECT registroapoyo.idRegistroApoyo from registroapoyo, apoyosrfc where registroapoyo.idRegistroApoyo=apoyosrfc.idRegistroApoyo and idApoyo=$idApoyo");
+		$sql= $this->pdo->prepare("SELECT registroapoyo.idRegistroApoyo from registroapoyo, apoyosrfc where registroapoyo.idRegistroApoyo=apoyosrfc.idRegistroApoyo and idApoyoRFC=$idApoyo");
 		$resultado=$sql->execute();
 		return $sql->fetch(PDO::FETCH_OBJ,PDO::FETCH_ASSOC);
 	}

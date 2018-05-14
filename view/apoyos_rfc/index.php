@@ -89,7 +89,7 @@
        <tbody>
         <?php foreach($this->model->Listar() as $r): ?>
           <tr class="grade">
-            <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoApoyo(<?php echo $r->idApoyo; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
+            <td align="center"> <a class="btn btn-default btn-sm tooltips" data-target="#modalInfo" href="#modalInfo" role="button" data-toggle="modal" onclick="infoApoyo(<?php echo $r->idApoyoRFC; ?>)" data-toggle="tooltip" data-placement="rigth" data-original-title="Ver información de registro"><i class="fa fa-info-circle"></i></a> </td>
             <td><?php echo $r->RFC ?> </td>
             <td><?php echo $r->fechaApoyo ?> </td>
             <td><?php echo $r->programa; ?> </td>
@@ -101,10 +101,10 @@
             <td>$<?php echo $r->importeApoyo; ?></td>
             <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
             <td class="center">
-              <a class="btn btn-primary btn-sm" role="button" href="?c=apoyosrfc&a=Crud&idApoyo=<?php echo $r->idApoyo ?>"><i class="fa fa-edit"></i></a>
+              <a class="btn btn-primary btn-sm" role="button" href="?c=apoyosrfc&a=Crud&idApoyoRFC=<?php echo $r->idApoyoRFC ?>"><i class="fa fa-edit"></i></a>
             </td>
             <td class="center">
-              <a class="btn btn-danger btn-sm" onclick="eliminarApoyo(<?php echo $r->idApoyo;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
+              <a class="btn btn-danger btn-sm" onclick="eliminarApoyo(<?php echo $r->idApoyoRFC;?>);" href="#modalEliminar"  data-toggle="modal" data-target="#modalEliminar" role="button"><i class="fa fa-eraser"></i></a>
             </td>
             <?php } ?>
           </tr>
@@ -206,7 +206,7 @@
       <div class="modal-footer" style="margin-top: -10px;">
         <div class="row col-md-5 col-md-offset-7" style="margin-top: -5px;">
           <form action="?c=apoyosrfc&a=Eliminar" enctype="multipart/form-data" method="post">
-            <input  type="hidden" name="idApoyo" id="txtIdApoyo">
+            <input type="hidden" name="idApoyoRFC" id="txtIdApoyo">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-danger">Eliminar</button>
           </form>
@@ -223,7 +223,7 @@
 
   infoApoyo = function (idApoyo){
     var idApoyo=idApoyo;
-    $.post("index.php?c=apoyosrfc&a=InfoApoyo", {idApoyo: idApoyo}, function(info) {
+    $.post("index.php?c=apoyosrfc&a=InfoApoyo", {idApoyoRFC: idApoyo}, function(info) {
       $("#divInfo").html(info);
     }); 
   }
