@@ -100,7 +100,9 @@
                 <td><?php echo $r->nombres." ".$r->primerApellido." ".$r->segundoApellido ?> </td>
                 <td><?php echo $r->nombreMunicipio ?> </td>
                 <td class="center">
-                  <a class="btn btn-info btn-sm tooltips" role="button" href="?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
+                  <?php echo $r->idBeneficiario; ?>
+                  <a class="btn btn-info btn-sm tooltips" role="button" href="
+                  ?c=beneficiario&a=Detalles&idBeneficiario=<?php echo $r->idBeneficiario; ?>" data-toggle="tooltip" data-placement="left" data-original-title="Ver detalles de beneficiario"><i class="fa fa-eye"></i></a>
                 </td>
                 <?php if($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==3){?>
                 <td class="center">

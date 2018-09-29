@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>INSEZAC | LOGIN</title>
+  <title>Sistema para el control de beneficiarios | LOGIN</title>
   <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
@@ -29,15 +29,15 @@ body{
 
   <div class="row">
   <div class="col-md-3 col-sm-12">
-     <center><img src="assets/images/sezac.png" style="" id="logosezac"></center>
+     <center><img src="assets/images/zacatecas.png" style="" id="logosezac"></center>
   </div>
   <div class="col-md-9">
   </div>
 </div>
  
   <div id="titulo">
-    <center><h2> Bienvenido a <b>INSEZAC</b></h2></center>
-  <h5 id="intro" align="center">Sistema para el control del padrón de beneficiarios</h5>
+    <center><h2> Bienvenido a <b></b></h2></center>
+  <h5 id="intro" align="center">Sistema para el control  de beneficiarios</h5>
 
 </div>
   
@@ -63,7 +63,7 @@ body{
         </form>
       </div>
   <br><hr style="color:black">
-  <center><h4>Visitar sitio oficial de <a href="http://sezac.org.mx/">SEZAC</a></h4></center>
+
   <script src="assets/js/jquery-2.1.0.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/common-script.js"></script>

@@ -23,7 +23,7 @@
 							<div class="btn-group pull-right">
 								<b>
 									<?php if($_SESSION['tipoUsuario']==1){?>
-									<div class="btn-group"> 
+								<div class="btn-group"> 
 										<a class="btn btn-sm btn-warning tooltips" href="#myModal" style="margin-right: 10px;"  data-toggle="modal" data-target="#myModal" data-original-title="Importar catálogo
 										para el registro de identficadores" type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
 

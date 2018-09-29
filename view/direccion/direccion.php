@@ -3,13 +3,13 @@
 <div class="pull-left breadcrumb_admin clear_both">
   <div class="pull-left page_title theme_color">
     <h1>Inicio</h1>
-    <h2 class="">Dirección</h2>
+    <h2 class="">Dependencia</h2>
   </div>
   <div class="pull-right">
     <ol class="breadcrumb">
       <li><a href="?c=Inicio">Inicio</a></li>
-      <li><a href="?c=Direccion">Dirección</a></li>
-      <li class="active"><?php echo $direccion->idDireccion != null ? 'Actualizar dirección' : 'Alta dirección'; ?></li>
+      <li><a href="?c=Direccion">Dependencia</a></li>
+      <li class="active"><?php echo $direccion->idDireccion != null ? 'Actualizar Dependencia' : 'Alta Dependencia'; ?></li>
     </ol>
   </div>
 </div>
@@ -21,7 +21,7 @@
           <div class="row" style="margin-top: 15px; margin-bottom: 12px;">
             <div class="col-sm-8">
               <div class="actions"> </div>
-              <h2 class="content-header theme_color" style="margin-top: -5px;"><?php echo $direccion->idDireccion != null ? '&nbsp; Actualizar dirección' : '&nbsp; Registrar dirección'; ?></h2> 
+              <h2 class="content-header theme_color" style="margin-top: -5px;"><?php echo $direccion->idDireccion != null ? '&nbsp; Actualizar Dependencia' : '&nbsp; Registrar Dependencia'; ?></h2> 
             </div>
             <div class="col-md-4">
               <div class="btn-group pull-right">
@@ -47,14 +47,14 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Nombre <strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-              <input name="direccion" type="text" onkeypress=" return soloLetras(event);" onkeyup="mayus(this);"  class="form-control" required value="<?php echo $direccion->direccion != null ? $direccion->direccion : "";  ?>" placeholder="Ingrese nombre de la dirección" <?php if($direccion->idDireccion != null){ ?>  <?php } ?> autofocus />
+              <input name="direccion" type="text" onkeypress=" return soloLetras(event);" onkeyup="mayus(this);"  class="form-control" required value="<?php echo $direccion->direccion != null ? $direccion->direccion : "";  ?>" placeholder="Ingrese nombre de la Dependencia" <?php if($direccion->idDireccion != null){ ?>  <?php } ?> autofocus />
               </div>
             </div><!--/form-group-->
 
             <div class="form-group">
               <label class="col-sm-3 control-label">Descripción <strog class="theme_color">*</strog></label>
               <div class="col-sm-6">
-                <input name="descripcion" type="text" onkeypress=" return soloLetras(event);" onkeyup="mayus(this);" class="form-control" required value="<?php echo $direccion->descripcion != null ? $direccion->descripcion : "";  ?>" placeholder="Ingrese descripción de la dirección"/>
+                <input name="descripcion" type="text" onkeypress=" return soloLetras(event);" onkeyup="mayus(this);" class="form-control" required value="<?php echo $direccion->descripcion != null ? $direccion->descripcion : "";  ?>" placeholder="Ingrese descripción de la Dependencia"/>
               </div>
             </div><!--/form-group-->
 

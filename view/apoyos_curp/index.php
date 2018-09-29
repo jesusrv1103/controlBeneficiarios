@@ -35,7 +35,7 @@
                    <div class="btn-group">
                     <a href="?c=apoyos&a=Crud" class="btn btn-sm btn-success" style="margin-right: 10px;" type="button"> <i class="fa fa-plus"></i>&nbsp;Registrar</a>
                   </div>
-                  <div class="btn-group">
+                 <div class="btn-group">
                     <a  data-toggle="modal" data-target="#modalImportar" href="#modalImportar" class="btn btn-sm tooltips btn-warning dropdown-toggle" style="margin-right: 10px;" data-original-title="Importar catálogo para registrar beneficiarios" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title=""><i class="fa fa-upload"></i>&nbsp;Importar</a>
                   </div>
                 </div>

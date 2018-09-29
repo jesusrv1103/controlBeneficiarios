@@ -34,7 +34,7 @@ if(isset($_SESSION['tiempo'])) {
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>INSEZAC</title>
+  <title>Sistema para el control de beneficiarios</title>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
@@ -110,7 +110,7 @@ if(isset($_SESSION['tiempo'])) {
       <div class="brand">
         <!--\\\\\\\ brand Start \\\\\\-->
         <!--div class="logo" style="display:block"><h2 style="margin-top: -5px;"><span class="theme_color">INSEZAC</span></h2></div-->
-        <div style="display:block"><img width="100%" style=" margin-top:-15px" src="assets/images/sezac.png"></div>
+        <div style="display:block"><img width="100%" style=" margin-top:-15px" src="assets/images/zacatecas.png"></div>
 
         <div class="small_logo" style="display:none"><img src="images/s-logo.png" width="50" height="47" alt="s-logo" /> <img src="images/r-logo.png" width="122" height="20" alt="r-logo" /></div>
 
@@ -120,7 +120,7 @@ if(isset($_SESSION['tiempo'])) {
         <!--\\\\\\\ header top bar start \\\\\\-->
         <a href="javascript:void(0);" class="menutoggle"> <i class="fa fa-bars"></i> </a>
         <div class="top_left_bar">
-          <h1>INSEZAC</h1>
+          <h1>Sistema para el control de beneficiarios</h1>
         </div>
         <div class="top_right_bar">
           <div style="margin-top: -33%;">
@@ -195,7 +195,7 @@ if(isset($_SESSION['tiempo'])) {
                   <?php }  ?> 
                   <li>
                     <a href="?c=direccion"> <span>&nbsp;</span> <i class="fa fa-circle"></i>
-                      <?php if (isset($direcciones)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Direcciones</b>
+                      <?php if (isset($direcciones)){ ?><b class="theme_color"><?php } else { ?> <b> <?php } ?>Dependencias</b>
                     </a>
                   </li><br><br>
                   <li>

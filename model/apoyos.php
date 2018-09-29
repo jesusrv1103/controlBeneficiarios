@@ -119,7 +119,7 @@ class Apoyos
 				$data->idSubprograma, 
 				$data->idCaracteristica, 
 				$data->importeApoyo, 
-				$data->numerosApoyo, 
+				$data->numeroApoyo, 
 				$data->fechaApoyo, 
 				$data->idPeriodicidad,
 				$data->idProgramaSocial,
